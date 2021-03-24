@@ -1,0 +1,104 @@
+/*QUITAR FLECHAS DE LOS INPUT NUMBER*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.w-max {
+    width: max-content;
+}
+
+
+.w1{width: 50px}
+.w2{width: 100px}
+.w3{width: 150px !important}
+.w4{width: 200px}
+.w5{width: 250px}
+.w6{width: 300px}
+.w7{width: 350px}
+.w8{width: 400px}
+.w9{width: 450px}
+.w10{width: 500px}
+.w100{width: 100%}
+
+.h1{height: 50px;}
+.h2{height: 100px;}
+.h3{height: 150px;}
+.h4{height: 200px;}
+.h5{height: 250px;}
+.h6{height: 300px;}
+.h7{height: 350px;}
+.h8{height: 400px;}
+.h9{height: 450px;}
+.h10{height: 500px;}
+*{
+    border-radius: 2px;
+}
+
+.w3-lobster {
+    font-family: "Lobster", serif;
+}
+
+
+.w3-select{
+    height: 40px;
+}
+
+
+
+
+/*LOADER*/
+#loader-content{
+    background: #000000e0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+}
+#loader{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    /*border: 16px solid #f3f3f3;*/
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(720deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(1440deg); }
+}
+
+/*FIN LOADER*/
+
+
+
+table.dataTable tbody td {
+    vertical-align: middle;
+  }
+
+
+
+
+
+
+
+
+
+
