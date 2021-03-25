@@ -1,5 +1,5 @@
 <article class="bg-white mx-auto border border-gray-50 rounded" style="height:100%" >
-
+hola
     <div class="relative">
         <a href="{{ route('products.show', $producto) }}">
             @isset($producto->image->url)
