@@ -12,8 +12,8 @@ class ProductController extends Controller
 
     public function index()
     {
-            $productos = Product::where('status', 1)->paginate(8);
-            $destacados = Product::where('status', 1)->paginate(8);
+            $productos = Product::where('status', 1)->paginate(100);
+            $destacados = Product::where('status', 1)->paginate(100);
           
 
 
@@ -26,8 +26,8 @@ class ProductController extends Controller
         //  $name= $request->name;
         
        
-         $productos = Product::where('status', 1)->where('name', 'like',"%". $name . "%")->paginate(8);
-         $destacados = Product::where('status', 1)->paginate(8);
+         $productos = Product::where('status', 1)->where('name', 'like',"%". $name . "%")->paginate(100);
+         $destacados = Product::where('status', 1)->paginate(100);
 
          return view('products.index', compact('productos','destacados','name'));
     }
