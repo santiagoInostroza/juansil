@@ -14,21 +14,21 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        Brand::create([
-            'name'=>'Colun',
-            'slug'=>'colun',
-           ]);
+        // Brand::create([
+        //     'name'=>'Colun',
+        //     'slug'=>'colun',
+        //    ]);
 
         
 
-        Brand::create([
-            'name'=>'Vitorio',
-            'slug'=>'vitorio',
-           ]);
+        // Brand::create([
+        //     'name'=>'Vitorio',
+        //     'slug'=>'vitorio',
+        //    ]);
 
-           Brand::create([
-            'name'=>'Omo',
-            'slug'=>'omo',
-           ]);
+        //    Brand::create([
+        //     'name'=>'Omo',
+        //     'slug'=>'omo',
+        //    ]);
     }
 }

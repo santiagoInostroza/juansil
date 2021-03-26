@@ -18,9 +18,9 @@ class SupplierSeeder extends Seeder
             'name'=>'Ajuste de Stock',
             'slug'=>'ajuste-de-stock',
            ]);
-        Supplier::create([
-            'name'=>'Colun',
-            'slug'=>'colun',
-           ]);
+        // Supplier::create([
+        //     'name'=>'Colun',
+        //     'slug'=>'colun',
+        //    ]);
     }
 }
