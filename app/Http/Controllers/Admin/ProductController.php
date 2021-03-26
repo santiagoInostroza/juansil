@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Svg\Tag\Image;
 use App\Models\Tag;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\SalePrice;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
-use App\Models\SalePrice;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -36,7 +37,10 @@ class ProductController extends Controller
         $producto = Product::create($request->all());
 
         if ($request->file('file')) {
-            $url = Storage::put('products', $request->file('file'));
+            
+            $url = $request->file('file')->store('products');
+
+            //$url = Storage::put('products', $request->file('file'));
             $producto->image()->create([
                 'url' => $url
             ]);
