@@ -31,11 +31,11 @@
                     <a href="/" class="flex-shrink-0 flex items-center">
                         {{-- DISPOSITIVOS PEQUEÑOS --}}
                         <div class=" text-white transform p-2 flex items-center lg:hidden" >
-                            <img class="h-10" src="{{public_path('images/iconos/jsyellow.png')}}" alt="">
+                            <img class="h-10" src='images/iconos/jsyellow.png' alt="">
                         </div>
                         {{-- OTROS DISPOSITIVOS --}}
                         <div class="hidden lg:flex h-8 w-autotext-xl text-white transform p-2  items-center" >
-                            <img class="h-20" src="{{public_path('images/iconos/juansil.png')}}" alt="">
+                            <img class="h-20" src='images/iconos/juansil.png' alt="">
                         </div>
                       
                     </a>  
