@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DatatableController;
@@ -42,30 +41,12 @@ Route::get('datatable/movimientos', [DatatableController::class,'movimientos'])-
 Route::get('datatable/stock', [DatatableController::class,'stock'])->name('datatable.stock');
 Route::get('datatable/clientes', [DatatableController::class,'clientes'])->name('datatable.clientes');
 Route::get('datatable/ventas', [DatatableController::class,'ventas'])->name('datatable.ventas');
-Route::get('billing', [BillingController::class,'index'])->middleware('auth')->name('billing.index');
-
-Route::get('googleMapsTest', function(){
-    return view("livewire.api-google-maps.index");
-});
-
-
-// Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
-//     return $request->user()->downloadInvoice($invoiceId, [
-//         'vendor' => 'Your Company',
-//         'product' => 'Your Product',
-//     ]);
-// });
-
-//Route::get('products/{product}/pay', [ProductController::class,'pay'])->name('products.pay');
 
 
 
 
-//Route::get('/googleMapsTest', TestApiGoogleMapsComponent::class);
 
 
-
-//Route::resource('categoria', CategoriaController::class)->names("categorias");
 
 
 
