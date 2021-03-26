@@ -1,5 +1,7 @@
 
     <div class="relative">
+
+        {{-- SPINNER --}}
         <div wire:loading.flex wire:target='addToCart'
             class="absolute w-full h-full bg-gray-200 bg-opacity-25 z-30 items-center justify-center">
             <x-spinner.spinner size='10' />
@@ -34,18 +36,19 @@
         </div>
 
 
-        {{-- ETIQUETAS --}}
-        <div class="flex justify-center items-center text-xs fl">
-            <div>
-                <a href="{{ route('products.show', $producto) }}" class="">{{ $producto->name }}</a>
-                <div class="font-bold text-center">
+        {{-- MARCA --}}
+        <div class="flex justify-center items-center text-xs">
+            <div class="h-14 flex-1 text-center">
+                <a href="{{ route('products.show', $producto) }}" class=" text-center">{{ $producto->name }}</a>
+
+                <div class="font-bold text-center ">
                     <a href='#' class=""> {{ $producto->brand->name }}</a>
                 </div>
             </div>
         </div>
 
         @if ($stock > 0)
-            <div class="text-xs text-center font-bold py-4">
+            <div class="text-xs text-center font-bold py-4 pt-2">
                 <button class="shadow p-2 px-4" wire:click='decrement'>-</button>
 
                 <input min="0" name="" type="number" id="" class="p-2 w-12 shadow text-center"
@@ -81,7 +84,7 @@
 
             </div>
         @else
-            <div class="w-full h-32 pb-1 flex items-end justify-center select-none text-xs text-center font-bold px-10">
+            <div class="w-full h-32 flex items-end justify-center select-none text-xs text-center font-bold px-10 pb-3">
                 <div class="bg-gray-300 text-gray-500 font-bold rounded p-3 w-full">
                     Sin stock 
                 </div>
