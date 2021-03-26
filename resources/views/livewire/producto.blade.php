@@ -2,16 +2,8 @@
 
     <div class="relative">
         <a href="{{ route('products.show', $producto) }}">
-
             @isset($producto->image->url)
-            <div>
-                {{ url("images") }}
-            </div>
-            <div>
-                {{$producto->image->url}}
-            </div>
-
-                <img class="object-contain h-48 w-full" src="{{ url("images",$producto->image->url) }}" alt="">
+                <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
             @endisset
         </a>
         {{-- ETIQUETAS --}}
