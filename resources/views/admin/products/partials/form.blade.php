@@ -4,46 +4,58 @@
     <div class="form-group col-sm">
         {!! Form::label('name', 'Nombre', ['class' => '']) !!}
         {!! Form::text('name', null, ['class' => 'form-control to_slug', 'placeholder' => 'Ingresa Nombre']) !!}
-        
+
         @error('name')
-        <span class="text-danger">{{ $message }}</span>
+            <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    
+
     {{-- SLUG --}}
     <div class="form-group d-none">
         {!! Form::label('slug', 'Slug', ['class' => '']) !!}
-        {!! Form::text('slug', null, ['class' => 'form-control slug', 'placeholder' => 'Ingresa Slug', 'readonly' => true])
-    !!}
-    @error('slug')
-    <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
+        {!! Form::text('slug', null, ['class' => 'form-control slug', 'placeholder' => 'Ingresa Slug', 'readonly' => true]) !!}
+        @error('slug')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
 
-{{-- ESTADO --}}
-<div class="form-group col-sm">
-    <p>Estado</p>
-    <label> {!! Form::radio('status', 1, true, ['class' => 'mr-2']) !!} Activo </label>
-    <label> {!! Form::radio('status', 2, false, ['class' => 'mx-2']) !!} Inactivo </label>
-    @error('status')
-    <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
-{{-- STOCK MINIMO --}}
-<div class="form-group col-sm">
-    {!! Form::label('stock_min', 'Stock minimo', ['class' => '']) !!}
-    {!! Form::number('stock_min',null, ['class' => 'form-control slug', 'placeholder' => 'Ingresa stock minimo']) !!}
-    @error('stock_min')
-    <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
+    {{-- ESTADO --}}
+    <div class="form-group col-sm">
+        <p>Estado</p>
+        <label> {!! Form::radio('status', 1, true, ['class' => 'mr-2']) !!} Activo </label>
+        <label> {!! Form::radio('status', 2, false, ['class' => 'mx-2']) !!} Inactivo </label>
+        @error('status')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    {{-- FORMATO --}}
+    <div class="form-group col-sm">
+        {!! Form::label('formato', 'Formato', ['class' => '']) !!}
+        {!! Form::number('formato', null, ['class' => 'form-control ', 'placeholder' => 'Ingresa formato']) !!}
+        @error('stock_min')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    {{-- STOCK MINIMO --}}
+    <div class="form-group col-sm">
+        {!! Form::label('stock_min', 'Stock minimo', ['class' => '']) !!}
+        {!! Form::number('stock_min', null, ['class' => 'form-control', 'placeholder' => 'Ingresa stock minimo']) !!}
+        @error('stock_min')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
 </div>
 
 {{-- DESCRIPCION --}}
 <div class="form-group">
     {!! Form::label('description', 'Descripcion', ['class' => '']) !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control ckeditor', 'placeholder' => 'Ingresa
-    Descripcion']) !!}
+    {!! Form::textarea('description', null, [
+    'class' => 'form-control ckeditor',
+    'placeholder' => 'Ingresa
+    Descripcion',
+]) !!}
 
 
     @error('description')
@@ -87,8 +99,7 @@
     {{-- CATEGORIA --}}
     <div class="form-group col-sm">
         {!! Form::label('category_id', 'Categoria', ['class' => '']) !!}
-        {!! Form::select('category_id', $categories, null, ['class' => 'form-control select2', 'placeholder' =>
-        'Selecciona Categoria']) !!}
+        {!! Form::select('category_id', $categories, null, ['class' => 'form-control select2', 'placeholder' => 'Selecciona Categoria']) !!}
         @error('category_id')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -98,10 +109,10 @@
     <div class="form-group col-sm">
         {!! Form::label('brand_id', 'Marca', ['class' => '']) !!}
         {!! Form::select('brand_id', $brand, null, [
-        'class' => 'form-control select2',
-        'placeholder' => 'Selecciona
+    'class' => 'form-control select2',
+    'placeholder' => 'Selecciona
         Marca',
-        ]) !!}
+]) !!}
 
         @error('brand_id')
             <span class="text-danger">{{ $message }}</span>
