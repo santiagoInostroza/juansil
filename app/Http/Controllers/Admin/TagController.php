@@ -38,7 +38,7 @@ class TagController extends Controller
         $request->validate([
             'name'=>'required',
             'slug'=>'required|unique:tags',
-            'color'=>'required|unique:tags',
+            'color'=>'required',
         ]);
         $tags = Tag::create($request->all());
         return redirect()->route('admin.tags.index',$tags)->with('info','Se creó Etiqueta');
