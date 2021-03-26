@@ -36,7 +36,8 @@ class ProductController extends Controller
         $producto = Product::create($request->all());
 
         if ($request->file('file')) {
-            $url = Storage::put('products', $request->file('file'));
+            $url =  public_path('images/products', $request->file('file'));
+            // $url = Storage::put('products', $request->file('file'));
             $producto->image()->create([
                 'url' => $url
             ]);
