@@ -1,6 +1,17 @@
 
 <div x-data="{animate: {{$openCarrito}} } " class="relative" >
     {{-- ICONO DE CARRITO --}}
+    <style>
+        .cuerpoCarrito::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .cuerpoCarrito {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
     <div class="relative">
         <button @click="animate = (animate) ? false : true" class="z-50 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
             @if (session()->has('carrito') && count(session('carrito')) > 0)
@@ -15,7 +26,7 @@
                 </path>
             </svg>
             @if (session()->has('carrito') && count(session('carrito')) > 0)
-            <div class="rounded-full p-1 px-2 text-xs text-white font-bold right-0 absolute">
+            <div class="rounded-full p-1 px-2 text-xs text-white font-bold right-0 absolute bg-black">
                 ${{ number_format(session('totalCarrito'),0,',','.') }}
             </div>
         @endif
@@ -40,7 +51,7 @@
         </div>
         @if (session()->has('carrito') && count(session('carrito')) > 0)
             {{-- CUERPO --}}
-            <div class="card-body overflow-auto h-8/12">
+            <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                     @foreach (session('carrito') as $producto)
                         @livewire('cart.item', ['producto' => $producto], key($producto['producto_id']))
                     @endforeach
