@@ -60,7 +60,6 @@ class ItemCompraComponent extends Component
 
     public function calculos()
     {
-
         try {
             //CALCULA CANTIDAD TOTAL
             try {

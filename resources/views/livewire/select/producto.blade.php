@@ -14,6 +14,9 @@
         wire:keydown.arrow-down='incrementIndex'
         wire:keydown.arrow-up='decrementIndex'
         wire:keydown.enter.prevent='seleccionarOpcion'
+        wire:keydown.arrow-left="$set('showList',true)" 
+        wire:keydown.arrow-right="$set('showList',true)" 
+        wire:keydown.Backspace="$set('showList',true)" 
     >
 
     @if ($showList)

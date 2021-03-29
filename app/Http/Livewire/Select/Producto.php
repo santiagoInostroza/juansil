@@ -38,6 +38,7 @@ class Producto extends Component
     }
     
     public function incrementIndex(){
+        $this->showList=true;
         if (count($this->productos) == 0) {
             $this->index=1;
         }else{            
@@ -49,6 +50,7 @@ class Producto extends Component
     }
 
     public function decrementIndex(){
+        $this->showList=true;
         if (count($this->productos) == 0) {
             $this->index=1;
         }else{ 
@@ -66,6 +68,7 @@ class Producto extends Component
         } else {
             $this->product_id = $this->productos[$this->index-1]['id'];
             $this->query = $this->productos[$this->index-1]['name'];
+            $this->showList= false;
             $this->emitUp('setProductId',$this->product_id);
         }
         
