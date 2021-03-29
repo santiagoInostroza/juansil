@@ -20,7 +20,7 @@
     >
 
     @if ($showList)
-        <div class="shadow bg-white position-absolute " style="min-width: 200px">
+        <div class="shadow bg-white position-absolute " style="min-width: 200px;max-height: 300px; overflow: auto">
             @forelse ($productos as $producto)
                 <div class="cursor-pointer p-2 @if($index == $loop->iteration) bg-secondary @endif" style="cursor: pointer"
                     wire:click="setProductId('{{$producto->id}}','{{$producto->name}}')" 
