@@ -7,7 +7,7 @@ use App\Models\Category;
 
 class Navigation extends Component{
 
-    public $texto = " ";
+    public $texto = "";
     public $search = false;
 
 
