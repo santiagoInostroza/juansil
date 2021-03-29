@@ -40,10 +40,10 @@
         </div>
         @if (session()->has('carrito') && count(session('carrito')) > 0)
             {{-- CUERPO --}}
-            <div class="card-body">
-                @foreach (session('carrito') as $producto)
-                   @livewire('cart.item', ['producto' => $producto], key($producto['producto_id']))
-                @endforeach
+            <div class="card-body overflow-auto h-8/12">
+                    @foreach (session('carrito') as $producto)
+                        @livewire('cart.item', ['producto' => $producto], key($producto['producto_id']))
+                    @endforeach
             </div>
 
             {{-- FOOTER --}}
