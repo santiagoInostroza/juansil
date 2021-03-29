@@ -50,6 +50,7 @@ class DetalleCompra extends Component
                 $this->items[] = [
                     'purchase_id' => $detalle->pivot->purchase_id,
                     'product_id' => $detalle->pivot->product_id,
+                    'product_name' => $detalle->name,
                     'item_id' => $detalle->pivot->id,
                     'cantidad' => $detalle->pivot->cantidad,
                     'cantidad_por_caja' => $detalle->pivot->cantidad_por_caja,
@@ -65,6 +66,7 @@ class DetalleCompra extends Component
               
                 'purchase_id' => $this->purchase_id,
                 'product_id' => '',
+                'product_name' => '',
                 'item_id' => '0',
                 'cantidad' => '',
                 'cantidad_por_caja' => '',
@@ -77,12 +79,12 @@ class DetalleCompra extends Component
         
     }
 
+   
     public function agregarItemCompra(){
         $agregar = true;
-
         foreach ($this->items as $fila) {
-            foreach ($fila as  $elemento) {
-                if ($elemento == "") {
+            foreach ($fila as $key =>  $elemento) {
+                if ($key != 'product_name' && $elemento == ""  ) {
                     $agregar = false;
                     break;
                 }
@@ -93,6 +95,7 @@ class DetalleCompra extends Component
             $this->items[] = [
                 'purchase_id' => $this->purchase_id,
                 'product_id' => '',
+                'product_name' => '',
                 'item_id' =>'0',
                 'cantidad' => '',
                 'cantidad_por_caja' => '',

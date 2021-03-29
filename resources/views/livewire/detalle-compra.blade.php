@@ -1,7 +1,4 @@
-
 <div>
-
-    
     {{-- DETALLE COMPRA --}}
     <table id='detalleCompra' class="table table-striped table-bordered table-hover table-sm table-responsive-xl"
         style="width:100%">
@@ -18,38 +15,26 @@
             </tr>
         </thead>
         <tbody>
-
+            {{-- ITEMS --}}
             @isset($items)
                 @foreach ($items as $indice => $item)
                     <livewire:item-compra-component :item="$item" :indice="$indice" :key="$indice">
                 @endforeach
             @endisset
 
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="8" class="">
-                    <div wire:click='agregarItemCompra' class="btn btn-secondary validar_item_compra">
-                        Agregar Item Compra
-                    </div>
-                    <div class="" style="margin: 0 0 0 auto; width:max-content">
-                        Total
-                        <input name="total" class="form-control d-inline-block" style="width: 100px" value="" readonly
-                            wire:model='total'>
-                    </div>
-                    <input type="hidden" wire:model='eliminados' name="eliminados">
-                   
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8">
-
-
-                </td>
-            </tr>
-        </tfoot>
-
+        </tbody>        
     </table>
+    <div class="d-flex mb-5" style="justify-items: center">
+        <div wire:click='agregarItemCompra' class="btn btn-secondary validar_item_compra">
+            Agregar Item Compra
+        </div>
+        <div class="" style="margin: 0 0 0 auto; width:max-content">
+            Total
+            <input name="total" class="form-control d-inline-block" style="width: 100px" value="" readonly
+                wire:model='total'>
+        </div>
+        <input type="hidden" wire:model='eliminados' name="eliminados">
+    </div>
 
 </div>
 

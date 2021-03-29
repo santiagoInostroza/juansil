@@ -29,9 +29,8 @@ class PurchaseController extends Controller
 
 
 
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){
+    //return $request->all();
         $request->validate([
             'supplier_id' => 'required',
             'fecha' => 'required',
@@ -39,6 +38,7 @@ class PurchaseController extends Controller
         ]);
 
         $purchase = Purchase::create($request->all());
+        
         $movement_type=($request->supplier_id==1)?"Ajuste Stock de Salida":"Compra";
         
 
@@ -219,4 +219,8 @@ class PurchaseController extends Controller
         $product->stock = $stock_nuevo;
         $product->save();
     }
+
+
+  
+
 }

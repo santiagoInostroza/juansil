@@ -3,9 +3,9 @@
 @section('title', 'Precios de feria')
 
 @section('content_header')
-<div class="container">
-    <h1>Crear Compra</h1>
-</div>
+    <div class="container">
+        <h1>Crear Compra</h1>
+    </div>
 @stop
 
 @section('content')
@@ -19,7 +19,6 @@
         </div>
     </div>
 
-</div>
 
 @stop
 
@@ -42,148 +41,162 @@
 @stop
 
 @section('js')
-<script>
-    $(document).on("click", ".validar_compra", function(e) {
-        e.preventDefault();
+    <script>
        
+          function calcular(valor) {
+              try {
+                if (/^[\d-+/*()]+$/.test(valor.trim())) {
+                  // Evaluar el resultado
+                  val = eval(valor.trim());
+                }
+              } catch (error) {
+                  val=valor;
+              }
+              return val;
+            }
+
+
+        $(document).on("click", ".validar_compra", function(e) {
+            e.preventDefault();
+
+            //VALIDA DATOS DE COMPRA
+            if (!validarCompra()) {
+                return false;
+            }
+            //VALIDAR DETALLES COMPRA
+            if (!validarDetalleCompras()) {
+                return false;
+            }
+            //REALIZAR SUBMIT
+            $("#detalleCompra").closest("form").submit();
+        })
+
+
+        $(document).on("click", ".validar_item_compra", function() {
+            //VALIDAR DETALLES COMPRA
+            validarDetalleCompras();
+        })
+
         //VALIDA DATOS DE COMPRA
-        if (!validarCompra()) {
-            return false;
+        function validarCompra() {
+            let submit = true;
+
+            let supplier_id = $("#supplier_id");
+            if (supplier_id.val() == "") {
+                supplier_id.focus();
+                supplier_id.siblings('span').addClass('border border-danger');
+                alerta("Debes seleccionar un proveedor", "Seleciona un proveedor!!");
+                submit = false;
+                return false;
+            } else {
+                supplier_id.siblings('span').removeClass('border border-danger');
+            }
+
+            let fecha = $("#fecha");
+
+            if (fecha.val().length != 10) {
+
+                fecha.focus();
+                fecha.addClass('border border-danger');
+                alerta("Debes seleccionar fecha", "Seleciona fecha!!");
+                submit = false;
+                return false;
+            } else {
+                fecha.removeClass('border border-danger');
+            }
+            return submit;
         }
+
         //VALIDAR DETALLES COMPRA
-        if (!validarDetalleCompras()) {
-            return false;
+        function validarDetalleCompras() {
+
+            let fila = $("#detalleCompra tbody tr");
+            let submit = true;
+            fila.each(function() {
+
+                //VALIDAR PRODUCTO
+                let product_id = $(this).find(".product_id");
+                let nombre_producto = $(this).find(".inputProducto");
+                if (product_id.val() == "") {
+                    nombre_producto.focus();
+                    nombre_producto.addClass('border border-danger');
+                    alerta("Debes seleccionar un producto", "Seleciona un producto!!");
+                    submit = false;
+                    return false;
+                } else {
+                    nombre_producto.removeClass('border border-danger');
+                }
+
+                //VALIDAR CANTIDAD
+                let cantidad = $(this).find("#cantidad");
+                if (cantidad.val() == "") {
+                    cantidad.focus();
+                    cantidad.addClass('border border-danger');
+                    alerta("Debes ingresar cantidad", "Ingresa cantidad!!");
+                    submit = false;
+                    return false;
+                } else {
+                    cantidad.removeClass('border border-danger');
+                }
+
+                //VALIDAR CANTIDAD POR CAJA
+                let cantidad_por_caja = $(this).find("#cantidad_por_caja");
+                if (cantidad_por_caja.val() == "") {
+                    cantidad_por_caja.focus();
+                    cantidad_por_caja.addClass('border border-danger');
+                    alerta("Debes ingresar cantidad por caja", "Ingresa cantidad por caja!!");
+                    submit = false;
+                    return false;
+                } else {
+                    cantidad_por_caja.removeClass('border border-danger');
+                }
+
+                //VALIDAR PRECIO
+                let precio = $(this).find("#precio");
+                if (precio.val() == "") {
+                    precio.focus();
+                    precio.addClass('border border-danger');
+                    alerta("Debes ingresar precio", "Ingresa precio!!");
+                    submit = false;
+                    return false;
+                } else {
+                    precio.removeClass('border border-danger');
+                }
+
+                //VALIDAR PRECIO POR CAJA
+                let precio_por_caja = $(this).find("#precio_por_caja");
+                if (precio_por_caja.val() == "") {
+                    precio_por_caja.focus();
+                    precio_por_caja.addClass('border border-danger');
+                    alerta("Debes ingresar precio por caja", "Ingresa precio por caja!!");
+                    submit = false;
+                    return false;
+                } else {
+                    precio_por_caja.removeClass('border border-danger');
+                }
+
+            });
+
+            return submit;
+
+
         }
-        //REALIZAR SUBMIT
-        $("#detalleCompra").closest("form").submit();
-    })
 
 
-    $(document).on("click", ".validar_item_compra", function() {
-        //VALIDAR DETALLES COMPRA
-        validarDetalleCompras();
-    })
+        //CUANDO SE ACTUALIZA LIVEWIRE    
+        document.addEventListener("DOMContentLoaded", () => {
+            Livewire.hook('message.processed', (message, component) => {
 
-    //VALIDA DATOS DE COMPRA
-    function validarCompra() {
-        let submit = true;
 
-        let supplier_id = $("#supplier_id");
-        if (supplier_id.val() == "") {
-            supplier_id.focus();
-            supplier_id.siblings('span').addClass('border border-danger');
-            alerta("Debes seleccionar un proveedor", "Seleciona un proveedor!!");
-            submit = false;
-            return false;
-        } else {
-            supplier_id.siblings('span').removeClass('border border-danger');
-        }
-
-        let fecha = $("#fecha");
-
-        if (fecha.val().length != 10) {
-
-            fecha.focus();
-            fecha.addClass('border border-danger');
-            alerta("Debes seleccionar fecha", "Seleciona fecha!!");
-            submit = false;
-            return false;
-        } else {
-            fecha.removeClass('border border-danger');
-        }
-        return submit;
-    }
-
-    //VALIDAR DETALLES COMPRA
-    function validarDetalleCompras() {
-
-        let fila = $("#detalleCompra tbody tr");
-        let submit = true;
-        fila.each(function() {
-
-            //VALIDAR PRODUCTO
-            let product_id = $(this).find("#product_id");
-            if (product_id.val() == "") {
-                product_id.focus();
-                product_id.addClass('border border-danger');
-                alerta("Debes seleccionar un producto", "Seleciona un producto!!");
-                submit = false;
-                return false;
-            } else {
-                product_id.removeClass('border border-danger');
-            }
-
-            //VALIDAR CANTIDAD
-            let cantidad = $(this).find("#cantidad");
-            if (cantidad.val() == "") {
-                cantidad.focus();
-                cantidad.addClass('border border-danger');
-                alerta("Debes ingresar cantidad", "Ingresa cantidad!!");
-                submit = false;
-                return false;
-            } else {
-                cantidad.removeClass('border border-danger');
-            }
-
-            //VALIDAR CANTIDAD POR CAJA
-            let cantidad_por_caja = $(this).find("#cantidad_por_caja");
-            if (cantidad_por_caja.val() == "") {
-                cantidad_por_caja.focus();
-                cantidad_por_caja.addClass('border border-danger');
-                alerta("Debes ingresar cantidad por caja", "Ingresa cantidad por caja!!");
-                submit = false;
-                return false;
-            } else {
-                cantidad_por_caja.removeClass('border border-danger');
-            }
-
-            //VALIDAR PRECIO
-            let precio = $(this).find("#precio");
-            if (precio.val() == "") {
-                precio.focus();
-                precio.addClass('border border-danger');
-                alerta("Debes ingresar precio", "Ingresa precio!!");
-                submit = false;
-                return false;
-            } else {
-                precio.removeClass('border border-danger');
-            }
-
-            //VALIDAR PRECIO POR CAJA
-            let precio_por_caja = $(this).find("#precio_por_caja");
-            if (precio_por_caja.val() == "") {
-                precio_por_caja.focus();
-                precio_por_caja.addClass('border border-danger');
-                alerta("Debes ingresar precio por caja", "Ingresa precio por caja!!");
-                submit = false;
-                return false;
-            } else {
-                precio_por_caja.removeClass('border border-danger');
-            }
-
+                $('.select2').select2({
+                    width: '100%'
+                });
+                $('.select2Mul').select2({
+                    closeOnSelect: false,
+                    width: '100%'
+                });
+            });
         });
 
-        return submit;
-
-
-    }
-
-    
-//CUANDO SE ACTUALIZA LIVEWIRE    
-document.addEventListener("DOMContentLoaded", () => {
-    Livewire.hook('message.processed', (message, component) => {
-
-
-        $('.select2').select2({
-            width: '100%'
-        });
-        $('.select2Mul').select2({
-            closeOnSelect: false,
-            width: '100%'
-        });
-    });
-});
-
-
-</script>
+    </script>
 @stop

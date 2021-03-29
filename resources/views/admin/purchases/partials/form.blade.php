@@ -40,8 +40,8 @@
     <div>
         @isset($compra)
             <livewire:detalle-compra :compra='$compra'>
-            @else
-                <livewire:detalle-compra>
-                @endisset
+        @else
+            <livewire:detalle-compra>
+        @endisset
     </div>
 </div>
