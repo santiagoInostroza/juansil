@@ -28,8 +28,11 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-
+@isset($cliente)
     @livewire('input.celular', ['celular' => $cliente->celular])
+@else
+    @livewire('input.celular')
+@endisset
    
    
 
