@@ -19,7 +19,7 @@
         @enderror
     </div>
     {{-- Telefono --}}
-    <div class="form-group col-sm">
+    <div class="form-group col-sm d-none">
         {!! Form::label('telefono', 'Telefono (codigo + telefono)', ['class' => '']) !!}
         {!! Form::text('telefono', null, ['class' => 'form-control', 'placeholder' => 'Ingresa Telefono']) !!}
 
@@ -29,15 +29,10 @@
         @enderror
     </div>
 
-    {{-- Celular --}}
-    <div class="form-group col-sm">
-        {!! Form::label('celular', 'Celular (codigo + numero)', ['class' => '']) !!}
-        {!! Form::text('celular', null, ['class' => 'form-control', 'placeholder' => '+56 9 xxxx xxxx']) !!}
+    @livewire('input.celular', ['celular' => $cliente->celular])
+   
+   
 
-        @error('celular')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
 </div>
 <div class="row">
 
@@ -53,7 +48,7 @@
 
 
     {{-- PLACE ID --}}
-    <div class="form-group col-sm">
+    <div class="form-group col-sm d-none">
         {!! Form::label('place_id', 'Place Id', ['class' => '']) !!}
         {!! Form::text('place_id', null, ['id' => 'place_id', 'class' => 'form-control', 'placeholder' => '', 'readonly' => true]) !!}
         @error('place_id')
@@ -65,7 +60,7 @@
 <div class="row">
 
     {{-- LATITUD --}}
-    <div class="form-group col-sm">
+    <div class="form-group col-sm d-none">
         {!! Form::label('latitud', 'Latitud', ['class' => '']) !!}
         {!! Form::text('latitud', null, ['class' => 'form-control', 'placeholder' => 'Latitud', 'readonly' => true]) !!}
 
@@ -76,7 +71,7 @@
 
 
     {{-- LONGITUD --}}
-    <div class="form-group col-sm">
+    <div class="form-group col-sm d-none">
         {!! Form::label('longitud', 'Longitud', ['class' => '']) !!}
         {!! Form::text('longitud', null, ['class' => 'form-control', 'placeholder' => 'longitud', 'readonly' => true]) !!}
         @error('longitud')
