@@ -27,17 +27,16 @@
                             <div class="" style="width: 60px">
                                 ${{ number_format($item->precio_total, 0, ',', '.') }}
                             </div>
-                            <div>
-                               
+                            <div style="width: 60px">
                                 @if ( count($item->product->purchasePrices)>0 )
                                     ${{  number_format($item->cantidad_total * $item->product->purchasePrices[0]->precio,0,',','.') }}
                                 @else
                                     0
                                 @endif
                             </div>
-                            <div>
+                            <div style="width: 60px">
                                 @if ( count($item->product->purchasePrices)>0 )
-                                    {{$item->precio_total - ($item->cantidad_total * $item->product->purchasePrices[0]->precio) }}
+                                    {{ $item->precio_total - ( $item->cantidad_total * $item->product->purchasePrices[0]->precio ) }}
                                 @else
                                     {{ $item->precio_total}}
                                 @endif
