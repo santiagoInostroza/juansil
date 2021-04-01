@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Select;
 use App\Models\Product;
 use Livewire\Component;
 
-class Producto extends Component
+class Productos extends Component
 {
     public $indice;
     public $query = "";
@@ -22,7 +22,7 @@ class Producto extends Component
     public function render(){ 
         $productos = Product::where("name","like", "%". $this->query ."%")->get();
         $this->productos = $productos;
-        return view('livewire.select.producto',compact('productos'));
+        return view('livewire.select.productos',compact('productos'));
     }
 
 
@@ -79,5 +79,4 @@ class Producto extends Component
         $this->showCreateProduct = true;
     }
 
-   
 }

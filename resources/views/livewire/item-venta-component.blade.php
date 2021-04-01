@@ -13,9 +13,9 @@
             </select> 
             @error('products') <span class="error">{{ $message }}</span> @enderror --}}
 
-            @livewire('select.producto', ['product_id' => $item['product_id'],'query' => $item['product_name'] ])
+            @livewire('select.productos', ['product_id' => $item['product_id'],'query' => $item['product_name'] ])
       
-       
+         
        
     </td>
     <td>

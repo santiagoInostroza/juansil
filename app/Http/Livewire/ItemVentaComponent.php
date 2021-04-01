@@ -124,7 +124,7 @@ class ItemVentaComponent extends Component
     }
 
     public function actualizarPadre(){
-        $this->emit("actualizar", $this->indice, $this->product_id, $this->cantidad, $this->cantidad_por_caja, $this->cantidad_total, $this->precio, $this->precio_por_caja, $this->precio_total);
+        $this->emitTo('detalle-venta',"actualizar", $this->indice, $this->product_id, $this->cantidad, $this->cantidad_por_caja, $this->cantidad_total, $this->precio, $this->precio_por_caja, $this->precio_total);
     }
 
 

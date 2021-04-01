@@ -1,6 +1,5 @@
 <div class=" ">
     <div class="row">
-
         {{-- CLIENTE --}}
         @livewire('select.clientes', ['customer_id' => $customer_id,'query'=>$customer_name])
 

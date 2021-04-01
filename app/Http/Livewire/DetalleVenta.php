@@ -32,15 +32,7 @@ class DetalleVenta extends Component
     public $customer_name;
     public $date;
 
-
-
-
-    protected $listeners = [
-        'eliminarItem' => 'eliminarItem',
-        'actualizar' => 'actualizar',
-        'guardarProducto' => 'guardarProducto',
-        'setCustomerId'
-    ];
+    protected $listeners = ['eliminarItem' , 'actualizar','guardarProducto', 'setCustomerId'];
 
     public function setCustomerId($id,$nombre)
     {
@@ -120,7 +112,7 @@ class DetalleVenta extends Component
         $agregar = true;
         foreach ($this->items as $value) {
             foreach ($value as $key => $value) {
-                if($value ==""){
+                if($key != 'product_name' &&  $value ==""){
                    $this->prueba= $key;
                     $agregar = false;
                     break;
@@ -132,6 +124,7 @@ class DetalleVenta extends Component
                 'item_id' => '0',
                 'sale_id' => $this->venta_id,
                 'product_id' => '',
+                'product_name' => '',
                 'cantidad' => '',
                 'cantidad_por_caja' =>'',
                 'cantidad_total' =>'',
