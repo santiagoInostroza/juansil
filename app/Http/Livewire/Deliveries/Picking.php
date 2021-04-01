@@ -9,7 +9,7 @@ use Livewire\Component;
 class Picking extends Component
 {
     public $fecha;
-    public $vistaPicking=1;
+    public $vistaPicking=2;
     
     public function render()
     {
