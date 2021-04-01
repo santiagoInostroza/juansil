@@ -28,11 +28,12 @@
                                 ${{ number_format($item->precio_total, 0, ',', '.') }}
                             </div>
                             <div>
-                                @if ( $item->product->purchasePrices[0])
+                                $item->product->purchasePrices
+                                {{-- @if ( $item->product->purchasePrices[0] )
                                 ${{  number_format($item->cantidad_total * $item->product->purchasePrices[0]->precio,0,',','.') }}
                                 @else
                                     0
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
 
