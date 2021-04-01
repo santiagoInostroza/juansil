@@ -38,7 +38,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="">
-                    Pedidos {{ count($ventas) }}
+                    Pedidos {{ count($ventas) }} {{ $ventas->sum('total') }}
                 </h2>
             </div>
             <div id="map" class="card-body">
