@@ -18,6 +18,7 @@ class ItemVentaComponent extends Component
     public $item_id;
     public $sale_id;
     public $product_id;
+    public $product_name;
     public $cantidad;
     public $cantidad_por_caja;
     public $cantidad_total;
@@ -33,7 +34,13 @@ class ItemVentaComponent extends Component
     public $showStock;
 
 
+    protected $listeners=['setProductId'];
 
+    public function setProductId($id)
+    {
+        $this->product_id = $id;
+        $this->actualizarPadre();
+    }
 
 
     public function render()
@@ -44,14 +51,12 @@ class ItemVentaComponent extends Component
         ]);
     }
 
-    public function mount()
-    {
-
+    public function mount(){
         $this->fill([
-
             'item_id' => $this->item['item_id'],
             'sale_id' => $this->item['sale_id'],
             'product_id' => $this->item['product_id'],
+            'product_name' => $this->item['product_name'],
             'cantidad' => $this->item['cantidad'],
             'cantidad_por_caja' => $this->item['cantidad_por_caja'],
             'cantidad_total' => $this->item['cantidad_total'],
@@ -67,8 +72,7 @@ class ItemVentaComponent extends Component
         $this->emit('eliminarItem', $this->indice, $this->item_id);
     }
 
-    public function calculos()
-    {
+    public function calculos(){
         //CALCULA CANTIDAD TOTAL
         try {
             $this->cantidad_total = $this->cantidad * $this->cantidad_por_caja;
@@ -93,8 +97,7 @@ class ItemVentaComponent extends Component
 
         $this->actualizarPadre();
     }
-    public function calculaPrecio()
-    {
+    public function calculaPrecio(){
         //CALCULA PRECIO UNITARIO A PARTIR DEL PRECIO DE CAJA
         try {
             $this->precio = round($this->precio_por_caja / $this->cantidad_por_caja);
@@ -105,8 +108,7 @@ class ItemVentaComponent extends Component
         }
     }
 
-    public function calculaPrecioTotal()
-    {
+    public function calculaPrecioTotal(){
         //CALCULA PRECIO CAJA A PARTIR DEL PRECIO DE UNITARIO
         try {
             $this->precio_por_caja = $this->precio * $this->cantidad_por_caja;
@@ -121,8 +123,7 @@ class ItemVentaComponent extends Component
 
     }
 
-    public function actualizarPadre()
-    {
+    public function actualizarPadre(){
         $this->emit("actualizar", $this->indice, $this->product_id, $this->cantidad, $this->cantidad_por_caja, $this->cantidad_total, $this->precio, $this->precio_por_caja, $this->precio_total);
     }
 

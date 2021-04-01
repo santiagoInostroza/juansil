@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class TagSeeder extends Seeder
@@ -14,20 +15,28 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        // Tag::create([
-        //     'name'=>'Corta Fecha',
-        //     'slug'=>'corta_fecha',
-        //     'color'=>'red'
-        //    ]);
-        // Tag::create([
-        //     'name'=>'Promocion',
-        //     'slug'=>'promocion',
-        //     'color'=>'yellow'
-        //    ]);
-        // Tag::create([
-        //     'name'=>'2x1',
-        //     'slug'=>'2x1',
-        //     'color'=>'blue'
-        //    ]);
+
+
+        $brands = [
+            [ 'Endulzantes','indigo'],
+            [ 'Mayonesas','indigo'],
+            [ 'Leches','indigo'],
+            [ 'Aceite','indigo'],
+            [ 'Azucar','indigo'],
+            [ 'Atunes','indigo'],
+            [ 'Salsas','indigo'],
+            [ 'Pastas','indigo'],
+            [ 'Arroz','indigo'],
+            [ 'Snacks','pink'],
+            [ 'Enlatados','pink'],
+        ];
+        
+        foreach ($brands as  $brand) {
+            Tag::create([
+                'name'=>$brand[0],
+                'slug'=>Str::slug($brand[0]),
+                'color'=>$brand[1],
+            ]);
+        }
     }
 }

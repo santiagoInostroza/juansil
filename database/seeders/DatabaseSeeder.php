@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CustomerData;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
 use Database\Seeders\SaleSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\BrandSeeder;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       $this->call(RoleSeeder::class);
        $this->call(UserSeeder::class);
        $this->call(CategorySeeder::class);
        $this->call(BrandSeeder::class);

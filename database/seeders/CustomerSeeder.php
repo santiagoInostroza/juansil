@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use App\Models\CustomerData;
 use Illuminate\Database\Seeder;
 
@@ -22,42 +23,45 @@ class CustomerSeeder extends Seeder
            'slug' => 'ajuste-de-stock',
        ]);
 
-    //     CustomerData::create([
-    //         'total_credito' => 0,
-    //         ]);
-    //    Customer::create([
-    //        'name' => 'Silvy Inostroza',
-    //        'slug' => 'silvy-inostroza',
-    //        'direccion' => 'Pelluco 0878',
-    //        'comuna' => 'La granja',
-    //        'customer_data_id' => 1,
-    //    ]);
+       
 
        
-    //    CustomerData::create([
-    //     'total_credito' => 0,
-    //     ]);
 
+        CustomerData::create([
+            'total_credito' => 0,
+        ]);
+        $name = "Silvy Inostroza";
+        Customer::create([
+           'name' => $name,
+           'slug' => Str::slug($name),
+           'direccion' => 'Pelluco 0878',
+           'comuna' => 'La granja',
+           'customer_data_id' => 1,
+        ]);
 
-    //    Customer::create([
-    //        'name' => 'Shelly Inostroza',
-    //        'slug' => 'shelly-inostroza',
-    //        'direccion' => 'Los angeles 8280',
-    //        'comuna' => 'La granja',
-    //        'customer_data_id' => 2,
-    //    ]);
+        CustomerData::create([
+            'total_credito' => 0,
+        ]);
+        $name = "Shelly Inostroza";
+        Customer::create([
+           'name' => $name,
+           'slug' => Str::slug($name),
+           'direccion' => 'Los angeles 8280',
+           'comuna' => 'La granja',
+           'customer_data_id' => 2,
+        ]);
 
-    //    CustomerData::create([
-    //     'total_credito' => 0,
-    //     ]);
-
-    //    Customer::create([
-    //     'name' => 'Daniel Pando',
-    //     'slug' => 'daniel-pando',
-    //     'direccion' => 'Pelluco 0878',
-    //     'comuna' => 'La granja',
-    //     'customer_data_id' => 3,
-    // ]);
+        CustomerData::create([
+            'total_credito' => 0,
+        ]);
+        $name = "Dany Pando";
+        Customer::create([
+           'name' => $name,
+           'slug' => Str::slug($name),
+           'direccion' => 'Pelluco 0878',
+           'comuna' => 'La granja',
+           'customer_data_id' => 3,
+        ]);
 
      
     }

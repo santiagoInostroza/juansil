@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -14,18 +15,22 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        // Category::create([
-        //     'name'=>'Lacteos',
-        //     'slug'=>'lacteos',
-        //    ]);
-        // Category::create([
-        //     'name'=>'Articulos de aseo',
-        //     'slug'=>'articulos-de-aseo',
-        //    ]);
-        // Category::create([
-        //     'name'=>'Abarrotes',
-        //     'slug'=>'abarrotes',
-        //    ]);
+        $names = [
+            'Lacteos',
+            'Abarrotes',
+            'Articulos de aseo',
+        ];
+        
+        foreach ($names as  $name) {
+            Category::create([
+                'name'=>$name,
+                'slug'=>Str::slug($name),
+               ]);
+        }
+        
+       
+       
+       
         
     }
 }

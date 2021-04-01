@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\ComunaController;
@@ -37,6 +38,8 @@ Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerDa
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->name('admin.sales.create');
 Route::resource('ventas', SaleController::class)->names('admin.sales');
 Route::resource('comunas', ComunaController::class)->names('admin.comunas');
+
+Route::resource('users',  UserController::class)->names('admin.users');
 
 
 

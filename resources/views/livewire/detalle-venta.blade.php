@@ -1,37 +1,8 @@
 <div class=" ">
     <div class="row">
+
         {{-- CLIENTE --}}
-        <div class="form-group col-sm">
-            <i class="fas fa-user"></i>
-            {!! Form::label('customer_id', 'Nombre', ['class' => 'd-inline-block mr-2']) !!}
-            <div style="width: 100%">
-
-                {!! Form::select('customer', $customers, null, ['class' => 'form-control', 'placeholder' => 'Selecciona Nombre', 'wire:model' => 'customer_id']) !!}
-                @error('customer')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        
-        {{-- CLIENTE --}}
-        <div class="form-group col-sm">
-            <i class="fas fa-user"></i>
-            {!! Form::label('customer_id', 'Direccion', ['class' => 'd-inline-block mr-2']) !!}
-            <div class="d-flex">
-                <div style="width: 100%">
-
-                    {!! Form::select('customer_id', $directions, null, ['class' => 'form-control', 'placeholder' => 'Selecciona Direccion', 'wire:model' => 'customer_id']) !!}
-                    @error('customer_id')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="p-1 ml-2 mb-1 rounded btn" style="width:40px">
-                    <a href="{{ route('admin.customers.create') }}"><i class="fas fa-user">+</i></a>
-                </div>
-            </div>
-
-        </div>
-
+        @livewire('select.clientes', ['customer_id' => $customer_id,'query'=>$customer_name])
 
         {{-- FECHA --}}
         <div class="form-group col-sm">
@@ -43,9 +14,6 @@
 
         </div>
     </div>
-
-
-
 
     {{-- DETALLE VENTA --}}
     <table id='detalleVenta' class="table table-bordered table-hover table-sm table-responsive-xl mt-5" style="width:100%">

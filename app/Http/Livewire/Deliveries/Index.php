@@ -10,7 +10,9 @@ class Index extends Component
 {
     public $fecha;
     public $fecha2;
-    public $showAgregarDespacho = false;
+    public $showAgregarDespacho = true;
+
+    protected $listeners = ['closeAgregarProducto'];
 
     
 
@@ -27,6 +29,11 @@ class Index extends Component
         $this->fecha2 =Carbon::createFromFormat('Y-m-d',  $this->fecha)->locale('es');
     
         return view('livewire.deliveries.index',compact('ventas','prev', 'next'));
+    }
+
+    public function closeAgregarProducto()
+    {
+        $this->showAgregarDespacho = false;
     }
 
     

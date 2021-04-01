@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Supplier;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class SupplierSeeder extends Seeder
@@ -14,13 +15,19 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        Supplier::create([
-            'name'=>'Ajuste de Stock',
-            'slug'=>'ajuste-de-stock',
-           ]);
-        // Supplier::create([
-        //     'name'=>'Colun',
-        //     'slug'=>'colun',
-        //    ]);
+        $names = [
+            'Ajuste de Stock',
+            'Colun',
+            'Bodegas Sumar',
+        ];
+        
+        foreach ($names as  $name) {
+            Supplier::create([
+                'name'=>$name,
+                'slug'=>Str::slug($name),
+            ]);
+        }
+
+     
     }
 }

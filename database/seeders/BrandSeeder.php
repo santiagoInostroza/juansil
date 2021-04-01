@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Brand;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class BrandSeeder extends Seeder
@@ -12,23 +13,32 @@ class BrandSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run() 
     {
-        // Brand::create([
-        //     'name'=>'Colun',
-        //     'slug'=>'colun',
-        //    ]);
-
+        $names = [
+            'Colun',
+            'Traverso',
+            'Soprole',
+            'Tucapel',
+            'La Patrona',
+            'Iansa',
+            'Rucas',
+            'Kraft',
+            'Daily',
+            'Dorasol',
+            'Robinson Crusoe',
+            "D'ampezzo",
+            "Vittorio",
+            "Olivaz",
+            "Antartic",
+        ];
         
-
-        // Brand::create([
-        //     'name'=>'Vitorio',
-        //     'slug'=>'vitorio',
-        //    ]);
-
-        //    Brand::create([
-        //     'name'=>'Omo',
-        //     'slug'=>'omo',
-        //    ]);
+        foreach ($names as $name) {
+            Brand::create([
+                'name'=>$name,
+                'slug'=>Str::slug($name),
+               ]); 
+        }
+       
     }
 }

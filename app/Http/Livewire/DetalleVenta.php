@@ -16,6 +16,7 @@ class DetalleVenta extends Component
     public $total;
     public $eliminados;
     public $venta_id;
+    //cliente _id se le pasa cuando viene desde una vista de cliente para que aparezca seleccionado
     public $cliente_id;
 
 
@@ -38,7 +39,15 @@ class DetalleVenta extends Component
         'eliminarItem' => 'eliminarItem',
         'actualizar' => 'actualizar',
         'guardarProducto' => 'guardarProducto',
+        'setCustomerId'
     ];
+
+    public function setCustomerId($id,$nombre)
+    {
+        $this->customer_id = $id;
+        $this->customer_name = $nombre;
+    }
+    
 
     public function render(){
         return view('livewire.detalle-venta',[
@@ -58,6 +67,7 @@ class DetalleVenta extends Component
                     'item_id' => $item->id,
                     'sale_id' => $this->venta_id,
                     'product_id' => $item->product_id,
+                    'product_name' => $item->product->name,
                     'cantidad' => $item->cantidad,
                     'cantidad_por_caja' => $item->cantidad_por_caja,
                     'cantidad_total' => $item->cantidad_total,
@@ -73,6 +83,7 @@ class DetalleVenta extends Component
             $this->delivery_stage = $this->venta->delivery_stage;
             $this->tiene_comentarios =($this->venta->comments != "")? 1: 0;
             $this->customer_id = $this->venta->customer_id;
+            $this->customer_name =  $this->venta->customer->name;
             $this->date=$this->venta->date;
 
         }else{
@@ -81,6 +92,7 @@ class DetalleVenta extends Component
                 'item_id' => "0",
                 'sale_id' =>$this->venta_id,
                 'product_id' => '',
+                'product_name' => '',
                 'cantidad' => '',
                 'cantidad_por_caja' =>'',
                 'cantidad_total' =>'',
@@ -94,7 +106,7 @@ class DetalleVenta extends Component
             $this->delivery_stage = 0;
             $this->delivery_date = $this->dateNextDelivery();
             $this->customer_id =request()->cliente_id;
-            $this->customer_name =request()->cliente_id;
+            // $this->customer_name =request()->cliente_id;
             $this->date=Carbon::now()->toDateString();
         }
         $this->search='1';

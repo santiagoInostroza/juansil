@@ -45,6 +45,8 @@ class ProductController extends Controller
 
     public function show(Product $producto)
     {
+        $this->authorize('published',$producto);
+        
         $misma_categoria = Product::where('category_id', $producto->category_id)
             ->where('id', '!=', $producto->id)
             ->take(4)

@@ -68,8 +68,9 @@ class ProductController extends Controller
     }
 
 
-    public function edit(Product $producto)
-    {
+    public function edit(Product $producto){
+
+        $this->authorize('author',$producto);
 
         $categories = Category::pluck('name', 'id');
         $brand = Brand::pluck('name', 'id');

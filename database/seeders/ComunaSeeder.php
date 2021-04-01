@@ -15,6 +15,42 @@ class ComunaSeeder extends Seeder
      */
     public function run()
     {
+        // $comunas = [
+        //     [
+        //         "name" => "CERRILLOS",
+        //         'valor_despacho'=> '2990', 
+        //         'dia'=>'0', 
+        //         'sector' =>'2', 
+        //         'descuento' => '0' 
+        //     ],
+        //     [
+        //         "name" => "CERRO NAVIA",
+        //         'valor_despacho'=> '2990', 
+        //         'dia'=>'0', 
+        //         'sector' =>'2', 
+        //         'descuento' => '0' 
+        //     ],
+        //     [
+        //         "name" => "CONCHALÍ",
+        //         'valor_despacho'=> '2990', 
+        //         'dia'=>'0', 
+        //         'sector' =>'2', 
+        //         'descuento' => '0' 
+        //     ],
+        // ];
+
+        // foreach ($comunas as $comuna) {
+        //     Comuna::create([
+        //         'name' => $comuna['name'],
+        //         'slug' => Str::slug($comuna['name']),
+        //         'valor_despacho' => '2990',
+        //         'dia' => '0',
+        //         'sector' => '2',
+        //         'descuento' => '0',
+                
+        //     ]);
+        // }
+
         $name="CERRILLOS";
         Comuna::create([
             'name' => $name,

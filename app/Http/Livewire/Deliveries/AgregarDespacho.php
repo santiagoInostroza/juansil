@@ -11,8 +11,10 @@ class AgregarDespacho extends Component
     public $name;
     public $direccion;
     public $fecha;
+    public $valor_despacho;
 
-    public $producto_id;
+    public $product_id;
+    public $nombre_producto;
     public $cantidad;
     public $cantidad_por_caja;
     public $cantidad_total;
@@ -26,10 +28,20 @@ class AgregarDespacho extends Component
     public $delivery_stage;
     public $tiene_comentarios;
 
+    protected $listeners = ['setProductId'];
+
+    public function setProductId($id,$nombre_producto)
+    {
+        $this->product_id = $id ;
+        $this->nombre_producto = $nombre_producto ;
+    }
+
 
     public function mount()
     {
+        //session()->pull('despacho', 'default');
         $this->fecha = Carbon::now()->format('Y-m-d');
+
     }
 
     public function render()
@@ -37,24 +49,27 @@ class AgregarDespacho extends Component
         return view('livewire.deliveries.agregar-despacho');
     }
 
-
-    public function dateNextDelivery()
-    {
-        $proxMartes = new Carbon('next tuesday');
-        $proxViernes = new Carbon('next friday');
-
-        if($proxMartes->diffInDays(Carbon::now()->toDateString())< $proxViernes->diffInDays(Carbon::now()->toDateString())){
-            $fecha =  $proxMartes;
-        }else{
-            $fecha =  $proxViernes;
-        }
-       return $fecha->toDateString();
-    }
-
     public function agregarItem()
     {
-        session(['despacho' =>[
 
-        ]]);
+        $item = session('despacho');
+        $item []= [
+            'product_id' => $this->product_id,
+            'nombre_producto' => $this->nombre_producto,
+            'cantidad' => $this->cantidad,
+            'cantidad_por_caja' => $this->cantidad_por_caja,
+            'cantidad_total' => $this->cantidad_total,
+            'precio' => $this->precio,
+            'precio_por_caja' => $this->precio_por_caja,
+            'precio_total' => $this->precio_total,
+            'cantidad' => $this->cantidad,
+        ] ;
+
+        session(['despacho' => $item]);
+    }
+
+    public function closeAgregarProducto()
+    {
+        $this->emitUp('closeAgregarProducto');
     }
 }
