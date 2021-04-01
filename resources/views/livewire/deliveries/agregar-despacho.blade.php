@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-md">
                         <label for="">Producto</label>
-                        @livewire('select.producto', ['user' => ''])
+                        @livewire('select.productos', ['user' => ''])
                         {{$product_id}}
                     </div>
                     <div class="col-md">

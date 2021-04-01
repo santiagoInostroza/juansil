@@ -10,7 +10,7 @@ class Index extends Component
 {
     public $fecha;
     public $fecha2;
-    public $showAgregarDespacho = true;
+    public $showAgregarDespacho = false;
 
     protected $listeners = ['closeAgregarProducto'];
 
