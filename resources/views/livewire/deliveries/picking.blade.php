@@ -20,12 +20,15 @@
                             <div class="" style="width: 60px">
                                 {{ $item->cantidad }} x {{ $item->cantidad_por_caja }}
                             </div>
-                            <div class="pr-2" style="width: 200px">
+                            <div class="pr-2" style="width: max-content">
                                 {{ $item->product->name }}
                             </div>
 
                             <div class="" style="width: 60px">
                                 ${{ number_format($item->precio_total, 0, ',', '.') }}
+                            </div>
+                            <div>
+                                {{   $item->product->purchasePrices }}
                             </div>
                         </div>
 
