@@ -13,6 +13,7 @@
             <label wire:click="$set('vistaPicking','1')" class="btn @if ($vistaPicking==1) btn-dark @endif">Detalle</label>
             <label wire:click="$set('vistaPicking','2')" class="btn @if ($vistaPicking==2) btn-dark @endif">Total</label>
             @if ($vistaPicking == 1)
+
                 @foreach ($ventas as $venta)
                     @foreach ($venta->sale_items as $item)
 
@@ -35,17 +36,21 @@
                                 @endif
                             </div>
                             <div style="width: 60px">
-                                @if ( count($item->product->purchasePrices)>0 )
-                                    {{ $item->precio_total - ( $item->cantidad_total * $item->product->purchasePrices[0]->precio ) }}
-                                @else
-                                    {{ $item->precio_total}}
-                                @endif
-                                
+                                @php
+                                if(count($item->product->purchasePrices)>0){
+                                    $diferencia =  $item->precio_total - ( $item->cantidad_total * $item->product->purchasePrices[0]->precio );
+                                }else{
+                                    $diferencia = $item->precio_total;
+                                }
+                                $totalisimo += $diferencia;
+                                @endphp
+                                 ${{number_format($diferencia)}}
                             </div>
                         </div>
 
                     @endforeach
                 @endforeach
+
             @else
                 @foreach ($arreglo as $key => $value)
                     <div>
@@ -53,6 +58,9 @@
                     </div>
                 @endforeach
             @endif
+            <div>
+                ${{number_format($totalisimo)}}
+            </div>
 
         </div>
     @endif

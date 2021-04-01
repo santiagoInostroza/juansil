@@ -10,6 +10,8 @@ class Picking extends Component
 {
     public $fecha;
     public $vistaPicking=2;
+    public $diferencia;
+    public $totalisimo = 0;
     
     public function render()
     {
