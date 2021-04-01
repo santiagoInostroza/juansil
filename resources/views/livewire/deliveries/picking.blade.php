@@ -20,7 +20,7 @@
                             <div class="" style="width: 60px">
                                 {{ $item->cantidad }} x {{ $item->cantidad_por_caja }}
                             </div>
-                            <div class="pr-2" style="width: max-content">
+                            <div class="pr-2" style="width: 200px">
                                 {{ $item->product->name }}
                             </div>
 
