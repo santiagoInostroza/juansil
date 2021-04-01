@@ -35,6 +35,14 @@
                                     0
                                 @endif
                             </div>
+                            <div>
+                                @if ( count($item->product->purchasePrices)>0 )
+                                    {{$item->precio_total - ($item->cantidad_total * $item->product->purchasePrices[0]->precio) }}
+                                @else
+                                    {{ $item->precio_total}}
+                                @endif
+                                
+                            </div>
                         </div>
 
                     @endforeach
