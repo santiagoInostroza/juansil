@@ -3,7 +3,7 @@
 
    
     <td>
-        @livewire('select.producto', ['indice' => $indice, 'product_id'=>$item['product_id'], 'query'=> $item['product_name']], key($indice) )
+        @livewire('select.productos', ['indice' => $indice, 'product_id'=>$item['product_id'], 'query'=> $item['product_name']], key($indice) )
     </td>
     <td>
         {{-- {!!  Form::number('cantidad[]', $itemCompra['cantidad'], ['class' => 'form-control','wire:keyup'=>'calculos','wire:model'=>'cantidad']) !!}  --}}
