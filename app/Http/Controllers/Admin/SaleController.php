@@ -25,7 +25,7 @@ class SaleController extends Controller
 
     public function create( $cliente_id ="" )
     {
-        
+       
         $customers = Customer::pluck('name', 'id');
         $products = Product::pluck('name', 'id');
         return view('admin.sales.create', compact('customers', 'products','cliente_id') );
