@@ -44,7 +44,7 @@
                                 }
                                 $totalisimo += $diferencia;
                                 @endphp
-                                 ${{number_format($diferencia)}}
+                                 ${{number_format($diferencia,0,',','.')}}
                             </div>
                         </div>
 
@@ -59,7 +59,7 @@
                 @endforeach
             @endif
             <div>
-                ${{number_format($totalisimo)}}
+                ${{number_format($totalisimo,0,',','.')}}
             </div>
 
         </div>
