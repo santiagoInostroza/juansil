@@ -98,7 +98,9 @@ class DetalleVenta extends Component
             $this->delivery_stage = 0;
             $this->delivery_date = $this->dateNextDelivery();
             $this->customer_id =request()->cliente_id;
-            $this->customer_name =Customer::find($this->customer_id)->name;
+            if($this->customer_id){
+                $this->customer_name =Customer::find($this->customer_id)->name;
+            }
             $this->date=Carbon::now()->toDateString();
         }
         $this->search='1';
