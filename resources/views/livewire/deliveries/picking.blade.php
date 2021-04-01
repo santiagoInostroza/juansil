@@ -28,7 +28,7 @@
                                 ${{ number_format($item->precio_total, 0, ',', '.') }}
                             </div>
                             <div>
-                                {{   $item->product->purchasePrices }}
+                                {{   $item->product->purchasePrices[0]->precio }}
                             </div>
                         </div>
 
