@@ -24,9 +24,9 @@
                                 {{ $item->product->name }}
                             </div>
 
-                            {{-- <div class="" style="width: 60px">
-            ${{ number_format($item->precio_total, 0, ',', '.') }}
-        </div> --}}
+                            <div class="" style="width: 60px">
+                                ${{ number_format($item->precio_total, 0, ',', '.') }}
+                            </div>
                         </div>
 
                     @endforeach
