@@ -59,7 +59,7 @@
                 @endforeach
             @endif
             <div>
-                ${{number_format($totalisimo,0,',','.')}}
+              Total  ${{number_format($totalisimo,0,',','.')}}
             </div>
 
         </div>

@@ -215,7 +215,9 @@ class SaleController extends Controller
 
     public function destroy(Sale $venta)
     {
-        //
+        $id= $venta->id;
+        $venta->delete();
+       return  redirect()->route('admin.sales.index')->with('info', "Venta '$id' eliminada correctamente");
     }
 
 
