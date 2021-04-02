@@ -26,7 +26,7 @@ class SaleController extends Controller
         foreach ( $sales as $items) {
             foreach ($items->sale_items as $item) {
                 $this->total_venta  +=  $item->precio_total;
-                if(isset($item->product->purchasePrices)){
+                if(count($item->product->purchasePrices>0)){
                     $total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;
                 }
                 $diferencia += $item->precio_total - ($item->cantidad_total * $item->product->purchasePrices[0]->precio);       
