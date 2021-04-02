@@ -15,13 +15,26 @@ use App\Http\Controllers\Controller;
 class SaleController extends Controller
 {
 
-    public function index()
-    {
+    public $total_venta = 0;
+    public $total_compra = 0;
+    public $diferencia = 0;
+
+    public function index(){
         $sales = Sale::all();
-        
+        $diferencia = 0;
+        $total_compra = 0;
+        foreach ( $sales as $items) {
+            foreach ($items->sale_items as $item) {
+                $this->total_venta  +=  $item->precio_total;
+                $total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;
+                $diferencia += $item->precio_total - ($item->cantidad_total * $item->product->purchasePrices[0]->precio);       
+            
 
+            }
+        }
+       
 
-        return view('admin.sales.index', compact('sales'));
+        return view('admin.sales.index', compact('sales','diferencia','total_compra'));
     }
 
 
