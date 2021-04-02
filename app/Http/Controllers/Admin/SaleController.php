@@ -26,11 +26,13 @@ class SaleController extends Controller
         foreach ( $sales as $items) {
             foreach ($items->sale_items as $item) {
                 $this->total_venta  +=  $item->precio_total;
-               try {
-                   $total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;
-               } catch (\Throwable $th) { }
+                try {
+                    $total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;
+                    $diferencia += $item->precio_total - ($item->cantidad_total * $item->product->purchasePrices[0]->precio);       
+                } catch (\Throwable $th) { 
+                    $diferencia += $item->precio_total;     
+                }
                 
-                $diferencia += $item->precio_total - ($item->cantidad_total * $item->product->purchasePrices[0]->precio);       
             
             }
         }
