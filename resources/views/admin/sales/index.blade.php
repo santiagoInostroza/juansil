@@ -37,7 +37,7 @@
         </script>
     @endif
 
-    <div class="fixed-bottom p-5 shadow text-center">Total ventas ${{number_format($sales->sum('total'),0,',','.')}}</div>
+    <div class="fixed-bottom p-2 bg-white shadow text-center">Total ventas ${{number_format($sales->sum('total'),0,',','.')}}</div>
     <div class="card">
         <div class="card-body">
             <table id="tablaVentas" class="table table-striped table-bordered" style="width:100%">
