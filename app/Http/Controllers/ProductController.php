@@ -6,28 +6,47 @@ use App\Models\Tag;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
+    public $productos;
+    public $destacados;
 
-    public function index()
-    {
-            $productos = Product::where('status', 1)->paginate(100);
-            $destacados = Product::where('status', 1)->paginate(100);
-          
-
-
+    public function index(){
+        $this->getCache();
+        $productos = $this->productos;
+        $destacados = $this->destacados;
         return view('products.index', compact('productos','destacados'));
     }
 
-    public function filtro($name){
+    public function deleteCache(){
+        $value = Cache::pull('key');
+        $value = Cache::pull('destacados');
+    }
 
-        
-        //  $name= $request->name;
-        
-       
+    public function getCache(){
+        $seconds = 60;
+
+        if (request()->page) {
+           $key = 'productos'. request()->page;
+        } else {
+            $key = 'productos';
+        }
+
+        $this->productos = Cache::remember($key, $seconds, function () {
+            return Product::where('status', 1)->paginate(32);
+        });
+
+        $this->destacados = Cache::remember('destacados', $seconds, function () {
+            return Product::where('status', 1)->take(10)->get();
+        });
+           
+    }
+
+    public function filtro($name){
          $productos = Product::where('status', 1)->where('name', 'like',"%". $name . "%")->paginate(100);
-         $destacados = Product::where('status', 1)->paginate(100);
+         $destacados = Product::where('status', 1)->take(10)->get();
 
          return view('products.index', compact('productos','destacados','name'));
     }

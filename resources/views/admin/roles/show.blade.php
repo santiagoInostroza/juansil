@@ -3,7 +3,7 @@
 @section('title', 'Juansil')
 
 @section('content_header')
-    <h1>Precios de feria</h1>
+    <h1>Mostrar rol</h1>
 @stop
 
 @section('content')

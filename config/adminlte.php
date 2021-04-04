@@ -247,8 +247,18 @@ return [
             'route'         => 'admin.users.index',
             //'url'         => 'admin',
             'icon'        => 'fas fa-fw fa-users ',
-            /*'label'       => 4,
-            'label_color' => 'success',*/
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+            'can'  => 'admin.users.index',
+        ],
+        [
+            'text'        => 'Lista de roles',
+            'route'         => 'admin.roles.index',
+            //'url'         => 'admin',
+            'icon'        => 'fas fa-fw fa-users-cog ',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+            'can'  => 'admin.users.index',
         ],
         ['header' => 'Administrador'],
         [
@@ -283,7 +293,7 @@ return [
             'text' => 'Clientes',
             'route'  => 'admin.customers.index',
             // 'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-copyright',
+            'icon' => 'fas fa-fw fa-users',
             'active'=> ['admin/clientes*']
         ],
         [
@@ -359,7 +369,7 @@ return [
         [
             'text'       => 'Ventas',
             'route'=> 'admin.sales.index',
-            'icon' => 'fas fa-fw fa-clipboard',
+            'icon' => 'fas fa-fw fa-cash-register',
             'active'=> ['admin/ventas*'],
             
         ],

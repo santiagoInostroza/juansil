@@ -18,8 +18,12 @@
         </div>
     </div>
 
+
+
+       <livewire:precios-producto :producto='$producto' :key="$producto->id">
+ 
+
     
-    <livewire:precios-producto :producto='$producto' :key="$producto->id">
 
 
 
