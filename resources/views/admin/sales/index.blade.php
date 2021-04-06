@@ -47,6 +47,7 @@
         Total costo ${{number_format($total_compra,0,',','.')}} 
         Diferencia ${{number_format($diferencia,0,',','.')}}  
         Porcentaje % {{number_format($porcentaje,2)}}  
+        Pendientes ${{number_format($total_pendiente,0,',','.')}}  
 
     </div>
     <div class="card">
