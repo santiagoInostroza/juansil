@@ -18,8 +18,12 @@
                 <a style="width: max-content"
                     href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}' style='padding:15px'
                     target='_blank'>{{ $venta->customer->direccion }}
-                    @if ($venta->customer->block != '') "Torre: " .
-                        $venta->customer->block @endif
+                    @if ($venta->customer->block != '') 
+                    "Torre: " . {{ $venta->customer->block }}
+                    @endif
+                    @if ($venta->customer->depto != '') 
+                    "Depto: " . {{ $venta->customer->depto }}
+                    @endif
                 </a>
             </div>
 
