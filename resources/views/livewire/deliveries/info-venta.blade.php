@@ -2,7 +2,7 @@
     @if ($mostrar_venta)
         <div class="row">
             <div class="col-md">
-                <div class="h3 form-group pb-0 mb-0 d-flex" style="">
+                <div class="h3 form-group pb-0 mb-0 d-flex" style="justify-content: space-between; align-items: center;">
                     <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
                     @if ($venta->customer->celular)
                     <div class=" pl-1" style="width: max-content">
