@@ -58,7 +58,7 @@
 
             <div class='form-group col-md' style="">
                 <div class="d-flex"  style="justify-content: space-between; align-items: center;">
-                    <i class="far fa-money-bill-alt  mr-2"></i>
+                    {{-- <i class="far fa-money-bill-alt  mr-2"></i> --}}
                     @if ($payment_status == 1)
                         <div wire:click="pagar({{ $venta->id }})" class="btn bg-warning  ml-2">
                             Pagado
@@ -76,7 +76,7 @@
 
             <div class="form-group col-md" style="">
                 <div class="d-flex"  style="justify-content: space-between; align-items: center;">
-                    <i class="fas fa-truck mr-2"></i>
+                    {{-- <i class="fas fa-truck mr-2"></i> --}}
                     @if ($venta->delivery_stage == 0)
                         <div wire:click="$emit('entregar',{{ $venta->id }})" class="btn bg-warning"> Entregado</div>
                     @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
