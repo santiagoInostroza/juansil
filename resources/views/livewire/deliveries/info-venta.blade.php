@@ -1,7 +1,7 @@
 <div class="px-2">
     @if ($mostrar_venta)
         <div class="row">
-            <div class="text-xl form-group col-md pb-0 " style="">
+            <div class="text-xl form-group col-md pb-0 mb-0" style="">
                 <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
             </div>
             <div class="form-group col-md" style="width: max-content">
