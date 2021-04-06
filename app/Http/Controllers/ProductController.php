@@ -35,11 +35,11 @@ class ProductController extends Controller
         }
 
         $this->productos = Cache::remember($key, $seconds, function () {
-            return Product::where('status', 1)->paginate(32);
+            return Product::where('status', 1)->paginate(60);
         });
 
         $this->destacados = Cache::remember('destacados', $seconds, function () {
-            return Product::where('status', 1)->take(10)->get();
+            return Product::where('status', 1)->take(15)->get();
         });
            
     }
