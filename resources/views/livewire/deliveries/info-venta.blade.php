@@ -21,9 +21,9 @@
                 $ {{ number_format($venta->total, 0, ',', '.') }}
                 @if ($venta->customer->celular)
                 <div class="" style="width: max-content">
-                    <div class="d-inline-block " style="width: max-content">
+                    {{-- <div class="d-inline-block " style="width: max-content">
                         {{ $venta->customer->celular }}
-                    </div>
+                    </div> --}}
 
                     <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
                             class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
@@ -33,7 +33,7 @@
             @endif
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="form-group col-md">
                 @if ($venta->customer->telefono)
                     <div class="mb-2" style="width: max-content">
@@ -56,7 +56,7 @@
                     </div>
                 @endif
             </div>
-        </div>
+        </div> --}}
 
         <div class="row">
 
