@@ -1,37 +1,31 @@
 <div class="px-2">
     @if ($mostrar_venta)
         <div class="row">
-            <div class="text-xl form-group col-md pb-0 mb-0" style="">
-                <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
+            <div class="col-md">
+                <div class="text-xl form-group pb-0 mb-0" style="">
+                    <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
+                </div>
+                <div class="form-group" style="width: max-content">
+                    <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>
+                        {{ $venta->customer->direccion }}
+                        @if ($venta->customer->block != '') 
+                            Torre  {{ $venta->customer->block }},
+                        @endif
+                        @if ($venta->customer->depto != '') 
+                            Depto: {{ $venta->customer->depto }}
+                        @endif
+                    </a>
+                </div>
             </div>
-            <div class="form-group col-md" style="width: max-content">
-                <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>
-                    {{ $venta->customer->direccion }}
-                    @if ($venta->customer->block != '') 
-                        Torre  {{ $venta->customer->block }},
-                    @endif
-                    @if ($venta->customer->depto != '') 
-                        Depto: {{ $venta->customer->depto }}
-                    @endif
-                </a>
-            </div>
-
             <div class="text-xl form-group col-md ">
                 $ {{ number_format($venta->total, 0, ',', '.') }}
             </div>
         </div>
-
-
-
         <div class="row">
-
-           
-
             <div class="form-group col-md">
-
                 @if ($venta->customer->telefono)
                     <div class="mb-2" style="width: max-content">
-                        <div class="d-inline-block " style="width: 100px">
+                        <div class="d-inline-block " style="width: max-content">
                             {{ $venta->customer->telefono }}
                         </div>
                         <a href="tel:+{{ $venta->customer->telefono }} " target="_blank"><i
@@ -40,7 +34,6 @@
                 @endif
                 @if ($venta->customer->celular)
                     <div class="" style="width: max-content">
-
                         <div class="d-inline-block " style="width: 100px">
                             {{ $venta->customer->celular }}
                         </div>
