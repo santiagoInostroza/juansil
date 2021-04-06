@@ -5,9 +5,7 @@
                 <div class="h3 form-group pb-0 mb-0 d-flex" style="">
                     <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
                     @if ($venta->customer->celular)
-                    <div class="" style="width: max-content">
-                       
-    
+                    <div class=" pl-1" style="width: max-content">
                         <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
                                 class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
                         <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20hablo%20de:%20'Precios%20Convenientes'."
@@ -61,9 +59,9 @@
             <div class='form-group col-md' style="">
                 <i class="far fa-money-bill-alt  mr-2"></i>
                 @if ($payment_status == 1)
-                    Pendiente
+                   
                     <div wire:click="pagar({{ $venta->id }})" class="btn bg-warning  ml-2">
-                        Pagar
+                        Pagado
                     </div>
                 @elseif($payment_status==2)
                     Abonado
@@ -79,7 +77,7 @@
             <div class="form-group col-md" style="">
                 <i class="fas fa-truck mr-2"></i>
                 @if ($venta->delivery_stage == 0)
-                    Pendiente <div wire:click="$emit('entregar',{{ $venta->id }})" class="btn bg-warning  ml-2"> Entregar
+                     <div wire:click="$emit('entregar',{{ $venta->id }})" class="btn bg-warning  ml-2"> Entregado
                     </div>
                 @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
                     Entregado
