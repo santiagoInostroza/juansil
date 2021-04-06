@@ -75,15 +75,15 @@
             </div>
 
             <div class="form-group col-md" style="">
-                <i class="fas fa-truck mr-2"></i>
-                @if ($venta->delivery_stage == 0)
-                     <div wire:click="$emit('entregar',{{ $venta->id }})" class="btn bg-warning  ml-2"> Entregado</div>
-                @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
-                    <div class="flex"  style="justify-content: space-between; align-items: center;">
+                <div class="flex"  style="justify-content: space-between; align-items: center;">
+                    <i class="fas fa-truck mr-2"></i>
+                    @if ($venta->delivery_stage == 0)
+                        <div wire:click="$emit('entregar',{{ $venta->id }})" class="btn bg-warning"> Entregado</div>
+                    @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
                         <span> Entregado {{ date('d-m-Y H:i:s', strtotime($venta->date_delivered)) }} </span>
-                        <span class="btn btn-success ml-2"><i class="fas fa-check"></i></span>
-                    </div>
-                @endif
+                        <span class="btn btn-success ml-2"> <i class="fas fa-check"></i> </span>
+                    @endif
+                </div>
             </div>
 
         </div>
