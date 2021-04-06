@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\PurchasePrice;
 use App\Models\ProductMovement;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
@@ -88,6 +89,7 @@ class SaleController extends Controller
             'delivery_date' => $delivery_date,
             'delivery_stage' => $delivery_stage,
             'comments' => $request->comments,
+            'user_created' => Auth::user()->id,
         ]);
 
         //CREA LOS ITEMS DE VENTA
@@ -154,9 +156,8 @@ class SaleController extends Controller
         $delivery_date = ($delivery == 1) ? $request->delivery_date : null;
         $delivery_stage = (isset($request->delivery_stage) && $request->delivery_stage == 'on') ? 1 : 0;
         
-        //CREA LA VENTA
+        //ACTUALIZA LA VENTA
 
-    
             $venta->update([
                 'customer_id' => $request->customer_id,
                 'total' => $request->total,
@@ -168,6 +169,7 @@ class SaleController extends Controller
                 'delivery_date' => $delivery_date,
                 'delivery_stage' => $delivery_stage,
                 'comments' => $request->comments,
+                'user_modified' => Auth::user()->id,
             ]);
 
            

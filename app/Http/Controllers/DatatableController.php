@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Purchase;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Admin\SupplierController;
 
 class DatatableController extends Controller
 {
+   
     public function productos()
     {
 
@@ -163,6 +165,7 @@ class DatatableController extends Controller
             ->make(true);
     }
     public function ventas(){
+
         return Datatables::of(Sale::all())
            
             ->addColumn('customer', function ($venta) {
@@ -186,6 +189,11 @@ class DatatableController extends Controller
             })
             ->addColumn('delivery', function ($venta) {
                 return  view('partials/datatables/sales/delivery', compact('venta'));
+            })
+            ->addColumn('user_created', function ($venta) {
+                $user = User::find($venta->user_created);
+
+                return  view('partials/datatables/sales/created_by', compact('user','venta'));
             })
             ->addColumn('action', function ($venta) {
                 return view('partials/datatables/sales/action', compact('venta'));

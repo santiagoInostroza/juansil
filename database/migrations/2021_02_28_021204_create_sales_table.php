@@ -27,6 +27,7 @@ class CreateSalesTable extends Migration
             $table->dateTime('date_delivered')->nullable();
             $table->integer('delivery_stage')->nullable();// etapa de entrega  0= por entregar\n1= entregado
             $table->text('comments')->nullable();// etapa de entrega  0= por entregar\n1= entregado
+            $table->text('user_modificate');
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
