@@ -2,8 +2,18 @@
     @if ($mostrar_venta)
         <div class="row">
             <div class="col-md">
-                <div class="text-xl form-group pb-0 mb-0" style="">
+                <div class="text-xl form-group pb-0 mb-0 d-flex" style="">
                     <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
+                    @if ($venta->customer->celular)
+                    <div class="" style="width: max-content">
+                       
+    
+                        <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
+                                class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20hablo%20de:%20'Precios%20Convenientes'."
+                            target="_blank"><i class="fab fa-whatsapp p-1 mr-1 bg-success"></i></a>
+                    </div>
+                @endif
                 </div>
                 <div class="form-group" style="width: max-content">
                     <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>
@@ -19,18 +29,6 @@
             </div>
             <div class="text-xl form-group col-md ">
                 $ {{ number_format($venta->total, 0, ',', '.') }}
-                @if ($venta->customer->celular)
-                <div class="" style="width: max-content">
-                    {{-- <div class="d-inline-block " style="width: max-content">
-                        {{ $venta->customer->celular }}
-                    </div> --}}
-
-                    <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
-                            class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
-                    <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20hablo%20de:%20'Precios%20Convenientes'."
-                        target="_blank"><i class="fab fa-whatsapp p-1 mr-1 bg-success"></i></a>
-                </div>
-            @endif
             </div>
         </div>
         {{-- <div class="row">
