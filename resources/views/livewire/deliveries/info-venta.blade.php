@@ -5,7 +5,7 @@
                 <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
             </div>
             <div class="form-group col-md" style="width: max-content">
-                <a style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}' style='padding:15px' target='_blank'>{{ $venta->customer->direccion }}
+                <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>{{ $venta->customer->direccion }}
                     @if ($venta->customer->block != '') 
                         Torre  {{ $venta->customer->block }},
                     @endif
