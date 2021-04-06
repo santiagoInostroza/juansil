@@ -1,11 +1,12 @@
 <div class="px-2">
     @if ($mostrar_venta)
         <div class="row">
-            <div class="text-xl form-group col-md " style="">
+            <div class="text-xl form-group col-md pb-0 " style="">
                 <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
             </div>
             <div class="form-group col-md" style="width: max-content">
-                <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>{{ $venta->customer->direccion }}
+                <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>
+                    {{ $venta->customer->direccion }}
                     @if ($venta->customer->block != '') 
                         Torre  {{ $venta->customer->block }},
                     @endif
