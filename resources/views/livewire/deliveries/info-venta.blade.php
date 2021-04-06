@@ -57,25 +57,25 @@
         <div class="row">
 
             <div class='form-group col-md' style="">
-                <i class="far fa-money-bill-alt  mr-2"></i>
-                @if ($payment_status == 1)
-                    <div wire:click="pagar({{ $venta->id }})" class="btn bg-warning  ml-2">
-                        Pagado
-                    </div>
-                @elseif($payment_status==2)
-                    Abonado
-                    
-                    <div wire:click='pagarDiferencia({{ $venta->id }})' style="background: #d0e80a" class="btn ml-2">Pagar</div>
-                @elseif($payment_status==3) {{-- PAGADO --}}
-                <div class="flex"  style="justify-content: space-between; align-items: center;">
-                    <span> Pagado {{ date('d-m-Y H:i:s', strtotime($venta->payment_date)) }} </span>
-                    <span class="btn btn-success ml-2"> <i class="fas fa-check"></i></span>
+                <div class="d-flex"  style="justify-content: space-between; align-items: center;">
+                    <i class="far fa-money-bill-alt  mr-2"></i>
+                    @if ($payment_status == 1)
+                        <div wire:click="pagar({{ $venta->id }})" class="btn bg-warning  ml-2">
+                            Pagado
+                        </div>
+                    @elseif($payment_status==2)
+                        Abonado
+                        
+                        <div wire:click='pagarDiferencia({{ $venta->id }})' style="background: #d0e80a" class="btn ml-2">Pagar</div>
+                    @elseif($payment_status==3) {{-- PAGADO --}}
+                        <span> Pagado {{ date('d-m-Y H:i:s', strtotime($venta->payment_date)) }} </span>
+                        <span class="btn btn-success ml-2"> <i class="fas fa-check"></i></span>
+                    @endif
                 </div>
-                @endif
             </div>
 
             <div class="form-group col-md" style="">
-                <div class="flex"  style="justify-content: space-between; align-items: center;">
+                <div class="d-flex"  style="justify-content: space-between; align-items: center;">
                     <i class="fas fa-truck mr-2"></i>
                     @if ($venta->delivery_stage == 0)
                         <div wire:click="$emit('entregar',{{ $venta->id }})" class="btn bg-warning"> Entregado</div>
