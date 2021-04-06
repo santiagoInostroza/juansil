@@ -47,10 +47,9 @@
         Total costo ${{number_format($total_compra,0,',','.')}} 
         Porcentaje % {{number_format($porcentaje,2)}}  
         <span class="text-success">Diferencia ${{number_format($diferencia,0,',','.')}}  </span> 
-       <span class="text-warning"> Pendientes ${{number_format($total_pendiente,0,',','.')}}  </span>
-
+        <span class="text-warning"> Pendientes ${{number_format($total_pendiente,0,',','.')}}  </span>
     </div>
-    <div class="card">
+    <div class="card mb-5">
         <div class="card-body">
             <table id="tablaVentas" class="table table-striped table-bordered" style="width:100%">
                 <thead>
