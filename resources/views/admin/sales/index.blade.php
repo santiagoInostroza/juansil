@@ -46,6 +46,8 @@
         Total ventas ${{number_format($sales->sum('total'),0,',','.')}}
         Total costo ${{number_format($total_compra,0,',','.')}} 
         Diferencia ${{number_format($diferencia,0,',','.')}}  
+        Porcentaje {{number_format($diferencia,2)}}  
+
     </div>
     <div class="card">
         <div class="card-body">
