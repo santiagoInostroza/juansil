@@ -35,7 +35,7 @@ class SaleController extends Controller
             }
         }
         $diferencia =  $total_venta - $total_compra;  
-        $porcentaje =    $diferencia / $total_venta;
+        $porcentaje =    $diferencia / $total_venta * 100;
 
        
 
