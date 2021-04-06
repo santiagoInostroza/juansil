@@ -191,8 +191,12 @@ class DatatableController extends Controller
                 return  view('partials/datatables/sales/delivery', compact('venta'));
             })
             ->addColumn('user_created', function ($venta) {
+               try {
                 $user = User::find($venta->user_created);
                 return  $user->name;
+               } catch (\Throwable $th) {
+                  return"";
+               } 
             })
             ->addColumn('action', function ($venta) {
                 return view('partials/datatables/sales/action', compact('venta'));
