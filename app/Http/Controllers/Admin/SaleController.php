@@ -29,7 +29,7 @@ class SaleController extends Controller
 
         foreach ( $sales as $items) {
             if($items->payment_status != 3){
-              $total_pendiente += $items->total;  
+              $total_pendiente += $items->pending_amount;  
             }
             foreach ($items->sale_items as $item) {
                 $total_venta  +=  $item->precio_total;
@@ -118,14 +118,12 @@ class SaleController extends Controller
     }
 
 
-    public function show(Sale $venta)
-    {
+    public function show(Sale $venta){
         //
     }
 
-    public function edit(Sale $venta)
-    {
-
+    public function edit(Sale $venta){
+        
         $customers = Customer::pluck('name', 'id');
         return view('admin.sales.edit', compact('venta', 'customers'));
     }
@@ -133,8 +131,8 @@ class SaleController extends Controller
 
 
 
-    public function update(Request $request, Sale $venta)
-    {
+    public function update(Request $request, Sale $venta){
+
         //return $request->all();
         $request->validate([
             'customer_id' => 'required',
@@ -146,7 +144,8 @@ class SaleController extends Controller
         $payment_amount = 0;
         $delivery = (isset($request->delivery) && $request->delivery == 'on') ? 1 : 0;
         if ($request->payment_status == 2) {
-            $payment_amount = $request->abono;
+            $payment_amount =$venta->payment_amount + $request->payment_amount;
+
         } else if ($request->payment_status == 3) {
             $payment_amount = $request->total;
         }

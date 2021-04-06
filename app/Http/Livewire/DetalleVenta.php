@@ -26,6 +26,8 @@ class DetalleVenta extends Component
     public $delivery_date;
     public $tiene_comentarios;
     public $payment_amount;
+    public $pending_amount;
+    public $payment_amount_anterior;
     public $delivery_stage;
     public $search;
     public $customer_id;
@@ -71,7 +73,10 @@ class DetalleVenta extends Component
             $this->delivery = $this->venta->delivery;
             $this->payment_status = $this->venta->payment_status;
             $this->delivery_date = $this->venta->delivery_date;
-            $this->payment_amount = $this->venta->payment_amount;
+            // $this->payment_amount = $this->venta->payment_amount;
+            $this->payment_amount = "";
+            $this->payment_amount_anterior = $this->venta->payment_amount;
+            $this->pending_amount = $this->venta->pending_amount;
             $this->delivery_stage = $this->venta->delivery_stage;
             $this->tiene_comentarios =($this->venta->comments != "")? 1: 0;
             $this->customer_id = $this->venta->customer_id;
