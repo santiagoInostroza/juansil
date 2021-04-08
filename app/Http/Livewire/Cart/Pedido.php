@@ -98,7 +98,7 @@ class Pedido extends Component
              $this->response = $response;
  
          } catch (Exception $e) {
-             $this->response = 'Error: ' . $e->getCode() . ' - ' . $e->getMessage();
+             $this->response = 'Error Get: ' . $e->getCode() . ' - ' . $e->getMessage();
          }
     }
 
@@ -108,7 +108,7 @@ class Pedido extends Component
             curl_setopt($ch, CURLOPT_URL, $this->url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_POST, TRUE);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->params);
             $response = curl_exec($ch);
             if($response === false) {
                 $error = curl_error($ch);
@@ -120,7 +120,7 @@ class Pedido extends Component
             }
             $this->response = $response;
         } catch (Exception $e) {
-            $this->response = 'Error: ' . $e->getCode() . ' - ' . $e->getMessage();
+            $this->response = 'Error Post: ' . $e->getCode() . ' - ' . $e->getMessage();
         }   
     }
 
