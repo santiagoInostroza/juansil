@@ -70,9 +70,25 @@ class Pedido extends Component
     }
 
     public function createPayment(){
-        $this->params["commerceOrder"] = '123456';
+
+        $optional = array(
+            "rut" => "9999999-9",
+            "otroDato" => "otroDato"
+        );
+        $optional = json_encode($optional);
+
+        $this->params["commerceOrder"] = 123456;
         $this->params["subject"] ='Pago de prueba';
-        $this->params["amount"] ='5000';
+        $this->params["currency"] ="CLP";
+        $this->params["amount"] =5000;
+        $this->params["email"] ='santiagoinostroza2@gmail.com';
+        $this->params["paymentMethod"] =9;
+        $this->params["urlConfirmation"] =route('admin.sales.index');
+        $this->params["urlReturn"] =route('admin.sales.create');
+        $this->params["optional"] =$optional;
+        // $this->params["timeout"] ='santiagoinostroza2@gmail.com';
+        // $this->params["merchantId"] ='santiagoinostroza2@gmail.com';
+        // $this->params["payment_currency"] ='santiagoinostroza2@gmail.com';
 
         $this->url .= '/payment/create';
         $this->flowMetodoPost();
