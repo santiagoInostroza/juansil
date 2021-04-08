@@ -73,11 +73,11 @@ class Pedido extends Component
         // $url = 'https://www.flow.cl/api';
         $url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
 
-        $this->flowMetodoGet($url,$signature);
+        $this->flowMetodoGet($url, $params, $signature);
   
     }
 
-    public function flowMetodoGet($url,$signature)
+    public function flowMetodoGet($url,$params,$signature)
     {
          // Agrega a la url el servicio a consumir
          $url = $url . '/payment/getStatus';
