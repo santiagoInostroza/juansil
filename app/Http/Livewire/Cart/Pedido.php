@@ -67,13 +67,10 @@ class Pedido extends Component
         };
 
         $secretKey='4df0e0d49429c7a7d597b0ae5c7039788a35f877';
-
-        //Firmando:
         $signature = hash_hmac('sha256', $toSign , $secretKey);
+        $params["s"] = $signature;
         // $url = 'https://www.flow.cl/api';
         $url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
-        $params["s"] = $signature;
-
         $this->flowMetodoPost($url, $params);
   
     }
