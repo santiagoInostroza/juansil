@@ -1,15 +1,14 @@
 <div class="container xl:max-w-7xl text-gray-500 pt-10">
    <div>
     {{var_dump($response)}} 
-   </div>
-    <button wire:click='createPayment' class="p-5 shadow ">
-       Crear Pago
-    </button>
+</div>
+<button wire:click='createPayment' class="p-5 shadow ">
+    Crear Pago
+</button>
 
-    <div >
-        {{var_dump($params)}}
-    </div>
-
+@if ($response)
+    <div>OK</div>
+@endif
     
     <div wire:click='eliminarTodo'>
         eliminar
