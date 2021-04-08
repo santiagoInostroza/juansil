@@ -4,6 +4,8 @@
        Crear Pago
     </button>
 
+    {{$params}}
+
     
     <div wire:click='eliminarTodo'>
         eliminar

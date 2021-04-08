@@ -55,7 +55,6 @@ class Pedido extends Component
             "apiKey" => "656B75FB-F6A6-48FE-9749-81244695L999",
             "token" => "AJ089FF5467367",
         );
-        $this->getSignature();
         // $this->url = 'https://www.flow.cl/api';
         $this->url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
 
