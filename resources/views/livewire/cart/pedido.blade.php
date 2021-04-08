@@ -2,9 +2,9 @@
     
     {{var_dump($response)}}
 
-    <div wire:click='flow' class="p-5 shadow">
+    <button wire:click='flow' class="p-5 shadow ">
        Flow
-    </div>
+    </button>
     
     <div wire:click='eliminarTodo'>
         eliminar
