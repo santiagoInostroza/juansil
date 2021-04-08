@@ -1,4 +1,4 @@
-<div class="container xl:max-w-7xl text-gray-500">
+<div class="container xl:max-w-7xl text-gray-500 pt-3">
     
     {{var_dump($response)}}
 
