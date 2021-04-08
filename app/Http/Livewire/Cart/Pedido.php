@@ -119,10 +119,10 @@ class Pedido extends Component
                      throw new Exception( 'Unexpected error occurred. HTTP_CODE: ' . $info['http_code'] , $info['http_code']);
              }
  
-            $this->response =json_decode($response) ;
+             $this->response = $response;
  
          } catch (Exception $e) {
-            $this->response = 'Error Get: ' . $e->getCode() . ' - ' . $e->getMessage();
+             $this->response = 'Error Get: ' . $e->getCode() . ' - ' . $e->getMessage();
          }
     }
 
@@ -142,7 +142,7 @@ class Pedido extends Component
             if(!in_array($info['http_code'], array('200', '400', '401')) ){
                 throw new Exception('Unexpected error occurred. HTTP_CODE: '.$info['http_code'] , $info['http_code']);
             }
-            $this->response =json_decode($response) ;
+            $this->response = $response;
         } catch (Exception $e) {
             $this->response = 'Error Post: ' . $e->getCode() . ' - ' . $e->getMessage();
         }   
