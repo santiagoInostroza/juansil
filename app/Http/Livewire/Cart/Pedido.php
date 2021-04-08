@@ -70,7 +70,7 @@ class Pedido extends Component
     }
 
     public function createPayment(){
-        //$url = $this->url;
+        $this->params["commerceOrder"] = 123456;
         $this->url .= '/payment/create';
         $this->flowMetodoPost();
         
