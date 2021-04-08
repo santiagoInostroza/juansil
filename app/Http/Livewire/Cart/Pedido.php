@@ -49,13 +49,19 @@ class Pedido extends Component
     public $params;
     public $response;
     public $url;
-    public $signature;
 
     public function setFlow(){
         $this->params =array( 
             "apiKey" => "656B75FB-F6A6-48FE-9749-81244695L999",
             "token" => "AJ089FF5467367",
         );
+        $this->getSignature();
+        // $this->url = 'https://www.flow.cl/api';
+        $this->url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
+
+    }
+    public function getSignature()
+    {
         $keys = array_keys($this->params);
         sort($keys);
         $toSign = "";
@@ -64,11 +70,7 @@ class Pedido extends Component
         };
         $secretKey='4df0e0d49429c7a7d597b0ae5c7039788a35f877';
         $signature = hash_hmac('sha256', $toSign , $secretKey);
-        $this->signature = $signature;
         $this->params["s"] = $signature;
-        // $this->url = 'https://www.flow.cl/api';
-        $this->url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
-
     }
 
     public function createPayment(){
@@ -91,6 +93,8 @@ class Pedido extends Component
         // $this->params["timeout"] ='santiagoinostroza2@gmail.com';
         // $this->params["merchantId"] ='santiagoinostroza2@gmail.com';
         // $this->params["payment_currency"] ='santiagoinostroza2@gmail.com';
+
+        $this->getSignature();
 
         $this->url .= '/payment/create';
         $this->flowMetodoPost();

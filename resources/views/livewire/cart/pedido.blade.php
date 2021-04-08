@@ -4,7 +4,6 @@
        Crear Pago
     </button>
 
-    {{$signature}}
     
     <div wire:click='eliminarTodo'>
         eliminar
