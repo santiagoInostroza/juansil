@@ -72,17 +72,15 @@ class Pedido extends Component
         $signature = hash_hmac('sha256', $toSign , $secretKey);
         // $url = 'https://www.flow.cl/api';
         $url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
+        $params["s"] = $signature;
 
-        $this->flowMetodoGet($url, $params, $signature);
+        $this->flowMetodoPost($url, $params);
   
     }
 
-    public function flowMetodoGet($url,$params,$signature)
-    {
-         // Agrega a la url el servicio a consumir
+    public function flowMetodoGet($url,$params){
          $url = $url . '/payment/getStatus';
-         // agrega la firma a los parámetros
-         $params["s"] = $signature;
+         
          //Codifica los parámetros en formato URL y los agrega a la URL
          $url = $url . "?" . http_build_query($params);
          try {
@@ -105,6 +103,30 @@ class Pedido extends Component
              $this->response = 'Error: ' . $e->getCode() . ' - ' . $e->getMessage();
          }
     }
+
+    public function flowMetodoPost($url,$params){
+        $url = $url . '/payment/create';
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+            $response = curl_exec($ch);
+            if($response === false) {
+                $error = curl_error($ch);
+                throw new Exception($error, 1);
+            } 
+            $info = curl_getinfo($ch);
+            if(!in_array($info['http_code'], array('200', '400', '401')) ){
+                throw new Exception('Unexpected error occurred. HTTP_CODE: '.$info['http_code'] , $info['http_code']);
+            }
+            echo $response;
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getCode() . ' - ' . $e->getMessage();
+        }   
+    }
+
 
 
 
