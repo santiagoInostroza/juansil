@@ -48,41 +48,42 @@ class Pedido extends Component
 
     public $params;
     public $response;
+    public $url;
 
-    public function flow(){
-
-        //Ordenando los parámetros:
-        $params =array( 
+    public function setFlow(){
+        $this->params =array( 
             "apiKey" => "656B75FB-F6A6-48FE-9749-81244695L999",
             "token" => "AJ089FF5467367",
         );
-
-        $keys = array_keys($params);
+        $keys = array_keys($this->params);
         sort($keys);
-
-        //Concatenando:
         $toSign = "";
         foreach($keys as $key) {
-            $toSign .= $key . $params[$key];
+            $toSign .= $key . $this->params[$key];
         };
-
         $secretKey='4df0e0d49429c7a7d597b0ae5c7039788a35f877';
         $signature = hash_hmac('sha256', $toSign , $secretKey);
-        $params["s"] = $signature;
-        // $url = 'https://www.flow.cl/api';
-        $url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
-        $this->flowMetodoPost($url, $params);
-  
+        $this->params["s"] = $signature;
+        // $this->url = 'https://www.flow.cl/api';
+        $this->url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
+
     }
 
-    public function flowMetodoGet($url,$params){
-         $url = $url . '/payment/getStatus';
-         
-         //Codifica los parámetros en formato URL y los agrega a la URL
-         $url = $url . "?" . http_build_query($params);
+    public function createPayment(){
+        //$url = $this->url;
+        $this->url .= '/payment/create';
+        $this->flowMetodoPost();
+        
+    }
+    public function getStatus(){
+        $this->url .= '/payment/getStatus';
+    }
+
+    public function flowMetodoGet(){
+        $this->url .= "?" . http_build_query($this->params);
          try {
              $ch = curl_init();
-             curl_setopt($ch, CURLOPT_URL, $url);
+             curl_setopt($ch, CURLOPT_URL, $this->url);
              curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
              $response = curl_exec($ch);
              if($response === false) {
@@ -101,11 +102,10 @@ class Pedido extends Component
          }
     }
 
-    public function flowMetodoPost($url,$params){
-        $url = $url . '/payment/create';
+    public function flowMetodoPost(){
         try {
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_URL, $this->url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_POST, TRUE);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
@@ -144,6 +144,8 @@ class Pedido extends Component
     ];
     
     public function mount(){
+        //INICIAR FLOW
+        $this->setFlow();
 
         $this->date = Carbon::now()->locale('es');
  
