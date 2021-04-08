@@ -70,7 +70,10 @@ class Pedido extends Component
     }
 
     public function createPayment(){
-        $this->params["commerceOrder"] = 123456;
+        $this->params["commerceOrder"] = '123456';
+        $this->params["subject"] ='Pago de prueba';
+        $this->params["amount"] ='5000';
+
         $this->url .= '/payment/create';
         $this->flowMetodoPost();
         
