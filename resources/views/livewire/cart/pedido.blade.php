@@ -8,9 +8,9 @@
     <div>
         {{var_dump($response)}} 
     </div>
-    <div>Token {{$response->token}}</div>
+    {{-- <div>Token {{$response->token}}</div>
     <div>URL {{$response->url}}</div>
-    <div>Flow Order {{$response->flowOrder}}</div>
+    <div>Flow Order {{$response->flowOrder}}</div> --}}
 
 @endif
     
