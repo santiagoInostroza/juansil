@@ -6,7 +6,7 @@
 
 @if ($response)
     <div>
-        {{var_dump($response)}} 
+        {{($response)}} 
     </div>
     {{-- <div>Token {{$response->token}}</div>
     <div>URL {{$response->url}}</div>
