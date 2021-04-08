@@ -3,6 +3,8 @@
     <button wire:click='createPayment' class="p-5 shadow ">
        Crear Pago
     </button>
+
+    {{$signature}}
     
     <div wire:click='eliminarTodo'>
         eliminar

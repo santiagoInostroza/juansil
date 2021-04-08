@@ -49,6 +49,7 @@ class Pedido extends Component
     public $params;
     public $response;
     public $url;
+    public $signature;
 
     public function setFlow(){
         $this->params =array( 
@@ -63,6 +64,7 @@ class Pedido extends Component
         };
         $secretKey='4df0e0d49429c7a7d597b0ae5c7039788a35f877';
         $signature = hash_hmac('sha256', $toSign , $secretKey);
+        $this->signature = $signature;
         $this->params["s"] = $signature;
         // $this->url = 'https://www.flow.cl/api';
         $this->url = 'https://sandbox.flow.cl/api'; //URL DE PRUEBA
