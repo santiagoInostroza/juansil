@@ -121,9 +121,9 @@ class Pedido extends Component
             if(!in_array($info['http_code'], array('200', '400', '401')) ){
                 throw new Exception('Unexpected error occurred. HTTP_CODE: '.$info['http_code'] , $info['http_code']);
             }
-            echo $response;
+            $this->response = $response;
         } catch (Exception $e) {
-            echo 'Error: ' . $e->getCode() . ' - ' . $e->getMessage();
+            $this->response = 'Error: ' . $e->getCode() . ' - ' . $e->getMessage();
         }   
     }
 
