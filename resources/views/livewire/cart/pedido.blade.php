@@ -1,9 +1,9 @@
 <div class="container xl:max-w-7xl text-gray-500 pt-10">
    <div>
        <button wire:click='createPayment' class="p-5 shadow ">
+           Crear Pago
+        </button>
     </div>
-       Crear Pago
-    </button>
 
     <div >
         {{var_dump($params)}}
