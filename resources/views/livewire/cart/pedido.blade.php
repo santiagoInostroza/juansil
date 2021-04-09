@@ -1,8 +1,6 @@
 <div class="container xl:max-w-7xl text-gray-500 pt-10">
 
-<button wire:click='createPayment' class="p-5 shadow ">
-    Crear Pago
-</button>
+
 
 @if ($response)
     <div>
@@ -475,7 +473,9 @@
                 <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1"
                     x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                     <div class="card-body shadow w-full ">
-                        AGREGAR METODO DE PAGO
+                        <button wire:click='createPayment' class="p-5 shadow ">
+                            Crear Pago
+                        </button>
                     </div>
                 </div>
             </div>
