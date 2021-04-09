@@ -87,12 +87,12 @@ class Pedido extends Component
         $this->params["commerceOrder"] = 123458;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
-        $this->params["amount"] =5000;
-        $this->params["email"] ='santiagoinostroza2@gmail.com';
+        $this->params["amount"] =session('totalCarrito');
+        $this->params["email"] =$this->email;
         $this->params["paymentMethod"] =9;
         $this->params["urlConfirmation"] =route('flow');
         $this->params["urlReturn"] =route('flow2');
-        $this->params["optional"] =$optional;
+       // $this->params["optional"] =$optional;
         // $this->params["timeout"] ='santiagoinostroza2@gmail.com';
         // $this->params["merchantId"] ='santiagoinostroza2@gmail.com';
         // $this->params["payment_currency"] ='santiagoinostroza2@gmail.com';
@@ -255,6 +255,7 @@ class Pedido extends Component
             $this->latitud = session('cliente.datos.latitud');
             $this->longitud = session('cliente.datos.longitud');
             $this->comentario = session('cliente.datos.comentario');
+            $this->email= session('cliente.datos.email');
         }
 
        if(session()->has('totalCarrito')){
@@ -326,6 +327,7 @@ class Pedido extends Component
             }
 
             session(['cliente.datos.name' => $this->name]);
+            session(['cliente.datos.email' => $this->email]);
             session(['cliente.datos.celular' => $this->celular]);
             session(['cliente.datos.block' => $this->block]);
             session(['cliente.datos.depto' => $this->depto]);
