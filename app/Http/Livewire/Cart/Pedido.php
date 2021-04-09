@@ -175,6 +175,7 @@ class Pedido extends Component
         'validarDireccion','render','mount'
     ];
     protected $rules = [
+        'email' => 'required',
         'direccion' => 'required',
         'comuna' => 'required',
         'name' => 'required',
