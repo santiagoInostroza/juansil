@@ -88,7 +88,7 @@ class Pedido extends Component
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =session('totalCarrito');
-        $this->params["email"] =$this->email;
+        $this->params["email"] =session('datos.email');
         $this->params["paymentMethod"] =9;
         $this->params["urlConfirmation"] =route('flow');
         $this->params["urlReturn"] =route('flow2');
