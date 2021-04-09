@@ -117,10 +117,14 @@ class Pedido extends Component
              $info = curl_getinfo($ch);
              if(!in_array($info['http_code'], array('200', '400', '401')) ) {
                      throw new Exception( 'Unexpected error occurred. HTTP_CODE: ' . $info['http_code'] , $info['http_code']);
+
              }
  
-             $this->response = $response;
- 
+            $url = json_decode($response)->url;
+            $token = json_decode($response)->token;
+            //  $this->response = $response;
+            return redirect( $url . "?token=" . $token);
+
          } catch (Exception $e) {
              $this->response = 'Error Get: ' . $e->getCode() . ' - ' . $e->getMessage();
          }
