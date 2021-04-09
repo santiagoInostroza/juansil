@@ -49,7 +49,7 @@ class Pedido extends Component
     public $params;
     public $response;
     public $url;
-    public $msj_error;
+    public $msj_error ="";
 
     public function setFlow(){
         $this->params =array( 
