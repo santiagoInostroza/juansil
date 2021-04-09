@@ -6,7 +6,7 @@
 
 @if ($response)
     <div>
-    <a href="{{json_decode($response)->url}}"> Pagar </a>     
+    <a href="{{json_decode($response)->url}}?token={{json_decode($response)->token}}"> Pagar </a>     
     </div>
     <div>
         {{var_dump($response)}}
