@@ -156,10 +156,11 @@ class Pedido extends Component
                 $code = $resp->code;
                 if($code == 1605){//Orden ya pagada
                     $this->msj_error = "El número de orden " . $this->params["commerceOrder"] . " ya ha sido pagado";
-                    exit;
+                   
                 }
-             }
-            $this->response = $response;
+             }else{
+                 $this->response = $response;
+                }
         } catch (Exception $e) {
             $this->response = 'Error Post: ' . $e->getCode() . ' - ' . $e->getMessage();
         }   
