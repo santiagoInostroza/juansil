@@ -120,10 +120,10 @@ class Pedido extends Component
 
              }
  
-            $url = json_decode($response)->url;
+            $url2 = json_decode($response)->url;
             $token = json_decode($response)->token;
             //  $this->response = $response;
-            $this->response =  $url . "?token=" . $token;
+            $this->response =  $url2 . "?token=" . $token;
            // return redirect( $url . "?token=" . $token);
 
          } catch (Exception $e) {
