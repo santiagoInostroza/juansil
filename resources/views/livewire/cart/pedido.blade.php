@@ -6,7 +6,7 @@
 
 @if ($response)
     <div>
-        {{($response."- hola")}} 
+        {{ var_dump(json_decode($response))}} 
     </div>
     <div>
         {{var_dump($response)}}
