@@ -80,7 +80,8 @@ class Pedido extends Component
         );
         $optional = json_encode($optional);
 
-        $this->params["commerceOrder"] = 123456;
+        // $this->params["commerceOrder"] = 123456;
+        $this->params["commerceOrder"] = 123457;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =5000;
@@ -147,6 +148,10 @@ class Pedido extends Component
             if(!in_array($info['http_code'], array('200', '400', '401')) ){
                 throw new Exception('Unexpected error occurred. HTTP_CODE: '.$info['http_code'] , $info['http_code']);
             }
+            
+            $url = json_decode($response)->url;
+            $token = json_decode($response)->token;
+            return redirect( $url . "?token=" . $token);
             $this->response = $response;
         } catch (Exception $e) {
             $this->response = 'Error Post: ' . $e->getCode() . ' - ' . $e->getMessage();
