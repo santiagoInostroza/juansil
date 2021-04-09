@@ -6,7 +6,7 @@
 
 @if ($response)
     <div>
-        {{ var_dump(json_decode($response))}} 
+        {{  json_decode($response)->url}} 
     </div>
     <div>
         {{var_dump($response)}}
