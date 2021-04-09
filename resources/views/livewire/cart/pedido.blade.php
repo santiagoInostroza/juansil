@@ -462,8 +462,8 @@
                 <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1"
                     x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                     <div class="card-body shadow w-full ">
-                        <button wire:click='createPayment' class="p-5 shadow ">
-                            Crear Pago
+                        <button wire:click='createPayment' class="p-5 shadow bg-green-500 block text-center text-white font-bold">
+                            Pagar ${{ number_format($this->totalCarrito + $this->totalDespacho, 0, ',', '.') }}
                         </button>
                         @if ($msj_error!="")
                             <div class="feedback_error">
