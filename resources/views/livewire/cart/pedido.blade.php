@@ -465,9 +465,9 @@
                         <button wire:click='createPayment' class="p-5 shadow ">
                             Crear Pago
                         </button>
-                        @if ($response)
-                            <div>
-                            {{-- <a href="{{json_decode($response)->url}}?token={{json_decode($response)->token}}"> Pagar </a>      --}}
+                        @if ($msj_error!="")
+                            <div class="feedback_error">
+                                {{$msj_error}}
                             </div>
                             <div>
                                 {{var_dump($response)}}
