@@ -82,7 +82,7 @@ class Pedido extends Component
         $optional = json_encode($optional);
 
         // $this->params["commerceOrder"] = 123456;
-        $this->params["commerceOrder"] = 123457;
+        $this->params["commerceOrder"] = 123458;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =5000;

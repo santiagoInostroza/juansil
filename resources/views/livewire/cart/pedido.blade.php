@@ -470,12 +470,8 @@
                                 {{$msj_error}}
                             </div>
                             <div>
-                                {{var_dump($response)}}
+                                {{-- {{var_dump($response)}} --}}
                             </div>
-                            {{-- <div>Token {{$response->token}}</div>
-                            <div>URL {{$response->url}}</div>
-                            <div>Flow Order {{$response->flowOrder}}</div> --}}
-
                         @endif
                     </div>
                 </div>
