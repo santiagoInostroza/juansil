@@ -46,8 +46,8 @@ Route::get('datatable/ventas', [DatatableController::class,'ventas'])->name('dat
 Route::post('flow', function ($id) { 
     return "PAGINA FLOW";
 })->name('flow');
-Route::get('flow2', function ($id) { 
-    return "PAGINA flow2";
+Route::post('flow2', function ($id) { 
+    return "PAGINA flow2" . $id;
 })->name('flow2');
 
 
