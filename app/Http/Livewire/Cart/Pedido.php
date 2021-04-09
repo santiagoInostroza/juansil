@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Cart;
 use Exception;
 use DateTimeZone;
 use Carbon\Carbon;
+use App\Models\Sale;
 use App\Models\Comuna;
 use Livewire\Component;
 use App\Models\Customer;
@@ -83,8 +84,8 @@ class Pedido extends Component
         );
         $optional = json_encode($optional);
 
-        // $this->params["commerceOrder"] = 123456;
-        $this->params["commerceOrder"] = 123458;
+        // $this->params["commerceOrder"] = 123456; 
+        $this->params["commerceOrder"] =  Sale::orderBy('id', 'desc')->first() + 1;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =session('totalCarrito');
