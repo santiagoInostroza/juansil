@@ -47,8 +47,8 @@ Route::post('flow', function ($id) {
     return "PAGINA FLOW";
 })->name('flow');
 Route::post('flow2', function ($id) { 
-    return "PAGINA Exito";
-})->name('exito');
+    return "PAGINA flow2";
+})->name('flow2');
 
 
 

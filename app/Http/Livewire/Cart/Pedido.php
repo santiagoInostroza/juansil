@@ -88,7 +88,7 @@ class Pedido extends Component
         $this->params["email"] ='santiagoinostroza2@gmail.com';
         $this->params["paymentMethod"] =9;
         $this->params["urlConfirmation"] =route('flow');
-        $this->params["urlReturn"] =route('exito');
+        $this->params["urlReturn"] =route('flow2');
         $this->params["optional"] =$optional;
         // $this->params["timeout"] ='santiagoinostroza2@gmail.com';
         // $this->params["merchantId"] ='santiagoinostroza2@gmail.com';
@@ -121,12 +121,7 @@ class Pedido extends Component
 
              }
  
-            $url2 = json_decode($response)->url;
-            $token = json_decode($response)->token;
-            //  $this->response = $response;
-            $this->response =  $url2 . "?token=" . $token;
-           // return redirect( $url . "?token=" . $token);
-
+             $this->response = $response;
          } catch (Exception $e) {
              $this->response = 'Error Get: ' . $e->getCode() . ' - ' . $e->getMessage();
          }
@@ -148,10 +143,20 @@ class Pedido extends Component
             if(!in_array($info['http_code'], array('200', '400', '401')) ){
                 throw new Exception('Unexpected error occurred. HTTP_CODE: '.$info['http_code'] , $info['http_code']);
             }
-            
-            $url = json_decode($response)->url;
-            $token = json_decode($response)->token;
-            return redirect( $url . "?token=" . $token);
+
+            $resp = json_decode($response);
+            if (isset($resp->url) ) {
+                $url = $resp->url;
+                $token = $resp->token;
+                $flowOrder = $resp->flowOrder;
+                return redirect( $url . "?token=" . $token);
+             }
+             if(isset($resp->code)){
+                $code = $resp->code;
+                if($code == 1){
+
+                }
+             }
             $this->response = $response;
         } catch (Exception $e) {
             $this->response = 'Error Post: ' . $e->getCode() . ' - ' . $e->getMessage();
