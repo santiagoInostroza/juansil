@@ -83,8 +83,8 @@ class Pedido extends Component
             "otroDato" => "otroDato"
         );
         $optional = json_encode($optional);
-        
-        $ultima_venta = Sale::latest()->first();
+
+       // $ultima_venta = Sale::latest()->first();
         // $this->params["commerceOrder"] = 123456; 
         $this->params["commerceOrder"] =  12;
         $this->params["subject"] ='Pago de prueba';
@@ -94,7 +94,7 @@ class Pedido extends Component
         $this->params["paymentMethod"] =9;
         $this->params["urlConfirmation"] =route('flow');
         $this->params["urlReturn"] =route('flow2');
-       // $this->params["optional"] =$optional;
+        $this->params["optional"] =$optional;
         // $this->params["timeout"] ='santiagoinostroza2@gmail.com';
         // $this->params["merchantId"] ='santiagoinostroza2@gmail.com';
         // $this->params["payment_currency"] ='santiagoinostroza2@gmail.com';
