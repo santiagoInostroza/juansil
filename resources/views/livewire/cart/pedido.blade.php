@@ -2,22 +2,11 @@
 
 
 
-@if ($response)
-    <div>
-    <a href="{{json_decode($response)->url}}?token={{json_decode($response)->token}}"> Pagar </a>     
-    </div>
-    <div>
-        {{var_dump($response)}}
-    </div>
-    {{-- <div>Token {{$response->token}}</div>
-    <div>URL {{$response->url}}</div>
-    <div>Flow Order {{$response->flowOrder}}</div> --}}
 
-@endif
     
-    <div wire:click='eliminarTodo'>
+    {{-- <div wire:click='eliminarTodo'>
         eliminar
-    </div>
+    </div> --}}
 
     @if (session('carrito'))
        
@@ -476,6 +465,18 @@
                         <button wire:click='createPayment' class="p-5 shadow ">
                             Crear Pago
                         </button>
+                        @if ($response)
+                            <div>
+                            <a href="{{json_decode($response)->url}}?token={{json_decode($response)->token}}"> Pagar </a>     
+                            </div>
+                            <div>
+                                {{var_dump($response)}}
+                            </div>
+                            {{-- <div>Token {{$response->token}}</div>
+                            <div>URL {{$response->url}}</div>
+                            <div>Flow Order {{$response->flowOrder}}</div> --}}
+
+                        @endif
                     </div>
                 </div>
             </div>
