@@ -410,6 +410,7 @@ class Pedido extends Component
             $this->msjErrorCelular="";
             $datosClientes = [
                 'name'=> $this->name,
+                'email'=> $this->email,
                 'comuna'=> $this->comuna,
                 'direccion'=> $this->direccion,
                 'celular'=> $this->celular,
