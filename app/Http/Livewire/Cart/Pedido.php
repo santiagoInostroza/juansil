@@ -83,9 +83,10 @@ class Pedido extends Component
             "otroDato" => "otroDato"
         );
         $optional = json_encode($optional);
+        
         $ultima_venta = Sale::latest()->first();
         // $this->params["commerceOrder"] = 123456; 
-        $this->params["commerceOrder"] =  $ultima_venta->id + 1;
+        $this->params["commerceOrder"] =  12;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =session('totalCarrito');
