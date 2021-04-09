@@ -410,11 +410,14 @@
                     x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
 
                     <div class="card-body shadow w-full">
-                       <h2 class="my-3">
+                       <h2 class="my-3 font-bold">
                            DATOS DEL CLIENTE
                         </h2>
                         <div class="my-2">
                             {{$this->name}} 
+                        </div>
+                        <div class="my-2">
+                            {{$this->email}} 
                         </div>
                         <div class="my-2">
                             {{$this->celular}}
