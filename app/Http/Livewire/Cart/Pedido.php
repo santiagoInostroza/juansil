@@ -84,9 +84,9 @@ class Pedido extends Component
         );
         $optional = json_encode($optional);
 
-       // $ultima_venta = Sale::latest()->first();
+        $ultima_venta = Sale::latest()->first();
         // $this->params["commerceOrder"] = 123456; 
-        $this->params["commerceOrder"] =  12;
+        $this->params["commerceOrder"] =  $ultima_venta->id;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =$this->totalCarrito;
