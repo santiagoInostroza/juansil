@@ -484,7 +484,7 @@
                                 {{$msj_error}}
                             </div>
                             <div>
-                                {{-- {{var_dump($response)}} --}}
+                                {{var_dump($response)}}
                             </div>
                         @endif
                     </div>
