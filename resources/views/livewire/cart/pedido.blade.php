@@ -143,8 +143,19 @@
                     x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                     <div class="card-body">
                         <form action="" disabled>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="grid grid-cols-1">
+                                 {{-- Email --}}
+                                 <div class="form-group ">
+                                    {!! Form::label('email', 'Email', ['class' => '']) !!}
+                                    {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'wire:model' => 'email']) !!}
 
+                                    @error('email')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                
                                 {{-- DIRECCION --}}
                                 <div class="form-group">
                                     {!! Form::label('direccion', 'Direccion', ['class' => '']) !!}
