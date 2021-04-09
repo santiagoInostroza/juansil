@@ -86,7 +86,7 @@ class Pedido extends Component
 
         $ultima_venta = Sale::latest()->first();
         // $this->params["commerceOrder"] = 123456; 
-        $this->params["commerceOrder"] =  $ultima_venta->id + 1;
+        $this->params["commerceOrder"] = 1;
         $this->params["subject"] ='Pago de prueba';
         $this->params["currency"] ="CLP";
         $this->params["amount"] =$this->totalCarrito;
