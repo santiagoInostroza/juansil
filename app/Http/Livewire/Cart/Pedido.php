@@ -175,13 +175,14 @@ class Pedido extends Component
         'validarDireccion','render','mount'
     ];
     protected $rules = [
-        'email' => 'required',
+        'email' => 'required|email',
         'direccion' => 'required',
         'comuna' => 'required',
         'name' => 'required',
         'celular' => 'required'
     ];
     protected $messages = [
+        'email.required' => 'El campo email no puede estar vacio.',
         'direccion.required' => 'El campo direccion no puede estar vacio.',
         'comuna.required' => 'El campo comuna no puede estar vacio.',
         'name.required' => 'El campo contacto no puede estar vacio.',
