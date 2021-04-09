@@ -183,6 +183,7 @@ class Pedido extends Component
     ];
     protected $messages = [
         'email.required' => 'El campo email no puede estar vacio.',
+        'email.email' => 'El campo debe contener una direccion de email valida.',
         'direccion.required' => 'El campo direccion no puede estar vacio.',
         'comuna.required' => 'El campo comuna no puede estar vacio.',
         'name.required' => 'El campo contacto no puede estar vacio.',
