@@ -87,7 +87,7 @@ class Pedido extends Component
         $this->params["email"] ='santiagoinostroza2@gmail.com';
         $this->params["paymentMethod"] =9;
         $this->params["urlConfirmation"] =route('flow');
-        $this->params["urlReturn"] =route('flow2');
+        $this->params["urlReturn"] =route('exito');
         $this->params["optional"] =$optional;
         // $this->params["timeout"] ='santiagoinostroza2@gmail.com';
         // $this->params["merchantId"] ='santiagoinostroza2@gmail.com';
