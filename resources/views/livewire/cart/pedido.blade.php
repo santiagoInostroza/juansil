@@ -6,9 +6,7 @@
 
 @if ($response)
     <div>
-        {{($response)}} 
-      
-        
+        {{($response."- hola")}} 
     </div>
     <div>
         {{var_dump($response)}}
