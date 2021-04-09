@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 class Pedido extends Component
 {
 
+
+    public $email;
     public $direccion;
     public $comuna;
     public $name;
