@@ -7,7 +7,11 @@
 @if ($response)
     <div>
         {{($response)}} 
+      
         
+    </div>
+    <div>
+        {{var_dump($response)}}
     </div>
     {{-- <div>Token {{$response->token}}</div>
     <div>URL {{$response->url}}</div>
