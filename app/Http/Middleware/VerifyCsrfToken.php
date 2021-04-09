@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'https://sandbox.flow.cl/app/mach/showVoucher.php'
+        'sandbox.flow.cl/*',
+        'https://sandbox.flow.cl/*'
     ];
 }
