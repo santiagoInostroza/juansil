@@ -3,6 +3,9 @@
 @section('title', 'Precios de feria')
 
 @section('content_header')
+<div class="float-right ">
+    <a href="{{ route('admin.sales.create') }}" class="btn btn-secondary">Venta Nueva</a>
+</div>
     <h1>Editar Venta</h1>
 @stop
 
