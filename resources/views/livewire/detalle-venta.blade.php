@@ -58,8 +58,8 @@
     <div class="mb-3 pt-2 px-3  border">
         <div class="">
             <label wire:click="$set('payment_status','1')" class="btn btn-sm @if ($payment_status=='1' ) btn-dark @endif"> Pendiente</label>
-            <label wire:click="$set('payment_status','2')" class="btn btn-sm @if ($payment_status=='2' ) btn-dark @endif"> Abonar</label>
-            <label wire:click="$set('payment_status','3')" class="btn btn-sm @if ($payment_status=='3' ) btn-dark @endif"> Pagar</label>
+            <label wire:click="$set('payment_status','2')" class="btn btn-sm @if ($payment_status=='2' ) btn-dark @endif"> Abono</label>
+            <label wire:click="$set('payment_status','3')" class="btn btn-sm @if ($payment_status=='3' ) btn-dark @endif"> Pagado</label>
             <input type="hidden" wire:model='payment_status' name='payment_status'>
         </div>
         @if ($payment_status == 2)
