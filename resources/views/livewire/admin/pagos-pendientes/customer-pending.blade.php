@@ -1,8 +1,4 @@
 <div class="pt-2">
-    @livewire('select.clientes', [
-        'agregar_cliente' => false,
-        'customer_id' => $customer_id ,
-    ])
  
     @if ($customer_id >0)
     
@@ -30,8 +26,8 @@
                             <tr>
                                 <td>{{$pending->id}}</td>
                                 <td>{{ date("d-m-Y",strtotime($pending->date) ) }}</td>
-                                <td>{{$pending->total}}</td>
-                                <td>{{$pending->payment_amount}}</td>
+                                <td> ${{number_format($pending->total,0,',','.')}}</td>
+                                <td> ${{number_format($pending->payment_amount,0,',','.')}} </td>
                                 <td>
                                   @if ($pending->payment_status == 1)
                                     Pendiente 
@@ -39,7 +35,7 @@
                                     Abonado
                                   @endif 
                                 </td>
-                                <td>{{$pending->pending_amount}}</td>
+                                <td> ${{number_format($pending->pending_amount,0,',','.')}} </td>
                                 <td>{{$pending->delivery_date}}</td>
                                 <td>@if($pending->created_by())  {{$pending->created_by()->name}} @endif</td>
                                 <td>{{$pending->comments}}</td>

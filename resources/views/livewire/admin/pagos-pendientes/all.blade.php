@@ -11,14 +11,10 @@
                       <tr>
                           <th>ID</th>
                           <th>Cliente</th>
-                          <th>Fecha</th>
                           <th>Total</th>
                           <th>Monto Pagado</th>
-                          <th>Estado Pago</th>
+                          
                           <th>Monto Pendiente</th>
-                          <th>Delivery</th>
-                          <th>Venta por</th>
-                          <th>Comentarios</th>
                           <th>Accion</th>
                       </tr>
                   </thead>
@@ -27,31 +23,15 @@
                           <tr>
                               <td>{{$pendiente->id}}</td>
                               <td>
-                                <div class="text-primary" style="cursor: pointer;" wire:click='verCliente({{ $pendiente->customer->id }})'>
-                                    <div>{{$pendiente->customer->name}} </div> 
-                                    <div>{{$pendiente->customer->direccion}}</div> 
-                                </div>
+                                <div>{{$pendiente->name}} </div> 
+                                <div>{{$pendiente->direccion}}</div> 
                               </td>
-                              <td>{{$pendiente->fecha}}</td>
-                              <td>{{$pendiente->total}}</td>
-                              <td>{{$pendiente->payment_amount}}</td>
+                            
+                              <td> ${{ number_format($pendiente->sales->sum('total'),0,',','.') }}</td>
+                              <td> ${{ number_format($pendiente->sales->sum('payment_amount'),0,',','.')  }}</td>
+                              <td> ${{ number_format($pendiente->sales->sum('pending_amount'),0,',','.') }}</td>
                               <td>
-                                  @if ($pendiente->payment_status==1)
-                                      Pendiente
-                                  @elseif ($pendiente->payment_status==2)
-                                      Abonado
-                                  @elseif ($pendiente->payment_status==3)
-                                      Pagado 
-                                  @endif
-                              </td>
-                              <td>{{$pendiente->pending_amount}}</td>
-                              <td>
-                                  {{$pendiente->delivery_date}}
-                              </td>
-                              <td> @if($pendiente->created_by()) {{ $pendiente->created_by()->name }} @endif</td>
-                              <td>{{$pendiente->comments}}</td>
-                              <td>
-                                  <div class="">
+                                <div class="bg-secondary btn" wire:click='verCliente({{ $pendiente->id }})'>
                                       Pagar
                                   </div>
                               </td>

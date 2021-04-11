@@ -8,9 +8,6 @@ use App\Models\Customer;
 class CustomerPending extends Component{
     public $customer_id;
     public $customer;
-
-    protected $listeners = ['setCustomerId'];
-
     public function render(){
         return view('livewire.admin.pagos-pendientes.customer-pending');
     }
@@ -20,9 +17,5 @@ class CustomerPending extends Component{
            $this->customer = Customer::find($this->customer_id);
         }
     }
-
-    public function setCustomerId($id){
-        $this->customer_id = $id;
-        $this->customer = Customer::find($this->customer_id);
-    }
+    
 }

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Sale;
-use App\Models\Sales;
 use App\Models\CustomerData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,14 +34,12 @@ class Customer extends Model
           
       }
 
-      public function sales()
-      {
-          return $this->hasMany(Sales::class);
+      public function sales(){
+          return $this->hasMany(Sale::class);
           //return $this->belongsTo(Producto::class);
       }
 
-      public function pending()
-      {
+      public function pending(){
           $pending = Sale::where('customer_id',$this->id)->where('payment_status',"!=", 3)->get();
           return $pending;
       }
