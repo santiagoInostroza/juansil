@@ -41,7 +41,7 @@
                                 </td>
                                 <td>{{$pending->pending_amount}}</td>
                                 <td>{{$pending->delivery_date}}</td>
-                                <td>@isset($pending->created_by()) {{$pending->created_by()->name}} @endif</td>
+                                <td>@if($pending->created_by())  {{$pending->created_by()->name}} @endif</td>
                                 <td>{{$pending->comments}}</td>
                             </tr>
                         @endforeach
