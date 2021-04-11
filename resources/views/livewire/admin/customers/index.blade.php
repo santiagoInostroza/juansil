@@ -4,7 +4,7 @@
            <input wire:model='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
        </div>
        <div class="card-body">
-           <table class="table">
+           <table class="table table-hover">
                <thead>
                    <tr>
                        <th>Id</th>
@@ -17,8 +17,8 @@
                <tbody>
                    @foreach ($customers as $customer)
                     <tr>
-                        <td>
-                            <div class="d-flex">{{$customer->id}}</div>
+                        <td width='10px'>
+                            <div>{{$customer->id}}</div>
                         </td>    
                         <td>
                         <div class="h5 ">
