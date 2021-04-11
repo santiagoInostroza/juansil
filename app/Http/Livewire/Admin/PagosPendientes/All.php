@@ -18,4 +18,8 @@ class All extends Component
 
         return view('livewire.admin.pagos-pendientes.all',compact('pendientes'));
     }
+
+    public function verCliente($id){
+        $this->emitUp('verCliente',$id);
+    }
 }

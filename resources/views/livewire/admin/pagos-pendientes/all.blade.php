@@ -27,8 +27,10 @@
                           <tr>
                               <td>{{$pendiente->id}}</td>
                               <td>
-                                 <div>{{$pendiente->customer->name}}</div> 
-                                 <div>{{$pendiente->customer->direccion}}</div> 
+                                <div class="text-primary" style="cursor: pointer;" wire:click='verCliente({{ $pendiente->customer->id }})'>
+                                    <div>{{$pendiente->customer->name}} </div> 
+                                    <div>{{$pendiente->customer->direccion}}</div> 
+                                </div>
                               </td>
                               <td>{{$pendiente->fecha}}</td>
                               <td>{{$pendiente->total}}</td>
