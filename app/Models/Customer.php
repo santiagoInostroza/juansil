@@ -13,18 +13,10 @@ class Customer extends Model
     
     protected $guarded = ['id','created_at','updated_at'];
 
-
-   
-        // public function __construct() { 
-        //     ini_set('precision', 17); 
-        //     parent::__construct(); 
-        // }
-
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 
 
       //RELACION UNO A MUCHOS INVERSA

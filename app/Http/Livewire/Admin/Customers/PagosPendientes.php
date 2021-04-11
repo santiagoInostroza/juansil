@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Admin\PagosPendientes;
+namespace App\Http\Livewire\Admin\Customers;
 
-use App\Models\Sale;
 use Livewire\Component;
+use App\Models\Sale;
 use App\Models\Customer;
 
-class All extends Component
+class PagosPendientes extends Component
 {
     public $search;
+  
     public function render()
     {
         $pendientes = Customer::join('sales', 'sales.customer_id', '=', 'customers.id')
@@ -18,10 +19,10 @@ class All extends Component
         ->distinct()
         ->get();
 
-        return view('livewire.admin.pagos-pendientes.all',compact('pendientes'));
+        return view('livewire.admin.customers.pagos-pendientes',compact('pendientes'));
     }
 
-    public function verCliente($id){
-        $this->emitUp('verCliente',$id);
+    public function verDetallePagosPendientes($id){
+        $this->emitUp('verDetallePagosPendientes',$id);
     }
 }

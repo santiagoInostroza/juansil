@@ -1,11 +1,18 @@
 <div class="pt-2">
     @if ($customer_id >0)
+
+        {{-- NOMBRE CLIENTE --}}
+        <div class="px-3">
+            <h2>{{$customer->name}}</h2>
+        </div>
+
+        {{-- VENTA CON PAGO PENDIENTE --}}
         <div class="card">
-            <div class="card-header">
-               <h2> {{$customer->name}} </h2>
-            </div>
-            <div class="card-body">
-                @if (count($customer->pending())>0)
+            @if (count($customer->pending())>0)
+                <div class="card-header">
+                    <h3>Ventas con pago pendiente</h3>
+                </div>
+                <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -58,16 +65,19 @@
                     <div wire:click='pagarMonto' class="btn btn-secondary">
                         Pagar
                     </div>
-                @else
-                    <h2> No tiene pagos pendientes</h2>
-                @endif
-                
-            </div>
+                </div>
+            @else
+                <div class="card-header">
+                    <h3>No tiene deuda</h3>
+                </div>
+            @endif   
         </div>
-        @if (count($pays)>0)
-            <div class="card">
+
+        {{-- LISTA DE PAGOS --}}
+        <div class="card">
+            @if (count($pays)>0)
                 <div class="card-body">
-                    <h2>Pagos Realizados</h2>
+                    <h3>Pagos Realizados</h3>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -89,8 +99,10 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        @endif
-         
+                <div class="card-footer">
+                    {{ $pays->links() }}
+                </div>
+            @endif
+        </div>
     @endif
- </div>
+</div>
