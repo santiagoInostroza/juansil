@@ -39,7 +39,7 @@ Route::get('datatable/proveedores', [DatatableController::class,'proveedores'])-
 Route::get('datatable/compras', [DatatableController::class,'compras'])->name('datatable.compras');
 Route::get('datatable/movimientos', [DatatableController::class,'movimientos'])->name('datatable.movimientos');
 Route::get('datatable/stock', [DatatableController::class,'stock'])->name('datatable.stock');
-Route::get('datatable/clientes', [DatatableController::class,'clientes'])->name('datatable.clientes');
+// Route::get('datatable/clientes', [DatatableController::class,'clientes'])->name('datatable.clientes');
 Route::get('datatable/ventas', [DatatableController::class,'ventas'])->name('datatable.ventas');
 
 

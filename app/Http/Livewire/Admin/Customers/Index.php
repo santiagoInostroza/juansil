@@ -22,7 +22,7 @@ class Index extends Component{
         ->orWhere('depto','like','%'. $this->search .'%')
         ->orWhere('celular','like','%'. $this->search .'%')
         ->orWhere('telefono','like','%'. $this->search .'%')
-        ->paginate(50);
+        ->paginate(20);
         return view('livewire.admin.customers.index',compact('customers'));
     }
 

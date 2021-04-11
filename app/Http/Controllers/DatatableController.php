@@ -156,14 +156,14 @@ class DatatableController extends Controller
     }
 
 
-    public function clientes(){
-        return Datatables::of(Customer::all())
+    // public function clientes(){
+    //     return Datatables::of(Customer::all())
            
-            ->addColumn('action', function ($cliente) {
-                return view('partials/datatables/customers/action', compact('cliente'));
-            })
-            ->make(true);
-    }
+    //         ->addColumn('action', function ($cliente) {
+    //             return view('partials/datatables/customers/action', compact('cliente'));
+    //         })
+    //         ->make(true);
+    // }
     public function ventas(){
 
         return Datatables::of(Sale::all())
