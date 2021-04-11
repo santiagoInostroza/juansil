@@ -50,6 +50,7 @@ class PagosPendientesPorUsuario extends Component{
         $pay->total = $this->monto;
         $pay->fecha = Carbon::now();
         $pay->user_created = Auth::user()->id;
+        $pay->customer_id = $this->customer_id;
         $pay->save();
         
 

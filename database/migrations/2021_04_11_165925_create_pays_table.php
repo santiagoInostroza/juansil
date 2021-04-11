@@ -12,6 +12,7 @@ class CreatePaysTable extends Migration{
             $table->integer('total');
             $table->date('fecha');
             $table->integer('user_created');
+            $table->integer('customer_id');
             $table->timestamps();
         });
     }
