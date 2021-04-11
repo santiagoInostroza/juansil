@@ -53,7 +53,7 @@
            </table>
         </div>
         <div class="card-footer">
-            {{ $users->links() }}
+            {{ $customers->links() }}
         </div>
 
    </div>
