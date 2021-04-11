@@ -29,7 +29,7 @@
                         @foreach ($customer->pending() as $pending)
                             <tr>
                                 <td>{{$pending->id}}</td>
-                                <td>{{$pending->date}}</td>
+                                <td>{{ date("d-m-Y",strtotime($pending->date) ) }}</td>
                                 <td>{{$pending->total}}</td>
                                 <td>{{$pending->payment_amount}}</td>
                                 <td>
