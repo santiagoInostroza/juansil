@@ -44,6 +44,12 @@ class SaleController extends Controller
         return view('admin.sales.index', compact('sales','diferencia','total_compra','porcentaje','total_pendiente'));
     }
 
+    public function pagosPendientes()
+    {
+       
+        return view('admin.sales.pagos_pendientes');
+    }
+
 
     public function create( $cliente_id ="" )
     {

@@ -42,6 +42,9 @@ Route::resource('comunas', ComunaController::class)->names('admin.comunas');
 
 Route::resource('users',  UserController::class)->only('index','edit','update')->names('admin.users');
 Route::resource('roles',  RoleController::class)->names('admin.roles');
+Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->name('admin.sales.pagos_pendientes');
+
+
 
 
 

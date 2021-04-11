@@ -26,6 +26,12 @@ class Sale extends Model
       
     }
 
+    public function created_by()
+    {
+        $user = User::find($this->user_created); 
+        return $user;
+    }
+
     
 
 

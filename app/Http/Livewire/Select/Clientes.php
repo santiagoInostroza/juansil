@@ -14,7 +14,28 @@ class Clientes extends Component{
     public $showCreateCustomer = false;
     public $clientes = "";
     public $index =0;
+
+
+    public $agregar_cliente = false;
+
+    public function mount(){
+
+       if($this->customer_id>0) {
+           $customer = Customer::find($this->customer_id);
+           $this->query = $customer->name;
+       };
+
+       if(request()->agregar_cliente) {
+           $this->agregar_cliente = true;
+       };
+
+       
+    }
+
+
     protected $listeners=['setCustomerId','showCreateCustomer'];
+
+
 
     public function render(){
         $clientes = Customer::where("name","like", "%". $this->query ."%")->orWhere("direccion","like", "%". $this->query ."%")->get();

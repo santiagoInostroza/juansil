@@ -26,10 +26,11 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
 
-        <div class="p-1 ml-2 mb-1 rounded btn" style="width:40px">
-            <a href="{{ route('admin.customers.create') }}"><i class="fas fa-user">+</i></a>
-        </div>
-
+        @if ($agregar_cliente)
+            <div class="p-1 ml-2 mb-1 rounded btn" style="width:40px">
+                <a href="{{ route('admin.customers.create') }}"><i class="fas fa-user">+</i></a>
+            </div>
+        @endif
         
 
  

@@ -374,6 +374,13 @@ return [
             
         ],
         [
+            'text'       => 'Pagos Pendientes',
+            'route'=> 'admin.sales.pagos_pendientes',
+            'icon' => 'fas fa-fw fa-cash-register',
+            'active'=> ['admin/pagos_pendientes*'],
+            
+        ],
+        [
             'text'       => 'Deliveries',
             'route'=> 'admin.deliveries.index',
             'icon' => 'fas fa-fw fa-truck',
