@@ -38,6 +38,9 @@
     @endif
 
 
+    @livewire('admin.customers.index', ['user' => ''])
+
+
     <div class="card">
         <div class="card-body">
             <table id="tablaClientes" class="table table-striped table-bordered" style="width:100%">

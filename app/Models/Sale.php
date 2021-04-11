@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pay;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\SaleItem;
@@ -20,16 +21,19 @@ class Sale extends Model
          
      }
 
-     public function sale_items()
-    {
+     public function sale_items(){
         return $this->hasMany(SaleItem::class);
       
     }
 
-    public function created_by()
-    {
+    public function created_by(){
         $user = User::find($this->user_created); 
         return $user;
+    }
+
+     //RELACION MUCHOS A MUCHOS
+     public function pays(){
+        return $this->belongsToMany(Pay::class);
     }
 
     

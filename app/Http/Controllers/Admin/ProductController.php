@@ -54,7 +54,7 @@ class ProductController extends Controller
             }
         }
 
-
+       
         if ($request->tags) {
             $producto->tags()->attach($request->tags);
         }

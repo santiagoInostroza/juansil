@@ -55,8 +55,7 @@ class Product extends Model
     }
 
     //RELACION MUCHOS A MUCHOS
-    public function purchases()
-    {
+    public function purchases(){
         return $this->belongsToMany(Purchase::class);
     }
 

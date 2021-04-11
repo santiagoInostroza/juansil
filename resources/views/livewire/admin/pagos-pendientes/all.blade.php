@@ -32,8 +32,8 @@
                               <td> ${{ number_format($pendiente->sales->sum('pending_amount'),0,',','.') }}</td>
                               <td>
                                 <div class="bg-secondary btn" wire:click='verCliente({{ $pendiente->id }})'>
-                                      Pagar
-                                  </div>
+                                      Detalle
+                                </div>
                               </td>
                           </tr>
                       @endforeach
