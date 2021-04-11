@@ -46,7 +46,7 @@
                               <td>
                                   {{$pendiente->delivery_date}}
                               </td>
-                              <td>{{$pendiente->created_by()->name}}</td>
+                              <td> @if($pendiente->created_by()) {{ $pendiente->created_by()->name }} @endif</td>
                               <td>{{$pendiente->comments}}</td>
                               <td>
                                   <div class="">
