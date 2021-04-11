@@ -77,6 +77,7 @@ class PagosPendientesPorUsuario extends Component{
                 $venta->user_modified = Auth::user()->id;
                 $venta->save();
                 $pay->sales()->attach([$venta->id]);
+                $this->monto = 0;
             }else{
                 break;
             }
