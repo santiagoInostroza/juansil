@@ -23,13 +23,8 @@ class PagosPendientesPorUsuario extends Component{
     public function render(){
        
 
-        $pays = Pay::join('pay_sale','pay_sale.pay_id','=','pays.id')
-        ->join('sales','sales.id','=','pay_sale.sale_id')
-        ->select('pays.*')
-        ->where('sales.customer_id',$this->customer->id)
-        ->distinct()
-        ->orderBy('pays.id','desc')
-
+        $pays = Pay::where('customer_id',$this->customer->id)
+        ->orderBy('id','desc')
         ->paginate(50);
         return view('livewire.admin.customers.pagos-pendientes-por-usuario',compact('pays'));
     }
