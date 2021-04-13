@@ -20,40 +20,15 @@ class SaleController extends Controller
 
 
     public function index(){
-
-        $sales = Sale::all();
-        $diferencia = 0;
-        $total_compra = 0;
-        $total_venta =0;
-        $porcentaje=0;
-        $total_pendiente = 0;
-
-        foreach ( $sales as $items) {
-            if($items->payment_status != 3){
-              $total_pendiente += $items->pending_amount;  
-            }
-            foreach ($items->sale_items as $item) {
-                $total_venta  +=  $item->precio_total;
-                try {
-                    $total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;
-                } catch (\Throwable $th) { }
-            }
-        }
-        $diferencia =  $total_venta - $total_compra;  
-        $porcentaje =    $diferencia / $total_venta * 100;
-        return view('admin.sales.index', compact('sales','diferencia','total_compra','porcentaje','total_pendiente'));
+        return view('admin.sales.index');
     }
 
-    public function pagosPendientes()
-    {
-       
+    public function pagosPendientes(){
         return view('admin.sales.pagos_pendientes');
     }
 
 
-    public function create( $cliente_id ="" )
-    {
-       
+    public function create( $cliente_id ="" ){
         $customers = Customer::pluck('name', 'id');
         $products = Product::pluck('name', 'id');
         return view('admin.sales.create', compact('customers', 'products','cliente_id') );
