@@ -25,9 +25,9 @@ class Lista extends Component{
 
 
     public function render(){
-        if( trim($this->search == 'solodespachos') ){
+        if( $this->search == 'solo despachos') {
             $ventas = Sale::where('delivery',1)->paginate(200);
-        }elseif(trim($this->search == 'solobodega')){
+        }elseif($this->search == 'solo bodega'){
             $ventas = Sale::where('delivery','!=',1)->paginate(200);
         }else{
             $ventas = Sale::join('customers','sales.customer_id','=','customers.id')
