@@ -35,12 +35,12 @@
                    
 
                     {{-- TOTAL --}}
-                    <td width='100px' class="align-middle">
+                    <td  style="min-width: 100px" class="align-middle">
                         <div class="h5">${{number_format($venta->total,0,',','.')}}</div> 
                     </td>
 
                     {{-- ESTADO DE PAGO --}}
-                    <td width='100px' class="align-middle">
+                    <td style="min-width: 100px" class="align-middle">
                         @if ($venta->payment_status == 1)
                             Pendiente <div class=""> ${{number_format($venta->pending_amount,0,',','.')}} </div> 
                         @elseif ($venta->payment_status == 2)
@@ -52,7 +52,7 @@
                     </td>
 
                     {{-- ESTADO DELIVERY --}}
-                    <td width="150px" class="align-middle">
+                    <td style="min-width: 150px" class="align-middle">
                         @if ($venta->delivery == 1)
                             @if ($venta->delivery_stage == 1)
                                 <i class="fas fa-check text-success"></i> {{date("d-m-Y",strtotime($venta->delivery_date))}}
@@ -66,12 +66,12 @@
                     </td>
 
                      {{-- FECHA --}}
-                     <td width='100px' class="align-middle">
+                     <td style="min-width: 100px" class="align-middle">
                         {{date("d-m-Y",strtotime($venta->date))}}
                      </td>
 
                     {{-- VENTA POR --}}
-                    <td width='100px' class="align-middle">
+                    <td style="min-width: 100px" class="align-middle">
                         <div> @if( $venta->created_by() ) {{ $venta->created_by()->name }} @endif</div>
                     </td>
                    
