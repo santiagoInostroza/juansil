@@ -35,6 +35,12 @@ class Lista extends Component{
         ->orderBy('id','desc')
         ->paginate(200);
 
+        $this->diferencia = 0;
+        $this->total_compra = 0;
+        $this->total_venta = 0;
+        $this->porcentaje = 0;
+        $this->total_pendiente = 0;
+
 
         foreach ( $ventas as $venta) {
             if($venta->payment_status != 3){
