@@ -42,9 +42,9 @@
                     {{-- ESTADO DE PAGO --}}
                     <td style="min-width: 100px" class="align-middle">
                         @if ($venta->payment_status == 1)
-                            <div class=""> Pendiente  ${{number_format($venta->pending_amount,0,',','.')}} </div> 
+                            <div><span class="text-warning">Pendiente</span>${{number_format($venta->pending_amount,0,',','.')}} </div> 
                         @elseif ($venta->payment_status == 2)
-                            <div class=""> Pendiente  ${{number_format($venta->pending_amount,0,',','.')}} </div> 
+                            <div><span class="text-warning">Pendiente</span>${{number_format($venta->pending_amount,0,',','.')}} </div> 
                             
                         @elseif ($venta->payment_status == 3)
                             <i class="fas fa-check text-success d-block"></i>
