@@ -72,7 +72,7 @@
 
                     {{-- VENTA POR --}}
                     <td width='10px' class="align-middle">
-                        <div>{{$venta->created_by()->name}}</div>
+                        <div> @if( $venta->created_by() ) {{ $venta->created_by()->name }} @endif</div>
                     </td>
                    
                     {{-- ACCION --}}
