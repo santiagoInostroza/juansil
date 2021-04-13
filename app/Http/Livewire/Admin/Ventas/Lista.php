@@ -25,16 +25,21 @@ class Lista extends Component{
 
 
     public function render(){
-        $ventas = Sale::join('customers','sales.customer_id','=','customers.id')
-        ->where('customers.name','like','%'. $this->search . '%')
-        ->orWhere('customers.direccion','like','%'. $this->search . '%')
-        ->orWhere('customers.block','like','%'. $this->search . '%')
-        ->orWhere('customers.depto','like','%'. $this->search . '%')
-        ->orWhere('customers.celular','like','%'. $this->search . '%')
-        ->orWhere('sales.id','like','%'. $this->search . '%')
-        ->select('sales.*')
-        ->orderBy('id','desc')
-        ->paginate(200);
+        if($this->search == 'solo despachos'){
+            $ventas = Sale::where('delivery',1)->paginate(200);
+
+        }else{
+            $ventas = Sale::join('customers','sales.customer_id','=','customers.id')
+            ->where('customers.name','like','%'. $this->search . '%')
+            ->orWhere('customers.direccion','like','%'. $this->search . '%')
+            ->orWhere('customers.block','like','%'. $this->search . '%')
+            ->orWhere('customers.depto','like','%'. $this->search . '%')
+            ->orWhere('customers.celular','like','%'. $this->search . '%')
+            ->orWhere('sales.id','like','%'. $this->search . '%')
+            ->select('sales.*')
+            ->orderBy('id','desc')
+            ->paginate(200);
+        }
 
         $this->diferencia = 0;
         $this->total_compra = 0;
