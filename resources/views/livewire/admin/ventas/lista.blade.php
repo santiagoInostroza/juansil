@@ -19,7 +19,7 @@
             <tbody>
                 @foreach ($ventas as $venta)
                 <tr>
-                    <td width='10px' class="align-middle">
+                    <td width='30px' class="align-middle">
                         <div>{{$venta->id}}</div>
                     </td>    
                     <td>
@@ -35,12 +35,12 @@
                    
 
                     {{-- TOTAL --}}
-                    <td width='10px' class="align-middle">
-                        <div class="text-right h5">${{number_format($venta->total,0,',','.')}}</div> 
+                    <td width='100px' class="align-middle">
+                        <div class="h5">${{number_format($venta->total,0,',','.')}}</div> 
                     </td>
 
                     {{-- ESTADO DE PAGO --}}
-                    <td width='10px' class="align-middle">
+                    <td width='100px' class="align-middle">
                         @if ($venta->payment_status == 1)
                             Pendiente <div class=""> ${{number_format($venta->pending_amount,0,',','.')}} </div> 
                         @elseif ($venta->payment_status == 2)
@@ -71,7 +71,7 @@
                      </td>
 
                     {{-- VENTA POR --}}
-                    <td width='10px' class="align-middle">
+                    <td width='100px' class="align-middle">
                         <div> @if( $venta->created_by() ) {{ $venta->created_by()->name }} @endif</div>
                     </td>
                    
