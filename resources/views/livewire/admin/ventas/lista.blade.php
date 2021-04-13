@@ -47,7 +47,7 @@
                             <div class=""> Pendiente  ${{number_format($venta->pending_amount,0,',','.')}} </div> 
                             
                         @elseif ($venta->payment_status == 3)
-                            <i class="fas fa-check text-success text-center d-block"></i>
+                            <i class="fas fa-check text-success d-block"></i>
                         @endif
                     </td>
 
