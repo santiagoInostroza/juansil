@@ -47,6 +47,10 @@
                                 ${{number_format($venta->pending_amount,0,',','.')}} 
                             </div> 
                         @elseif ($venta->payment_status == 2)
+                            <div class=""> 
+                                <span class="text-success">Abonado</span> 
+                                ${{number_format($venta->payment_amount,0,',','.')}} 
+                            </div> 
                             <div> 
                                 <span class="text-warning">Pendiente</span> 
                                 ${{number_format($venta->pending_amount,0,',','.')}} 
