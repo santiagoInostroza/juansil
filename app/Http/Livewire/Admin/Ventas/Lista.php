@@ -14,7 +14,7 @@ class Lista extends Component{
 
     public $diferencia;
     public $total_compra;
-    public $total_venta;
+    public $total_venta = 0;
     public $porcentaje;
     public $total_pendiente;
 
