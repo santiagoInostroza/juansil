@@ -32,7 +32,7 @@ class Lista extends Component{
         ->orWhere('customers.depto','like','%'. $this->search . '%')
         ->orWhere('customers.celular','like','%'. $this->search . '%')
         ->select('sales.*')
-        ->paginate();
+        ->paginate(200);
 
 
         foreach ( $ventas as $venta) {
