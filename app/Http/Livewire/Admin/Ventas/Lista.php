@@ -31,6 +31,7 @@ class Lista extends Component{
         ->orWhere('customers.block','like','%'. $this->search . '%')
         ->orWhere('customers.depto','like','%'. $this->search . '%')
         ->orWhere('customers.celular','like','%'. $this->search . '%')
+        ->orWhere('sales.id','like','%'. $this->search . '%')
         ->select('sales.*')
         ->orderBy('id','desc')
         ->paginate(200);
