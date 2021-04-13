@@ -41,13 +41,11 @@ class Lista extends Component{
             }
             foreach ($venta->sale_items as $item) {
                 $this->total_venta  +=  $item->precio_total;
-                try {
-                    $this->total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;
-                } catch (\Throwable $th) { }
+                try {$this->total_compra += $item->cantidad_total * $item->product->purchasePrices[0]->precio;} catch (\Throwable $th) { }
             }
         }
         $this->diferencia =  $this->total_venta - $this->total_compra;  
-        $this->porcentaje =    $this->diferencia / $this->total_venta * 100;
+        $this->porcentaje =  0; // $this->diferencia / $this->total_venta * 100;
 
 
 
