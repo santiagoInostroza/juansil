@@ -22,7 +22,7 @@
                     <td width='30px' class="align-middle">
                         <div>{{$venta->id}}</div>
                     </td>    
-                    <td>
+                    <td style="min-width: 250px">
                         {{-- <div class="h6"> ${{number_format($venta->total,0,',','.')}}</div> --}}
                         <div class="h5 ">{{$venta->customer->name}}</div> {{-- {{$venta->customer->telefono}} {{$venta->customer->celular}} --}}
                         <div>
