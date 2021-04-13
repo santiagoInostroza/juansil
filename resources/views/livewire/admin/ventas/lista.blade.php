@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 @foreach ($ventas as $venta)
-                <tr class=" @if($venta->payment_status == 3 && $venta->delivery_stage == 1) bg-danger  @endif">
+                <tr class=" @if($venta->payment_status == 3 && ($venta->delivery_stage == 1 || $venta->delivery == 0 ) ) bg-success  @endif">
                     <td  style="min-width: 50px" class="align-middle">
                         <div>{{$venta->id}}</div>
                     </td>    
