@@ -19,7 +19,7 @@
             <tbody>
                 @foreach ($ventas as $venta)
                 <tr>
-                    <td width='30px' class="align-middle">
+                    <td  style="min-width: 50px" class="align-middle">
                         <div>{{$venta->id}}</div>
                     </td>    
                     <td style="min-width: 180px">
