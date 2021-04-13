@@ -45,7 +45,7 @@ class Lista extends Component{
             }
         }
         $this->diferencia =  $this->total_venta - $this->total_compra;  
-        $this->porcentaje =  0; // $this->diferencia / $this->total_venta * 100;
+        $this->porcentaje =  $this->diferencia / $this->total_venta * 100;
 
 
 
