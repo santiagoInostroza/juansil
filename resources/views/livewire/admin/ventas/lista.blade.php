@@ -66,7 +66,7 @@
                     </td>
 
                      {{-- FECHA --}}
-                     <td class="align-middle">
+                     <td width='100px' class="align-middle">
                         {{date("d-m-Y",strtotime($venta->date))}}
                      </td>
 
