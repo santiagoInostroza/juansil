@@ -58,7 +58,7 @@ class Lista extends Component{
             }
         }
         $this->diferencia =  $this->total_venta - $this->total_compra;  
-        $this->porcentaje =  $this->diferencia / $this->total_venta * 100;
+        try {$this->porcentaje =  $this->diferencia / $this->total_venta * 100;} catch (\Throwable $th) {}
 
 
 
