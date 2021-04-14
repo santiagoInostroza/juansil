@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,12 @@ class Purchase extends Model
         return $this->belongsToMany(Product::class)
         ->withPivot('id','cantidad','cantidad_por_caja','cantidad_total','precio','precio_por_caja','total')
         ->withTimestamps();
+    }
+
+    
+    public function created_by(){
+        $user = User::find($this->user_created); 
+        return $user;
     }
 
      

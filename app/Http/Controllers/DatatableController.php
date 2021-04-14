@@ -164,45 +164,47 @@ class DatatableController extends Controller
     //         })
     //         ->make(true);
     // }
-    public function ventas(){
 
-        return Datatables::of(Sale::all())
+    
+    // public function ventas(){
+
+    //     return Datatables::of(Sale::all())
            
-            ->addColumn('customer', function ($venta) {
+    //         ->addColumn('customer', function ($venta) {
                 
-                return  view('partials/datatables/sales/customer', compact('venta'));
-            })
-            ->addColumn('total', function ($venta) {
-                return "$" .  number_format($venta->total,0,',','.');
-            })
-            ->addColumn('date', function ($venta) {
-                return  date("d-m-Y",strtotime($venta->date)) ;
-            })
-            ->addColumn('payment_status', function ($venta) {
-                return  view('partials/datatables/sales/payment_status', compact('venta'));
-            })
-            ->addColumn('payment_amount', function ($venta) {
-                return  "$" .  number_format($venta->payment_amount,0,',','.');
-            })
-            ->addColumn('pending_amount', function ($venta) {
-                return  "$" .  number_format($venta->pending_amount,0,',','.');
-            })
-            ->addColumn('delivery', function ($venta) {
-                return  view('partials/datatables/sales/delivery', compact('venta'));
-            })
-            ->addColumn('user_created', function ($venta) {
-               try {
-                $user = User::find($venta->user_created);
-                return  $user->name;
-               } catch (\Throwable $th) {
-                  return"";
-               } 
-            })
-            ->addColumn('action', function ($venta) {
-                return view('partials/datatables/sales/action', compact('venta'));
-            })
-            ->make(true);
-    }
+    //             return  view('partials/datatables/sales/customer', compact('venta'));
+    //         })
+    //         ->addColumn('total', function ($venta) {
+    //             return "$" .  number_format($venta->total,0,',','.');
+    //         })
+    //         ->addColumn('date', function ($venta) {
+    //             return  date("d-m-Y",strtotime($venta->date)) ;
+    //         })
+    //         ->addColumn('payment_status', function ($venta) {
+    //             return  view('partials/datatables/sales/payment_status', compact('venta'));
+    //         })
+    //         ->addColumn('payment_amount', function ($venta) {
+    //             return  "$" .  number_format($venta->payment_amount,0,',','.');
+    //         })
+    //         ->addColumn('pending_amount', function ($venta) {
+    //             return  "$" .  number_format($venta->pending_amount,0,',','.');
+    //         })
+    //         ->addColumn('delivery', function ($venta) {
+    //             return  view('partials/datatables/sales/delivery', compact('venta'));
+    //         })
+    //         ->addColumn('user_created', function ($venta) {
+    //            try {
+    //             $user = User::find($venta->user_created);
+    //             return  $user->name;
+    //            } catch (\Throwable $th) {
+    //               return"";
+    //            } 
+    //         })
+    //         ->addColumn('action', function ($venta) {
+    //             return view('partials/datatables/sales/action', compact('venta'));
+    //         })
+    //         ->make(true);
+    // }
 
 
 }
