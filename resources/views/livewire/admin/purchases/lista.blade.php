@@ -46,7 +46,9 @@
                     </td>
 
                     <td>
-                        {{$purchase->created_by()->name}}
+                        @if ($purchase->created_by())
+                            {{$purchase->created_by()->name}}   
+                        @endif
                     </td>
 
                     {{-- ACCION --}}
