@@ -16,18 +16,25 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
-    public function index()
-    {
+    public function index(){
         $products = Product::all();
         return view('admin.products.index', compact('products'));
     }
 
-    public function create()
-    {
+    public function create(){
         $categories = Category::pluck('name', 'id');
         $brand = Brand::pluck('name', 'id');
         $tags = Tag::pluck('name', 'id');
         return view('admin.products.create', compact('categories', 'tags', 'brand'));
+    }
+
+    // CREA UN PRODUCTO NUEVO A PARTIR DE UNO EXISTENTE
+    public function newProduct(Product $producto){
+        //return $producto;
+        $categories = Category::pluck('name', 'id');
+        $brand = Brand::pluck('name', 'id');
+        $tags = Tag::pluck('name', 'id');
+        return view('admin.products.create', compact('categories', 'tags', 'brand','producto'));
     }
 
 

@@ -3,8 +3,11 @@
 @section('title', 'Precios de feria')
 
 @section('content_header')
+    <div class="float-right ml-2">
+        <a href="{{ route('admin.products.new_product',$producto) }}" class="btn btn-secondary">Nuevo producto desde este producto</a>
+    </div>
     <div class="float-right ">
-        <a href="{{ route('admin.products.create') }}" class="btn btn-secondary"> Agregar Producto</a>
+        <a href="{{ route('admin.products.create') }}" class="btn btn-secondary">Nuevo producto</a>
     </div>
     <h1>Editar Producto</h1>
 @stop
@@ -21,12 +24,9 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($producto, ['route' => ['admin.products.update', $producto], 'files' => 'true', 'method' =>
-            'put']) !!}
+            {!! Form::model($producto, ['route' => ['admin.products.update', $producto], 'files' => 'true', 'method' =>'put']) !!}
             @include('admin.products.partials.form')
             {!! Form::submit('Actualizar Producto', ['class' => 'btn btn-primary']) !!}
-
-
             {!! Form::close() !!}
         </div>
     </div>

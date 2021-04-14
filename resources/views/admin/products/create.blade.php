@@ -12,7 +12,12 @@
 
     <div class="card container">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.products.store', 'autocomplete' => 'off','files'=>'true']) !!}
+            @if (isset($producto))
+                {!! Form::model($producto, ['route' => ['admin.products.store', 'autocomplete' => 'off'], 'files' => 'true']) !!}
+            @else
+                {!! Form::open(['route' => 'admin.products.store', 'autocomplete' => 'off','files'=>'true']) !!}
+            @endif
+            
             @include('admin.products.partials.form')
             {!! Form::submit('Crear Producto', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}

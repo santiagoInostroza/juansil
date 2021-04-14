@@ -24,7 +24,11 @@ Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.home')-
 Route::resource('categorias', CategoryController::class)->names('admin.categories');
 Route::resource('etiquetas', TagController::class)->names('admin.tags');
 Route::resource('marcas', BrandController::class)->names('admin.brands');
+
+
+Route::get('productos/newProduct/{producto}',[ProductController::class,'newProduct'])->name('admin.products.new_product');
 Route::resource('productos', ProductController::class)->names('admin.products');
+
 Route::resource('proveedores', SupplierController::class)->names('admin.suppliers');
 Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create'])->name('admin.purchases.create');
 Route::resource('compras', PurchaseController::class)->names('admin.purchases');
@@ -43,6 +47,8 @@ Route::resource('comunas', ComunaController::class)->names('admin.comunas');
 Route::resource('users',  UserController::class)->only('index','edit','update')->names('admin.users');
 Route::resource('roles',  RoleController::class)->names('admin.roles');
 Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->name('admin.sales.pagos_pendientes');
+
+
 
 
 
