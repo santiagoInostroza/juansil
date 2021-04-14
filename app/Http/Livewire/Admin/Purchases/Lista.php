@@ -18,12 +18,12 @@ class Lista extends Component{
     
     public function render(){
         $purchases = Purchase::join('suppliers','suppliers.id','=','purchases.supplier_id')
-        ->join('users','users.id','=','purchases.user_created')
+        // ->join('users','users.id','=','purchases.user_created')
         ->where('suppliers.name','like','%'. $this->search .'%')
-        ->orWhere('total','like','%'. $this->search .'%')
-        ->orWhere('fecha','like','%'. $this->search .'%')
-        ->orWhere('comments','like','%'. $this->search .'%')
-        ->orWhere('users.name','like','%'. $this->search .'%')
+        // ->orWhere('total','like','%'. $this->search .'%')
+        // ->orWhere('fecha','like','%'. $this->search .'%')
+        // ->orWhere('comments','like','%'. $this->search .'%')
+        // ->orWhere('users.name','like','%'. $this->search .'%')
         // ->orWhere('telefono','like','%'. $this->search .'%')
         ->select('purchases.*')
         ->paginate(25);
