@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Productos;
 
+use App\Models\Tag;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
 
 class Lista extends Component{
@@ -39,14 +41,14 @@ class Lista extends Component{
         });
 
         $this->destacados = Cache::remember('destacados', $seconds, function () {
-            return Product::where('status', 1)->take(15)->get();
+            return Product::where('status', 1)->take(16)->get();
         });
            
     }
 
     public function filtro($name){
-         $productos = Product::where('status', 1)->where('name', 'like',"%". $name . "%")->paginate(100);
-         $destacados = Product::where('status', 1)->take(10)->get();
+         $productos = Product::where('status', 1)->where('name', 'like',"%". $name . "%")->paginate(60);
+         $destacados = Product::where('status', 1)->take(16)->get();
 
          return view('products.index', compact('productos','destacados','name'));
     }
