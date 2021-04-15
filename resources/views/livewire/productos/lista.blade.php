@@ -37,6 +37,7 @@
         </div>
     </div>
     <hr>
+    
     {{-- PRODUCTOS MAS VENDIDOS --}}
 
 </div>
