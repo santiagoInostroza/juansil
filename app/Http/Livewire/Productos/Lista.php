@@ -7,8 +7,8 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
 
 class Lista extends Component{
-    public $productos;
-    public $destacados;
+    private $productos;
+    private $destacados;
     
     public function render(){
 
