@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    @livewire('productos')
+    @livewire('productos.index')
     
     <div class="container max-w-7xl py-8">
         @if (count($productos)>0)
