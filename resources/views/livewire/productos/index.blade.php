@@ -1,5 +1,5 @@
-<div class="mt-4">
+<div class="mt-5">
     lkfkdv
-    {{-- @livewire('productos.lista') --}}
+    @livewire('productos.lista')
 </div>
 
