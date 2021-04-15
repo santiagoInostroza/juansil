@@ -29,10 +29,11 @@
         @foreach ($destacados as $key => $producto)
             <livewire:producto :producto='$producto' :key="$producto->id" />
         @endforeach
-        <div class="flex justify-end w-full">
-            <div class="cursor-pointer btn ">
-                Ver más destacados...
-            </div>
+       
+    </div>
+    <div class="flex justify-end">
+        <div class="cursor-pointer btn ">
+            Ver más destacados...
         </div>
     </div>
     <hr>
