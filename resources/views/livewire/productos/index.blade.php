@@ -1,4 +1,5 @@
 <div>
-    @livewire('productos.lista')
+    lkfkdv
+    {{-- @livewire('productos.lista') --}}
 </div>
 
