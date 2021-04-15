@@ -23,7 +23,7 @@ class Lista extends Component{
         ->orWhere('total','like','%'. $this->search .'%')
         ->orWhere('fecha','like','%'. $this->search .'%')
         ->orWhere('comments','like','%'. $this->search .'%')
-        // ->orWhere('users.name','like','%'. $this->search .'%')
+        ->orWhere('users.name','like','%'. $this->search .'%')
         ->select('purchases.*')
         ->orderBy('id','desc')
         ->paginate(25);
