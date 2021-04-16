@@ -1,6 +1,7 @@
 <div class="card">
     <div class="card-header d-flex">
         <input wire:model='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
+        {{$search}}
         @livewire('admin.ventas.agregar')
     </div>
     
