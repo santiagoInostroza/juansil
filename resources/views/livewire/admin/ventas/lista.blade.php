@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header d-flex">
-        <input wire:model.delay='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
+        <input wire:model.debounce.500ms='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
         {{$search}}
         @livewire('admin.ventas.agregar')
     </div>
