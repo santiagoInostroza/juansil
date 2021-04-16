@@ -42,7 +42,7 @@ class Lista extends Component{
             ->orWhere('sales.id','like','%'. $this->search . '%')
             ->select('sales.*')
             ->orderBy($this->sort,$this->direction)
-            ->paginate(50);
+            ->paginate(300);
         }
 
         $this->diferencia = 0;
