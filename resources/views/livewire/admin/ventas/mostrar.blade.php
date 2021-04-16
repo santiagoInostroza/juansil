@@ -4,7 +4,7 @@
         <div class="position-fixed bg-secondary" style="top:0;bottom:0;left:0;right:0;opacity: 0.5"></div>
         
         
-        <div class="position-absolute bg-white"  style="top:0;left:0;right:0; border-radius:5px" >
+        <div class="position-fixed bg-white"  style="top:0;left:0;right:0; border-radius:5px" >
             <div wire:click="$set('open',false)" class="p-3 btn" style="float: right"><i class="fas fa-times"></i></div>
             <h3 class="p-4">Detalle de venta</h3>
             <h4 class="px-4">{{$venta->customer->name}} {{date("d-m-Y",strtotime($venta->date))}}</h4>
