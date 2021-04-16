@@ -13,18 +13,14 @@
                 <table class="table table-hover">
                    <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
+                        <th>Producto</th>
                         <th>total</th>
                     </tr>
                    </thead>
                    <tbody>
                        @foreach ($venta->sale_items as $item)
                        <tr>
-                           <td>
-                            {{$item->id}}
-                           </td>
-                           <td>{{$item->product->name}}</td>
+                           <td> {{$item->cantidad}} {{$item->product->name}} x {{$item->cantidad_por_caja}} un. </td>
                            <td>${{number_format($item->precio_total,0,',','.')}}</td>
                        </tr>
                        @endforeach
