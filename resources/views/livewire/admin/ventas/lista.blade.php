@@ -175,7 +175,7 @@
                         {{-- ACCION --}}
                         <td width='100px' class="align-middle">
                             <div class="d-flex" style="align-content: center">
-                                <div>@livewire('admin.ventas.mostrar', ['venta' => $venta], key($venta->id))</div>
+                                @livewire('admin.ventas.mostrar', ['venta' => $venta], key($venta->id))
                                 <a href="{{ route('admin.sales.edit', $venta) }}" class="btn btn-secondary btn-sm mr-2"><i class="fas fa-pen"></i></a>
                                 <form action="{{ route('admin.sales.destroy', $venta) }}" method='POST' class="alerta_eliminar  mr-2">
                                     @csrf
