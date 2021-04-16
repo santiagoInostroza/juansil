@@ -29,14 +29,13 @@
                        </tr>
                        @endforeach
                     </tbody>
-                
                 </table>
-                
             </div>
-            <h4>
-                ${{number_format($venta->total,0,',','.')}}
-            </h4>
-            <div class="p-4" style="background: #f7f7f7; border-radius:5px" ></div>
+            <div class="p-4" style="background: #f7f7f7; border-radius:5px" >
+                <h4>
+                    ${{number_format($venta->total,0,',','.')}}
+                </h4>
+            </div>
         </div>
     @endif
 </div>
