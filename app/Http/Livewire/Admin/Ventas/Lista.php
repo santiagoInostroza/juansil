@@ -10,7 +10,7 @@ class Lista extends Component{
     use WithPagination;
 
     protected $paginationTheme = "bootstrap";
-    public $search;
+    public $search ="";
     public $sort = 'id';
     public $direction = 'desc';
 
