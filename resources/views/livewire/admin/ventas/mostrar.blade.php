@@ -10,7 +10,7 @@
             <h4 class="px-4">{{$venta->customer->name}} {{date("d-m-Y",strtotime($venta->date))}}</h4>
 
             <div class="p-4" >
-                <table class="table table-hover">
+                <table class="table table-hover" style="height: 80%">
                    <thead>
                     <tr>
                         <th>Id</th>
