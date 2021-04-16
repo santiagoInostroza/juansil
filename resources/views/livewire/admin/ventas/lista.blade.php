@@ -1,18 +1,105 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex">
         <input wire:model='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
+        @livewire('admin.ventas.agregar')
     </div>
+    
     <div class="card-body">
         <table class="table table-hover table-responsive-xl table-sm">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>cliente</th>
-                    <th>Total</th>
-                    <th>EstadoPago</th>
-                    <th>EstadoDelivery</th>
-                    <th>FechaVenta</th>
-                    <th>VentaPor </th>
+                    <th wire:click="order('id')" class="" style="cursor:pointer">
+                        Id 
+                        {{-- SORT --}}
+                        @if ($sort== 'id')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                        
+                    </th>
+                    <th wire:click="order('customers.name')" class="" style="cursor:pointer">
+                            Cliente 
+                            {{-- SORT --}}
+                            @if ($sort== 'customers.name')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                    </th>
+                    <th wire:click="order('total')" class="" style="cursor:pointer">
+                        Total 
+                        {{-- SORT --}}
+                        @if ($sort== 'total')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                    </th>
+                    <th wire:click="order('payment_status')" class="" style="cursor:pointer">
+                        EstadoPago 
+                        {{-- SORT --}}
+                        @if ($sort== 'payment_status')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                    </th>
+                    <th wire:click="order('delivery_stage')" class="" style="cursor:pointer">
+                        EstadoDelivery 
+                        {{-- SORT --}}
+                        @if ($sort== 'delivery_stage')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                    </th>
+                    <th wire:click="order('date')" class="" style="cursor:pointer">
+                        FechaVenta 
+                        {{-- SORT --}}
+                        @if ($sort== 'date')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                    </th>
+                    <th wire:click="order('user_created')" class="" style="cursor:pointer">
+                        VentaPor 
+                        {{-- SORT --}}
+                        @if ($sort== 'user_created')
+                            @if ($direction =='asc')
+                                <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt mt-1" style="float: right"></i>  
+                            @endif
+                        @else
+                            <i class="fas fa-sort mt-1" style="float: right"></i>
+                        @endif
+                    </th>
                     <th>Accion</th>
                 </tr>
             </thead>
@@ -87,10 +174,8 @@
                     
                         {{-- ACCION --}}
                         <td width='100px' class="align-middle">
-                            <div class="d-flex">
-                            
-                            
-                            
+                            <div class="d-flex" style="align-content: center">
+                                <div>@livewire('admin.ventas.mostrar', ['venta' => $venta], key($venta->id))</div>
                                 <a href="{{ route('admin.sales.edit', $venta) }}" class="btn btn-secondary btn-sm mr-2"><i class="fas fa-pen"></i></a>
                                 <form action="{{ route('admin.sales.destroy', $venta) }}" method='POST' class="alerta_eliminar  mr-2">
                                     @csrf
