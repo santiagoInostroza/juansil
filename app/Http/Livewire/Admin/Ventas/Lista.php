@@ -29,9 +29,9 @@ class Lista extends Component{
 
     public function render(){
         if( $this->search == 'solo despachos') {
-            $ventas = Sale::where('delivery',1)->paginate(50);
+            $ventas = Sale::where('delivery',1)->paginate(300);
         }elseif($this->search == 'solo bodega'){
-            $ventas = Sale::where('delivery','!=',1)->paginate(50);
+            $ventas = Sale::where('delivery','!=',1)->paginate(300);
         }else{
             $ventas = Sale::join('customers','sales.customer_id','=','customers.id')
             ->where('customers.name','like','%'. $this->search . '%')
