@@ -9,7 +9,7 @@
             <h3 class="p-4">Detalle de venta</h3>
             <h4 class="px-4">{{$venta->customer->name}} {{date("d-m-Y",strtotime($venta->date))}}</h4>
 
-            <div class="p-4"  style="max-height: 80%; overflow: auto">
+            <div class="p-4"  style="max-height: 60vh; overflow: auto">
                 <table class="table table-hover">
                    <thead>
                     <tr>
@@ -31,11 +31,11 @@
                     </tbody>
                 
                 </table>
-                <h4>
-                    ${{number_format($venta->total,0,',','.')}}
-                </h4>
-
+                
             </div>
+            <h4>
+                ${{number_format($venta->total,0,',','.')}}
+            </h4>
             <div class="p-4" style="background: #f7f7f7; border-radius:5px" ></div>
         </div>
     @endif
