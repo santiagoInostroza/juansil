@@ -4,13 +4,13 @@
         <div class="position-fixed bg-secondary" style="top:0;bottom:0;left:0;right:0;opacity: 0.5;z-index: 9998"></div>
         
         
-        <div class="position-fixed bg-white m-5"  style="top:0;left:0;right:0; border-radius:5px;z-index: 9999;max-height: 80vh; overflow: auto" >
+        <div class="position-fixed bg-white m-5"  style="top:0;left:0;right:0; border-radius:5px;z-index: 9999;max-height: 80vh" >
             <div wire:click="$set('open',false)" class="p-3 btn" style="float: right"><i class="fas fa-times"></i></div>
             <h3 class="p-4">Detalle de venta</h3>
             <h4 class="px-4">{{$venta->customer->name}} {{date("d-m-Y",strtotime($venta->date))}}</h4>
 
             <div class="p-4" >
-                <table class="table table-hover" style="height: 80%">
+                <table class="table table-hover" style="height: 80%; overflow: auto">
                    <thead>
                     <tr>
                         <th>Id</th>
