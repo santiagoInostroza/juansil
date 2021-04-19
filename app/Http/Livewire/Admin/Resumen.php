@@ -47,6 +47,6 @@ class Resumen extends Component{
         try {$this->porcentaje =  $this->diferencia / $this->total_venta * 100;} catch (\Throwable $th) {}
 
 
-        return view('livewire.admin.resumen',compact('sales','total_purchases'))->layout('layouts.admin_base');
+        return view('livewire.admin.resumen',compact('sales','total_purchases'))->layout('layouts.admin');
     }
 }

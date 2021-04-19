@@ -84,8 +84,7 @@
                                     class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                     id="user-menu" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}"
-                                        alt="">
+                                    <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
                                 </button>
                             </div>
 
@@ -97,6 +96,9 @@
                                 
                                 @can('admin.home')
                                     <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero</a>
+                                @endcan
+                                @can('admin.home')
+                                    <a href="{{ route('admin.home2') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero Nuevo (No está listo)</a>
                                 @endcan
                                
                                

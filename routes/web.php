@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Livewire\Admin\Home;
 use App\Http\Livewire\Cart\Pagos;
 use App\Http\Livewire\Cart\Pedido;
 use App\Http\Livewire\Cart\Carrito;
@@ -51,7 +52,8 @@ Route::post('flow2', function ($id) {
     return "PAGINA flow2" . $id;
 })->name('flow2');
 
-Route::get('resumen', Resumen::class)->name('admin.resumen');
+Route::get('admin/home', Home::class)->name('admin.home2');
+Route::get('admin/resumen', Resumen::class)->name('admin.resumen');
 
 
 
