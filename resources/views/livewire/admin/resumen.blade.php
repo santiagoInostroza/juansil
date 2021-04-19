@@ -25,7 +25,7 @@
         </div>
         <div>
             <x-jet-label>Porcentaje</x-jet-label>
-            {{ number_format($porcentaje, 2) }}
+            %{{ number_format($porcentaje, 2) }}
         </div>
 
         <hr>
