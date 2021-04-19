@@ -45,12 +45,12 @@
         <div class="grid grid-cols-12">
             <div>Nombre</div>
             <div>fecha</div>
-            <div class="col-span-6">Detalle</div>
-            <div class="col-span-4 grid grid-cols-3">
-                <div>Costo</div>
-                <div>Venta</div>
-                <div>Diferencia</div>
-            </div>
+            <div class="col-span-7">Detalle</div>
+            
+            <div>Costo</div>
+            <div>Venta</div>
+            <div>Diferencia</div>
+           
         </div>
         @foreach ($sales as $sale)
             <div class="border p-2 grid grid-cols-12">
@@ -62,7 +62,7 @@
                     {{date("d-m-Y",strtotime($sale->date))}}
                 </div>
                
-                <div class="col-span-6">
+                <div class="col-span-7">
                   
                 @foreach ($sale->sale_items as $item)
 
@@ -89,17 +89,17 @@
                     </div>
                 @endforeach
                 </div>
-                <div class="col-span-4 grid grid-cols-3">
-                    <div class="">
-                        ${{number_format($sale->total,0,',','.')}}
-                    </div>
-                    <div class="">
-                        ${{number_format($sale->total,0,',','.')}}
-                    </div>
-                    <div class="">
-                        ${{number_format($sale->total,0,',','.')}}
-                    </div>
+          
+                <div class="">
+                    ${{number_format($sale->total,0,',','.')}}
                 </div>
+                <div class="">
+                    ${{number_format($sale->total,0,',','.')}}
+                </div>
+                <div class="">
+                    ${{number_format($sale->total,0,',','.')}}
+                </div>
+            
             </div>
         @endforeach
     </div>
