@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header d-flex">
-        <input wire:model.debounce.1000ms='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
+        <input wire:model='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
       
         @livewire('admin.ventas.agregar')
     </div>

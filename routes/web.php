@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Livewire\Cart\Pagos;
+use App\Http\Livewire\Cart\Pedido;
+use App\Http\Livewire\Cart\Carrito;
+use App\Http\Livewire\Admin\Resumen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DatatableController;
-use App\Http\Livewire\Cart\Carrito;
-use App\Http\Livewire\Cart\Pagos;
-use App\Http\Livewire\Cart\Pedido;
 use App\Http\Livewire\TestApiGoogleMapsComponent;
 
 /*
@@ -49,6 +50,11 @@ Route::post('flow', function ($id) {
 Route::post('flow2', function ($id) { 
     return "PAGINA flow2" . $id;
 })->name('flow2');
+
+Route::get('resumen', Resumen::class)->name('admin.resumen');
+
+
+
 
 
 
