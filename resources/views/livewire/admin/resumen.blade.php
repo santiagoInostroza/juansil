@@ -130,12 +130,11 @@
                                     @endphp
                                 </div>
                                 {{$item->cantidad_total}} {{$item->product->name}}
-                                 {{-- @if ($item->product->purchasePrices)
+                                @if ($item->product->purchasePrices->first())
                                 {{ $item->product->purchasePrices->first()->precio}}
-                                @endif --}} 
+                                @endif 
                                 ${{number_format($costo,0,',','.')}}
                             @endforeach
-                            diferencia{{$diferencia}}
                             @php
                                 $diferencia = $sale->total - $costo_total;
                                 $porcentaje = $diferencia *100  / $sale->total ;
