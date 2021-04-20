@@ -189,7 +189,7 @@
                 
                 </tbody>
             </table>
-            <div class="sticky bottom-0 flex">
+            <div class="w-full h-12 bg-gray-900 fixed bottom-0 flex">
                 <div class="p-2">
                     ventas ${{number_format($ventas,0,',','.')}}
                 </div>
