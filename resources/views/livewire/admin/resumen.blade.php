@@ -196,11 +196,11 @@
                 <div class="p-2">
                     costos ${{number_format($costos,0,',','.')}}
                 </div>
-                <div class="p-2">
-                    diferencia = ${{number_format($diferencias,0,',','.')}}
+                <div class="p-2 text-green-500">
+                    diferencia ${{number_format($diferencias,0,',','.')}}
                 </div>
                 <div class="p-2">
-                    porcentaje = %{{number_format($porcentajes,2,',','.')}}
+                    porcentaje %{{number_format($porcentajes,2,',','.')}}
                 </div>
             </div>
         </div>
