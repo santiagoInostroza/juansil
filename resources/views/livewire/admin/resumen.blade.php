@@ -126,8 +126,9 @@
                                 </div>
                             @endforeach
                             {{$item->cantidad_total}} {{$item->product->name}} 
-                            
-                            {{ $item->product->purchasePrices->first()->precio}}
+                            @if ($item->product->purchasePrices)
+                                {{ $item->product->purchasePrices->first()->precio}}
+                            @endif
                              ${{number_format($costo,0,',','.')}}
                             @php
                                 $diferencia = $sale->total - $costo;
