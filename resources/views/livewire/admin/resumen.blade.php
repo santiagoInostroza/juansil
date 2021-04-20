@@ -65,6 +65,9 @@
                  Fecha
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                 Detalle
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                  Costo
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -113,7 +116,7 @@
                             <div class="text-sm text-gray-900"> {{date("d-m-Y",strtotime($sale->date))}}</div>
                         </td>
 
-                        {{-- COSTO --}}
+                        {{-- DETALLE --}}
                         <td class="px-6 py-4 whitespace-nowrap">
                             @foreach ($sale->sale_items as $item)
                                 <div>
@@ -137,6 +140,10 @@
                                 $porcentaje = $diferencia *100  / $sale->total ;
                             @endphp
 
+                        </td>
+                        {{-- COSTO --}}
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            ${{number_format($costo_total,0,',','.')}}
                         </td>
                         {{-- TOTAL --}}
                         <td class="px-6 py-4 whitespace-nowrap">
