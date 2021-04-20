@@ -123,6 +123,7 @@
                                         $diferencia = $sale->total - $costo;
                                         $porcentaje = $diferencia *100  / $sale->total ;
                                     @endphp
+                                    {{$item->product->name}} {{$precio->precio}}
                                      ${{number_format($costo,0,',','.')}}
                                 </div>
                                 @endforeach
