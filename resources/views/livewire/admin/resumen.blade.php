@@ -87,6 +87,7 @@
                 @foreach ($sales as $sale)
                 @php
                     $costo=0;
+                    $costo_total=0;
                     $diferencia=0;
                     $porcentaje=0;
                 @endphp
@@ -118,10 +119,11 @@
                                 <div>
                                     @php
                                     try {
-                                        $costo += $item->product->purchasePrices->first()->precio * $item->cantidad_total ;
+                                        $costo = $item->product->purchasePrices->first()->precio * $item->cantidad_total ;
                                     } catch (\Throwable $th) {
-                                        //throw $th;
+                                       $costo = 0;
                                     } 
+                                    $costo_total+=$costo;
                                     @endphp
                                 </div>
                                 {{$item->cantidad_total}} {{$item->product->name}}
@@ -131,7 +133,7 @@
                                 ${{number_format($costo,0,',','.')}}
                             @endforeach
                             @php
-                                $diferencia = $sale->total - $costo;
+                                $diferencia = $sale->total - $costo_total;
                                 $porcentaje = $diferencia *100  / $sale->total ;
                             @endphp
 
