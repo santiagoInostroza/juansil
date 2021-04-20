@@ -191,16 +191,16 @@
             </table>
 
             <div class="w-full h-12 bg-gray-900 fixed bottom-0 flex">
-                <div class="p-2">
+                <div class="p-2 text-white">
                     ventas ${{number_format($ventas,0,',','.')}}
                 </div>
-                <div class="p-2">
+                <div class="p-2 text-white">
                     costos ${{number_format($costos,0,',','.')}}
                 </div>
                 <div class="p-2 text-green-500">
                     diferencia ${{number_format($diferencias,0,',','.')}}
                 </div>
-                <div class="p-2">
+                <div class="p-2 text-white">
                     porcentaje %{{number_format($porcentajes,2,',','.')}}
                 </div>
             </div>
