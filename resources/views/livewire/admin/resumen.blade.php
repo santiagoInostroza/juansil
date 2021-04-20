@@ -114,19 +114,19 @@
 
                         {{-- COSTO --}}
                         <td class="px-6 py-4 whitespace-nowrap">
-                           @foreach ($sale->sale_items as $item)
-                           
-                                @foreach ($item->product->purchasePrices as $precio)
+                            @foreach ($sale->sale_items as $item)
                                 <div>
                                     @php
-                                        $costo = $precio->precio * $item->cantidad_total ;
-                                        $diferencia = $sale->total - $costo;
-                                        $porcentaje = $diferencia *100  / $sale->total ;
+                                        $costo += $item->product->purchasePrices->first()->precio * $item->cantidad_total ;
                                     @endphp
-                                    {{$item->cantidad_total}} {{$item->product->name}} {{$precio->precio}} ${{number_format($costo,0,',','.')}}
                                 </div>
-                                @endforeach
-                           @endforeach
+                            @endforeach
+                            {{$item->cantidad_total}} {{$item->product->name}} {{ $item->product->purchasePrices->first()->precio}} ${{number_format($costo,0,',','.')}}
+                            @php
+                                $diferencia = $sale->total - $costo;
+                                $porcentaje = $diferencia *100  / $sale->total ;
+                            @endphp
+
                         </td>
                         {{-- TOTAL --}}
                         <td class="px-6 py-4 whitespace-nowrap">
