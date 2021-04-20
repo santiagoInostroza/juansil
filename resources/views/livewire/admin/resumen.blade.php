@@ -135,6 +135,7 @@
                                 @endif --}} 
                                 ${{number_format($costo,0,',','.')}}
                             @endforeach
+                            diferencia{{$diferencia}}
                             @php
                                 $diferencia = $sale->total - $costo_total;
                                 $porcentaje = $diferencia *100  / $sale->total ;
