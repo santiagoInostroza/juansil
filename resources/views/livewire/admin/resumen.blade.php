@@ -146,30 +146,34 @@
                                         </div>
                                         <div class="flex">
                                             <div class="bg-gray-100 ml-1 p-1 w-24">
-                                                @if ($item->product->purchasePrices->first())
-                                                    ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
-                                                @else
-                                                    $0
-                                                @endif 
-                                                ${{number_format($item->precio,0,',','.')}}
+                                                <div class="w-12 inline-block">
+                                                    @if ($item->product->purchasePrices->first())
+                                                        ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
+                                                    @else
+                                                        $0
+                                                    @endif 
+                                                </div>
+                                                <div class="w-16 inline-block">
+                                                    ${{number_format($item->precio,0,',','.')}}
+                                                </div>
                                                 
                                             </div>
 
                                             <div class="bg-green-100 ml-1 p-1 w-32">
-                                                <span class="w-16">
+                                                <div class="w-16 inline-block">
                                                     ${{number_format($costo,0,',','.')}}
-                                                </span>
-                                                <span class="w-16">
+                                                </div>
+                                                <div class="w-16 inline-block">
                                                     ${{number_format($venta,0,',','.')}}
-                                                </span>
+                                                </div>
                                             </div>
                                             <div class="bg-yellow-100 ml-1 p-1 w-32">
-                                                <span class="w-16">
-                                                 ${{ number_format($venta - $costo,0,',','.') }}
-                                                </span>
-                                                <span class="w-16">
-                                                 %{{ number_format(($venta - $costo) /  $venta * 100,2,',','.') }}
-                                                </span>
+                                                <div class="w-16 inline-block">
+                                                    ${{ number_format($venta - $costo,0,',','.') }}
+                                                </div>
+                                                <div class="w-16 inline-block">
+                                                    %{{ number_format(($venta - $costo) /  $venta * 100,2,',','.') }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
