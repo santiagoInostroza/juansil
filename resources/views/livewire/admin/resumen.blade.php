@@ -167,6 +167,7 @@
                                                     ${{number_format($venta,0,',','.')}}
                                                 </div>
                                             </div>
+                                            
                                             <div class="bg-yellow-100 ml-1 p-1 w-32">
                                                 <div class="w-15 inline-block">
                                                     ${{ number_format($venta - $costo,0,',','.') }}

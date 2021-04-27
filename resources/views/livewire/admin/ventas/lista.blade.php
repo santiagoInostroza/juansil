@@ -112,7 +112,11 @@
                         </td>    
                         <td style="min-width: 180px">
                             {{-- <div class="h6"> ${{number_format($venta->total,0,',','.')}}</div> --}}
-                            <div class="h5 ">{{$venta->customer->name}}</div> {{-- {{$venta->customer->telefono}} {{$venta->customer->celular}} --}}
+                            <div class="h5 ">
+                                <a href="{{ route('admin.sales.edit',$venta->customer->id) }}">
+                                    {{$venta->customer->name}}
+                                </a>
+                            </div> {{-- {{$venta->customer->telefono}} {{$venta->customer->celular}} --}}
                             <div>
                                 {{$venta->customer->direccion}} 
                                 @isset($venta->customer->block) Torre {{$venta->customer->block}} @endisset 
