@@ -129,8 +129,7 @@
                             {{-- DETALLE --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @foreach ($sale->sale_items as $item)
-                                    <div>
-                                        @php
+                                    @php
                                         try {
                                             $precio_compra = $item->product->purchasePrices->first()->precio ;
                                             $costo = $precio_compra * $item->cantidad_total ;
@@ -139,29 +138,33 @@
                                             $costo = 0;
                                         } 
                                         $costo_total+=$costo;
-                                        @endphp
-                                    </div>
-                                    {{$item->cantidad_total}} {{$item->product->name}}
-                                    @if ($item->product->purchasePrices->first())
-                                        ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
-                                    @endif 
-                                    ${{number_format($costo,0,',','.')}}
+                                    @endphp
+                                    <div class="flex justify-between">
+                                        <div class="p-1">
+                                            {{$item->cantidad_total}} {{$item->product->name}}
+                                        </div>
+                                        <div class="bg-gray-100 ml-1 p-1">
+                                            @if ($item->product->purchasePrices->first())
+                                            ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
+                                            @endif 
+                                            ${{number_format($costo,0,',','.')}}
+                                        </div>
 
-                                    ${{number_format($item->precio,0,',','.')}}
-                                    ${{number_format($venta,0,',','.')}}
-                                    
-                                   
+                                        <div class="bg-green-100 ml-1 p-1">
+                                            ${{number_format($item->precio,0,',','.')}}
+                                            ${{number_format($venta,0,',','.')}}
+                                        </div>
+                                        <div class="bg-yellow-100 ml-1 p-1">
+                                            %
+                                        </div>
+                                    </div>
                                 @endforeach
-                                
                                 @php
                                     $diferencia = $sale->total - $costo_total;
                                     $porcentaje = $diferencia *100  / $sale->total ;
-
-
+                                    
                                     $costos += $costo_total;
                                     $ventas += $sale->total;
-                                
-
                                 @endphp
 
                             </td>
