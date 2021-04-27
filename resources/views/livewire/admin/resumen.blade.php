@@ -136,6 +136,7 @@
                                             $venta = $item->precio * $item->cantidad_total;
                                         } catch (\Throwable $th) {
                                             $costo = 0;
+                                            $venta = $item->cantidad_total;
                                         } 
                                         $costo_total+=$costo;
                                     @endphp
