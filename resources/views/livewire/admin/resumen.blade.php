@@ -153,7 +153,7 @@
                                                         $0
                                                     @endif 
                                                 </div>
-                                                <div class="w-16 inline-block">
+                                                <div class="w-12 inline-block">
                                                     ${{number_format($item->precio,0,',','.')}}
                                                 </div>
                                                 
