@@ -144,7 +144,7 @@
                                             {{$item->cantidad_total}} {{$item->product->name}}
                                         </div>
                                         <div class="flex">
-                                            <div class="bg-gray-100 ml-1 p-1">
+                                            <div class="bg-gray-100 ml-1 p-1 w-24">
                                                 @if ($item->product->purchasePrices->first())
                                                     ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
                                                 @else
@@ -154,11 +154,11 @@
                                                 
                                             </div>
 
-                                            <div class="bg-green-100 ml-1 p-1">
+                                            <div class="bg-green-100 ml-1 p-1 w-32">
                                                 ${{number_format($costo,0,',','.')}}
                                                 ${{number_format($venta,0,',','.')}}
                                             </div>
-                                            <div class="bg-yellow-100 ml-1 p-1">
+                                            <div class="bg-yellow-100 ml-1 p-1 w-32">
                                                  ${{ number_format($venta - $costo,0,',','.') }}
                                                  %{{ number_format(($venta - $costo) /  $venta * 100,2,',','.') }}
                                             </div>
