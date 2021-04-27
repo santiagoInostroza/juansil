@@ -102,6 +102,7 @@
                         $costo_total=0;
                         $diferencia=0;
                         $porcentaje=0;
+                        $venta=0;
                     @endphp
                         <tr>
                             {{-- ID VENTA --}}
@@ -131,9 +132,11 @@
                                     <div>
                                         @php
                                         try {
-                                            $costo = $item->product->purchasePrices->first()->precio * $item->cantidad_total ;
+                                            $precio_compra = $item->product->purchasePrices->first()->precio ;
+                                            $costo = $precio_compra * $item->cantidad_total ;
+                                            $venta = $item->precio * $item->cantidad_total;
                                         } catch (\Throwable $th) {
-                                        $costo = 0;
+                                            $costo = 0;
                                         } 
                                         $costo_total+=$costo;
                                         @endphp
@@ -143,7 +146,13 @@
                                         ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
                                     @endif 
                                     ${{number_format($costo,0,',','.')}}
+
+                                    ${{number_format($item->precio,0,',','.')}}
+                                    ${{number_format($venta,0,',','.')}}
+                                    
+                                   
                                 @endforeach
+                                
                                 @php
                                     $diferencia = $sale->total - $costo_total;
                                     $porcentaje = $diferencia *100  / $sale->total ;

@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Purchase;
 
 class Resumen extends Component{
+    
     public $total_bodega;
 
     public $diferencia;
@@ -19,15 +20,15 @@ class Resumen extends Component{
     public function render(){
         $sales= Sale::all();
         $total_purchases= Purchase::all()->sum('total');
+        
         $products= Product::where('stock', '>',0)->get();
-
         foreach ($products as $product) {
             $valor = $product->purchasePrices[0]->precio;
             $this->total_bodega+= $product->stock * $valor;
         }
 
         
-         $this->diferencia = 0;
+        $this->diferencia = 0;
         $this->total_compra = 0;
         $this->total_venta = 0;
         $this->porcentaje = 0;
