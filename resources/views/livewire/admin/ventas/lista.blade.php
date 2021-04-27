@@ -113,7 +113,7 @@
                         <td style="min-width: 180px">
                             {{-- <div class="h6"> ${{number_format($venta->total,0,',','.')}}</div> --}}
                             <div class="h5 ">
-                                <a href="{{ route('admin.sales.edit',$venta->customer->id) }}">
+                                <a href="{{ route('admin.customers.edit',$venta->customer->id) }}">
                                     {{$venta->customer->name}}
                                 </a>
                             </div> {{-- {{$venta->customer->telefono}} {{$venta->customer->celular}} --}}
