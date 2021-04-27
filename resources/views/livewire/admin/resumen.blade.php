@@ -168,10 +168,10 @@
                                                 </div>
                                             </div>
                                             <div class="bg-yellow-100 ml-1 p-1 w-32">
-                                                <div class="w-16 inline-block">
+                                                <div class="w-15 inline-block">
                                                     ${{ number_format($venta - $costo,0,',','.') }}
                                                 </div>
-                                                <div class="w-16 inline-block">
+                                                <div class="w-17 inline-block">
                                                     %{{ number_format(($venta - $costo) /  $venta * 100,2,',','.') }}
                                                 </div>
                                             </div>
