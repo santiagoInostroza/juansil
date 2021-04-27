@@ -145,15 +145,15 @@
                                             {{$item->cantidad_total}} {{$item->product->name}}
                                         </div>
                                         <div class="flex">
-                                            <div class="bg-gray-100 ml-1 p-1 w-24">
-                                                <div class="w-12 inline-block">
+                                            <div class="bg-gray-100 ml-1 p-1 w-32">
+                                                <div class="w-16 inline-block">
                                                     @if ($item->product->purchasePrices->first())
                                                         ${{ number_format($item->product->purchasePrices->first()->precio,0,',','.')}}
                                                     @else
                                                         $0
                                                     @endif 
                                                 </div>
-                                                <div class="w-12 inline-block">
+                                                <div class="w-16 inline-block">
                                                     ${{number_format($item->precio,0,',','.')}}
                                                 </div>
                                                 
