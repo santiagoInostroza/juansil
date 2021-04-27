@@ -13,6 +13,7 @@
         <div>
             <x-jet-label>Total ventas</x-jet-label>
             ${{ number_format($total_venta, 0, ',', '.') }}
+            ${{ number_format($sales->sum('total'), 0, ',', '.') }}
         </div>
         <div>
             <x-jet-label>Costo total ventas</x-jet-label>
@@ -48,7 +49,7 @@
 
 
 
-<div class="flex flex-col mb-12">
+<div class="flex flex-col mb-20">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -190,7 +191,7 @@
                 </tbody>
             </table>
 
-            <div class="w-full h-12 bg-gray-900 fixed bottom-0 flex">
+            <div class="w-full h-16 sm:h-8 bg-gray-900 fixed bottom-0 flex ">
                 <div class="p-2 text-white">
                     ventas ${{number_format($ventas,0,',','.')}}
                 </div>
