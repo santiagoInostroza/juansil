@@ -159,7 +159,8 @@
                                                 ${{number_format($venta,0,',','.')}}
                                             </div>
                                             <div class="bg-yellow-100 ml-1 p-1">
-                                                %
+                                                 ${{ number_format($venta - $costo,0,',','.') }}
+                                                 %{{ number_format(($venta - $costo) /  $venta * 100,2,',','.') }}
                                             </div>
                                         </div>
                                     </div>
