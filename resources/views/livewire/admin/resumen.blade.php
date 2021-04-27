@@ -156,12 +156,20 @@
                                             </div>
 
                                             <div class="bg-green-100 ml-1 p-1 w-32">
-                                                ${{number_format($costo,0,',','.')}}
-                                                ${{number_format($venta,0,',','.')}}
+                                                <span class="w-16">
+                                                    ${{number_format($costo,0,',','.')}}
+                                                </span>
+                                                <span class="w-16">
+                                                    ${{number_format($venta,0,',','.')}}
+                                                </span>
                                             </div>
                                             <div class="bg-yellow-100 ml-1 p-1 w-32">
+                                                <span class="w-16">
                                                  ${{ number_format($venta - $costo,0,',','.') }}
+                                                </span>
+                                                <span class="w-16">
                                                  %{{ number_format(($venta - $costo) /  $venta * 100,2,',','.') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
