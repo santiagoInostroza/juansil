@@ -375,7 +375,12 @@
                                     @endif
                                     @if ($selected_sale->payment_date)
                                         <div class="grid grid-cols-2">
-                                            <div>Fecha de pago </div>
+                                            @if ($selected_sale->payment_status ==3)
+                                                <div>Fecha de pago </div>
+                                            @elseif ($selected_sale->payment_status ==2)
+                                                <div>Fecha de abono </div>
+                                            @endif
+                                            
                                             <div>{{date("d-m-Y",strtotime($selected_sale->payment_date))}}</div>
                                         </div>
                                     @endif
