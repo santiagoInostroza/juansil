@@ -443,7 +443,7 @@
                                                 <td class="text-left">
                                                     <div class="flex justify-start items-center">
                                                         @if ($item->product->image)
-                                                            <img class="object-cover w-20 h-20" src="{{Storage::url($item->product->image->url)}}" alt=""> 
+                                                            <img class="object-contain w-20 h-20" src="{{Storage::url($item->product->image->url)}}" alt=""> 
                                                         @endif
                                                         <div>{{$item->cantidad}} {{$item->product->name}} x {{$item->cantidad_por_caja}} un.</div>
                                                     </div>
