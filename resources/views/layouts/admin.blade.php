@@ -8,9 +8,7 @@
         <title>{{ config('app.name', 'Juansil') }} | ADMIN</title>
         <link rel="icon" type="image/png" href="{{url('images/iconos/jsyellow.png')}}" />
 
-        {{-- HELPERS ALPINE --}}
-        <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@1.2.x/dist/index.min.js" defer></script>
-
+       
         
 
         <!-- Fonts -->

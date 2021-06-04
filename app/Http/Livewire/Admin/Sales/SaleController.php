@@ -31,7 +31,7 @@ class SaleController extends Component{
         ->select('sales.*')
         ->orderBy($this->sort,$this->direction)
         ->paginate(50);
-        return view('livewire.admin.sales.sale-controller',compact('sales'))->layout('layouts.admin');
+        return view('livewire.admin.sales.sale-controller',compact('sales'))->layout('layouts.admin2');
     }
 
 

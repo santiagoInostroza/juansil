@@ -17,6 +17,7 @@ module.exports = {
 
     variants: {
         opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        overflow: ['hover'],
     },
 
     plugins: [
@@ -29,3 +30,4 @@ module.exports = {
        container: false,
       }
 };
+//

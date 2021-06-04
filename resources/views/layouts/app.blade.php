@@ -42,9 +42,7 @@
         @stack('modals')
 
         @livewireScripts
-        <script>
-
-        </script>
+   
 
         @isset($js)
             {{$js}}

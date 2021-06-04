@@ -5,12 +5,13 @@
         <x-jet-input wire:model='search' class="flex-1 mr-4" type="" placeholder='Buscar palabra...'  />
         @livewire('admin.sales.create-sale', ['user' => ''])
     </div>
+    
     <x-table>
-        <table class="min-w-full divide-y divide-gray-200 overscroll-auto">
+        <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     {{-- ID --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase  cursor-pointer hidden xl:table-cell @if ($sort == 'sales.id' ) font-bold text-gray-700 @endif" style="" wire:click="order('sales.id')">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.id' ) font-bold text-gray-700 @endif" style="" wire:click="order('sales.id')">
                         <div class="flex justify-center items-center ">
                             <div>
                                 Id 
@@ -88,7 +89,7 @@
                         </div>
                     </th>
                     {{-- ESTADO PAGO --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hidden  lg:table-cell @if ($sort == 'sales.payment_status' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_status')">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.payment_status' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_status')">
                         
                         <div class="flex justify-center items-center ">
                             <div>
@@ -108,7 +109,7 @@
                         </div>
                     </th>
                     {{-- ESTADO DELIVERY --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hidden  lg:table-cell @if ($sort == 'sales.delivery_stage' ) font-bold text-gray-700 @endif " wire:click="order('sales.delivery_stage')">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.delivery_stage' ) font-bold text-gray-700 @endif " wire:click="order('sales.delivery_stage')">
                         
                         <div class="flex justify-center items-center ">
                             <div>
@@ -128,7 +129,7 @@
                         </div>
                     </th>
                     {{-- FECHA VENTA --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hidden  xl:table-cell @if ($sort == 'sales.date' ) font-bold text-gray-700 @endif " wire:click="order('sales.date')">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.date' ) font-bold text-gray-700 @endif " wire:click="order('sales.date')">
                         <div class="flex justify-center items-center ">
                             <div>
                                 Fecha Venta 
@@ -147,7 +148,7 @@
                         </div>
                     </th>
                     {{-- FECHA DE PAGO --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hidden xl:table-cell @if ($sort == 'sales.payment_date' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_date')">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.payment_date' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_date')">
                         <div class="flex justify-center items-center ">
                             <div>
                                 Fecha Pago 
@@ -166,7 +167,7 @@
                         </div>
                     </th>
                     {{-- VENTA POR --}}
-                    <th class="hidden px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer xl:table-cell @if ($sort == 'sales.user_created' ) font-bold text-gray-700  @endif " wire:click="order('sales.user_created')">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.user_created' ) font-bold text-gray-700  @endif " wire:click="order('sales.user_created')">
                         <div class="flex justify-center items-center ">
                             <div>
                                 VentaPor
@@ -185,21 +186,22 @@
                         </div>
                     </th>
                     {{-- COMENTARIOS --}}
-                    <th class="hidden px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer xl:table-cell">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
                         <div>Comentarios</div>
                     </th>
                     {{-- ACCION --}}
                     <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
                         Accion
-                        <span class="sr-only">Accion</span>
+                        {{-- <span class="sr-only">Accion</span> --}}
                     </th>
                 </tr>
             </thead>
+            
             <tbody class="bg-white divide-y divide-gray-200">
                @foreach ($sales as $sale)
                 <tr>
                     {{-- ID --}}
-                    <td class="hidden xl:table-cell px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
                             {{$sale->id}}
                         </div>
@@ -220,7 +222,7 @@
                         ${{number_format($sale->total,0,',','.')}}
                     </td>
                      {{-- ESTADO DE PAGO --}}
-                    <td class="hidden  lg:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_status == 1)
                             <div> 
                                 <span class="text-yellow-400">Pendiente</span> 
@@ -241,7 +243,7 @@
                         @endif
                     </td>
                      {{-- ESTADO DE DELIVERY --}}
-                    <td class="hidden  lg:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->delivery == 1)
                             @if ($sale->delivery_stage == 1)
                             <div>
@@ -273,11 +275,11 @@
                         @endif
                     </td>
                      {{--  FECHA VENTA  --}}
-                    <td class="hidden xl:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{date("d-m-Y",strtotime($sale->date))}}
                     </td>
                      {{--  FECHA PAGO --}}
-                    <td class="hidden xl:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_date!="" && $sale->payment_status == 3)
                             {{date("d-m-Y",strtotime($sale->payment_date))}}
                         @endif
@@ -294,11 +296,11 @@
                        
                     </td>
                      {{--  VENTA POR  --}}
-                    <td class="hidden xl:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <div> {{ ($sale->created_by()) ? $sale->created_by()->name:"" }}</div>
                     </td>
                      {{--  COMENTARIOS  --}}
-                    <td class="hidden xl:table-cell px-6 py-4 text-sm text-gray-500">
+                    <td class="px-6 py-4 text-sm text-gray-500">
                         <div class="w-24 text-sm"> {{ $sale->comments }}</div>
                     </td>
                     {{-- ACCION --}}
@@ -316,17 +318,16 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
-
-             
+                @endforeach             
             </tbody>
         </table>
     </x-table>
+  
 
     @if ($open_show)
         <div x-show="open_show">
-            <div class="fixed top-0 right-0 left-0 bottom-0 w-full h-full bg-gray-900 opacity-25 z-10"></div>
-            <div class="fixed top-0 right-0 left-0 mx-auto rounded-xl max-w-4xl shadow-2xl bg-white z-10 overflow-auto scrollbar-hide max-h-screen" style="">
+            <div class="fixed inset-0 w-full h-full bg-gray-900 opacity-25 z-10"></div>
+            <div class="fixed inset-1 rounded-xl  shadow-2xl bg-white z-10 overflow-auto h-screen w-screen" style="">
                 
                 <div class="flex justify-between uppercase items-end">
                     <h2 class="text-xl font-semibold text-gray-500 ml-10">Detalle de venta</h2>
