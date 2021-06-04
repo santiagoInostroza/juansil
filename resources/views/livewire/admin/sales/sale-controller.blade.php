@@ -471,7 +471,7 @@
                                 <div class="grid grid-cols-2 w-60 gap-4 text-xl uppercase font-semibold">
                                     @if ($selected_sale->delivery_value>0)
                                         <div class="font-bold text-gray-500">Sub total </div>
-                                        <div class="text-right"> ${{number_format($selected_sale->total - $selected_product->image,0,',','.')}}</div>
+                                        <div class="text-right"> ${{number_format($selected_sale->total -$selected_sale->delivery_value,0,',','.')}}</div>
                                         <div class="font-bold text-gray-500">Despacho </div>
                                         <div class="text-right"> ${{number_format($selected_sale->delivery_value,0,',','.')}}</div>
                                         <div class="font-bold text-gray-500">Total </div>
