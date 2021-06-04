@@ -110,7 +110,9 @@
                                                <tr>
                                                    <td class="py-4 whitespace-nowrap">
                                                        <div class="flex items-center justify-center">
-                                                           <img  class="object-contain h-24 w-24" src="{{Storage::url($item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                                        
+                                                                <img  class="object-contain h-24 w-24" src="{{Storage::url($item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                                        
                                                        </div>
                                                        
                                                    </td>
@@ -289,7 +291,9 @@
                                                            {{-- @click="seleccionarProducto" --}}
                                                        >
                                                            <div class="flex items-center">
-                                                               <img class="object-contain h-24 w-24" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                               @if ($product->image)
+                                                                    <img class="object-contain h-24 w-24" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                               @endif
                                                                <div>
                                                                    <div class="text-center font-semibold text-gray-600">{{$product->name}} </div>
                                                                    <div class="text-gray-400 font-bold text-sm">{{$product->brand->name}}</div>
@@ -343,7 +347,9 @@
 
                                    <div class="px-4 m-4 flex items-center justify-between">
                                        <div class="flex items-center">
-                                           <img class="object-contain h-24 w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
+                                            @if ($selected_product->image)
+                                                <img class="object-contain h-24 w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
+                                            @endif
                                            <div class="">
                                                <h2 class="text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
                                                <div class="flex items-start text-sm font-semibold text-gray-400">
