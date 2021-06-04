@@ -299,7 +299,7 @@
                     </td>
                      {{--  COMENTARIOS  --}}
                     <td class="hidden xl:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div> {{ $sale->comments }}</div>
+                        <div class="w-24"> {{ $sale->comments }}</div>
                     </td>
                     {{-- ACCION --}}
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
