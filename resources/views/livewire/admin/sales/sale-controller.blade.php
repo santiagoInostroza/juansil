@@ -298,7 +298,7 @@
                         <div> {{ ($sale->created_by()) ? $sale->created_by()->name:"" }}</div>
                     </td>
                      {{--  COMENTARIOS  --}}
-                    <td class="hidden xl:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="hidden xl:table-cell px-6 py-4 text-sm text-gray-500">
                         <div class="w-24"> {{ $sale->comments }}</div>
                     </td>
                     {{-- ACCION --}}
