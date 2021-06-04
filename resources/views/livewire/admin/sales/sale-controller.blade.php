@@ -299,7 +299,7 @@
                     </td>
                      {{--  COMENTARIOS  --}}
                     <td class="hidden xl:table-cell px-6 py-4 text-sm text-gray-500">
-                        <div class="w-24"> {{ $sale->comments }}</div>
+                        <div class="w-24 text-sm"> {{ $sale->comments }}</div>
                     </td>
                     {{-- ACCION --}}
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
@@ -431,10 +431,10 @@
                                 <table class="table-fixed w-full mx-auto">
                                     <thead>
                                         <tr>
-                                            <th class="w-1/2 text-left pl-20">Producto</th>
-                                            <th class="w-1/4">Precio</th>
-                                            <th class="w-1/4">Precio por caja</th>
-                                            <th class="w-1/4">Precio total</th>
+                                            <th class="w-2/5 text-left pl-20">Producto</th>
+                                            <th class="w-1/5">Precio</th>
+                                            <th class="w-1/5">Precio por caja</th>
+                                            <th class="w-1/5">Precio total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
