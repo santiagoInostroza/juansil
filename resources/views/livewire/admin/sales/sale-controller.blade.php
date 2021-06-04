@@ -326,7 +326,7 @@
     @if ($open_show)
         <div x-show="open_show">
             <div class="fixed top-0 right-0 left-0 bottom-0 w-full h-full bg-gray-900 opacity-25 z-10"></div>
-            <div class="fixed top-0 right-0 left-0 mx-auto rounded-xl max-w-4xl shadow-2xl bg-white z-10 overflow-auto scrollbar-hide mt-8" style="max-height: 90vh">
+            <div class="fixed top-0 right-0 left-0 mx-auto rounded-xl max-w-4xl shadow-2xl bg-white z-10 overflow-auto scrollbar-hide max-h-screen" style="">
                 
                 <div class="flex justify-between uppercase items-end">
                     <h2 class="text-xl font-semibold text-gray-500 ml-10">Detalle de venta</h2>
