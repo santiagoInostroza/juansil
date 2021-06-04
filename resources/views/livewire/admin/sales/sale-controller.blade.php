@@ -431,22 +431,25 @@
                                 <table class="table-fixed w-full mx-auto">
                                     <thead>
                                         <tr>
-                                            <th class="w-2/5 text-left pl-20">Producto</th>
-                                            <th class="w-1/5">Precio</th>
-                                            <th class="w-1/5">Precio por caja</th>
-                                            <th class="w-1/5">Precio total</th>
+                                            <th class="w-1/6">Imagen</th>
+                                            <th class="w-2/6">Producto</th>
+                                            <th class="w-1/6">Precio</th>
+                                            <th class="w-1/6">Precio por caja</th>
+                                            <th class="w-1/6">Precio total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($selected_sale->sale_items as $item)
                                             <tr>
+                                                <td class="text-center">
+                                                    @if ($item->product->image)
+                                                    <div class="flex justify-center">
+                                                        <img class="object-contain w-20 h-20" src="{{Storage::url($item->product->image->url)}}" alt=""> 
+                                                    </div>
+                                                    @endif
+                                                </td>
                                                 <td class="text-left">
                                                     <div class="flex justify-start items-center">
-                                                        @if ($item->product->image)
-                                                            <div class="w-24">
-                                                                <img class="object-contain w-20 h-20" src="{{Storage::url($item->product->image->url)}}" alt=""> 
-                                                            </div>
-                                                        @endif
                                                         <div>{{$item->cantidad}} {{$item->product->name}} x {{$item->cantidad_por_caja}} un.</div>
                                                     </div>
                                                 </td>
