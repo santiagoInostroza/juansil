@@ -2,7 +2,92 @@
     <x-slot name='titulo'>Resumen</x-slot>
 
     <div class="card-body">
+
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Mes
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Ventas
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Crecimiento
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    % frente al mes anterior
+                    </th>
+                    <th scope="col" class="relative px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                
+                @foreach ($sales as $sale)
+                <div>
+                    
+                    @php
+                    if ($sale->delivery_date != null) {
+                        $month = date("m",strtotime($sale->delivery_date));
+                        $year = date("Y",strtotime($sale->delivery_date));
+                    }else{
+                        $month = date("m",strtotime($sale->date));
+                        $year = date("Y",strtotime($sale->date));
+                    }
+                       
+                    @endphp
+
+                    {{$month}} {{$year}}
+                   
+                    
+                   
+                </div>
+                    
+                @endforeach
+                <tr>
+                    {{-- ID VENTA --}}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium text-gray-900">
+                               
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium text-gray-900">
+                               
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium text-gray-900">
+                               
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium text-gray-900">
+                               
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium text-gray-900">
+                               
+                            </div>
+                        </div>
+                    </td>
+            </tbody>
+        </table>
     
+
+        <hr>
         <div>
             <x-jet-label>Total de Compras</x-jet-label>
             ${{ number_format($total_purchases, 0, ',', '.') }}
@@ -167,7 +252,7 @@
                                                     ${{number_format($venta,0,',','.')}}
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="bg-yellow-100 ml-1 p-1 w-32">
                                                 <div class="w-15 inline-block">
                                                     ${{ number_format($venta - $costo,0,',','.') }}

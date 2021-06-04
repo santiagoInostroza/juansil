@@ -8,6 +8,10 @@ use Livewire\Component;
 use App\Models\Purchase;
 
 class Resumen extends Component{
+    public $meses;
+    
+    
+    public $vista=0;
     
     public $total_bodega;
 
@@ -18,7 +22,13 @@ class Resumen extends Component{
     public $total_pendiente;
 
     public function render(){
+        
         $sales= Sale::all();
+
+      
+
+
+
         $total_purchases= Purchase::all()->sum('total');
         
         $products= Product::where('stock', '>',0)->get();

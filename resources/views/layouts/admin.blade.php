@@ -7,6 +7,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Juansil') }} | ADMIN</title>
         <link rel="icon" type="image/png" href="{{url('images/iconos/jsyellow.png')}}" />
+
+        {{-- HELPERS ALPINE --}}
+        <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@1.2.x/dist/index.min.js" defer></script>
+
         
 
         <!-- Fonts -->
@@ -138,6 +142,11 @@
                         </li>
                         <li class="items-center">
                             <a class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                                href="{{route('admin.sales')}}"><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
+                                Ventas</a>
+                        </li>
+                        {{-- <li class="items-center">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                                 href="#/landing"><i class="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>
                                 Landing Page</a>
                         </li>
@@ -160,14 +169,15 @@
                             <a class="text-blueGray-300 text-xs uppercase py-3 font-bold block" href="#pablo"><i
                                     class="fas fa-tools text-blueGray-300 mr-2 text-sm"></i>
                                 Settings (soon)</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <hr class="my-4 md:min-w-full" />
+
                     <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
                         Documentation
                     </h6>
                     <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-                        <li class="inline-flex">
+                        {{-- <li class="inline-flex">
                             <a class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                                 href="#/documentation/styles"><i
                                     class="fas fa-paint-brush mr-2 text-blueGray-400 text-base"></i>
@@ -202,7 +212,7 @@
                                 href="#/documentation/javascript/alerts"><i
                                     class="fab fa-js-square mr-2 text-blueGray-400 text-base"></i>
                                 Javascript</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -250,11 +260,17 @@
 
             <!-- Header -->
             @isset($titulo)
+            
                 <div class="relative bg-gray-900 md:py-10 py-0">
                 </div>
-                <h1 class="p-4 bg-gray-700 text-gray-200 text-2xl pl-10">{{$titulo}}</h1>
+                <div class=" bg-gray-700 text-gray-200">
+                    <h1 class="mx-auto px-4 sm:px-6 lg:px-8 p-4 text-2xl" style="max-width:100rem">{{$titulo}}</h1>
+                </div>
             @endisset
-           {{$slot}}
+            <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-12" style="max-width: 100rem">
+                {{$slot}}
+            </div>
+
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" charset="utf-8"></script>
@@ -478,6 +494,43 @@
         })();
 
     </script>
+
+@stack('modals')
+
+@stack('js')
+<script>
+    window.addEventListener('alerta_express', event => {
+        // alert(event.detail.msj);
+        Swal.fire(event.detail.msj)
+    })
+    window.addEventListener('alerta', event => {
+        Swal.fire({
+            icon: event.detail.icon,
+            title: event.detail.title,
+            text: event.detail.msj,
+            footer: event.detail.footer,
+        })
+    })
+    window.addEventListener('alerta_timer', event => {
+      
+        Swal.fire({
+            position: 'top-end',
+            icon: event.detail.icon,
+            title: event.detail.msj,
+            showConfirmButton: false,
+            timer: 1500,
+          
+        })
+       
+    })
+
+</script>
+
+@livewireScripts
+
+@isset($js)
+    {{$js}}
+@endisset
 </body>
 
 </html>

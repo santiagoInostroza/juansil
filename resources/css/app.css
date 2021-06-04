@@ -7,3 +7,20 @@
 @import 'cards.css';
 @import 'forms.css';
 @import 'spinner.css';
+@import 'toggle_switch.css';
+
+@media (min-width: 768px) {
+    .md\:table-cell {
+        display: table-cell !important;
+    }
+}
+@media (min-width: 1024px) {
+    .lg\:table-cell {
+        display: table-cell !important;
+    }
+}
+@media (min-width: 1280px) {
+    .xl\:table-cell {
+        display: table-cell !important;
+    }
+}

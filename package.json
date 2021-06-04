@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "choices.js": "^9.0.1",
-        "sweetalert2": "^10.14.0"
+        "sweetalert2": "^10.14.0",
+        "tailwind-scrollbar-hide": "^1.0.3"
     }
 }

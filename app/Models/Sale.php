@@ -15,8 +15,7 @@ class Sale extends Model
     protected $guarded = ['id','created_at','updated_at'];
 
      //RELACION UNO A MUCHOS INVERSA
-     public function customer()
-     {
+     public function customer(){
          return $this->belongsTo(Customer::class);
          
      }
@@ -28,6 +27,14 @@ class Sale extends Model
 
     public function created_by(){
         $user = User::find($this->user_created); 
+        return $user;
+    }
+    public function modified_by(){
+        $user = User::find($this->user_modified); 
+        return $user;
+    }
+    public function delivered_by(){
+        $user = User::find($this->delivered_user); 
         return $user;
     }
 

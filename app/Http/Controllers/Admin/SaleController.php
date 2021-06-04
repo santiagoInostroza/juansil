@@ -13,11 +13,7 @@ use App\Models\ProductMovement;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class SaleController extends Controller
-{
-
-    
-
+class SaleController extends Controller{
 
     public function index(){
         return view('admin.sales.index');

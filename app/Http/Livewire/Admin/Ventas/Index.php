@@ -9,6 +9,6 @@ class Index extends Component{
     public $venta_id = 0;
 
     public function render(){
-        return view('livewire.admin.ventas.index');
+        return view('livewire.admin.ventas.index')->layout('layouts.admin');
     }
 }
