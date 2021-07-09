@@ -44,7 +44,7 @@
                 </div>
 
                 {{-- BUSCADOR --}}
-                <div class="hidden flex-1 sm:flex sm:items-center  sm:justify-start">
+                <div class="hidden flex-1 sm:flex items-center justify-start mr-3">
                         @livewire('buscador-productos', ['user' => '']) 
                 </div>
 

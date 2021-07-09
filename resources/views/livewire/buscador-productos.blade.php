@@ -1,14 +1,14 @@
-<div class="w-full">
+<div class="w-full sm:relative">
     <div x-data="buscador()" x-init="document.getElementById('buscar').focus()">
 
-        <div @click="openSearch" class="flex items-center">
-            <input  class="w-full h-8 px-3" type="text" placeholder="Que producto estás buscando?">
-            <div class=" text-black -ml-12 mr-15 px-2" >     
+        <div @click="openSearch" class="flex items-center w-full relative">
+            <input  class="w-full h-8 px-3" type="text" placeholder="Que estás buscando?">
+            <div class=" text-black absolute px-2 right-0" >     
                 <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
         </div>
         <div x-show="busqueda">
-            <div class="fixed inset-0 bg-gray-100 opacity-25"></div>
+            <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
             <div class="absolute top-0 left-0 right-0 bg-white border z-10">
                 <div class="flex px-3 justify-between items-center">
                     <h2 class="text-lg font-bold my-2 text-center">Que estás buscando?</h2>
@@ -21,17 +21,18 @@
                     >
                 </div>
 
-                <div class="flex p-3">
-                    <div @click="type_selected=1" class="p-2 @if($type_selected == 1) border-b-2  border-orange-400 @endif">Todo</div>
-                    <div @click="type_selected=2" class="p-2 @if($type_selected == 2) border-b-2  border-orange-400 @endif">Productos</div>
-                    <div @click="type_selected=3" class="p-2 @if($type_selected == 3) border-b-2  border-orange-400 @endif">Categorias</div>
+                <div class="flex p-3 gap-2">
+                    <div @click="type_selected=1" class="p-2 cursor-pointer @if($type_selected == 1) border-b-2  border-orange-400 @endif">Todo</div>
+                    <div @click="type_selected=2" class="p-2 cursor-pointer @if($type_selected == 2) border-b-2  border-orange-400 @endif">Productos</div>
+                    <div @click="type_selected=3" class="p-2 cursor-pointer @if($type_selected == 3) border-b-2  border-orange-400 @endif">Categorias</div>
                 </div>
 
                 <hr>
                
            
-                <div class="mt-2 p-3 shadow-xl overflow-auto" style="height: calc(100vh - 170px)">
-                    @if ($type_selected == 1 || $type_selected == 2 )
+                <div class="mt-2 p-3 shadow-xl overflow-auto" style="max-height: calc(100vh - 170px)">
+                  
+                    @if ($type_selected != 3 && count($products)>0)
                         <h2 class="text-lg p-3">Productos</h2>
                         @foreach ($products as $product)
                         <a href="{{ route('products.show', $product) }}">
@@ -52,7 +53,7 @@
                                      
                     @endif
                     
-                    @if ($type_selected == 1 || $type_selected == 3)
+                    @if ($type_selected != 2 && count($tags)>0)
                         <h2 class="text-lg p-3">Categorias</h2>
                         @foreach ($tags as $tag)
                             <a href="{{ route('products.tag', $tag) }}">
@@ -61,6 +62,10 @@
                                 </div>
                             </a>
                         @endforeach
+                    @endif
+
+                    @if (count($products)==0 && count($tags)==0)
+                        <h2 class="font-bold">No se encontraron resultados...</h2>
                     @endif
                    
                 </div>
