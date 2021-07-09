@@ -5,7 +5,8 @@
             <div class="relative flex items-center justify-between h-16 ">
 
                 <!-- BOTON SE MUESTRA SOLO EN DISPOSITIVOS PEQUEÑOS-->
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden ">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                   
                     <button x-on:click="open=true" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <!-- Icon when menu is closed. -->
@@ -28,6 +29,7 @@
                
                 {{-- LOGO --}}
                 <div class="flex-1 sm:flex-none  flex items-center justify-center ml-10  sm:mx-0 ">
+                    
                     <a href="/" class="flex-shrink-0 flex items-center">
                         {{-- DISPOSITIVOS PEQUEÑOS --}}
                         <div class=" text-white transform p-2 flex items-center lg:hidden" >
@@ -40,15 +42,6 @@
                       
                     </a>  
                 </div>
-
-                {{-- BUSCADOR EN DISPOSITIVOS PEQUEÑOS --}}
-                <div class="flex flex-1 sm:hidden items-center  justify-start  ">
-                    <button wire:click="$set('search', '{{!$search}}')" class=" text-white px-2" >    
-                        <svg class="w-8 h-8 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </button> 
-                   
-                </div>
-                
 
                 {{-- BUSCADOR --}}
                 <div class="hidden flex-1 sm:flex sm:items-center  sm:justify-start">
@@ -156,7 +149,14 @@
     </div>
   
 
-    {{-- BARRA DE ABOJO DE LA BARRA PRINCIPAL --}}
+   
+
+    <div  class=" flex sm:hidden bg-gray-700 w-full h-10 px-3 items-center">
+        @livewire('buscador-productos', ['user' => '']) 
+    </div>
+
+    {{-- BARRA DE ABAJO DE LA BARRA PRINCIPAL --}}
+
     <div  class="hidden sm:block bg-gray-700 w-full h-10">
         <div  class=" mx-auto px-2 sm:px-6 lg:max-w-7xl" >
             <div class="hidden sm:block">
@@ -172,8 +172,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+
 </nav>
 <div class="h-20 w-full">
 </div>
