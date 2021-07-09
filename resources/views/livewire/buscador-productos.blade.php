@@ -33,7 +33,9 @@
                         <a href="{{ route('products.show', $product) }}">
                             <div class="p-2 flex">
                                 <div class="pr-2 w-12">
-                                    <img src="{{Storage::url($product->image->url)}}" alt=""> 
+                                    @if ($product->image->url))
+                                       <img src="{{Storage::url($product->image->url)}}" alt=""> 
+                                    @endif
                                 </div>
                                 <div>
                                     {{$product->name}}
