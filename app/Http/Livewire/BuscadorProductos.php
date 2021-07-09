@@ -10,7 +10,7 @@ use Livewire\Component;
 class BuscadorProductos extends Component{
 
     public $search;
-    public $busqueda = false;
+    public $searchIsOpen = false;
     public $type_selected = 1;
 
     public function render(){
