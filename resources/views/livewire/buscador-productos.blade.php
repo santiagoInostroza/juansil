@@ -11,7 +11,7 @@
         </div>
         <div class="hidden" :class="{'hidden': !searchIsOpen}">
             <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
-            <div class="absolute top-0 left-0 right-0 bg-white border z-10 shadow">
+            <div class="absolute top-0 left-0 right-0 bg-white border z-10 shadow max-w-3xl m-auto">
                 <div class="flex px-3 justify-between items-center">
                     <h2 class="text-lg font-bold my-2 text-center">¿Qué estás buscando?</h2>
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
@@ -43,17 +43,17 @@
                             <div class="flex justify-between items-center my-3">
                                 <a href="{{ route('products.show', $product) }}">
                                     <div class="p-2 flex">
-                                        <div class="pr-2 w-16">
+                                        <div class="pr-2 w-16 sm:w-28">
                                             @if ($product->image)
                                             <img class="object-cover w-full" src="{{Storage::url($product->image->url)}}" alt=""> 
                                             @endif
                                         </div>
-                                        <div class="text-xs md:text-sm">
+                                        <div class="text-xs sm:text-xl ">
                                             <div class="font-bold text-gray-800">
 
                                                 {{$product->name}}
                                             </div>
-                                            <div class="text-xs">
+                                            <div class="text-xs sm:text-base">
                                                 @foreach ($product->salePrices as $price)
                                                     <div class="grid grid-cols-3 gap-2">
                                                         <div class="">
