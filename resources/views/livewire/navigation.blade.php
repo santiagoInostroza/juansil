@@ -48,12 +48,11 @@
                         @livewire('buscador-productos', ['user' => '']) 
                 </div>
 
-                <div class="pl-10">
-                    @livewire('cart.index', ['user' => ""])
-                </div>
+                
 
                 @auth
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
+                        @livewire('cart.index', ['user' => ""])
                         {{-- boton notificacion --}}
                         <button  class="hidden ml-2 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span class="sr-only">View notifications</span>
@@ -104,7 +103,9 @@
                             </div>
                         </div>
                     </div>
-                @else                   
+                @else
+
+                    @livewire('cart.index', ['user' => ""])
                     <div class="flex">
                         <a href="{{ route('login') }}"
                             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Acceder</a>
