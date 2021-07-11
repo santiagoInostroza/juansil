@@ -9,7 +9,7 @@
         </div>
         <div class="hidden" :class="{'hidden': !searchIsOpen}">
             <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
-            <div class="absolute top-0 left-0 right-0 bg-white border z-10">
+            <div class="absolute top-0 md:-mt-4 left-0 right-0 bg-white border z-10 overflow-auto h-screen">
                 <div class="flex px-3 justify-between items-center">
                     <h2 class="text-lg font-bold my-2 text-center">¿Qué estás buscando?</h2>
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
@@ -30,7 +30,7 @@
                 <hr>
                
            
-                <div class="mt-2 p-3 shadow-xl overflow-auto" style="max-height: calc(100vh - 170px)">
+                <div class="mt-2 p-3 shadow-xl">
                   
                     @if ($type_selected != 3 && count($products)>0)
                         <h2 class="text-lg p-3">Productos</h2>
@@ -62,7 +62,7 @@
                                                        
                                                         @if($price->quantity>1) 
                                                             <div class="font-bold text-red-700">
-                                                                (${{number_format($price->price,0,',','.')}}c/u) 
+                                                                (${{number_format($price->price,0,',','.')}}) 
                                                             </div>
                                                         @endif
                                                        
