@@ -1,6 +1,8 @@
 <div class="w-full lg:relative">
     <div x-data="buscador()" x-init="document.getElementById('buscar').focus()">
 
+        
+
         <div @click="openSearch" class="flex items-center w-full relative">
             <input  class="w-full h-8 px-3 rounded" type="text" placeholder="¿Qué estás buscando?">
             <div class=" text-black absolute px-2 right-0" >     
@@ -76,15 +78,24 @@
                                 </a>
                                 <div>
                                     <div class=" flex flex-col text-xs">
-                                        <div class="flex mb-1">
-                                            <div @click="disminuyeCantidad" class="p-1 px-2 border cursor-pointer" data-pid="{{$product->id}}">-</div>
-                                            <div class="p-1 px-2 border" id='producto_{{$product->id}}'> 1</div>
-                                            <div @click="aumentaCantidad" class="p-1 px-2 border cursor-pointer" data-pid="{{$product->id}}">+</div>
-                                        </div>
+                                        @if (isset(session('carrito')[$product->id]))
+                                            <div class="flex mb-1">
+                                                <div @click="disminuyeCantidad" class="p-1 px-2 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
+                                                <input type="number" class="p-1 w-7" id='cantidad_producto_{{$product->id}}' value="{{ session('carrito')[$product->id]['cantidad'] }}"> 
+                                                <div @click="aumentaCantidad" class="p-1 px-2 border cursor-pointer rounded" data-pid="{{$product->id}}">+</div>
+                                            </div>
+                                            <button class="shadow cursor-pointer bg-blue-600 text-white p-1 rounded">
+                                                Agregado
+                                            </button>
+
+                                        @else
+                                            <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
+                                                <i class="fas fa-cart-plus"></i> Agregar
+                                            </button>
+                                        @endif
                                        
-                                       <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
-                                           <i class="fas fa-cart-plus"></i>agregar
-                                        </button>
+                                       
+                                      
                                        
                                     </div>
                                 </div>
@@ -116,39 +127,44 @@
         </div>
         
     </div>
-    <script>
-        function buscador() {
-            return {
-                cantidad : @entangle('cantidad'),
-                search: @entangle('search'),
-                searchIsOpen: @entangle('searchIsOpen'),
-                type_selected: @entangle('type_selected'),
+    @push('js')
+        <script>
+            function buscador() {
+                return {
+                    cantidad : @entangle('cantidad'),
+                    search: @entangle('search'),
+                    searchIsOpen: @entangle('searchIsOpen'),
+                    type_selected: @entangle('type_selected'),
 
-               
-                search: null,
+                
+                    search: null,
 
-                escribir: function(e){
-                //    console.log(e.target.value);
-                    console.log(this.search);
-                //    this.search= e.target.value;
-                },
-                openSearch: function(){
-                    this.searchIsOpen=true;
-                    this.search = document.getElementById('buscar');
-                    setTimeout(() => {
-                        this.search.focus();
-                    }, 300);
-                },
-                aumentaCantidad: function(e){
-                    this.cantidad++;
-                    console.log(e.target.dataset.pid);
-                },
-                disminuyeCantidad: function(){
-                    this.cantidad--;
-                },
-               
+                    escribir: function(e){
+                    //    console.log(e.target.value);
+                        console.log(this.search);
+                    //    this.search= e.target.value;
+                    },
+                    openSearch: function(){
+                        this.searchIsOpen=true;
+                        this.search = document.getElementById('buscar');
+                        setTimeout(() => {
+                            this.search.focus();
+                        }, 300);
+                    },
+                    aumentaCantidad: function(e){
+                        let pid = e.target.dataset.pid;
+                        let cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                        
+                       
+                        this.$wire.aumentar( pid,cantidad );
+                    },
+                    disminuyeCantidad: function(){
+                        this.cantidad--;
+                    },
+                
+                }
             }
-        }
-    </script>
+        </script>
+     @endpush
 
 </div>

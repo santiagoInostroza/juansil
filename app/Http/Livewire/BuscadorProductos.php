@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
+use App\Http\Controllers\CarritoController;
 use App\Models\Product;
 use App\Models\Tag;
 use Livewire\Component;
@@ -13,6 +13,7 @@ class BuscadorProductos extends Component{
     public $searchIsOpen = false;
     public $type_selected = 1;
     public $cantidad = 1;
+    public $prueba = 'hola';
 
 
     public function render(){
@@ -35,10 +36,26 @@ class BuscadorProductos extends Component{
             })
             ->get();
 
+            
+
                 
         
 
 
         return view('livewire.buscador-productos', compact('products','tags'));
+    }
+
+    public function aumentar($product_id,$cantidad){
+        $this->dispatchBrowserEvent('alerta', [
+            'msj' =>  "Cantidad aumentada Total '". $cantidad,
+            'icon' => 'success',
+            'title' => "Cantidad aumentada Total '". $cantidad,
+        ]); 
+
+        session('carrito')[$product_id]['cantidad'] = $cantidad;
+        
+
+        // $carrito = new CarritoController();
+        // $carrito->setCantidad($product_id,$cantidad);
     }
 }

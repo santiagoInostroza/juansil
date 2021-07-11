@@ -63,7 +63,7 @@ class Item extends Component
         if ($this->cantidad < $this->stock) {
             $this->cantidad++;
         } else {
-            $this->msj = "No tenemos más stock por el momento";
+            $this->msj = "No es posible agregar más por el momento";
         }
        
     }

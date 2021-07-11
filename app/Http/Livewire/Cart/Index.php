@@ -79,8 +79,7 @@ class Index extends Component
        
     }
 
-    public function openCarrito()
-    {
+    public function openCarrito(){
         $this->openCarrito = true;
     }
 }

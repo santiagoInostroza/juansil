@@ -43,8 +43,37 @@
         </div>
 
         @stack('modals')
-
+        @stack('js')
         @livewireScripts
+
+        {{-- ALERTAS --}}
+        <script>
+            window.addEventListener('alerta_express', event => {
+                // alert(event.detail.msj);
+                Swal.fire(event.detail.msj)
+            })
+            window.addEventListener('alerta', event => {
+                Swal.fire({
+                    icon: event.detail.icon,
+                    title: event.detail.title,
+                    text: event.detail.msj,
+                    footer: event.detail.footer,
+                })
+            })
+            window.addEventListener('alerta_timer', event => {
+            
+                Swal.fire({
+                    position: 'top-end',
+                    icon: event.detail.icon,
+                    title: event.detail.msj,
+                    showConfirmButton: false,
+                    timer: 1500,
+                
+                })
+            
+            })
+    
+        </script>
    
 
         @isset($js)
