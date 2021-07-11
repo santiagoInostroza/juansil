@@ -2,7 +2,7 @@
     <div x-data="buscador()" x-init="document.getElementById('buscar').focus()">
 
         <div @click="openSearch" class="flex items-center w-full relative">
-            <input  class="w-full h-8 px-3 rounded" type="text" placeholder="Que estás buscando?">
+            <input  class="w-full h-8 px-3 rounded" type="text" placeholder="¿Qué estás buscando?">
             <div class=" text-black absolute px-2 right-0" >     
                 <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
@@ -11,7 +11,7 @@
             <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
             <div class="absolute top-0 left-0 right-0 bg-white border z-10">
                 <div class="flex px-3 justify-between items-center">
-                    <h2 class="text-lg font-bold my-2 text-center">Que estás buscando?</h2>
+                    <h2 class="text-lg font-bold my-2 text-center">¿Qué estás buscando?</h2>
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
                 </div>
 
@@ -39,7 +39,7 @@
                             <div class="flex justify-between items-center my-3">
                                 <a href="{{ route('products.show', $product) }}">
                                     <div class="p-2 flex">
-                                        <div class="pr-2 w-12 md:w-16">
+                                        <div class="pr-2 w-16">
                                             @if ($product->image)
                                             <img class="object-cover w-full" src="{{Storage::url($product->image->url)}}" alt=""> 
                                             @endif
