@@ -1,4 +1,4 @@
-<div class="w-full md:relative">
+<div class="w-full lg:relative">
     <div x-data="buscador()" x-init="document.getElementById('buscar').focus()">
 
         <div @click="openSearch" class="flex items-center w-full relative">
@@ -9,7 +9,7 @@
         </div>
         <div class="hidden" :class="{'hidden': !searchIsOpen}">
             <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
-            <div class="absolute top-0 left-0 right-0 bg-white border z-10 md:-mt-4">
+            <div class="absolute top-0 left-0 right-0 bg-white border z-10 lg:-mt-4">
                 <div class="flex px-3 justify-between items-center">
                     <h2 class="text-lg font-bold my-2 text-center">¿Qué estás buscando?</h2>
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
