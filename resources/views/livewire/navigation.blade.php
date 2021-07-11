@@ -77,8 +77,8 @@
                             </div>
 
                             
-                            <div x-show='open' x-on:click.away="open=false"
-                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 z-40"
+                            <div x-show='open'  x-on:click.away="open=false"
+                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 z-40 hidden" :class="{'hidden': !open}"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                                 <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Perfil</a>
                                 
@@ -118,7 +118,7 @@
         </div>
 
         {{-- menu mobil --}}
-        <div class="sm:hidden" x-show="open" x-on:click.away="open=false">
+        <div class="hidden sm:hidden" :class="{'hidden': !open}" x-show="open" x-on:click.away="open=false">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
