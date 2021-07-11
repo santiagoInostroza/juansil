@@ -18,7 +18,7 @@ class BuscadorProductos extends Component{
 
     public function render(){
 
-            // session()->pull('carrito');
+            session()->pull('carrito');
             $str = explode(' ', $this->search);
 
             $products = Product::where(function($query) use($str) {
