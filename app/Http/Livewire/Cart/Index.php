@@ -13,7 +13,7 @@ class Index extends Component
     public $openCarrito = 'false';
 
 
-    protected $listeners = (['addToCart', 'deleteFromCart','addToCart','productToCart','cartToProduct','updateTotal','openCarrito']);
+    protected $listeners = (['addToCart', 'deleteFromCart','addToCart','productToCart','cartToProduct','updateTotal','openCarrito','render']);
 
   
 

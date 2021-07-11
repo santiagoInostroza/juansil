@@ -43,13 +43,14 @@ class BuscadorProductos extends Component{
     public function setCantidad($product_id,$cantidad){
          $carrito = new CarritoController();
          $carrito->setCantidad($product_id,$cantidad);
+         $this->emitTo('cart.index','render');
         
     }
 
     public function addToCart($product_id){
         $carrito = new CarritoController();
         $carrito->addToCart($product_id,1);
-
+        $this->emitTo('cart.index','render');
          $this->dispatchBrowserEvent('alerta_timer', [
             'icon' => 'success',
             'msj' => "Agregado al carrito",
@@ -60,7 +61,7 @@ class BuscadorProductos extends Component{
     public function removeFromCart($product_id){
         $carrito = new CarritoController();
         $carrito->deleteFromCart($product_id);
-        
+        $this->emitTo('cart.index','render');
     }
 
 
