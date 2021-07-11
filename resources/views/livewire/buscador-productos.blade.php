@@ -17,13 +17,13 @@
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
                 </div>
 
-                <div class="px-3 mb-3">
+                <div class="px-3 mb-1">
                     <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre del producto" wire:model='search' id='buscar'
                         @keyup="escribir"
                     >
                 </div>
                
-                    <div class="flex p-3 gap-2">
+                    <div class="flex p-3 pt-1 gap-2">
                         <div @click="type_selected=1" class="p-2 cursor-pointer @if($type_selected == 1) border-b-2  border-orange-400 @endif">Todo</div>
                         <div @click="type_selected=2" class="p-2 cursor-pointer @if($type_selected == 2) border-b-2  border-orange-400 @endif">Productos</div>
                         <div @click="type_selected=3" class="p-2 cursor-pointer @if($type_selected == 3) border-b-2  border-orange-400 @endif">Categorias</div>

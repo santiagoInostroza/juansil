@@ -1,6 +1,6 @@
 <nav class="fixed w-full z-10">
     {{-- BARRA PRINCIPAL --}}
-    <div class="bg-gray-900" x-data="{ open:false }">
+    <div class="bg-gray-900 h-20" x-data="{ open:false }">
         <div class=" mx-auto px-2 sm:px-6 lg:px-8 xl:max-w-7xl" >
             <div class="relative flex items-center justify-between h-16 ">
 
@@ -133,20 +133,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
-
-    {{-- DESPLEGABLE BUSCAR --}}
-    {{-- <div  class="block bg-gray-700 w-full h-12">
-        <form method="get" action="{{ route('products.busqueda', $texto)}}" class="flex flex-1 items-center justify-start">
-            <input type="text" class="form-control ml-1" wire:model='texto'>
-            
-            <button class=" text-white px-2" >     
-                <svg class="w-8 h-8 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </button>
-            
-        </form>
-    </div> --}}
-  
+    </div> 
 
    
 
@@ -175,4 +162,5 @@
 
 </nav>
 <div class="h-20 w-full">
+   
 </div>
