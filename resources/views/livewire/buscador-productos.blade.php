@@ -77,9 +77,9 @@
                                 <div>
                                     <div class=" flex flex-col text-xs">
                                         <div class="flex mb-1">
-                                            <div @click="disminuyeCantidad" class="p-1 px-2 border" data-pid="{{$product->id}}">-</div>
+                                            <div @click="disminuyeCantidad" class="p-1 px-2 border cursor-pointer" data-pid="{{$product->id}}">-</div>
                                             <div class="p-1 px-2 border" id='producto_{{$product->id}}'> 1</div>
-                                            <div @click="aumentaCantidad" class="p-1 px-2 border" data-pid="{{$product->id}}">+</div>
+                                            <div @click="aumentaCantidad" class="p-1 px-2 border cursor-pointer" data-pid="{{$product->id}}">+</div>
                                         </div>
                                        
                                        <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
