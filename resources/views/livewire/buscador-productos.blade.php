@@ -79,34 +79,33 @@
                                 </a>
                                 <div>
                                     <div class=" flex flex-col text-xs">
-                                        @if (session()->has('carrito.'.$product->id)) 
-                                            <div id="producto_agregado_{{$product->id}}">
-                                                <div class="flex-1 flex mb-1">
-                                                    <div x-on:click="disminuyeCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
-                                                    <input type="number" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
-                                                        wire:ignore 
-                                                        @change="setCantidad"  
-                                                        id='cantidad_producto_{{$product->id}}'  
-                                                        data-pid="{{$product->id}}"
-                                                    > 
-                                                    <div x-on:click="aumentaCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">+</div>
-                                                </div>
-                                                <div>
-                                                    <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
-                                                        Agregado
-                                                    </button>
-                                                    <button wire:click="removeFromCart({{ $product->id }})"  class="bg-red-600 p-2 py-1 rounded">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
-                                                </div>
+                                        
+                                        <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
+                                            <div class="flex-1 flex mb-1">
+                                                <div x-on:click="disminuyeCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
+                                                <input type="number" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                                    wire:ignore 
+                                                    @change="setCantidad"  
+                                                    id='cantidad_producto_{{$product->id}}'  
+                                                    data-pid="{{$product->id}}"
+                                                > 
+                                                <div x-on:click="aumentaCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">+</div>
                                             </div>
-                                        @else
-                                            <button wire:click="addToCart({{$product->id}})"  
-                                                class="shadow cursor-pointer bg-gray-600 text-white p-1 rounded" 
-                                            >
-                                                <i class="fas fa-cart-plus"></i> Agregar
-                                            </button> 
-                                        @endif
+                                            <div>
+                                                <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
+                                                    Agregado
+                                                </button>
+                                                <button wire:click="removeFromCart({{ $product->id }})"  class="bg-red-600 p-2 py-1 rounded">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                          
+                                        <button wire:click="addToCart({{$product->id}})"  
+                                            class="shadow cursor-pointer bg-gray-600 text-white p-1 rounded @if (session()->has('carrito.'.$product->id)) hidden @endif" 
+                                        >
+                                            <i class="fas fa-cart-plus"></i> Agregar
+                                        </button> 
                                     </div>
                                 </div>
                             </div>

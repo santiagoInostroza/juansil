@@ -43,7 +43,7 @@ class BuscadorProductos extends Component{
     public function setCantidad($product_id,$cantidad){
          $carrito = new CarritoController();
          $carrito->setCantidad($product_id,$cantidad);
-         return "hola";
+        
     }
 
     public function addToCart($product_id){
