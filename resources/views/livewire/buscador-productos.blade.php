@@ -78,7 +78,7 @@
                                     </div> 
                                 </a>
                                 <div>
-                                    <div wire:ignore class=" flex flex-col text-xs">
+                                    <div class=" flex flex-col text-xs">
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
                                                 <div x-on:click="disminuyeCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
@@ -94,13 +94,13 @@
                                                 <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
                                                     Agregado
                                                 </button>
-                                                <button x-on:click="removeFromCart" data-pid="{{$product->id}}" class="bg-red-600 p-2 py-1 rounded">
+                                                <button wire:click="removeFromCart({{ $product->id }})"  class="bg-red-600 p-2 py-1 rounded">
                                                     <i class="far fa-trash-alt"></i>
                                                 </button>
                                             </div>
                                         </div>
                                           
-                                        <button id="agregar_producto_{{$product->id}}" x-on:click="addToCart"  data-pid="{{$product->id}}"
+                                        <button wire:click="addToCart({{$product->id}})"  
                                             class="shadow cursor-pointer bg-gray-600 text-white p-1 rounded @if (session()->has('carrito.'.$product->id)) hidden @endif" 
                                         >
                                             <i class="fas fa-cart-plus"></i> Agregar
@@ -178,25 +178,25 @@
                         this.$wire.setCantidad( pid,cantidad);
                        
                     },
-                    addToCart: function(e){
-                        let pid = e.target.dataset.pid;
-                        console.log(pid);
-                        this.$wire.addToCart(pid)
-                        .then((result) => {
-                            document.getElementById('producto_agregado_' + pid).classList.remove("hidden")
-                            document.getElementById('agregar_producto_' + pid).classList.add("hidden")
-                        }).catch((err) => {
+                    // addToCart: function(e){
+                    //     let pid = e.target.dataset.pid;
+                    //     console.log(pid);
+                    //     this.$wire.addToCart(pid)
+                    //     .then((result) => {
+                    //         document.getElementById('producto_agregado_' + pid).classList.remove("hidden")
+                    //         document.getElementById('agregar_producto_' + pid).classList.add("hidden")
+                    //     }).catch((err) => {
                             
-                        });
-                    },
-                    removeFromCart:function(e){
-                        let pid = e.target.dataset.pid;
-                        this.$wire.removeFromCart(pid)
-                        .then((result) => {
-                            document.getElementById('agregar_producto_' + pid).classList.remove("hidden");
-                            document.getElementById('producto_agregado_' + pid).classList.add("hidden");
-                        })
-                    }
+                    //     });
+                    // },
+                    // removeFromCart:function(e){
+                    //     let pid = e.target.dataset.pid;
+                    //     this.$wire.removeFromCart(pid)
+                    //     .then((result) => {
+                    //         document.getElementById('agregar_producto_' + pid).classList.remove("hidden");
+                    //         document.getElementById('producto_agregado_' + pid).classList.add("hidden");
+                    //     })
+                    // }
                    
                 
                 }
