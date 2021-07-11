@@ -13,13 +13,12 @@ class BuscadorProductos extends Component{
     public $searchIsOpen = false;
     public $type_selected = 1;
     public $cantidad = 1;
-    public $prueba = 'hola';
+   
 
 
     public function render(){
-       
 
-      
+        
             $str = explode(' ', $this->search);
 
             $products = Product::where(function($query) use($str) {
@@ -35,27 +34,34 @@ class BuscadorProductos extends Component{
                 }
             })
             ->get();
-
-            
-
-                
         
 
 
         return view('livewire.buscador-productos', compact('products','tags'));
     }
 
-    public function aumentar($product_id,$cantidad){
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' =>  "Cantidad aumentada Total '". $cantidad,
-            'icon' => 'success',
-            'title' => "Cantidad aumentada Total '". $cantidad,
-        ]); 
-
-        session('carrito')[$product_id]['cantidad'] = $cantidad;
-        
-
-        // $carrito = new CarritoController();
-        // $carrito->setCantidad($product_id,$cantidad);
+    public function setCantidad($product_id,$cantidad){
+         $carrito = new CarritoController();
+         $carrito->setCantidad($product_id,$cantidad);
+         return "hola";
     }
+
+    public function addToCart($product_id){
+        $carrito = new CarritoController();
+        $carrito->addToCart($product_id,1);
+
+         $this->dispatchBrowserEvent('alerta_timer', [
+            'icon' => 'success',
+            'msj' => "Agregado al carrito",
+        ]); 
+       
+
+    }
+    public function removeFromCart($product_id){
+        $carrito = new CarritoController();
+        $carrito->deleteFromCart($product_id);
+        
+    }
+
+
 }

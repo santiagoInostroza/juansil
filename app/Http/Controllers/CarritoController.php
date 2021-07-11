@@ -9,14 +9,17 @@ class CarritoController extends Controller{
 
     public $eliminado;
 
-    public function addToCart($producto_id, $cantidad, $precio, $total){
+    public function addToCart($product_id, $cantidad){
+        $precio = $this->calcularPrecioVenta($product_id, $cantidad);
+        $total = $precio * $cantidad;
+
         $listaProductos = session('carrito');
 
-        $producto = Product::find($producto_id);
+        $producto = Product::find($product_id);
 
-        $listaProductos[$producto_id] =
+        $listaProductos[$product_id] =
             [
-                'producto_id' =>$producto_id,
+                'producto_id' =>$product_id,
                 'name' =>$producto->name,
                 'url' =>$producto->image->url,
                 'cantidad' => $cantidad,
@@ -44,25 +47,48 @@ class CarritoController extends Controller{
         session(['totalProductos' => $totalProductos]);
        
     }
+    
 
     public function deleteFromCart($id){
         $this->eliminado = session()->pull('carrito.' . $id, 'default');
+        // session()->forget('carrito.' . $id);
         $this->updateTotal();
     }
 
-    public function setCantidad($producto_id, $cantidad){
-       
-        session('carrito')[$producto_id]['cantidad'] = $cantidad;
-        $this->updateTotal();
-    }
+    public function setCantidad($product_id, $cantidad){
+        $precio = $this->calcularPrecioVenta($product_id, $cantidad);
+        $total = $precio * $cantidad;
 
-    public  function aumentarCantidad($producto_id){
-        session('carrito')[$producto_id]['cantidad']++;
+        session(['carrito.' . $product_id . '.cantidad' => $cantidad]);
+        session(['carrito.' . $product_id . '.precio' => $precio]);
+        session(['carrito.' . $product_id . '.total' => $total]);
         $this->updateTotal();
     }
-    public function disminuirCantidad($producto_id){
-        session('carrito')[$producto_id]['cantidad']--;
-        $this->updateTotal();
+  
+
+
+    /*
+    calcular precio de venta de acuerdo a la cantidad de productos que lleva (precio de venta por mayor o por menor)
+    */
+    public function calcularPrecioVenta($product_id, $cantidad){
+        $producto = Product::find($product_id);
+        $precio = 0;
+        for ($i=0; $i < count($producto->salePrices) ; $i++) { 
+
+            $cant = $producto->salePrices[$i]['quantity'];
+            $pre = $producto->salePrices[$i]['price'];
+
+            try {
+                if($cantidad >= $cant && $cantidad < $producto->salePrices[$i+1]['quantity']){
+                    $precio = $pre;
+                }
+            } catch (\Throwable $th) {
+                if($precio == 0){
+                    $precio = $pre;
+                }
+            }
+        }
+        return $precio;
     }
 
 }

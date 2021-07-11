@@ -31,6 +31,7 @@
         @isset($jsCabecera)
             {{$jsCabecera}}
         @endisset
+        
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen ">
@@ -63,11 +64,11 @@
             window.addEventListener('alerta_timer', event => {
             
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'top-center',
                     icon: event.detail.icon,
                     title: event.detail.msj,
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 800,
                 
                 })
             

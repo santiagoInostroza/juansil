@@ -37,6 +37,7 @@
                   
                     @if ($type_selected != 3 && count($products)>0)
                         <h2 class="text-lg p-3">Productos</h2>
+                       
                         @foreach ($products as $product)
                         
                             <div class="flex justify-between items-center my-3">
@@ -77,26 +78,33 @@
                                     </div> 
                                 </a>
                                 <div>
-                                    <div class=" flex flex-col text-xs">
-                                        @if (isset(session('carrito')[$product->id]))
-                                            <div class="flex mb-1">
-                                                <div @click="disminuyeCantidad" class="p-1 px-2 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
-                                                <input type="number" class="p-1 w-7" id='cantidad_producto_{{$product->id}}' value="{{ session('carrito')[$product->id]['cantidad'] }}"> 
-                                                <div @click="aumentaCantidad" class="p-1 px-2 border cursor-pointer rounded" data-pid="{{$product->id}}">+</div>
+                                    <div wire:ignore class=" flex flex-col text-xs">
+                                        <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
+                                            <div class="flex-1 flex mb-1">
+                                                <div x-on:click="disminuyeCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
+                                                <input type="number" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                                    wire:ignore 
+                                                    @change="setCantidad"  
+                                                    id='cantidad_producto_{{$product->id}}'  
+                                                    data-pid="{{$product->id}}"
+                                                > 
+                                                <div x-on:click="aumentaCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">+</div>
                                             </div>
-                                            <button class="shadow cursor-pointer bg-blue-600 text-white p-1 rounded">
-                                                Agregado
-                                            </button>
-
-                                        @else
-                                            <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
-                                                <i class="fas fa-cart-plus"></i> Agregar
-                                            </button>
-                                        @endif
-                                       
-                                       
-                                      
-                                       
+                                            <div>
+                                                <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
+                                                    Agregado
+                                                </button>
+                                                <button x-on:click="removeFromCart" data-pid="{{$product->id}}" class="bg-red-600 p-2 py-1 rounded">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                          
+                                        <button id="agregar_producto_{{$product->id}}" x-on:click="addToCart"  data-pid="{{$product->id}}"
+                                            class="shadow cursor-pointer bg-gray-600 text-white p-1 rounded @if (session()->has('carrito.'.$product->id)) hidden @endif" 
+                                        >
+                                            <i class="fas fa-cart-plus"></i> Agregar
+                                        </button> 
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +135,7 @@
         </div>
         
     </div>
-    @push('js')
+   
         <script>
             function buscador() {
                 return {
@@ -152,19 +160,48 @@
                         }, 300);
                     },
                     aumentaCantidad: function(e){
-                        let pid = e.target.dataset.pid;
-                        let cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                        var pid = e.target.dataset.pid;
+                        var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                        this.$wire.setCantidad( pid,cantidad)
                         
+                        
+                    },
+                    disminuyeCantidad: function(e){
+                        let pid = e.target.dataset.pid;
+                        let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
+                        this.$wire.setCantidad( pid,cantidad);
+                    },
+                    setCantidad:function(e){
+                        let pid = e.target.dataset.pid;
+                        let cantidad =  document.getElementById('cantidad_producto_' + pid).value;
+                        
+                        this.$wire.setCantidad( pid,cantidad);
                        
-                        this.$wire.aumentar( pid,cantidad );
                     },
-                    disminuyeCantidad: function(){
-                        this.cantidad--;
+                    addToCart: function(e){
+                        let pid = e.target.dataset.pid;
+                        console.log(pid);
+                        this.$wire.addToCart(pid)
+                        .then((result) => {
+                            document.getElementById('producto_agregado_' + pid).classList.remove("hidden")
+                            document.getElementById('agregar_producto_' + pid).classList.add("hidden")
+                        }).catch((err) => {
+                            
+                        });
                     },
+                    removeFromCart:function(e){
+                        let pid = e.target.dataset.pid;
+                        this.$wire.removeFromCart(pid)
+                        .then((result) => {
+                            document.getElementById('agregar_producto_' + pid).classList.remove("hidden");
+                            document.getElementById('producto_agregado_' + pid).classList.add("hidden");
+                        })
+                    }
+                   
                 
                 }
             }
         </script>
-     @endpush
+
 
 </div>
