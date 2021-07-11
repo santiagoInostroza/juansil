@@ -16,12 +16,19 @@ class BuscadorProductos extends Component{
 
 
     public function render(){
-        $tags = Tag::where('name','like', '%'. $this->search . '%')->get();
+       
 
       
             $str = explode(' ', $this->search);
 
             $products = Product::where(function($query) use($str) {
+                foreach($str as $s) {
+                    $query = $query->where('name','like',"%" . $s . "%");
+                }
+            })
+            ->get();
+
+            $tags = Tag::where(function($query) use($str) {
                 foreach($str as $s) {
                     $query = $query->where('name','like',"%" . $s . "%");
                 }
