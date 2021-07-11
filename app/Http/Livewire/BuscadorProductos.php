@@ -12,6 +12,8 @@ class BuscadorProductos extends Component{
     public $search;
     public $searchIsOpen = false;
     public $type_selected = 1;
+    public $cantidad = 1;
+
 
     public function render(){
 

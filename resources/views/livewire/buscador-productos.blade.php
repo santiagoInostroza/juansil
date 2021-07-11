@@ -35,19 +35,61 @@
                     @if ($type_selected != 3 && count($products)>0)
                         <h2 class="text-lg p-3">Productos</h2>
                         @foreach ($products as $product)
-                        <a href="{{ route('products.show', $product) }}">
-                            <div class="p-2 flex">
-                                <div class="pr-2 w-12">
-                                    @if ($product->image)
-                                       <img src="{{Storage::url($product->image->url)}}" alt=""> 
-                                    @endif
-                                </div>
-                                <div>
-                                    {{$product->name}}
-                                </div>
+                        
+                            <div class="flex justify-between items-center my-3">
+                                <a href="{{ route('products.show', $product) }}">
+                                    <div class="p-2 flex">
+                                        <div class="pr-2 w-12 md:w-16">
+                                            @if ($product->image)
+                                            <img class="object-cover w-full" src="{{Storage::url($product->image->url)}}" alt=""> 
+                                            @endif
+                                        </div>
+                                        <div class="text-xs md:text-sm">
+                                            <div class="font-bold text-gray-800">
 
-                            </div> 
-                        </a>
+                                                {{$product->name}}
+                                            </div>
+                                            <div class="text-xs">
+                                                @foreach ($product->salePrices as $price)
+                                                    <div class="grid grid-cols-3 gap-2">
+                                                        <div class="">
+                                                            x {{$price->quantity}} un.
+                                                        </div>
+                                                       
+                                                        <div class="">
+                                                             ${{number_format($price->total_price,0,',','.')}}  
+                                                        </div>
+                                                       
+                                                        @if($price->quantity>1) 
+                                                            <div class="font-bold text-red-700">
+                                                                (${{number_format($price->price,0,',','.')}}c/u) 
+                                                            </div>
+                                                        @endif
+                                                       
+                                                    </div>
+                                                @endforeach
+                                              
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </a>
+                                <div>
+                                    <div class=" flex flex-col text-xs">
+                                        <div class="flex mb-1">
+                                            <div @click="disminuyeCantidad" class="p-1 px-2 border" data-pid="{{$product->id}}">-</div>
+                                            <div class="p-1 px-2 border" id='producto_{{$product->id}}'> 1</div>
+                                            <div @click="aumentaCantidad" class="p-1 px-2 border" data-pid="{{$product->id}}">+</div>
+                                        </div>
+                                       
+                                       <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
+                                           <i class="fas fa-cart-plus"></i>agregar
+                                        </button>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        
                             
                         @endforeach
                                      
@@ -76,9 +118,11 @@
     <script>
         function buscador() {
             return {
+                cantidad : @entangle('cantidad'),
                 search: @entangle('search'),
                 searchIsOpen: @entangle('searchIsOpen'),
                 type_selected: @entangle('type_selected'),
+
                
                 search: null,
 
@@ -93,7 +137,14 @@
                     setTimeout(() => {
                         this.search.focus();
                     }, 300);
-                }
+                },
+                aumentaCantidad: function(e){
+                    this.cantidad++;
+                    console.log(e.target.dataset.pid);
+                },
+                disminuyeCantidad: function(){
+                    this.cantidad--;
+                },
                
             }
         }
