@@ -49,7 +49,6 @@
                 </div>
 
                 <div class="pl-10">
-
                     @livewire('cart.index', ['user' => ""])
                 </div>
 
