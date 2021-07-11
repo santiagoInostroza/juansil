@@ -44,7 +44,7 @@
                 </div>
 
                 {{-- BUSCADOR --}}
-                <div class="hidden flex-1 sm:flex items-center justify-start mr-3">
+                <div class="flex-1 sm:flex items-center justify-start mr-3">
                         @livewire('buscador-productos', ['user' => '']) 
                 </div>
 
@@ -136,10 +136,17 @@
     </div> 
 
    
-
-    <div  class=" flex sm:hidden bg-gray-700 w-full h-10 px-3 items-center">
-        @livewire('buscador-productos', ['user' => '']) 
-    </div>
+    <div  class=" flex sm:hidden  bg-gray-700 w-full h-10 px-3 items-center">
+         <label for="buscador" class="p-1 m-1 bg-white text-gray-400 flex items-center w-full rounded">
+           <div>
+               ¿Qué estás buscando?
+            </div>
+            <div class=" text-black absolute px-2 right-6" >     
+                <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+         </label>
+        {{-- @livewire('buscador-productos', ['user' => ''])  --}}
+    </div> 
 
     {{-- BARRA DE ABAJO DE LA BARRA PRINCIPAL --}}
 
