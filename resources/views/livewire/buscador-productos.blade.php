@@ -11,7 +11,7 @@
         </div>
         <div class="hidden" :class="{'hidden': !searchIsOpen}">
             <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
-            <div class="absolute top-0 left-0 right-0 bg-white border z-10 shadow max-w-3xl m-auto">
+            <div class="absolute top-0 left-0 right-0 bg-white border z-10 shadow max-w-3xl m-auto mt-2">
                 <div class="flex px-3 justify-between items-center">
                     <h2 class="text-lg font-bold my-2 text-center">¿Qué estás buscando?</h2>
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
@@ -36,7 +36,7 @@
                 <div class="mt-2 p-3 shadow-xl overflow-auto" style="max-height: calc(100vh - 170px)">
                   
                     @if ($type_selected != 3 && count($products)>0)
-                        <h2 class="text-lg p-3">Productos</h2>
+                        <h2 class="text-lg sm:text-2xl p-3 bg-gray-100">Productos</h2>
                        
                         @foreach ($products as $product)
                         
@@ -82,30 +82,31 @@
                                         
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
-                                                <div x-on:click="disminuyeCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">-</div>
+                                                <x-jet-secondary-button x-on:click="disminuyeCantidad" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                                                 <input type="number" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                                     wire:ignore 
                                                     @change="setCantidad"  
                                                     id='cantidad_producto_{{$product->id}}'  
                                                     data-pid="{{$product->id}}"
                                                 > 
-                                                <div x-on:click="aumentaCantidad" class="p-2 px-3 border cursor-pointer rounded" data-pid="{{$product->id}}">+</div>
+                                                <x-jet-secondary-button x-on:click="aumentaCantidad" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                             </div>
                                             <div>
-                                                <button class="shadow cursor-pointer bg-green-600 text-white p-1 rounded">
-                                                    Agregado
-                                                </button>
-                                                <button wire:click="removeFromCart({{ $product->id }})"  class="bg-red-600 p-2 py-1 rounded">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
+                                                <x-jet-button wire:click="removeFromCart({{ $product->id }})" >
+                                                   Agregado
+                                                </x-jet-button>
+                                                {{-- <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
+                                                   Quitar <i class="far fa-trash-alt"></i>
+                                                </x-jet-danger-button> --}}
                                             </div>
                                         </div>
-                                          
-                                        <button wire:click="addToCart({{$product->id}})"  
-                                            class="shadow cursor-pointer bg-gray-600 text-white p-1 rounded @if (session()->has('carrito.'.$product->id)) hidden @endif" 
-                                        >
-                                            <i class="fas fa-cart-plus"></i> Agregar
-                                        </button> 
+
+                                        @if (!session()->has('carrito.'.$product->id))  
+                                            <x-jet-secondary-button wire:click="addToCart({{$product->id}})" class="" >
+                                                <i class="fas fa-cart-plus"></i> Agregar
+                                            </x-jet-secondary-button>
+                                        @endif
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +118,7 @@
                     @endif
                     
                     @if ($type_selected != 2 && count($tags)>0)
-                        <h2 class="text-lg p-3">Categorias</h2>
+                        <h2 class="text-lg sm:text-2xl p-3 bg-gray-100">Categorias</h2>
                         @foreach ($tags as $tag)
                             <a href="{{ route('products.tag', $tag) }}">
                                 <div class="p-2  pl-5 flex">
