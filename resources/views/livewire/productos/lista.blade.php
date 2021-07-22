@@ -73,12 +73,12 @@
                                 @else
                                     @if ($price->quantity == 1)
                                     <div class="text-sm grid grid-cols-2">
-                                        <div>1 x </div>
+                                        <div class="text-right">1 x </div>
                                         <div> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
                                     </div>
                                         
                                     @else
-                                        <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full mt-2">
+                                        <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full mt-2 text-right">
                                             <div>
                                                 {{ $price->quantity }} x  ${{ number_format($price->total_price, 0,',','.') }}
                                             </div>
