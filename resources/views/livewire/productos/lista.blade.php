@@ -49,18 +49,18 @@
                         
                         <div class="text-gray-600 w-max-content m-auto">
                            
-                           <div class="max-w-xs pr-16">
+                           <div class="pr-16" style="max-width: 300px">
                                {{$producto->name}}
                             </div> 
         
-                            <div class="font-bold ">
-                                {{$producto->brand->name}}
-                            </div>
-                            {{-- stock {{$producto->stock}}
-                            {{$producto->category->name}} --}}
+                           
+                          
                         </div>
                         
                     
+                    </div>
+                    <div class="font-bold">
+                        {{$producto->brand->name}}
                     </div>
 
                     <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center">
