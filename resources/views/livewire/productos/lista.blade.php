@@ -78,7 +78,7 @@
                                     </div>
                                         
                                     @else
-                                        <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full">
+                                        <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full mt-2">
                                             <div>
                                                 {{ $price->quantity }} x  ${{ number_format($price->total_price, 0,',','.') }}
                                             </div>
