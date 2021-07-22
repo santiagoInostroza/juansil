@@ -80,10 +80,10 @@
                                     @else
                                         <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full">
                                             <div>
-                                                {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
+                                                {{ $price->quantity }} x  ${{ number_format($price->total_price, 0,',','.') }}
                                             </div>
                                             <span class="bg-red-600  text-lg  px-1 mx-1  rounded text-white" style="padding-top: 1px">
-                                                $ {{ number_format($price->price, 0,',','.') }} c/u
+                                                ${{ number_format($price->price, 0,',','.') }} c/u
                                             </span>
                                         </div>
                                         
