@@ -49,7 +49,7 @@
                         
                         <div class="text-gray-600 w-max-content m-auto">
                            
-                           <div class="max-w-xs pr-10">
+                           <div class="max-w-xs pr-16">
                                {{$producto->name}}
                             </div> 
         
