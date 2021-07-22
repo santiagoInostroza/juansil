@@ -1,4 +1,4 @@
-<div class="container max-w-7xl py-8">
+<div class="container max-w-7xl py-8" >
 
     {{-- @if (count($productos)>0)
         @isset($name)
@@ -38,67 +38,78 @@
     <hr> --}}
     
     {{-- PRODUCTOS MAS VENDIDOS --}}
-    
-    <ul class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        @foreach ($productos as $producto)
-            <li class="border-b border-gray-200 p-4 flex flex-col justify-between">
-                <div>
-                    <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
-                    <div class="text-gray-600 w-max-content m-auto">
-                        {{$producto->name}}
-    
-                        <div class="font-bold ">
-                            {{$producto->brand->name}}
+    <div x-data="main">
+        <ul class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            @foreach ($productos as $producto)
+                <li class="border-b border-gray-200 p-4 flex flex-col justify-between">
+                    <div>
+                        <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
+                        <div class="text-gray-600 w-max-content m-auto">
+                            {{$producto->name}}
+        
+                            <div class="font-bold ">
+                                {{$producto->brand->name}}
+                            </div>
+                            {{-- stock {{$producto->stock}}
+                            {{$producto->category->name}} --}}
                         </div>
-                        {{-- stock {{$producto->stock}}
-                        {{$producto->category->name}} --}}
+                        
+                    
+                    </div>
+
+                    <div class="text-gray-600 w-max-content m-auto text-center mt-2 h-full ">
+                    
+                        @if (count($producto->salePrices)>0)
+                            @foreach ($producto->salePrices as $price)
+                                @if ( count($producto->salePrices)==1)
+                                    <div class="text-xl h-full flex items-center"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
+                                @else
+                                    @if ($price->quantity == 1)
+                                        <div class="text-sm"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
+                                    @else
+                                        <div class="text-xs font-thin mt-1">
+                                            {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
+                                        </div>
+                                        <span class="bg-red-600  text-lg  px-1 mx-1  rounded text-white" style="padding-top: 1px">
+                                            $ {{ number_format($price->price, 0,',','.') }} c/u
+                                        </span>
+                                    @endif
+                                    
+                                @endif
+                            @endforeach
+                        @endif
+                
                     </div>
                     
-                  
-                </div>
+                
+                    @if ($producto->stock>0)
+                        <div class="text-center mt-4">
+                            <x-jet-secondary-button> <i class="fas fa-cart-plus mr-1"></i> Agregar</x-jet-secondary-button>
+                        </div>
+                    @else
+                        <div class="text-center mt-4">
+                            <div class="cursor-default inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm  focus:outline-none    transition ease-in-out duration-150" disabled> Agotado</div>
+                        </div>
+                    @endif
 
-                <div class="text-gray-600 w-max-content m-auto text-center mt-2 h-full ">
-                   
-                    @foreach ($producto->salePrices as $price)
-                        @if ( count($producto->salePrices)==1)
-                            <div class="text-xl h-full flex items-center"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
-                        @else
-                            @if ($price->quantity == 1)
-                                <div class="text-sm"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
-                            @else
-                                <div class="text-xs font-thin mt-1">
-                                    {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
-                                </div>
-                                <span class="bg-red-600  text-lg  px-1 mx-1  rounded text-white" style="padding-top: 1px">
-                                    $ {{ number_format($price->price, 0,',','.') }} c/u
-                                </span>
-                            @endif
-                            
-                        @endif
-                    @endforeach
-               
-                </div>
+                    
                 
-             
-                @if ($producto->stock>0)
-                    <div class="text-center mt-4">
-                        <x-jet-secondary-button> <i class="fas fa-cart-plus mr-1"></i> Agregar</x-jet-secondary-button>
-                    </div>
-                @else
-                    <div class="text-center mt-4">
-                        <div class="cursor-default inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-400 uppercase tracking-widest shadow-sm  focus:outline-none    transition ease-in-out duration-150" disabled> Agotado</div>
-                    </div>
-                @endif
-
                 
-               
-               
-               
-               
                 
-            </li>            
-        @endforeach
+                
+                    
+                </li>            
+            @endforeach
         </ul>
+    </div>
+
+    <script>
+        function main(){
+            return{
+
+            }
+        }
+    </script>
 
 
 </div>

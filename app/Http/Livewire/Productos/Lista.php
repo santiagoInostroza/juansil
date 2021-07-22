@@ -14,7 +14,7 @@ class Lista extends Component{
 
     public function render()
     {
-        $productos = Product::where('status','1')->get();
+        $productos = Product::where('status','1')->orderBy('name','asc')->get();
         return view('livewire.productos.lista', compact('productos'));
     }
     

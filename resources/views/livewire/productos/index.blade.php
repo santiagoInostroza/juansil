@@ -7,7 +7,7 @@
        <h2 class="w-full p-4 text-3xl bg-gray-200 text-gray-800 font-bold text-center cursor-pointer uppercase font-mono">Ver lista con todos los productos</h2>
     </a>
    <hr>
-   explicacion del sistema de compras brebe
+   explicacion del sistema de compras breve
    <hr>
    ofertas
    <hr>
