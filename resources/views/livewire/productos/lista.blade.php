@@ -39,7 +39,7 @@
     
     {{-- PRODUCTOS MAS VENDIDOS --}}
     <div x-data="main">
-        <ul class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @foreach ($productos as $producto)
                 <li class="border-b border-r border-gray-200 p-4 flex flex-col justify-between">
                     <div class="w-full">
