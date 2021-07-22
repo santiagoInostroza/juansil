@@ -43,7 +43,10 @@
             @foreach ($productos as $producto)
                 <li class="border-b border-gray-200 p-4 flex flex-col justify-between">
                     <div>
+                        @if ($producto->image)
                         <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
+                        @endif
+                        
                         <div class="text-gray-600 w-max-content m-auto">
                             {{$producto->name}}
         
