@@ -59,7 +59,7 @@
 
                     <div class="text-gray-600 w-max-content m-auto text-center mt-2 h-full ">
                     
-                        @if (count($producto->salePrices)>0)
+                        @if (isset($producto->salePrices))
                             @foreach ($producto->salePrices as $price)
                                 @if ( count($producto->salePrices)==1)
                                     <div class="text-xl h-full flex items-center"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
