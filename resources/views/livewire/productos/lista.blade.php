@@ -49,7 +49,7 @@
                         
                         <div class="text-gray-600 w-max-content m-auto">
                            
-                           <div class="max-w-xs">
+                           <div class="max-w-xs pr-10">
                                {{$producto->name}}
                             </div> 
         
@@ -77,7 +77,7 @@
                                     </div>
                                         
                                     @else
-                                        <div class="text-xs font-thin mt-1 grid grid-cols-2">
+                                        <div class="text-xs font-thin grid grid-cols-2 items-center">
                                             <div>
                                                 {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
                                             </div>
