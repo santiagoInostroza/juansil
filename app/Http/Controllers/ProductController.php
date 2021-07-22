@@ -15,6 +15,10 @@ class ProductController extends Controller{
         return view('products.index');
     }
 
+    public function lista(){
+        return view('products.lista');
+    }
+
 
 
 

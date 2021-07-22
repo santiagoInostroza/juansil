@@ -28,6 +28,7 @@ Route::get('productos/pedido',Pedido::class)->name('productos.pedido');
 Route::get('productos/pagar',Carrito::class)->name('productos.pagar');
 
 Route::get('/', [ProductController::class,'index'])->name('products.index');
+Route::get('productos/lista', [ProductController::class,'lista'])->name('products.lista');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

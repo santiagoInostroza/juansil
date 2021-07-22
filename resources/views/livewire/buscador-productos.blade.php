@@ -83,7 +83,7 @@
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
                                                 <x-jet-secondary-button x-on:click="disminuyeCantidad" data-pid="{{$product->id}}">-</x-jet-secondary-button>
-                                                <input type="number" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                                <input type="number" min="1" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                                     wire:ignore 
                                                     @change="setCantidad"  
                                                     id='cantidad_producto_{{$product->id}}'  
@@ -92,18 +92,16 @@
                                                 <x-jet-secondary-button x-on:click="aumentaCantidad" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                             </div>
                                             <div>
-                                                <x-jet-button wire:click="removeFromCart({{ $product->id }})" >
-                                                   Agregado
-                                                </x-jet-button>
-                                                {{-- <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
-                                                   Quitar <i class="far fa-trash-alt"></i>
-                                                </x-jet-danger-button> --}}
+                                       
+                                                 <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
+                                                     <i class="far fa-trash-alt mr-1"></i>  del carro
+                                                </x-jet-danger-button>
                                             </div>
                                         </div>
 
                                         @if (!session()->has('carrito.'.$product->id))  
                                             <x-jet-secondary-button wire:click="addToCart({{$product->id}})" class="" >
-                                                <i class="fas fa-cart-plus"></i> Agregar
+                                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                                             </x-jet-secondary-button>
                                         @endif
                                        
@@ -159,19 +157,29 @@
                     },
                     aumentaCantidad: function(e){
                         var pid = e.target.dataset.pid;
-                        var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                        this.$wire.setCantidad( pid,cantidad)
+                       
+                            var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                            this.$wire.setCantidad( pid,cantidad)
                         
                         
                     },
                     disminuyeCantidad: function(e){
                         let pid = e.target.dataset.pid;
-                        let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
-                        this.$wire.setCantidad( pid,cantidad);
+                        if(document.getElementById('cantidad_producto_' + pid).value <= 1){
+                           
+                        }else{
+                            let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
+                            this.$wire.setCantidad( pid,cantidad);
+                        }
                     },
                     setCantidad:function(e){
                         let pid = e.target.dataset.pid;
-                        let cantidad =  document.getElementById('cantidad_producto_' + pid).value;
+                        let cantidad =1;
+                        if(document.getElementById('cantidad_producto_' + pid).value<=1){
+                            document.getElementById('cantidad_producto_' + pid).value = cantidad;
+                        }else{
+                            cantidad =  document.getElementById('cantidad_producto_' + pid).value;
+                        }
                         
                         this.$wire.setCantidad( pid,cantidad);
                        

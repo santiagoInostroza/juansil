@@ -11,40 +11,43 @@ use Illuminate\Support\Facades\Cache;
 class Lista extends Component{
     private $productos;
     private $destacados;
+
+    public function render()
+    {
+        $productos = Product::where('status','1')->get();
+        return view('livewire.productos.lista', compact('productos'));
+    }
     
-    public function render(){
+    // public function render(){
 
-        $this->getCache();
-        $productos = $this->productos;
-        $destacados = $this->destacados;
+    //     $this->getCache();
+    //     $productos = $this->productos;
+    //     $destacados = $this->destacados;
 
-        return view('livewire.productos.lista', compact('productos','destacados'));
-    }
+    //     return view('livewire.productos.lista', compact('productos','destacados'));
+    // }
+    // public function getCache(){
+    //     $seconds = 60;
 
+    //     if (request()->page) {
+    //        $key = 'productos'. request()->page;
+    //     } else {
+    //         $key = 'productos';
+    //     }
 
-    public function deleteCache(){
-        $value = Cache::pull('key');
-        $value = Cache::pull('destacados');
-    }
+    //     $this->productos = Cache::remember($key, $seconds, function () {
+    //         return Product::where('status', 1)->paginate(60);
+    //     });
 
-    public function getCache(){
-        $seconds = 60;
-
-        if (request()->page) {
-           $key = 'productos'. request()->page;
-        } else {
-            $key = 'productos';
-        }
-
-        $this->productos = Cache::remember($key, $seconds, function () {
-            return Product::where('status', 1)->paginate(60);
-        });
-
-        $this->destacados = Cache::remember('destacados', $seconds, function () {
-            return Product::where('status', 1)->take(12)->get();
-        });
+    //     $this->destacados = Cache::remember('destacados', $seconds, function () {
+    //         return Product::where('status', 1)->take(12)->get();
+    //     });
            
-    }
+    // }
+    // public function deleteCache(){
+    //     $value = Cache::pull('key');
+    //     $value = Cache::pull('destacados');
+    // }
 
     public function filtro($name){
          $productos = Product::where('status', 1)->where('name', 'like',"%". $name . "%")->paginate(60);
