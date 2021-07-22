@@ -64,7 +64,7 @@
                     </div>
                   
 
-                    <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center">
+                    <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center max-w-full">
                     
                         @if (isset($producto->salePrices))
                             @foreach ($producto->salePrices as $price)
@@ -78,7 +78,7 @@
                                     </div>
                                         
                                     @else
-                                        <div class="text-xs font-thin grid grid-cols-2 items-center">
+                                        <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full">
                                             <div>
                                                 {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
                                             </div>
