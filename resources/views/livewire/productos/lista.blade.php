@@ -44,7 +44,7 @@
                 <li class="border-b border-gray-200 p-4 flex flex-col justify-between">
                     <div>
                         @if ($producto->image)
-                        <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
+                            <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
                         @endif
                         
                         <div class="text-gray-600 w-max-content m-auto">
@@ -63,7 +63,7 @@
                     
                     </div>
 
-                    <div class="text-gray-600 w-max-content m-auto text-center mt-2 h-full ">
+                    <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center">
                     
                         @if (isset($producto->salePrices))
                             @foreach ($producto->salePrices as $price)
@@ -71,14 +71,21 @@
                                     <div class="text-xl h-full flex items-center"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
                                 @else
                                     @if ($price->quantity == 1)
-                                        <div class="text-sm"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
+                                    <div class="text-sm grid grid-cols-2">
+                                        <div>1 x </div>
+                                        <div> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
+                                    </div>
+                                        
                                     @else
-                                        <div class="text-xs font-thin mt-1">
-                                            {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
+                                        <div class="text-xs font-thin mt-1 grid grid-cols-2">
+                                            <div>
+                                                {{ $price->quantity }} x  $ {{ number_format($price->total_price, 0,',','.') }}
+                                            </div>
+                                            <span class="bg-red-600  text-lg  px-1 mx-1  rounded text-white" style="padding-top: 1px">
+                                                $ {{ number_format($price->price, 0,',','.') }} c/u
+                                            </span>
                                         </div>
-                                        <span class="bg-red-600  text-lg  px-1 mx-1  rounded text-white" style="padding-top: 1px">
-                                            $ {{ number_format($price->price, 0,',','.') }} c/u
-                                        </span>
+                                        
                                     @endif
                                     
                                 @endif
