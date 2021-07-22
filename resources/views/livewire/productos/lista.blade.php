@@ -48,7 +48,10 @@
                         @endif
                         
                         <div class="text-gray-600 w-max-content m-auto">
-                            {{$producto->name}}
+                           
+                           <div class="max-w-xs">
+                               {{$producto->name}}
+                            </div> 
         
                             <div class="font-bold ">
                                 {{$producto->brand->name}}
