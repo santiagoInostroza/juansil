@@ -41,17 +41,20 @@
     <div x-data="main">
         <ul class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @foreach ($productos as $producto)
-                <li class="border-b border-gray-200 p-4 flex flex-col justify-between">
-                    <div>
+                <li class="border-b border-r border-gray-200 p-4 flex flex-col justify-between">
+                    <div class="w-full">
                         @if ($producto->image)
                             <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
                         @endif
                         
-                        <div class="text-gray-600 w-max-content m-auto">
+                        <div class="text-gray-600 w-max-content m-auto max-w-full">
                            
-                           <div class="pr-16" style="max-width: 300px">
+                           <div class="max-w-full">
                                {{$producto->name}}
                             </div> 
+                            <div class="font-bold">
+                                {{$producto->brand->name}}
+                            </div>
         
                            
                           
@@ -59,9 +62,7 @@
                         
                     
                     </div>
-                    <div class="font-bold">
-                        {{$producto->brand->name}}
-                    </div>
+                  
 
                     <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center">
                     
