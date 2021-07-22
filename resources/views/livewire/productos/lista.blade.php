@@ -74,7 +74,7 @@
                                     @if ($price->quantity == 1)
                                     <div class="text-sm grid grid-cols-2">
                                         <div class="text-right">1 x </div>
-                                        <div class="text-left"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
+                                        <div class="text-left  px-1 mx-1"> ${{ number_format($price->total_price, 0, ',', '.') }}</div>
                                     </div>
                                         
                                     @else
