@@ -1,6 +1,6 @@
 <div class="w-full">
-    <div x-data="buscador()" x-init="document.getElementById('buscar').focus()">
-
+    <div x-data="buscadorMain()" x-init="document.getElementById('buscar').focus()">
+       
         
 
         <div @click="openSearch" class="hidden sm:flex items-center w-full relative">
@@ -9,6 +9,7 @@
                 <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
         </div>
+
         <div class="hidden" :class="{'hidden': !searchIsOpen}">
             <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
             <div class="absolute top-0 left-0 right-0 bg-white border z-10 shadow max-w-3xl m-auto mt-2">
@@ -83,7 +84,8 @@
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
                                                 <x-jet-secondary-button x-on:click="disminuyeCantidad" data-pid="{{$product->id}}">-</x-jet-secondary-button>
-                                                <input type="number" min="1" class="p-1 w-7 text-center" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+
+                                                <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                                     wire:ignore 
                                                     @change="setCantidad"  
                                                     id='cantidad_producto_{{$product->id}}'  
@@ -137,7 +139,7 @@
     </div>
    
         <script>
-            function buscador() {
+            function buscadorMain() {
                 return {
                     cantidad : @entangle('cantidad'),
                     search: @entangle('search'),
@@ -157,11 +159,13 @@
                     },
                     aumentaCantidad: function(e){
                         var pid = e.target.dataset.pid;
-                       
-                            var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                            this.$wire.setCantidad( pid,cantidad)
+                        var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                        console.log(document.querySelectorAll(".cantidad_producto_" + pid));
+                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                            element.value=cantidad;
+                        });
                         
-                        
+                        this.$wire.setCantidad( pid,cantidad)
                     },
                     disminuyeCantidad: function(e){
                         let pid = e.target.dataset.pid;
@@ -169,6 +173,9 @@
                            
                         }else{
                             let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
+                            document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                                element.value=cantidad;
+                            });
                             this.$wire.setCantidad( pid,cantidad);
                         }
                     },
@@ -180,7 +187,9 @@
                         }else{
                             cantidad =  document.getElementById('cantidad_producto_' + pid).value;
                         }
-                        
+                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                            element.value=cantidad;
+                        });
                         this.$wire.setCantidad( pid,cantidad);
                        
                     },

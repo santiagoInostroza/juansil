@@ -53,7 +53,7 @@
             {{-- CUERPO --}}
             <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                     @foreach (session('carrito') as $producto)
-                        @livewire('cart.item', ['producto' => $producto], key($producto['producto_id']))
+                        {{-- @livewire('cart.item', ['producto' => $producto], key($producto['producto_id'])) --}}
                     @endforeach
             </div>
 

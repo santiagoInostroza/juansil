@@ -7,6 +7,7 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\CarritoController;
 
 class Lista extends Component{
     private $productos;
@@ -17,6 +18,30 @@ class Lista extends Component{
         $productos = Product::where('status','1')->where('name','!=','despacho')->orderBy('name','asc')->get();
         return view('livewire.productos.lista', compact('productos'));
     }
+
+    public function setCantidad($product_id,$cantidad){
+        $carrito = new CarritoController();
+        $carrito->setCantidad($product_id,$cantidad);
+        $this->emitTo('cart.index','render');
+   }
+
+   public function addToCart($product_id){
+       $carrito = new CarritoController();
+       $carrito->addToCart($product_id,1);
+       $this->emitTo('cart.index','render');
+        $this->dispatchBrowserEvent('alerta_timer', [
+           'icon' => 'success',
+           'msj' => "Agregado al carrito",
+       ]); 
+      
+
+   }
+   public function removeFromCart($product_id){
+       $carrito = new CarritoController();
+       $carrito->deleteFromCart($product_id);
+       $this->emitTo('cart.index','render');
+   }
+
     
     // public function render(){
 
