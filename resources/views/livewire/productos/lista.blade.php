@@ -80,7 +80,7 @@
                                         
                                     @else
                                         <div class="text-xs font-thin grid grid-cols-2 items-center max-w-full mt-2 text-right">
-                                            <div>
+                                            <div class="w-max-content">
                                                 {{ $price->quantity }} x  ${{ number_format($price->total_price, 0,',','.') }}
                                             </div>
                                             <span class="text-left bg-red-600 text-sm  sm:text-lg  px-1 mx-1  rounded text-white w-max-content" style="padding-top: 1px">
