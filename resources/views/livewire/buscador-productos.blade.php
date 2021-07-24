@@ -91,7 +91,7 @@
                                                     id='cantidad_producto_{{$product->id}}'  
                                                     data-pid="{{$product->id}}"
                                                 > 
-                                                <x-jet-secondary-button x-on:click="aumentaCantidad" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                <x-jet-secondary-button x-on:click="aumentaCantidad({{$product->id}})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                             </div>
                                             <div>
                                        
@@ -158,9 +158,9 @@
                         }, 300);
                     },
                     aumentaCantidad: function(e){
-                        var pid = e.target.dataset.pid;
+                        // var pid = e.target.dataset.pid;
                         var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                        console.log(document.querySelectorAll(".cantidad_producto_" + pid));
+                        // console.log(document.querySelectorAll(".cantidad_producto_" + pid));
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
                         });
