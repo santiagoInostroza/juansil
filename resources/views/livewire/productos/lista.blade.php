@@ -83,8 +83,8 @@
                                             <div>
                                                 {{ $price->quantity }} x  ${{ number_format($price->total_price, 0,',','.') }}
                                             </div>
-                                            <span class="text-left bg-red-600 text-sm  sm:text-lg  px-1 mx-1  rounded text-white" style="padding-top: 1px">
-                                                ${{ number_format($price->price, 0,',','.') }}c/u
+                                            <span class="text-left bg-red-600 text-sm  sm:text-lg  px-1 mx-1  rounded text-white w-max-content" style="padding-top: 1px">
+                                                ${{ number_format($price->price, 0,',','.') }} c/u
                                             </span>
                                         </div>
                                         
