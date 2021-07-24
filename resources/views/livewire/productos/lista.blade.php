@@ -145,6 +145,7 @@
                     console.log(e.target.dataset.pid);
                 },
                 aumentaCantidad: function(e){
+                    console.log(e.target)
                     var pid = e.target.dataset.pid;
                     var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
                     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
