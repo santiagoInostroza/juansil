@@ -83,15 +83,15 @@
                                         
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
-                                                <x-jet-secondary-button x-on:click="disminuyeCantidad" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                                                <x-jet-secondary-button x-on:click="disminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
 
                                                 <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                                     wire:ignore 
-                                                    @change="setCantidad"  
+                                                    @change="setCantidad({{ $product->id }})"  
                                                     id='cantidad_producto_{{$product->id}}'  
                                                     data-pid="{{$product->id}}"
                                                 > 
-                                                <x-jet-secondary-button x-on:click="aumentaCantidad({{$product->id}})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                <x-jet-secondary-button x-on:click="aumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                             </div>
                                             <div>
                                        
@@ -158,17 +158,14 @@
                         }, 300);
                     },
                     aumentaCantidad: function(pid){
-                        // var pid = e.target.dataset.pid;
                         var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                        // console.log(document.querySelectorAll(".cantidad_producto_" + pid));
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
                         });
                         
                         this.$wire.setCantidad( pid,cantidad)
                     },
-                    disminuyeCantidad: function(e){
-                        let pid = e.target.dataset.pid;
+                    disminuyeCantidad: function(pid){
                         if(document.getElementById('cantidad_producto_' + pid).value <= 1){
                            
                         }else{
@@ -179,8 +176,7 @@
                             this.$wire.setCantidad( pid,cantidad);
                         }
                     },
-                    setCantidad:function(e){
-                        let pid = e.target.dataset.pid;
+                    setCantidad:function(pid){
                         let cantidad =1;
                         if(document.getElementById('cantidad_producto_' + pid).value<=1){
                             document.getElementById('cantidad_producto_' + pid).value = cantidad;

@@ -105,13 +105,13 @@
                             <label for="cantidad_product_{{$product->id}}">
                                 <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                     wire:ignore 
-                                    @change="setCantidad"  
-                                    id='cantidad_product_{{$product->id}}'  
-                                    data-pid="{{$product->id}}"
+                                    @change="setCantidad({{ $product->id }})"  
+                                    id='cantidad_product_{{ $product->id }}'  
+                                    data-pid="{{ $product->id }}"
                                 > 
                                 <i class="fas fa-shopping-cart mr-2 text-gray-400"></i>
                             </label>
-                            <x-jet-secondary-button x-on:click="disminuyeCantidad" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                            <x-jet-secondary-button x-on:click="listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                            
                             <x-jet-secondary-button x-on:click="listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                           
@@ -150,8 +150,7 @@
                      });
                      this.$wire.setCantidad( pid,cantidad)
                 },
-                disminuyeCantidad: function(e){
-                    let pid = e.target.dataset.pid;
+                listaDisminuyeCantidad: function(pid){
                     if(document.getElementById('cantidad_product_' + pid).value <= 1){
                         
                     }else{
@@ -162,8 +161,7 @@
                         this.$wire.setCantidad( pid,cantidad);
                     }
                 },
-                setCantidad:function(e){
-                    let pid = e.target.dataset.pid;
+                setCantidad:function(pid){
                     let cantidad =1;
                     if(document.getElementById('cantidad_product_' + pid).value<=1){
                         document.getElementById('cantidad_product_' + pid).value = cantidad;
