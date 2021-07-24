@@ -157,7 +157,7 @@
                             this.search.focus();
                         }, 300);
                     },
-                    aumentaCantidad: function(e){
+                    aumentaCantidad: function(pid){
                         // var pid = e.target.dataset.pid;
                         var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
                         // console.log(document.querySelectorAll(".cantidad_producto_" + pid));
