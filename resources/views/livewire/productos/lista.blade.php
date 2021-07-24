@@ -39,9 +39,10 @@
     
     {{-- PRODUCTOS MAS VENDIDOS --}}
     <div x-data="main">
-        <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Lista de productos</h2>
+        <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
             @foreach ($productos as $producto)
-                <li class="border-b border-r border-gray-200 p-4 flex flex-col justify-between">
+                <li class="border-b border-r  p-4 flex flex-col justify-between">
                     <div class="w-full">
                         @if ($producto->image)
                             <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
