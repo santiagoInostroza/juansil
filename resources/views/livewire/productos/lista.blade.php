@@ -113,7 +113,7 @@
                             </label>
                             <x-jet-secondary-button x-on:click="disminuyeCantidad" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                            
-                            <x-jet-secondary-button x-on:click="aumentaCantidad" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                            <x-jet-secondary-button x-on:click="aumentaCantidad({{$product->id}})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                           
                         @endif
 
@@ -146,16 +146,18 @@
                 agregar: function(e){
                     console.log(e.target.dataset.pid);
                 },
-                aumentaCantidad: function(e){
-                    console.log(e.target)
-                    var pid = e.target.dataset.pid;
-                    var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
-                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                aumentaCantidad: function(pid){
+
+                    console.log(pid)
+                    // console.log(e.target)
+                    // var pid = e.target.dataset.pid;
+                     var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+                     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                         element.value=cantidad;
-                    });
+                     });
                    
                    
-                    this.$wire.setCantidad( pid,cantidad)
+                     this.$wire.setCantidad( pid,cantidad)
                 },
                 disminuyeCantidad: function(e){
                     let pid = e.target.dataset.pid;
