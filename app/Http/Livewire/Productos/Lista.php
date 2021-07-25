@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\CarritoController;
+use App\Models\Brand;
 
 class Lista extends Component{
     private $productos;
@@ -20,14 +21,21 @@ class Lista extends Component{
 
         $str = explode(' ', $this->search);
 
-        $productos = Product::where('status','1')->where('name','!=','despacho')->where(function($query) use($str) {
+        $productos = Product::where('products.status','1')->where('products.name','!=','despacho')->where(function($query) use($str) {
+            foreach($str as $s) {
+                $query = $query->where('products.name','like',"%" . $s . "%");
+            }
+        })
+        ->orderBy('name','asc')->get();
+
+        $tags = Tag::where(function($query) use($str) {
             foreach($str as $s) {
                 $query = $query->where('name','like',"%" . $s . "%");
             }
         })
-        ->get();
-
-        $tags = Tag::where(function($query) use($str) {
+        ->orderBy('name','asc')->get();
+        
+        $brands = Brand::where(function($query) use($str) {
             foreach($str as $s) {
                 $query = $query->where('name','like',"%" . $s . "%");
             }
@@ -37,7 +45,7 @@ class Lista extends Component{
 
 
         // $productos = Product::where('status','1')->where('name','!=','despacho')->where('name','like','%'. $this->search . "%")->orderBy('name','asc')->get();
-        return view('livewire.productos.lista', compact('productos'));
+        return view('livewire.productos.lista', compact('productos','tags','brands'));
     }
 
     public function buscar($search){

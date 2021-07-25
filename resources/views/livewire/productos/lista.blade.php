@@ -40,7 +40,7 @@
     {{-- PRODUCTOS MAS VENDIDOS --}}
     <div x-data="productosMain()" x-init="">
         @if ($search != "")
-        <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Busqueda : {{$search}}</h2>
+            <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Busqueda : {{$search}}</h2>
         @else
             <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Lista de productos</h2>
         @endif
@@ -140,6 +140,26 @@
                 </li>            
             @endforeach
         </ul>
+        @if ($search != "")
+            @if (count($tags)>0)
+                <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Etiquetas : {{$search}}</h2>
+                @foreach ($tags as $tag)
+                    <a href="" class="p-4 ">
+                        {{$tag->name}}
+                    </a>
+                @endforeach
+               
+            @endif
+            @if (count($brands)>0)
+                <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Marcas : {{$search}}</h2>
+                @foreach ($brands as $brand)
+                    <a href="" class="p-4 ">
+                        {{$brand->name}}
+                    </a>
+                @endforeach
+               
+            @endif
+        @endif
     </div>
 
     @push('js')
