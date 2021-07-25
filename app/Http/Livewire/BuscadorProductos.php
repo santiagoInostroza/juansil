@@ -63,6 +63,7 @@ class BuscadorProductos extends Component{
         $carrito = new CarritoController();
         $carrito->deleteFromCart($product_id);
         $this->emitTo('cart.index','render');
+        $this->emitTo('productos.lista','render');
     }
 
 
