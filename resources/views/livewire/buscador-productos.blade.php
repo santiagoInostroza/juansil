@@ -93,16 +93,10 @@
                                                     > 
                                                     <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $product->id }});"  data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                                 </div>
-                                                <div>
-                                        
-                                                    <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
-                                                        <i class="far fa-trash-alt mr-1"></i>  
-                                                    </x-jet-danger-button>
-                                                </div>
                                             </div>
                                         @else
                                             <x-jet-secondary-button wire:click="addToCart({{$product->id}})" class="" >
-                                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                                                <i class="fas fa-cart-plus m-1"></i> Agregar
                                             </x-jet-secondary-button>
                                         @endif
                                        
@@ -174,7 +168,7 @@
             }
             function buscadorDisminuyeCantidad(pid){
                 if(document.getElementById('cantidad_producto_' + pid).value <= 1){
-                        
+                        Livewire.emitTo('buscador-productos','removeFromCart', pid);
                     }else{
                         let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
