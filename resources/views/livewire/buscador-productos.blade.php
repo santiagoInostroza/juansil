@@ -167,12 +167,11 @@
             }
             function buscadorAumentaCantidad(pid){
                 console.log(pid);
-                        var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                            element.value=cantidad;
-                        });
-                        Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
-                        // this.$wire.setCantidad( pid,cantidad)
+                var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    element.value=cantidad;
+                });
+                Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
             }
             function buscadorDisminuyeCantidad(pid){
                 if(document.getElementById('cantidad_producto_' + pid).value <= 1){

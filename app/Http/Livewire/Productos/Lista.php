@@ -12,6 +12,7 @@ use App\Http\Controllers\CarritoController;
 class Lista extends Component{
     private $productos;
     private $destacados;
+    protected $listeners = (['render','setCantidad']);
 
     public function render()
     {
