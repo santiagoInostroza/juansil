@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use App\Http\Livewire\Admin\Home;
 use App\Http\Livewire\Cart\Pagos;
 use App\Http\Livewire\Cart\Pedido;
-use App\Http\Livewire\Cart\Carrito;
 use App\Http\Livewire\Admin\Resumen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Ventas\Venta;
@@ -25,7 +24,7 @@ use App\Http\Livewire\TestApiGoogleMapsComponent;
 |
 */
 Route::get('productos/pedido',Pedido::class)->name('productos.pedido');
-Route::get('productos/pagar',Carrito::class)->name('productos.pagar');
+// Route::get('productos/pagar',Carrito::class)->name('productos.pagar');
 
 Route::get('/', [ProductController::class,'index'])->name('products.index');
 Route::get('productos/lista', [ProductController::class,'lista'])->name('products.lista');
@@ -34,7 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('productos/busqueda/{texto}', [ProductController::class,'filtro'])->name('products.busqueda');
+// Route::get('productos/busqueda/{texto}', [ProductController::class,'filtro'])->name('products.busqueda');
 Route::resource('productos', ProductController::class)->names("products");
 Route::get('categoria/{category}', [ProductController::class,'category'])->name('products.category');
 Route::get('etiqueta/{tag}', [ProductController::class,'tag'])->name('products.tag');

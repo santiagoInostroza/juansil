@@ -52,7 +52,7 @@
                 <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                         @foreach (session('carrito') as $producto)
                         {{-- {{var_dump($producto)}} --}}
-                        <div class="pb-4 h-28 text-cool-gray-600 border-b-2 border-gray-200">
+                        <div class="pb-4  text-cool-gray-600 border-b-2 border-gray-200">
                             <div class=" h-24 flex items-center justify-between relative ">
                                
                                 <div class="w-16">
@@ -60,7 +60,7 @@
                                 </div>
                         
                                 {{-- NOMBRE --}}
-                                <div class="pl-1 sm:px-2 ml-2 sm:mx-4 w-2/3 sm:w-1/2">
+                                <div class="text-sm sm:text-2xl pl-1 sm:px-2 ml-2 sm:mx-4 w-2/3 sm:w-1/2">
                                     <div class="font-bold">
                                         {{ $producto['name'] }}
                                     </div>
@@ -95,23 +95,44 @@
                             </div>
                         
                         
-                        
-                            @if (isset($msj) && $msj != '')
-                                <div class="text-red-700 text-sm ml-20 -mt-4">
-                                    {{ $msj }}
-                                </div>
-                            @elseif (isset($hasOfert) && $hasOfert == false)
-                        
-                            @elseif (isset($tipoPrecio) && $tipoPrecio == 1)
-                                <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg ml-20 -mt-4">
+                            @if ($producto['faltan']>0 && $producto['nivel']==1)
+                                <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg sm:ml-20">
                                     Agrega 
-                                    <span class="font-bold">{{ $cantFaltante }}</span> 
-                                    productos más, para activar la oferta
+                                    <span class="font-bold">{{$producto['faltan']}}</span> 
+                                    productos más, para obtener un precio más bajo
                                 </div>
-                            @elseif (isset($tipoPrecio) && $tipoPrecio == 2)
-                                <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg ml-20 -mt-4">
+                            @endif
+                            @if ($producto['nivel']>1 && $producto['nivel'] < $producto['cantidadNiveles'] )
+                                
+                                
+                            <div class="sm:flex justify-start items-center">
+                                <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20 ">
+
                                     Precio de oferta aplicado
+                                    @for($i = 0; $i < $producto['nivel']-1; $i++)
+                                        <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    @endfor
+                                </div>
+                                <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg sm:ml-2 ">
+                                    Agrega 
+                                    <span class="font-bold">{{$producto['faltan']}}</span> 
+                                    productos más, si quieres obtener un precio aún más bajo
+                                </div>
+                            </div>
+                            @elseif($producto['nivel']>2 &&  $producto['nivel'] == $producto['cantidadNiveles'] )
+                            <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20">
+                                Mejor precio de oferta aplicado
+                                @for($i = 0; $i < $producto['nivel']-1; $i++)
                                     <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                @endfor
+                            </div>
+                            @elseif ($producto['nivel']>1)
+                                <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20">
+                                    Precio de oferta aplicado
+                                    @for($i = 0; $i < $producto['nivel']-1; $i++)
+                                        <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    @endfor
+                                   
                                 </div>
                             @endif
                         

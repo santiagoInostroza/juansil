@@ -1,43 +1,4 @@
 <div class="container max-w-7xl py-8" >
-
-    {{-- @if (count($productos)>0)
-        @isset($name)
-            <h2 class="font-bold text-gray-600 pt-8 pb-4 text-xl">Busquedas relacionadas con "{{$name}}"</h2>
-        @endisset
-
-        <div class="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:max-w-5xl xl:max-w-7xl mx-auto" style="height: max-content">
-            @foreach ($productos as $producto)
-                <livewire:producto :producto='$producto' :key="$producto->id" />
-            @endforeach
-        </div>
-
-        <div class="mt-4">
-            {{ $productos->links() }}
-        </div>
-
-    @else
-        @isset($name)
-        <h2 class="font-bold text-gray-600 pt-8 pb-4 text-xl">No se encontraron productos relacionados con la busqueda '{{$name}}'</h2>
-        <p class="font-bold text-gray-600 pt-8 pb-4" >Si quieres revisa nuestros otros productos</p>
-        @endisset
-    @endif
-
-    <hr>
-    <h2 class="font-bold text-gray-600 pt-8 pb-4 text-xl">Destacados</h2>
-    <div class="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4  lg:max-w-5xl xl:max-w-7xl mx-auto" style="height: max-content">
-        @foreach ($destacados as $key => $producto)
-            <livewire:producto :producto='$producto' :key="$producto->id" />
-        @endforeach
-       
-    </div>
-    <div class="flex justify-end">
-        <div class="cursor-pointer btn ">
-            Ver más destacados...
-        </div>
-    </div>
-    <hr> --}}
-    
-    {{-- PRODUCTOS MAS VENDIDOS --}}
     <div x-data="productosMain()" x-init="">
         @if ($search != "")
             <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Busqueda : {{$search}}</h2>
@@ -47,22 +8,23 @@
         <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
             @foreach ($productos as $product)
                 <li class="border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
-                    <div class="w-full">
-                        @if ($product->image)
-                            <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
-                        @endif
-                        
-                        <div class="text-gray-600 w-max-content m-auto max-w-full">
-                            <div class="font-bold">
-                                {{$product->brand->name}}
+                    <a href="{{route('products.show',$product)}}">
+                        <div class="w-full">
+                            @if ($product->image)
+                                <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                            @endif
+                            
+                            <div class="text-gray-600 w-max-content m-auto max-w-full">
+                                <div class="font-bold">
+                                    {{$product->brand->name}}
+                                </div>
+            
+                               <div class="max-w-full">
+                                   {{$product->name}}
+                                </div>                           
                             </div>
-        
-                           <div class="max-w-full">
-                               {{$product->name}}
-                            </div>                           
                         </div>
-                    </div>
-
+                    </a>
                     <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center max-w-full">
                     
                         @if (isset($product->salePrices))
@@ -125,14 +87,7 @@
                         <div class="text-center mt-4">
                             <div class="cursor-default inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm  focus:outline-none    transition ease-in-out duration-150" disabled> Agotado</div>
                         </div>
-                    @endif
-
-                    
-                
-                
-                
-                
-                    
+                    @endif                    
                 </li>            
             @endforeach
         </ul>

@@ -10,8 +10,7 @@ class CarritoController extends Controller{
     public $eliminado;
 
     public function addToCart($product_id, $cantidad){
-        $precio = $this->calcularPrecioVenta($product_id, $cantidad);
-        $total = $precio * $cantidad;
+       
 
         $listaProductos = session('carrito');
 
@@ -23,14 +22,18 @@ class CarritoController extends Controller{
                 'name' =>$producto->name,
                 'url' =>$producto->image->url,
                 'cantidad' => $cantidad,
-                'precio' => $precio,
-                'total' => $total,
-                'stock' => $producto->stock
+                'stock' => $producto->stock,
             ];
 
         session([
             'carrito' => $listaProductos
         ]);
+
+        $precio = $this->calcularPrecioVenta($product_id, $cantidad);
+        $total = $precio * $cantidad;
+
+        session(['carrito.' . $product_id . '.precio' => $precio]);
+        session(['carrito.' . $product_id . '.total' => $total]);
 
         $this->updateTotal();
         
@@ -71,24 +74,38 @@ class CarritoController extends Controller{
     /*
     calcular precio de venta de acuerdo a la cantidad de productos que lleva (precio de venta por mayor o por menor)
     */
-    public function calcularPrecioVenta($product_id, $cantidad){
+    public function calcularPrecioVenta($product_id, $miCantidad){
         $producto = Product::find($product_id);
         $precio = 0;
+        $faltan = 0;
+        $nivel = 0;
+        $sigCantidad = 0;
+        $cantidadNiveles = count($producto->salePrices);
         for ($i=0; $i < count($producto->salePrices) ; $i++) { 
+            $nivel++;
+            
+            $cantidad = $producto->salePrices[$i]['quantity'];
+            $precio = $producto->salePrices[$i]['price'];
 
-            $cant = $producto->salePrices[$i]['quantity'];
-            $pre = $producto->salePrices[$i]['price'];
-
-            try {
-                if($cantidad >= $cant && $cantidad < $producto->salePrices[$i+1]['quantity']){
-                    $precio = $pre;
-                }
-            } catch (\Throwable $th) {
-                if($precio == 0){
-                    $precio = $pre;
-                }
+            if($nivel< $cantidadNiveles){
+                $sigCantidad =  $producto->salePrices[$i+1]['quantity'];
+            }else{
+                $sigCantidad = -1;
             }
+                
+            if($miCantidad >= $cantidad && ($miCantidad < $sigCantidad || $sigCantidad == -1 )){
+                if($sigCantidad>0){
+                    $faltan = $sigCantidad - $miCantidad;
+                }
+                session(['carrito.' . $product_id . '.cantidadNiveles' => $cantidadNiveles]);
+                session(['carrito.' . $product_id . '.nivel' => $nivel]);
+                session(['carrito.' . $product_id . '.faltan' => $faltan]);
+                
+                break;
+            }
+         
         }
+
         return $precio;
     }
 

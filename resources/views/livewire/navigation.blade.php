@@ -28,7 +28,7 @@
 
                
                 {{-- LOGO --}}
-                <div class="flex-1 sm:flex-none  flex items-center justify-center ml-10  sm:mx-0 ">
+                <div class="flex-1 sm:flex-none  flex items-center justify-center ml-8  sm:mx-0 ">
                     
                     <a href="/" class="flex-shrink-0 flex items-center">
                         {{-- DISPOSITIVOS PEQUEÑOS --}}
@@ -48,7 +48,7 @@
                         @livewire('buscador-productos', ['user' => '']) 
                 </div>
 
-                <div class=" sm:pl-5">
+                <div class="mr-12 sm:mr-0 sm:ml-12">
                     @livewire('cart.index', ['user' => ""])
                 </div>
 
@@ -56,6 +56,7 @@
 
                 @auth
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
+                        
                         
                         {{-- boton notificacion --}}
                         <button  class="hidden ml-2 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">

@@ -33,16 +33,9 @@ class ProductController extends Controller{
     public function show(Product $producto){
         $this->authorize('published',$producto);
         
-        $misma_categoria = Product::where('category_id', $producto->category_id)
-            ->where('id', '!=', $producto->id)
-            ->take(4)
-            ->get();
-        $misma_marca = Product::where('brand_id', $producto->brand_id)
-        ->where('id', '!=',$producto->id)
-        ->take(4)
-        ->get();
+      
 
-        return view('products.show', compact('producto', 'misma_categoria', 'misma_marca'));
+        return view('products.show', compact('producto'));
     }
 
     public function edit($id)
