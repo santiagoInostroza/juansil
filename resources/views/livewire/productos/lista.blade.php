@@ -105,7 +105,7 @@
                                 </x-jet-secondary-button>
                             @else
                                 <div class="w-max-content">
-                                    <i class="fas fa-shopping-cart mx-2 text-green-500"></i>
+                                    <i class="fas fa-shopping-cart mr-1 text-green-500"></i>
                                     <label for="cantidad_product_{{$product->id}}">
                                         <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                             wire:ignore 
