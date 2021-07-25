@@ -80,28 +80,27 @@
                                 </a>
                                 <div>
                                     <div class=" flex flex-col text-xs">
+                                        @if (session()->has('carrito.'.$product->id))
+                                            <div class="" id="producto_agregado_{{$product->id}}">
+                                                <div class="flex-1 flex mb-1">
+                                                    <x-jet-secondary-button onclick="return buscadorDisminuyeCantidad({{ $product->id }});" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+
+                                                    <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                                        wire:ignore 
+                                                        onchange="return buscadorSetCantidad({{ $product->id }});"  
+                                                        id='cantidad_producto_{{$product->id}}'  
+                                                        data-pid="{{$product->id}}"
+                                                    > 
+                                                    <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $product->id }});"  data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                </div>
+                                                <div>
                                         
-                                        <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
-                                            <div class="flex-1 flex mb-1">
-                                                <x-jet-secondary-button onclick="return buscadorDisminuyeCantidad({{ $product->id }});" data-pid="{{$product->id}}">-</x-jet-secondary-button>
-
-                                                <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
-                                                    wire:ignore 
-                                                    onchange="return buscadorSetCantidad({{ $product->id }});"  
-                                                    id='cantidad_producto_{{$product->id}}'  
-                                                    data-pid="{{$product->id}}"
-                                                > 
-                                                <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $product->id }});"  data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                    <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
+                                                        <i class="far fa-trash-alt mr-1"></i>  del carro
+                                                    </x-jet-danger-button>
+                                                </div>
                                             </div>
-                                            <div>
-                                       
-                                                 <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
-                                                     <i class="far fa-trash-alt mr-1"></i>  del carro
-                                                </x-jet-danger-button>
-                                            </div>
-                                        </div>
-
-                                        @if (!session()->has('carrito.'.$product->id))  
+                                        @else
                                             <x-jet-secondary-button wire:click="addToCart({{$product->id}})" class="" >
                                                 <i class="fas fa-cart-plus mr-1"></i> Agregar
                                             </x-jet-secondary-button>

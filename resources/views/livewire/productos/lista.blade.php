@@ -98,33 +98,24 @@
                     
                 
                     @if ($product->stock>0)
-                    <div class="text-center mt-4">
-                        <div class="@if (session()->has('carrito.'.$product->id)) hidden  @endif">
-                            <x-jet-secondary-button wire:click="addToCart({{$product->id}})"> <i class="fas fa-cart-plus mr-1" ></i> Agregar</x-jet-secondary-button>
+                        <div class="text-center mt-4">
+                            @if (!session()->has('carrito.'.$product->id))
+                                <x-jet-secondary-button wire:click="addToCart({{$product->id}})"> <i class="fas fa-cart-plus mr-1" ></i> Agregar</x-jet-secondary-button>
+                            @else
+                                <label for="cantidad_product_{{$product->id}}">
+                                    <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                        wire:ignore 
+                                        onchange="return listaSetCantidad({{ $product->id }})"  
+                                        id='cantidad_product_{{ $product->id }}'  
+                                        data-pid="{{ $product->id }}"
+                                    > 
+                                    <i class="fas fa-shopping-cart mr-2 text-gray-400"></i>
+                                </label>
+                                <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                                
+                                <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                            @endif
                         </div>
-                       
-                        <div class="@if (!session()->has('carrito.'.$product->id)) hidden  @endif">
-                            <label for="cantidad_product_{{$product->id}}">
-                                <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
-                                    wire:ignore 
-                                    onchange="return listaSetCantidad({{ $product->id }})"  
-                                    id='cantidad_product_{{ $product->id }}'  
-                                    data-pid="{{ $product->id }}"
-                                > 
-                                <i class="fas fa-shopping-cart mr-2 text-gray-400"></i>
-                            </label>
-                            <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
-                            
-                            <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
-                            
-                        </div>
-
-                    </div>
-
-
-
-
-
                     @else
                         <div class="text-center mt-4">
                             <div class="cursor-default inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm  focus:outline-none    transition ease-in-out duration-150" disabled> Agotado</div>
