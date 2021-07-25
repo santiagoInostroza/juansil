@@ -172,7 +172,7 @@
         } 
 
         function listaAumentaCantidad(pid, stock){
-            if(document.getElementById('cantidad_producto_' + pid).value>= stock){
+            if(document.getElementById('cantidad_product_' + pid).value >= stock){
                 alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
             }else{
                 var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
@@ -201,7 +201,7 @@
 
 
             let cantidad =1;
-                if(document.getElementById('cantidad_producto_' + pid).value>= stock){
+                if(document.getElementById('cantidad_product_' + pid).value>= stock){
                     alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
                     cantidad = stock;
                 }else{
