@@ -46,7 +46,7 @@
         @endif
         <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
             @foreach ($productos as $product)
-                <li class="border-b border-r  p-4 flex flex-col justify-between">
+                <li class="border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
                     <div class="w-full">
                         @if ($product->image)
                             <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
@@ -96,10 +96,10 @@
                     
                 
                     @if ($product->stock>0)
-                        <div class="text-center mt-4 relative">
+                        <div class="text-center mt-4 relative" >
                             @if (!session()->has('carrito.'.$product->id))
-                                <div wire:loading wire:target="addToCart({{$product->id}})" class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div>
-                                <x-jet-secondary-button wire:loading.remove  onclick="return addToCart({{$product->id}});"> 
+                                {{-- <div wire:loading wire:target="{{$product->id}}" class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div> --}}
+                                <x-jet-secondary-button onclick="return addToCart({{$product->id}});"> 
                                     <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                     Agregar
                                 </x-jet-secondary-button>
