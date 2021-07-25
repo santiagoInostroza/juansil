@@ -99,9 +99,11 @@
                 
                     @if ($product->stock>0)
                     <div class="text-center mt-4">
-                        @if (!session()->has('carrito.'.$product->id))  
-                            <x-jet-secondary-button wire:click="addToCart({{$product->id}})"> <i class="fas fa-cart-plus mr-1"></i> Agregar</x-jet-secondary-button>
-                        @else
+                        <div class="@if (session()->has('carrito.'.$product->id)) hidden  @endif">
+                            <x-jet-secondary-button wire:click="addToCart({{$product->id}})"> <i class="fas fa-cart-plus mr-1" ></i> Agregar</x-jet-secondary-button>
+                        </div>
+                       
+                        <div class="@if (!session()->has('carrito.'.$product->id)) hidden  @endif">
                             <label for="cantidad_product_{{$product->id}}">
                                 <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                     wire:ignore 
@@ -112,10 +114,10 @@
                                 <i class="fas fa-shopping-cart mr-2 text-gray-400"></i>
                             </label>
                             <x-jet-secondary-button x-on:click="listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
-                           
+                            
                             <x-jet-secondary-button x-on:click="listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
-                          
-                        @endif
+                            
+                        </div>
 
                     </div>
 
@@ -140,15 +142,16 @@
         </ul>
     </div>
 
+    @push('js')
     <script>
         function productosMain(){
             return{
                 listaAumentaCantidad: function(pid){
-                     var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
-                     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                         element.value=cantidad;
-                     });
-                     this.$wire.setCantidad( pid,cantidad)
+                    });
+                    this.$wire.setCantidad( pid,cantidad)
                 },
                 listaDisminuyeCantidad: function(pid){
                     if(document.getElementById('cantidad_product_' + pid).value <= 1){
@@ -177,8 +180,9 @@
                 },
 
             }
-        }
+        } 
     </script>
+@endpush
 
 
 </div>
