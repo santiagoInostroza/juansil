@@ -83,15 +83,15 @@
                                         
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
-                                                <x-jet-secondary-button x-on:click="disminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                                                <x-jet-secondary-button x-on:click="buscadorDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
 
                                                 <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                                     wire:ignore 
-                                                    @change="setCantidad({{ $product->id }})"  
+                                                    @change="buscadorSetCantidad({{ $product->id }})"  
                                                     id='cantidad_producto_{{$product->id}}'  
                                                     data-pid="{{$product->id}}"
                                                 > 
-                                                <x-jet-secondary-button x-on:click="aumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                <x-jet-secondary-button x-on:click="buscadorAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                             </div>
                                             <div>
                                        
@@ -137,7 +137,7 @@
         </div>
         
     </div>
-   
+    @push('js')
         <script>
             function buscadorMain() {
                 return {
@@ -149,7 +149,7 @@
                 
                     search: null,
 
-                 
+                
                     openSearch: function(){
                         this.searchIsOpen=true;
                         this.search = document.getElementById('buscar');
@@ -157,7 +157,7 @@
                             this.search.focus();
                         }, 300);
                     },
-                    aumentaCantidad: function(pid){
+                    buscadorAumentaCantidad: function(pid){
                         var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
@@ -165,9 +165,9 @@
                         
                         this.$wire.setCantidad( pid,cantidad)
                     },
-                    disminuyeCantidad: function(pid){
+                    buscadorDisminuyeCantidad: function(pid){
                         if(document.getElementById('cantidad_producto_' + pid).value <= 1){
-                           
+                        
                         }else{
                             let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
                             document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
@@ -176,7 +176,7 @@
                             this.$wire.setCantidad( pid,cantidad);
                         }
                     },
-                    setCantidad:function(pid){
+                    buscadorSetCantidad:function(pid){
                         let cantidad =1;
                         if(document.getElementById('cantidad_producto_' + pid).value<=1){
                             document.getElementById('cantidad_producto_' + pid).value = cantidad;
@@ -187,7 +187,7 @@
                             element.value=cantidad;
                         });
                         this.$wire.setCantidad( pid,cantidad);
-                       
+                    
                     },
                     limpiar_buscador:function(){
                         this.$wire.search ="";
@@ -198,6 +198,8 @@
                 }
             }
         </script>
+    @endpush
+        
 
 
 </div>
