@@ -73,14 +73,18 @@ class BuscadorProductos extends Component{
     }
 
     public function buscar(){
+        
         $this->searchIsOpen = false;
         $this->search2 = $this->search;
     }
 
-    public function updatedSearch(){
+     public function updatedSearch(){
         $this->emitTo('productos.lista','buscar',$this->search);
-        $this->search2 = $this->search;
-    }
+         $this->search2 = $this->search;
+     }
+     public function updatedSearch2(){
+        $this->emitTo('productos.lista','buscar',$this->search);
+     }
 
 
 }

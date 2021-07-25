@@ -21,10 +21,10 @@
 
                 <div class="flex justify-between items-center">
                     <div class="px-3 mb-1 flex relative flex-1">
-                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'>
+                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar' wire:keydown.enter='buscar()'>
                         <i class="fas fa-times absolute right-7 p-2 cursor-pointer text-gray-400" x-on:click="limpiar_buscador"></i>
                     </div>
-                    <x-jet-secondary-button wire:click="buscar()" class="mx-4">buscar</x-jet-secondary-button>
+                    <x-jet-secondary-button wire:click="buscar()"  class="mx-4">buscar</x-jet-secondary-button>
                 </div>
                 
                

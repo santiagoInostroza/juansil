@@ -39,7 +39,11 @@
     
     {{-- PRODUCTOS MAS VENDIDOS --}}
     <div x-data="productosMain()" x-init="">
-        <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Lista de productos</h2>
+        @if ($search != "")
+        <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Busqueda : {{$search}}</h2>
+        @else
+            <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Lista de productos</h2>
+        @endif
         <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
             @foreach ($productos as $product)
                 <li class="border-b border-r  p-4 flex flex-col justify-between">

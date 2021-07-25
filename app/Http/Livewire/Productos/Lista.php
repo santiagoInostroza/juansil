@@ -16,7 +16,27 @@ class Lista extends Component{
     protected $listeners = (['render','setCantidad','addToCart','removeFromCart','buscar']);
 
     public function render(){
-        $productos = Product::where('status','1')->where('name','!=','despacho')->where('name','like','%'. $this->search . "%")->orderBy('name','asc')->get();
+
+
+        $str = explode(' ', $this->search);
+
+        $productos = Product::where('status','1')->where('name','!=','despacho')->where(function($query) use($str) {
+            foreach($str as $s) {
+                $query = $query->where('name','like',"%" . $s . "%");
+            }
+        })
+        ->get();
+
+        $tags = Tag::where(function($query) use($str) {
+            foreach($str as $s) {
+                $query = $query->where('name','like',"%" . $s . "%");
+            }
+        })
+        ->orderBy('name','asc')->get();
+
+
+
+        // $productos = Product::where('status','1')->where('name','!=','despacho')->where('name','like','%'. $this->search . "%")->orderBy('name','asc')->get();
         return view('livewire.productos.lista', compact('productos'));
     }
 
