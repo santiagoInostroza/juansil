@@ -158,6 +158,7 @@
                         }, 300);
                     },
                     buscadorAumentaCantidad: function(pid){
+                        console.log(pid);
                         var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
