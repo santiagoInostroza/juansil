@@ -25,6 +25,7 @@ class CarritoController extends Controller{
                 'cantidad' => $cantidad,
                 'precio' => $precio,
                 'total' => $total,
+                'stock' => $producto->stock
             ];
 
         session([

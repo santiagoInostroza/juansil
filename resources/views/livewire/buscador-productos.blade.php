@@ -196,14 +196,14 @@
             }
             function buscadorDisminuyeCantidad(pid){
                 if(document.getElementById('cantidad_producto_' + pid).value <= 1){
-                        Livewire.emitTo('buscador-productos','removeFromCart', pid);
-                    }else{
-                        let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
-                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                            element.value=cantidad;
-                        });
-                        Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
-                    }
+                    Livewire.emitTo('buscador-productos','removeFromCart', pid);
+                }else{
+                    let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
+                }
             }
             function buscadorSetCantidad(pid,stock){
                 let cantidad =1;

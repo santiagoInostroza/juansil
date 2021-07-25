@@ -51,7 +51,73 @@
                 {{-- CUERPO --}}
                 <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                         @foreach (session('carrito') as $producto)
-                            @livewire('cart.item', ['producto' => $producto], key($producto['producto_id']))
+                        {{-- {{var_dump($producto)}} --}}
+                        <div class="pb-4 h-28 text-cool-gray-600 border-b-2 border-gray-200">
+                            <div class=" h-24 flex items-center justify-between relative ">
+                               
+                                <div class="w-16">
+                                    <img class="max-h-24 object-cover" src=" {{ Storage::url($producto['url']) }}" alt="">
+                                </div>
+                        
+                                {{-- NOMBRE --}}
+                                <div class="pl-1 sm:px-2 ml-2 sm:mx-4 w-2/3 sm:w-1/2">
+                                    <div class="font-bold">
+                                        {{ $producto['name'] }}
+                                    </div>
+                                    <div class="text-xs">
+                                        ${{ number_format($producto['precio'], 0, ',', '.') }}
+                                    </div>
+                                </div>
+                        
+                                {{-- CANTIDAD --}}
+                                <div class=" text-right w-20">
+                                    <label class="text-xs font-bold flex items-baseline justify-end">
+                                        <input wire:ignore id="carrito_cantidad_producto_{{ $producto['producto_id'] }}" class="w-10 inline-block text-right p-1 cantidad_producto_{{ $producto['producto_id'] }}" onchange="carritoSetCantidad({{ $producto['producto_id'] }}, {{ $producto['stock'] }});" value="{{$producto['cantidad']}}" type="number" > un.
+                                    </label>
+                                    <div>
+                                        ${{ number_format($producto['total'], 0, ',', '.') }}
+                                    </div>
+                                </div>
+                        
+                                {{-- BOTONES --}}
+                                <div x-data class="flex items-center justify-center ml-4 ">
+                                    <button class="cursor-pointer hover:bg-purple-100 rounded-full" onclick="return carritoDisminuyeCantidad({{ $producto['producto_id'] }})">
+                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </button>
+
+                                    <button class="cursor-pointer hover:bg-purple-100 rounded-full" onclick="return carritoAumentaCantidad({{ $producto['producto_id'] }}, {{ $producto['stock'] }})">
+                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="cursor-pointer hover:bg-purple-100 rounded-full p-1 sm:p-3 ml-1 sm:ml-5" onclick="return removeFromCart({{ $producto['producto_id'] }});">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                            @if (isset($msj) && $msj != '')
+                                <div class="text-red-700 text-sm ml-20 -mt-4">
+                                    {{ $msj }}
+                                </div>
+                            @elseif (isset($hasOfert) && $hasOfert == false)
+                        
+                            @elseif (isset($tipoPrecio) && $tipoPrecio == 1)
+                                <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg ml-20 -mt-4">
+                                    Agrega 
+                                    <span class="font-bold">{{ $cantFaltante }}</span> 
+                                    productos más, para activar la oferta
+                                </div>
+                            @elseif (isset($tipoPrecio) && $tipoPrecio == 2)
+                                <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg ml-20 -mt-4">
+                                    Precio de oferta aplicado
+                                    <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                            @endif
+                        
+                        
+                        </div>
+
                         @endforeach
                 </div>
     
@@ -84,6 +150,60 @@
                     animate: @entangle('openCarrito')
                 }
             }
+
+
+            function carritoAumentaCantidad(pid, stock){
+                if(document.getElementById('carrito_cantidad_producto_' + pid).value>= stock){
+                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                }else{
+                    var cantidad =  ++document.getElementById('carrito_cantidad_producto_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('cart.index','setCantidad', pid,cantidad);
+                }
+            }
+
+
+            function carritoDisminuyeCantidad(pid){
+                if(document.getElementById('carrito_cantidad_producto_' + pid).value <= 1){
+                    
+                }else{
+                    let cantidad =  --document.getElementById('carrito_cantidad_producto_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('cart.index','setCantidad', pid,cantidad);
+                }
+            }
+
+            function removeFromCart(pid){
+                Livewire.emitTo('cart.index','removeFromCart', pid);
+               
+            }
+
+            function carritoSetCantidad(pid, stock){
+                let cantidad =1;
+                if(document.getElementById('carrito_cantidad_producto_' + pid).value>= stock){
+                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                    cantidad = stock;
+                }else{
+                    
+                    if(document.getElementById('carrito_cantidad_producto_' + pid).value<=1){
+                        document.getElementById('carrito_cantidad_producto_' + pid).value = cantidad;
+                    }else{
+                        cantidad =  document.getElementById('carrito_cantidad_producto_' + pid).value;
+                    }
+                    
+                }
+                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    element.value=cantidad;
+                });
+                Livewire.emitTo('cart.index','setCantidad', pid,cantidad);
+
+            }
+
+
         </script>
     @endpush
 </div>
