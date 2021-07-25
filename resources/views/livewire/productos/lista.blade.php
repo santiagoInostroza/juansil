@@ -98,7 +98,7 @@
                     @if ($product->stock>0)
                         <div class="text-center mt-4 relative">
                             @if (!session()->has('carrito.'.$product->id))
-                                <div wire:loading class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div>
+                                <div wire:loading wire:target="addToCart({{$product->id}})" class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div>
                                 <x-jet-secondary-button wire:loading.remove  onclick="return addToCart({{$product->id}});"> 
                                     <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                     Agregar
