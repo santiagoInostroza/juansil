@@ -12,7 +12,7 @@ use App\Http\Controllers\CarritoController;
 class Lista extends Component{
     private $productos;
     private $destacados;
-    protected $listeners = (['render','setCantidad']);
+    protected $listeners = (['render','setCantidad','addToCart','removeFromCart']);
 
     public function render()
     {
@@ -41,6 +41,10 @@ class Lista extends Component{
        $carrito = new CarritoController();
        $carrito->deleteFromCart($product_id);
        $this->emitTo('cart.index','render');
+       $this->dispatchBrowserEvent('alerta_timer', [
+        'icon' => 'success',
+        'msj' => "Eliminado del carrito",
+    ]); 
    }
 
     

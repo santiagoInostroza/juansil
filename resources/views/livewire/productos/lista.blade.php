@@ -98,9 +98,9 @@
                     
                 
                     @if ($product->stock>0)
-                        <div class="text-center mt-4">
+                        <div class="text-center mt-4 relative">
                             @if (!session()->has('carrito.'.$product->id))
-                                <x-jet-secondary-button wire:click="addToCart({{$product->id}})"> <i class="fas fa-cart-plus mr-1" ></i> Agregar</x-jet-secondary-button>
+                                <x-jet-secondary-button onclick="return addToCart({{$product->id}});"> <i class="fas fa-cart-plus mr-1" ></i> Agregar</x-jet-secondary-button>
                             @else
                                 <label for="cantidad_product_{{$product->id}}">
                                     <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
@@ -114,6 +114,10 @@
                                 <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                                 
                                 <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+
+                                <x-jet-danger-button onclick="return removeFromCart({{ $product->id }});" class="m-1 ml-5" >
+                                    <i class="far fa-trash-alt"></i> 
+                                </x-jet-danger-button>
                             @endif
                         </div>
                     @else
@@ -177,6 +181,15 @@
                 element.value=cantidad;
             });
             Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+        }
+
+        function addToCart(pid){
+           
+            Livewire.emitTo('productos.lista','addToCart', pid);
+        }
+        function removeFromCart(pid){
+           
+            Livewire.emitTo('productos.lista','removeFromCart', pid);
         }
     </script>
 @endpush

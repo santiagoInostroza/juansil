@@ -52,7 +52,8 @@ class BuscadorProductos extends Component{
         $carrito = new CarritoController();
         $carrito->addToCart($product_id,1);
         $this->emitTo('cart.index','render');
-         $this->dispatchBrowserEvent('alerta_timer', [
+        $this->emitTo('productos.lista','render');
+        $this->dispatchBrowserEvent('alerta_timer', [
             'icon' => 'success',
             'msj' => "Agregado al carrito",
         ]); 
@@ -64,6 +65,10 @@ class BuscadorProductos extends Component{
         $carrito->deleteFromCart($product_id);
         $this->emitTo('cart.index','render');
         $this->emitTo('productos.lista','render');
+        $this->dispatchBrowserEvent('alerta_timer', [
+            'icon' => 'success',
+            'msj' => "Eliminado del carrito",
+        ]); 
     }
 
 
