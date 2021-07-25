@@ -12,12 +12,17 @@ use App\Http\Controllers\CarritoController;
 class Lista extends Component{
     private $productos;
     private $destacados;
-    protected $listeners = (['render','setCantidad','addToCart','removeFromCart']);
+    public $search;
+    protected $listeners = (['render','setCantidad','addToCart','removeFromCart','buscar']);
 
-    public function render()
-    {
-        $productos = Product::where('status','1')->where('name','!=','despacho')->orderBy('name','asc')->get();
+    public function render(){
+        $productos = Product::where('status','1')->where('name','!=','despacho')->where('name','like','%'. $this->search . "%")->orderBy('name','asc')->get();
         return view('livewire.productos.lista', compact('productos'));
+    }
+
+    public function buscar($search){
+        $this->search = $search;
+
     }
 
     public function setCantidad($product_id,$cantidad){

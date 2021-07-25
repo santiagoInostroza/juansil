@@ -10,6 +10,7 @@ use Livewire\Component;
 class BuscadorProductos extends Component{
 
     public $search;
+    public $search2;
     public $searchIsOpen = false;
     public $type_selected = 1;
     public $cantidad = 1;
@@ -69,6 +70,16 @@ class BuscadorProductos extends Component{
             'icon' => 'success',
             'msj' => "Eliminado del carrito",
         ]); 
+    }
+
+    public function buscar(){
+        $this->searchIsOpen = false;
+        $this->search2 = $this->search;
+    }
+
+    public function updatedSearch(){
+        $this->emitTo('productos.lista','buscar',$this->search);
+        $this->search2 = $this->search;
     }
 
 
