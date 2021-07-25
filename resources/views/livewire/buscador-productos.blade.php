@@ -96,7 +96,7 @@
                                                 <div>
                                         
                                                     <x-jet-danger-button wire:click="removeFromCart({{ $product->id }})" >
-                                                        <i class="far fa-trash-alt mr-1"></i>  del carro
+                                                        <i class="far fa-trash-alt mr-1"></i>  
                                                     </x-jet-danger-button>
                                                 </div>
                                             </div>
