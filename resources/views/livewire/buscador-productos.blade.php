@@ -19,9 +19,7 @@
                 </div>
 
                 <div class="px-3 mb-1 flex">
-                    <input 
-                    {{-- wire:ignore  --}}
-                    type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'
+                    <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'
                     >
                     <i class="fas fa-times absolute right-7 p-2 cursor-pointer text-gray-400" x-on:click="limpiar_buscador"></i>
                 </div>
@@ -88,12 +86,12 @@
                                                 <x-jet-secondary-button x-on:click="buscadorDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
 
                                                 <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
-                                                    {{-- wire:ignore  --}}
+                                                    wire:ignore 
                                                     @change="buscadorSetCantidad({{ $product->id }})"  
                                                     id='cantidad_producto_{{$product->id}}'  
                                                     data-pid="{{$product->id}}"
                                                 > 
-                                                <x-jet-secondary-button x-on:click="buscadorAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $product->id }});"  data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                             </div>
                                             <div>
                                        
@@ -199,6 +197,15 @@
                     }
                 
                 }
+            }
+            function buscadorAumentaCantidad(pid){
+                console.log(pid);
+                        var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                            element.value=cantidad;
+                        });
+                        
+                        this.$wire.setCantidad( pid,cantidad)
             }
         </script>
     @endpush
