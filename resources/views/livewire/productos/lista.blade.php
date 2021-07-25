@@ -59,15 +59,9 @@
         
                            <div class="max-w-full">
                                {{$product->name}}
-                            </div> 
-                           
-                           
-                          
+                            </div>                           
                         </div>
-                        
-                    
                     </div>
-                  
 
                     <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center max-w-full">
                     
@@ -104,16 +98,17 @@
                     @if ($product->stock>0)
                         <div class="text-center mt-4 relative">
                             @if (!session()->has('carrito.'.$product->id))
-                                <x-jet-secondary-button  onclick="return addToCart({{$product->id}});"> 
+                                <div wire:loading class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div>
+                                <x-jet-secondary-button wire:loading.remove  onclick="return addToCart({{$product->id}});"> 
                                     <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                     Agregar
                                 </x-jet-secondary-button>
                             @else
                                 <i class="fas fa-shopping-cart mx-2 text-green-500"></i>
                                 <label for="cantidad_product_{{$product->id}}">
-                                    <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                    <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                         wire:ignore 
-                                        onchange="return listaSetCantidad({{ $product->id }})"  
+                                        onchange="return listaSetCantidad({{ $product->id }}, {{ $product->stock }})"  
                                         id='cantidad_product_{{ $product->id }}'  
                                         data-pid="{{ $product->id }}"
                                     > 
@@ -121,7 +116,7 @@
                                 </label>
                                 <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                                 
-                                <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }}, {{ $product->stock }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                                
                             @endif
                         </div>
@@ -176,13 +171,18 @@
             }
         } 
 
-        function listaAumentaCantidad(pid){
-            var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
-            document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                element.value=cantidad;
-            });
-            Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+        function listaAumentaCantidad(pid, stock){
+            if(document.getElementById('cantidad_producto_' + pid).value>= stock){
+                alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+            }else{
+                var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    element.value=cantidad;
+                });
+                Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+            }           
         }
+
 
         function listaDisminuyeCantidad(pid){
             if(document.getElementById('cantidad_product_' + pid).value <= 1){
@@ -196,18 +196,27 @@
             }
         }
 
-        function listaSetCantidad(pid){
+
+        function listaSetCantidad(pid, stock){
+
+
             let cantidad =1;
-            if(document.getElementById('cantidad_product_' + pid).value<=1){
-                document.getElementById('cantidad_product_' + pid).value = cantidad;
-            }else{
-                cantidad =  document.getElementById('cantidad_product_' + pid).value;
-            }
-            document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                element.value=cantidad;
-            });
-            Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+                if(document.getElementById('cantidad_producto_' + pid).value>= stock){
+                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                    cantidad = stock;
+                }else{
+                    if(document.getElementById('cantidad_product_' + pid).value<=1){
+                        document.getElementById('cantidad_product_' + pid).value = cantidad;
+                    }else{
+                        cantidad =  document.getElementById('cantidad_product_' + pid).value;
+                    }
+                }
+                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    element.value=cantidad;
+                });
+                Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);            
         }
+
 
         function addToCart(pid){
            

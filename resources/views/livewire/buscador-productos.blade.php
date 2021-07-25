@@ -83,28 +83,46 @@
                                     </div> 
                                 </a>
                                 <div>
-                                    <div class=" flex flex-col text-xs">
-                                        @if (session()->has('carrito.'.$product->id))
-                                            <div class="" id="producto_agregado_{{$product->id}}">
-                                                <div class="flex-1 flex mb-1">
-                                                    <x-jet-secondary-button onclick="return buscadorDisminuyeCantidad({{ $product->id }});" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                                    @if ($product->stock>0)
+                                        <div class=" flex flex-col text-xs">
+                                            @if (session()->has('carrito.'.$product->id))
+                                                <div class="" id="producto_agregado_{{$product->id}}">
+                                                    <div class="flex-1 flex mb-1">
+                                                        <x-jet-secondary-button onclick="return buscadorDisminuyeCantidad({{ $product->id }});" data-pid="{{$product->id}}">-</x-jet-secondary-button>
 
-                                                    <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
-                                                        wire:ignore 
-                                                        onchange="return buscadorSetCantidad({{ $product->id }});"  
-                                                        id='cantidad_producto_{{$product->id}}'  
-                                                        data-pid="{{$product->id}}"
-                                                    > 
-                                                    <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $product->id }});"  data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                        <input type="number" min="1" class="p-1 w-8 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                                            wire:ignore 
+                                                            onchange="return buscadorSetCantidad({{ $product->id }}, {{$product->stock}});"  
+                                                            id='cantidad_producto_{{$product->id}}'  
+                                                            data-pid="{{$product->id}}"
+                                                        > 
+                                                       
+                                                        <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $product->id }}, {{$product->stock}});"  data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @else
-                                            <x-jet-secondary-button wire:click="addToCart({{$product->id}})" class="" >
-                                                <i class="fas fa-cart-plus m-1"></i> Agregar
-                                            </x-jet-secondary-button>
-                                        @endif
+                                            @else
+                                                <x-jet-secondary-button wire:click="addToCart({{$product->id}})" class="" >
+                                                    <i class="fas fa-cart-plus m-1"></i> Agregar
+                                                </x-jet-secondary-button>
+                                            @endif
+                                        </div>
+                                    @else
+                                        <div class="text-center mt-4">
+                                            <div class="cursor-default inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm  focus:outline-none    transition ease-in-out duration-150" disabled> Agotado</div>
+                                        </div>
+                                    @endif
+
+
+
+
+
+
+
+
+
+
                                        
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <hr>
@@ -162,13 +180,19 @@
                 
                 }
             }
-            function buscadorAumentaCantidad(pid){
-                console.log(pid);
-                var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                    element.value=cantidad;
-                });
-                Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
+            function buscadorAumentaCantidad(pid,stock){
+               
+                if(document.getElementById('cantidad_producto_' + pid).value>= stock){
+                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                }else{
+                    var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
+                }
+                
+               
             }
             function buscadorDisminuyeCantidad(pid){
                 if(document.getElementById('cantidad_producto_' + pid).value <= 1){
@@ -181,17 +205,29 @@
                         Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
                     }
             }
-            function buscadorSetCantidad(pid){
+            function buscadorSetCantidad(pid,stock){
                 let cantidad =1;
-                if(document.getElementById('cantidad_producto_' + pid).value<=1){
-                    document.getElementById('cantidad_producto_' + pid).value = cantidad;
+                if(document.getElementById('cantidad_producto_' + pid).value>= stock){
+                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                    cantidad = stock;
                 }else{
-                    cantidad =  document.getElementById('cantidad_producto_' + pid).value;
+                    
+                    if(document.getElementById('cantidad_producto_' + pid).value<=1){
+                        document.getElementById('cantidad_producto_' + pid).value = cantidad;
+                    }else{
+                        cantidad =  document.getElementById('cantidad_producto_' + pid).value;
+                    }
+                    
                 }
                 document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                     element.value=cantidad;
                 });
                 Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
+
+
+
+
+               
             }
         </script>
     @endpush

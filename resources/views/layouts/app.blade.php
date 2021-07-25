@@ -43,11 +43,6 @@
             </main>
         </div>
 
-        @stack('modals')
-        @stack('js')
-        @livewireScripts
-
-        {{-- ALERTAS --}}
         <script>
             window.addEventListener('alerta_express', event => {
                 // alert(event.detail.msj);
@@ -73,8 +68,35 @@
                 })
             
             })
+
+         
+
+
+            function alerta_timer(data = ""){
+
+                position =(data.position)?data.position:'center';
+                icon =(data.icon)?data.icon:'success';
+                title =(data.title)?data.title:'ingresa texto';
+                timer =(data.timer)?data.timer: 1000;
+
+                Swal.fire({
+                    position: position,
+                    icon: icon,
+                    title: title,
+                    showConfirmButton: false,
+                    timer: timer,
+                });
+
+            }
     
         </script>
+
+        @stack('modals')
+        @stack('js')
+        @livewireScripts
+
+        {{-- ALERTAS --}}
+      
    
 
         @isset($js)

@@ -10,7 +10,7 @@ class Index extends Component
     public $eliminado;
     public $listaProductos = [];
 
-    public $openCarrito = 'false';
+    public $openCarrito = false;
 
 
     protected $listeners = (['addToCart', 'deleteFromCart','addToCart','productToCart','cartToProduct','updateTotal','openCarrito','render']);
