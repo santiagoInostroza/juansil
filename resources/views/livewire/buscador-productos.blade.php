@@ -204,8 +204,8 @@
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
                         });
-                        
-                        this.$wire.setCantidad( pid,cantidad)
+                        Livewire.emit('setCantidad',pid,cantidad)
+                        // this.$wire.setCantidad( pid,cantidad)
             }
         </script>
     @endpush
