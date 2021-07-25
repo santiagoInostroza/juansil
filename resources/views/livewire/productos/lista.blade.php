@@ -104,18 +104,16 @@
                                     Agregar
                                 </x-jet-secondary-button>
                             @else
-                                <i class="fas fa-shopping-cart mx-2 text-green-500"></i>
-                                <label for="cantidad_product_{{$product->id}}">
-                                    <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
-                                        wire:ignore 
-                                        onchange="return listaSetCantidad({{ $product->id }}, {{ $product->stock }})"  
-                                        id='cantidad_product_{{ $product->id }}'  
-                                        data-pid="{{ $product->id }}"
-                                    > 
-                                    
-                                </label>
                                 <div class="w-max-content">
-
+                                    <i class="fas fa-shopping-cart mx-2 text-green-500"></i>
+                                    <label for="cantidad_product_{{$product->id}}">
+                                        <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
+                                            wire:ignore 
+                                            onchange="return listaSetCantidad({{ $product->id }}, {{ $product->stock }})"  
+                                            id='cantidad_product_{{ $product->id }}'  
+                                            data-pid="{{ $product->id }}"
+                                        > 
+                                    </label>
                                     <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                                     
                                     <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }}, {{ $product->stock }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
