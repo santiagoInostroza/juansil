@@ -83,11 +83,11 @@
                                         
                                         <div class="@if (!session()->has('carrito.'.$product->id)) hidden @endif" id="producto_agregado_{{$product->id}}">
                                             <div class="flex-1 flex mb-1">
-                                                <x-jet-secondary-button x-on:click="buscadorDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                                                <x-jet-secondary-button onclick="return buscadorDisminuyeCantidad({{ $product->id }});" data-pid="{{$product->id}}">-</x-jet-secondary-button>
 
                                                 <input type="number" min="1" class="p-1 w-7 text-center cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                                     wire:ignore 
-                                                    @change="buscadorSetCantidad({{ $product->id }})"  
+                                                    onchange="return buscadorSetCantidad({{ $product->id }});"  
                                                     id='cantidad_producto_{{$product->id}}'  
                                                     data-pid="{{$product->id}}"
                                                 > 
@@ -157,39 +157,6 @@
                             this.search.focus();
                         }, 300);
                     },
-                    buscadorAumentaCantidad: function(pid){
-                        console.log(pid);
-                        var cantidad =  ++document.getElementById('cantidad_producto_' + pid).value;
-                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                            element.value=cantidad;
-                        });
-                        
-                        this.$wire.setCantidad( pid,cantidad)
-                    },
-                    buscadorDisminuyeCantidad: function(pid){
-                        if(document.getElementById('cantidad_producto_' + pid).value <= 1){
-                        
-                        }else{
-                            let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
-                            document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                                element.value=cantidad;
-                            });
-                            this.$wire.setCantidad( pid,cantidad);
-                        }
-                    },
-                    buscadorSetCantidad:function(pid){
-                        let cantidad =1;
-                        if(document.getElementById('cantidad_producto_' + pid).value<=1){
-                            document.getElementById('cantidad_producto_' + pid).value = cantidad;
-                        }else{
-                            cantidad =  document.getElementById('cantidad_producto_' + pid).value;
-                        }
-                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                            element.value=cantidad;
-                        });
-                        this.$wire.setCantidad( pid,cantidad);
-                    
-                    },
                     limpiar_buscador:function(){
                         this.$wire.search ="";
                         document.getElementById('buscar').value = "";
@@ -204,8 +171,31 @@
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
                         });
-                        Livewire.emit('setCantidad',pid,cantidad)
+                        Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
                         // this.$wire.setCantidad( pid,cantidad)
+            }
+            function buscadorDisminuyeCantidad(pid){
+                if(document.getElementById('cantidad_producto_' + pid).value <= 1){
+                        
+                    }else{
+                        let cantidad =  --document.getElementById('cantidad_producto_' + pid).value;
+                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                            element.value=cantidad;
+                        });
+                        Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
+                    }
+            }
+            function buscadorSetCantidad(pid){
+                let cantidad =1;
+                if(document.getElementById('cantidad_producto_' + pid).value<=1){
+                    document.getElementById('cantidad_producto_' + pid).value = cantidad;
+                }else{
+                    cantidad =  document.getElementById('cantidad_producto_' + pid).value;
+                }
+                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    element.value=cantidad;
+                });
+                Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
             }
         </script>
     @endpush

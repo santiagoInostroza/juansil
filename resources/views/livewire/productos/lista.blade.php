@@ -107,15 +107,15 @@
                             <label for="cantidad_product_{{$product->id}}">
                                 <input type="number" min="1" class="p-1 w-7 text-center text-gray-500 cantidad_producto_{{$product->id}}" value="{{ (isset(session('carrito')[$product->id])) ? session('carrito')[$product->id]['cantidad']:'1' }}"
                                     wire:ignore 
-                                    @change="setCantidad({{ $product->id }})"  
+                                    onchange="return listaSetCantidad({{ $product->id }})"  
                                     id='cantidad_product_{{ $product->id }}'  
                                     data-pid="{{ $product->id }}"
                                 > 
                                 <i class="fas fa-shopping-cart mr-2 text-gray-400"></i>
                             </label>
-                            <x-jet-secondary-button x-on:click="listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
+                            <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $product->id }})" data-pid="{{$product->id}}">-</x-jet-secondary-button>
                             
-                            <x-jet-secondary-button x-on:click="listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
+                            <x-jet-secondary-button onclick="return listaAumentaCantidad({{ $product->id }})" data-pid="{{$product->id}}">+</x-jet-secondary-button>
                             
                         </div>
 
@@ -153,34 +153,40 @@
                     });
                     this.$wire.setCantidad( pid,cantidad)
                 },
-                listaDisminuyeCantidad: function(pid){
-                    if(document.getElementById('cantidad_product_' + pid).value <= 1){
-                        
-                    }else{
-                        let cantidad =  --document.getElementById('cantidad_product_' + pid).value;
-                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                            element.value=cantidad;
-                        });
-                        this.$wire.setCantidad( pid,cantidad);
-                    }
-                },
-                setCantidad:function(pid){
-                    let cantidad =1;
-                    if(document.getElementById('cantidad_product_' + pid).value<=1){
-                        document.getElementById('cantidad_product_' + pid).value = cantidad;
-                    }else{
-                        cantidad =  document.getElementById('cantidad_product_' + pid).value;
-                    }
-                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                        element.value=cantidad;
-                    });
-                    
-                    this.$wire.setCantidad( pid,cantidad);
-                    
-                },
-
             }
         } 
+
+        function listaAumentaCantidad(pid){
+            var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+            document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                element.value=cantidad;
+            });
+            Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+        }
+
+        function listaDisminuyeCantidad(pid){
+            if(document.getElementById('cantidad_product_' + pid).value <= 1){
+            }else{
+                let cantidad =  --document.getElementById('cantidad_product_' + pid).value;
+                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    element.value=cantidad;
+                });
+                Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+            }
+        }
+
+        function listaSetCantidad(pid){
+            let cantidad =1;
+            if(document.getElementById('cantidad_product_' + pid).value<=1){
+                document.getElementById('cantidad_product_' + pid).value = cantidad;
+            }else{
+                cantidad =  document.getElementById('cantidad_product_' + pid).value;
+            }
+            document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                element.value=cantidad;
+            });
+            Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+        }
     </script>
 @endpush
 

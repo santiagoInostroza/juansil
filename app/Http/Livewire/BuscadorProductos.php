@@ -13,7 +13,7 @@ class BuscadorProductos extends Component{
     public $searchIsOpen = false;
     public $type_selected = 1;
     public $cantidad = 1;
-    protected $listeners = (['render,setCantidad']);
+    protected $listeners = (['render','setCantidad']);
 
 
 
