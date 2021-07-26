@@ -5,25 +5,37 @@ namespace App\Http\Livewire\Productos;
 use App\Models\Product;
 use Livewire\Component;
 use App\Http\Controllers\CarritoController;
+use App\Models\Tag;
 
 class Show extends Component{
     public $producto;
     protected $listeners = (['render','setCantidad','removeFromCart','addToCart']);
 
+    public $tag;
     public function render(){
 
         $misma_categoria = Product::where('category_id', $this->producto->category_id)
         ->where('id', '!=', $this->producto->id)
-        ->take(4)
+        ->take(12)
         ->get();
 
         $misma_marca = Product::where('brand_id', $this->producto->brand_id)
         ->where('id', '!=',$this->producto->id)
-        ->take(4)
+        ->take(12)
         ->get();
 
+ 
+
+
+   
+       foreach ($this->producto->tags as $tag) {
+           $this->tag=$tag;
+            $mismas_etiquetas[$tag->name] =Product::with(['tags'=> function($query){
+                $query->where('tags.id','=',$this->tag->id);
+            }])->where('products.id', '!=',$this->producto->id)->get();
+        }
     
-        return view('livewire.productos.show',compact('misma_marca', 'misma_categoria'));
+        return view('livewire.productos.show',compact('misma_marca', 'misma_categoria','mismas_etiquetas'));
     }
 
   
