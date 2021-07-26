@@ -54,21 +54,22 @@
                     <div class=" flex flex-col text-xs">
                         @if (session()->has('carrito.'.$producto->id))
                           
-                                <div class="flex justify-center gap-2">
+                                <div class="flex justify-center items-center gap-2">
+                                    <i class="fas fa-shopping-cart text-green-500 text-xl"></i>
                                     <input type="number" min="1" class="p-1 w-12 text-center text-gray-500 text-xl font-bold cantidad_producto_{{$producto->id}}" value="{{ (isset(session('carrito')[$producto->id])) ? session('carrito')[$producto->id]['cantidad']:'1' }}"
                                         wire:ignore 
-                                        onchange="return buscadorSetCantidad({{ $producto->id }}, {{$producto->stock}});"  
-                                        id='cantidad_producto_{{$producto->id}}'  
+                                        onchange="return showSetCantidad({{ $producto->id }}, {{$producto->stock}});"  
+                                        id='show_cantidad_producto_{{$producto->id}}'  
                                         data-pid="{{$producto->id}}"
                                     > 
                                 
-                                    <x-jet-secondary-button onclick="return buscadorDisminuyeCantidad({{ $producto->id }});" data-pid="{{$producto->id}}">-</x-jet-secondary-button>
-                                    <x-jet-secondary-button onclick="return buscadorAumentaCantidad({{ $producto->id }}, {{$producto->stock}});"  data-pid="{{$producto->id}}">+</x-jet-secondary-button>
+                                    <x-jet-secondary-button onclick="return showDisminuyeCantidad({{ $producto->id }});" data-pid="{{$producto->id}}">-</x-jet-secondary-button>
+                                    <x-jet-secondary-button onclick="return showAumentaCantidad({{ $producto->id }}, {{$producto->stock}});"  data-pid="{{$producto->id}}">+</x-jet-secondary-button>
                                 </div>
                            
                         @else
                             <div>
-                                <x-jet-secondary-button wire:click="addToCart({{$producto->id}})" class="" >
+                                <x-jet-secondary-button onclick="addToCart({{$producto->id}})" class="" >
                                     <i class="fas fa-cart-plus m-1"></i> Agregar al carrito
                                 </x-jet-secondary-button>
 
@@ -103,7 +104,7 @@
                     @foreach ($misma_categoria as $producto)
 
                         <li class="mb-8 shadow-2xl" >
-                            <livewire:producto :producto='$producto'>
+                            {{-- <livewire:producto :producto='$producto'> --}}
                         </li>
                     @endforeach
 
@@ -117,7 +118,7 @@
                 <ul class="flex flex-wrap justify-around">
                     @foreach ($misma_marca as $producto)
                         <li class="mb-8 shadow-2xl">
-                            <livewire:producto :producto='$producto'>
+                            {{-- <livewire:producto :producto='$producto'> --}}
                         </li>
                     @endforeach
 
@@ -128,6 +129,60 @@
         </aside>
 
 
+        @push('js')
+            <script>
+                function showDisminuyeCantidad(pid){
+                    console.log('ok');
+                    if(document.getElementById('show_cantidad_producto_' + pid).value <= 1){
+                        Livewire.emitTo('productos.show','removeFromCart', pid);
+                    }else{
+                        let cantidad =  --document.getElementById('show_cantidad_producto_' + pid).value;
+                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                            element.value=cantidad;
+                        });
+                         Livewire.emitTo('productos.show','setCantidad', pid, cantidad);
+                    }
+                }
+
+                function showAumentaCantidad(pid, stock){
+                    if(document.getElementById('show_cantidad_producto_' + pid).value>= stock){
+                        alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                    }else{
+                        var cantidad =  ++document.getElementById('show_cantidad_producto_' + pid).value;
+                        document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                            element.value=cantidad;
+                        });
+                        Livewire.emitTo('productos.show','setCantidad', pid,cantidad);
+                    }
+                }
+
+                function showSetCantidad(pid, stock){
+                    let cantidad =1;
+                    if(document.getElementById('show_cantidad_producto_' + pid).value>= stock){
+                        alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                        cantidad = stock;
+                    }else{
+                        
+                        if(document.getElementById('show_cantidad_producto_' + pid).value<=1){
+                            document.getElementById('show_cantidad_producto_' + pid).value = cantidad;
+                        }else{
+                            cantidad =  document.getElementById('show_cantidad_producto_' + pid).value;
+                        }
+                        
+                    }
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('productos.show','setCantidad', pid,cantidad);
+                }
+
+                
+                function addToCart(pid){
+                    Livewire.emitTo('productos.show','addToCart', pid);
+                }
+
+            </script>
+        @endpush
 
 
 

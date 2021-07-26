@@ -191,6 +191,7 @@
                     Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
                 }
             }
+            
             function buscadorSetCantidad(pid,stock){
                 let cantidad =1;
                 if(document.getElementById('cantidad_producto_' + pid).value>= stock){
@@ -209,11 +210,6 @@
                     element.value=cantidad;
                 });
                 Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
-
-
-
-
-               
             }
         </script>
     @endpush

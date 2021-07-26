@@ -175,7 +175,6 @@
 
 
         function addToCart(pid){
-           
             Livewire.emitTo('productos.lista','addToCart', pid);
         }
 

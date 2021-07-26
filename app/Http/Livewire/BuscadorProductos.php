@@ -57,9 +57,7 @@ class BuscadorProductos extends Component{
         $this->dispatchBrowserEvent('alerta_timer', [
             'icon' => 'success',
             'msj' => "Agregado al carrito",
-        ]); 
-       
-
+        ]);
     }
     public function removeFromCart($product_id){
         $carrito = new CarritoController();
