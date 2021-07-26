@@ -16,12 +16,12 @@ class Show extends Component{
 
         $misma_categoria = Product::where('category_id', $this->producto->category_id)
         ->where('id', '!=', $this->producto->id)
-        ->take(12)
+        
         ->get();
 
         $misma_marca = Product::where('brand_id', $this->producto->brand_id)
         ->where('id', '!=',$this->producto->id)
-        ->take(12)
+        
         ->get();
 
  
@@ -35,7 +35,7 @@ class Show extends Component{
             ->where('products.id', '!=',$this->producto->id)
             ->where('product_tag.tag_id', '=',$tag->id)
             ->select('products.*')
-            ->take(12)->get();
+            ->get();
         }
     
         return view('livewire.productos.show',compact('misma_marca', 'misma_categoria','mismas_etiquetas'));
