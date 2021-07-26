@@ -29,10 +29,12 @@ class Show extends Component{
 
    
        foreach ($this->producto->tags as $tag) {
-           $this->tag=$tag;
-            $mismas_etiquetas[$tag->name] =Product::with(['tags'=> function($query){
-                $query->where('tags.id','=',$this->tag->id);
-            }])->where('products.id', '!=',$this->producto->id)->get();
+            $this->tag=$tag;
+
+            $mismas_etiquetas[$this->tag->name] =Product::join('product_tag','product_tag.id','=','products.id')
+            ->where('products.id', '!=',$this->producto->id)
+            ->where('product_tag.id', '=',$tag->id)
+            ->take(12)->get();
         }
     
         return view('livewire.productos.show',compact('misma_marca', 'misma_categoria','mismas_etiquetas'));
