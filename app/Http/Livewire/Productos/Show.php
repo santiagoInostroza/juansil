@@ -34,6 +34,7 @@ class Show extends Component{
             $mismas_etiquetas[$this->tag->name] =Product::join('product_tag','product_tag.id','=','products.id')
             ->where('products.id', '!=',$this->producto->id)
             ->where('product_tag.id', '=',$tag->id)
+            ->select('products.*')
             ->take(12)->get();
         }
     
