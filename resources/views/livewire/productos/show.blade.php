@@ -49,7 +49,7 @@
                 </div>
             </div>
             <hr>
-            <div class="fixed left-0 bottom-0 py-6 bg-white text-center w-full border-t mr-6 z-auto ">
+            <div class="fixed left-0 bottom-0 py-6 bg-white text-center w-full border-t mr-6" style="z-index: 1">
                 @if ($producto->stock>0)
                     <div class=" flex flex-col text-xs">
                         @if (session()->has('carrito.'.$producto->id))
@@ -97,7 +97,7 @@
 
        
 
-        <aside class="md:col-span-2 lg:col-span-3 xl:col-span-1 m-6">
+        <aside class="md:col-span-2 lg:col-span-3 xl:col-span-1 m-6 mb-20">
             
             @if (count($misma_categoria)>0)
                 <div>
@@ -385,7 +385,7 @@
   
 
         </aside>
-        <br><br><br><br><br><br><br><br>
+       
 
 
         @push('js')
