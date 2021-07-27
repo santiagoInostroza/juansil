@@ -1,11 +1,11 @@
 <div class="">
     <div x-data="routesCalendar()"  class="header sm:p-6">
         <div class="w-screen sm:max-w-screen-sm ">
-            <h1 class="text-2xl font-bold text-gray-600 py-4">Calendario Juansil</h1>
+            <h1 class="text-2xl font-bold text-gray-600 py-4 px-2">Calendario Juansil</h1>
 
          
 
-            <div class="">
+            <div class="px-2">
                     
                 <x-jet-secondary-button wire:click="$set('tipoBusqueda', 1)">Por mes</x-jet-secondary-button> 
                 <x-jet-secondary-button wire:click="$set('tipoBusqueda', 2)">Por rango</x-jet-secondary-button> 
