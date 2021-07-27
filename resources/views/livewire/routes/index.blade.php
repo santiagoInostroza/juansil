@@ -1,6 +1,6 @@
 <div class="">
     <div x-data="routesCalendar()"  class="header p-6">
-        <div class="w-max-content m-auto">
+        <div class="w-screen sm:max-w-screen-sm m-auto">
             <h1 class="text-2xl font-bold text-gray-600 py-4">Calendario Juansil</h1>
 
          
