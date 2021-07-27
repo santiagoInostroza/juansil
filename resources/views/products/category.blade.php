@@ -1,7 +1,5 @@
 <x-app-layout>
-   
-
-    <div class="container py-8">
+    {{-- <div class="container py-8">
 
         <h1 class="uppercase text-center text-3xl font-bold mb-10">Categoria: {{$category->name}}</h1>
 
@@ -19,7 +17,5 @@
             {{$products->links()}}
         </div>
 
-    </div>
-
-
+    </div> --}}
 </x-app-layout>

@@ -6,6 +6,7 @@ use App\Http\Livewire\Cart\Pagos;
 use App\Http\Livewire\Cart\Pedido;
 use App\Http\Livewire\Admin\Resumen;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RouteController;
 use App\Http\Livewire\Admin\Ventas\Venta;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriaController;
@@ -57,6 +58,7 @@ Route::post('flow2', function ($id) {
 Route::get('admin/home', Home::class)->middleware('can:admin.home')->name('admin.home2');
 Route::get('admin/resumen', Resumen::class)->name('admin.resumen');
 Route::get('admin/sales', App\Http\Livewire\Admin\Sales\SaleController::class)->name('admin.sales');
+
 
 
 

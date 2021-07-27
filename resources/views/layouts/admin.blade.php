@@ -143,6 +143,11 @@
                                 href="{{route('admin.sales')}}"><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
                                 Ventas</a>
                         </li>
+                        <li class="items-center">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                                href="{{route('routes.index')}}"><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
+                                Calendario</a>
+                        </li>
                         {{-- <li class="items-center">
                             <a class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                                 href="#/landing"><i class="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>
@@ -258,16 +263,18 @@
 
             <!-- Header -->
             @isset($titulo)
-            
                 <div class="relative bg-gray-900 md:py-10 py-0">
                 </div>
                 <div class=" bg-gray-700 text-gray-200">
                     <h1 class="mx-auto px-4 sm:px-6 lg:px-8 p-4 text-2xl" style="max-width:100rem">{{$titulo}}</h1>
                 </div>
             @endisset
-            <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-12" style="max-width: 100rem">
-                {{$slot}}
-            </div>
+            @isset($slot)
+                <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-12" style="max-width: 100rem">
+                    {{$slot}}
+                </div>
+            @endisset
+            @yield('content')
 
         </div>
     </div>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container py-12 grid grid-cols-12 gap-6">
+    {{-- <div class="container py-12 grid grid-cols-12 gap-6">
         <div class="col-span-7">
             <article class="card">
                 <div class="card-body">
@@ -18,5 +18,5 @@
         <div class="col-span-4">
                 @livewire('billings.product-pay', ['product' => $product])
         </div>
-    </div>
+    </div> --}}
 </x-app-layout>
