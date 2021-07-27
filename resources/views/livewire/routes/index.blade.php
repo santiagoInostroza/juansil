@@ -1,6 +1,6 @@
 <div class="">
-    <div x-data="routesCalendar()"  class="header p-6">
-        <div class="w-screen sm:max-w-screen-sm m-auto">
+    <div x-data="routesCalendar()"  class="header sm:p-6">
+        <div class="w-screen sm:max-w-screen-sm ">
             <h1 class="text-2xl font-bold text-gray-600 py-4">Calendario Juansil</h1>
 
          
@@ -31,7 +31,7 @@
                 
             </div>
            
-            <div class="grid grid-cols-7 gap-3 ">
+            <div class="grid grid-cols-7 gap-2 text-sm sm:text-base">
             
                         @foreach ($period as $fecha)
                         {{-- {{$fecha->format('N')}} --}}
@@ -98,7 +98,7 @@
                                 <div>Jueves</div>
                                 <div>Viernes</div>
                                 <div>Sabado</div>
-                                <div>Domingo</div>
+                                <div>Dom</div>
 
 
                                 @for ($i = 1; $i <= 7; $i++)
