@@ -31,7 +31,7 @@
                 
             </div>
            
-            <div class="grid grid-cols-7 gap-2 text-sm sm:text-base">
+            <div class="grid grid-cols-7 gap-2 text-sm sm:text-base p-2">
             
                         @foreach ($period as $fecha)
                         {{-- {{$fecha->format('N')}} --}}
