@@ -6,12 +6,12 @@
             <div>
                 <img src="{{url('images/comunas.png')}}" alt="">
             </div>
-            <div class="w-screen overflow-auto pr-10">
+            <div class="">
                 <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-gray-200 ">
                             <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -40,13 +40,8 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($comunas as $comuna)
-                                    <tr class=" @if($comuna->tiene_reparto)   @else disabled bg-gray-200 text-gray-100 @endif " id="comuna_{{$comuna->id}}"
-                                        data-nombre="{{$comuna->name}}"
-                                        data-valor_despacho="{{$comuna->valor_despacho}}"
-                                        data-sector="{{$comuna->sector}}"
-                                        data-dias_rebajados="{{$comuna->dias_rebajados}}"
-                                        data-valor_rebajado="{{$comuna->valor_rebajado}}"
-                                        data-tiene_reparto="{{$comuna->tiene_reparto}}"
+                                    <tr class=" hover:bg-gray-300 @if($comuna->tiene_reparto)   @else  bg-gray-200 text-gray-100 @endif "
+                                      
                                     >
                                         <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -94,7 +89,7 @@
                                                         </div>
                                                     @endforeach 
                                                 </div>
-                                                <div class="text-xl">
+                                                <div class="text-xl font-hairline ml-2">
                                                     {{($comuna->valor_rebajado!=0)?"$" . number_format($comuna->valor_rebajado,0,',','.'): ""}}
                                                 </div>
                                             </div>
