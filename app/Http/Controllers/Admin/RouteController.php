@@ -16,6 +16,11 @@ class RouteController extends Controller
     {
        return view('admin.routes.index');
     }
+    public function sectors()
+    {
+       
+       return view('admin.routes.sectors');
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -71,7 +71,7 @@ class BuscadorProductos extends Component{
     }
 
     public function buscar(){
-        
+       
         $this->searchIsOpen = false;
         $this->search2 = $this->search;
     }

@@ -148,6 +148,11 @@
                                 href="{{route('routes.index')}}"><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
                                 Calendario</a>
                         </li>
+                        <li class="items-center">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                                href="{{route('routes.sectors')}}"><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
+                                Sectores</a>
+                        </li>
                         {{-- <li class="items-center">
                             <a class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                                 href="#/landing"><i class="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>

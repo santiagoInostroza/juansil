@@ -55,11 +55,11 @@
 <div class="flex justify-start bg-gradient-to-r from-white to-gray-200">
    <div class="my-20 px-20" >
       <h2 class=" text-3xl sm:text-5xl text-red-500 font-hairline">Explora nuestros <span class="font-bold font-sans text-5xl inline-block -mt-5 mb-5 sm:mb-0 sm:mt-0">productos</span></h2>
-      
       <p class="text-gray-600 max-w-md">
-         En <span class="font-extrabold">Juansil</span> queremos que te cuides. Es por eso que trabajamos para llevarte los productos directamente a tú casa. 
-         <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br>
+         <span class="font-extrabold"></span>Somos un joven emprendimiento y lucharemos por hacer crecer nuestra variedad de productos para que no te falte nada.
       </p>
+      
+     
       <div class="my-8 flex justify-between items-center gap-1 sm:gap-6 p-2 max-w-xs sm:max-w-md sm:w-max-content">
          <a href="{{route('products.lista')}}">
             <img class="object-cover rounded-full h-20 sm:h-32 w-20 sm:w-32 bg-gray-800 " src="{{url('images/min/leche_min.jpg')}}" alt="">
@@ -88,15 +88,23 @@
       </div>
     </div>
 
-   <div class="flex justify-end bg-gradient-to-r from-gray-200 via-white to-white">
+   <div class="flex flex-col-reverse sm:flex-row justify-between items-center | bg-gradient-to-r from-gray-200 via-white to-white | pb-20  mb-10 sm:p-20">
+      <div>
+         <img class="object-cover max-w-xs sm:max-w-sm " src="{{url('images/portada/repartidor.jpg')}}" alt="">
+      </div>
 
-      <div class="my-20 px-20">
-         <h2 class="text-5xl text-red-500 font-hairline"> Estamos <span class="font-bold font-sans">Creciendo</span></h2>
-         
+      <div class="my-20 px-20 filter drop-shadow-lg">
+         <h2 class="text-4xl sm:text-5xl text-red-500 font-hairline"> Directo a tu <span class="block font-bold font-sans text-5xl -mt-4 sm:mt-0">Domicilio</span></h2>
+
          <p class="text-gray-600 max-w-md">
-            <span class="font-extrabold"></span>Somos un joven emprendimiento y lucharemos por hacer crecer nuestra variedad de productos para que no te falte nada.
-            <br><span class="font-bold text-red-500"> Nuestro desafio es entregarte el mejor servicio... </span><br>
+            En 
+            <span class="font-extrabold">Juansil</span> 
+            queremos que te cuides. Es por eso que trabajamos para llevarte los productos directamente a tu casa. 
+            <br><span class="font-bold text-red-500"> Nuestro desafío es entregarte el mejor servicio... </span><br>
+            <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br>
          </p>
+         
+        
       
       </div>
       

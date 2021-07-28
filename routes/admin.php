@@ -50,6 +50,8 @@ Route::resource('roles',  RoleController::class)->names('admin.roles');
 Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->name('admin.sales.pagos_pendientes');
 
 Route::resource('routes', RouteController::class)->names('routes');
+Route::get('sectors',[RouteController::class,'sectors'])->name('routes.sectors');
+
 
 
 
