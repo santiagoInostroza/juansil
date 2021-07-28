@@ -53,26 +53,25 @@
 
    
 <div class="flex justify-start bg-gradient-to-r from-white to-gray-200">
-
    <div class="my-20 px-20" >
-      <h2 class="text-5xl text-red-500 font-hairline">Explora nuestros <span class="font-bold font-sans">productos</span></h2>
+      <h2 class=" text-3xl sm:text-5xl text-red-500 font-hairline">Explora nuestros <span class="font-bold font-sans text-5xl inline-block -mt-5 mb-5 sm:mb-0 sm:mt-0">productos</span></h2>
       
       <p class="text-gray-600 max-w-md">
          En <span class="font-extrabold">Juansil</span> queremos que te cuides. Es por eso que trabajamos para llevarte los productos directamente a tú casa. 
          <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br>
       </p>
-      <div class="my-8 flex justify-between items-center gap-6 p-2 w-max-content">
+      <div class="my-8 flex justify-between items-center gap-1 sm:gap-6 p-2 max-w-xs sm:max-w-md sm:w-max-content">
          <a href="{{route('products.lista')}}">
-            <img class="object-cover rounded-full h-32 w-32 bg-gray-800 " src="{{url('images/min/leche_min.jpg')}}" alt="">
-            <p class="text-center font-bold text-gray-600 p-2" >Lacteos</p>
+            <img class="object-cover rounded-full h-20 sm:h-32 w-20 sm:w-32 bg-gray-800 " src="{{url('images/min/leche_min.jpg')}}" alt="">
+            <p class="text-center font-bold text-gray-600 p-2 text-sm" >Lacteos</p>
           </a>
          <a href="{{route('products.lista')}}">
-            <img class="object-cover rounded-full h-32 w-32 bg-gray-800 " src="{{url('images/min/abarrotes3_min.jpeg')}}" alt="">
-            <p class="text-center font-bold text-gray-600 p-2" >Abarrotes</p>
+            <img class="object-cover rounded-full h-20 sm:h-32 w-20 sm:w-32 bg-gray-800 " src="{{url('images/min/abarrotes3_min.jpeg')}}" alt="">
+            <p class="text-center font-bold text-gray-600 p-2 text-sm" >Abarrotes</p>
           </a>
          <a href="{{route('products.lista')}}">
-            <img class="object-cover rounded-full h-32 w-32 bg-gray-800 " src="{{url('images/min/abarrotes_min.jpg')}}" alt="">
-            <p class="text-center font-bold text-gray-600 p-2" >Todo</p>         
+            <img class="object-cover rounded-full h-20 sm:h-32 w-20 sm:w-32 bg-gray-800 " src="{{url('images/min/abarrotes_min.jpg')}}" alt="">
+            <p class="text-center font-bold text-gray-600 p-2 text-sm" >Todo</p>         
          </a>
       </div>
    </div>
