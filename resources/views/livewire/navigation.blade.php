@@ -1,6 +1,6 @@
 <nav class="fixed w-full z-10">
     {{-- BARRA PRINCIPAL --}}
-    <div class="bg-gray-900 h-20" x-data="{ open:false }">
+    <div class="bg-white h-20" x-data="{ open:false }">
         <div class=" mx-auto px-2 sm:px-6 lg:px-8 xl:max-w-7xl" >
             <div class="relative flex items-center justify-between h-16 ">
 
@@ -151,14 +151,14 @@
 
     {{-- BARRA DE ABAJO DE LA BARRA PRINCIPAL --}}
 
-    <div  class="hidden sm:block bg-gray-700 w-full h-10">
+    <div  class="hidden sm:block bg-white w-full h-10">
         <div  class=" mx-auto px-2 sm:px-6 lg:max-w-7xl" >
             <div class="hidden sm:block">
                 <div class="flex space-x-4">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     @foreach ($categories as $category)
                         <a href="{{ route('products.category', $category) }}"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ $category->name }}</a>
+                            class="text-gray-500 hover:text-gray-800 hover:font-bold px-3 py-2 rounded-md text-sm font-medium transform hover:scale-110">{{ $category->name }}</a>
                     @endforeach
 
                     {{-- <a href="#"

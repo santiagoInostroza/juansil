@@ -11,7 +11,7 @@
         </div>
 
         <div class="hidden" :class="{'hidden': !searchIsOpen}">
-            <div class="fixed inset-0 bg-gray-900 opacity-75"></div>
+            <div class="fixed inset-0 bg-gray-900 opacity-75 z-10"></div>
             <div class="absolute top-0 left-0 right-0 bg-white border z-10 shadow max-w-3xl m-auto mt-2">
               
                 <div class="flex px-3 justify-between items-center">
@@ -211,6 +211,9 @@
                 });
                 Livewire.emitTo('buscador-productos','setCantidad', pid,cantidad);
             }
+
+
+           
         </script>
     @endpush
         

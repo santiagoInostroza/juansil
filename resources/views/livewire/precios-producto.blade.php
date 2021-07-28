@@ -1,13 +1,13 @@
-
+{{-- 
     <div class="relative">
 
-        {{-- SPINNER --}}
+   
         <div wire:loading.flex wire:target='addToCart'
             class="absolute w-full h-full bg-gray-200 bg-opacity-25 z-30 items-center justify-center">
             <x-spinner.spinner size='10' />
         </div>
 
-        {{-- PRECIOS Y CANTIDADES --}}
+     
         <div class="text-center font-bold py-2 my-2 h-20 flex items-center justify-center ">
             <div>
                 @if ($hasOfert)
@@ -35,8 +35,6 @@
             </div>
         </div>
 
-
-        {{-- MARCA --}}
         <div class="flex justify-center items-center text-xs">
             <div class="h-14 flex-1 text-center">
                 <a href="{{ route('products.show', $producto) }}" class=" text-center">{{ $producto->name }}</a>
@@ -93,4 +91,4 @@
 
 
 
-    </div>
+    </div> --}}

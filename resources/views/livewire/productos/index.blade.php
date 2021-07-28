@@ -52,8 +52,9 @@
    <hr>
 
    
+<div class="flex justify-start bg-gradient-to-r from-white to-gray-200">
 
-   <div class="my-20 px-20">
+   <div class="my-20 px-20" >
       <h2 class="text-5xl text-red-500 font-hairline">Explora nuestros <span class="font-bold font-sans">productos</span></h2>
       
       <p class="text-gray-600 max-w-md">
@@ -73,15 +74,12 @@
             <img class="object-cover rounded-full h-32 w-32 bg-gray-800 " src="{{url('images/min/abarrotes_min.jpg')}}" alt="">
             <p class="text-center font-bold text-gray-600 p-2" >Todo</p>         
          </a>
-
-
-
-        
-        
-        
-        
       </div>
    </div>
+   
+</div>
+
+
 
    <div class="w-screen h-64 flex items-center justify-center">
       <div class="text-3xl">
@@ -90,6 +88,20 @@
         </figure>
       </div>
     </div>
+
+   <div class="flex justify-end bg-gradient-to-r from-gray-200 via-white to-white">
+
+      <div class="my-20 px-20">
+         <h2 class="text-5xl text-red-500 font-hairline"> Estamos <span class="font-bold font-sans">Creciendo</span></h2>
+         
+         <p class="text-gray-600 max-w-md">
+            <span class="font-extrabold"></span>Somos un joven emprendimiento y lucharemos por hacer crecer nuestra variedad de productos para que no te falte nada.
+            <br><span class="font-bold text-red-500"> Nuestro desafio es entregarte el mejor servicio... </span><br>
+         </p>
+      
+      </div>
+      
+   </div>
 
 
 

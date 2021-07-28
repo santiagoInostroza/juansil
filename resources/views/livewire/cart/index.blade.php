@@ -12,7 +12,7 @@
 
     <div x-data="carritoMain()" class="relative">
         <div class="relative">
-            <button @click="animate = (animate) ? false : true" class="z-50 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <button @click="animate = (animate) ? false : true" class="z-50 bg-white p-1 rounded-full text-gray-400 hover:text-gray-800 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 @if (session()->has('carrito') && count(session('carrito')) > 0)
                     <div class="rounded-full bg-red-600 p-1 px-2 text-xs text-white font-bold absolute right-6">
                         {{ (session('totalProductos')) }}
