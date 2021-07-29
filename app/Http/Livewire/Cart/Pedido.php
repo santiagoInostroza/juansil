@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Cart;
 
+use App\Models\Calendario;
 use Exception;
 use DateTimeZone;
 use Carbon\Carbon;
@@ -9,6 +10,7 @@ use App\Models\Sale;
 use App\Models\Comuna;
 use Livewire\Component;
 use App\Models\Customer;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Str;
 
 class Pedido extends Component
@@ -39,7 +41,7 @@ class Pedido extends Component
 
     public $openResumen =0;
 
-    public $idFechaSeleccionada ="";
+   
     public $totalDespacho = 0;
     public $fechaDespacho;
     public $direccionValida=0;
@@ -193,10 +195,11 @@ class Pedido extends Component
     ];
     
     public function mount(){
+        
         //INICIAR FLOW
         $this->setFlow();
 
-        $this->date = Carbon::now()->locale('es');
+        $this->date = Carbon::now()->locale('es')->timezone('America/Santiago');
  
         // VERIFICAR SI PEDIDO ESTA CONFIRMADO
         if(session()->has('cliente.openRevisarPedido')){
@@ -232,10 +235,7 @@ class Pedido extends Component
             $this->totalDespacho= session('cliente.totalDespacho');
         }
 
-        // VERIFICAR SI EXISTE ID DE FECHA SELECCIONADA
-        if(session()->has('cliente.idFechaSeleccionada')){
-            $this->idFechaSeleccionada= session('cliente.idFechaSeleccionada');
-        }
+      
 
         // VERIFICAR SI EXISTE FECHA DE DESPACHO 
         if(session()->has('cliente.fechaDespacho')){
@@ -268,9 +268,55 @@ class Pedido extends Component
              $this->comunaDespacho= session('cliente.comunaDespacho');
         }
 
+       
+        $period = CarbonPeriod::create(Carbon::tomorrow('America/Santiago')->locale('es_ES'), 7); 
+        foreach ($period as  $fecha) {
+            $valor_despacho ="";
+            $oferta=0;
 
+            
+            if ($fecha->isoFormat('E') == 7) {
+                continue;
+            }
 
+            if ( strpos($this->comunaDespacho->dias_rebajados, $fecha->isoFormat('E')) !== false) {
+                $valor_despacho = $this->comunaDespacho->valor_rebajado;
+                $oferta = 1;
+
+            }else{
+                $valor_despacho = $this->comunaDespacho->valor_despacho;
+            }
+            $agendable = 1;
+            if (Calendario::where('agendable','0')->where('fecha','=',$fecha->toDateString())->first()){
+                $agendable = 0;
+            }
+
+            $copado = 0;
+            
+            $total_diario =  Sale::where('delivery_date', $fecha->toDateString())->sum('total');
+            if($total_diario > 700000){
+                $copado = 1;
+            }
+
+            
+           
+
+            $this->fechasDespacho []= [
+                'fecha_despacho' =>  $fecha->toDateTimeString(),
+                'valor_despacho' =>  $valor_despacho,
+                'nombre_dia' =>  $fecha->dayName,
+                'dia_del_mes' =>  $fecha->day,
+                'nombre_mes' =>  $fecha->monthName,
+                'anio' =>  $fecha->year,
+                'id' =>  $fecha->isoFormat('E'),
+                'agendable'=>$agendable,
+                'oferta'=>$oferta,
+                'copado'=>$copado,
+              
+              ];
+        }    
      }
+     public $fechasDespacho;
 
     
      public function render(){
@@ -300,9 +346,10 @@ class Pedido extends Component
                     $this->block = $direccion->block;
                     $this->depto = $direccion->depto;
                     $this->comentario = $direccion->comentario; 
+                    $this->email = $direccion->email; 
                 }
 
-                $this->comunaDespacho = Comuna::where('name' ,Str::upper($comuna))->first();
+                $this->comunaDespacho = Comuna::where('name' ,Str::upper($comuna))->where('tiene_reparto','1')->first();
                 
                 if($this->comunaDespacho){
                     $this->direccionValida=1;
@@ -312,16 +359,18 @@ class Pedido extends Component
                     $this->direccionValida=4; 
                     $this->isValidDatosDespacho = 0;
 
-                    $this->idFechaSeleccionada="";
                     $this->fechaDespacho ="";
                     $this->isValidFechaDespacho = 0;
+                    $this->dispatchBrowserEvent('alerta', [
+                        'icon' => 'warning',
+                        'msj' => "Por el momento no tenemos reparto para " . $comuna,
+                    ]); 
                 }   
 
             } catch (\Throwable $th) {
                 $this->direccionValida=3; 
                 $this->isValidDatosDespacho = 0;
 
-                $this->idFechaSeleccionada="";
                 $this->fechaDespacho ="";
                 $this->isValidFechaDespacho = 0;
                 
@@ -343,14 +392,12 @@ class Pedido extends Component
             session(['cliente.comunaDespacho' => $this->comunaDespacho]);
             session(['cliente.isValidFechaDespacho' => $this->isValidFechaDespacho]);
             session(['cliente.fechaDespacho' => $this->fechaDespacho]);
-            session(['cliente.idFechaSeleccionada' => $this->idFechaSeleccionada]);
 
                     
         }else{
             $this->direccionValida=2;
             $this->isValidDatosDespacho = 0;
 
-            $this->idFechaSeleccionada="";
             $this->fechaDespacho ="";
             $this->isValidFechaDespacho = 0;
 
@@ -358,7 +405,6 @@ class Pedido extends Component
             session(['cliente.isValidDatosDespacho' => $this->isValidDatosDespacho]);
             session(['cliente.isValidFechaDespacho' => $this->isValidFechaDespacho]);
             session(['cliente.fechaDespacho' => $this->fechaDespacho]);
-            session(['cliente.idFechaSeleccionada' => $this->idFechaSeleccionada]);
         }
 
     }
@@ -429,8 +475,7 @@ class Pedido extends Component
             $this->isValidDatosDespacho = 1;
             session(['cliente.isValidDatosDespacho' => $this->isValidDatosDespacho]);
     
-            $this->idFechaSeleccionada = 0;
-            session(['cliente.idFechaSeleccionada'=>  $this->idFechaSeleccionada]);
+           
             $this->fechaDespacho = 0;
             session(['cliente.fechaDespacho'=>  $this->fechaDespacho]);
             $this->totalDespacho = 0;
@@ -482,11 +527,8 @@ class Pedido extends Component
         session(['cliente.direccionValida' => $this->direccionValida]);
     }
 
-    public function seleccionarFecha($id, $fecha, $valor){
-        $this->idFechaSeleccionada=$id;
-        session(['cliente.idFechaSeleccionada' => $this->idFechaSeleccionada]);
-
-        $this->fechaDespacho =Carbon::createFromFormat('Y-m-d H:i:s',  $fecha)->locale('es');
+    public function seleccionarFecha($fecha, $valor){
+        $this->fechaDespacho = Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es');
         session(['cliente.fechaDespacho' => $this->fechaDespacho]);
 
         $this->totalDespacho = $valor;
@@ -543,16 +585,25 @@ class Pedido extends Component
         }else{
             $this->msjErrorCelular  = "Debes ingresar un numero valido";
         }
-
     }
 
-    public function eliminarTodo()
-    {
+    public function eliminarTodo(){
        
         $this->eliminado = session()->pull('cliente' , 'default');
         $this->mount();
         $this->render();
     }
+
+    public $modal = false;
+    public $comunas_disponibles;
+
+
+    public function verComunasDisponibles(){
+        $this->modal = true;
+        $this->comunas_disponibles = Comuna::where('tiene_reparto','1')->get();
+    }
+
+
 
    
    

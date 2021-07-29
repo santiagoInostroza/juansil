@@ -151,7 +151,7 @@
                         ${{ number_format(session('totalCarrito'), 0, ',', '.') }}
                     </div>
                     <div class="m-2">
-                        <a href="{{route('productos.pedido')}}">
+                        <a href="{{route('pedido')}}">
                             <div class="btn btn-primary block cursor-pointer text-center"> Continuar </div>
                         </a>
                     </div>

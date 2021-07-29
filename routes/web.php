@@ -24,7 +24,7 @@ use App\Http\Livewire\TestApiGoogleMapsComponent;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('productos/pedido',Pedido::class)->name('productos.pedido');
+Route::get('pedido',Pedido::class)->name('pedido');
 // Route::get('productos/pagar',Carrito::class)->name('productos.pagar');
 
 Route::get('/', [ProductController::class,'index'])->name('products.index');

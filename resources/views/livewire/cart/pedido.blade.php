@@ -1,13 +1,4 @@
-<div class="container xl:max-w-7xl text-gray-500 pt-10">
-
-
-
-
-    
-    {{-- <div wire:click='eliminarTodo'>
-        eliminar
-    </div> --}}
-
+<div class="container xl:max-w-7xl text-gray-500 pt-10" x-data="pedidoMain()">
     @if (session('carrito'))
        
   
@@ -143,19 +134,7 @@
                     x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                     <div class="card-body">
                         <form action="" disabled>
-                            <div class="grid grid-cols-1">
-                                 {{-- Email --}}
-                                 <div class="form-group ">
-                                    {!! Form::label('email', 'Email', ['class' => '']) !!}
-                                    {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'wire:model' => 'email']) !!}
-
-                                    @error('email')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                
                                 {{-- DIRECCION --}}
                                 <div class="form-group">
                                     {!! Form::label('direccion', 'Direccion', ['class' => '']) !!}
@@ -189,8 +168,10 @@
                                     @endif
                                     @if ($direccionValida == 4)
                                         <span class="invalid-feedback">Lo sentimos, no tenemos reparto a esta direccion.
-                                            <br> Revisa el listado de comunas disponibles <a href="" target="_blank"
-                                                class="p-2 text-primary"> acá </a>
+                                            <br> Revisa el listado de comunas disponibles 
+                                            <a  class="p-2 text-primary underline cursor-pointer" wire:click="verComunasDisponibles"> 
+                                               Acá
+                                            </a>
                                         </span>
                                     @endif
                                 </div>
@@ -210,7 +191,7 @@
 
                                 {{-- NOMBRE --}}
                                 <div class="form-group">
-                                    {!! Form::label('name', 'Contacto', ['class' => '']) !!}
+                                    {!! Form::label('name', 'Nombre', ['class' => '']) !!}
                                     {!! Form::text('name', null, ['class' => 'form-control to_slug', 'placeholder' => 'Nombre y apellido', 'wire:model' => 'name']) !!}
 
                                     @error('name')
@@ -290,8 +271,21 @@
                                     @enderror
                                 </div>
 
+                                <div class="grid grid-cols-1 sm:col-span-2 lg:col-span-1 ">
+                                    {{-- Email --}}
+                                    <div class="form-group ">
+                                       {!! Form::label('email', 'Email', ['class' => '']) !!}
+                                       {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'wire:model' => 'email']) !!}
+   
+                                       @error('email')
+                                           <span class="invalid-feedback">{{ $message }}</span>
+                                       @enderror
+                                   </div>
+                               </div>
+
                                 {{-- COMENTARIO --}}
-                                <div class="form-group col-span-1 sm:col-span-2 lg:col-span-4">
+                                <div class="form-group col-span-1 sm:col-span-2 lg:col-span-3">
+                                  
                                     <div class="flex items-center">
 
                                         {!! Form::label('comentario', 'Comentario adicional', ['class' => '']) !!}
@@ -359,34 +353,32 @@
                                     Los despachos serán realizados entre las 09:00 hrs y las 19:00 hrs, debes contar con disponibilidad para recibir durante ese horario. En caso de no concretar, se reagendará el envío para otra fecha.
                                 </div>
                                 <div class=" form-group flex items-center justify-center text-sm ">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @php
-                                            $date->addDay();
-                                            $numeroDia = $date->isoFormat('E');
-                                            if ($numeroDia == 6) {
-                                                $date->addDays(2);
-                                                $numeroDia = $date->isoFormat('E');
-                                            }
-                                            if ($numeroDia == 7) {
-                                                $date->addDay();
-                                                $numeroDia = $date->isoFormat('E');
-                                            }
-                                            $despacho = 0;
-                                            if ($comunaDespacho->dia == $numeroDia) {
-                                                $despacho = $comunaDespacho->valor_despacho - $comunaDespacho->descuento;
-                                            } else {
-                                                $despacho = $comunaDespacho->valor_despacho;
-                                            }
-                                        @endphp
-                                        <div wire:click="seleccionarFecha('{{ $i }}', '{{ $date }}','{{ $despacho }}')"
-                                            class="mx-1 shadow p-1 hover:bg-gray-100  transform hover:scale-110 cursor-pointer @if ($idFechaSeleccionada==$i) scale-110 bg-gray-200 @endif" style="width: 100%; height: 100px;">
-                                            {{ $date->dayName }} <br> {{ $date->day }}
+                                    @foreach ($fechasDespacho as $fecha)
+                                        <div  @if($fecha['agendable'] && !$fecha['copado'])  wire:click="seleccionarFecha('{{ $fecha['fecha_despacho'] }}','{{ $fecha['valor_despacho'] }}' ) " @endif
+                                            class="relative mx-1 shadow p-1  transform @if($fecha['agendable'] && !$fecha['copado']) hover:scale-110 hover:bg-green-300 cursor-pointer @endif   @if ($fechaDespacho==$fecha['fecha_despacho']) scale-110 border-b-4 border-yellow-400 @elseif($fecha['oferta']) text-green-600 @endif " style="width: 100%; height: 100px;">
+                                           
 
+                                            {{ $fecha['nombre_dia'] }} <br> {{ $fecha['dia_del_mes'] }}
                                             <div class="text-center my-5 text-lg">
-                                                ${{ number_format($despacho, 0, ',', '.') }}
+                                                ${{ number_format($fecha['valor_despacho'], 0, ',', '.') }}
+                                               
                                             </div>
+                                            @if ($fecha['copado'])
+                                                <div class="absolute inset-0  text-red-500 underline flex justify-center items-center font-bold">
+                                                    Agotado
+                                                    
+                                                </div>
+                                            @elseif (!$fecha['agendable'])
+                                                <div class="absolute inset-0  text-orange-500 underline flex justify-center items-center font-bold">
+                                                    No disponible
+                                                    
+                                                </div>
+                                            @endif
+
+                                       
                                         </div>
-                                    @endfor
+                                    @endforeach
+                                   
                                 </div>
 
                             @endif
@@ -430,7 +422,7 @@
                         </div>
                         @if ($fechaDespacho)
                         <div class="my-2">
-                            Despacho para el día  {{ $fechaDespacho->locale('es')->dayName }} {{ $fechaDespacho->locale('es')->day }} de {{ $fechaDespacho->locale('es')->monthName }} 
+                            Despacho para el día  {{ $fechaDespacho->dayName }} {{ $fechaDespacho->locale('es')->day }} de {{ $fechaDespacho->locale('es')->monthName }} 
                         </div>
                         @endif
                         <div>
@@ -493,25 +485,46 @@
         </div>
 
     @else
-    <div class="card my-10 ">
-        <div class="relative " x-data="{selected:1 }">
-            <div class="card-header flex justify-between">
-                <h2 class="text-lg font-bold text-gray-600">
-                    No hay productos en el carrito
-                </h2>
-            </div>
-                {{-- BOTONES --}}
-                <div class="flex justify-center items-center my-10 text-sm">
-                    <a href="{{route('products.index')}}"  class="btn rounded shadow p-5 bg-teal-500 text-white mx-4 cursor-pointer">
-                        Ir a agregar productos
-                    </a> 
+        <div class="card my-10 ">
+            <div class="relative " x-data="{selected:1 }">
+                <div class="card-header flex justify-between">
+                    <h2 class="text-lg font-bold text-gray-600">
+                        No hay productos en el carrito
+                    </h2>
                 </div>
+                    {{-- BOTONES --}}
+                    <div class="flex justify-center items-center my-10 text-sm">
+                        <a href="{{route('products.index')}}"  class="btn rounded shadow p-5 bg-teal-500 text-white mx-4 cursor-pointer">
+                            Ir a agregar productos
+                        </a> 
+                    </div>
 
+            </div>
         </div>
-    </div>
-    
-@endif
+    @endif
 
+    
+
+    @isset($comunas_disponibles)
+        <x-modal.modal class="">
+            <x-slot name='titulo'><h2 class="font-bold text-gray-600 text-xl">Comunas disponibles</h2></x-slot>
+            
+            <ul>
+                @foreach ($comunas_disponibles as $comuna)
+                    <li>{{$comuna->name}}</li>
+                @endforeach
+            </ul>
+            <x-slot name='footer' >
+                <div class="flex justify-end">
+
+                    <x-jet-button wire:click="$set('modal',false)">
+                        Cerrar
+                    </x-jet-button>
+                </div>
+            </x-slot>
+        </x-modal.modal>
+        
+    @endisset
 
 </div>
 
@@ -533,6 +546,13 @@
 @endslot
 
 @slot('js')
+<script>
+    function pedidoMain(){
+        return{
+            modal: @entangle('modal')
+        }
+    }
+</script>
     <script>
         google.maps.event.addDomListener(window, "load", function() {
             const santiago = { //coordenadas de la ciudad santiago
