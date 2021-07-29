@@ -268,52 +268,54 @@ class Pedido extends Component
              $this->comunaDespacho= session('cliente.comunaDespacho');
         }
 
-       
+        if ($this->comunaDespacho) {       
         $period = CarbonPeriod::create(Carbon::tomorrow('America/Santiago')->locale('es_ES'), 7); 
-        foreach ($period as  $fecha) {
-            $valor_despacho ="";
-            $oferta=0;
+            foreach ($period as  $fecha) {
+                $valor_despacho ="";
+                $oferta=0;
 
+                
+                if ($fecha->isoFormat('E') == 7) {
+                    continue;
+                }
+                
+
+                if ( strpos($this->comunaDespacho->dias_rebajados, $fecha->isoFormat('E')) !== false) {
+                    $valor_despacho = $this->comunaDespacho->valor_rebajado;
+                    $oferta = 1;
+
+                }else{
+                    $valor_despacho = $this->comunaDespacho->valor_despacho;
+                }
+                $agendable = 1;
+                if (Calendario::where('agendable','0')->where('fecha','=',$fecha->toDateString())->first()){
+                    $agendable = 0;
+                }
+
+                $copado = 0;
+                
+                $total_diario =  Sale::where('delivery_date', $fecha->toDateString())->sum('total');
+                if($total_diario > 700000){
+                    $copado = 1;
+                }
+
+                
             
-            if ($fecha->isoFormat('E') == 7) {
-                continue;
+
+                $this->fechasDespacho []= [
+                    'fecha_despacho' =>  $fecha->toDateTimeString(),
+                    'valor_despacho' =>  $valor_despacho,
+                    'nombre_dia' =>  $fecha->dayName,
+                    'dia_del_mes' =>  $fecha->day,
+                    'nombre_mes' =>  $fecha->monthName,
+                    'anio' =>  $fecha->year,
+                    'id' =>  $fecha->isoFormat('E'),
+                    'agendable'=>$agendable,
+                    'oferta'=>$oferta,
+                    'copado'=>$copado,
+                
+                ];
             }
-
-            if ( strpos($this->comunaDespacho->dias_rebajados, $fecha->isoFormat('E')) !== false) {
-                $valor_despacho = $this->comunaDespacho->valor_rebajado;
-                $oferta = 1;
-
-            }else{
-                $valor_despacho = $this->comunaDespacho->valor_despacho;
-            }
-            $agendable = 1;
-            if (Calendario::where('agendable','0')->where('fecha','=',$fecha->toDateString())->first()){
-                $agendable = 0;
-            }
-
-            $copado = 0;
-            
-            $total_diario =  Sale::where('delivery_date', $fecha->toDateString())->sum('total');
-            if($total_diario > 700000){
-                $copado = 1;
-            }
-
-            
-           
-
-            $this->fechasDespacho []= [
-                'fecha_despacho' =>  $fecha->toDateTimeString(),
-                'valor_despacho' =>  $valor_despacho,
-                'nombre_dia' =>  $fecha->dayName,
-                'dia_del_mes' =>  $fecha->day,
-                'nombre_mes' =>  $fecha->monthName,
-                'anio' =>  $fecha->year,
-                'id' =>  $fecha->isoFormat('E'),
-                'agendable'=>$agendable,
-                'oferta'=>$oferta,
-                'copado'=>$copado,
-              
-              ];
         }    
      }
      public $fechasDespacho;
