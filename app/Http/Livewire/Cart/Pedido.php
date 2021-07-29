@@ -142,7 +142,10 @@ class Pedido extends Component
              $this->comunaDespacho= session('cliente.comunaDespacho');
         }
 
-        $this->cargarFechasDespacho();
+
+        if($this->comuna){
+            $this->cargarFechasDespacho();
+        }
 
      }
      

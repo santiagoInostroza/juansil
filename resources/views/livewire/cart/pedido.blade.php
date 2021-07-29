@@ -452,7 +452,7 @@
         </div>
 
         {{-- REALIZAR PAGO --}}
-        <div class="card my-10">
+        {{-- <div class="card my-10">
             <div class="relative " >
                 <div class="card-header flex justify-start">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -465,8 +465,8 @@
                         Realizar pago
                     </h2>
                 </div>
-                <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1"
-                    x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container5"
+                    x-bind:style="selected == 1 ? 'max-height: ' + $refs.container5.scrollHeight + 'px' : ''">
                     <div class="card-body shadow w-full ">
                         <button class="p-5 shadow bg-green-500 block text-center text-white font-bold">
                             Pagar $
@@ -475,7 +475,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     @else
         <div class="card my-10 ">
