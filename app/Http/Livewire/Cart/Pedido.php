@@ -2,16 +2,19 @@
 
 namespace App\Http\Livewire\Cart;
 
-use App\Models\Calendario;
 use Exception;
 use DateTimeZone;
 use Carbon\Carbon;
 use App\Models\Sale;
 use App\Models\Comuna;
+use App\Models\Product;
 use Livewire\Component;
 use App\Models\Customer;
+use App\Models\SaleItem;
 use Carbon\CarbonPeriod;
+use App\Models\Calendario;
 use Illuminate\Support\Str;
+use App\Models\PurchasePrice;
 
 class Pedido extends Component
 {
@@ -53,6 +56,8 @@ class Pedido extends Component
     public $comunaDespacho; 
     public $totalCarrito;
 
+    public $customer;
+
     public $fechasDespacho=[];
 
     protected $listeners = [
@@ -77,6 +82,10 @@ class Pedido extends Component
     public function mount(){
         // $this->date = Carbon::now()->locale('es')->timezone('America/Santiago');
  
+        // VERIFICAR SI ES CLIENTE
+        if(session()->has('cliente.customer')){
+            $this->customer= session('cliente.customer');
+        }
         // VERIFICAR SI PEDIDO ESTA CONFIRMADO
         if(session()->has('cliente.open_level_1')){
             $this->open_level_1= session('cliente.open_level_1');
@@ -189,7 +198,8 @@ class Pedido extends Component
     // NIVEL 2 DATOS DE DESPACHO
     public function validarDireccion($newDireccion, $comuna, $lat, $lng ,$numero){
         if($comuna){
-            $direccion = Customer::where('longitud', $lng) ->where('latitud',$lat) ->first();
+            $this->customer = Customer::where('longitud', $lng) ->where('latitud',$lat) ->first();
+            session(['cliente.customer' => $this->customer]);
 
             $this->name = "";
             $this->celular = "";
@@ -201,13 +211,14 @@ class Pedido extends Component
 
             try {
                 $numero *1;
-                if ($direccion ){
-                    $this->name = $direccion->name;
-                    $this->celular = $direccion->celular;
-                    $this->block = $direccion->block;
-                    $this->depto = $direccion->depto;
-                    $this->comentario = $direccion->comentario; 
-                    $this->email = $direccion->email; 
+                
+                if ($this->customer ){
+                    $this->name = $this->customer->name;
+                    $this->celular = $this->customer->celular;
+                    $this->block = $this->customer->block;
+                    $this->depto = $this->customer->depto;
+                    $this->comentario = $this->customer->comentario; 
+                    $this->email = $this->customer->email; 
                 }
 
                 $this->comunaDespacho = Comuna::where('name' ,Str::upper($comuna))->where('tiene_reparto','1')->first();
@@ -392,6 +403,7 @@ class Pedido extends Component
     }
 
     public function cargarFechasDespacho(){
+        $this->fechasDespacho =null;
          
         $period = CarbonPeriod::create(Carbon::tomorrow('America/Santiago')->locale('es_ES'), 7); 
         foreach ($period as  $fecha) {
@@ -442,7 +454,6 @@ class Pedido extends Component
         }
     }
  
-   
 
     public function eliminarTodo(){
        
@@ -454,6 +465,154 @@ class Pedido extends Component
     public function verComunasDisponibles(){
         $this->modal = true;
         $this->comunas_disponibles = Comuna::where('tiene_reparto','1')->get();
+    }
+
+    public function agendarPedido(){
+
+        // ACTUALIZA CLIENTE   
+        if($this->customer){
+
+            $this->customer->name = $this->name;
+            $this->customer->celular = $this->celular;
+            $this->customer->block = $this->block;
+            $this->customer->depto = $this->depto;
+            $this->customer->email = $this->email;
+            $this->customer->comentario = $this->comentario;
+            $this->customer->save();
+        }
+
+        // CREA CLIENTE
+        if (!$this->customer) {
+            $this->customer = new Customer();
+
+            $this->customer->name = $this->name;
+            $this->customer->slug = Str::slug($this->name);
+            $this->customer->celular = $this->celular;
+            $this->customer->block = $this->block;
+            $this->customer->depto = $this->depto;
+            $this->customer->email = $this->email;
+            $this->customer->comentario = $this->comentario;
+            
+            $this->customer->direccion = $this->direccion;
+            $this->customer->comuna = $this->comuna;
+            $this->customer->latitud = $this->latitud;
+            $this->customer->longitud = $this->longitud;
+
+            $this->customer->save();
+
+            
+        }
+
+        // CREAR VENTA
+
+        $venta = new Sale();
+
+
+
+        $venta->customer_id = $this->customer->id;
+        $venta->total = session('totalCarrito');
+        $venta->date = Carbon::now();
+        $venta->payment_amount = 0;
+        $venta->payment_status = 1;
+        $venta->pending_amount = session('totalCarrito');
+        $venta->payment_date = null;
+        $venta->delivery = 1;
+        $venta->delivery_date = $this->fechaDespacho->toDateString();
+        $venta->date_delivered = null;
+        $venta->delivery_stage = 0;
+        $venta->comments = "";
+        $venta->user_created = 0;
+        $venta->total_cost = 0;
+        $venta->delivery_value = session('cliente.totalDespacho');
+
+        $venta->save();
+
+        // CREAR ITEMS_VENTA
+        $total_cost = 0;
+        foreach (session('carrito') as $item) {
+
+            // ACTUALIZA STOCK DEL PRODUCTO GENERAL
+            $producto_general = Product::find($item['producto_id']);
+            $stock = $producto_general->stock;
+            $nuevoStock = $stock - $item['cantidad'];
+            $producto_general->stock = $nuevoStock;
+            $producto_general->save();
+
+
+
+            $go = true;
+            $cantidad_restante = 0;
+            $suma_costo = 0;
+            $costo=0;
+
+            $vueltas = 0;
+
+           
+            try {//intenta obtener el valor de costo del producto
+                do {
+                    $producto = PurchasePrice::where('product_id', $item['producto_id'])->where('stock', '>', 0)->orderBy('created_at', 'asc')->first();    
+                    $cantidad = ($cantidad_restante == 0) ? $item['cantidad'] : $cantidad_restante ;
+                    
+                    $costo = $producto->precio;
+                    $costo2 = $producto->precio;
+                    $cantidad_a_multiplicar = 0;
+                    if($producto->stock >= $cantidad){//alcanza para cubrir el stock necesitado
+                        $stock = $producto->stock;
+                        $producto->stock = $stock - $cantidad;
+                        $go = false;
+                        $cantidad_a_multiplicar = $cantidad;
+                    }else{ // no alcanza el stock, es necesario obtener otro producto para ocupar su stock
+                        $cantidad_restante =  $cantidad - $producto->stock;
+                        $cantidad_a_multiplicar = $producto->stock;
+                        $producto->stock = 0; 
+                    }
+                    // ACTUALIZA STOCK DEL PRODUCTO INTERNO
+                    $producto->save();
+
+                    $total_costo = $cantidad_a_multiplicar * $costo;
+                    $suma_costo += $total_costo;
+                    $vueltas++;
+                } while ($go); 
+
+                $costo_final =$suma_costo / $item['cantidad'];
+                $total_cost += $suma_costo;
+
+            } catch (\Throwable $th) { //si encuentra un costo pero el stock no es suficiente, guarda todos los costos con el valor que encontro, si no encuentra ni un costo guarda el valor del costo al valor del precio venta
+                if($vueltas>0){
+                    $costo_final = $costo2;
+                    // $this->msj.= "Stock insuficiente de '$producto_general->name'.\n";
+                }else{
+                    $costo_final = $item['precio'];
+                    $total_cost = $item['precio'] * $item['cantidad_total']; 
+                    // $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
+                }
+               
+            }
+
+            
+       
+            $saleItem = new SaleItem();
+            $saleItem->sale_id = $venta->id;
+            $saleItem->product_id = $item['producto_id'];
+            $saleItem->cantidad = $item['cantidad'];
+            $saleItem->cantidad_por_caja = 1;
+            $saleItem->cantidad_total = $item['cantidad'] ;
+            $saleItem->precio = $item['precio'] ;
+            $saleItem->precio_por_caja = $item['precio'] ;
+            $saleItem->precio_total = $item['total'] ;
+            $saleItem->costo = $costo_final;
+            $saleItem->save();
+        }
+
+        $venta->total_cost = $total_cost;
+        $venta->save();
+
+        $this->dispatchBrowserEvent('alerta', [
+            'icon' => 'success',
+            'title' => "Gracias por agendar con nosotros",
+            'msj' => "En breve te enviaremos un mail y un wasap con el pedido y la información",
+        ]); 
+        
     }
 
 

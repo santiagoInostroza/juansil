@@ -166,6 +166,7 @@ class CreateSale extends Component{
             $cantidad_restante = 0;
             $suma_costo = 0;
             $costo=0;
+            $costo_final = 0;
 
             $vueltas = 0;
             
@@ -176,33 +177,36 @@ class CreateSale extends Component{
                     
                     $costo = $producto->precio;
                     $costo2 = $producto->precio;
+                    $cantidad_a_multiplicar = 0;
                     if($producto->stock >= $cantidad){//alcanza para cubrir el stock necesitado
                         $stock = $producto->stock;
                         $producto->stock = $stock - $cantidad;
                         $go = false;
+                        $cantidad_a_multiplicar = $cantidad;
                     }else{ // no alcanza el stock, es necesario obtener otro producto para ocupar su stock
                         $cantidad_restante =  $cantidad - $producto->stock;
+                        $cantidad_a_multiplicar = $producto->stock;
                         $producto->stock = 0; 
                     }
                     $producto->save();
-                    $total_costo = $cantidad * $costo;
+                    $total_costo = $cantidad_a_multiplicar * $costo;
                     $suma_costo += $total_costo;
                     $vueltas++;
                 } while ($go); 
 
-                $costo =$suma_costo / $item['cantidad_total'];
-                $total_cost += $costo;
+                $costo_final =$suma_costo / $item['cantidad_total'];
+                $total_cost += $suma_costo;
 
             } catch (\Throwable $th) { //si encuentra un costo pero el stock no es suficiente, guarda todos los costos con el valor que encontro, si no encuentra ni un costo guarda el valor del costo al valor del precio venta
                 if($vueltas>0){
                     $costo = $costo2;
                     $this->msj.= "Stock insuficiente de '$producto_general->name'.\n";
                 }else{
-                    $costo = $item['precio'];
+                    $costo_final = $item['precio'];
                     $total_cost = $item['precio'] * $item['cantidad_total']; 
                     $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
                 }
-                $go = false;
+               
             }
 
             SaleItem::create([
@@ -214,7 +218,7 @@ class CreateSale extends Component{
                 'precio' => $item['precio'],
                 'precio_por_caja' => $item['precio_por_caja'],
                 'precio_total' => $item['precio_total'],
-                'costo' => $costo,
+                'costo' => $costo_final,
             ]);
         }
 
