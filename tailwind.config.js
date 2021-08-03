@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const ta_gallery_safelist = require('./node_modules/@markusantonwolf/ta-gallery/src/plugin/safelist');
+const ta_gallery_safelist = require('./node_modules/@markusantonwolf/ta-gallery/src/plugin/safelist')
 
 
 module.exports = {
