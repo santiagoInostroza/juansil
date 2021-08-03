@@ -24,7 +24,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script src="https://js.stripe.com/v3/"></script>
+        {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
 
         {{-- ESTILOS DE CARRUSEL --}}
@@ -141,5 +141,8 @@
         @isset($js)
             {{$js}}
         @endisset
+
+        <!-- at the end of <body> -->
+<script src="https://unpkg.com/@markusantonwolf/ta-gallery@latest/dist/js/ta-gallery.min.js"></script>
     </body>
 </html>

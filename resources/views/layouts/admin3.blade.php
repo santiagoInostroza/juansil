@@ -17,9 +17,10 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
+        <div class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll font-sans antialiased text-gray-900">
             @isset($slot)
                 {{ $slot }}
             @endisset
@@ -79,5 +80,7 @@
             {{$js}}
         @endisset
         @livewireScripts
+
+
     </body>
 </html>

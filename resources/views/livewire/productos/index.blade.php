@@ -1,5 +1,92 @@
 <div class="mt-10">
    {{-- CREAR INICIO DE PRODUCTOS    --}}
+
+   <div
+   class="mb-8 ta-gallery ta-gallery-aspect-hd"
+   x-data="taGallery()"
+   x-init="init()"
+   data-start="0"
+   data-timing="ease-in-out"
+   data-duration="0.3s"
+>
+   <!--- START SLIDES /-->
+   <div class="rounded-lg ta-gallery-element ta-gallery-anim-swing" x-cloak>
+       <figure>
+           <img
+               src="https://picsum.photos/800/500?random=1"
+               alt="Example Image"
+               class="ta-gallery-image"
+               loading="lazy"
+               x-ref="height"
+           />
+           <figcaption
+               class="px-4 py-1 text-sm font-semibold text-white bg-gray-900 bg-opacity-25 ta-gallery-image-caption bg-blur-2"
+           >
+               Example Image
+           </figcaption>
+       </figure>
+   </div>
+   <div class="rounded-lg ta-gallery-element ta-gallery-anim-swing" x-cloak>
+       <figure>
+           <img
+               src="https://picsum.photos/800/500?random=2"
+               alt="Example Image"
+               class="ta-gallery-image"
+               loading="lazy"
+               x-ref="height"
+           />
+           <figcaption
+               class="px-4 py-1 text-sm font-semibold text-white bg-gray-900 bg-opacity-25 ta-gallery-image-caption bg-blur-2"
+           >
+               Example Image
+           </figcaption>
+       </figure>
+   </div>
+   <!--- EXAMPLE TEXT SLIDE /-->
+   <div
+       class="px-12 py-8 bg-teal-200 rounded-lg ta-gallery-element ta-gallery-anim-slide flex-center bg-opacity-95 bg-blur-1 sm:px-24 sm:py-12" x-cloak
+   >
+       <div class="text-base font-semibold leading-relaxed text-center text-gray-900 sm:text-xl">
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi quasi incidunt dolorum cupiditate! Aut amet nesciunt, neque vitae non error culpa suscipit nobis placeat vel dolores earum dolore reiciendis consectetur?
+       </div>
+   </div>
+   <!--- END SLIDES /-->
+   <!--- START BACKGROUND /-->
+   <div
+       class="flex flex-col items-center justify-center overflow-hidden text-center bg-gray-100 rounded-lg shadow-xl ta-gallery-background"
+   >
+       <div class="w-2/3 text-3xl font-bold leading-normal text-gray-900 opacity-75">
+           Lorem ipsum dolor sit amet
+       </div>
+   </div>
+   <!--- END BACKGROUND /-->
+   <!--- START BUTTONS /-->
+   <button
+       type="button"
+       class="flex items-center justify-center w-10 h-10 text-white bg-black bg-opacity-75 border-2 border-white rounded-full shadow-xl ta-gallery-button -left-5 sm:left-2 focus:ring focus:ring-primary"
+       x-on:click="previous()"
+       x-show="loaded"
+   >
+       <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+           <path
+               d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+           ></path>
+       </svg>
+   </button>
+   <button
+       type="button"
+       class="flex items-center justify-center w-10 h-10 text-white bg-black bg-opacity-75 border-2 border-white rounded-full shadow-xl ta-gallery-button -right-5 sm:right-2 focus:ring focus:ring-primary"
+       x-on:click="next()"
+       x-show="loaded"
+   >
+       <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+           <path
+               d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+           ></path>
+       </svg>
+   </button>
+   <!--- END BUTTONS /-->
+</div>
   
 
     {{-- CARRUSEL --}}
@@ -9,7 +96,7 @@
          <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
          <div class="absolute opacity-0 carousel-item" style="height:50vh;">
             <div class="">
-               <img class="object-cover w-screen" src="{{url('images/portada/Juansil1.png')}}" alt="">  
+               <img class="object-fill w-screen" src="{{url('images/portada/Juansil1.png')}}" alt="">  
             </div>
          </div>
          <label for="carousel-3" class="absolute inset-y-0 left-0 hidden w-10 h-10 my-auto ml-2 text-3xl font-bold leading-tight text-center text-black bg-white rounded-full cursor-pointer prev control-1 md:ml-10 hover:text-white hover:bg-blue-700" style="z-index: 9">‹</label>
@@ -80,10 +167,10 @@
 
 
 
-   <div class="flex items-center justify-center w-screen h-64">
+   <div class="flex items-center justify-center w-screen">
       <div class="text-3xl">
         <figure>
-           <img class="object-cover w-screen h-64" src="{{url('images/portada/Juansil1.png')}}" alt="">
+           <img class="object-contain w-screen h-full" src="{{url('images/portada/Juansil2.png')}}" alt="">
         </figure>
       </div>
     </div>
