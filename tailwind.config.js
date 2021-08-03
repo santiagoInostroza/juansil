@@ -42,7 +42,9 @@ module.exports = {
                 'hd',
                 'wide',
                 {
-                    instagram: 3 / 5, // add your own aspect ratio
+                    instagram: 80 / 31, // add your own aspect ratio
+                    santy: 2 / 1,
+                    santy2: 1 / 2,
                 },
             ],
         },
