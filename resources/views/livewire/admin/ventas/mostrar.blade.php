@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <div wire:click="$set('open',true)" class="btn btn-secondary btn-sm mr-2"><i class="far fa-eye"></i></div>
     @if ($open)
         <div class="position-fixed bg-secondary" style="top:0;bottom:0;left:0;right:0;opacity: 0.5;z-index: 9998"></div>
@@ -34,4 +34,4 @@
             </div>
         </div>
     @endif
-</div>
+</div> --}}

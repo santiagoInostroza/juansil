@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\SaleItem;
 use App\Models\SalePrice;
+use App\Models\PurchaseItem;
 use App\Models\PurchasePrice;
 use App\Models\ProductMovement;
 use Illuminate\Database\Eloquent\Model;
@@ -74,6 +75,11 @@ class Product extends Model
     public function sale_items()
     {
         return $this->hasMany(SaleItem::class);
+      
+    }
+    public function purchase_items()
+    {
+        return $this->hasMany(PurchaseItem::class);
       
     }
 

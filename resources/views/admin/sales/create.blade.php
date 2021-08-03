@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+{{-- @extends('adminlte::page')
 
 @section('title', 'Precios de feria')
 
@@ -63,6 +63,7 @@
             //VALIDAR DETALLES VENTA
             validarDetalleVenta();
         })
+        
 
         //VALIDA DATOS DE VENTA
         function validarVenta() {
@@ -205,4 +206,4 @@
 
 
     </script>
-@stop
+@stop --}}

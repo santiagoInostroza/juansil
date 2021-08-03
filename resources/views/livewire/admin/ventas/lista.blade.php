@@ -1,4 +1,4 @@
-<div class="card">
+{{-- <div class="card">
     <div class="card-header d-flex">
         <input wire:model='search' type="text" class="form-control" placeholder="Ingrese nombre o direccion a buscar">
         @livewire('admin.ventas.create')
@@ -10,7 +10,6 @@
                 <tr>
                     <th wire:click="order('id')" class="" style="cursor:pointer">
                         Id 
-                        {{-- SORT --}}
                         @if ($sort== 'id')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -24,7 +23,7 @@
                     </th>
                     <th wire:click="order('customers.name')" class="" style="cursor:pointer">
                             Cliente 
-                            {{-- SORT --}}
+                          
                             @if ($sort== 'customers.name')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -37,7 +36,7 @@
                     </th>
                     <th wire:click="order('total')" class="" style="cursor:pointer">
                         Total 
-                        {{-- SORT --}}
+                     
                         @if ($sort== 'total')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -50,7 +49,7 @@
                     </th>
                     <th wire:click="order('payment_status')" class="" style="cursor:pointer">
                         EstadoPago 
-                        {{-- SORT --}}
+                     
                         @if ($sort== 'payment_status')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -63,7 +62,7 @@
                     </th>
                     <th wire:click="order('delivery_stage')" class="" style="cursor:pointer">
                         EstadoDelivery 
-                        {{-- SORT --}}
+                      
                         @if ($sort== 'delivery_stage')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -76,7 +75,7 @@
                     </th>
                     <th wire:click="order('date')" class="" style="cursor:pointer">
                         FechaVenta 
-                        {{-- SORT --}}
+                     
                         @if ($sort== 'date')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -89,7 +88,7 @@
                     </th>
                     <th wire:click="order('user_created')" class="" style="cursor:pointer">
                         VentaPor 
-                        {{-- SORT --}}
+                       
                         @if ($sort== 'user_created')
                             @if ($direction =='asc')
                                 <i class="fas fa-sort-alpha-up-alt mt-1" style="float: right"></i>
@@ -110,12 +109,12 @@
                             <div>{{$venta->id}}</div>
                         </td>    
                         <td style="min-width: 180px">
-                            {{-- <div class="h6"> ${{number_format($venta->total,0,',','.')}}</div> --}}
+                          
                             <div class="h5 ">
                                 <a href="{{ route('admin.customers.edit',$venta->customer->id) }}">
                                     {{$venta->customer->name}}
                                 </a>
-                            </div> {{-- {{$venta->customer->telefono}} {{$venta->customer->celular}} --}}
+                            </div>
                             <div>
                                 {{$venta->customer->direccion}} 
                                 @isset($venta->customer->block) Torre {{$venta->customer->block}} @endisset 
@@ -125,12 +124,12 @@
                         
                     
 
-                        {{-- TOTAL --}}
+                     
                         <td  style="min-width: 100px" class="align-middle">
                             <div class="h5">${{number_format($venta->total,0,',','.')}}</div> 
                         </td>
 
-                        {{-- ESTADO DE PAGO --}}
+                     
                         <td style="min-width: 100px" class="align-middle">
                             @if ($venta->payment_status == 1)
                                 <div> 
@@ -152,12 +151,12 @@
                             @endif
                         </td>
 
-                        {{-- ESTADO DELIVERY --}}
+                       
                         <td style="min-width: 150px" class="align-middle">
                             @if ($venta->delivery == 1)
                                 @if ($venta->delivery_stage == 1)
                                     <i class="fas fa-check text-success"></i> {{date("d-m-Y",strtotime($venta->delivery_date))}}
-                                    {{-- {{date("d-m-Y",strtotime($venta->date_delivered))}} --}}
+                                  
                                 @else
                                     <i class="fas fa-truck text-warning"></i> {{date("d-m-Y",strtotime($venta->delivery_date))}}
                                 @endif
@@ -166,17 +165,17 @@
                             @endif
                         </td>
 
-                        {{-- FECHA --}}
+                       
                         <td style="min-width: 100px" class="align-middle">
                             {{date("d-m-Y",strtotime($venta->date))}}
                         </td>
 
-                        {{-- VENTA POR --}}
+                      
                         <td style="min-width: 100px" class="align-middle">
                             <div> @if( $venta->created_by() ) {{ $venta->created_by()->name }} @endif</div>
                         </td>
                     
-                        {{-- ACCION --}}
+                       
                         <td width='100px' class="align-middle">
                             <div class="d-flex" style="align-content: center">
                                 @livewire('admin.ventas.mostrar', ['venta' => $venta], key($venta->id))
@@ -209,5 +208,5 @@
         <span class="text-success">Diferencia ${{number_format($diferencia,0,',','.')}}  </span> 
         <span class="text-warning"> Pendientes ${{number_format($total_pendiente,0,',','.')}}  </span> 
     </div>
-</div>
+</div> --}}
 

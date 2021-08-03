@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <div wire:click="$set('open',true)" class="btn btn-secondary ml-5" style="width: 200px">Agregar Venta</div>
     
     @if ($open)
@@ -17,7 +17,7 @@
                         'agregar_cliente' => false,
                         ])
                 
-                    {{-- FECHA --}}
+                  
                     <div class="form-group col-sm">
                         {!! Form::label('date', 'Fecha', ['class' => '']) !!}
                         {!! Form::date('date', null, ['class' => 'form-control', 'wire:model' => 'date']) !!}
@@ -65,4 +65,4 @@
             </div>
         </div>
     @endif
-</div>
+</div> --}}

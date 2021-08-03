@@ -1,3 +1,3 @@
-<div>
+{{-- <div>
     @livewire('admin.ventas.lista', ['user' => ''])
-</div>
+</div> --}}

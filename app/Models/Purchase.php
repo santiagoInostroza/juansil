@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\PurchaseItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,6 +20,10 @@ class Purchase extends Model
           return $this->belongsTo(Supplier::class);
           
       }
+
+        public function purchase_items(){
+            return $this->hasMany(PurchaseItem::class);
+        }
 
       //RELACION MUCHOS A MUCHOS
     public function products(){

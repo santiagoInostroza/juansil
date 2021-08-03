@@ -14,16 +14,12 @@ class SaleItem extends Model
 
 
      //RELACION UNO A MUCHOS INVERSA
-     public function product()
-     {
-         return $this->belongsTo(Product::class);
-         
+     public function product(){
+        return $this->belongsTo(Product::class); 
      }
 
      //RELACION UNO A MUCHOS INVERSA
-     public function sale()
-     {
+     public function sale(){
          return $this->belongsTo(Sale::class);
-         
      }
 }

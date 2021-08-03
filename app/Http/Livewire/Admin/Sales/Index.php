@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin\Sales;
 use App\Models\Sale;
 use Livewire\Component;
 
-class SaleController extends Component{
+class Index extends Component{
 
     public $search;
     public $sort = 'id';
@@ -17,7 +17,7 @@ class SaleController extends Component{
     protected $listeners = ['render'];
 
     public function render(){
-       
+        
         $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
         ->where('sales.id','like','%'. $this->search . '%')
         ->orWhere('customers.name','like','%'. $this->search . '%')
@@ -31,9 +31,8 @@ class SaleController extends Component{
         ->select('sales.*')
         ->orderBy($this->sort,$this->direction)
         ->paginate(50);
-        return view('livewire.admin.sales.sale-controller',compact('sales'))->layout('layouts.admin2');
+        return view('livewire.admin.sales.index',compact('sales'));
     }
-
 
     public function order($sort){
         if ($this->sort == $sort) {
@@ -58,4 +57,6 @@ class SaleController extends Component{
 
         
     }
+
+    
 }

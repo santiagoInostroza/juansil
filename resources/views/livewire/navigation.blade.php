@@ -91,7 +91,7 @@
                                     <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero</a>
                                 @endcan
                                 @can('admin.home')
-                                    <a href="{{ route('admin.home2') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero Nuevo (No está listo)</a>
+                                    <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero Nuevo (No está listo)</a>
                                 @endcan
                                
                                

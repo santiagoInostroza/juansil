@@ -22,7 +22,6 @@ class Sale extends Model
 
      public function sale_items(){
         return $this->hasMany(SaleItem::class);
-      
     }
 
     public function created_by(){
