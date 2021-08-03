@@ -9,7 +9,7 @@
          <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
          <div class="absolute opacity-0 carousel-item" style="height:50vh;">
             <div class="">
-               <img class="object-cover w-screen" src="{{url('images/portada/juansil1.png')}}" alt="">  
+               <img class="object-cover w-screen" src="{{url('images/portada/Juansil1.png')}}" alt="">  
             </div>
          </div>
          <label for="carousel-3" class="absolute inset-y-0 left-0 hidden w-10 h-10 my-auto ml-2 text-3xl font-bold leading-tight text-center text-black bg-white rounded-full cursor-pointer prev control-1 md:ml-10 hover:text-white hover:bg-blue-700" style="z-index: 9">‹</label>
@@ -19,7 +19,7 @@
          <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
          <div class="absolute opacity-0 carousel-item" style="height:50vh;">
             <div class="block w-full h-full text-5xl text-center text-white bg-orange-500">
-               <img class="object-cover w-screen" src="{{url('images/portada/juansil2.png')}}" alt=""> 
+               <img class="object-cover w-screen" src="{{url('images/portada/Juansil2.png')}}" alt=""> 
             </div>
          </div>
          <label for="carousel-1" class="absolute inset-y-0 left-0 hidden w-10 h-10 my-auto ml-2 text-3xl font-bold leading-tight text-center text-black bg-white rounded-full cursor-pointer prev control-2 md:ml-10 hover:text-white hover:bg-blue-700" style="z-index: 9">‹</label>
@@ -83,7 +83,7 @@
    <div class="flex items-center justify-center w-screen h-64">
       <div class="text-3xl">
         <figure>
-           <img class="object-cover w-screen h-64" src="{{url('images/portada/juansil1.png')}}" alt="">
+           <img class="object-cover w-screen h-64" src="{{url('images/portada/Juansil1.png')}}" alt="">
         </figure>
       </div>
     </div>
