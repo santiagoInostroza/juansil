@@ -124,7 +124,17 @@
     <script >
         var elms = document.getElementsByClassName( 'splide' );
         for ( var i = 0, len = elms.length; i < len; i++ ) {
-            new Splide( elms[ i ] ).mount();
+            new Splide( elms[ i ],{
+                type: 'loop',
+                perPage: 4,
+                trimSpace: false,
+                focus : 'center' ,
+                breakpoints: {
+                    640: {
+                        perPage: 2,
+                    },
+                },
+            }).mount();
         }
      </script>
     </body>

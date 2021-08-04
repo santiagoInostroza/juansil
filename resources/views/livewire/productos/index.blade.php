@@ -76,12 +76,7 @@
       <h2 class="mt-10 p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
       <div 
          class="splide" 
-         data-splide='{
-            "type":"loop",
-            "perPage": 1,
-            "trimSpace": false,
-            "focus" : "center" 
-         }'
+         
       > 
          <div class="splide__track">
             <ul class="splide__list">
