@@ -126,12 +126,21 @@
         for ( var i = 0, len = elms.length; i < len; i++ ) {
             new Splide( elms[ i ],{
                 type: 'loop',
-                perPage: 4,
+                perPage: 5,
                 trimSpace: false,
-                focus : 'center' ,
+                // focus : 'center' ,
                 breakpoints: {
-                    640: {
+                    // 640: {
+                    //     perPage: 2,
+                    // },
+                    768: {
                         perPage: 2,
+                    },
+                    1024: {
+                        perPage: 3,
+                    },
+                    1280: {
+                        perPage: 4,
                     },
                 },
             }).mount();
