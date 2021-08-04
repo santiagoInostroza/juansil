@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@splidejs/splide": "^2.4.21",
         "choices.js": "^9.0.1",
         "sweetalert2": "^10.14.0",
         "tailwind-scrollbar-hide": "^1.0.3"

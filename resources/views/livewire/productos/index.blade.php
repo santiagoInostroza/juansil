@@ -66,7 +66,6 @@
    </button>
    <!--- END BUTTONS /-->
 </div>
-  
 
 
    
@@ -97,6 +96,33 @@
 </div>
 
 
+<div class="splide" data-splide='{
+   "type":"loop",
+   "perPage":4 ,  
+   "trimSpace": false ,
+   "focus" : "center" 
+}'>
+   
+	<div class="splide__track">
+      
+		<ul class="splide__list">
+         
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+			<li class="splide__slide"> <img class="object-cover h-20 bg-gray-800 sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt=""></li>
+		</ul>
+	</div>
+</div>
+  
+
+<br><hr><br>
+
+
 
    <div class="flex items-center justify-center w-screen">
       <div class="text-3xl">
@@ -119,7 +145,7 @@
             <span class="font-extrabold">Juansil</span> 
             queremos que te cuides. Es por eso que trabajamos para llevarte los productos directamente a tu casa. 
             <br><span class="font-bold text-red-500"> Nuestro desafío es entregarte el mejor servicio... </span><br>
-            <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br>
+            {{-- <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br> --}}
          </p>
          
         
@@ -146,3 +172,9 @@
  
 </div>
 
+<script>
+   new Splide( '.splide' ).mount();
+
+   
+
+</script>
