@@ -78,8 +78,8 @@
          class="splide" 
          data-splide='{
             "type":"loop",
-            "perPage": 2
-            {{-- "trimSpace": false , --}}
+            "perPage": 4,
+            "trimSpace": false
             {{-- "focus" : "center"  --}}
          }'
       > 
