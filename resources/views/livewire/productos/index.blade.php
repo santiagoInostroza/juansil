@@ -86,11 +86,11 @@
          <div class="splide__track">
             <ul class="splide__list">
                @foreach ($categoria->products as $product)
-                  <li class="border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
+                  <li class="splide__slide border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
                      <a href="{{route('products.show',$product)}}">
                         <div class="w-full">
                            @if ($product->image)
-                              <figure>
+                              <figure class="splide__slide__container">
                                  <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
                               </figure>
                            @endif
