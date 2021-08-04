@@ -172,9 +172,3 @@
  
 </div>
 
-<script>
-   new Splide( '.splide' ).mount();
-
-   
-
-</script>

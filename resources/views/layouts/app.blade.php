@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
         <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
-
+       
 
   
 
@@ -120,5 +120,9 @@
 
        {{-- TA GALERY --}}
     <script src="https://unpkg.com/@markusantonwolf/ta-gallery@latest/dist/js/ta-gallery.min.js"></script>
+    
+    <script >
+        new Splide( '.splide' ).mount();
+     </script>
     </body>
 </html>
