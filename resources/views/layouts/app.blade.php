@@ -122,7 +122,7 @@
     <script src="https://unpkg.com/@markusantonwolf/ta-gallery@latest/dist/js/ta-gallery.min.js"></script>
     
     <script >
-        var elms = document.getElementsByClassName( 'splide' );
+        var elms = document.getElementsByClassName( 'splideIndex' );
         for ( var i = 0, len = elms.length; i < len; i++ ) {
             new Splide( elms[ i ],{
                 type: 'loop',
@@ -143,8 +143,25 @@
                         perPage: 4,
                     },
                 },
+                pagination: false,
+                lazyLoad: 'sequential'
             }).mount();
         }
+
+        var elms = document.getElementsByClassName( 'splideBanner' );
+        for ( var i = 0, len = elms.length; i < len; i++ ) {
+            new Splide( elms[ i ],{
+                type: 'loop',
+                perPage: 1,
+                easing: 'linear',
+                autoplay: true,
+                // trimSpace: false,
+                // focus : 'center' ,
+               
+            }).mount();
+        }
+
+
      </script>
     </body>
 </html>

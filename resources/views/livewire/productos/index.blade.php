@@ -1,73 +1,91 @@
 <div>
      
-   {{-- BANNER --}}
+  
    <div class="mt-10">
-      {{-- CREAR INICIO DE PRODUCTOS    --}}
-
+   
+       {{-- BANNER --}}
       <div
-      class="max-h-full b-8 ta-gallery ta-gallery-aspect-instagram "
-      style="height: max-content"
-      x-data="taGallery()"
-      x-init="init()"
-      data-start="0"
-      data-autoplay="true"
-      data-interval="5000"
-      data-timing="ease-in-out"
-      data-duration="0.3s"
-   >
-      <!--- START SLIDES /-->
-      <div class="rounded-lg ta-gallery-element ta-gallery-anim-swing" x-cloak style="height: max-content">
-         <figure>
-            <img
-                  src="{{url('images/portada/Juansil1.png')}}"
-                  alt="Example Image"
-                  class=""
-                  loading="lazy"
-                  x-ref="size "
-            />
-            
-         </figure>
-      </div>
-      <div class="rounded-lg ta-gallery-element ta-gallery-anim-rotate" x-cloak style="height: max-content">
-         <figure>
-            <img
-                  src="{{url('images/portada/Juansil2.png')}}"
-                  alt="Example Image"
-                  class=""
-                  loading="lazy"
-                  x-ref="height"
-            />
-            
-         </figure>
-      </div>
-   
-   
-      <!--- START BUTTONS /-->
-      <button
-         type="button"
-         class="flex items-center justify-center w-10 h-10 text-white bg-black bg-opacity-75 border-2 border-white rounded-full shadow-xl ta-gallery-button -left-5 sm:left-2 focus:ring focus:ring-primary"
-         x-on:click="previous()"
-         x-show="loaded"
+         class="max-h-full b-8 ta-gallery ta-gallery-aspect-instagram hidden"
+         style="height: max-content"
+         x-data="taGallery()"
+         x-init="init()"
+         data-start="0"
+         data-autoplay="true"
+         data-interval="5000"
+         data-timing="ease-in-out"
+         data-duration="0.3s"
       >
-         <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-            <path
-                  d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
-            ></path>
-         </svg>
-      </button>
-      <button
-         type="button"
-         class="flex items-center justify-center w-10 h-10 text-white bg-black bg-opacity-75 border-2 border-white rounded-full shadow-xl ta-gallery-button -right-5 sm:right-2 focus:ring focus:ring-primary"
-         x-on:click="next()"
-         x-show="loaded"
-      >
-         <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-            <path
-                  d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-            ></path>
-         </svg>
-      </button>
-      <!--- END BUTTONS /-->
+ 
+         <div class="rounded-lg ta-gallery-element ta-gallery-anim-swing" x-cloak style="height: max-content">
+            <figure>
+               <img
+                     src="{{url('images/portada/Juansil1.png')}}"
+                     alt="Example Image"
+                     class=""
+                     loading="lazy"
+                     x-ref="size "
+               />
+               
+            </figure>
+         </div>
+         <div class="rounded-lg ta-gallery-element ta-gallery-anim-rotate" x-cloak style="height: max-content">
+            <figure>
+               <img
+                     src="{{url('images/portada/Juansil2.png')}}"
+                     alt="Example Image"
+                     class=""
+                     loading="lazy"
+                     x-ref="height"
+               />
+               
+            </figure>
+         </div>
+      
+      
+      
+         <button
+            type="button"
+            class="flex items-center justify-center w-10 h-10 text-white bg-black bg-opacity-75 border-2 border-white rounded-full shadow-xl ta-gallery-button -left-5 sm:left-2 focus:ring focus:ring-primary"
+            x-on:click="previous()"
+            x-show="loaded"
+         >
+            <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+               <path
+                     d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+               ></path>
+            </svg>
+         </button>
+         <button
+            type="button"
+            class="flex items-center justify-center w-10 h-10 text-white bg-black bg-opacity-75 border-2 border-white rounded-full shadow-xl ta-gallery-button -right-5 sm:right-2 focus:ring focus:ring-primary"
+            x-on:click="next()"
+            x-show="loaded"
+         >
+            <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+               <path
+                     d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+               ></path>
+            </svg>
+         </button>
+      
+      </div>
+
+   {{-- BANNER OPCION 2 --}}
+   <div class="splide splideBanner">
+      <div class="splide__track">
+         <ul class="splide__list">
+            <li class="splide__slide">
+               <div class="splide__slide__container">
+                  <img src="{{url('images/portada/Juansil1.png')}}">
+               </div>
+            </li>
+            <li class="splide__slide">
+               <div class="splide__slide__container">
+                  <img src="{{url('images/portada/Juansil2.png')}}">
+               </div>
+            </li>
+         </ul>
+      </div>
    </div>
 
 
@@ -75,7 +93,7 @@
    @foreach ($categories as $categoria)
       <h2 class="mt-10 p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
       <div 
-         class="splide" 
+         class="splide splideIndex" 
          
       > 
          <div class="splide__track">
@@ -86,7 +104,7 @@
                         <div class="w-full">
                            @if ($product->image)
                               <figure class="splide__slide__container">
-                                 <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                 <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}">
                               </figure>
                            @endif
                            
@@ -235,21 +253,12 @@
          
       </div>
 
-
-
-      <hr>
-      breve explicacion del sistema de compras
       <hr>
       ofertas
-      <hr>
-
-      lista x categorias
       <hr>
       lista x más VENDIDOS
       <hr>
       Lo ultimo que llegó
-
-
    
    </div>
 
