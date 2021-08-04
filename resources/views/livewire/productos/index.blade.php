@@ -76,7 +76,7 @@
          <ul class="splide__list">
             <li class="splide__slide">
                <div class="splide__slide__container">
-                  <img src="{{url('images/portada/Juansil1.png')}}">
+                  <img data-splide-lazy="{{url('images/portada/Juansil1.png')}}">
                </div>
             </li>
             <li class="splide__slide">
@@ -104,7 +104,7 @@
                         <div class="w-full">
                            @if ($product->image)
                               <figure class="splide__slide__container">
-                                 <img class="object-contain h-48 w-full"  alt="" src="{{ Storage::url($product->image->url) }}">
+                                 <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}">
                               </figure>
                            @endif
                            
@@ -154,7 +154,6 @@
                      @if ($product->stock>0)
                         <div class="text-center mt-4 relative" >
                            @if (!session()->has('carrito.'.$product->id))
-                                 {{-- <div wire:loading wire:target="{{$product->id}}" class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div> --}}
                                  <x-jet-secondary-button onclick="return addToCart({{$product->id}});"> 
                                     <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                     Agregar
@@ -262,6 +261,11 @@
    
    </div>
 
+   @push('js')
+      <script>
+      </script>
+
+   @endpush
    
 </div>
 

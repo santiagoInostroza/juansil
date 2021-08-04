@@ -117,13 +117,13 @@
     <script>
         function productosMain(){
             return{
-                listaAumentaCantidad: function(pid){
-                    var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
-                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                        element.value=cantidad;
-                    });
-                    this.$wire.setCantidad( pid,cantidad)
-                },
+                // listaAumentaCantidad: function(pid){
+                //     var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+                //     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                //         element.value=cantidad;
+                //     });
+                //     this.$wire.setCantidad( pid,cantidad)
+                // },
             }
         } 
 

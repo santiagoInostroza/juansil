@@ -119,40 +119,41 @@
         @endisset
 
        {{-- TA GALERY --}}
-    <script src="https://unpkg.com/@markusantonwolf/ta-gallery@latest/dist/js/ta-gallery.min.js"></script>
+        <script src="https://unpkg.com/@markusantonwolf/ta-gallery@latest/dist/js/ta-gallery.min.js"></script>
+
+        <script>
     
-    <script >
-        var elms = document.getElementsByClassName( 'splideIndex' );
-        for ( var i = 0, len = elms.length; i < len; i++ ) {
+            var elms = document.getElementsByClassName( 'splideIndex' );
+            for ( var i = 0, len = elms.length; i < len; i++ ) {
             new Splide( elms[ i ],{
                 type: 'loop',
                 perPage: 6,
                 trimSpace: false,
                 focus : 'center' ,
                 breakpoints: {
-                    // 640: {
-                    //     perPage: 2,
-                    // },
-                    // 768: {
-                    //     perPage: 2,
-                    // },
-                    1024: {
+                        // 640: {
+                        //     perPage: 2,
+                        // },
+                        // 768: {
+                        //     perPage: 2,
+                        // },
+                        1024: {
                         perPage: 2,
-                    },
-                    // 1280: {
-                    //     perPage: 2,
-                    // },
-                    1563: {
+                        },
+                        // 1280: {
+                        //     perPage: 2,
+                        // },
+                        1563: {
                         perPage: 4,
-                    },
+                        },
                 },
                 pagination: false,
-                // lazyLoad: 'sequential'
+                lazyLoad: 'sequential',
             }).mount();
-        }
+            }
 
-        var elms = document.getElementsByClassName( 'splideBanner' );
-        for ( var i = 0, len = elms.length; i < len; i++ ) {
+            var elms = document.getElementsByClassName( 'splideBanner' );
+            for ( var i = 0, len = elms.length; i < len; i++ ) {
             new Splide( elms[ i ],{
                 type: 'loop',
                 perPage: 1,
@@ -160,11 +161,11 @@
                 autoplay: true,
                 // trimSpace: false,
                 // focus : 'center' ,
-               
+                 lazyLoad: 'sequential',
             }).mount();
-        }
-
-
-     </script>
+            }
+            
+        </script>
+        
     </body>
 </html>
