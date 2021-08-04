@@ -78,9 +78,9 @@
          class="splide" 
          data-splide='{
             "type":"loop",
-            "perPage": 4,
-            "trimSpace": false
-            {{-- "focus" : "center"  --}}
+            "perPage": 1,
+            "trimSpace": false,
+            "focus" : "center" 
          }'
       > 
          <div class="splide__track">
