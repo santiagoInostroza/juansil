@@ -16,7 +16,6 @@ class Show extends Component{
 
         $misma_categoria = Product::where('category_id', $this->producto->category_id)
         ->where('id', '!=', $this->producto->id)
-        
         ->get();
 
         $misma_marca = Product::where('brand_id', $this->producto->brand_id)
