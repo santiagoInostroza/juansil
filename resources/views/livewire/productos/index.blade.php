@@ -81,7 +81,7 @@
             </li>
             <li class="splide__slide">
                <div class="splide__slide__container">
-                  <img src="{{url('images/portada/Juansil2.png')}}">
+                  <img data-splide-lazy="{{url('images/portada/Juansil2.png')}}">
                </div>
             </li>
          </ul>
@@ -104,7 +104,7 @@
                         <div class="w-full">
                            @if ($product->image)
                               <figure class="splide__slide__container">
-                                 <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}">
+                                 <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}" src="{{ Storage::url($product->image->url) }}">
                               </figure>
                            @endif
                            
