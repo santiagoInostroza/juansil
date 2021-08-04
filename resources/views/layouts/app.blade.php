@@ -144,7 +144,7 @@
                     },
                 },
                 pagination: false,
-                lazyLoad: 'sequential'
+                // lazyLoad: 'sequential'
             }).mount();
         }
 

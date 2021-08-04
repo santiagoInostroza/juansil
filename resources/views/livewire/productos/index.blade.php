@@ -4,7 +4,7 @@
    <div class="mt-10">
    
        {{-- BANNER --}}
-      <div
+      {{-- <div
          class="max-h-full b-8 ta-gallery ta-gallery-aspect-instagram hidden"
          style="height: max-content"
          x-data="taGallery()"
@@ -68,7 +68,7 @@
             </svg>
          </button>
       
-      </div>
+      </div> --}}
 
    {{-- BANNER OPCION 2 --}}
    <div class="splide splideBanner">
@@ -104,7 +104,7 @@
                         <div class="w-full">
                            @if ($product->image)
                               <figure class="splide__slide__container">
-                                 <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}">
+                                 <img class="object-contain h-48 w-full"  alt="" src="{{ Storage::url($product->image->url) }}">
                               </figure>
                            @endif
                            
