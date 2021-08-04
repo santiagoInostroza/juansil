@@ -73,7 +73,7 @@
 
    {{-- PRODUCTOS POR CATEGORIA --}}
    @foreach ($categories as $categoria)
-      <h2 class="my-10 px-10 text-xl font-bold text-gray-600">{{$categoria->name}}</h2>
+      <h2 class="mt-10 p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
       <div 
          class="splide" 
          data-splide='{
