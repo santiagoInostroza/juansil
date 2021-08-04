@@ -148,7 +148,7 @@
                         },
                 },
                 pagination: false,
-                lazyLoad: 'sequential',
+                lazyLoad: 'nearby',
             }).mount();
             }
 
@@ -161,7 +161,7 @@
                 autoplay: true,
                 // trimSpace: false,
                 // focus : 'center' ,
-                 lazyLoad: 'sequential',
+                 lazyLoad: 'nearby',
             }).mount();
             }
             
