@@ -1,4 +1,4 @@
-<article class="bg-white mx-auto" style="height:100%" >
+{{-- <article class="bg-white mx-auto" style="height:100%" >
 
     <div class="relative">
         <a href="{{ route('products.show', $producto) }}">
@@ -6,7 +6,7 @@
                 <img class="object-contain h-48 w-full" src="{{ Storage::url($producto->image->url) }}" alt="">
             @endisset
         </a>
-        {{-- ETIQUETAS --}}
+
         <div class="m-2 text-left">
             @foreach ($producto->tags as $tag)
                 <div class="absolute top-{{ $loop->index * 5 }}">
@@ -29,4 +29,4 @@
 
 
 
-</article>
+</article> --}}

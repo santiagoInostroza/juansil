@@ -214,9 +214,34 @@
                     </div>
                     <div class="flex flex-col gap-2 mb-4">
                         <x-jet-label>Selecciona Proveedor</x-jet-label>
-                        <x-dropdowns.dropdown :items="$suppliers" id="buscador" placeholder="Ingresa nombre del proveedor"/>
-                        
+                        <x-dropdowns.dropdown :items="$suppliers" placeholder="Ingresa nombre del proveedor" id="searchSupliers"></x-dropdowns.dropdown>
                     </div>
+                    <div>
+                        <x-jet-button wire:click="$set('openAddItem',true)" >Agregar Item</x-jet-button>
+                        @if ($openAddItem)
+                            <x-modal.modal_screen>
+                                <x-slot name="titulo"> 
+                                    <div class="flex justify-center items-center h-full bg-gray-200">
+                                        <h2 class="text-xl">Agregar Item</h2>
+                                    </div>
+                                </x-slot>
+
+                                <div class="flex flex-col gap-2 mb-4">
+                                    <x-jet-label>Selecciona Producto</x-jet-label>
+                                    <x-dropdowns.dropdown :items="$products" placeholder="Ingresa nombre del producto" id="searchProducts"></x-dropdowns.dropdown>
+                                </div>
+
+
+                                <x-slot name="footer"> 
+                                    <div class="flex justify-end items-center h-full mr-5">
+                                        <x-jet-button wire:click="$set('openAddItem',false)"> Cerrar </x-jet-button>
+                                    </div>
+                                </x-slot>
+                            </x-modal.modal_screen>                   
+                        @endif
+                    </div>
+                    
+
                 </div>
                 
             </div>
@@ -248,9 +273,12 @@
             function purchaseMain(){
                 return {
                     openShowDetails: @entangle('openShowDetails'),
+                    openAddItem: @entangle('openAddItem'),
                     prueba: function(){
                         alert(this.refs.searchField.dataset.value)
-                    }
+                    },
+                   
+
                 }
             }
         </script>

@@ -1,4 +1,4 @@
-<tr> 
+{{-- <tr> 
     <input type="hidden" name='id[]' value="{{$item_id}}">
 
    
@@ -6,7 +6,6 @@
         @livewire('select.productos', ['indice' => $indice, 'product_id'=>$item['product_id'], 'query'=> $item['product_name']], key($indice) )
     </td>
     <td>
-        {{-- {!!  Form::number('cantidad[]', $itemCompra['cantidad'], ['class' => 'form-control','wire:keyup'=>'calculos','wire:model'=>'cantidad']) !!}  --}}
         <input wire:model='cantidad' id='cantidad' wire:keyup='calculos' type="number" name='cantidad[]' class="form-control" style="min-width: 80px"  >
         @error('cantidad') <span class="error">{{ $message }}</span> @enderror
     </td>
@@ -31,4 +30,4 @@
                 class="far fa-trash-alt"></i></div>
     </td>
 
-</tr>
+</tr> --}}

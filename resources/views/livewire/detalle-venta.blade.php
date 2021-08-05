@@ -1,14 +1,12 @@
-<div class=" ">
+{{-- <div class=" ">
     {{$cliente_id}}
     <div class="row">
-        {{-- CLIENTE --}}
         @livewire('select.clientes', [
             'customer_id' => $customer_id,
             'query' => $customer_name,
             'agregar_cliente' => true,
             ])
 
-        {{-- FECHA --}}
         <div class="form-group col-sm">
             {!! Form::label('date', 'Fecha', ['class' => '']) !!}
             {!! Form::date('date', null, ['class' => 'form-control', 'wire:model' => 'date']) !!}
@@ -19,7 +17,6 @@
         </div>
     </div>
 
-    {{-- DETALLE VENTA --}}
     <table id='detalleVenta' class="table table-bordered table-hover table-sm table-responsive-xl mt-5" style="width:100%">
         <thead class="thead-light">
             <tr>
@@ -56,8 +53,6 @@
     <input type="hidden" wire:model='eliminados' name="eliminados">
 
 
-
-    {{-- PAYMENT STATUS - ESTADO DEL PAGO --}}
     <label>Estado del pago</label>
     <div class="mb-3 pt-2 px-3  border">
         <div class="">
@@ -80,7 +75,6 @@
 
     </div>
 
-    {{-- DELIVERY --}}
     <div class="custom-control custom-switch d-inline-block my-4">
         <input type="checkbox" class="custom-control-input" name="delivery" id="delivery" wire:model='delivery'>
         <label class="custom-control-label" for="delivery"><i class="fas fa-truck"></i> Delivery</label>
@@ -103,7 +97,6 @@
         </div>
     @endif
 
-    {{-- COMENTARIOS --}}
     <div class="form-group">
         <div class="custom-control custom-switch d-inline-block my-4">
             <input type="checkbox" class="custom-control-input" id="comentarios" wire:model='tiene_comentarios'>
@@ -118,5 +111,4 @@
 
 
 
-</div>
-{{-- FIN DETALLE Venta --}}
+</div> --}}

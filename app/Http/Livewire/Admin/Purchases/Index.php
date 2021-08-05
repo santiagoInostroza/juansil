@@ -8,12 +8,14 @@ use App\Models\Purchase;
 use App\Models\Supplier;
 use Livewire\WithPagination;
 use App\Http\Controllers\helper;
+use App\Models\Product;
 
 class Index extends Component{
 
     // use WithPagination;
     public $openShowDetails = false;
     public $openNewPurchase = true;
+    public $openAddItem = true;
     public $fecha_compra;
 
     public $purchase_selected;
@@ -21,6 +23,11 @@ class Index extends Component{
     public $search;
 
     public $suppliers;
+    public $products;
+
+
+    public $open_add_item = false;
+    public $open_mod_item = false;
     
     public function updatingSearch(){
         $this->resetPage();
@@ -28,6 +35,7 @@ class Index extends Component{
 
     public function mount(){
         $this->suppliers =  Supplier::all();
+        $this->products =  Product::with('image')->get();
     }
     
     public function render(){

@@ -1,17 +1,9 @@
-<tr> 
+{{-- <tr> 
    
     <input type="hidden" name='id[]' value="{{$item_id}}">
    
     <td>
-         {{-- {!!  Form::select('product_id[]', $nombreProductos, $itemCompra['product_id'], ['class' => 'select2', 'placeholder' => 'Selecciona producto'/*,'wire:model'=>'product_id'*/]) !!}  --}}
-   
-           {{-- <select name="products[]" id='product_id' class="form-control"  name="states" wire:change='calculos' wire:model='product_id' style="width: max-content" >
-               <option value="">Selecciona Producto</option>
-               @foreach ($nombreProductos as $key => $lista)
-               <option value="{{ $key }}">{{ $lista }}</option>
-               @endforeach
-            </select> 
-            @error('products') <span class="error">{{ $message }}</span> @enderror --}}
+      
 
             @livewire('select.productos', ['product_id' => $item['product_id'],'query' => $item['product_name'] ])
       
@@ -19,7 +11,6 @@
        
     </td>
     <td>
-        {{-- {!!  Form::number('cantidad[]', $itemCompra['cantidad'], ['class' => 'form-control','wire:keyup'=>'calculos','wire:model'=>'cantidad']) !!}  --}}
         <input wire:model='cantidad' id='cantidad' wire:keyup='calculos' type="number" name='cantidad[]' class="form-control" style="min-width: 80px" wire:focus='showStock' wire:blur='hideStock' >
         @error('cantidad') <span class="error">{{ $message }}</span> @enderror
     </td>
@@ -64,4 +55,4 @@
                 class="far fa-trash-alt"></i></div>
     </td>
 
-</tr>
+</tr> --}}

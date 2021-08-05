@@ -8,10 +8,12 @@
                     {{$titulo}}
                 </header>
             @endisset
+           
             
             <main class="p-4 bg-white my-15 overflow-auto" style="max-height: calc(100vh - 112px);">
                 {{$slot}}
             </main>
+
             @isset($footer)
                 <footer class="header fixed bottom-0 w-screen bg-gray-200 h-15">
                     {{$footer}}

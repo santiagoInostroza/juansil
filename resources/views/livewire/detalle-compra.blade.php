@@ -1,5 +1,4 @@
-<div>
-    {{-- DETALLE COMPRA --}}
+{{-- <div>
     <table id='detalleCompra' class="table table-striped table-bordered table-hover table-sm table-responsive-xl"
         style="width:100%">
         <thead class="thead-light">
@@ -15,7 +14,6 @@
             </tr>
         </thead>
         <tbody>
-            {{-- ITEMS --}}
             @isset($items)
                 @foreach ($items as $indice => $item)
                     <livewire:item-compra-component :item="$item" :indice="$indice" :key="$indice">
@@ -38,5 +36,4 @@
 
 </div>
 
-
-{{-- FIN DETALLE COMPRA --}}
+ --}}

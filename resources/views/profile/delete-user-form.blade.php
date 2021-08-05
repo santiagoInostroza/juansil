@@ -9,7 +9,7 @@
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+            {{ __('Una vez que se elimine tu cuenta, todos tus recursos y datos se eliminarán permanentemente. Antes de eliminar tu cuenta, descargua cualquier dato o información que deseas conservar.') }}
         </div>
 
         <div class="mt-5">
