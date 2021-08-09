@@ -1,5 +1,5 @@
-{{-- 
-    <div class="relative">
+
+    {{-- <div class="relative">
 
    
         <div wire:loading.flex wire:target='addToCart'
@@ -91,4 +91,4 @@
 
 
 
-    </div> --}}
+    </div>  --}}

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\MovementController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\InventarioController;
 use App\Http\Controllers\Admin\CustomerDataController;
 
 Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.home')->name('admin.home');
@@ -39,6 +40,7 @@ Route::resource('deliveries', DeliveryController::class)->names('admin.deliverie
 
 Route::resource('movimientos', MovementController::class)->names('admin.movements');
 Route::resource('stock', StockController::class)->names('admin.stock');
+Route::get('inventory', [InventarioController::class,'index'])->name('admin.inventory');
 Route::resource('clientes', CustomerController::class)->names('admin.customers');
 Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerData'])->name('admin.customers.datos_cliente');
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->name('admin.sales.create');

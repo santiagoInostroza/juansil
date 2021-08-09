@@ -1,6 +1,5 @@
-
 @extends('layouts.admin3')
 
 @section('content')
-    @livewire('routes.index')
+    @livewire('admin.inventario.index')
 @endsection

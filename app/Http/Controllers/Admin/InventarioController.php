@@ -8,42 +8,13 @@ use Illuminate\Http\Request;
 use App\Models\PurchasePrice;
 use App\Http\Controllers\Controller;
 
-class StockController extends Controller
-{
-    public function index()
-    {
+class InventarioController extends Controller{
+
+    public function index(){
+
         $products = Product::all();
-        return view('admin.stock.index', compact('products'));
+        return view('admin.inventario.index', compact('products'));
     }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        
-    }
-
-    public function show($id)
-    {
-        
-    }
-    public function edit($id)
-    {
-        
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-    public function destroy($id)
-    {
-     
-    }
-
 
     public function restaurarStock(Purchase $purchase){
         // RESTA STOCK
@@ -71,7 +42,5 @@ class StockController extends Controller
        
 
     }
-
-
 
 }

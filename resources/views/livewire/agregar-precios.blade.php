@@ -1,4 +1,4 @@
-{{-- <div x-data="{ open:false }">
+<div x-data="{ open:false }">
     <div class="d-flex align-items-stretch">
 
         @if ($listaProductos)
@@ -86,4 +86,4 @@
 
 
     
-</div> --}}
+</div>
