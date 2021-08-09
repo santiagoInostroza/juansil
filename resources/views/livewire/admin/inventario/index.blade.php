@@ -48,10 +48,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center gap-4">
-                                            <figure>
-                                                <img class="h-12 w-12 object-cover" src="{{Storage::url($product->image->url)}}" alt="">
-                                            </figure>
-                                        
+                                            @if ($product->image)
+                                                <figure>
+                                                    <img class="h-12 w-12 object-cover" src="{{Storage::url($product->image->url)}}" alt="">
+                                                </figure>
+                                            @endif
+                                           
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{$product->name}}
