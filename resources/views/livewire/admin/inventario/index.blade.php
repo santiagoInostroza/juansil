@@ -101,7 +101,8 @@
                                                     @endif
                                                     <div class="grid grid-cols-4 hover:bg-gray-100 p-1">
                                                         <div>
-                                                            {{$this->fecha($precio->fecha)->format('d-m-Y')}}
+                                                            {{$precio->fecha)}}
+                                                            {{-- {{$this->fecha($precio->fecha)->format('d-m-Y')}} --}}
                                                         </div>
                                                         <div>
                                                             {{$precio->cantidad}} un.
