@@ -20,6 +20,7 @@
 
         <script src="{{ URL::asset('js/nice-select2.js') }}"></script>
         <link rel="stylesheet" href="{{ URL::asset('css/nice-select2.css') }}">
+        @livewireStyles
 
     </head>
     <body>

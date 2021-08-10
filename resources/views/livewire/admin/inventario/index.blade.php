@@ -1,11 +1,12 @@
 <div>
-    <div wire:loading class="fixed inset-0 bg-gray-400 opacity-25"></div>
-    <x-spinner.spinner></x-spinner.spinner>
+    
+    
     <h1 class="text-2xl p-4 text-center font-bold bg-gray-50">INVENTARIO</h1>
-    <div class="my-4 flex gap-4">
+    <div class="my-4 flex gap-4 relative">
         <x-jet-input wire:model="search" class="w-full" placeholder="Buscar por producto"></x-jet-input>
-       
-
+        <div class="absolute right-4">
+            <x-spinner.spinner :size="10" wire:loading.delay></x-spinner.spinner>
+        </div>
     </div>
     <div class="flex gap-4 my-4">
         Ordenar por...
@@ -21,6 +22,7 @@
         </select>
 
     </div>
+  
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
