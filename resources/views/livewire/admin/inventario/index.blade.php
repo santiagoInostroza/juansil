@@ -3,7 +3,7 @@
     
     <h1 class="text-2xl p-4 text-center font-bold bg-gray-50">INVENTARIO</h1>
     <div class="my-4 flex gap-4 relative">
-        <x-jet-input wire:model="search" class="w-full" placeholder="Buscar por producto"></x-jet-input>
+        <x-jet-input wire:model.debounce="search" class="w-full" placeholder="Buscar por producto"></x-jet-input>
         <div class="absolute right-4">
             <x-spinner.spinner :size="10" wire:loading.delay wire:target="search"></x-spinner.spinner>
         </div>
