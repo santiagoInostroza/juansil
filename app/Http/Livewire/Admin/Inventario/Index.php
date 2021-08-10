@@ -21,6 +21,7 @@ class Index extends Component{
                 $query = $query->where('products.name','like',"%" . $s . "%");
             }
         })
+        ->with('purchasePrices')
         ->orderBy($this->order_by,$this->asc)->get();;
 
         return view('livewire.admin.inventario.index',compact('products'));

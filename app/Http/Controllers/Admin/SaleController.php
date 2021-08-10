@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use App\Models\PurchasePrice;
 use App\Models\ProductMovement;
 use App\Http\Controllers\Controller;
+use App\Models\ErrorNotice;
+use App\Models\MovementSale;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller{
@@ -335,5 +338,149 @@ class SaleController extends Controller{
             ]);
             $stock = $stock_actual;
         } while ($go);
+    }
+
+    public function createSale($arrayVenta){
+
+        $sale = new Sale();
+
+        $sale->customer_id             = $arrayVenta['sale']['customer_id'];
+        $sale->total                   = $arrayVenta['sale']['total'];
+        $sale->date                    = $arrayVenta['sale']['date'];
+        $sale->payment_amount          = $arrayVenta['sale']['payment_amount'];
+        $sale->payment_status          = $arrayVenta['sale']['payment_status'];
+        $sale->pending_amount          = $arrayVenta['sale']['pending_amount'];
+        $sale->payment_date            = $arrayVenta['sale']['payment_date'];
+        $sale->delivery                = $arrayVenta['sale']['delivery'];
+        $sale->delivery_date           = $arrayVenta['sale']['delivery_date'];
+        $sale->date_delivered          = $arrayVenta['sale']['date_delivered'];
+        $sale->delivery_stage          = $arrayVenta['sale']['delivery_stage'];
+        $sale->comments                = $arrayVenta['sale']['comments'];
+        $sale->user_created            = $arrayVenta['sale']['user_created'];
+        $sale->delivery_value          = $arrayVenta['sale']['delivery_value'];
+        $sale->save();
+
+
+
+        $total_cost = 0;
+        foreach ($arrayVenta['items'] as $item) {
+
+            $product = Product::find($item['product_id']);
+            $product->stock -= $item['cantidad'];
+            $product->save();
+
+
+            $go = true;
+            $cantidad_restante = 0;
+            $suma_costo = 0;
+            $costo=0;
+            $cantidad = 0;
+            $vueltas = 0;
+           
+            try {//intenta obtener el valor de costo del producto
+                do {
+                    $purchasePrice = PurchasePrice::where('product_id', $item['product_id'])->where('stock', '>', 0)->orderBy('fecha', 'asc')->first();    
+                    $cantidad = ($cantidad_restante == 0) ? $item['cantidad'] : $cantidad_restante ;
+                    
+                    $cantidad_a_multiplicar = 0;
+                    $costo = $purchasePrice->precio;
+                    $costo2 = $purchasePrice->precio;
+                    if($purchasePrice->stock >= $cantidad){//alcanza para cubrir el stock necesitado
+                        $cantidad_a_multiplicar = $cantidad;
+                        $purchasePrice->stock -= $cantidad;
+                        $go = false;
+
+                    }else{ // no alcanza el stock, es necesario obtener otro producto para ocupar su stock
+                        $cantidad_restante =  $cantidad - $purchasePrice->stock;
+                        $cantidad_a_multiplicar = $purchasePrice->stock;
+                        $purchasePrice->stock = 0; 
+                    }
+                    // ACTUALIZA STOCK DEL PRODUCTO INTERNO
+                    $purchasePrice->save();
+
+                    $movement_sales = new MovementSale();
+                    $movement_sales->purchase_price_id = $purchasePrice->id;
+                    $movement_sales->sale_id = $sale->id;
+                    $movement_sales->product_id = $item['product_id'];
+                    $movement_sales->fecha = $sale->date ;
+                    $movement_sales->cantidad = $cantidad_a_multiplicar ;
+                    $movement_sales->cost = $purchasePrice->precio ;
+                    $movement_sales->total_cost = $purchasePrice->precio * $cantidad_a_multiplicar ;
+                    $movement_sales->save();
+
+                    $total_costo = $cantidad_a_multiplicar * $costo;
+                    $suma_costo += $total_costo;
+                    $vueltas++;
+                } while ($go); 
+
+                $costo_final_unitario =$suma_costo / $item['cantidad'];
+                $total_cost += $suma_costo;
+
+            } catch (\Throwable $th) { //si encuentra un costo pero el stock no es suficiente, guarda todos los costos con el valor que encontro, si no encuentra ni un costo guarda el valor del costo al valor del precio venta
+                if($vueltas>0){
+                    $costo_final_unitario = $costo2;
+                    // $this->msj.= "Stock insuficiente de '$producto_general->name'.\n";
+                    $message = new ErrorNotice();
+                    $message->message = "No se encontró stock suficiente para $product->name en venta $sale->id. Se guardará el valor de costo del producto de un producto encontrado sin stock";
+                    $message->save();
+
+                }else{
+                    $costo_final_unitario = $item['precio'];
+                    $total_cost = $item['precio'] * $item['cantidad_total']; 
+                    // $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
+                    $message = new ErrorNotice();
+                    $message->message = "No se encontró stock para $product->name en venta $sale->id. Se guardará el precio de venta como precio de costo, esto ocasionará que no refleje utilidades este item";
+                    $message->save();
+                }
+
+                $movement_sales = new MovementSale();
+                $movement_sales->purchase_price_id = null;
+                $movement_sales->sale_id = $sale->id;
+                $movement_sales->product_id = $item['product_id'];
+                $movement_sales->fecha = $sale->date ;
+                $movement_sales->cantidad = $cantidad ;
+                $movement_sales->cost = $costo_final_unitario ;
+                $movement_sales->total_cost = $costo_final_unitario * $cantidad ;
+                $movement_sales->save();
+
+            }
+           
+            $saleItem = new SaleItem();
+
+            $saleItem->sale_id              = $sale->id;
+            $saleItem->product_id           = $item['product_id'];
+            $saleItem->cantidad             = $item['cantidad'];
+            $saleItem->cantidad_por_caja    = $item['cantidad_por_caja'];
+            $saleItem->cantidad_total       = $item['cantidad_total'] ;
+            $saleItem->precio               = $item['precio'] ;
+            $saleItem->precio_por_caja      = $item['precio_por_caja'] ;
+            $saleItem->precio_total         = $item['precio_total'] ;
+            $saleItem->costo                = $costo_final_unitario;
+
+            $saleItem->save();
+
+
+        }
+
+        $sale->total_cost = $total_cost;
+        $sale->save();
+
+      
+        
+    }
+
+    public function deleteSale(Sale $sale){
+
+        foreach ($sale->movement_sales as $movement) {
+            $movement->purchase_price->stock+=$movement->cantidad; 
+            $movement->product->stock += $movement->cantidad;
+            
+            $movement->purchase_price->save(); 
+            $movement->product->save(); 
+        }
+
+        $sale->sale_items;
+        $sale->delete();
+        
     }
 }

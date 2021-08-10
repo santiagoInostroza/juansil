@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\SaleItem;
 use App\Models\SalePrice;
+use App\Models\MovementSale;
 use App\Models\PurchaseItem;
 use App\Models\PurchasePrice;
 use App\Models\ProductMovement;
@@ -60,16 +61,14 @@ class Product extends Model
         return $this->belongsToMany(Purchase::class);
     }
 
-    public function movements()
-    {
-        return $this->hasMany(ProductMovement::class);
-        //return $this->belongsTo(Producto::class);
+    public function movement_sales(){
+        return $this->hasMany(MovementSale::class); 
     }
 
     public function purchasePrices()
     {
         return $this->hasMany(PurchasePrice::class);
-        //return $this->belongsTo(Producto::class);
+      
     }
 
     public function sale_items()

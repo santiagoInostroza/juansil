@@ -6,6 +6,7 @@ use App\Models\Pay;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\SaleItem;
+use App\Models\MovementSale;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,6 +23,9 @@ class Sale extends Model
 
      public function sale_items(){
         return $this->hasMany(SaleItem::class);
+    }
+     public function movement_sales(){
+        return $this->hasMany(MovementSale::class);
     }
 
     public function created_by(){

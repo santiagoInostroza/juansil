@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 class CreateSale extends Component{
+    public $editSale=false;
     public $search;
 
     public $fecha;
@@ -321,9 +322,6 @@ class CreateSale extends Component{
         ]);
     }
 
-    
-
-
     public function open_add_item(){
         $this->reset(['selected_product','search','cantidad','cantidad_por_caja','cantidad_total','precio','precio_por_caja','precio_total']);
         $this->open_list = true;
@@ -332,8 +330,6 @@ class CreateSale extends Component{
         $this->search ="";
 
     }
-
-  
 
     public $modItem = false;
     

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Cart;
 
+use App\Http\Controllers\Admin\SaleController;
 use Exception;
 use DateTimeZone;
 use Carbon\Carbon;
@@ -13,8 +14,10 @@ use App\Models\Customer;
 use App\Models\SaleItem;
 use Carbon\CarbonPeriod;
 use App\Models\Calendario;
+use App\Models\ErrorNotice;
 use Illuminate\Support\Str;
 use App\Models\PurchasePrice;
+use Stripe\Terminal\Location;
 
 class Pedido extends Component
 {
@@ -498,120 +501,62 @@ class Pedido extends Component
             $this->customer->latitud = $this->latitud;
             $this->customer->longitud = $this->longitud;
 
-            $this->customer->save();
-
-            
+            $this->customer->save(); 
         }
 
         // CREAR VENTA
 
-        $venta = new Sale();
-
-
-
-        $venta->customer_id = $this->customer->id;
-        $venta->total = session('totalCarrito');
-        $venta->date = Carbon::now();
-        $venta->payment_amount = 0;
-        $venta->payment_status = 1;
-        $venta->pending_amount = session('totalCarrito');
-        $venta->payment_date = null;
-        $venta->delivery = 1;
-        $venta->delivery_date = $this->fechaDespacho->toDateString();
-        $venta->date_delivered = null;
-        $venta->delivery_stage = 0;
-        $venta->comments = "";
-        $venta->user_created = 0;
-        $venta->total_cost = 0;
-        $venta->delivery_value = session('cliente.totalDespacho');
-
-        $venta->save();
-
-        // CREAR ITEMS_VENTA
-        $total_cost = 0;
-        foreach (session('carrito') as $item) {
-
-            // ACTUALIZA STOCK DEL PRODUCTO GENERAL
-            $producto_general = Product::find($item['producto_id']);
-            $stock = $producto_general->stock;
-            $nuevoStock = $stock - $item['cantidad'];
-            $producto_general->stock = $nuevoStock;
-            $producto_general->save();
-
-
-
-            $go = true;
-            $cantidad_restante = 0;
-            $suma_costo = 0;
-            $costo=0;
-
-            $vueltas = 0;
-
-           
-            try {//intenta obtener el valor de costo del producto
-                do {
-                    $producto = PurchasePrice::where('product_id', $item['producto_id'])->where('stock', '>', 0)->orderBy('created_at', 'asc')->first();    
-                    $cantidad = ($cantidad_restante == 0) ? $item['cantidad'] : $cantidad_restante ;
-                    
-                    $costo = $producto->precio;
-                    $costo2 = $producto->precio;
-                    $cantidad_a_multiplicar = 0;
-                    if($producto->stock >= $cantidad){//alcanza para cubrir el stock necesitado
-                        $stock = $producto->stock;
-                        $producto->stock = $stock - $cantidad;
-                        $go = false;
-                        $cantidad_a_multiplicar = $cantidad;
-                    }else{ // no alcanza el stock, es necesario obtener otro producto para ocupar su stock
-                        $cantidad_restante =  $cantidad - $producto->stock;
-                        $cantidad_a_multiplicar = $producto->stock;
-                        $producto->stock = 0; 
-                    }
-                    // ACTUALIZA STOCK DEL PRODUCTO INTERNO
-                    $producto->save();
-
-                    $total_costo = $cantidad_a_multiplicar * $costo;
-                    $suma_costo += $total_costo;
-                    $vueltas++;
-                } while ($go); 
-
-                $costo_final =$suma_costo / $item['cantidad'];
-                $total_cost += $suma_costo;
-
-            } catch (\Throwable $th) { //si encuentra un costo pero el stock no es suficiente, guarda todos los costos con el valor que encontro, si no encuentra ni un costo guarda el valor del costo al valor del precio venta
-                if($vueltas>0){
-                    $costo_final = $costo2;
-                    // $this->msj.= "Stock insuficiente de '$producto_general->name'.\n";
-                }else{
-                    $costo_final = $item['precio'];
-                    $total_cost = $item['precio'] * $item['cantidad_total']; 
-                    // $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
-                }
-               
-            }
-
-            
+        $arrayVenta['sale']=[
+            'customer_id' => $this->customer->id,
+            'total' => session('totalCarrito'),
+            'date' => Carbon::now(),
+            'payment_amount' => 0,
+            'payment_status' => 1,
+            'pending_amount' =>  session('totalCarrito'),
+            'payment_date' => null,
+            'delivery' => 1,
+            'delivery_date' => $this->fechaDespacho->toDateString(),
+            'date_delivered' => null,
+            'delivery_stage' => 0,
+            'comments' => '',
+            'user_created' => 0,//cero es: que lo creo un usuario de internet
+            'delivery_value' => session('cliente.totalDespacho'),
+        ];
        
-            $saleItem = new SaleItem();
-            $saleItem->sale_id = $venta->id;
-            $saleItem->product_id = $item['producto_id'];
-            $saleItem->cantidad = $item['cantidad'];
-            $saleItem->cantidad_por_caja = 1;
-            $saleItem->cantidad_total = $item['cantidad'] ;
-            $saleItem->precio = $item['precio'] ;
-            $saleItem->precio_por_caja = $item['precio'] ;
-            $saleItem->precio_total = $item['total'] ;
-            $saleItem->costo = $costo_final;
-            $saleItem->save();
+
+        foreach (session('carrito') as $item) {
+            $arrayVenta['items'][]=[
+               'product_id' => $item['producto_id'],
+               'cantidad' => $item['cantidad'],
+               'cantidad_por_caja' => 1,
+               'cantidad_total' => $item['cantidad'],
+               'precio' => $item['precio'],
+               'precio_por_caja' => $item['precio'],
+               'precio_total' => $item['total'],
+            ];
         }
 
-        $venta->total_cost = $total_cost;
-        $venta->save();
+        $sale = new SaleController();
+        $sale->createSale($arrayVenta);
 
+        session()->forget('carrito');
+        session()->forget('totalCarrito');
+        session()->forget('totalProductos');
+        $this->emitTo('cart.index','render');
         $this->dispatchBrowserEvent('alerta', [
             'icon' => 'success',
-            'title' => "Gracias por agendar con nosotros",
+            'title' => "Pedido agendado!!",
             'msj' => "En breve te enviaremos un mail y un wasap con el pedido y la información",
         ]); 
+            
+            // redirect()->route('products.lista')->with('msj','pedido_agendado');
+           
+            // $messages = new ErrorNotice();
+            // $messages->messages="se pudo crear la compra."  .  $this->customer->toString; 
+
+
+       
+
         
     }
 

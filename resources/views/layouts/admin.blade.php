@@ -534,6 +534,27 @@
        
     })
 
+    window.addEventListener('confirm_delete', event => {
+       Swal.fire({
+        title: '¿Seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+            )
+        }
+        })
+    })
+
+
 </script>
 
 @livewireScripts

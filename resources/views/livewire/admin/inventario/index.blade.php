@@ -41,14 +41,12 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
+                                <th scope="col" width="10" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Producto</th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Stock</th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Stock min</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock por precios</th>
                                 
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Estado</th>
-                                <th scope="col" class="relative px-6 py-3">
+                                <th scope="col" width="10" class="relative px-6 py-3">
                                 
                                 </th>
                             </tr>
@@ -86,16 +84,14 @@
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">
+                                        <div class="text-sm text-gray-900 w-max-content">
                                             <div class="font-bold tracking-wide">
-                                                {{ $product->stock}} 
+                                              Disp.  {{ $product->stock}} un.
                                             </div>
                                         </div>
-                                        {{-- <div class="text-sm text-gray-500">Optimization</div> --}}
+                                        <div class="text-sm text-gray-500"> Min. {{ $product->stock_min}} un. </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500"> {{ $product->stock_min}}</div>
-                                    </td>
+                                  
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($product->purchasePrices->count())
                                             <div class="text-sm text-gray-500 max-h-96 overflow-auto border rounded"> 
@@ -103,7 +99,13 @@
                                                     @if (!$mostrarTodosLosProductos && $precio->stock <=0)
                                                         @continue
                                                     @endif
-                                                    <div class="grid grid-cols-2 hover:bg-gray-100 p-1">
+                                                    <div class="grid grid-cols-4 hover:bg-gray-100 p-1">
+                                                        <div>
+                                                            {{$this->fecha($precio->fecha)->format('d-m-Y')}}
+                                                        </div>
+                                                        <div>
+                                                            {{$precio->cantidad}} un.
+                                                        </div>
                                                         <div>
                                                             {{$precio->stock}} un.
                                                         </div>

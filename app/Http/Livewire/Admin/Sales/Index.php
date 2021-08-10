@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Sales;
 
+use App\Http\Controllers\Admin\SaleController;
 use App\Models\Sale;
 use Livewire\Component;
 
@@ -27,6 +28,7 @@ class Index extends Component{
         ->orWhere('customers.celular','like','%'. $this->search . '%')
         ->orWhere('sales.total','like','%'. $this->search . '%')
         ->orWhere('sales.date','like','%'. $this->search . '%')
+        ->with('movement_sales.purchase_price')
         
         ->select('sales.*')
         ->orderBy($this->sort,$this->direction)
@@ -55,6 +57,26 @@ class Index extends Component{
         $this->open_show = true;
         $this->selected_sale = $sale;
 
+        
+    }
+    public function deleteSale(Sale $sale){
+        $saleController = new SaleController();
+        $saleController->deleteSale($sale);
+        $this->dispatchBrowserEvent('alerta', [
+                'msj' =>  "Pedido " . $sale->id ." eliminado !!. Total ". number_format($sale->total,0,',','.'),
+                'icon' => 'success',
+                'title' => "Pedido Eliminado",
+        ]); 
+    }
+
+    public function editSale(Sale $sale){
+        $saleController = new SaleController();
+        $saleController->editSale($sale);
+        $this->dispatchBrowserEvent('alerta', [
+            'msj' =>  "Pedido " . $sale->id ." editado !!. Total ". number_format($sale->total,0,',','.'),
+            'icon' => 'success',
+            'title' => "Pedido Editado",
+    ]); 
         
     }
 

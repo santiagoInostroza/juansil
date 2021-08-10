@@ -289,17 +289,15 @@ class Index extends Component{
                 $product->stock += $item['cantidad_total'];
                 $product->save();
 
-                
-                $productPurchasePrice = PurchasePrice::where('precio',$item['precio'])->where('product_id',$item['product_id'])->first();
-                if($productPurchasePrice){
-                    $productPurchasePrice->stock+=$item['cantidad_total'];
-                }else{
-                    $productPurchasePrice = new PurchasePrice();
-                    $productPurchasePrice->product_id = $item['product_id'];
-                    $productPurchasePrice->precio = $item['precio'];
-                    $productPurchasePrice->precio_por_caja = $item['precio_por_caja'];
-                    $productPurchasePrice->stock = $item['cantidad_total'];
-                }
+       
+                $productPurchasePrice = new PurchasePrice();
+                $productPurchasePrice->product_id = $item['product_id'];
+                $productPurchasePrice->precio = $item['precio'];
+                $productPurchasePrice->precio_por_caja = $item['precio_por_caja'];
+                $productPurchasePrice->stock = $item['cantidad_total'];
+                $productPurchasePrice->cantidad = $item['cantidad_total'];
+                $productPurchasePrice->fecha = $this->fecha_compra;
+                $productPurchasePrice->purchase_id = $purchase->id;
                 $productPurchasePrice->save();
             }
             

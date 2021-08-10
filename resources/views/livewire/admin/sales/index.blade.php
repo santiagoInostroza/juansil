@@ -1,6 +1,5 @@
 <div x-data="ventas()">
-    <x-slot name='titulo'>Lista de Ventas</x-slot>
-    
+    <h1 class="uppercase text-2xl text-gray-600 font-bold text-center mb-10">LISTA DE VENTAS</h1>
     <div class="py-4 flex items-center">
         <x-jet-input wire:model='search' class="flex-1 mr-4" type="" placeholder='Buscar palabra...'  />
         @livewire('admin.sales.create-sale', ['user' => ''])
@@ -219,14 +218,14 @@
                     </td>
                     {{-- TOTAL --}}
                     <td class="px-6 py-4 whitespace-nowrap text-xl text-gray-500">
-                        ${{number_format($sale->total,0,',','.')}}
+                        ${{number_format($sale->total + $sale->delivery_value,0,',','.')}}
                     </td>
                      {{-- ESTADO DE PAGO --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_status == 1)
                             <div> 
                                 <span class="text-yellow-400">Pendiente</span> 
-                                ${{number_format($sale->pending_amount,0,',','.')}} 
+                                ${{number_format($sale->pending_amount + $sale->delivery_value,0,',','.')}} 
                             </div> 
                         @elseif ($sale->payment_status == 2)
                             <div class=""> 
@@ -235,7 +234,7 @@
                             </div> 
                             <div> 
                                 <span class="text-yellow-400">Pendiente</span> 
-                                ${{number_format($sale->pending_amount,0,',','.')}} 
+                                ${{number_format($sale->pending_amount + $sale->delivery_value,0,',','.')}} 
                             </div> 
                             
                         @elseif ($sale->payment_status == 3)
@@ -289,10 +288,6 @@
                             </div>
                             {{date("d-m-Y",strtotime($sale->payment_date))}}
                         @endif
-                        
-                      
-
-                       
                        
                     </td>
                      {{--  VENTA POR  --}}
@@ -301,20 +296,18 @@
                     </td>
                      {{--  COMENTARIOS  --}}
                     <td class="px-6 py-4 text-sm text-gray-500">
-                        <div class="w-24 text-sm"> {{ $sale->comments }}</div>
+                        <div class="w-24 text-sm"> {{ $sale->comments }}
+                           
+                        </div>
                     </td>
                     {{-- ACCION --}}
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                         <div class="flex lg:flex-col items-center gap-2">
-                          
-                            
-                            <x-jet-button wire:click="open_show({{$sale}})" class="mr-2"><i class="far fa-eye"></i></x-jet-button>
-                            <a href="{{ route('admin.sales.edit', $sale) }}" class="btn btn-secondary btn-sm mr-2"><i class="fas fa-pen"></i></a>
-                            <form action="{{ route('admin.sales.destroy', $sale) }}" method='POST' class="alerta_eliminar  mr-2">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
-                            </form>
+                            <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button>
+                            @if ($sale->payment_status != 3)
+                                 {{-- <x-jet-button wire:click="editSale({{ $sale }})"><i class="fas fa-pen"></i></x-jet-button>  --}}
+                                <x-jet-button wire:click="deleteSale({{ $sale }})"><i class="far fa-trash-alt"></i></x-jet-button>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -322,10 +315,11 @@
             </tbody>
         </table>
     </x-table>
-  
+    
+   
 
     @if ($open_show)
-        <div x-show="open_show">
+        <div class="hidden" :class="{'hidden': !open_show }">
             <div class="fixed inset-0 w-full h-full bg-gray-900 opacity-25 z-10"></div>
             <div class="fixed inset-1 rounded-xl  shadow-2xl bg-white z-10 overflow-auto h-screen w-screen" style="">
                 
@@ -371,7 +365,7 @@
                                     @if ($selected_sale->payment_status !=3 ) 
                                         <div class="grid grid-cols-2">
                                             <div>Monto pendiente</div>
-                                            <div>${{number_format($selected_sale->pending_amount,0,',','.')}}</div>
+                                            <div>${{number_format($selected_sale->pending_amount + $selected_sale->delivery_value,0,',','.')}}</div>
                                         </div>
                                     @endif
                                     @if ($selected_sale->payment_date)
@@ -472,11 +466,11 @@
                                 <div class="grid grid-cols-2 w-60 gap-4 text-xl uppercase font-semibold">
                                     @if ($selected_sale->delivery_value>0)
                                         <div class="font-bold text-gray-500">Sub total </div>
-                                        <div class="text-right"> ${{number_format($selected_sale->total -$selected_sale->delivery_value,0,',','.')}}</div>
+                                        <div class="text-right"> ${{number_format($selected_sale->total ,0,',','.')}}</div>
                                         <div class="font-bold text-gray-500">Despacho </div>
                                         <div class="text-right"> ${{number_format($selected_sale->delivery_value,0,',','.')}}</div>
                                         <div class="font-bold text-gray-500">Total </div>
-                                        <div class="text-right"> ${{number_format($selected_sale->total,0,',','.')}}</div>
+                                        <div class="text-right"> ${{number_format($selected_sale->total +$selected_sale->delivery_value,0,',','.')}}</div>
                                     @else
                                         <div class="font-bold text-gray-500">Total </div>
                                         <div class="text-right"> ${{number_format($selected_sale->total,0,',','.')}}</div>
@@ -513,7 +507,6 @@
             function ventas(){
                 return{
                     open_show: @entangle('open_show'),
-
                 }
             }
         </script>
