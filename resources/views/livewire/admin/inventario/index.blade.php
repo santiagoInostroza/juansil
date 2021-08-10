@@ -5,21 +5,32 @@
     <div class="my-4 flex gap-4 relative">
         <x-jet-input wire:model="search" class="w-full" placeholder="Buscar por producto"></x-jet-input>
         <div class="absolute right-4">
-            <x-spinner.spinner :size="10" wire:loading.delay></x-spinner.spinner>
+            <x-spinner.spinner :size="10" wire:loading.delay wire:target="search"></x-spinner.spinner>
         </div>
     </div>
     <div class="flex gap-4 my-4">
         Ordenar por...
-        <select name="" id="" class="border rounded" wire:model="order_by">
-            <option value="name">Nombre</option>
-            <option value="id">Id</option>
-            <option value="stock">Stock</option>
-            <option value="status">Estado</option>
-        </select>
-        <select name="" id="" class="border rounded" wire:model="asc">
-            <option value="asc">Asc...</option>
-            <option value="desc">Desc</option>
-        </select>
+        <div class="relative">
+            <select name="" id="" class="border rounded" wire:model="order_by">
+                <option value="name">Nombre</option>
+                <option value="id">Id</option>
+                <option value="stock">Stock</option>
+                <option value="status">Estado</option>
+            </select>
+            <div class="absolute top-0 left-8">
+                <x-spinner.spinner :size="6" wire:loading.delay wire:target="order_by"></x-spinner.spinner>
+            </div>
+        </div>
+        <div class="relative">
+            <select name="" id="" class="border rounded" wire:model="asc">
+                <option value="asc">Asc...</option>
+                <option value="desc">Desc</option>
+            </select>
+            <div class="absolute top-0 left-4">
+                <x-spinner.spinner :size="6" wire:loading.delay wire:target="asc"></x-spinner.spinner>
+            </div>
+        </div>
+       
 
     </div>
   
