@@ -1,4 +1,5 @@
 <div>
+    <div wire:loading class="inset-0 bg-gray-400"></div>
     <h1 class="text-2xl p-4 text-center font-bold bg-gray-50">INVENTARIO</h1>
     <div class="my-4 flex gap-4">
         <x-jet-input wire:model="search" class="w-full" placeholder="Buscar por producto"></x-jet-input>
@@ -102,7 +103,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{$product->status}}
+                                       
                                         @if ($product->status)
                                             Activo
                                         @else
