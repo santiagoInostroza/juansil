@@ -119,7 +119,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                        
                                         @if ($product->status)
-                                            <div class="text-green-600 font-bold">
+                                            <div class="text-green-600 font-bold flex items-center gap-2">
                                                 Activo <div class="fas fa-check"></div>
                                             </div>
                                             <button class="text-sm text-gray-600" wire:click="desactivar({{ $product->id }})">Desactivar</button>
