@@ -119,18 +119,24 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                        
                                         @if ($product->status)
-                                            Activo
+                                            <div class="text-green-600 font-bold">
+                                                Activo <div class="fas fa-check"></div>
+                                            </div>
+                                            <button class="text-sm text-gray-600" wire:click="desactivar({{ $product->id }})">Desactivar</button>
                                         @else
-                                            Desactivado
+                                            <div class="text-red-400">
+                                                Inactivo
+                                            </div>
+                                            <button class="text-sm text-gray-600" wire:click="activar({{ $product->id }})">Activar</button>
                                         @endif
                                     </td>
                                    
                               
                                     <td class="px-6 py-2 text-sm font-medium text-right whitespace-nowrap">
                                         <div class="flex flex-col items-center justify-between gap-1 w-max-content">                                            
-                                            <x-jet-secondary-button wire:click="showPurchase({{$product}})"> <i class="fas fa-eye"></i></x-jet-secondary-button>
+                                            <x-jet-secondary-button wire:click="showPurchase({{ $product }})"> <i class="fas fa-eye"></i></x-jet-secondary-button>
                                             <x-jet-secondary-button  > <i class="fas fa-pen"></i> </x-jet-secondary-button>
-                                            <x-jet-secondary-button wire:click="deletePurchase({{$product}})"><i class="far fa-trash-alt"></i></x-jet-secondary-button>
+                                            {{-- <x-jet-secondary-button wire:click="deleteProduct({{ $product }})"><i class="far fa-trash-alt"></i></x-jet-secondary-button> --}}
                                             {{-- <a href="{{ route('admin.purchases.show', $purchase) }}" title="Ver datos del cliente" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('admin.purchases.edit', $purchase) }}" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-pen"></i></a>
                                             <form action="{{ route('admin.purchases.destroy', $purchase) }}" method='POST' class="mr-2 alerta_eliminar">

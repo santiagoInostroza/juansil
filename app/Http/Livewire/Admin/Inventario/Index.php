@@ -25,4 +25,14 @@ class Index extends Component{
 
         return view('livewire.admin.inventario.index',compact('products'));
     }
+    public function desactivar($product_id){
+        $product = Product::find($product_id);
+        $product->status = 0;
+        $product->save();
+    }
+    public function activar($product_id){
+        $product = Product::find($product_id);
+        $product->status = 1;
+        $product->save();
+    }
 }
