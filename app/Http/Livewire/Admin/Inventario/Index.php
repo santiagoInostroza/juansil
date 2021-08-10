@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Inventario;
 
+use Carbon\Carbon;
 use App\Models\Product;
 use Livewire\Component;
 
@@ -35,5 +36,10 @@ class Index extends Component{
         $product = Product::find($product_id);
         $product->status = 1;
         $product->save();
+    }
+
+    
+    public static function fecha($fecha){
+        return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
     }
 }
