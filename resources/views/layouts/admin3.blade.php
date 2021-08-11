@@ -18,8 +18,8 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-        <script src="{{ URL::asset('js/nice-select2.js') }}"></script>
-        <link rel="stylesheet" href="{{ URL::asset('css/nice-select2.css') }}">
+        {{-- <script src="{{ URL::asset('js/nice-select2.js') }}"></script>
+        <link rel="stylesheet" href="{{ URL::asset('css/nice-select2.css') }}"> --}}
         @livewireStyles
 
     </head>
@@ -78,10 +78,6 @@
             }
     
         </script>
-
-
-
-      
      
 
         @stack('js')

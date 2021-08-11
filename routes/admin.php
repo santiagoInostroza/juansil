@@ -35,7 +35,9 @@ Route::resource('proveedores', SupplierController::class)->names('admin.supplier
 Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create'])->name('admin.purchases.create');
 Route::resource('compras', PurchaseController::class)->names('admin.purchases');
 
+Route::get('deliveries2/{fecha}', [DeliveryController::class,'index2'])->name('admin.deliveries.index2');
 Route::get('deliveries/{fecha}', [DeliveryController::class,'index'])->name('admin.deliveries.index');
+
 Route::resource('deliveries', DeliveryController::class)->names('admin.deliveries');
 
 Route::resource('movimientos', MovementController::class)->names('admin.movements');

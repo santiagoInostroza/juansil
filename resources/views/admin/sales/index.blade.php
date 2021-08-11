@@ -39,7 +39,7 @@
     @stop --}}
 
     
-@extends('layouts.admin3')
+@extends('layouts.admin4')
 
 @section('content')
     @livewire('admin.sales.index', ['user' => ''])      

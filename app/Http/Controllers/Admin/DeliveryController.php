@@ -8,14 +8,23 @@ use App\Http\Controllers\Controller;
 
 class DeliveryController extends Controller
 {
-    public function index($fecha="")
-    {
+    public function index($fecha=""){
 
         if ($fecha =="") {
             $fecha=date("Y-m-d");
         }
        
        return view("admin.deliveries.index",compact('fecha'));    
+    }
+
+
+    public function index2($fecha=""){
+
+        if ($fecha =="") {
+            $fecha=date("Y-m-d");
+        }
+       
+       return view("admin.deliveries.index2",compact('fecha'));    
     }
 
     public function create()

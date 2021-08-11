@@ -1,5 +1,5 @@
 
-@extends('layouts.admin3')
+@extends('layouts.admin4')
 
 @section('content')
 <x-slot name='titulo'>Resumen</x-slot>

@@ -86,7 +86,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900 w-max-content">
                                             <div class="font-bold tracking-wide">
-                                              Disp.  {{ $product->stock}} un.
+                                              Stock.  {{ $product->stock}} un.
                                             </div>
                                         </div>
                                         <div class="text-sm text-gray-500"> Min. {{ $product->stock_min}} un. </div>

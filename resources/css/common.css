@@ -1,6 +1,6 @@
-.container{
+/* .container{
     @apply  mx-auto px-2;
-    /* max-width:95rem; */
+  
 }
 
 @media(min-width:640px){
@@ -13,7 +13,7 @@
     .container{
         @apply px-8 ;
     }
-}
+} */
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

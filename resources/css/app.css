@@ -3,11 +3,13 @@
 @import 'tailwindcss/utilities';
 
 @import 'common.css';
-@import 'buttons.css';
-@import 'cards.css';
-@import 'forms.css';
+/* @import 'buttons.css'; */
+/* @import 'cards.css'; */
+/* @import 'forms.css'; */
 @import 'spinner.css';
 @import 'toggle_switch.css';
+
+
 
 @media (min-width: 768px) {
     .md\:table-cell {
