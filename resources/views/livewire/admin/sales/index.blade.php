@@ -218,14 +218,14 @@
                     </td>
                     {{-- TOTAL --}}
                     <td class="px-6 py-4 whitespace-nowrap text-xl text-gray-500">
-                        ${{number_format($sale->total + $sale->delivery_value,0,',','.')}}
+                        ${{number_format($sale->total,0,',','.')}}
                     </td>
                      {{-- ESTADO DE PAGO --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_status == 1)
                             <div> 
                                 <span class="text-yellow-400">Pendiente</span> 
-                                ${{number_format($sale->pending_amount + $sale->delivery_value,0,',','.')}} 
+                                ${{number_format($sale->pending_amount,0,',','.')}} 
                             </div> 
                         @elseif ($sale->payment_status == 2)
                             <div class=""> 
@@ -234,7 +234,7 @@
                             </div> 
                             <div> 
                                 <span class="text-yellow-400">Pendiente</span> 
-                                ${{number_format($sale->pending_amount + $sale->delivery_value,0,',','.')}} 
+                                ${{number_format($sale->pending_amount,0,',','.')}} 
                             </div> 
                             
                         @elseif ($sale->payment_status == 3)
@@ -365,7 +365,7 @@
                                     @if ($selected_sale->payment_status !=3 ) 
                                         <div class="grid grid-cols-2">
                                             <div>Monto pendiente</div>
-                                            <div>${{number_format($selected_sale->pending_amount + $selected_sale->delivery_value,0,',','.')}}</div>
+                                            <div>${{number_format($selected_sale->pending_amount ,0,',','.')}}</div>
                                         </div>
                                     @endif
                                     @if ($selected_sale->payment_date)
@@ -466,11 +466,11 @@
                                 <div class="grid grid-cols-2 w-60 gap-4 text-xl uppercase font-semibold">
                                     @if ($selected_sale->delivery_value>0)
                                         <div class="font-bold text-gray-500">Sub total </div>
-                                        <div class="text-right"> ${{number_format($selected_sale->total ,0,',','.')}}</div>
+                                        <div class="text-right"> ${{number_format($selected_sale->subtotal ,0,',','.')}}</div>
                                         <div class="font-bold text-gray-500">Despacho </div>
                                         <div class="text-right"> ${{number_format($selected_sale->delivery_value,0,',','.')}}</div>
                                         <div class="font-bold text-gray-500">Total </div>
-                                        <div class="text-right"> ${{number_format($selected_sale->total +$selected_sale->delivery_value,0,',','.')}}</div>
+                                        <div class="text-right"> ${{number_format($selected_sale->total,0,',','.')}}</div>
                                     @else
                                         <div class="font-bold text-gray-500">Total </div>
                                         <div class="text-right"> ${{number_format($selected_sale->total,0,',','.')}}</div>

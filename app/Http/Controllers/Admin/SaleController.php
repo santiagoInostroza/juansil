@@ -358,6 +358,8 @@ class SaleController extends Controller{
         $sale->comments                = $arrayVenta['sale']['comments'];
         $sale->user_created            = $arrayVenta['sale']['user_created'];
         $sale->delivery_value          = $arrayVenta['sale']['delivery_value'];
+        $sale->subtotal                = $arrayVenta['sale']['subtotal'];
+        $sale->delivered_user          = $arrayVenta['sale']['delivered_user'];
         $sale->save();
 
 
@@ -366,7 +368,7 @@ class SaleController extends Controller{
         foreach ($arrayVenta['items'] as $item) {
 
             $product = Product::find($item['product_id']);
-            $product->stock -= $item['cantidad'];
+            $product->stock -= $item['cantidad_total'];
             $product->save();
 
 
@@ -380,7 +382,7 @@ class SaleController extends Controller{
             try {//intenta obtener el valor de costo del producto
                 do {
                     $purchasePrice = PurchasePrice::where('product_id', $item['product_id'])->where('stock', '>', 0)->orderBy('fecha', 'asc')->first();    
-                    $cantidad = ($cantidad_restante == 0) ? $item['cantidad'] : $cantidad_restante ;
+                    $cantidad = ($cantidad_restante == 0) ? $item['cantidad_total'] : $cantidad_restante ;
                     
                     $cantidad_a_multiplicar = 0;
                     $costo = $purchasePrice->precio;
@@ -413,7 +415,7 @@ class SaleController extends Controller{
                     $vueltas++;
                 } while ($go); 
 
-                $costo_final_unitario =$suma_costo / $item['cantidad'];
+                $costo_final_unitario =$suma_costo / $item['cantidad_total'];
                 $total_cost += $suma_costo;
 
             } catch (\Throwable $th) { //si encuentra un costo pero el stock no es suficiente, guarda todos los costos con el valor que encontro, si no encuentra ni un costo guarda el valor del costo al valor del precio venta
@@ -464,6 +466,8 @@ class SaleController extends Controller{
 
         $sale->total_cost = $total_cost;
         $sale->save();
+
+        return $sale;
 
       
         

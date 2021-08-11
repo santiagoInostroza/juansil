@@ -11,6 +11,7 @@ use App\Models\Customer;
 use App\Models\SaleItem;
 use App\Models\PurchasePrice;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\SaleController;
 
 
 class CreateSale extends Component{
@@ -112,6 +113,7 @@ class CreateSale extends Component{
     public function save(){
 
         $total =($this->valor_despacho>0)? $this->valor_despacho + session('venta.total'): session('venta.total');
+        $subtotal =  session('venta.total');
 
         $payment_amount = 0;
         $pending_amount = 0;
@@ -132,7 +134,8 @@ class CreateSale extends Component{
         $delivered_user=($this->delivered)? Auth::user()->id:null;
         $delivery_value=($this->delivery)? $this->valor_despacho: null;
 
-        $sale = Sale::create([
+
+        $arrayVenta['sale']=[
             'customer_id' => $this->customerId,
             'total' => $total,
             'date' => $this->fecha,
@@ -140,104 +143,44 @@ class CreateSale extends Component{
             'payment_status' => $this->estado_pago,
             'pending_amount' => $pending_amount,
             'payment_date' => $payment_date,
-            'delivery' => $this->delivery,
+            'delivery' =>  $this->delivery,
             'delivery_date' => $delivery_date,
             'date_delivered' => $date_delivered,
             'delivery_stage' => $this->delivered,
-            'comments' => $this->comentario,
+            'comments' =>  $this->comentario,
             'user_created' => Auth::user()->id,
-            'total_cost' => 0,
             'delivered_user' => $delivered_user,
-            'delivery_value' => $delivery_value,
-        ]);
+            'delivery_value' =>  $delivery_value,
+            'subtotal' => $subtotal,
+        ];
+       
 
-        $total_cost = 0;
-
-        foreach (session('venta.items') as $key => $item) {
-
-
-            $producto_general = Product::find($item['product_id']);
-            $stock = $producto_general->stock;
-            $nuevoStock = $stock - $item['cantidad_total'];
-
-            $producto_general->stock = $nuevoStock;
-            $producto_general->save();
-
-            $go = true;
-            $cantidad_restante = 0;
-            $suma_costo = 0;
-            $costo=0;
-            $costo_final = 0;
-
-            $vueltas = 0;
-            
-            try {//intenta obtener el valor de costo del producto
-                do {
-                    $producto = PurchasePrice::where('product_id', $item['product_id'])->where('stock', '>', 0)->orderBy('created_at', 'asc')->first();    
-                    $cantidad = ($cantidad_restante == 0) ? $item['cantidad_total'] : $cantidad_restante ;
-                    
-                    $costo = $producto->precio;
-                    $costo2 = $producto->precio;
-                    $cantidad_a_multiplicar = 0;
-                    if($producto->stock >= $cantidad){//alcanza para cubrir el stock necesitado
-                        $stock = $producto->stock;
-                        $producto->stock = $stock - $cantidad;
-                        $go = false;
-                        $cantidad_a_multiplicar = $cantidad;
-                    }else{ // no alcanza el stock, es necesario obtener otro producto para ocupar su stock
-                        $cantidad_restante =  $cantidad - $producto->stock;
-                        $cantidad_a_multiplicar = $producto->stock;
-                        $producto->stock = 0; 
-                    }
-                    $producto->save();
-                    $total_costo = $cantidad_a_multiplicar * $costo;
-                    $suma_costo += $total_costo;
-                    $vueltas++;
-                } while ($go); 
-
-                $costo_final =$suma_costo / $item['cantidad_total'];
-                $total_cost += $suma_costo;
-
-            } catch (\Throwable $th) { //si encuentra un costo pero el stock no es suficiente, guarda todos los costos con el valor que encontro, si no encuentra ni un costo guarda el valor del costo al valor del precio venta
-                if($vueltas>0){
-                    $costo = $costo2;
-                    $this->msj.= "Stock insuficiente de '$producto_general->name'.\n";
-                }else{
-                    $costo_final = $item['precio'];
-                    $total_cost = $item['precio'] * $item['cantidad_total']; 
-                    $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
-                }
-               
-            }
-
-            SaleItem::create([
-                'sale_id' => $sale->id,
-                'product_id' => $item['product_id'],
-                'cantidad' => $item['cantidad'],
-                'cantidad_por_caja' => $item['cantidad_por_caja'],
-                'cantidad_total' => $item['cantidad_total'],
-                'precio' => $item['precio'],
-                'precio_por_caja' => $item['precio_por_caja'],
-                'precio_total' => $item['precio_total'],
-                'costo' => $costo_final,
-            ]);
+        foreach (session('venta.items') as $item) {
+            $arrayVenta['items'][]=[
+               'product_id' => $item['product_id'],
+               'cantidad' => $item['cantidad'],
+               'cantidad_por_caja' => $item['cantidad_por_caja'],
+               'cantidad_total' => $item['cantidad_total'],
+               'precio' => $item['precio'],
+               'precio_por_caja' =>$item['precio_por_caja'],
+               'precio_total' =>$item['precio_total'],
+            ];
         }
 
-        $sale->total_cost = $total_cost;
-        $sale->save();
+        $saleController = new SaleController();
+        $sale =  $saleController->createSale($arrayVenta);
+
+
         $this->open=false;
         $this->emitUp('render');
-
        
-       
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' =>  $this->msj,
-            'icon' => 'success',
-            'title' => "Venta " . $sale->id ." creada !! " . $this->selectedCustomer->name . "' Total '". $sale->total,
-        ]); 
         $this->reset();
         $this->eliminarSesionVenta();
-
+        $this->dispatchBrowserEvent('alerta', [
+            'msj' => "Venta a " . $sale->customer->name . " Total ". number_format($sale->total,0,',','.'),
+            'icon' => 'success',
+            'title' => "Venta " . $sale->id ." creada !!",
+        ]); 
     }
    
 

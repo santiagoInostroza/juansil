@@ -508,7 +508,7 @@ class Pedido extends Component
 
         $arrayVenta['sale']=[
             'customer_id' => $this->customer->id,
-            'total' => session('totalCarrito'),
+            'total' => session('totalCarrito') +  session('cliente.totalDespacho'),
             'date' => Carbon::now(),
             'payment_amount' => 0,
             'payment_status' => 1,
@@ -521,6 +521,8 @@ class Pedido extends Component
             'comments' => '',
             'user_created' => 0,//cero es: que lo creo un usuario de internet
             'delivery_value' => session('cliente.totalDespacho'),
+            'delivered_user' => null,
+            'subtotal' => session('totalCarrito'),
         ];
        
 

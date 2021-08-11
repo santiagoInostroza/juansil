@@ -76,7 +76,7 @@ class Index extends Component{
             'msj' =>  "Pedido " . $sale->id ." editado !!. Total ". number_format($sale->total,0,',','.'),
             'icon' => 'success',
             'title' => "Pedido Editado",
-    ]); 
+        ]); 
         
     }
 
