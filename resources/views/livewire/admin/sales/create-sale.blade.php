@@ -25,6 +25,7 @@
                         <div class="mb-4">
                             <x-jet-label value='Fecha '></x-jet-label>
                             <x-jet-input type='date' class="w-full" wire:model.lazy="fecha">Fecha</x-jet-input>
+                            <x-jet-input-error for="fecha" class="mt-2" />
                             
                         </div> 
                     </div>
@@ -54,10 +55,12 @@
                                 <div>
                                     <x-jet-label value="Valor despacho"></x-jet-label>
                                     <x-jet-input class="w-full" wire:model="valor_despacho"></x-jet-input>
+                                    <x-jet-input-error for="valor_despacho" class="mt-2" />
                                 </div>
                                 <div>
                                     <x-jet-label value="Fecha de entrega"></x-jet-label>
                                     <x-jet-input type="date" class="w-full" wire:model="fecha_entrega"></x-jet-input>
+                                    <x-jet-input-error for="fecha_entrega" class="mt-2" />
                                 </div>
                             </div>
                             <div  class="flex items-center  w-max-content mt-3">
@@ -368,13 +371,15 @@
                                @if ($selected_product)
 
                                    <div class="px-4 m-4 mb-0 sm:mb-4 flex items-center justify-between">
-                                       <div class="flex items-center justify-between">
-                                            @if ($selected_product->image)
-                                                <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
-                                            @endif
-                                           <div class="w-full ">
-                                                <h2 class="sm:text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
-                                                <div class="flex items-center">
+                                       <div class="flex items-center justify-between w-full">
+                                           <div>
+                                                @if ($selected_product->image)
+                                                    <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
+                                                @endif
+                                            </div>
+                                            <div class="w-full ">
+                                                <h2 class="sm:text-xl font-bold text-gray-800 w-full">{{$selected_product->name}}</h2>
+                                                <div class="flex items-center justify-between">
                                                     <div class="flex items-start text-sm font-semibold text-gray-400">
                                                         <div class="mr-4">
                                                             @foreach ($selected_product->salePrices as $price)
@@ -390,11 +395,11 @@
                                                          <div class="text-sm font-semibold">Stock</div>
                                                      </div>
                                                 </div> 
-                                           </div>
-                                           <div class="text-center hidden sm:block">
-                                            <div class="text-xl font-bold text-gray-800">{{$selected_product->stock}}</div>
-                                            <div class="text-sm font-semibold">Stock</div>
-                                        </div>
+                                            </div>
+                                            <div class="text-center hidden sm:block">
+                                                <div class="text-xl font-bold text-gray-800">{{$selected_product->stock}}</div>
+                                                <div class="text-sm font-semibold">Stock</div>
+                                            </div>
                                        </div>
                                       
                                    </div>

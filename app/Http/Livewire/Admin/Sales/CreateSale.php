@@ -63,14 +63,35 @@ class CreateSale extends Component{
         'setCustomerId'
     ];
 
-    protected $rules = [
-        'cantidad' => 'required|numeric|min:0|not_in:0',
-        'cantidad_por_caja' => 'required|numeric|min:0|not_in:0',
+
+    public $validar; //1 validar items, 2 = validar save()
+    public function rules(){
+        
+        if ($this->validar == 1) {
+            # code...
        
-        'precio' => 'required|numeric|min:0|not_in:0',
-        'precio_por_caja' => 'required|numeric|min:0|not_in:0',
-      
-    ];
+            return [
+                'cantidad' => 'required|numeric|min:0|not_in:0',
+                'cantidad_por_caja' => 'required|numeric|min:0|not_in:0',
+            
+                'precio' => 'required|numeric|min:0|not_in:0',
+                'precio_por_caja' => 'required|numeric|min:0|not_in:0',
+            ];
+        }else if ($this->validar == 2) {
+            if($this->delivery){
+                return[
+                    'fecha' => 'required|date',
+                    'valor_despacho' => 'required|numeric|min:0',
+                    'fecha_entrega' => 'required|date',
+                ];
+            }else{
+                return [
+                    'fecha' => 'required|date',
+                ];
+
+            }
+        }
+    }
 
     protected $messages = [
         'cantidad.required' => 'Ingresar cantidad.',
@@ -92,6 +113,14 @@ class CreateSale extends Component{
         'precio_por_caja.numeric' => 'Ingresar valor numerico.',
         'precio_por_caja.min' => 'Revisar.',
         'precio_por_caja.not_in' => 'Ingresar cantidad valida.',
+
+        'fecha.required' => 'Ingresa fecha.',
+        'fecha.date' => 'Ingresa formato fecha.',
+
+        'valor_despacho.required' => 'Ingresa valor.',
+        'valor_despacho.numeric' => 'Ingresa valor numerico.',
+        'fecha_entrega.required' => 'Ingresa fecha de entrega.',
+        'fecha_entrega.date' => 'Ingresa formato fecha.',
         
     ];
 
@@ -113,6 +142,9 @@ class CreateSale extends Component{
 
    
     public function save(){
+
+        $this->validar = 2;
+        $this->validate();
 
         $total =($this->valor_despacho>0)? $this->valor_despacho + session('venta.total'): session('venta.total');
         $subtotal =  session('venta.total');
@@ -227,6 +259,7 @@ class CreateSale extends Component{
 
 
     public function addItem(){
+        $this->validar = 1;
         $this->validate();
 
         $this->addToSale();
@@ -304,6 +337,7 @@ class CreateSale extends Component{
     }
 
     public function modItem(){
+        $this->validar = 1;
         $this->validate();
         $items = [];
         if (session()->has('venta.items')) {
