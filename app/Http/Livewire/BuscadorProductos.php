@@ -20,6 +20,11 @@ class BuscadorProductos extends Component{
 
     public function render(){
 
+            if(isset($_GET['search'])){
+                $this->search =  $_GET['search'];
+                $this->search2 =  $_GET['search'];
+            }
+
             // session()->pull('carrito');
             $str = explode(' ', $this->search);
 
@@ -72,17 +77,22 @@ class BuscadorProductos extends Component{
 
     public function buscar(){
        
-        $this->searchIsOpen = false;
         $this->search2 = $this->search;
+        $this->searchIsOpen = false;
     }
 
-     public function updatedSearch(){
+    public function irBuscar(){
+        redirect()->route('products.lista', ['search' => $this->search]);
+    }
+
+    public function updatedSearch(){
+        $this->search2 = $this->search;
         $this->emitTo('productos.lista','buscar',$this->search);
-         $this->search2 = $this->search;
-     }
-     public function updatedSearch2(){
+    }
+
+    public function updatedSearch2(){
         $this->emitTo('productos.lista','buscar',$this->search);
-     }
+    }
 
 
 }

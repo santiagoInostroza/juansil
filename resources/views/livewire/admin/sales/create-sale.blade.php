@@ -269,17 +269,46 @@
                                            @click="open_list=true"
                                        />
                                        
-                                       <div x-show='open_list' class="absolute bg-white shadow-2xl rounded-lg mr-4 border">
+                                        <div x-show='open_list' class="absolute bg-white shadow-2xl rounded-lg mr-4 border ">
                                            {{-- ETIQUETAS --}}
-                                           <div class="p-4">
-                                               <div class="inline-block p-2 m-1 font-semibold rounded-xl hover:bg-blue-500 cursor-pointer  @if($tagId == "") bg-blue-900 text-white @else text-blue-800 bg-blue-200  @endif" wire:click="$set('tagId','')">
-                                                   Todos
-                                               </div>
-                                               @foreach ($tags as $tag)
-                                                   <div class="inline-block p-2 m-1  font-semibold rounded-xl hover:bg-blue-500 cursor-pointer @if($tagId == $tag->id)  text-white bg-blue-900 @else bg-blue-200 text-blue-800 @endif" wire:click="$set('tagId','{{ $tag->id }}')">
-                                                       {{$tag->name}}
-                                                   </div>
-                                               @endforeach
+                                            <div class="p-4">
+                                                <div class="flex items-center justify-between">
+                                                    <div x-show="!showTags"  
+                                                        x-transition:enter="transition duration-200 transform ease-out"
+                                                        x-transition:enter-start="scale-75"
+                                                        {{-- x-transition:leave="transition duration-100 transform ease-in"
+                                                        x-transition:leave-end="opacity-0 scale-90" --}}
+                                                        class="cursor-pointer text-sm font-bold flex items-center gap-2" @click="toggleShowTags">
+                                                        <div>Abrir Etiquetas </div>
+                                                        <i class="fas fa-chevron-circle-right"></i>
+                                                    </div>
+                                                    <div x-show="showTags" 
+                                                        x-transition:enter="transition duration-200 transform ease-out"
+                                                        x-transition:enter-start="scale-75"
+                                                        {{-- x-transition:leave="transition duration-100 transform ease-in"
+                                                        x-transition:leave-end="opacity-0 scale-90" --}}
+                                                    >
+                                                        <div class="inline-block p-2 m-1 font-semibold rounded-xl hover:bg-blue-500 cursor-pointer  @if($tagId == "") bg-blue-900 text-white @else text-blue-800 bg-blue-200  @endif" wire:click="$set('tagId','')">
+                                                            Todos
+                                                        </div>
+                                                        @foreach ($tags as $tag)
+                                                            <div class="inline-block p-2 m-1  font-semibold rounded-xl hover:bg-blue-500 cursor-pointer @if($tagId == $tag->id)  text-white bg-blue-900 @else bg-blue-200 text-blue-800 @endif" wire:click="$set('tagId','{{ $tag->id }}')">
+                                                                {{$tag->name}}
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                   
+                                                    <div x-show="showTags"  
+                                                        x-transition:enter="transition duration-200 transform ease-out"
+                                                        x-transition:enter-start="scale-75"
+                                                        x-transition:leave="transition duration-100 transform ease-in"
+                                                        x-transition:leave-end="opacity-0 scale-90"
+                                                        class="cursor-pointer text-sm font-bold flex items-center gap-2" @click="toggleShowTags">
+                                                      <i class="fas fa-chevron-circle-left"></i>  
+                                                      <div>Cerrar Etiquetas </div>
+                                                    </div>
+                                                </div>
+                                              
                                            </div>
                                        
                                            {{-- LISTA PRODUCTOS --}}
@@ -465,6 +494,10 @@
             <script>
                 function main(){
                     return {
+                            showTags:true,
+                            toggleShowTags(){
+                                this.showTags = !this.showTags
+                            },
                         
                             search:@entangle('search'),
 

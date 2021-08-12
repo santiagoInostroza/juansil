@@ -114,75 +114,75 @@
     </div>
 
     @push('js')
-    <script>
-        function productosMain(){
-            return{
-                // listaAumentaCantidad: function(pid){
-                //     var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
-                //     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                //         element.value=cantidad;
-                //     });
-                //     this.$wire.setCantidad( pid,cantidad)
-                // },
-            }
-        } 
-
-        function listaAumentaCantidad(pid, stock){
-            if(document.getElementById('cantidad_product_' + pid).value >= stock){
-                alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
-            }else{
-                var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
-                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                    element.value=cantidad;
-                });
-                Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
-            }           
-        }
-
-
-        function listaDisminuyeCantidad(pid){
-            if(document.getElementById('cantidad_product_' + pid).value <= 1){
-                removeFromCart(pid);
-            }else{
-                let cantidad =  --document.getElementById('cantidad_product_' + pid).value;
-                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                    element.value=cantidad;
-                });
-                Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
-            }
-        }
-
-
-        function listaSetCantidad(pid, stock){
-
-
-            let cantidad =1;
-                if(document.getElementById('cantidad_product_' + pid).value>= stock){
-                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
-                    cantidad = stock;
-                }else{
-                    if(document.getElementById('cantidad_product_' + pid).value<=1){
-                        document.getElementById('cantidad_product_' + pid).value = cantidad;
-                    }else{
-                        cantidad =  document.getElementById('cantidad_product_' + pid).value;
-                    }
+        <script>
+            function productosMain(){
+                return{
+                    // listaAumentaCantidad: function(pid){
+                    //     var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+                    //     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                    //         element.value=cantidad;
+                    //     });
+                    //     this.$wire.setCantidad( pid,cantidad)
+                    // },
                 }
-                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
-                    element.value=cantidad;
-                });
-                Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);            
-        }
+            } 
+
+            function listaAumentaCantidad(pid, stock){
+                if(document.getElementById('cantidad_product_' + pid).value >= stock){
+                    alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                }else{
+                    var cantidad =  ++document.getElementById('cantidad_product_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+                }           
+            }
 
 
-        function addToCart(pid){
-            Livewire.emitTo('productos.lista','addToCart', pid);
-        }
+            function listaDisminuyeCantidad(pid){
+                if(document.getElementById('cantidad_product_' + pid).value <= 1){
+                    removeFromCart(pid);
+                }else{
+                    let cantidad =  --document.getElementById('cantidad_product_' + pid).value;
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);
+                }
+            }
 
-        function removeFromCart(pid){
-            Livewire.emitTo('productos.lista','removeFromCart', pid);
-        }
-    </script>
-@endpush
+
+            function listaSetCantidad(pid, stock){
+
+
+                let cantidad =1;
+                    if(document.getElementById('cantidad_product_' + pid).value>= stock){
+                        alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});
+                        cantidad = stock;
+                    }else{
+                        if(document.getElementById('cantidad_product_' + pid).value<=1){
+                            document.getElementById('cantidad_product_' + pid).value = cantidad;
+                        }else{
+                            cantidad =  document.getElementById('cantidad_product_' + pid).value;
+                        }
+                    }
+                    document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
+                        element.value=cantidad;
+                    });
+                    Livewire.emitTo('productos.lista','setCantidad', pid,cantidad);            
+            }
+
+
+            function addToCart(pid){
+                Livewire.emitTo('productos.lista','addToCart', pid);
+            }
+
+            function removeFromCart(pid){
+                Livewire.emitTo('productos.lista','removeFromCart', pid);
+            }
+        </script>
+    @endpush
 
 
 </div>

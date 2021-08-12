@@ -14,4 +14,33 @@ class Index extends Component{
         return view('livewire.productos.index',compact('categories'));
     }
 
+
+    public function setCantidad($product_id,$cantidad){
+        $carrito = new CarritoController();
+        $carrito->setCantidad($product_id,$cantidad);
+        $this->emitTo('cart.index','render');
+   }
+
+   public function addToCart($product_id){
+       $carrito = new CarritoController();
+       $carrito->addToCart($product_id,1);
+       $this->emitTo('cart.index','render');
+        $this->dispatchBrowserEvent('alerta_timer', [
+           'icon' => 'success',
+           'msj' => "Agregado al carrito",
+       ]); 
+      
+
+   }
+   public function removeFromCart($product_id){
+       $carrito = new CarritoController();
+       $carrito->deleteFromCart($product_id);
+       $this->emitTo('cart.index','render');
+       $this->dispatchBrowserEvent('alerta_timer', [
+        'icon' => 'success',
+        'msj' => "Eliminado del carrito",
+    ]); 
+   }
+
+
 }

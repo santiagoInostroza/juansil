@@ -1,8 +1,5 @@
 <div class="w-full">
     <div x-data="buscadorMain()" x-init="document.getElementById('buscar').focus()">
-       
-        
-
         <div @click="openSearch" class="hidden sm:flex items-center w-full relative"> 
             <input  class="w-full h-8 px-3 rounded" type="text" placeholder="¿Qué estás buscando?" id="buscador"  wire:model='search2'>
             <div class=" text-black absolute px-2 right-0" >     
@@ -16,13 +13,17 @@
               
                 <div class="flex px-3 justify-between items-center">
                     <h2 class="text-lg font-bold my-2 text-center">¿Qué estás buscando?</h2>
+                
                     <div class="p-3 cursor-pointer hover:bg-red-600" @click="searchIsOpen = false"><i class="fas fa-times"></i></div>
                 </div>
 
                 <div class="flex justify-between items-center">
                     <div class="px-3 mb-1 flex relative flex-1">
-                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar' wire:keydown.enter='buscar()'>
+                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'   wire:keydown.enter=@if (Request::is('productos/lista*')) 'buscar()' @else 'irBuscar()' @endif>
                         <i class="fas fa-times absolute right-7 p-2 cursor-pointer text-gray-400" x-on:click="limpiar_buscador"></i>
+                        <div wire:loading.delay class="absolute mt-1 right-12">
+                            <x-spinner.spinner size="6"></x-spinner.spinner>
+                        </div>
                     </div>
                     <x-jet-secondary-button wire:click="buscar()"  class="mx-4">buscar</x-jet-secondary-button>
                 </div>

@@ -18,7 +18,10 @@ class Lista extends Component{
 
     public function render(){
 
-
+        if(isset($_GET['search'])){
+            $this->search =  $_GET['search'];
+        }
+       
         $str = explode(' ', $this->search);
 
         $productos = Product::where('products.status','1')->where('products.name','!=','despacho')->where(function($query) use($str) {
