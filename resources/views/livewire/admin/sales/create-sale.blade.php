@@ -373,25 +373,26 @@
                                                 <img class="object-contain h-24 w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
                                             @endif
                                            <div class="">
-                                               <h2 class="sm:text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
-                                               <div class="flex items-start text-sm font-semibold text-gray-400">
-                                                   <div class="mr-4">
-                                                       @foreach ($selected_product->salePrices as $price)
-                                                           <div>desde {{$price->quantity}} un.  ${{number_format($price->price,0,',','.')}}</div>  
-                                                       @endforeach
-                                                   </div>
-                                                   <div>
-                                                       {{$selected_product->formato}} un. x caja
-                                                   </div>
-                                               </div>
-                                               
+                                                <h2 class="sm:text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
+                                                <div class="flex items-center">
+                                                    <div class="flex items-start text-sm font-semibold text-gray-400">
+                                                        <div class="mr-4">
+                                                            @foreach ($selected_product->salePrices as $price)
+                                                                <div>desde {{$price->quantity}} un.  ${{number_format($price->price,0,',','.')}}</div>  
+                                                            @endforeach
+                                                        </div>
+                                                        <div>
+                                                            {{$selected_product->formato}} un. x caja
+                                                        </div>
+                                                     </div>
+                                                     <div class="text-center">
+                                                         <div class="text-xl font-bold text-gray-800">{{$selected_product->stock}}</div>
+                                                         <div class="text-sm font-semibold">Stock</div>
+                                                     </div>
+                                                </div> 
                                            </div>
                                        </div>
-                                       <div class="text-center">
-                                           <div class="text-xl font-bold text-gray-800">{{$selected_product->stock}}</div>
-                                           <div class="text-sm font-semibold">Stock</div>
-                                       
-                                       </div>
+                                      
                                    </div>
                                    
                                    <div class="colspan-2 grid grid-cols-3 gap-x-6 p-4 pt-0 sm:pt-4">
