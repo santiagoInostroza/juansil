@@ -373,7 +373,7 @@
                                                 <img class="object-contain h-24 w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
                                             @endif
                                            <div class="">
-                                               <h2 class="text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
+                                               <h2 class="sm:text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
                                                <div class="flex items-start text-sm font-semibold text-gray-400">
                                                    <div class="mr-4">
                                                        @foreach ($selected_product->salePrices as $price)
