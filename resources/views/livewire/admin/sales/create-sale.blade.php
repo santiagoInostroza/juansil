@@ -367,7 +367,7 @@
                                                    
                                @if ($selected_product)
 
-                                   <div class="px-4 m-4 flex items-center justify-between">
+                                   <div class="px-4 m-4 mb-0 sm:mb-4 flex items-center justify-between">
                                        <div class="flex items-center">
                                             @if ($selected_product->image)
                                                 <img class="object-contain h-24 w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
@@ -394,7 +394,7 @@
                                        </div>
                                    </div>
                                    
-                                   <div class="colspan-2 grid grid-cols-3 gap-6 p-8">
+                                   <div class="colspan-2 grid grid-cols-3 gap-x-6 p-4 pt-0 sm:pt-4">
 
                                        <div>
                                            <x-jet-label value="Cantidad"/> 
