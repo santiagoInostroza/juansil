@@ -43,6 +43,7 @@
                             <tr>
                                 <th scope="col" width="10" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Producto</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock por precios</th>
                                 
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Estado</th>
@@ -82,12 +83,20 @@
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900 w-max-content">
-                                            <div class="font-bold tracking-wide">
-                                              Stock.  {{ $product->stock}} un.
+                                        
+                                        <x-tooltip.tooltip>
+                                            <div class="text-sm text-gray-900 w-max-content">
+                                                <div class="font-bold tracking-wide">
+                                                  Stock {{ $product->stock}}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="text-sm text-gray-500"> Min. {{ $product->stock_min}} un. </div>
+                                            <x-slot name="tooltip">
+                                                <div class="text-sm text-gray-500"> Stock min. {{ $product->stock_min}} un. </div>
+                                            </x-slot>
+
+                                        </x-tooltip.tooltip>
+                                        
+                                        
                                     </td>
                                   
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -106,7 +115,7 @@
                                                         <div class="col-span-2">
                                                             {{$precio->stock}}/<span class="font-bold">{{$precio->cantidad}}</span>
                                                         </div>
-                                                        <div>
+                                                        <div class="" style="min-width: 45px">
                                                             ${{number_format($precio->precio,0,',','.')}}
                                                         </div>
                                                        
