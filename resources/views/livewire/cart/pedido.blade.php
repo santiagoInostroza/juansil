@@ -1,5 +1,5 @@
 <div>
-    <div class="container xl:max-w-7xl text-gray-500 pt-10" x-data="pedidoMain()">   
+    <div class="container xl:max-w-7xl text-gray-500 pt-10 px-4" x-data="pedidoMain()">   
         @if (session('carrito'))
             {{-- REVISAR PEDIDO --}}
             <div class="card my-10 ">
