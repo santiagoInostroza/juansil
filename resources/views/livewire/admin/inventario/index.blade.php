@@ -59,14 +59,12 @@
                                         <div>{{$product->id}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center gap-1">
+                                        <div class="flex items-center gap-1 justify-between">
                                             @if ($product->image)
-                                                <figure>
-                                                    <img class="h-12 w-16 object-cover" src="{{Storage::url($product->image->url)}}" alt="">
-                                                </figure>
+                                               <img class="object-cover w-12 h-12" src="{{Storage::url($product->image->url)}}" alt="">
                                             @endif
-                                           
-                                            <div class="ml-4">
+                                        
+                                            <div class="ml-2">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{$product->name}}
                                                 </div>
@@ -108,15 +106,15 @@
                                                     @endif
                                                     <div class="grid grid-cols-5 hover:bg-gray-100 p-1 w-max-content text-center">
                                                         <div class="col-span-2">
-                                                            @if ($precio->fecha)
-                                                                {{$this->fecha($precio->fecha)->format('d-m-Y')}}
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-span-2">
-                                                            {{$precio->stock}}/<span class="font-bold">{{$precio->cantidad}}</span>
+                                                            {{$precio->stock}}/<span class="font-bold">{{$precio->cantidad}}</span> un.
                                                         </div>
                                                         <div class="" style="min-width: 45px">
                                                             ${{number_format($precio->precio,0,',','.')}}
+                                                        </div>
+                                                        <div class="col-span-2">
+                                                            @if ($precio->fecha)
+                                                                {{$this->fecha($precio->fecha)->format('d-m-Y')}}
+                                                            @endif
                                                         </div>
                                                        
                                                     </div>
