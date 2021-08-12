@@ -368,11 +368,11 @@
                                @if ($selected_product)
 
                                    <div class="px-4 m-4 mb-0 sm:mb-4 flex items-center justify-between">
-                                       <div class="flex items-center">
+                                       <div class="flex items-center justify-between">
                                             @if ($selected_product->image)
-                                                <img class="object-contain h-24 w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
+                                                <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
                                             @endif
-                                           <div class="">
+                                           <div class="w-full ">
                                                 <h2 class="sm:text-xl font-bold text-gray-800">{{$selected_product->name}}</h2>
                                                 <div class="flex items-center">
                                                     <div class="flex items-start text-sm font-semibold text-gray-400">
@@ -385,12 +385,16 @@
                                                             {{$selected_product->formato}} un. x caja
                                                         </div>
                                                      </div>
-                                                     <div class="text-center">
+                                                     <div class="text-center sm:hidden">
                                                          <div class="text-xl font-bold text-gray-800">{{$selected_product->stock}}</div>
                                                          <div class="text-sm font-semibold">Stock</div>
                                                      </div>
                                                 </div> 
                                            </div>
+                                           <div class="text-center hidden sm:block">
+                                            <div class="text-xl font-bold text-gray-800">{{$selected_product->stock}}</div>
+                                            <div class="text-sm font-semibold">Stock</div>
+                                        </div>
                                        </div>
                                       
                                    </div>
