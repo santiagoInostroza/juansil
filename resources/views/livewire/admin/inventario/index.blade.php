@@ -55,15 +55,13 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="">
-                                            <div>{{$product->id}}</div>
-                                        </div>
+                                        <div>{{$product->id}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center gap-4">
+                                        <div class="flex items-center gap-1">
                                             @if ($product->image)
                                                 <figure>
-                                                    <img class="h-12 w-12 object-cover" src="{{Storage::url($product->image->url)}}" alt="">
+                                                    <img class="h-12 w-16 object-cover" src="{{Storage::url($product->image->url)}}" alt="">
                                                 </figure>
                                             @endif
                                            
@@ -94,22 +92,19 @@
                                   
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($product->purchasePrices->count())
-                                            <div class="text-sm text-gray-500 max-h-96 overflow-auto border rounded"> 
+                                            <div class="text-sm text-gray-500 max-h-96 overflow-auto rounded w-max-content"> 
                                                 @foreach ($product->purchasePrices as $precio)
                                                     @if (!$mostrarTodosLosProductos && $precio->stock <=0)
                                                         @continue
                                                     @endif
-                                                    <div class="grid grid-cols-4 hover:bg-gray-100 p-1 w-max-content">
-                                                        <div>
+                                                    <div class="grid grid-cols-5 hover:bg-gray-100 p-1 w-max-content text-center">
+                                                        <div class="col-span-2">
                                                             @if ($precio->fecha)
                                                                 {{$this->fecha($precio->fecha)->format('d-m-Y')}}
                                                             @endif
                                                         </div>
-                                                        <div>
-                                                            {{$precio->cantidad}} un.
-                                                        </div>
-                                                        <div>
-                                                            {{$precio->stock}} un.
+                                                        <div class="col-span-2">
+                                                            <span class="font-bold">{{$precio->stock}}/</span>{{$precio->cantidad}}
                                                         </div>
                                                         <div>
                                                             ${{number_format($precio->precio,0,',','.')}}
