@@ -99,7 +99,7 @@
                                                     @if (!$mostrarTodosLosProductos && $precio->stock <=0)
                                                         @continue
                                                     @endif
-                                                    <div class="grid grid-cols-4 hover:bg-gray-100 p-1">
+                                                    <div class="grid grid-cols-4 hover:bg-gray-100 p-1 w-max-content">
                                                         <div>
                                                             @if ($precio->fecha)
                                                                 {{$this->fecha($precio->fecha)->format('d-m-Y')}}
