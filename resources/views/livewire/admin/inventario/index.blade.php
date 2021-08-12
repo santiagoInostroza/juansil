@@ -104,7 +104,7 @@
                                                             @endif
                                                         </div>
                                                         <div class="col-span-2">
-                                                            <span class="font-bold">{{$precio->stock}}/</span>{{$precio->cantidad}}
+                                                            {{$precio->stock}}/<span class="font-bold">{{$precio->cantidad}}</span>
                                                         </div>
                                                         <div>
                                                             ${{number_format($precio->precio,0,',','.')}}
