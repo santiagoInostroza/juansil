@@ -22,10 +22,6 @@ class Show extends Component{
         ->where('id', '!=',$this->producto->id)
         
         ->get();
-
- 
-
-
    
        foreach ($this->producto->tags as $tag) {
             $this->tag=$tag;

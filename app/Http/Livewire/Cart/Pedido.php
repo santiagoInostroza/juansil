@@ -164,7 +164,7 @@ class Pedido extends Component
 
     
     
-     public function render(){
+    public function render(){
         // $this->date = Carbon::now()->locale('es');
         return view('livewire.cart.pedido');
     }

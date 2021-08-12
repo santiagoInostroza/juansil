@@ -8,8 +8,11 @@ use App\Models\Category;
 use App\Http\Controllers\CarritoController;
 
 class Index extends Component{
+
+    protected $listeners = (['render','setCantidad','addToCart','removeFromCart','buscar']);
     
     public function render(){
+        // session()->forget('carrito');
         $categories = Category::all();
         return view('livewire.productos.index',compact('categories'));
     }

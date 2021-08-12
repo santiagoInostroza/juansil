@@ -13,7 +13,8 @@
     {{-- <title>Dashboard | Tailwind Admin</title> --}}
 
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Juansil') }}</title>
+    <link rel="icon" type="image/png" href="{{url('images/iconos/jsyellow.png')}}" />
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -38,7 +39,20 @@
                 <div class="flex justify-between">
                     <div class="p-1 mx-3 inline-flex items-center">
                         <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
-                        <h1 class="text-white p-2">Logo</h1>
+                        <div class="flex-1 sm:flex-none  flex items-center justify-center ml-8  sm:mx-0 ">
+                    
+                            <a href="/" class="flex-shrink-0 flex items-center">
+                                {{-- DISPOSITIVOS PEQUEÑOS --}}
+                                <div class=" text-white transform p-2 flex items-center lg:hidden" >
+                                    <img class="h-10" src= "{{url('images/iconos/jsyellow.png')}}" alt="">
+                                </div>
+                                {{-- OTROS DISPOSITIVOS --}}
+                                <div class="hidden lg:flex h-8 w-autotext-xl text-white transform p-2  items-center" >
+                                    <img class="h-20" src="{{url('images/iconos/juansil.png')}}" alt="">
+                                </div>
+                              
+                            </a>  
+                        </div>
                     </div>
                     <div class="p-1 flex flex-row items-center">
                         <a href="https://github.com/tailwindadmin/admin" class="text-white p-2 mr-2 no-underline hidden md:block lg:block">Github</a>
