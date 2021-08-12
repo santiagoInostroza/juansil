@@ -56,6 +56,8 @@ class CreateSale extends Component{
     public $openComentario = false;
     public $abono;
 
+    public $showTags=true;
+
     protected $listeners = [
         'seleccionar',
         'setCustomerId'
@@ -181,6 +183,11 @@ class CreateSale extends Component{
             'icon' => 'success',
             'title' => "Venta " . $sale->id ." creada !!",
         ]); 
+    }
+
+    public function selectTag($tag_id){
+       $this->tagId = $tag_id;
+       $this->showTags = false;
     }
    
 
