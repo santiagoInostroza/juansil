@@ -9,7 +9,7 @@ use App\Http\Controllers\CarritoController;
 
 class Index extends Component{
 
-    protected $listeners = (['render','setCantidad','addToCart','removeFromCart','buscar']);
+    protected $listeners = (['render','setCantidad','addToCart','removeFromCart2','buscar']);
     
     public function render(){
         // session()->forget('carrito');
@@ -24,25 +24,31 @@ class Index extends Component{
         $this->emitTo('cart.index','render');
    }
 
-   public function addToCart($product_id){
-       $carrito = new CarritoController();
-       $carrito->addToCart($product_id,1);
-       $this->emitTo('cart.index','render');
+    public function addToCart($product_id){
+        $carrito = new CarritoController();
+        $carrito->addToCart($product_id,1);
+        $this->emitTo('cart.index','render');
         $this->dispatchBrowserEvent('alerta_timer', [
-           'icon' => 'success',
-           'msj' => "Agregado al carrito",
-       ]); 
-      
-
-   }
-   public function removeFromCart($product_id){
+            'icon' => 'success',
+            'msj' => "Agregado al carrito",
+        ]);
+        $this->dispatchBrowserEvent('jsHiddenAgregar',[
+            'pid' =>$product_id,
+        ]);
+       
+    }
+   public function removeFromCart2($product_id){
        $carrito = new CarritoController();
        $carrito->deleteFromCart($product_id);
        $this->emitTo('cart.index','render');
+      
        $this->dispatchBrowserEvent('alerta_timer', [
-        'icon' => 'success',
-        'msj' => "Eliminado del carrito",
-    ]); 
+            'icon' => 'success',
+            'msj' => "Eliminado del carrito",
+        ]); 
+        $this->dispatchBrowserEvent('jsShowAgregar',[
+            'pid' =>$product_id,
+        ]);
    }
 
 

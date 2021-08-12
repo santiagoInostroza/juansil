@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore >
      
   
    <div class="mt-10">
@@ -71,7 +71,7 @@
       </div> --}}
 
    {{-- BANNER OPCION 2 --}}
-   <div wire:ignore class="splide splideBanner">
+   <div class="splide splideBanner">
       <div class="splide__track">
          <ul class="splide__list">
             <li class="splide__slide">
@@ -89,7 +89,7 @@
    </div>
    {{-- PRODUCTOS POR CATEGORIA --}}
 
-   <div wire:ignore>
+   <div>
       @foreach ($categories as $categoria)
          @if ( count($categoria->products) )
             <h2 class="mt-10 p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
@@ -151,7 +151,7 @@
                      
                            @if ($product->stock>0)
                               <div class="text-center mt-4 relative" >
-                                    <div class=" @if (session()->has('carrito.'.$product->id)) hidden @endif agregar_{{$product->id}}">
+                                    <div class="@if (session()->has('carrito.'.$product->id)) hidden @endif agregar_{{$product->id}}">
                                        <x-jet-secondary-button onclick="return addToCart({{ $product->id }});"> 
                                           <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                           Agregar
@@ -271,7 +271,7 @@
 
        function listaDisminuyeCantidad(pid){
            if(document.getElementById('cantidad_product_' + pid).value <= 1){
-               removeFromCart(pid);
+               removeFromCart2(pid);
            }else{
                let cantidad =  --document.getElementById('cantidad_product_' + pid).value;
                document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
@@ -303,33 +303,40 @@
        }
 
 
-       function addToCart(pid){
-            let agregar = document.querySelectorAll('.agregar_' + pid);
-            let agregado = document.querySelectorAll('.agregado_' + pid);
-
-            agregar.forEach(element => {
-               element.classList.add("hidden");
-            }); 
-            agregado.forEach(element => {
-               element.classList.remove("hidden");
-            }); 
-       
-            
-            Livewire.emitTo('productos.index','addToCart', pid)    
+      function addToCart(pid){
+         Livewire.emitTo('productos.index','addToCart', pid)    
       }
 
-       function removeFromCart(pid){
-            let agregar = document.querySelectorAll('.agregar_' + pid);
-            let agregado = document.querySelectorAll('.agregado_' + pid);
-
-            agregar.forEach(element => {
-               element.classList.remove("hidden");
-            }); 
-            agregado.forEach(element => {
-               element.classList.add("hidden");
-            }); 
-           Livewire.emitTo('productos.index','removeFromCart', pid);
+      function removeFromCart2(pid){
+           Livewire.emitTo('productos.index','removeFromCart2', pid);
        }
+ 
+      window.addEventListener('jsHiddenAgregar', event => {
+         let agregar = document.querySelectorAll('.agregar_' + event.detail.pid);
+         let agregado = document.querySelectorAll('.agregado_' + event.detail.pid);
+
+         agregar.forEach(element => {
+            element.classList.add("hidden");
+         }); 
+         agregado.forEach(element => {
+            element.classList.remove("hidden");
+         }); 
+      })
+
+   
+      window.addEventListener('jsShowAgregar', event => {
+         let agregar = document.querySelectorAll('.agregar_' + event.detail.pid);
+         let agregado = document.querySelectorAll('.agregado_' + event.detail.pid);
+
+         agregar.forEach(element => {
+            element.classList.remove("hidden");
+         }); 
+         agregado.forEach(element => {
+            element.classList.add("hidden");
+         }); 
+      })
+
+      
    </script>
 @endpush
 
