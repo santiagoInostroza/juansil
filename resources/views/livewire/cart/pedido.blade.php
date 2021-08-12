@@ -1,8 +1,8 @@
 <div>
-    <div class="container xl:max-w-7xl text-gray-500 pt-10 px-2" x-data="pedidoMain()">   
+    <div class="container xl:max-w-7xl text-gray-500 pt-10" x-data="pedidoMain()">   
         @if (session('carrito'))
             {{-- REVISAR PEDIDO --}}
-            <div class="card my-10 border p-2 rounded">
+            <div class="card my-10">
 
                 <div class="relative ">
                     <div class="card-header flex justify-between">
@@ -90,7 +90,7 @@
             </div>
 
             {{-- DATOS DE DESPACHO --}}
-            <div class="card my-10 border p-2 rounded">
+            <div class="card my-10 ">
                 <div class="relative ">
                     <div class="card-header flex justify-between  items-center ">
                         <div class=" flex justify-start  items-center">
@@ -325,7 +325,7 @@
             </div>
 
             {{-- SELECCIONAR FECHA DESPACHO--}}
-            <div class="card my-10 border p-2 rounded">
+            <div class="card my-10 ">
                 <div class="relative">
                     <div class="card-header flex justify-between">
                         <div class=" flex justify-start  items-center">
@@ -389,7 +389,7 @@
             </div>
 
             {{-- RESUMEN --}}
-            <div class="card my-10 border p-2 rounded">
+            <div class="card my-10 ">
                 <div class="relative ">
                     <div class="card-header flex justify-start">
                         <h2 class="text-lg font-bold text-gray-600 flex items-center justify-start">
