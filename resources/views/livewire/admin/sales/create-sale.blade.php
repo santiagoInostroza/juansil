@@ -278,7 +278,7 @@
                                                         <i class="fas fa-chevron-circle-right"></i>
                                                     </div>
                                                     <div x-show="showTags" x-transition:enter="transition duration-200 transform ease-out" x-transition:enter-start="scale-75">
-                                                        <div class="inline-block p-2 m-1 font-semibold rounded-xl hover:bg-blue-500 cursor-pointer  @if($tagId == "") bg-blue-900 text-white @else text-blue-800 bg-blue-200  @endif" wire:click="selectTag("")">
+                                                        <div class="inline-block p-2 m-1 font-semibold rounded-xl hover:bg-blue-500 cursor-pointer  @if($tagId == "") bg-blue-900 text-white @else text-blue-800 bg-blue-200  @endif" wire:click="selectTag('')">
                                                             Todos
                                                         </div>
                                                         @foreach ($tags as $tag)
