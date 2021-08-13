@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\ComunaController;
-use App\Http\Controllers\admin\ReportController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
