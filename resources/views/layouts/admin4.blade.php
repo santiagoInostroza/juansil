@@ -136,7 +136,7 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/sectors*')) bg-white @endif">
+                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('')) bg-white @endif">
                             <a href="{{route('admin.deliveries.index')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
@@ -144,11 +144,19 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/sectors*')) bg-white @endif">
+                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('')) bg-white @endif">
                             <a href="{{route('admin.deliveries.index')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Deliveries2
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/report*')) bg-white @endif">
+                            <a href="{{route('admin.report')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                                <i class="fab fa-wpforms float-left mx-2"></i>
+                                Reportes
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\ComunaController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -55,6 +56,7 @@ Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->name('
 
 Route::resource('routes', RouteController::class)->names('routes');
 Route::get('sectors',[RouteController::class,'sectors'])->name('routes.sectors');
+Route::get('report', [ReportController::class,'index'])->name('admin.report');
 
 
 
