@@ -30,8 +30,8 @@
                         </select>
                         <x-jet-label>Direccion</x-jet-label>
                         <select class="border rounded p-2" name="" id="" wire:model="direccion">
-                            <option value="asc">Mayor a menor</option>
-                            <option value="desc">Menor a mayor</option>
+                            <option value="desc">Mayor a menor</option>
+                            <option value="asc">Menor a mayor</option>
                         </select>
                     </div>
                     <x-table>
