@@ -203,7 +203,6 @@
 
             function removeFromCart(pid){
                 Livewire.emitTo('cart.index','removeFromCart', pid);
-               
             }
 
             function carritoSetCantidad(pid, stock){

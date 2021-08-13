@@ -29,10 +29,14 @@ class Index extends Component{
         $carrito = new CarritoController();
         $carrito->deleteFromCart($product_id);
         $this->emitTo('productos.lista','render');
+        $this->emitTo('productos.show','render');
         $this->dispatchBrowserEvent('alerta_timer', [
             'icon' => 'success',
             'msj' => "Eliminado del carrito",
         ]); 
+        $this->dispatchBrowserEvent('jsShowAgregar',[
+            'pid' =>$product_id,
+        ]);
     }
 
     public function openCarrito(){
