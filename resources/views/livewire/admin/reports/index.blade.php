@@ -21,8 +21,18 @@
         <h2 @click="toggleShowSales" class="text-xl font-bold text-gray-400 bg-gray-100 p-2 text-center hover:bg-gray-200 cursor-pointer">Ventas</h2>
         <div x-show="showSales" >
             @if ($sales->count())
-                    <div class="p-4 ">
-                        FILTROS
+                    <div class="p-4 flex items-center gap-2">
+                        <x-jet-label>Ordenar</x-jet-label>
+                        <select class="border rounded p-2" name="" id="" wire:model="order_by">
+                            <option class="p-2" value="id">Id</option>
+                            <option value="date">Fecha</option>
+                            <option value="total">Total</option>
+                        </select>
+                        <x-jet-label>Direccion</x-jet-label>
+                        <select class="border rounded p-2" name="" id="" wire:model="direccion">
+                            <option value="asc">Mayor a menor</option>
+                            <option value="desc">Menor a mayor</option>
+                        </select>
                     </div>
                     <x-table>
                         <table class="min-w-full divide-y divide-gray-200">

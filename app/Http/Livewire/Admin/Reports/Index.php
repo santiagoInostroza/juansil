@@ -10,6 +10,8 @@ class Index extends Component{
 
     public $showSales = true;
     public $month;
+    public $order_by = 'id';
+    public $direccion = 'asc';
 
     public function mount(){
         $this->month = Carbon::now()->locale('es')->timezone('America/Santiago');
@@ -21,7 +23,7 @@ class Index extends Component{
         $month =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('m');
         $year =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('Y');
 
-        $sales = Sale::whereMonth('date', $month)->whereYear('date', $year)->get();
+        $sales = Sale::with('customer')->whereMonth('date', $month)->whereYear('date', $year)->orderBy($this->order_by,$this->direccion)->get();
 
         return view('livewire.admin.reports.index',compact('sales'));
     }

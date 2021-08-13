@@ -28,6 +28,7 @@ class Index extends Component{
         $this->tipoBusqueda = 1;
         $this->fecha_inicio = date("Y-m-1");
         $this->fecha_termino = date("Y-m-t") ;
+        
 
     }
 
