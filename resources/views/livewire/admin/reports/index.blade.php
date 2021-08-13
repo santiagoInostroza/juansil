@@ -4,8 +4,15 @@
     <div class="p-4">
         <div class="flex justify-center items-center gap-4">
             <div wire:click="lastMonth" class="cursor-pointer text-sm font-bold">Anterior</div>
-            <x-jet-input class="" type="month" id="start" name="start" min="2021-06" value="{{date('Y-m')}}" max="{{date('Y')}}-12" wire:change="seleccionaMes" wire:model="month"></x-jet-input>
+            <div class="relative">
+                <x-jet-input class="" type="month" id="start" name="start" min="2021-06" value="{{date('Y-m')}}" max="{{date('Y')}}-12" wire:change="seleccionaMes" wire:model="month"></x-jet-input>
+                <div wire:loading wire:target="month" class="absolute right-10 top-2">
+                    <x-spinner.spinner size="7"></x-spinner.spinner>
+                </div>
+            </div>
+
             <div wire:click="nextMonth" class="cursor-pointer text-sm font-bold">Siguiente</div>
+
         </div>
     </div>
 
