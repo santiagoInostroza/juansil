@@ -94,13 +94,13 @@
    </div>
 
    {{-- PRODUCTOS POR CATEGORIA --}}
-   <div class="px-20 my-20" >
-      <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Mira nuestros productos <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> por categoria</span> </h2>
+   <div class="px-5 sm:px-20 mt-10" >
+      <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> Por categoria</span> </h2>
    </div>
    <div>
       @foreach ($categories as $categoria)
          @if ( count($categoria->products) )
-            <h2 class="mt-10 p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
+            <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
             <div class="splide splideIndex"> 
                <div class="splide__track">
                   <ul class="splide__list">
@@ -196,8 +196,8 @@
 
 
    {{-- LO ULTIMO QUE HA LLEGADO --}}
-   <div class="px-20 my-20" >
-      <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Mira nuestros productos <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> por lo ultimo que ha llegado</span> </h2>
+   <div class="px-5 sm:px-20 mt-10" >
+      <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> <span class="inline-block mb-5 -mt-5 font-sans text-3xl sm:text-5xl font-bold sm:mb-0 sm:mt-0">Lo ultimo que ha llegado</span> </h2>
    </div>
    <div>
       @foreach ($ultimasCompras as $compra)
@@ -302,12 +302,12 @@
  
 
       {{-- LO  MÁS VENDIDO --}}
-      <div class="px-20 my-20" >
-         <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Mira nuestros productos <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> por lo más vendido</span> </h2>
+      <div class="px-5 sm:px-20 mt-10" >
+         <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> lo más vendido</span> </h2>
       </div>
       <div>
          @if ( count($loMasVendido) )
-            <h2 class="mt-10 p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">
+            <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">
                Top 10 más vendido
             </h2>
             <div class="splide splideIndex"> 
