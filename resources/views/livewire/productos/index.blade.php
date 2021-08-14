@@ -76,12 +76,17 @@
          <ul class="splide__list">
             <li class="splide__slide">
                <div class="splide__slide__container">
-                  <img data-splide-lazy="{{url('images/portada/Juansil1.png')}}">
+                  <img data-splide-lazy="{{url('images/portada/banner_leches_xl.png')}}">
                </div>
             </li>
             <li class="splide__slide">
                <div class="splide__slide__container">
-                  <img data-splide-lazy="{{url('images/portada/Juansil2.png')}}">
+                  <img data-splide-lazy="{{url('images/portada/banner_paltas_xl.png')}}">
+               </div>
+            </li>
+            <li class="splide__slide">
+               <div class="splide__slide__container">
+                  <img data-splide-lazy="{{url('images/portada/banner_registrarse_xl.png')}}">
                </div>
             </li>
          </ul>

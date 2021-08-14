@@ -46,6 +46,11 @@ class Sale extends Model
         return $this->belongsToMany(Pay::class);
     }
 
+    public function boleta_by(){
+        $user = User::find($this->user_boleta); 
+        return $user;
+    }
+
     
 
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Sales;
 
-use App\Http\Controllers\Admin\SaleController;
+use Carbon\Carbon;
 use App\Models\Sale;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\SaleController;
 
 class Index extends Component{
 
@@ -78,6 +80,20 @@ class Index extends Component{
             'title' => "Pedido Editado",
         ]); 
         
+    }
+
+    public function generarBoleta(Sale $sale){
+        $sale->boleta = 1;
+        $sale->fecha_boleta =Carbon::now();
+        $sale->user_boleta = Auth::id();
+        $sale->save();
+    }
+
+    public static function fecha($fecha){
+        return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
+    }
+    public static function fechaHora($fecha){
+        return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
     }
 
     

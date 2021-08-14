@@ -307,6 +307,18 @@
                             @if ($sale->payment_status != 3)
                                  {{-- <x-jet-button wire:click="editSale({{ $sale }})"><i class="fas fa-pen"></i></x-jet-button>  --}}
                                 <x-jet-button wire:click="deleteSale({{ $sale }})"><i class="far fa-trash-alt"></i></x-jet-button>
+                            @else
+                                @if ($sale->boleta)
+                                    <x-tooltip.tooltip>
+                                        <x-slot name='tooltip'>Boleta generada {{ $this->fechaHora($sale->fecha_boleta)->format('d-m-y H:i') }} por {{$sale->boleta_by()->name}}</x-slot>
+                                        <x-jet-secondary-button class="bg-green-500"><i class="fas fa-file-alt"></i></x-jet-secondary-button>
+                                    </x-tooltip.tooltip>
+                                @else
+                                    <x-tooltip.tooltip>
+                                        <x-slot name='tooltip'>Generar Boleta</x-slot>
+                                        <x-jet-secondary-button wire:click="generarBoleta({{ $sale }})" class="bg-yellow-400"><i class="fas fa-file-alt"></i></x-jet-secondary-button>
+                                    </x-tooltip.tooltip>
+                                @endif
                             @endif
                         </div>
                     </td>
