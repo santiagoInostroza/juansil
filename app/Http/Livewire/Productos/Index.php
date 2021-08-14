@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire\Productos;
 
+use Carbon\Carbon;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Purchase;
+use App\Models\MovementSale;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CarritoController;
 
 class Index extends Component{
@@ -12,9 +16,23 @@ class Index extends Component{
     protected $listeners = (['render','setCantidad','addToCart','removeFromCart2','buscar']);
     
     public function render(){
-        // session()->forget('carrito');
-        $categories = Category::all();
-        return view('livewire.productos.index',compact('categories'));
+        session()->forget('carrito');
+        $categories = Category::with('products')->get();
+
+        $ultimasCompras = Purchase::with('purchase_items')->take(5)->get();
+
+        $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
+        ->groupBy('product_id')
+        ->orderBy('cantidad', 'desc')
+        ->take('10')
+        ->get();
+
+        $loMasVendido = collect();
+        foreach ($idLoMasVendido as $value) {
+            $loMasVendido->push(collect(Product::where('id',$value->product_id)->get()));
+        }
+
+        return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido'));
     }
 
 
@@ -50,6 +68,13 @@ class Index extends Component{
             'pid' =>$product_id,
         ]);
    }
+
+   public static function fecha($fecha){
+    return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
+}
+public static function fechaHora($fecha){
+    return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
+}
 
 
 }
