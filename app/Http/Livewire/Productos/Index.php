@@ -17,7 +17,7 @@ class Index extends Component{
     
     public function render(){
         session()->forget('carrito');
-        $categories = Category::with('products')->get();
+        $categories = Category::with('products')->where('id','!=', 3)->get();
 
         $ultimasCompras = Purchase::with('purchase_items')->orderBy('fecha','desc')->take(5)->get();
 
