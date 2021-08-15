@@ -56,6 +56,54 @@
             </main>
         </div>
 
+
+        <footer>
+           
+           
+            <div class="bg-gradient-to-r from-gray-400 to-gray-600 p-4">
+                <div class="flex justify-center gap-12">
+                    <div>
+                        <h3 class="text-2xl text-gray-200 ">Siguenos</h3>
+                        <div class="flex my-2">
+                            <i style="background-color: #3B5998;"
+                            class="flex items-center justify-center h-12 w-12 mx-1 rounded-full fab fill-current text-white text-xl fa-facebook-f"></i>
+                            <i style="background-color:#dd4b39"
+                            class="flex items-center justify-center h-12 w-12 mx-1 rounded-full fas fill-current text-white text-xl fa-envelope"></i>
+                  
+                        </div> 
+                    </div>
+                                      
+                    <div>
+                        <h3 class="text-2xl text-gray-200 ">Medios de pago</h3>
+                        <ul class="my-2">
+                           <li class="text-xl text-gray-200">Transferencia</li>
+                           <li class="text-xl text-gray-200">Efectivo</li>
+                        </ul> 
+                    </div>
+                </div>
+                <div>
+                   
+                </div>
+               <div class="border-b-2 my-4  mx-6 sm:mx-20"></div>
+                <div class="flex-1 sm:flex-none  flex items-center justify-center ml-8  sm:mx-0 ">
+                    <a href="/" class="flex-shrink-0 flex items-center">
+                        {{-- DISPOSITIVOS PEQUEÑOS --}}
+                        <div class=" text-white transform p-2 flex items-center lg:hidden" >
+                            <img class="h-10" src= "{{url('images/iconos/jsyellow.png')}}" alt="">
+                        </div>
+                        {{-- OTROS DISPOSITIVOS --}}
+                        <div class="hidden lg:flex h-8 w-autotext-xl text-white transform p-2  items-center" >
+                            <img class="h-20" src="{{url('images/iconos/juansil.png')}}" alt="">
+                        </div>
+                    </a>  
+                </div>
+            </div>
+           
+            <div class="bg-gray-700 text-gray-200  p-4 pl-6 sm:pl-20">
+                Comercial Juansil Spa Todos los derechos reservados {{date('Y')}}
+            </div>
+        </footer>
+
         <script>
             window.addEventListener('alerta_express', event => {
                 // alert(event.detail.msj);

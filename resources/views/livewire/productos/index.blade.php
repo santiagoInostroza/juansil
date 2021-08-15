@@ -443,14 +443,6 @@
       </div>
       
    </div>
-
-
-
-      <hr>
-      ofertas
-      <br><hr>
-      <br>
-
   
    @push('js')
    <script>
