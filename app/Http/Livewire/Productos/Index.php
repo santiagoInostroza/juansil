@@ -19,7 +19,7 @@ class Index extends Component{
         session()->forget('carrito');
         $categories = Category::with('products')->get();
 
-        $ultimasCompras = Purchase::with('purchase_items')->take(5)->get();
+        $ultimasCompras = Purchase::with('purchase_items')->orderBy('fecha','desc')->take(5)->get();
 
         $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
         ->groupBy('product_id')
