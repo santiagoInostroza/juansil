@@ -16,7 +16,7 @@ class Index extends Component{
     protected $listeners = (['render','setCantidad','addToCart','removeFromCart2','buscar']);
     
     public function render(){
-        session()->forget('carrito');
+        //session()->forget('carrito');
         $categories = Category::with('products')->where('id','!=', 3)->get();
 
         $ultimasCompras = Purchase::with('purchase_items')->orderBy('fecha','desc')->take(5)->get();
@@ -44,7 +44,7 @@ class Index extends Component{
 
     public function addToCart($product_id){
         $carrito = new CarritoController();
-        $carrito->addToCart($product_id,1);
+        $carrito->addToCart($product_id  ,1);
         $this->emitTo('cart.index','render');
         $this->dispatchBrowserEvent('alerta_timer', [
             'icon' => 'success',

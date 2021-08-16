@@ -20,6 +20,11 @@ class ProductController extends Controller{
         return view('products.lista');
     }
 
+    public function specialPrice(){
+      
+        return view('products.specialPrice');
+    }
+
 
 
 

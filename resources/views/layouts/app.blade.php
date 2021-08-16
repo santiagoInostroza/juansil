@@ -104,6 +104,7 @@
             </div>
         </footer>
 
+        {{-- ALERTAS --}}
         <script>
             window.addEventListener('alerta_express', event => {
                 // alert(event.detail.msj);
@@ -164,16 +165,16 @@
 
        {{-- TA GALERY --}}
         <script src="https://unpkg.com/@markusantonwolf/ta-gallery@latest/dist/js/ta-gallery.min.js"></script>
-
         <script>
     
             var elms = document.getElementsByClassName( 'splideIndex' );
             for ( var i = 0, len = elms.length; i < len; i++ ) {
             new Splide( elms[ i ],{
                 type: 'loop',
+                rewind : true,
                 perPage: 6,
                 trimSpace: false,
-                focus : 'center' ,
+                // focus : 'center' ,
                 breakpoints: {
                         // 640: {
                         //     perPage: 2,
