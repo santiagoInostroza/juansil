@@ -193,7 +193,7 @@
                 </div>
             @endif
         </div>
-        {{$sale}}
+    
         @if ($openShowSale)
             <div x-show="openShowSale">
                 <x-modal.modal_screen>
