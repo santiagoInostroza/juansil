@@ -140,7 +140,7 @@
                                         </td>
                                         <td class="px-6 py-2 text-sm font-medium text-right whitespace-nowrap">
                                             <div class="flex flex-col items-center justify-between gap-1 w-max-content">                                            
-                                                <x-jet-secondary-button wire:click="showPurchase({{$sale}})"> <i class="fas fa-eye"></i></x-jet-secondary-button>
+                                                <x-jet-secondary-button wire:click="showSale({{$sale}})"> <i class="fas fa-eye"></i></x-jet-secondary-button>
                                                 {{-- <x-jet-secondary-button  > <i class="fas fa-pen"></i> </x-jet-secondary-button> --}}
                                                 {{-- <x-jet-secondary-button wire:click="deletePurchase({{$sale}})"><i class="far fa-trash-alt"></i></x-jet-secondary-button> --}}
                                                 {{-- <a href="{{ route('admin.purchases.show', $purchase) }}" title="Ver datos del cliente" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-eye"></i></a>
@@ -193,16 +193,249 @@
                 </div>
             @endif
         </div>
+        <div x-show="openShowSale">
+            <x-modal.modal_screen>
+                <x-slot name="titulo">
+           
+                        <div class="p-4 flex justify-between items-center">
+                            <div>
+                                <h2 class="text-xl text-gray-600 font-bold">
+                                    Venta {{$sale->id}} {{$sale->customer->name}}
+                                </h2>
+                              
+                            </div>
+                            <div class="p-4 hover:shadow-xl cursor-pointer rounded-full">
+                                <i class="fas fa-times" @click="closeOpenShowSale"></i>
+                            </div>
+                        </div>             
+                </x-slot>
+
+                <div>
+                    {{ $this->fecha($sale->date)->dayName }}   {{ $this->fecha($sale->date)->format('d')  }}  {{ $this->fecha($sale->date)->monthName }}
+                    <div>
+                        Venta Por {{$sale->created_by()->name}}
+                    </div>
+                </div>
+
+                <div class="grid  gap-4 my-6">
+                  
+                    <div class="border rounded p-4"> 
+                        <div class="font-bold">Estado</div> 
+                        @if ($sale->payment_status == 1)
+                            Pendiente
+                            <div> Monto pendiente  ${{number_format($sale->pending_amount,0,',','.') }}</div>
+                        @elseif($sale->payment_status == 2)
+                            Abonado
+                            <div> Monto abonado ${{number_format($sale->payment_amount,0,',','.') }} </div>
+                            <div> Monto pendiente  ${{number_format($sale->pending_amount,0,',','.') }}</div>
+                        @elseif($sale->payment_status == 3)
+                            Pagado el {{$sale->payment_date}}
+                            <div> Monto pagado ${{number_format($sale->payment_amount,0,',','.') }} </div>
+                            
+                        @endif
+                    </div>
+
+                
+
+                    @if ($sale->delivery)
+                        <div class="border rounded p-4">
+                            <div class="font-bold">Reparto</div>
+                            @if ($sale->delivery_stage == 1)
+                                Reparto pendiente para el {{$sale->delivery_date}}
+                            @elseif($sale->delivery_stage == 2)
+                                <div> Fecha entregado {{$sale->date_delivered}} </div>
+                                @if ($sale->delivered_by())
+                                    <div> Entregado por  {{$sale->delivered_by()->name}}</div>
+                                @endif
+                            @endif
+                        </div>
+                    @endif
+                
+                    @if ($sale->comments)
+                        <div class="border rounded p-4"> 
+                            <h3 class="font-bold">
+                               Comentario
+                            </h3> 
+                            <textarea name="" id="">{{$sale->comments}}</textarea>
+                        </div>
+                    @endif
+
+               
+                 
+                   
+                    @if ($sale->payment_status == 3)
+                    <div class="border rounded p-4"> 
+                        <h3 class="font-bold">Estado Boleta</h3>
+                        @if ($sale->boleta)
+                            <div> Boleta entregada el {{$sale->fecha_boleta}}</div>
+                            <div>por{{$sale->boleta_by()->name}}</div>
+                         @else
+                           <div>Pendiente</div>
+                        @endif
+                        @endif
+                    </div>
+                    
+                </div>
+               
+           
+
+               <x-table>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                               id
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                               nombre
+                            </th>
+                           
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                               Cantidad total
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                precio total
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                costo unitario
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                costo total
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                diferencia
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                               porcentaje
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Aciones
+                            </th>
+
+                        
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($sale->sale_items as $item)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div>{{$item->id}}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center gap-2">
+                                        <figure>
+                                            <img class="h-16 w-16 object-cover" src="{{ Storage::url($item->product->image->url) }}" alt="">
+                                        </figure>
+                                       
+                                        <div class="text-sm font-medium text-gray-900">
+                                            <div>
+                                                {{ $item->cantidad}}   x  {{ $item->cantidad_por_caja}}   {{$item->product->name}} 
+                                            </div>
+                                            <div>
+                                                ${{ number_format($item->precio,0,',','.') }} c/u
+                                            </div>
+                                            <div>
+                                                ${{ number_format($item->precio_por_caja,0,',','.') }} x caja
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        {{ $item->cantidad_total}} 
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        ${{ number_format($item->precio_total,0,',','.') }} 
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        ${{ number_format($item->costo,0,',','.') }} 
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        ${{ number_format($item->costo * $item->cantidad_total,0,',','.') }} 
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        ${{ number_format( $item->precio_total - ($item->costo * $item->cantidad_total) ,0,',','.') }} 
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        {{ number_format(  ($item->precio - $item->costo) / $item->precio * 100  ,2,',','.') }} %
+                                    </div>
+                                </td>
+                                <td class="px-6 py-2 text-sm font-medium text-right whitespace-nowrap">
+                                    <div class="flex flex-col items-center justify-between gap-1 w-max-content">                                            
+                                        {{-- <x-jet-secondary-button wire:click="showSale({{$sale}})"> <i class="fas fa-eye"></i></x-jet-secondary-button> --}}
+                                        {{-- <x-jet-secondary-button  > <i class="fas fa-pen"></i> </x-jet-secondary-button> --}}
+                                        {{-- <x-jet-secondary-button wire:click="deletePurchase({{$sale}})"><i class="far fa-trash-alt"></i></x-jet-secondary-button> --}}
+                                        {{-- <a href="{{ route('admin.purchases.show', $purchase) }}" title="Ver datos del cliente" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('admin.purchases.edit', $purchase) }}" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-pen"></i></a>
+                                        <form action="{{ route('admin.purchases.destroy', $purchase) }}" method='POST' class="mr-2 alerta_eliminar">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                                        </form> --}}
+                                    </div>
+                                </td>
+                            </tr>
+            
+                        @endforeach
+                    </tbody>
+              
+                </table>
+            </x-table>
+
+            <div class="flex justify-end">
+                <div class="grid grid-cols-2 gap-x-4">
+
+                    <div>Subtotal </div>
+                    <div class="text-right">${{number_format($sale->subtotal,0,',','.')}}</div>
+    
+                    <div> Despacho</div>
+                    <div class="text-right"> ${{number_format($sale->delivery_value,0,',','.') }}</div>
+    
+                    <div>Total </div>
+                    <div class="text-right">${{number_format($sale->total,0,',','.')}}</div>
+    
+                    <div>Costo total </div>
+                    <div class="text-right">${{number_format($sale->total_cost,0,',','.')}}</div>
+    
+                    <div>Diferencia</div>
+                    <div class="text-right">${{number_format( $sale->total - $sale->total_cost,0,',','.')}}</div>
+    
+                    <div>Porcentaje</div>
+                    <div class="text-right"> {{number_format( ($sale->total - $sale->total_cost) / $sale->total * 100,2,',','.')}}% </div>
+    
+                </div>
+            </div>
+           
+
+
+               
+
+            </x-modals.modal_screen>
+        </div>
     </div>
 
     @push('js')
         <script>
             function salesMain(){
                 return{
+                    openShowSale : @entangle('openShowSale'),
                     showSales : @entangle('showSales'),
                     toggleShowSales(){
                         this.showSales = !this.showSales;
                     },
+                    closeOpenShowSale(){
+                        this.openShowSale = false;
+                    }
                 }
             }
         </script>        

@@ -5,10 +5,12 @@ namespace App\Http\Livewire\Admin\Reports;
 use Carbon\Carbon;
 use App\Models\Sale;
 use Livewire\Component;
+use App\Models\Purchase;
 
 class Index extends Component{
 
     public $showSales = true;
+    public $openShowSale = true;
     public $month;
     public $order_by = 'id';
     public $direccion = 'asc';
@@ -43,5 +45,20 @@ class Index extends Component{
     public function lastMonth(){
         $this->month =  Carbon::createFromFormat('Y-m', $this->month)->locale('es')->subMonth()->format('Y-m');
         
+    }
+
+    public $sale;
+    public $product_id;
+    public $cantidad;
+    public $cantidad_por_caja;
+    public $cantidad_total;
+    public $precio;
+    public $precio_por_caja;
+    public $precio_total;
+    public $costo;
+
+    public function showSale(Sale $sale){
+       $this->openShowSale = true;    
+       $this->sale= $sale;
     }
 }
