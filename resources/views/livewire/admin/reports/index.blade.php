@@ -193,6 +193,7 @@
                 </div>
             @endif
         </div>
+        {{$sale}}
         @if ($openShowSale)
             <div x-show="openShowSale">
                 <x-modal.modal_screen>
@@ -201,7 +202,7 @@
                             <div class="p-4 flex justify-between items-center">
                                 <div>
                                     <h2 class="text-xl text-gray-600 font-bold">
-                                        Venta {{$sale->id}} {{$sale->customer->name}}
+                                        Venta {{$sale_selected->id}} {{$sale_selected->customer->name}}
                                     </h2>
                                 
                                 </div>
@@ -212,9 +213,9 @@
                     </x-slot>
 
                     <div>
-                        {{ $this->fecha($sale->date)->dayName }}   {{ $this->fecha($sale->date)->format('d')  }}  {{ $this->fecha($sale->date)->monthName }}
+                        {{ $this->fecha($sale_selected->date)->dayName }}   {{ $this->fecha($sale_selected->date)->format('d')  }}  {{ $this->fecha($sale_selected->date)->monthName }}
                         <div>
-                            Venta Por {{$sale->created_by()->name}}
+                            Venta Por {{$sale_selected->created_by()->name}}
                         </div>
                     </div>
 
@@ -222,54 +223,54 @@
                     
                         <div class="border rounded p-4"> 
                             <div class="font-bold">Estado</div> 
-                            @if ($sale->payment_status == 1)
+                            @if ($sale_selected->payment_status == 1)
                                 Pendiente
-                                <div> Monto pendiente  ${{number_format($sale->pending_amount,0,',','.') }}</div>
-                            @elseif($sale->payment_status == 2)
+                                <div> Monto pendiente  ${{number_format($sale_selected->pending_amount,0,',','.') }}</div>
+                            @elseif($sale_selected->payment_status == 2)
                                 Abonado
-                                <div> Monto abonado ${{number_format($sale->payment_amount,0,',','.') }} </div>
-                                <div> Monto pendiente  ${{number_format($sale->pending_amount,0,',','.') }}</div>
-                            @elseif($sale->payment_status == 3)
-                                Pagado el {{$sale->payment_date}}
-                                <div> Monto pagado ${{number_format($sale->payment_amount,0,',','.') }} </div>
+                                <div> Monto abonado ${{number_format($sale_selected->payment_amount,0,',','.') }} </div>
+                                <div> Monto pendiente  ${{number_format($sale_selected->pending_amount,0,',','.') }}</div>
+                            @elseif($sale_selected->payment_status == 3)
+                                Pagado el {{$sale_selected->payment_date}}
+                                <div> Monto pagado ${{number_format($sale_selected->payment_amount,0,',','.') }} </div>
                                 
                             @endif
                         </div>
 
                     
 
-                        @if ($sale->delivery)
+                        @if ($sale_selected->delivery)
                             <div class="border rounded p-4">
                                 <div class="font-bold">Reparto</div>
-                                @if ($sale->delivery_stage == 1)
-                                    Reparto pendiente para el {{$sale->delivery_date}}
-                                @elseif($sale->delivery_stage == 2)
-                                    <div> Fecha entregado {{$sale->date_delivered}} </div>
-                                    @if ($sale->delivered_by())
-                                        <div> Entregado por  {{$sale->delivered_by()->name}}</div>
+                                @if ($sale_selected->delivery_stage == 1)
+                                    Reparto pendiente para el {{$sale_selected->delivery_date}}
+                                @elseif($sale_selected->delivery_stage == 2)
+                                    <div> Fecha entregado {{$sale_selected->date_delivered}} </div>
+                                    @if ($sale_selected->delivered_by())
+                                        <div> Entregado por  {{$sale_selected->delivered_by()->name}}</div>
                                     @endif
                                 @endif
                             </div>
                         @endif
                     
-                        @if ($sale->comments)
+                        @if ($sale_selected->comments)
                             <div class="border rounded p-4"> 
                                 <h3 class="font-bold">
                                 Comentario
                                 </h3> 
-                                <textarea name="" id="">{{$sale->comments}}</textarea>
+                                <textarea name="" id="">{{$sale_selected->comments}}</textarea>
                             </div>
                         @endif
 
                 
                     
                     
-                        @if ($sale->payment_status == 3)
+                        @if ($sale_selected->payment_status == 3)
                         <div class="border rounded p-4"> 
                             <h3 class="font-bold">Estado Boleta</h3>
-                            @if ($sale->boleta)
-                                <div> Boleta entregada el {{$sale->fecha_boleta}}</div>
-                                <div>por{{$sale->boleta_by()->name}}</div>
+                            @if ($sale_selected->boleta)
+                                <div> Boleta entregada el {{$sale_selected->fecha_boleta}}</div>
+                                <div>por{{$sale_selected->boleta_by()->name}}</div>
                             @else
                             <div>Pendiente</div>
                             @endif
@@ -317,7 +318,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($sale->sale_items as $item)
+                            @foreach ($sale_selected->sale_items as $item)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div>{{$item->id}}</div>
@@ -397,22 +398,22 @@
                     <div class="grid grid-cols-2 gap-x-4">
 
                         <div>Subtotal </div>
-                        <div class="text-right">${{number_format($sale->subtotal,0,',','.')}}</div>
+                        <div class="text-right">${{number_format($sale_selected->subtotal,0,',','.')}}</div>
         
                         <div> Despacho</div>
-                        <div class="text-right"> ${{number_format($sale->delivery_value,0,',','.') }}</div>
+                        <div class="text-right"> ${{number_format($sale_selected->delivery_value,0,',','.') }}</div>
         
                         <div>Total </div>
-                        <div class="text-right">${{number_format($sale->total,0,',','.')}}</div>
+                        <div class="text-right">${{number_format($sale_selected->total,0,',','.')}}</div>
         
                         <div>Costo total </div>
-                        <div class="text-right">${{number_format($sale->total_cost,0,',','.')}}</div>
+                        <div class="text-right">${{number_format($sale_selected->total_cost,0,',','.')}}</div>
         
                         <div>Diferencia</div>
-                        <div class="text-right">${{number_format( $sale->total - $sale->total_cost,0,',','.')}}</div>
+                        <div class="text-right">${{number_format( $sale_selected->total - $sale_selected->total_cost,0,',','.')}}</div>
         
                         <div>Porcentaje</div>
-                        <div class="text-right"> {{number_format( ($sale->total - $sale->total_cost) / $sale->total * 100,2,',','.')}}% </div>
+                        <div class="text-right"> {{number_format( ($sale_selected->total - $sale_selected->total_cost) / $sale_selected->total * 100,2,',','.')}}% </div>
         
                     </div>
                 </div>

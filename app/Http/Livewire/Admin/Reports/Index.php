@@ -34,9 +34,6 @@ class Index extends Component{
         return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
     }
 
-    public function seleccionaMes(){
-        
-    }
 
     public function nextMonth(){
         $this->month =  Carbon::createFromFormat('Y-m', $this->month)->locale('es')->addMonth()->format('Y-m');
@@ -47,7 +44,8 @@ class Index extends Component{
         
     }
 
-    public $sale;
+    public $sale_selected;
+
     public $product_id;
     public $cantidad;
     public $cantidad_por_caja;
@@ -58,7 +56,7 @@ class Index extends Component{
     public $costo;
 
     public function showSale(Sale $sale){
-       $this->openShowSale = true;    
-       $this->sale= $sale;
+        $this->sale_selected= $sale;
+        $this->openShowSale = true;    
     }
 }
