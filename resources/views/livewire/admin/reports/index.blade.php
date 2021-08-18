@@ -272,7 +272,7 @@
                                     <div> Boleta entregada el {{$sale_selected->fecha_boleta}}</div>
                                     <div>por{{$sale_selected->boleta_by()->name}}</div>
                                 @else
-                                <div>Pendiente</div>
+                                    <div>Pendiente</div>
                                 @endif
                             </div>
                         @endif

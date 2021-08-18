@@ -428,7 +428,7 @@ class SaleController extends Controller{
 
                 }else{
                     $costo_final_unitario = $item['precio'];
-                    $total_cost = $item['precio'] * $item['cantidad_total']; 
+                    $total_cost += ($item['precio'] * $item['cantidad_total']); 
                     // $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
                     $message = new ErrorNotice();
                     $message->message = "No se encontró stock para $product->name en venta $sale->id. Se guardará el precio de venta como precio de costo, esto ocasionará que no refleje utilidades este item";
