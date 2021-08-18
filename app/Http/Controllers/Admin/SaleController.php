@@ -476,10 +476,15 @@ class SaleController extends Controller{
     public function deleteSale(Sale $sale){
 
         foreach ($sale->movement_sales as $movement) {
-            $movement->purchase_price->stock+=$movement->cantidad; 
+            try {
+                // Cuando se guarda un movimiento sin encontrar stock purchase_price_id queda nulo por lo que cuando entre aqui buscando un purchase_price  arrojará un error
+                $movement->purchase_price->stock+=$movement->cantidad; 
+                $movement->purchase_price->save(); 
+            } catch (\Throwable $th) {
+              
+            }
+           
             $movement->product->stock += $movement->cantidad;
-            
-            $movement->purchase_price->save(); 
             $movement->product->save(); 
         }
 
