@@ -99,8 +99,8 @@
                 </div>
             </div>
            
-            <div class="text-sm bg-gray-700 text-gray-900 p-2 text-canter">
-                Comercial Juansil Spa Todos los derechos reservados {{date('Y')}}
+            <div class="text-sm bg-gray-700 text-gray-900 p-2 text-center">
+                Comercial Juansil Spa. Derechos reservados {{date('Y')}}
             </div>
         </footer>
 
