@@ -423,7 +423,7 @@ class SaleController extends Controller{
                     $costo_final_unitario = $costo2;
                     // $this->msj.= "Stock insuficiente de '$producto_general->name'.\n";
                     $message = new ErrorNotice();
-                    $message->message = "No se encontró stock suficiente para $product->name en venta $sale->id. Se guardará el valor de costo del producto de un producto encontrado sin stock";
+                    $message->message = "No se encontró stock suficiente para $product->name en venta $sale->id. Se guardará el valor de costo del producto de un producto encontrado sin stock. se guarda purchase_price_id como nulo en movement_sales";
                     $message->save();
 
                 }else{
@@ -431,7 +431,7 @@ class SaleController extends Controller{
                     $total_cost += ($item['precio'] * $item['cantidad_total']); 
                     // $this->msj.= "No se encontro stock de '$producto_general->name'.\n";
                     $message = new ErrorNotice();
-                    $message->message = "No se encontró stock para $product->name en venta $sale->id. Se guardará el precio de venta como precio de costo, esto ocasionará que no refleje utilidades este item";
+                    $message->message = "No se encontró stock para $product->name en venta $sale->id. Se guardará el precio de venta como precio de costo, esto ocasionará que no refleje utilidades este item. se guarda purchase_price_id como nulo en movement_sales";
                     $message->save();
                 }
 
