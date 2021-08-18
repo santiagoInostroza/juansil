@@ -266,16 +266,16 @@
                     
                     
                         @if ($sale_selected->payment_status == 3)
-                        <div class="border rounded p-4"> 
-                            <h3 class="font-bold">Estado Boleta</h3>
-                            @if ($sale_selected->boleta)
-                                <div> Boleta entregada el {{$sale_selected->fecha_boleta}}</div>
-                                <div>por{{$sale_selected->boleta_by()->name}}</div>
-                            @else
-                            <div>Pendiente</div>
-                            @endif
-                            @endif
-                        </div>
+                            <div class="border rounded p-4"> 
+                                <h3 class="font-bold">Estado Boleta</h3>
+                                @if ($sale_selected->boleta)
+                                    <div> Boleta entregada el {{$sale_selected->fecha_boleta}}</div>
+                                    <div>por{{$sale_selected->boleta_by()->name}}</div>
+                                @else
+                                <div>Pendiente</div>
+                                @endif
+                            </div>
+                        @endif
                         
                     </div>
                 
