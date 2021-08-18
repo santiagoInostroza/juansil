@@ -130,7 +130,9 @@
       <div>
          @foreach ($categories as $categoria)
             @if ( count($categoria->products) )
-               <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
+               <a href="{{route('products.category',$categoria)}}">
+                  <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
+               </a>
                <div class="splide splideIndex"> 
                   <div class="splide__track">
                      <ul class="splide__list">
@@ -224,6 +226,34 @@
          @endforeach
       </div>
 
+               
+
+         
+      <div class="flex justify-end bg-gradient-to-r from-white to-gray-200  pb-20  mb-10 sm:p-20">
+         <div class="px-20 my-20" >
+            <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Explora nuestros <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0">productos</span></h2>
+            <p class="max-w-md text-gray-600">
+               <span class="font-extrabold"></span>Somos un joven emprendimiento y lucharemos por hacer crecer nuestra variedad de productos para que no te falte nada.
+            </p>
+            
+         
+            {{-- <div class="flex items-center justify-between max-w-xs gap-1 p-2 my-8 sm:gap-6 sm:max-w-md sm:w-max-content">
+               <a href="{{route('products.lista')}}">
+                  <img class="object-cover w-20 h-20 bg-gray-800 rounded-full sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt="">
+                  <p class="p-2 text-sm font-bold text-center text-gray-600" >Lacteos</p>
+               </a>
+               <a href="{{route('products.lista')}}">
+                  <img class="object-cover w-20 h-20 bg-gray-800 rounded-full sm:h-32 sm:w-32 " src="{{url('images/min/abarrotes3_min.jpeg')}}" alt="">
+                  <p class="p-2 text-sm font-bold text-center text-gray-600" >Abarrotes</p>
+               </a>
+               <a href="{{route('products.lista')}}">
+                  <img class="object-cover w-20 h-20 bg-gray-800 rounded-full sm:h-32 sm:w-32 " src="{{url('images/min/abarrotes_min.jpg')}}" alt="">
+                  <p class="p-2 text-sm font-bold text-center text-gray-600" >Todo</p>         
+               </a>
+            </div> --}}
+         </div>
+      </div>
+
       {{-- LO ULTIMO QUE HA LLEGADO --}}
       <div class="px-5 sm:px-20 mt-10" >
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Mira <span class="inline-block mb-5 -mt-5 font-sans font-bold text-3xl sm:text-5xl sm:mb-0 sm:mt-0">Lo ultimo que ha llegado</span> </h2>
@@ -231,7 +261,7 @@
       <div>
          @foreach ($ultimasCompras as $compra)
             @if ( count($compra->purchase_items) )
-               <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">
+               <h2 class="p-5 text-2xl font-bold text-gray-600 text-center">
                   LLegó el {{$this->fecha($compra->fecha)->format('d')}} {{ $this->fecha($compra->fecha)->monthName }}
                </h2>
                <div class="splide splideIndex"> 
@@ -327,13 +357,30 @@
          @endforeach
       </div>
 
+      <div class="flex flex-col-reverse sm:flex-row justify-end items-center | bg-gradient-to-r from-gray-200 via-white to-white | pb-20  mb-10 sm:p-20">
+  
+
+         <div class="px-20 my-20 filter drop-shadow-lg">
+            <h2 class="text-4xl font-hairline text-red-500 sm:text-5xl"> Directo a tu <span class="block -mt-4 font-sans text-5xl font-bold sm:mt-0">Domicilio</span></h2>
+
+            <p class="max-w-md text-gray-600">
+               En 
+               <span class="font-extrabold">Juansil</span> 
+               queremos que te cuides. Es por eso que trabajamos para llevarte los productos directamente a tu casa. 
+               <br><span class="font-bold text-red-500"> Nuestro desafío es entregarte el mejor servicio... </span><br>
+               {{-- <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br> --}}
+            </p>
+         </div>
+         
+      </div>
+
       {{-- LO  MÁS VENDIDO --}}
       <div class="px-5 sm:px-20 mt-10" >
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Mira <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> lo más vendido</span> </h2>
       </div>
-      <div>
+      <div class="mb-20">
          @if ( count($loMasVendido) )
-            <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">
+            <h2 class="p-5 text-2xl font-bold text-gray-600 text-center ">
                Top 10 más vendido
             </h2>
             <div class="splide splideIndex"> 
@@ -427,53 +474,9 @@
             </div>
          @endif
       </div>
-         
 
          
-      <div class="flex justify-start bg-gradient-to-r from-white to-gray-200">
-         <div class="px-20 my-20" >
-            <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Explora nuestros <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0">productos</span></h2>
-            <p class="max-w-md text-gray-600">
-               <span class="font-extrabold"></span>Somos un joven emprendimiento y lucharemos por hacer crecer nuestra variedad de productos para que no te falte nada.
-            </p>
-            
-         
-            <div class="flex items-center justify-between max-w-xs gap-1 p-2 my-8 sm:gap-6 sm:max-w-md sm:w-max-content">
-               <a href="{{route('products.lista')}}">
-                  <img class="object-cover w-20 h-20 bg-gray-800 rounded-full sm:h-32 sm:w-32 " src="{{url('images/min/leche_min.jpg')}}" alt="">
-                  <p class="p-2 text-sm font-bold text-center text-gray-600" >Lacteos</p>
-               </a>
-               <a href="{{route('products.lista')}}">
-                  <img class="object-cover w-20 h-20 bg-gray-800 rounded-full sm:h-32 sm:w-32 " src="{{url('images/min/abarrotes3_min.jpeg')}}" alt="">
-                  <p class="p-2 text-sm font-bold text-center text-gray-600" >Abarrotes</p>
-               </a>
-               <a href="{{route('products.lista')}}">
-                  <img class="object-cover w-20 h-20 bg-gray-800 rounded-full sm:h-32 sm:w-32 " src="{{url('images/min/abarrotes_min.jpg')}}" alt="">
-                  <p class="p-2 text-sm font-bold text-center text-gray-600" >Todo</p>         
-               </a>
-            </div>
-         </div>
-         
-      </div>
-         
-      <div class="flex flex-col-reverse sm:flex-row justify-between items-center | bg-gradient-to-r from-gray-200 via-white to-white | pb-20  mb-10 sm:p-20">
-         <div>
-            {{-- <img class="object-cover max-w-xs sm:max-w-sm " src="{{url('images/portada/repartidor.jpg')}}" alt=""> --}}
-         </div>
 
-         <div class="px-20 my-20 filter drop-shadow-lg">
-            <h2 class="text-4xl font-hairline text-red-500 sm:text-5xl"> Directo a tu <span class="block -mt-4 font-sans text-5xl font-bold sm:mt-0">Domicilio</span></h2>
-
-            <p class="max-w-md text-gray-600">
-               En 
-               <span class="font-extrabold">Juansil</span> 
-               queremos que te cuides. Es por eso que trabajamos para llevarte los productos directamente a tu casa. 
-               <br><span class="font-bold text-red-500"> Nuestro desafío es entregarte el mejor servicio... </span><br>
-               {{-- <br><span class="font-bold text-red-500">Y sin pagar de más...</span><br> --}}
-            </p>
-         </div>
-         
-      </div>
    
       @push('js')
          <script>

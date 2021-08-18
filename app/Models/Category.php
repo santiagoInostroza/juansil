@@ -18,8 +18,7 @@ class Category extends Model
         //return $this->belongsTo(Producto::class);
     }
     
-    public function getRouteKeyName()
-    {
+    public function getRouteKeyName(){
         return 'slug';
     }
 }

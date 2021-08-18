@@ -15,14 +15,16 @@ class ProductController extends Controller{
         return view('products.index');
     }
 
-    public function lista(){
-      
+    public function lista(){   
         return view('products.lista');
     }
 
     public function specialPrice(){
-      
         return view('products.specialPrice');
+    }
+
+    public function category(Category $category){ 
+        return view('products.category',compact('category'));
     }
 
 
