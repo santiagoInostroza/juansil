@@ -10,7 +10,7 @@ use App\Models\Purchase;
 class Index extends Component{
 
     public $showSales = true;
-    public $openShowSale = true;
+    public $openShowSale = false;
     public $month;
     public $order_by = 'id';
     public $direccion = 'asc';
