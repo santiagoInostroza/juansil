@@ -19,13 +19,13 @@
 
                 <div class="flex justify-between items-center">
                     <div class="px-3 mb-1 flex relative flex-1">
-                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'   wire:keydown.enter=@if (Request::is('productos/lista*')) 'buscar()' @else 'irBuscar()' @endif>
+                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'   wire:keydown.enter=@if(Request::is('productos/lista*')) 'buscar()' @else 'irBuscar()' @endif>
                         <i class="fas fa-times absolute right-7 p-2 cursor-pointer text-gray-400" x-on:click="limpiar_buscador"></i>
                         <div wire:loading.delay class="absolute mt-1 right-12">
                             <x-spinner.spinner size="6"></x-spinner.spinner>
                         </div>
                     </div>
-                    <x-jet-secondary-button wire:click="buscar()"  class="mx-4">buscar</x-jet-secondary-button>
+                    <button  wire:click=@if(Request::is('productos/lista*')) 'buscar()' @else 'irBuscar()' @endif  class="mx-4 cursor-pointer p-2 shadow transform hover:scale-110 rounded" >Buscar </button>
                 </div>
                 
                

@@ -1,8 +1,14 @@
 <div>
     <div class="mt-10"></div>
     <div class="p-4">
-        <h1 class="text-2xl font-bold text-gray-600 uppercase">{{$category->name}}</h1>
+        <h1 class="text-2xl font-bold text-gray-600 uppercase">{{$tag->name}}</h1>
     </div>
+
+    {{-- @php
+        echo'<pre>';
+        var_dump('products');
+        echo'</pre>';
+    @endphp --}}
 
     <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
         @foreach ($products as $product)
@@ -93,20 +99,20 @@
 
     <div class="p-4">
         <h2 class="text-2xl font-bold text-gray-600 uppercase">
-           MIRA OTRAS CATEGORIAS
+           MIRA OTRAS ETIQUETAS
         </h2>
     </div>
 
    
 
     
-    @foreach ($categories as $category2)
-        @if (count($category2->products)==0)
+    @foreach ($tags as $tag2)
+        @if (count($tag2->products)==0)
             @continue
         @endif
-        <h3 class="text-2xl font-bold text-gray-600 uppercase p-4">{{$category2->name}}</h3>
+        <h3 class="text-2xl font-bold text-gray-600 uppercase p-4">{{$tag2->name}}</h3>
         <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
-            @foreach ($category2->products as $product)
+            @foreach ($tag2->products as $product)
                 <li class="border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
                     <a href="{{route('products.show',$product)}}">
                         <div class="w-full">
@@ -160,7 +166,6 @@
                     @if ($product->stock>0)
                         <div class="text-center mt-4 relative" >
                             @if (!session()->has('carrito.'.$product->id))
-                                {{-- <div wire:loading wire:target="{{$product->id}}" class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div> --}}
                                 <x-jet-secondary-button onclick="return addToCart({{$product->id}});"> 
                                     <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                     Agregar
@@ -197,6 +202,7 @@
     <div>
         @push('js')
             <script>
+
                 function listaAumentaCantidad(pid, stock){
                     if(document.getElementById('cantidad_product_' + pid).value >= stock){
                         alerta_timer({icon:'warning',title:'No hay suficiente stock para agregar más unidades!!', timer: 2000});

@@ -31,6 +31,7 @@ Route::get('/', [ProductController::class,'index'])->name('products.index');
 Route::get('productos/lista', [ProductController::class,'lista'])->name('products.lista');
 Route::get('productos/specialPrice', [ProductController::class,'specialPrice'])->name('products.specialPrice');
 Route::get('productos/categoria/{category}', [ProductController::class,'category'])->name('products.category');
+Route::get('productos/etiqueta/{tag}', [ProductController::class,'tag'])->name('products.tag');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

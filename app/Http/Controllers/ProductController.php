@@ -27,6 +27,10 @@ class ProductController extends Controller{
         return view('products.category',compact('category'));
     }
 
+    public function tag(Tag $tag){ 
+        return view('products.tag',compact('tag'));
+    }
+
 
 
 
