@@ -1,8 +1,9 @@
 @props(['position_x' => 'left', 'position_y' => 'top'])
 @php
-    if($position_x == 'right' ){
+    if($position_x == 'left' ){
         $position_x = "-translate-x-1/2";
     }else{
+       
         $position_x = " -translate-x-full";
     }
 

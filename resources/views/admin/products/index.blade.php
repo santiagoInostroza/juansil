@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+{{-- @extends('adminlte::page')
 
 @section('title', 'Precios de feria')
 
@@ -139,4 +139,11 @@
 
 
 
-@stop
+@stop --}}
+
+
+@extends('layouts.admin4')
+
+@section('content')
+    @livewire('admin.products.index', ['user' => ''])      
+@endsection

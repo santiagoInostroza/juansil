@@ -27,6 +27,12 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @livewireStyles
+
+    {{-- JQUERY --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    {{-- SELECT2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -160,6 +166,14 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
+                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/products.index*')) bg-white @endif">
+                            <a href="{{ route('admin.products.index') }}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                                <i class="fab fa-wpforms float-left mx-2"></i>
+                                Productos
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
                         {{-- <li class="w-full h-full py-3 px-2 border-b border-light-border">
                             <a href="forms.html"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
@@ -199,7 +213,7 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>--}}
-                        <li class="w-full h-full py-3 px-2">
+                        {{-- <li class="w-full h-full py-3 px-2">
                             <a href="#"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                                 <i class="far fa-file float-left mx-2"></i>
@@ -229,7 +243,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li>
                             {{Request::url()}}</li>
                     </ul>
@@ -501,6 +515,13 @@
             
             }
         }
+    </script>
+
+{{-- SELECT 2 --}}
+    <script>
+        $(document).ready(function() {
+            $('.select').select2();
+        });
     </script>
 </body>
 
