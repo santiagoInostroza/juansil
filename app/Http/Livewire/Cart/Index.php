@@ -16,6 +16,7 @@ class Index extends Component{
 
 
     public function render(){
+        // session()->forget('carrito');
         return view('livewire.cart.index');
     }
 
@@ -31,6 +32,7 @@ class Index extends Component{
         $this->emitTo('productos.lista','render');
         $this->emitTo('productos.show','render');
         $this->emitTo('productos.category','render');
+        $this->emitTo('productos.tag-livewire','render');
         $this->dispatchBrowserEvent('alerta_timer', [
             'icon' => 'success',
             'msj' => "Eliminado del carrito",

@@ -205,7 +205,7 @@
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
                         });
-                        Livewire.emitTo('productos.category','setCantidad', pid,cantidad);
+                        Livewire.emitTo('productos.category-livewire','setCantidad', pid,cantidad);
                     }           
                 }
     
@@ -218,7 +218,7 @@
                         document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                             element.value=cantidad;
                         });
-                        Livewire.emitTo('productos.category','setCantidad', pid,cantidad);
+                        Livewire.emitTo('productos.category-livewire','setCantidad', pid,cantidad);
                     }
                 }
     
@@ -238,16 +238,16 @@
                     document.querySelectorAll(".cantidad_producto_" + pid).forEach(element => {
                         element.value=cantidad;
                     });
-                    Livewire.emitTo('productos.category','setCantidad', pid,cantidad);            
+                    Livewire.emitTo('productos.category-livewire','setCantidad', pid,cantidad);            
                 }
     
     
                 function addToCart(pid){
-                    Livewire.emitTo('productos.category','addToCart', pid);
+                    Livewire.emitTo('productos.category-livewire','addToCart', pid);
                 }
     
                 function removeFromCart2(pid){
-                    Livewire.emitTo('productos.category','removeFromCart2', pid);
+                    Livewire.emitTo('productos.category-livewire','removeFromCart2', pid);
                 }
             </script>        
         @endpush

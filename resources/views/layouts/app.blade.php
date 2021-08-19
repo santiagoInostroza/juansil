@@ -98,10 +98,11 @@
                     </a>  
                 </div>
             </div>
-           
-            <div class="text-sm bg-gray-700 text-gray-900 p-2 text-center">
-                Comercial Juansil Spa. Derechos reservados {{date('Y')}}
+            <div class="flex justify-center flex-wrap gap-2  text-sm bg-gray-700 text-white p-2 ">
+                <div class="w-max-content"> Comercial Juansil Spa. Derechos reservados {{date('Y')}} </div>
+                <div  class="w-max-content"> Sistema comercial realizado por <div class="inline-block underline cursor-pointer font-bold tracking-widest transform hover:scale-110"> Vonaltein </div>
             </div>
+            
         </footer>
 
         {{-- ALERTAS --}}
