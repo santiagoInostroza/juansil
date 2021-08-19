@@ -144,41 +144,47 @@
                             <div class="flex justify-start items-center  min-w-max-content" >
                                 @if ($product->image)
                                     <figure>
-                                        <img class="h-28 w-20 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
+                                        <img class="h-32 w-24 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
                                     </figure>
                                 @endif
                                 <div class="flex flex-col gap-2">
                                     <div class="text-sm text-gray-900 font-bold py-1">{{$product->name}}</div>
 
-                                <div class="text-sm text-gray-500  flex justify-start items-center relative" 
-                                    x-data="{ 
-                                        change : true, 
-                                        product_id: '',
-                                        save(){
-                                            brand = this.$refs.brand;                                            
-                                            this.$wire.saveBrand(this.product_id,brand.value).then(element=> this.change=true); 
-                                        }, 
-                                    }" x-init=" product_id = {{$product->id}} ;">
-                                    <div class="py-1">Marca: </div>
-                                    <div @dblclick="change=false" x-show="change" class="cursor-pointer w-full" >{{ $product->brand->name }}</div>
-                                    <div wire:ignore x-show="!change" class="flex ml-12 items-center  gap-x-2 hidden absolute shadow-2xl" :class="{'hidden': change}">
-                                        <select x-ref="brand" class="select w-36" name="brand">
-                                            @foreach ($brands as $brand)
-                                                <option value="{{$brand->id}}" @if( $product->brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
-                                        <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="change=true"></i>
-                                        
+                                    <div class="text-sm text-gray-500  flex justify-start items-center relative" 
+                                        x-data="{ 
+                                            change : true, 
+                                            edit: false,
+                                            product_id: '',
+                                            save(){
+                                                brand = this.$refs.brand;                                            
+                                                this.$wire.saveBrand(this.product_id,brand.value).then(element=> this.change=true); 
+                                            }, 
+                                        }" x-init=" product_id = {{$product->id}} ;">
+                                        <div class="py-1">Marca: </div>
+
+                                        <div class="flex justify-between gap-4" @mouseleave="edit = false">                                            
+                                            <div @dblclick="change=false" x-show="change" class="cursor-pointer w-full pl-2" @mouseenter="edit = true"> {{ $product->brand->name }}</div>
+                                            <div x-show="edit" class="cursor-pointer "  @click="change=false"><i class="fas fa-pen"></i></div>
+                                        </div>
+
+                                        <div wire:ignore x-show="!change" class="flex ml-12 items-center  gap-x-2 hidden absolute shadow-2xl" :class="{'hidden': change}">
+                                            <select x-ref="brand" class="select w-36" name="brand">
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{$brand->id}}" @if( $product->brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
+                                            <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="change=true"></i>
+                                            
+                                        </div>
                                     </div>
-                                </div>
 
 
                                     <div class="text-sm text-gray-500 py-1">
-                                    Formato: {{$product->formato}} un. 
+                                        Formato: {{$product->formato}} un. 
                                     </div>
                                     <div class="text-sm text-gray-500 py-1">
-                                    Categoria: {{$product->category->name}}
+                                        Categoria: {{$product->category->name}}
                                     </div>
                                 </div>
                             </div>
