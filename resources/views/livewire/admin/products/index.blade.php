@@ -140,7 +140,7 @@
                              </div>
                          </td>
                         {{-- NOMBRE --}}
-                        <td class="px-6 py-4 w-full">
+                        <td class="pl-1 py-4 w-full">
                             <div class="flex justify-start items-center  min-w-max-content" >
                                 @if ($product->image)
                                     <figure>
