@@ -140,52 +140,164 @@
                              </div>
                          </td>
                         {{-- NOMBRE --}}
-                        <td class="px-6 py-4 ">
+                        <td class="px-6 py-4 w-full">
                             <div class="flex justify-start items-center  min-w-max-content" >
                                 @if ($product->image)
                                     <figure>
                                         <img class="h-32 w-24 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
                                     </figure>
                                 @endif
-                                <div class="flex flex-col gap-2">
-                                    <div class="text-sm text-gray-900 font-bold py-1">{{$product->name}}</div>
 
-                                    <div class="text-sm text-gray-500  flex justify-start items-center relative" 
+                                <div class="grid w-full">
+
+
+                                    {{-- NOMBRE --}}
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                        @mouseenter="edit = true"
+                                        @mouseleave="edit = false"
+                                        @dblclick="openChange"
                                         x-data="{ 
                                             change : true, 
                                             edit: false,
                                             product_id: '',
+                                            openChange(){
+                                                this.change=false;
+                                                this.edit=false;
+                                            },
+                                            closeChange(){
+                                                this.change=true;
+                                                this.edit=true;
+                                            },
                                             save(){
-                                                brand = this.$refs.brand;                                            
-                                                this.$wire.saveBrand(this.product_id,brand.value).then(element=> this.change=true); 
+                                                name = this.$refs.name.value;                               
+                                                this.$wire.saveName(this.product_id,name).then(element=> this.change=true); 
+                                            }, 
+                                        }" x-init="product_id={{ $product->id }}">
+                                        <div class="flex justify-start gap-x-1">
+                                            <div>Nombre: </div>
+                                            <div  x-show="change"> {{ $product->name }}</div>
+                                            <div  x-show="!change" class="flex items-center hidden absolute top-0 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
+                                                <x-jet-input x-ref="name" name="name" class="p-1" value="{{ $product->name }}"/>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                            </div>
+                                        </div>                                     
+                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                    </div>
+
+
+                                    {{-- MARCA --}}
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                        @dblclick="openChange" 
+                                        @mouseenter="edit = true"  
+                                        @mouseleave="edit = false" 
+                                        x-data="{ 
+                                            change : true, 
+                                            edit: false,
+                                            product_id: '',
+                                            openChange(){
+                                                this.change=false;
+                                                this.edit=false;
+                                            },
+                                            closeChange(){
+                                                this.change=true;
+                                            },
+                                            save(){
+                                                brand = this.$refs.brand.value;                                            
+                                                this.$wire.saveBrand(this.product_id,brand).then(element=> this.change=true); 
                                             }, 
                                         }" x-init=" product_id = {{$product->id}} ;">
-                                        <div class="py-1">Marca: </div>
-
-                                        <div class="flex justify-between gap-4" @mouseleave="edit = false">                                            
-                                            <div @dblclick="change=false" x-show="change" class="cursor-pointer w-full pl-2" @mouseenter="edit = true"> {{ $product->brand->name }}</div>
-                                            <div x-show="edit" class="cursor-pointer "  @click="change=false"><i class="fas fa-pen"></i></div>
+                                        <div class="flex justify-start gap-x-1">
+                                            <div>Marca: </div>
+                                            <div x-show="change">{{ $product->brand->name }}</div>
+                                            <div x-show="!change" class="flex items-center hidden absolute top-1 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}" wire:ignore>
+                                                <select x-ref="brand" class="select w-40" name="brand">
+                                                    @foreach ($brands as $brand)
+                                                        <option value="{{$brand->id}}" @if( $product->brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                            </div>
                                         </div>
+                                        <div x-show="edit" class="cursor-pointer " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                    </div>
 
-                                        <div wire:ignore x-show="!change" class="flex ml-12 items-center  gap-x-2 hidden absolute shadow-2xl" :class="{'hidden': change}">
-                                            <select x-ref="brand" class="select w-36" name="brand">
-                                                @foreach ($brands as $brand)
-                                                    <option value="{{$brand->id}}" @if( $product->brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
-                                            <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="change=true"></i>
-                                            
+
+                                    {{-- FORMATO --}}
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                        @dblclick="openChange" 
+                                        @mouseenter="edit = true"  
+                                        @mouseleave="edit = false" 
+                                        x-data="{ 
+                                            change : true, 
+                                            edit: false,
+                                            product_id: '',
+                                            openChange(){
+                                                this.change=false;
+                                                this.edit=false;
+                                            },
+                                            closeChange(){
+                                                this.change=true;
+                                            },
+                                            save(){
+                                                formato = this.$refs.formato.value;                                            
+                                                this.$wire.saveFormato(this.product_id,formato).then(element=> this.change=true); 
+                                            }, 
+                                        }" x-init=" product_id = {{$product->id}} ;">
+                                        <div class="flex justify-start gap-x-1">
+                                            <div>Formato: </div>
+                                            <div x-show="change">{{ $product->formato }}</div>
+                                            <div x-show="!change" class="flex items-center hidden absolute top-0 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
+                                                <x-jet-input x-ref="formato" name="name" class="p-1" value="{{ $product->formato }}"/>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                            </div>
                                         </div>
+                                        <div x-show="edit" class="cursor-pointer" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
 
-                                    <div class="text-sm text-gray-500 py-1">
-                                        Formato: {{$product->formato}} un. 
+                                    {{-- CATEGORIA --}}
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                        @dblclick="openChange" 
+                                        @mouseenter="edit = true"  
+                                        @mouseleave="edit = false" 
+                                        x-data="{ 
+                                            change : true, 
+                                            edit: false,
+                                            product_id: '',
+                                            openChange(){
+                                                this.change=false;
+                                                this.edit=false;
+                                            },
+                                            closeChange(){
+                                                this.change=true;
+                                            },
+                                            save(){
+                                                categoria = this.$refs.categoria.value;                                            
+                                                this.$wire.saveCategoria(this.product_id,categoria).then(element=> this.change=true); 
+                                            }, 
+                                        }" x-init=" product_id = {{$product->id}} ;">
+                                        <div class="flex justify-start gap-x-1">
+                                            <div>Categoria: </div>
+                                            <div x-show="change">{{ $product->category->name }}</div>
+                                            <div x-show="!change" class="flex items-center hidden absolute top-1 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
+                                                <select x-ref="categoria" class="select w-40 p-2" name="brand">
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{$category->id}}" @if( $product->category_id == $category->id) selected @endif>{{$category->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                            </div>
+                                        </div>
+                                        <div x-show="edit" class="cursor-pointer" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
-                                    <div class="text-sm text-gray-500 py-1">
-                                        Categoria: {{$product->category->name}}
-                                    </div>
+
+
+                               
+                                
                                 </div>
                             </div>
                         </td>
