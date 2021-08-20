@@ -25,7 +25,7 @@
                  <thead class="bg-gray-50">
                      <tr>
                          {{-- ID --}}
-                         <th  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'products.id' ) font-bold text-gray-700 @endif" style="" wire:click="order('products.id')">
+                         <th  class="pl-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'products.id' ) font-bold text-gray-700 @endif" style="" wire:click="order('products.id')">
                              <div class="flex justify-center items-center ">
                                  <div>Id</div>
                                  <div class="pl-2">  
@@ -134,7 +134,7 @@
                     @foreach ($products as $product)
                      <tr>
                          {{-- ID --}}
-                         <td class="px-6 py-4 whitespace-nowrap">
+                         <td class="pl-1 py-4 whitespace-nowrap">
                              <div class="flex items-center">
                                  {{$product->id}}
                              </div>
@@ -144,7 +144,7 @@
                             <div class="flex justify-start items-center  min-w-max-content" >
                                 @if ($product->image)
                                     <figure>
-                                        <img class="h-32 w-24 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
+                                        <img class="h-32 w-20 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
                                     </figure>
                                 @endif
 
