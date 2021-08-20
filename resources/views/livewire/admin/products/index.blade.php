@@ -302,13 +302,13 @@
                                     @endforeach
                                 </div>
                         
-                                <template x-if="true">
-                                    <select x-ref="tags" class="selectMultiple w-40 p-2" name="tags[]" multiple="multiple">
+                               
+                                    <select x-ref="tags" class="selectMultiple w-40 p-2" name="tags[]" multiple="multiple" wire:ignore>
                                         @foreach ($tags as $tag)
                                             <option  value="{{$tag->id}}" @if( $product->tags->contains($tag->id) ) selected @endif>{{$tag->name}}</option>
                                         @endforeach
                                     </select>
-                                </template>
+                                
                             </div>
                     
                            
