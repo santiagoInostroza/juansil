@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
+use App\Models\Tag;
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
 
 class Index extends Component{
     public $search;
@@ -19,8 +20,9 @@ class Index extends Component{
         $products = Product::where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction)->get();
         $brands= Brand::all();
         $categories= Category::all();
+        $tags= Tag::all();
 
-        return view('livewire.admin.products.index', compact('products','brands','categories'));
+        return view('livewire.admin.products.index', compact('products','brands','categories','tags'));
     }
     
     public function order($sort){
@@ -73,6 +75,22 @@ class Index extends Component{
             'title' => "El formato ha sido cambiado",
         ]); 
     }
+
+    public function removeTag($product_id , $tag_id){
+        $tag = Tag::find($tag_id);
+       
+        $product = Product::find($product_id);
+        $product->tags()->detach($tag_id);
+        $product->save();
+
+        $this->dispatchBrowserEvent('alerta', [
+            'msj' =>  "Se ha eliminado la etiqueta $tag->name",
+            'icon' => 'success',
+            'title' => "Etiqueta eliminada",
+        ]); 
+    }
+
+
 
 
 }

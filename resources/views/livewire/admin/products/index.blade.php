@@ -135,22 +135,19 @@
                      <tr>
                          {{-- ID --}}
                          <td class="pl-1 py-4 whitespace-nowrap">
-                             <div class="flex items-center">
+                             <div class="flex items-center font-bold text-gray-600">
                                  {{$product->id}}
                              </div>
                          </td>
                         {{-- NOMBRE --}}
                         <td class="pl-1 py-4 w-full">
-                            <div class="flex justify-start items-center  min-w-max-content" >
+                            <div class="flex justify-start items-center  min-w-max-content gap-2" >
                                 @if ($product->image)
                                     <figure>
                                         <img class="h-32 w-20 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
                                     </figure>
                                 @endif
-
                                 <div class="grid w-full">
-
-
                                     {{-- NOMBRE --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
                                         @mouseenter="edit = true"
@@ -173,10 +170,10 @@
                                                 this.$wire.saveName(this.product_id,name).then(element=> this.change=true); 
                                             }, 
                                         }" x-init="product_id={{ $product->id }}">
-                                        <div class="flex justify-start gap-x-1">
-                                            <div>Nombre: </div>
+                                        <div class="flex justify-start gap-x-1 h-6">
+                                           
                                             <div  x-show="change"> {{ $product->name }}</div>
-                                            <div  x-show="!change" class="flex items-center hidden absolute top-0 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
+                                            <div  x-show="!change" class="flex items-center hidden absolute top-1 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
                                                 <x-jet-input x-ref="name" name="name" class="p-1" value="{{ $product->name }}"/>
                                                 <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
@@ -184,7 +181,6 @@
                                         </div>                                     
                                         <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
-
 
                                     {{-- MARCA --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
@@ -220,9 +216,8 @@
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
-
 
                                     {{-- FORMATO --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
@@ -254,9 +249,8 @@
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
-
 
                                     {{-- CATEGORIA --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
@@ -292,31 +286,33 @@
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
-                                    </div>
+                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                    </div> 
 
-
-                               
-                                
                                 </div>
                             </div>
                         </td>
                          {{-- ETIQUETAS --}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <ul class="grid text-sm">
-                                @foreach ($product->tags as $tag)
-                                    <li class="min-w-max-content w-full flex justify-between p-1 gap-1 hover:bg-gray-100 rounded-full">
-                                        <div >{{$tag->name}}</div>
-                                        <i class="far fa-trash-alt p-1 cursor-pointer"></i>
-                                     </li>
-                                @endforeach
-                               
-                                <div class="p-1 cursor-pointer border rounded-full flex justify-center items-center gap-2" >
-                                    <i class="fas fa-plus"></i> 
-                                    <div> Agregar</div>
+
+                            <div x-data="{selectedTags: '' }">
+                                <div class="flex flex-wrap items-center justify-start">
+                                    @foreach ($product->tags as $tag)
+                                    <div  class="p-1 border rounded-full bg-orange-200 mx-1">{{$tag->name}}</div>
+                                    @endforeach
                                 </div>
-                              
-                            </ul>
+                        
+                                <template x-if="true">
+                                    <select x-ref="tags" class="selectMultiple w-40 p-2" name="tags[]" multiple="multiple">
+                                        @foreach ($tags as $tag)
+                                            <option  value="{{$tag->id}}" @if( $product->tags->contains($tag->id) ) selected @endif>{{$tag->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </template>
+                            </div>
+                    
+                           
+                     
                          </td>
                          {{-- Description --}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

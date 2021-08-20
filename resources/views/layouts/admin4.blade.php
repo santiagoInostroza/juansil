@@ -522,6 +522,10 @@
         $(document).ready(function() {
             $('.select').select2();
         });
+
+        $(document).ready(function() {
+    $('.selectMultiple').select2();
+});
     </script>
 </body>
 
