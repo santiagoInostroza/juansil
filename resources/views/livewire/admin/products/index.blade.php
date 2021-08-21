@@ -1,13 +1,8 @@
-<div>
-
-   
-
-  
-  
-
-    <div x-data="productsMain()">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-600 p-4">PRODUCTOS</h1>
+<div x-data="productsMain()">
+    <div>
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
+            <x-jet-button @click="openCreateProduct" >Agregar Producto</x-jet-button>
         </div>
         <div class="my-4">
             <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
@@ -302,12 +297,11 @@
                                     @endforeach
                                 </div>
                         
-                               
-                                    <select x-ref="tags" class="selectMultiple w-40 p-2" name="tags[]" multiple="multiple" wire:ignore>
-                                        @foreach ($tags as $tag)
-                                            <option  value="{{$tag->id}}" @if( $product->tags->contains($tag->id) ) selected @endif>{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
+                                <select x-ref="tags" class="selectMultiple w-40 p-2" name="tags[]" multiple="multiple" wire:ignore>
+                                    @foreach ($tags as $tag)
+                                        <option  value="{{$tag->id}}" @if( $product->tags->contains($tag->id) ) selected @endif>{{$tag->name}}</option>
+                                    @endforeach
+                                </select>
                                 
                             </div>
                     
@@ -317,7 +311,8 @@
                          {{-- Description --}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                              <div>
-                                 <textarea name="" > {{$product->description}}</textarea>
+                                {{$product->salePrices
+                                }}
                              </div>
                            
                          </td>
@@ -379,12 +374,23 @@
         </div>
     </div>
 
+    <div x-show="showCreateProduct" class="hidden" :class="{'hidden' : !showCreateProduct }">
+            @livewire('admin.products.create-product', ['user' => ''] )
+    </div>
+
     <div>
         @push('js')
         <script>
             function productsMain(){
                 return {
                     showRemoveTag:false,
+                    showCreateProduct: @entangle('showCreateProduct'),
+                    openCreateProduct(){
+                        this.showCreateProduct = true;
+                    },
+                    closeCreateProduct(){
+                        this.showCreateProduct = false;
+                    },
                     openShowRemoveTag(){
                         this.showRemoveTag = true;
                     },

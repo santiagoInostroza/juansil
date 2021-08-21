@@ -1,6 +1,6 @@
 @props(['id' => 'search', 'value' => 0, 'placeholder' => 'Buscar...','items'])
 
-<div  wire:ignore class="font-sans leading-normal tracking-normal bg-grey-100 h-full">    
+<div  wire:ignore class="font-sans leading-normal tracking-normal bg-grey-100">    
     <div  x-data="dropdown()" x-init=" id='{{$id}}';value= {{$value}}; items= {{ $items }}; setName();" class="mx-auto " @click.away="close()">    
         <div>
             <x-jet-input 

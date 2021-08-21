@@ -14,6 +14,7 @@ class Index extends Component{
     public $direction = "asc";
 
     public $openBrand = false;
+    public $showCreateProduct = false;
 
     public function render(){
 

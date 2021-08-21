@@ -133,5 +133,5 @@
 {{-- PRECIOS --}}
 <p>Precios</p>
 <div class="form-group border p-2">
-    <livewire:agregar-precios>
+    {{-- <livewire:agregar-precios> --}}
 </div>

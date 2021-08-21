@@ -33,6 +33,9 @@
     {{-- SELECT2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    {{-- CKEDITOR --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 </head>
 
 <body>
@@ -166,7 +169,7 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/products.index*')) bg-white @endif">
+                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/productos*')) bg-white @endif">
                             <a href="{{ route('admin.products.index') }}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
@@ -524,9 +527,19 @@
         });
 
         $(document).ready(function() {
-    $('.selectMultiple').select2();
-});
+            $('.selectMultiple').select2();
+        });
     </script>
+
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+        } );
+    </script>
+
 </body>
 
 </html>
