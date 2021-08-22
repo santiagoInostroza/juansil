@@ -15,6 +15,7 @@ class Index extends Component{
 
     public $openBrand = false;
     public $showCreateProduct = false;
+    public $productStatus;
 
     public function render(){
 
@@ -89,6 +90,20 @@ class Index extends Component{
             'icon' => 'success',
             'title' => "Etiqueta eliminada",
         ]); 
+    }
+
+    public function setStatus($product_id, $valor){
+        $product = Product::find($product_id);
+        $product->status = $valor; 
+        $product->save();
+       
+    }
+
+    public function setSpecialSalePrice($product_id, $valor){
+        $product = Product::find($product_id);
+        $product->special_sale_price = $valor; 
+        $product->save();
+       
     }
 
 

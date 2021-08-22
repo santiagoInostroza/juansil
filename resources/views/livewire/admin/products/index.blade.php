@@ -63,9 +63,9 @@
                              </div>
                          </th>
                          {{-- Description --}}
-                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
+                         <th class=" py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
                              <div class="flex justify-center items-center ">
-                                 DESCRIPTION
+                                 DESCRIPCION
                              </div>
                          </th>
                          {{-- Stock --}}
@@ -76,15 +76,7 @@
                                      STOCK
                                  </div>
                                  <div class="pl-2"> 
-                                     {{-- @if ($sort == 'sales.total' )
-                                         @if ($direction == 'asc')
-                                             <i class="fas fa-sort-up"></i>
-                                         @else
-                                             <i class="fas fa-sort-down"></i>
-                                         @endif
-                                     @else
-                                         <i class="fas fa-sort"></i> 
-                                     @endif --}}
+                                  
                                  </div>
                              </div>
                          </th>
@@ -125,7 +117,7 @@
                      </tr>
                  </thead>
                  
-                 <tbody class="bg-white divide-y divide-gray-200">
+                 <tbody class="bg-white divide-y divide-gray-200 text-gray-600">
                     @foreach ($products as $product)
                      <tr>
                          {{-- ID --}}
@@ -135,16 +127,13 @@
                              </div>
                          </td>
                         {{-- NOMBRE --}}
-                        <td class="pl-1 py-4 w-full">
-                            <div class="flex justify-start items-center  min-w-max-content gap-2" >
+                        <td class="px-6 py-4  whitespace-nowrap ">
+                            <div class="flex justify-between items-center gap-4 w-max-content" >
                                 @if ($product->image)
-                                    <figure>
-                                        <img class="h-32 w-20 object-cover" src="{{ Storage::url($product->image->url) }}" alt="">    
-                                    </figure>
+                                    <figure><img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt=""></figure>
                                 @endif
                                 <div class="grid w-full">
-                                    {{-- NOMBRE --}}
-                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative w-full p-1 px-2 rounded " 
                                         @mouseenter="edit = true"
                                         @mouseleave="edit = false"
                                         @dblclick="openChange"
@@ -167,18 +156,18 @@
                                         }" x-init="product_id={{ $product->id }}">
                                         <div class="flex justify-start gap-x-1 h-6">
                                            
-                                            <div  x-show="change"> {{ $product->name }}</div>
+                                            <div  x-show="change" class="w-max-content font-bold"> {{ $product->name }}</div>
                                             <div  x-show="!change" class="flex items-center hidden absolute top-1 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
                                                 <x-jet-input x-ref="name" name="name" class="p-1" value="{{ $product->name }}"/>
                                                 <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>                                     
-                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
                                     {{-- MARCA --}}
-                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full" 
                                         @dblclick="openChange" 
                                         @mouseenter="edit = true"  
                                         @mouseleave="edit = false" 
@@ -211,11 +200,11 @@
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
                                     {{-- FORMATO --}}
-                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full" 
                                         @dblclick="openChange" 
                                         @mouseenter="edit = true"  
                                         @mouseleave="edit = false" 
@@ -244,11 +233,11 @@
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
                                     {{-- CATEGORIA --}}
-                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative p-2 w-full" 
+                                    <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full" 
                                         @dblclick="openChange" 
                                         @mouseenter="edit = true"  
                                         @mouseleave="edit = false" 
@@ -281,7 +270,7 @@
                                                 <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer hidden" :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
                                     </div> 
 
                                 </div>
@@ -293,16 +282,9 @@
                             <div x-data="{selectedTags: '' }">
                                 <div class="flex flex-wrap items-center justify-start">
                                     @foreach ($product->tags as $tag)
-                                    <div  class="p-1 border rounded-full bg-orange-200 mx-1">{{$tag->name}}</div>
+                                        <div  class="p-1 border rounded-full bg-orange-200 mx-1">{{$tag->name}}</div>
                                     @endforeach
-                                </div>
-                        
-                                <select x-ref="tags" class="selectMultiple w-40 p-2" name="tags[]" multiple="multiple" wire:ignore>
-                                    @foreach ($tags as $tag)
-                                        <option  value="{{$tag->id}}" @if( $product->tags->contains($tag->id) ) selected @endif>{{$tag->name}}</option>
-                                    @endforeach
-                                </select>
-                                
+                                </div>                                
                             </div>
                     
                            
@@ -310,11 +292,23 @@
                          </td>
                          {{-- Description --}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                             <div>
-                                {{$product->salePrices
-                                }}
-                             </div>
-                           
+                            @if ( $product->description )     
+                                <div  x-data="{
+                                    open:false,
+                                    }"  @mouseenter="open = true" @mouseleave="open=false" >
+                                    <i class="fas fa-comment cursor-pointer"></i>
+                                    <div x-show="open"
+                                        x-transition:enter="transition ease-out duration-1000" 
+                                        x-transition:enter-start="opacity-0 transform scale-90"  
+                                        x-transition:enter-end="opacity-100 transform scale-100"  
+                                        x-transition:leave="transition ease-in duration-1000"  
+                                        x-transition:leave-start="opacity-100 transform scale-100"  
+                                        x-transition:leave-end="opacity-0 transform scale-90"
+                                        class="hidden absolute shadow-lg rounded border p-4 bg-white transform -translate-x-6/12 -translate-y-6/12 z-10" :class="{'hidden': !open}">
+                                        {!!$product->description!!}
+                                    </div>
+                                </div>
+                            @endif                                   
                          </td>
                           {{--Stock--}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -323,25 +317,41 @@
                          </td>
                           {{-- ESTADO --}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                           
-                                            
-                                 @if ($product->status)
-                                     <div class="text-green-600 font-bold flex items-center gap-2">
-                                         Activo <div class="fas fa-check"></div>
-                                     </div>
-                                     <button class="text-sm text-gray-600" wire:click="desactivar({{ $product->id }})">Desactivar</button>
-                                 @else
-                                     <div class="text-red-400">
-                                         Inactivo
-                                     </div>
-                                     <button class="text-sm text-gray-600" wire:click="activar({{ $product->id }})">Activar</button>
-                                 @endif
-                           
+
+                            <div x-data="{valor:''}" x-init="valor = {{$product->status}}">
+                                <label class="switch ">
+                                    <input x-model="valor"  type="checkbox" @if($product->status) checked @endif @change="$wire.setStatus({{ $product->id }},valor)">
+                                    <span class="slider round"></span> 
+                                </label>
+                         
+                                @if ($product->status)
+                                    <div class="text-gray-600 w-max-content">Activo</div>
+                                @else
+                                    <div class="text-gray-200">Inactivo</div>
+                                @endif
+                            </div>
+
                          </td>
                           {{-- Precio ESPECIAL  --}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm ">
-                            <div>
-                                ${{ number_format($product->special_sale_price,0,',','.')}}
+                         <td class="px-6 py-4 whitespace-nowrap">
+                           
+                            <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " @mouseenter="openEdit=true" @mouseleave="openEdit=false">
+                                <div x-show="!open" class="relative p-2 pr-6 font-bold w-20 hover:bg-gray-100 rounded hover:border">
+                                    ${{ number_format($product->special_sale_price,0,',','.')}}
+                                    <div x-show="openEdit" class="hidden absolute transform right-0 translate-x-4 top-0 p-2 bg-white cursor-pointer shadow border rounded" :class="{'hidden':!openEdit}"  @click=" open=true;  setTimeout(() => { $refs.valor.focus(); }, 200);">
+                                        <i class=" fas fa-pen" ></i>
+                                    </div>
+                                </div>
+                                <div x-show="open" x-on:click.away="open = false" class="hidden relative" :class="{'hidden' : !open}">
+                                    <x-jet-input x-ref="valor" x-model="valor" type='number' class="w-20"></x-jet-input>
+                                    <div class="absolute top-1 right-6" wire:loading>
+                                        <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
+                                    </div>
+                                    <div x-ref="btns" class="absolute w-20 flex justify-around items-center">
+                                        <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="$wire.setSpecialSalePrice({{ $product->id }},valor).then(elmnt=>open=false)"></i>
+                                        <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="open=false"></i>
+                                    </div>
+                                </div>                                    
                             </div>
                          </td>
                           {{--  FECHA PAGO --}}
