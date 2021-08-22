@@ -125,7 +125,7 @@ class CreateSale extends Component{
     ];
 
     public function mount(){
-       $this->fecha = Carbon::now()->toDateString();
+       $this->fecha = Carbon::now()->locale('es_ES')->timezone('America/Santiago')->toDateString();
        $this->fecha_entrega = Carbon::now()->tomorrow()->toDateString();
     }
 
