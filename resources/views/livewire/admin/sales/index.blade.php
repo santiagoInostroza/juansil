@@ -87,6 +87,25 @@
                             </div>
                         </div>
                     </th>
+                       {{-- FECHA VENTA --}}
+                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.date' ) font-bold text-gray-700 @endif " wire:click="order('sales.date')">
+                        <div class="flex justify-center items-center ">
+                            <div>
+                                Fecha Venta 
+                            </div>
+                            <div class="pl-2"> 
+                                @if ($sort == 'sales.date' )
+                                    @if ($direction == 'asc')
+                                        <i class="fas fa-sort-up"></i>
+                                    @else
+                                        <i class="fas fa-sort-down"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort"></i> 
+                                @endif
+                            </div>
+                        </div>
+                    </th>
                     {{-- ESTADO PAGO --}}
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.payment_status' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_status')">
                         
@@ -127,27 +146,9 @@
                             </div>
                         </div>
                     </th>
-                    {{-- FECHA VENTA --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.date' ) font-bold text-gray-700 @endif " wire:click="order('sales.date')">
-                        <div class="flex justify-center items-center ">
-                            <div>
-                                Fecha Venta 
-                            </div>
-                            <div class="pl-2"> 
-                                @if ($sort == 'sales.date' )
-                                    @if ($direction == 'asc')
-                                        <i class="fas fa-sort-up"></i>
-                                    @else
-                                        <i class="fas fa-sort-down"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort"></i> 
-                                @endif
-                            </div>
-                        </div>
-                    </th>
+                 
                     {{-- FECHA DE PAGO --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.payment_date' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_date')">
+                    {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.payment_date' ) font-bold text-gray-700 @endif " wire:click="order('sales.payment_date')">
                         <div class="flex justify-center items-center ">
                             <div>
                                 Fecha Pago 
@@ -164,9 +165,9 @@
                                 @endif
                             </div>
                         </div>
-                    </th>
+                    </th> --}}
                     {{-- VENTA POR --}}
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.user_created' ) font-bold text-gray-700  @endif " wire:click="order('sales.user_created')">
+                    {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'sales.user_created' ) font-bold text-gray-700  @endif " wire:click="order('sales.user_created')">
                         <div class="flex justify-center items-center ">
                             <div>
                                 VentaPor
@@ -183,7 +184,7 @@
                                 @endif
                             </div>
                         </div>
-                    </th>
+                    </th> --}}
                     {{-- COMENTARIOS --}}
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
                         <div>Comentarios</div>
@@ -220,6 +221,13 @@
                     <td class="px-6 py-4 whitespace-nowrap text-xl text-gray-500">
                         ${{number_format($sale->total,0,',','.')}}
                     </td>
+
+                      {{--  FECHA VENTA  --}}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $this->fecha($sale->date)->format('d-m-Y') }}
+                        <div class="w-max-content">  por {{ ($sale->created_by()) ? $sale->created_by()->name:"" }}</div>
+                    </td>
+
                      {{-- ESTADO DE PAGO --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_status == 1)
@@ -229,6 +237,9 @@
                             </div> 
                         @elseif ($sale->payment_status == 2)
                             <div class=""> 
+                                @if ($sale->payment_date!="")
+                                    <div>{{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }}</div>
+                                @endif
                                 <span class="text-green-500">Abonado</span> 
                                 ${{number_format($sale->payment_amount,0,',','.')}} 
                             </div> 
@@ -238,6 +249,9 @@
                             </div> 
                             
                         @elseif ($sale->payment_status == 3)
+                            @if ($sale->payment_date != "")
+                               <div> {{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }} </div>
+                            @endif
                             <i class="fas fa-check text-green-500 d-block"></i> Pagado
                         @endif
                     </td>
@@ -246,8 +260,8 @@
                         @if ($sale->delivery == 1)
                             @if ($sale->delivery_stage == 1)
                             <div>
-
-                                 {{date("d-m-Y",strtotime($sale->delivery_date))}}
+                                 {{-- {{date("d-m-Y",strtotime($sale->delivery_date))}} --}}
+                                 {{ $this->fecha($sale->delivery_date)->format('d-m-Y') }}
                             </div>
                             <div>
                                 <i class="fas fa-check text-green-500"></i> Entregado
@@ -273,35 +287,36 @@
                             </div>
                         @endif
                     </td>
-                     {{--  FECHA VENTA  --}}
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{-- {{date("d-m-Y",strtotime($sale->date))}} --}}
-                        {{ $this->fecha($sale->date)->format('d-m-Y') }}
-                    </td>
+                   
                      {{--  FECHA PAGO --}}
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_date!="" && $sale->payment_status == 3)
-                            {{-- {{ date("d-m-Y",strtotime($sale->payment_date)) }} --}}
                             {{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }}
                         @endif
                         @if ($sale->payment_date!="" && $sale->payment_status == 2)
-                           <div>
-                                Abonado   
-                            </div>
-                            {{-- {{date("d-m-Y",strtotime($sale->payment_date))}} --}}
+                            <div>Abonado</div>
                             {{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }}
                         @endif
-                       
-                    </td>
+                    </td> --}}
+
                      {{--  VENTA POR  --}}
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <div> {{ ($sale->created_by()) ? $sale->created_by()->name:"" }}</div>
-                    </td>
+                    </td> --}}
+
                      {{--  COMENTARIOS  --}}
                     <td class="px-6 py-4 text-sm text-gray-500">
-                        <div class="w-24 text-sm"> {{ $sale->comments }}
-                           
+                        <div class="w-24 text-sm"> 
+                            @if ( $sale->comments)    
+                            <x-tooltip.tooltip>
+                                <x-slot name="tooltip">
+                                    {{ $sale->comments }}
+                                </x-slot>
+                                <i class="far fa-comment"></i>
+                            </x-tooltip.tooltip>
+                            @endif
                         </div>
+                       
                     </td>
                     {{-- ACCION --}}
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
