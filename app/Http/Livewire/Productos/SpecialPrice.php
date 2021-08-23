@@ -12,14 +12,18 @@ class SpecialPrice extends Component{
 
     public $showCart = false;
 
-    public $onlyStock= false;
+    public $onlyStock= true;
 
     protected $listeners = (['render','setCantidad','addToCart','removeFromCart','buscar']);
 
     public function render(){
 
-        
-        $products = Product::where('name','like','%' . $this->search . '%')->where('stock','>', 0)->get();
+        $query = Product::where('name','like','%' . $this->search . '%');
+
+        if($this->onlyStock){
+            $products = $query->where('stock','>', 0);
+        }
+        $products = $query->get();
 
         return view('livewire.productos.special-price',compact('products'));
     }
