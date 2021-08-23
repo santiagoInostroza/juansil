@@ -275,18 +275,21 @@
                     </td>
                      {{--  FECHA VENTA  --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{date("d-m-Y",strtotime($sale->date))}}
+                        {{-- {{date("d-m-Y",strtotime($sale->date))}} --}}
+                        {{ $this->fecha($sale->date)->format('d-m-Y') }}
                     </td>
                      {{--  FECHA PAGO --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($sale->payment_date!="" && $sale->payment_status == 3)
-                            {{date("d-m-Y",strtotime($sale->payment_date))}}
+                            {{-- {{ date("d-m-Y",strtotime($sale->payment_date)) }} --}}
+                            {{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }}
                         @endif
                         @if ($sale->payment_date!="" && $sale->payment_status == 2)
                            <div>
                                 Abonado   
                             </div>
-                            {{date("d-m-Y",strtotime($sale->payment_date))}}
+                            {{-- {{date("d-m-Y",strtotime($sale->payment_date))}} --}}
+                            {{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }}
                         @endif
                        
                     </td>
