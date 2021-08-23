@@ -16,10 +16,18 @@ class Index extends Component{
     public $openBrand = false;
     public $showCreateProduct = false;
     public $productStatus;
+    public $onlyStock = true;
 
     public function render(){
 
-        $products = Product::where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction)->get();
+        $query = Product::where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction);
+        if($this->onlyStock){
+            $products= $query->where('stock','>',0);
+        }
+        $products = $query->get();
+
+
+
         $brands= Brand::all();
         $categories= Category::all();
         $tags= Tag::all();

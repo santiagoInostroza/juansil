@@ -8,7 +8,11 @@
             <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
         </div>
         <div class="my-4 p-4 border rounded">
-             FILTROS
+            Solo Stock
+             <label class="switch">
+                <input id="onlyStock" type="checkbox" wire:model="onlyStock">
+                <span class="slider round"></span>
+            </label>
         </div>
         <div>
 
