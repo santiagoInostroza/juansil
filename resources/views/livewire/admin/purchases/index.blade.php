@@ -119,7 +119,7 @@
 
 
     {{-- CREAR NUEVA COMPRA --}}
-    <div  class="hidden" :class=" {'hidden' :  !openNewPurchase  }" class="card" @keyup.shift.a.window="openItemIf()">
+    <div  class="hidden" :class=" {'hidden' :  !openNewPurchase  }" class="card" x-on:keyup.shift.a.window="openItemIf()">
         <x-modal.modal2>
             <x-slot name="titulo">
                 <div class="flex items-end justify-between uppercase">
@@ -242,35 +242,35 @@
                                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                                 <div  class="flex flex-col gap-2 mb-4">
                                                     <x-jet-label>Cantidad</x-jet-label>
-                                                    <x-jet-input wire:model.defer="cantidad" x-ref="cantidad" type="number" @keyup="calcularCantidadTotal"></x-jet-input>
+                                                    <x-jet-input wire:model.defer="cantidad" x-ref="cantidad" type="number" x-on:keyup="calcularCantidadTotal"></x-jet-input>
                                                     <x-jet-input-error for="cantidad" class="" />
                                                 
                                                 </div>
                                                 <div class="flex flex-col gap-2 mb-4">
                                                     <x-jet-label>Cantidad por caja</x-jet-label>
-                                                    <x-jet-input wire:model.defer="cantidad_por_caja" x-ref="cantidad_por_caja"  type="number" @keyup="calcularCantidadTotal"></x-jet-input>
+                                                    <x-jet-input wire:model.defer="cantidad_por_caja" x-ref="cantidad_por_caja"  type="number" x-on:keyup="calcularCantidadTotal"></x-jet-input>
                                                     <x-jet-input-error for="cantidad_por_caja" class="" />
                                                 </div>
                                         
                                         
                                             <div class="flex flex-col gap-2 mb-4">
                                                 <x-jet-label>Cantidad total</x-jet-label>
-                                                <x-jet-input wire:model.defer="cantidad_total" @keyup="calcularCantidad" x-ref="cantidad_total"  type="number"></x-jet-input>
+                                                <x-jet-input wire:model.defer="cantidad_total" x-on:keyup="calcularCantidad" x-ref="cantidad_total"  type="number"></x-jet-input>
                                                 <x-jet-input-error for="cantidad_total" class="" />
                                             </div>
                                             <div class="flex flex-col gap-2 mb-4">
                                                 <x-jet-label>precio</x-jet-label>
-                                                <x-jet-input  wire:model.defer="precio" x-ref="precio"  @keyup="calcularCantidadTotal" type="number"></x-jet-input>
+                                                <x-jet-input  wire:model.defer="precio" x-ref="precio"  x-on:keyup="calcularCantidadTotal" type="number"></x-jet-input>
                                                 <x-jet-input-error for="precio" class="" />
                                             </div>
                                             <div class="flex flex-col gap-2 mb-4">
                                                 <x-jet-label>precio por caja</x-jet-label>
-                                                <x-jet-input  wire:model.defer="precio_por_caja" id="precio_por_caja" x-model="precio_por_caja" x-ref="precio_por_caja" @keyup="calcularPrecio" type="number"></x-jet-input>
+                                                <x-jet-input  wire:model.defer="precio_por_caja" id="precio_por_caja" x-model="precio_por_caja" x-ref="precio_por_caja" x-on:keyup="calcularPrecio" type="number"></x-jet-input>
                                                 <x-jet-input-error for="precio_por_caja" class="" />
                                             </div>
                                             <div class="flex flex-col gap-2 mb-4">
                                                 <x-jet-label>precio total</x-jet-label>
-                                                <x-jet-input wire:model.defer="precio_total" @keyup="calcularPrecio2" x-ref="precio_total" type="number"></x-jet-input>
+                                                <x-jet-input wire:model.defer="precio_total" x-on:keyup="calcularPrecio2" x-ref="precio_total" type="number"></x-jet-input>
                                                 <x-jet-input-error for="precio_total" class="" />
                                             </div>
                                         </div>

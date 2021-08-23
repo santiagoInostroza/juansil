@@ -355,7 +355,7 @@
                 
                 <div class="flex justify-between uppercase items-end">
                     <h2 class="text-xl font-semibold text-gray-500 ml-10">Detalle de venta</h2>
-                    <i @click="open_show=false" class="fas fa-times block w-max-content cursor-pointer shadow p-5 hover:bg-gray-200 hover:shadow-2xl rounded-lg" ></i>
+                    <i x-on:click="open_show=false" class="fas fa-times block w-max-content cursor-pointer shadow p-5 hover:bg-gray-200 hover:shadow-2xl rounded-lg" ></i>
                 </div>
                     @if ($selected_sale)
                         <div class="px-10 py-2">
@@ -524,7 +524,7 @@
                         </div>
                     @endif
                     <div class="px-10 py-5 bg-gray-100 rounded-lg flex items-center justify-between">
-                        <x-jet-button @click="open_show=false">Cerrar</x-jet-button>
+                        <x-jet-button x-on:click="open_show=false">Cerrar</x-jet-button>
                     </div>
                
                

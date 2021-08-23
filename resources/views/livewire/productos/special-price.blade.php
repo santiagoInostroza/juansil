@@ -10,7 +10,7 @@
                 <h1 class=" text-2xl text-center py-4 uppercase text-gray-500 font-bold tracking-widest">
                     Precios Especiales
                 </h1>
-                <div class="p-4 rounded-full text-xl relative cursor-pointer" @click="openCart">
+                <div class="p-4 rounded-full text-xl relative cursor-pointer" x-on:click="openCart">
                     <i class="fas fa-shopping-cart text-gray-600"></i>
                     @if (session('totalProductosSpecial'))
                         <div class="rounded-full bg-red-600 p-1 px-2 text-white text-xs font-bold absolute right-10 top-4">{{ session('totalProductosSpecial') }}</div>
@@ -123,7 +123,7 @@
                 
                     <div class="flex justify-between items-center gap-4 border-b p-4">
                         <h2 class="text-xl font-bold text-gray-600">Detalle de compra</h2>
-                        <div @click="closeCart" class="cursor-pointer">
+                        <div x-on:click="closeCart" class="cursor-pointer">
                             <i class="fas fa-times"></i>
                         </div>
                     </div>

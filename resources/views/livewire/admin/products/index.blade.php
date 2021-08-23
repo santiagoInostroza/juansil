@@ -134,9 +134,9 @@
                                 @endif
                                 <div class="grid w-full">
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative w-full p-1 px-2 rounded " 
-                                        @mouseenter="edit = true"
-                                        @mouseleave="edit = false"
-                                        @dblclick="openChange"
+                                    x-on:mouseenter="edit = true"
+                                        x-on:mouseleave="edit = false"
+                                        x-on:dblclick="openChange"
                                         x-data="{ 
                                             change : true, 
                                             edit: false,
@@ -168,9 +168,9 @@
 
                                     {{-- MARCA --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full" 
-                                        @dblclick="openChange" 
-                                        @mouseenter="edit = true"  
-                                        @mouseleave="edit = false" 
+                                    x-on:dblclick="openChange" 
+                                    x-on:mouseenter="edit = true"  
+                                    x-on:mouseleave="edit = false" 
                                         x-data="{ 
                                             change : true, 
                                             edit: false,
@@ -205,9 +205,9 @@
 
                                     {{-- FORMATO --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full" 
-                                        @dblclick="openChange" 
-                                        @mouseenter="edit = true"  
-                                        @mouseleave="edit = false" 
+                                    x-on:dblclick="openChange" 
+                                    x-on:mouseenter="edit = true"  
+                                    x-on:mouseleave="edit = false" 
                                         x-data="{ 
                                             change : true, 
                                             edit: false,
@@ -238,9 +238,9 @@
 
                                     {{-- CATEGORIA --}}
                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full" 
-                                        @dblclick="openChange" 
-                                        @mouseenter="edit = true"  
-                                        @mouseleave="edit = false" 
+                                        x-on:dblclick="openChange" 
+                                        x-on:mouseenter="edit = true"  
+                                        x-on:mouseleave="edit = false" 
                                         x-data="{ 
                                             change : true, 
                                             edit: false,
@@ -297,7 +297,7 @@
                             @if ( $product->description )     
                                 <div  x-data="{
                                     open:false,
-                                    }"  @mouseenter="open = true" @mouseleave="open=false" >
+                                    }"  x-on:mouseenter="open = true" x-on:mouseleave="open=false" >
                                     <i class="fas fa-comment cursor-pointer"></i>
                                     <div x-show="open"
                                         x-transition:enter="transition ease-out duration-1000" 
@@ -337,7 +337,7 @@
                           {{-- Precio ESPECIAL  --}}
                          <td class="px-6 py-4 whitespace-nowrap">
                            
-                            <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " @mouseenter="openEdit=true" @mouseleave="openEdit=false">
+                            <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " x-on:mouseenter="openEdit=true" x-on:mouseleave="openEdit=false">
                                 <div x-show="!open" class="relative p-2 pr-6 font-bold w-20 hover:bg-gray-100 rounded hover:border">
                                     ${{ number_format($product->special_sale_price,0,',','.')}}
                                     <div x-show="openEdit" class="hidden absolute transform right-0 translate-x-4 top-0 p-2 bg-white cursor-pointer shadow border rounded" :class="{'hidden':!openEdit}"  x-on:click=" open=true;  setTimeout(() => { $refs.valor.focus(); }, 200);">

@@ -5,7 +5,7 @@
                 <h2 class="text-gray-600 font-bold text-xl px-6">
                         CREAR PRODUCTO
                 </h2>
-                <i @click="closeCreateProduct" class="fas fa-times p-2 transform hover:scale-110 hover:bg-red-500 hover:text-white rounded"></i>
+                <i x-on:click="closeCreateProduct" class="fas fa-times p-2 transform hover:scale-110 hover:bg-red-500 hover:text-white rounded"></i>
             </div>
         </x-slot>
         <div  class="relative p-4 px-6 max-w-screen-md">
@@ -155,7 +155,7 @@
                             
                                         @endforeach
                                     @endif
-                                    <x-jet-secondary-button @click="open=true">+ Agregar precio</x-jet-secondary-button>
+                                    <x-jet-secondary-button x-on:click="open=true">+ Agregar precio</x-jet-secondary-button>
                                 </div>
                             
                                 <div x-show="open">
@@ -166,17 +166,17 @@
                                         <div class="flex flex-col gap-4 p-4 rounded ">
                                             <x-jet-label>
                                                 Desde
-                                                <x-jet-input @keyup="calcular(1)"  type="number" x-ref="cantidad" wire:model.defer='cantidad' class="w-full"></x-jet-input>
+                                                <x-jet-input x-on:keyup="calcular(1)"  type="number" x-ref="cantidad" wire:model.defer='cantidad' class="w-full"></x-jet-input>
                                             </x-jet-label>
                             
                                             <x-jet-label>
                                                 Precio Unitario
-                                                <x-jet-input  @keyup="calcular(2)"  type="number"  x-ref="precio_unitario" wire:model.defer='precio_unitario' class="w-full"></x-jet-input>
+                                                <x-jet-input  x-on:keyup="calcular(2)"  type="number"  x-ref="precio_unitario" wire:model.defer='precio_unitario' class="w-full"></x-jet-input>
                                             </x-jet-label>
                             
                                             <x-jet-label>
                                                 Precio Total
-                                                <x-jet-input  @keyup="calcular(3)"  type="number"  x-ref="precio_total" wire:model.defer='precio_total' class="w-full"></x-jet-input>
+                                                <x-jet-input  x-on:keyup="calcular(3)"  type="number"  x-ref="precio_total" wire:model.defer='precio_total' class="w-full"></x-jet-input>
                                             </x-jet-label>
                             
                                             <x-slot name="footer">
@@ -267,7 +267,7 @@
 
             <div class="flex justify-end gap-8 mt-8">
                 <x-jet-button wire:click="save">Crear</x-jet-button>
-                <x-jet-button @click="closeCreateProduct">Cancelar</x-jet-button>
+                <x-jet-button x-on:click="closeCreateProduct">Cancelar</x-jet-button>
             </div>
 
         </div>
