@@ -64,6 +64,19 @@ class Index extends Component{
             'title' => "La marca ha sido cambiada",
         ]); 
     }
+    
+    public function saveCategoria($product_id , $category_id){
+        $product = Product::find($product_id);
+        $category = Category::find($category_id);
+        $oldCategory = $product->category->name;
+        $product->category_id = $category_id; 
+        $product->save();
+        $this->dispatchBrowserEvent('alerta', [
+            'msj' =>  "Se ha cambiado '$oldCategory' por '$category->name'",
+            'icon' => 'success',
+            'title' => "La marca ha sido cambiada",
+        ]); 
+    }
 
     public function saveFormato($product_id , $value){
        
