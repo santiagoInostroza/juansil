@@ -253,7 +253,9 @@
                                                 this.change=true;
                                             },
                                             save(){
-                                                categoria = this.$refs.categoria.value;                                            
+                                                categoria = this.$refs.categoria.value;     
+                                                console.log(categoria);
+                                                console.log({{$product->category_id}});
                                                 this.$wire.saveCategoria(this.product_id,categoria).then(element=> this.change=true); 
                                             }, 
                                         }" x-init=" product_id = {{$product->id}} ;">
