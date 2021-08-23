@@ -354,9 +354,28 @@
                                     </div>  
                                                             
                                 </div>
+                                <div class="w-max-content">
+                                 {{ $product->formato }} x  ${{ number_format($product->special_sale_price * $product->formato ,0,',','.') }}
+                                </div>
                                 @if (count($product->purchasePrices)>0)
-                                    <div class="text-red-400 px-2">
-                                        ${{ number_format( $product->special_sale_price - ( $product->purchasePrices->sum('precio') / count($product->purchasePrices)  ),0,',','.') }}    
+                    
+                                    <div class="text-red-400 px-2 cursor-pointer">
+                                        <x-tooltip.tooltip>
+                                            <x-slot name="tooltip">
+                                                Ganancia por unidad
+                                            </x-slot>
+                                            ${{ number_format( $product->special_sale_price - ( $product->purchasePrices->sum('precio') / count($product->purchasePrices)  ),0,',','.') }}
+                                        </x-tooltip.tooltip>
+                                           
+                                    </div>   
+                                    <div class="text-red-400 px-2 cursor-pointer">
+                                        <x-tooltip.tooltip>
+                                            <x-slot name="tooltip">
+                                                Ganancia por caja  
+                                            </x-slot>
+                                            ${{ number_format( ($product->special_sale_price - ( $product->purchasePrices->sum('precio') / count($product->purchasePrices)  )) *  $product->formato ,0,',','.') }} 
+                                        </x-tooltip.tooltip>
+                                          
                                     </div>   
                                     @if ($product->special_sale_price>0)
                                         <div class="px-2">
