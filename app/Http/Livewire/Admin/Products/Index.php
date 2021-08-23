@@ -74,7 +74,7 @@ class Index extends Component{
         $this->dispatchBrowserEvent('alerta', [
             'msj' =>  "Se ha cambiado '$oldCategory' por '$category->name'",
             'icon' => 'success',
-            'title' => "La marca ha sido cambiada",
+            'title' => "La categoría ha sido cambiada",
         ]); 
     }
 
