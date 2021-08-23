@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\SalePrice;
 
 class Index extends Component{
     public $search;
@@ -122,10 +123,25 @@ class Index extends Component{
        
     }
 
+    public function setStockMin($product_id, $valor){
+        $product = Product::find($product_id);
+        $product->stock_min = $valor; 
+        $product->save();
+       
+    }
+
     public function setSpecialSalePrice($product_id, $valor){
         $product = Product::find($product_id);
         $product->special_sale_price = $valor; 
         $product->save();
+       
+    }
+    public function setSalePrice($price_id, $quantity, $valor, $valor_por_caja){
+        $price = SalePrice::find($price_id);
+        $price->quantity = $quantity; 
+        $price->price = $valor; 
+        $price->total_price = $valor_por_caja; 
+        $price->save();
        
     }
 

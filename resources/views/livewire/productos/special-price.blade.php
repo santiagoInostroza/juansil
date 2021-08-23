@@ -20,12 +20,10 @@
                     @endif
                 </div>
             </div>
-            <div class="py-2">
+            <div class="p-4  rounded my-2">
                 <label for="">
                     <x-jet-input class="w-full" placeholder="Buscar..." wire:model="search"></x-jet-input>
                 </label>
-            </div >
-            <div class="p-4  rounded my-2">
                 <label for="onlyStock">
                     Mostrar solo productos con stock
                     <label class="switch">

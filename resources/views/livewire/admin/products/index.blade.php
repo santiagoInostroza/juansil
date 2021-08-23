@@ -5,19 +5,19 @@
             <x-jet-button x-on:click="openCreateProduct" >Agregar Producto</x-jet-button>
         </div>
         <div class="my-4">
-            <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
+           
         </div>
-        <div class="my-4 p-4 border rounded">
-            Solo Stock
-             <label class="switch">
-                <input id="onlyStock" type="checkbox" wire:model="onlyStock">
-                <span class="slider round"></span>
+        <div class="my-4 p-4 border rounded flex gap-2 items-center">
+            <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
+            <label for="onlyStock" class="flex justify-center flex-col items-center">
+                <div class="w-max-content">Solo stock</div>
+                <label class="switch">
+                    <input id="onlyStock" type="checkbox" wire:model="onlyStock">
+                    <span class="slider round"></span>
+                </label>
             </label>
         </div>
         <div>
-
-         
-
           
          <x-table>
              <table class="min-w-full divide-y divide-gray-200">
@@ -43,11 +43,9 @@
                          </th>
                          {{-- NOMBRE --}}
                          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer  @if ($sort == 'products.name' ) font-bold text-gray-700 @endif" wire:click="order('products.name')">
-                             <div class="flex justify-center items-center ">
-                                 <div>
-                                     NOMBRE 
-                                 </div>
-                                 <div class="pl-2"> 
+                            <div class="flex justify-center items-center ">
+                                <div>NOMBRE</div>
+                                <div class="pl-2"> 
                                      @if ($sort == 'products.name' )
                                          @if ($direction == 'asc')
                                              <i class="fas fa-sort-up"></i>
@@ -57,8 +55,8 @@
                                      @else
                                          <i class="fas fa-sort"></i> 
                                      @endif
-                                 </div>
-                             </div>
+                                </div>
+                            </div>
                          </th>
                          {{-- ETIQUETAS --}}
                          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
@@ -73,22 +71,21 @@
                              </div>
                          </th>
                          {{-- Stock --}}
-                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer " >
-                             
-                             <div class="flex justify-center items-center ">
-                                 <div>
-                                     STOCK
-                                 </div>
-                                 <div class="pl-2"> 
-                                  
-                                 </div>
-                             </div>
-                         </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer " >
+                            <div class="flex justify-center items-center ">STOCK</div>
+                        </th>
 
                          {{-- Costo--}}
                          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
                              <div class="flex justify-center items-center ">
                                  Costo
+                             </div>
+                         </th>
+
+                         {{-- VENTA--}}
+                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
+                             <div class="flex justify-center items-center ">
+                                 VENTA
                              </div>
                          </th>
 
@@ -118,11 +115,11 @@
                     @foreach ($products as $product)
                      <tr>
                          {{-- ID --}}
-                         <td class="px-6 py-4 whitespace-nowrap">
-                             <div class="flex items-center font-bold text-gray-600">
-                                 {{$product->id}}
-                             </div>
-                         </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center font-bold text-gray-600">
+                                {{$product->id}}
+                            </div>
+                        </td>
                         {{-- NOMBRE --}}
                         <td class="px-6 py-4  whitespace-nowrap ">
                             <div class="flex justify-between items-center gap-4 w-max-content" >
@@ -276,7 +273,7 @@
                             </div>
                         </td>
                          {{-- ETIQUETAS --}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <div x-data="{selectedTags: '' }">
                                 <div class="flex flex-col items-center justify-start">
                                     @foreach ($product->tags as $tag)
@@ -284,12 +281,9 @@
                                     @endforeach
                                 </div>                                
                             </div>
-                    
-                           
-                     
-                         </td>
-                         {{-- Description --}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        </td>
+                        {{-- Description --}}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             @if ( $product->description )     
                                 <div  x-data="{
                                     open:false,
@@ -307,15 +301,31 @@
                                     </div>
                                 </div>
                             @endif                                   
-                         </td>
-                          {{--Stock--}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                           <div class="w-max-content font-bold">Stock {{$product->stock}}</div>
-                           <div class="w-max-content">Min {{$product->stock_min}}</div>
-                         </td>
+                        </td>
+                        {{--Stock--}}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <div class="w-max-content font-bold">Stock {{$product->stock}}</div>
+                            <div x-data="{open:false,show:false,valor:''}" x-init="valor={{ $product->stock_min }}" x-on:mouseover="show=true" x-on:mouseleave="show=false">
+                                <div  x-show="!open" class="relative" >
+                                    <div class="w-max-content py-2 hover:bg-gray-100 rounded">Min {{$product->stock_min}}</div>
+                                    <div x-show="show" x-on:click="open=true" class="absolute right-0 transform translate-x-2  top-0 p-2 hidden cursor-pointer bg-white" :class="{'hidden':!show}"><i class="fas fa-pen"></i></div>
+                                </div>
+                                <div x-show="open"  x-on:click.away="open=false" class="hidden relative" :class="{'hidden':!open}">
+                                    <x-jet-input x-model="valor" class="w-16"></x-jet-input>
+                                    <div class="absolute top-1 right-6" wire:loading>
+                                        <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
+                                    </div>
+                                    <div x-ref="btns" class="absolute w-20 flex justify-around items-center bg-white shadow p-2 rounded right-0 top-0 transform translate-x-20">
+                                        <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.setStockMin({{ $product->id }},valor).then(elmnt=>open=false)"></i>
+                                        <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i>
+                                    </div>
+                                </div>
 
-                          {{--Stock--}}
-                          <td class="px-6 py-4 whitespace-nowrap">
+                            </div>
+                        </td>
+
+                          {{--COSTO--}}
+                        <td class="px-6 py-4 whitespace-nowrap">
                             @if ($product->purchasePrices->count())
                                 <div class="text-sm text-gray-500 max-h-96 overflow-auto rounded w-max-content"> 
                                     @foreach ($product->purchasePrices as $precio)
@@ -335,9 +345,58 @@
                             @endif
                         </td>
 
-                        
+                        {{-- PRECIO VENTA --}}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            @foreach ($product->salePrices as $price)
+                                <div x-data="{openEdit:false,openRemove:false,show:false,valor:'',valor_por_caja:'',quantity:'',price_id:''}" x-init="valor_por_caja={{$price->total_price}}; valor={{$price->price}}; quantity={{$price->quantity}}; price_id={{ $price->id }}" x-on:mouseover="show=true" x-on:mouseleave="show=false">
+                                    <div class="relative">
+                                        <div class="flex p-2 hover:bg-gray-100 rounded">
+                                            <div class="w-max-content">  
+                                                {{$price->quantity}} x ${{number_format($price->total_price,0,',','.')}}  
+                                            </div>
+                                            @if ($price->total_price != $price->price)
+                                                <div class="text-red-500 px-2"> (${{number_format($price->price,0,',','.')}}) </div> 
+                                            @endif
+                                        </div>
+                                        <div x-show="show" class="absolute right-0 top-0 transform translate-x-2  bg-white cursor-pointer flex items-center gap-2">
+                                            <div x-on:click="openEdit=true" class="border rounded shadow p-2"> <i class="fas fa-pen  transform hover:scale-110"></i> </div>
+                                            <div  class="border rounded shadow p-2"><i class="far fa-trash-alt  transform hover:scale-110 hover:bg-red-200"></i> </div> 
+                                        </div>
+                                        <div x-show="openEdit" x-on:click.away="openEdit=false" class="hidden" :class="{'hidden' : !openEdit}">
+                                            <div class="absolute z-20 p-2 shadow border rounded  bg-white transform -translate-x-3/12 -translate-y-6/12">
+                                                <div class=" flex items-center gap-2">
+                                                    <div>
+                                                        <x-jet-label>Cantidad</x-jet-label>
+                                                        <x-jet-input class="w-14" x-model="quantity" type="number"  x-on:keyup="{ valor_por_caja = quantity * valor }" required></x-jet-input>
+                                                    </div>
+                                                    <div>
+                                                        <x-jet-label>Valor</x-jet-label>
+                                                        <x-jet-input  class="w-20" x-model="valor" type="number" x-on:keyup="{ valor_por_caja = Math.round(quantity * valor) }" required></x-jet-input>
+                                                    </div>
+                                                    <div>
+                                                        <x-jet-label>Valor x caja</x-jet-label>
+                                                        <x-jet-input class="w-24" x-model="valor_por_caja" type="number" x-on:keyup="{ valor = valor_por_caja / quantity }" required></x-jet-input>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center justify-around pt-4">
+                                                    <div><i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.setSalePrice(price_id,quantity, valor,valor_por_caja).then(elmnt=>openEdit=false)"></i></div>
+                                                    <div> <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="openEdit=false"></i></div>
+                                                </div>
+                                                <div class="absolute inset-0 bg-gray-800 opacity-25" wire:loading>
+                                                </div>
+                                                <div class="absolute inset-0 flex justify-center items-center" wire:loading.flex>
+                                                    <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </td>
+
                           {{-- Precio ESPECIAL  --}}
-                         <td class="px-6 py-4 whitespace-nowrap">
+                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                             <div class="flex flex-col items-center justify-center">
                                 <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " x-on:mouseenter="openEdit=true" x-on:mouseleave="openEdit=false">
                                     <div x-show="!open" class="relative p-2  font-bold w-20 hover:bg-gray-100 rounded hover:border">
