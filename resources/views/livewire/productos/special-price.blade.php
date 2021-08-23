@@ -26,7 +26,13 @@
                 </label>
             </div >
             <div class="p-4  rounded my-2">
-                FILTROS
+                <label for="onlyStock">
+                    Mostrar solo productos con stock
+                    <label class="switch">
+                        <input id="onlyStock" type="checkbox" wire:model="onlyStock">
+                        <span class="slider round"></span>
+                    </label>
+                </label>
             </div>
             <div>
                 <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">

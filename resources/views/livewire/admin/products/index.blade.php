@@ -2,7 +2,7 @@
     <div>
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
-            <x-jet-button @click="openCreateProduct" >Agregar Producto</x-jet-button>
+            <x-jet-button x-on:click="openCreateProduct" >Agregar Producto</x-jet-button>
         </div>
         <div class="my-4">
             <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
@@ -159,11 +159,11 @@
                                             <div  x-show="change" class="w-max-content font-bold"> {{ $product->name }}</div>
                                             <div  x-show="!change" class="flex items-center hidden absolute top-1 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
                                                 <x-jet-input x-ref="name" name="name" class="p-1" value="{{ $product->name }}"/>
-                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
-                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="closeChange"></i>
                                             </div>
                                         </div>                                     
-                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" x-on:click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
                                     {{-- MARCA --}}
@@ -196,11 +196,11 @@
                                                         <option value="{{$brand->id}}" @if( $product->brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
                                                     @endforeach
                                                 </select>
-                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
-                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" x-on:click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
                                     {{-- FORMATO --}}
@@ -229,11 +229,11 @@
                                             <div x-show="change">{{ $product->formato }}</div>
                                             <div x-show="!change" class="flex items-center hidden absolute top-0 right-0 pr-1 bg-white gap-x-2" :class="{'hidden': change}">
                                                 <x-jet-input x-ref="formato" name="name" class="p-1" value="{{ $product->formato }}"/>
-                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
-                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" x-on:click="openChange"><i class="fas fa-pen"></i></div>
                                     </div>
 
                                     {{-- CATEGORIA --}}
@@ -266,11 +266,11 @@
                                                         <option value="{{$category->id}}" @if( $product->category_id == $category->id) selected @endif>{{$category->name}}</option>
                                                     @endforeach
                                                 </select>
-                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="save"></i>
-                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="closeChange"></i>
+                                                <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="save"></i>
+                                                <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="closeChange"></i>
                                             </div>
                                         </div>
-                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" @click="openChange"><i class="fas fa-pen"></i></div>
+                                        <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" x-on:click="openChange"><i class="fas fa-pen"></i></div>
                                     </div> 
 
                                 </div>
@@ -320,7 +320,7 @@
 
                             <div x-data="{valor:''}" x-init="valor = {{$product->status}}">
                                 <label class="switch ">
-                                    <input x-model="valor"  type="checkbox" @if($product->status) checked @endif @change="$wire.setStatus({{ $product->id }},valor)">
+                                    <input x-model="valor"  type="checkbox" @if($product->status) checked @endif x-on:change="$wire.setStatus({{ $product->id }},valor)">
                                     <span class="slider round"></span> 
                                 </label>
                          
@@ -338,7 +338,7 @@
                             <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " @mouseenter="openEdit=true" @mouseleave="openEdit=false">
                                 <div x-show="!open" class="relative p-2 pr-6 font-bold w-20 hover:bg-gray-100 rounded hover:border">
                                     ${{ number_format($product->special_sale_price,0,',','.')}}
-                                    <div x-show="openEdit" class="hidden absolute transform right-0 translate-x-4 top-0 p-2 bg-white cursor-pointer shadow border rounded" :class="{'hidden':!openEdit}"  @click=" open=true;  setTimeout(() => { $refs.valor.focus(); }, 200);">
+                                    <div x-show="openEdit" class="hidden absolute transform right-0 translate-x-4 top-0 p-2 bg-white cursor-pointer shadow border rounded" :class="{'hidden':!openEdit}"  x-on:click=" open=true;  setTimeout(() => { $refs.valor.focus(); }, 200);">
                                         <i class=" fas fa-pen" ></i>
                                     </div>
                                 </div>
@@ -348,8 +348,8 @@
                                         <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
                                     </div>
                                     <div x-ref="btns" class="absolute w-20 flex justify-around items-center">
-                                        <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="$wire.setSpecialSalePrice({{ $product->id }},valor).then(elmnt=>open=false)"></i>
-                                        <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" @click="open=false"></i>
+                                        <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.setSpecialSalePrice({{ $product->id }},valor).then(elmnt=>open=false)"></i>
+                                        <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i>
                                     </div>
                                 </div>                                    
                             </div>
