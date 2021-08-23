@@ -20,7 +20,7 @@
                  <thead class="bg-gray-50">
                      <tr>
                          {{-- ID --}}
-                         <th  class="pl-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'products.id' ) font-bold text-gray-700 @endif" style="" wire:click="order('products.id')">
+                         <th  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer @if ($sort == 'products.id' ) font-bold text-gray-700 @endif" style="" wire:click="order('products.id')">
                              <div class="flex justify-center items-center ">
                                  <div>Id</div>
                                  <div class="pl-2">  
@@ -80,35 +80,28 @@
                                  </div>
                              </div>
                          </th>
-                       
-                         {{-- Estado --}}
-                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" >
-                             
+
+                         {{-- Costo--}}
+                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
                              <div class="flex justify-center items-center ">
-                                 <div>
-                                     Estado
-                                 </div>
-                                 <div class="pl-2"> 
-                                     {{-- @if ($sort == 'sales.delivery_stage' )
-                                         @if ($direction == 'asc')
-                                             <i class="fas fa-sort-up"></i>
-                                         @else
-                                             <i class="fas fa-sort-down"></i>
-                                         @endif
-                                     @else
-                                         <i class="fas fa-sort"></i> 
-                                     @endif --}}
-                                 </div>
+                                 Costo
                              </div>
                          </th>
-                        
-                       
+
                          {{-- PRECIO ESPECIAL--}}
                          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
                              <div class="flex justify-center items-center ">
-                                 PRECIO ESPECIAL
+                                 ESPECIAL
                              </div>
                          </th>
+
+                          {{-- Estado --}}
+                          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" >
+                            <div class="flex justify-center items-center ">
+                                Estado
+                            </div>
+                         </th>
+
                          {{-- ACCION --}}
                          <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer ">
                             
@@ -121,7 +114,7 @@
                     @foreach ($products as $product)
                      <tr>
                          {{-- ID --}}
-                         <td class="pl-1 py-4 whitespace-nowrap">
+                         <td class="px-6 py-4 whitespace-nowrap">
                              <div class="flex items-center font-bold text-gray-600">
                                  {{$product->id}}
                              </div>
@@ -280,11 +273,10 @@
                         </td>
                          {{-- ETIQUETAS --}}
                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
                             <div x-data="{selectedTags: '' }">
-                                <div class="flex flex-wrap items-center justify-start">
+                                <div class="flex flex-col items-center justify-start">
                                     @foreach ($product->tags as $tag)
-                                        <div  class="p-1 border rounded-full bg-orange-200 mx-1">{{$tag->name}}</div>
+                                        <div  class="px-1 border rounded-full bg-orange-200 ">{{$tag->name}}</div>
                                     @endforeach
                                 </div>                                
                             </div>
@@ -317,8 +309,65 @@
                            <div class="w-max-content font-bold">Stock {{$product->stock}}</div>
                            <div class="w-max-content">Min {{$product->stock_min}}</div>
                          </td>
-                          {{-- ESTADO --}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+
+                          {{--Stock--}}
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            @if ($product->purchasePrices->count())
+                                <div class="text-sm text-gray-500 max-h-96 overflow-auto rounded w-max-content"> 
+                                    @foreach ($product->purchasePrices as $precio)
+                                        {{-- @if (!$mostrarTodosLosProductos && $precio->stock <=0)
+                                            @continue
+                                        @endif --}}
+                                        <div class="grid grid-cols-2 hover:bg-gray-100 p-1 w-max-content text-center">
+                                            <div class="">
+                                                {{$precio->stock}}/<span class="font-bold">{{$precio->cantidad}}</span>
+                                            </div>
+                                            <div class="" style="min-width: 45px">
+                                                ${{number_format($precio->precio,0,',','.')}}
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </td>
+
+                        
+                          {{-- Precio ESPECIAL  --}}
+                         <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex flex-col items-center justify-center">
+                                <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " x-on:mouseenter="openEdit=true" x-on:mouseleave="openEdit=false">
+                                    <div x-show="!open" class="relative p-2  font-bold w-20 hover:bg-gray-100 rounded hover:border">
+                                        ${{ number_format($product->special_sale_price,0,',','.')}}
+                                        <div x-show="openEdit" class="hidden absolute transform right-0 translate-x-4 top-0 p-2 bg-white cursor-pointer shadow border rounded" :class="{'hidden':!openEdit}"  x-on:click=" open=true;  setTimeout(() => { $refs.valor.focus(); }, 200);">
+                                            <i class=" fas fa-pen" ></i>
+                                        </div>
+                                    </div>
+                                    <div x-show="open" x-on:click.away="open = false" class="hidden relative" :class="{'hidden' : !open}">
+                                        <x-jet-input x-ref="valor" x-model="valor" type='number' class="w-20"></x-jet-input>
+                                        <div class="absolute top-1 right-6" wire:loading>
+                                            <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
+                                        </div>
+                                        <div x-ref="btns" class="absolute w-20 flex justify-around items-center bg-white shadow p-2 rounded">
+                                            <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.setSpecialSalePrice({{ $product->id }},valor).then(elmnt=>open=false)"></i>
+                                            <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i>
+                                        </div>
+                                    </div>  
+                                                            
+                                </div>
+                                @if (count($product->purchasePrices)>0)
+                                    <div class="text-red-400 px-2">
+                                        ${{ number_format( $product->special_sale_price - ( $product->purchasePrices->sum('precio') / count($product->purchasePrices)  ),0,',','.') }}    
+                                    </div>    
+                                    <div class="px-2">
+                                        {{ number_format(($product->special_sale_price - ( $product->purchasePrices->sum('precio') / count($product->purchasePrices)) )  / $product->special_sale_price * 100,2,',','.') }}%
+                                    </div> 
+                                @endif
+                            </div> 
+                          
+                         </td>
+
+                           {{-- ESTADO --}}
+                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 
                             <div x-data="{valor:''}" x-init="valor = {{$product->status}}">
                                 <label class="switch ">
@@ -332,45 +381,9 @@
                                     <div class="text-gray-200">Inactivo</div>
                                 @endif
                             </div>
-
                          </td>
-                          {{-- Precio ESPECIAL  --}}
-                         <td class="px-6 py-4 whitespace-nowrap">
-                           
-                            <div x-data="{openEdit:false, open:false, valor:''}"  x-init="valor = @if($product->special_sale_price != null)  {{$product->special_sale_price}} @else 0 @endif " x-on:mouseenter="openEdit=true" x-on:mouseleave="openEdit=false">
-                                <div x-show="!open" class="relative p-2 pr-6 font-bold w-20 hover:bg-gray-100 rounded hover:border">
-                                    ${{ number_format($product->special_sale_price,0,',','.')}}
-                                    <div x-show="openEdit" class="hidden absolute transform right-0 translate-x-4 top-0 p-2 bg-white cursor-pointer shadow border rounded" :class="{'hidden':!openEdit}"  x-on:click=" open=true;  setTimeout(() => { $refs.valor.focus(); }, 200);">
-                                        <i class=" fas fa-pen" ></i>
-                                    </div>
-                                </div>
-                                <div x-show="open" x-on:click.away="open = false" class="hidden relative" :class="{'hidden' : !open}">
-                                    <x-jet-input x-ref="valor" x-model="valor" type='number' class="w-20"></x-jet-input>
-                                    <div class="absolute top-1 right-6" wire:loading>
-                                        <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
-                                    </div>
-                                    <div x-ref="btns" class="absolute w-20 flex justify-around items-center">
-                                        <i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.setSpecialSalePrice({{ $product->id }},valor).then(elmnt=>open=false)"></i>
-                                        <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i>
-                                    </div>
-                                </div>                                    
-                            </div>
-                         </td>
-                          {{--  FECHA PAGO --}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            
-                            
-                         </td>
-                          {{--  VENTA POR  --}}
-                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                             <div></div>
-                         </td>
-                          {{--  COMENTARIOS  --}}
-                         <td class="px-6 py-4 text-sm text-gray-500">
-                             <div class="w-24 text-sm">
-                                
-                             </div>
-                         </td>
+                        
+                       
                          {{-- ACCION --}}
                          <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                              <div class="flex lg:flex-col items-center gap-2">
