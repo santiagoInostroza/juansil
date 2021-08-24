@@ -398,7 +398,7 @@
                         {{-- PRECIO VENTA --}}
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                             @foreach ($product->salePrices as $price)
-                                <div id="precioVenta_{{$price->id}}" x-data="{ openEdit:false, openRemove:false, show:false , valor:'', valor_por_caja:'' , quantity:'' , price_id:'' }" x-init="valor_por_caja={{$price->total_price}}; valor={{$price->price}}; quantity={{$price->quantity}}; price_id={{ $price->id }}" x-on:mouseover="show=true" x-on:mouseleave="show=false">
+                                <div id="editar_precio_venta_{{$price->id}}" x-data="{ openEdit:false, openRemove:false, show:false , valor:'', valor_por_caja:'' , quantity:'' , price_id:'' }" x-init="valor_por_caja={{$price->total_price}}; valor={{$price->price}}; quantity={{$price->quantity}}; price_id={{ $price->id }}" x-on:mouseover="show=true" x-on:mouseleave="show=false">
                                     <div class="relative">
                                         <div class="flex p-2 hover:bg-gray-100 rounded">
                                             <div class="w-max-content">  
@@ -442,39 +442,41 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div  id="precio_venta_{{ $product->id }}" x-data="{open:false,product_id:'',quantity:'',valor:'',valor_por_caja:''}" x-init="product_id={{$product->id}}">
-                                <div class="flex justify-center">
-                                    <div x-on:click="open=true" class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125">
-                                        <i class="fas fa-plus"></i>
-                                    </div>
-                                </div>
-                                <div x-show="open" class="hidden" :class="{'hidden':!open}">
-                                    <div class="absolute z-20 p-2 shadow border rounded  bg-white transform -translate-x-3/12 ">
-                                        <div class=" flex items-center gap-2">
-                                            <div>
-                                                <x-jet-label>Cantidad</x-jet-label>
-                                                <x-jet-input class="w-14" x-model="quantity" type="number"  x-on:keyup="{ valor_por_caja = quantity * valor }" required></x-jet-input>
-                                            </div>
-                                            <div>
-                                                <x-jet-label>Valor</x-jet-label>
-                                                <x-jet-input  class="w-20" x-model="valor" type="number" x-on:keyup="{ valor_por_caja = Math.round(quantity * valor) }" required></x-jet-input>
-                                            </div>
-                                            <div>
-                                                <x-jet-label>Valor x caja</x-jet-label>
-                                                <x-jet-input class="w-24" x-model="valor_por_caja" type="number" x-on:keyup="{ valor = valor_por_caja / quantity }" required></x-jet-input>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-around pt-4">
-                                            <div><i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.createSalePrice(product_id, quantity, valor,valor_por_caja).then(elmnt=>openEdit=false)"></i></div>
-                                            <div> <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i></div>
-                                        </div>
-                                        <div class="absolute inset-0 bg-gray-800 opacity-25" wire:loading>
-                                        </div>
-                                        <div class="absolute inset-0 flex justify-center items-center" wire:loading.flex>
-                                            <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
+                            <div  id="crear_precio_venta_{{ $product->id }}" x-data="{open:false,product_id:'',quantity:'',valor:'',valor_por_caja:''}" x-init="product_id={{$product->id}}">
+                                <div class="relative">
+                                    <div class="flex justify-center">
+                                        <div x-on:click="open=true" class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125">
+                                            <i class="fas fa-plus"></i>
                                         </div>
                                     </div>
+                                    <div x-show="open" class="hidden" :class="{'hidden':!open}" x-on:click.away="open = !open">
+                                        <div class="absolute z-20 p-2 shadow border rounded  bg-white transform -translate-x-3/12 ">
+                                            <div class=" flex items-center gap-2">
+                                                <div>
+                                                    <x-jet-label>Cantidad</x-jet-label>
+                                                    <x-jet-input class="w-14" x-model="quantity" type="number"  x-on:keyup="{ valor_por_caja = quantity * valor }" required></x-jet-input>
+                                                </div>
+                                                <div>
+                                                    <x-jet-label>Valor</x-jet-label>
+                                                    <x-jet-input  class="w-20" x-model="valor" type="number" x-on:keyup="{ valor_por_caja = Math.round(quantity * valor) }" required></x-jet-input>
+                                                </div>
+                                                <div>
+                                                    <x-jet-label>Valor x caja</x-jet-label>
+                                                    <x-jet-input class="w-24" x-model="valor_por_caja" type="number" x-on:keyup="{ valor = valor_por_caja / quantity }" required></x-jet-input>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-around pt-4">
+                                                <div><i class="fas fa-check p-1 text-green-400 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="$wire.createSalePrice(product_id, quantity, valor,valor_por_caja).then(elmnt=>openEdit=false)"></i></div>
+                                                <div> <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i></div>
+                                            </div>
+                                            <div class="absolute inset-0 bg-gray-800 opacity-25" wire:loading>
+                                            </div>
+                                            <div class="absolute inset-0 flex justify-center items-center" wire:loading.flex>
+                                                <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
+                                            </div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </td>
