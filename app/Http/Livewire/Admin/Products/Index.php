@@ -19,9 +19,11 @@ class Index extends Component{
     public $productStatus;
     public $onlyStock = true;
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
     public function render(){
 
-        $query = Product::where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction);
+        $query = Product::with(['salePrices','tags'])->where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction);
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }
@@ -102,19 +104,6 @@ class Index extends Component{
         ]); 
     }
 
-    public function removeTag($product_id , $tag_id){
-        $tag = Tag::find($tag_id);
-       
-        $product = Product::find($product_id);
-        $product->tags()->detach($tag_id);
-        $product->save();
-
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' =>  "Se ha eliminado la etiqueta $tag->name",
-            'icon' => 'success',
-            'title' => "Etiqueta eliminada",
-        ]); 
-    }
 
     public function setStatus($product_id, $valor){
         $product = Product::find($product_id);
@@ -142,6 +131,49 @@ class Index extends Component{
         $price->price = $valor; 
         $price->total_price = $valor_por_caja; 
         $price->save();
+       
+    }
+
+    public function createSalePrice($product_id, $quantity, $valor, $valor_por_caja){
+        $price =  SalePrice::where('product_id',$product_id)->where('quantity',$quantity)->first();
+        if(!$price){
+            $price = new SalePrice();
+            $price->product_id = $product_id; 
+        }
+        $price->quantity = $quantity; 
+        $price->price = $valor; 
+        $price->total_price = $valor_por_caja; 
+        $price->save(); 
+       
+    }
+
+    public function removePrice(SalePrice $price){
+        $price->delete();  
+    }
+
+    public function removeTag( $product_id, $tag_id){
+        $product = Product::find($product_id); 
+        $product->tags()->detach($tag_id);
+        $this->render();
+        $product->refresh();
+    }
+
+
+    public function saveTag($product_id, $tag_id){
+        if($tag_id>0){
+
+            $product = Product::find($product_id);
+            if( !$product->tags->contains('id',$tag_id)){
+                $product->tags()->attach($tag_id);
+                return true;
+            }else{
+                return false;
+            }
+           
+        }else{
+            return false;
+        }
+        
        
     }
 

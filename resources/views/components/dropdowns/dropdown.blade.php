@@ -1,7 +1,7 @@
 @props(['id' => 'search', 'value' => 0, 'placeholder' => 'Buscar...','items'])
 
 <div  wire:ignore class="font-sans leading-normal tracking-normal bg-grey-100">    
-    <div  x-data="dropdown()" x-init=" id='{{$id}}';value= {{$value}}; items= {{ $items }}; setName();" class="mx-auto " @click.away="close()">    
+    <div id="{{$id}}"  x-data="dropdown()" x-init=" id='{{$id}}';value= {{$value}}; items= {{ $items }}; setName();" class="mx-auto " @click.away="close()">    
         <div>
             <x-jet-input 
                 id="searchField_{{$id}}"
@@ -22,7 +22,7 @@
         </div>
      
 
-        <input {!! $attributes->merge(['class' => '']) !!}  type="hidden" id="buscador_{{ $id }}" onchange="setName()"  x-on:change="setName" />
+        <input {!! $attributes->merge(['class' => '']) !!} type="hidden" id="buscador_{{ $id }}" onchange="setName()"  />
        
         <div class="shadow absolute w-full z-50 bg-white overflow-auto max-h-96" :class=" show ? '':'hidden'" id="opcion_{{ $id }}">
             <template x-for="(item,index) in filteredOptions()" :key="item">

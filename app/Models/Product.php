@@ -48,7 +48,7 @@ class Product extends Model
     }
 
     public function salePrices(){
-        return $this->hasMany(SalePrice::class);
+        return $this->hasMany(SalePrice::class)->orderBy('quantity');
     }
 
     public function getRouteKeyName()

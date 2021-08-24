@@ -344,6 +344,8 @@
                 items: '',
                 value:'',
 
+                valor:'',
+
                 filter: "",
                 show: false,
                 selected: null,
