@@ -166,6 +166,8 @@ return [
          * Package Service Providers...
          */
 
+
+
         /*
          * Application Service Providers...
          */
@@ -176,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+     
 
     ],
 
@@ -228,6 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Helper' => App\Http\Controllers\Helper::class,
 
     ],
 

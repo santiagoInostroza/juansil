@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\SalePrice;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -68,10 +69,32 @@ class CreateProduct extends Component{
         $product->tags()->attach($this->etiquetas);
 
         if($this->photo){
-            $url =  $this->photo->store('products');
+
+            // Valida
+            request()->validate([
+                'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            ]);
+
+             //consigue el nombre
+            $url  = $this->photo->hashName();
+
+            // guarda en base de datos (CREA NUEVO)
             $product->image()->create([
                 'url' => $url
             ]);
+
+           
+            //guarda en products
+            $this->photo->store('products');
+    
+            // guarda en thumbs
+            $manager =  new ImageManager();
+            $image = $manager->make('storage/products/'.$url)->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image->save('storage/products_thumb/'.$url);          
+            
         }
 
         foreach ($this->salePrices as  $price) {

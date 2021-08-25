@@ -9,6 +9,7 @@
     <!-- Css -->
     <link rel="stylesheet" href="{{asset('css/templateAdmin4A.css')}}">
     <link rel="stylesheet" href="{{asset('css/templateAdmin4B.css')}}">
+   
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
     {{-- <title>Dashboard | Tailwind Admin</title> --}}
 
@@ -36,6 +37,8 @@
 
     {{-- CKEDITOR --}}
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="{{asset('css/ckStyles.css')}}">
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/balloon/ckeditor.js"></script> --}}
 </head>
 
 <body>

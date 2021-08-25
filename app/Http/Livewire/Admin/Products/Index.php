@@ -8,14 +8,23 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\SalePrice;
+use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component{
+
+    use WithFileUploads;
+
     public $search;
     public $sort = "id";
     public $direction = "asc";
 
     public $openBrand = false;
     public $showCreateProduct = false;
+    public $openChangePhoto = false;
     public $productStatus;
     public $onlyStock = true;
 
@@ -28,8 +37,6 @@ class Index extends Component{
             $products= $query->where('stock','>',0);
         }
         $products = $query->get();
-
-
 
         $brands= Brand::all();
         $categories= Category::all();
@@ -53,27 +60,15 @@ class Index extends Component{
 
     public function saveName($product_id , $name){
         $product = Product::find($product_id);
-        $oldName = $product->name;
         $product->name = $name; 
+        $product->slug = Str::slug($name); 
         $product->save();
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' =>  "Se ha cambiado '$oldName' por '$name'",
-            'icon' => 'success',
-            'title' => "El nombre ha sido cambiado",
-        ]); 
     }
     
     public function saveBrand($product_id , $brand_id){
         $product = Product::find($product_id);
-        $brand = Brand::find($brand_id);
-        $oldBrand = $product->brand->name;
         $product->brand_id = $brand_id; 
         $product->save();
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' =>  "Se ha cambiado '$oldBrand' por '$brand->name'",
-            'icon' => 'success',
-            'title' => "La marca ha sido cambiada",
-        ]); 
     }
     
     public function saveCategoria($product_id , $category_id){
@@ -175,6 +170,69 @@ class Index extends Component{
         }
         
        
+    }
+
+    public function saveDescription($product_id, $description){
+        $product = Product::find($product_id);
+        $product->description = $description;
+        $product->save();
+    }
+
+    public $photo0;
+    public $product_selected;
+
+    public function changePhoto($product_id){
+        $product = Product::find($product_id);
+        $this->product_selected = $product;
+        $this->openChangePhoto = true;
+        
+    }
+
+    public function savePhoto(){
+        
+        if($this->photo0){
+            request()->validate([
+                'photo0' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            //consigue el nombre
+            $url  = $this->photo0->hashName();
+
+            if ($this->product_selected->image) {
+
+                // Elimina imagen existente
+                Storage::delete('products/'. $this->product_selected->image->url);
+                Storage::delete('products_thumb/' .  $this->product_selected->image->url);
+
+                //guarda en products
+                $this->photo0->store('products');
+    
+                // guarda en thumbs
+                $manager =  new ImageManager();
+                $image = $manager->make('storage/products/'.$url)->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image->save('storage/products_thumb/'.$url);
+
+                // guarda en base de datos (ACTUALIZA)
+                $this->product_selected->image->update([
+                    'url' =>  $url,
+                ]);
+                
+            } else {
+
+                 // guarda en base de datos (CREA NUEVO)
+                $this->product_selected->image()->create([
+                    'url' => $url
+                ]);
+            }
+
+
+        }
+
+        $this->openChangePhoto = false;
+        $this->photo0 = "";
     }
 
 

@@ -22,16 +22,24 @@
                         x-on:livewire-upload-error="isUploading = false"
                         x-on:livewire-upload-progress="progress = $event.detail.progress">
 
-                        <label for="photo" wire:loading.remove wire:target="photo">
+                        
                             <div class="cursor-pointer relative text-white font-bold">
                                 @if ($photo)
-                                    <div class="absolute bottom-0">
-                                        EDITAR IMAGEN
+                                    <div class="absolute inset-0 flex justify-center items-end ">
+                                        <label for="photo" wire:loading.remove wire:target="photo">
+                                            <div class="p-2 bg-gray-800 opacity-25 hover:opacity-75 text-white">
+                                                EDITAR IMAGEN
+                                            </div>
+                                        </label>
                                     </div>
                                     <img class="w-full max-h-96 object-contain" src="{{ $photo->temporaryUrl() }}">
                                 @else
-                                    <div class="absolute bottom-0">
-                                        AGREGAR IMAGEN
+                                    <div class="absolute inset-0 flex justify-center items-end">
+                                        <label for="photo" wire:loading.remove wire:target="photo">
+                                            <div class="p-2 bg-gray-800 opacity-25 hover:opacity-75 text-white">
+                                                AGREGAR IMAGEN
+                                            </div>
+                                        </label>
                                     </div>
                                     <img class="w-full  max-h-96 object-contain" id='picture' src="{{ Storage::url('products/sinFoto.png') }}" alt="">
                                 @endif
@@ -107,16 +115,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <x-jet-input-error for="etiquetas" class="mt-2" />vgh
+                        <x-jet-input-error for="etiquetas" class="mt-2" />
                     </div>
                    
-                   
-                    {{-- @php
-                        echo "<pre>";
-                            var_dump($etiquetas);
-                            var_dump($salePrices);
-                                                        echo "</pre>";
-                    @endphp --}}
 
                     <div class="col-span-2">
                         <x-jet-label  type="number" >Precio de venta</x-jet-label>
@@ -138,12 +139,7 @@
                                                 </div>
                                                 <div class="text-xl text-center">${{ number_format($precio['price'],0,',','.') }}</div>
                             
-                                                @if ($precio['check'])
-                                                    {{-- {!! Form::hidden('quantity[]', $precio['quantity']) !!}
-                                                    {!! Form::hidden('price[]', $precio['price']) !!}
-                                                    {!! Form::hidden('total_price[]', $precio['total_price']) !!} --}}
-                            
-                                                    
+                                                @if ($precio['check'])    
                                                     <div class="text-sm">Precio registrado</div>
                                                     <div class="text-red-800 text-center cursor-pointer hover:font-bold" wire:click="eliminarPrecio({{ $precio['quantity'] }})"> Eliminar </div>
                                                 @else  
