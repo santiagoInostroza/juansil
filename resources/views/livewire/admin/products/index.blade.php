@@ -625,77 +625,79 @@
             @livewire('admin.products.create-product', ['user' => '']  )
     </div>
 
-    <div x-show="openChangePhoto"  class="hidden" :class="{'hidden' : !openChangePhoto}">
-        <x-modal.modal_screen>
-            <div x-on:click="openChangePhoto=!openChangePhoto" class="p-2 px-4 bg-gray-800 opacity-25 hover:opacity-75 w-max-content rounded-full text-white cursor-pointer">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="flex items-center justify-center">
-
-            
-                <div id="subir_imagen_{{$product->id}}" x-data="{ isUploading: false, progress: 0 }"
-                    x-on:livewire-upload-start="isUploading = true"
-                    x-on:livewire-upload-finish="isUploading = false"
-                    x-on:livewire-upload-error="isUploading = false"
-                    x-on:livewire-upload-progress="progress = $event.detail.progress">
-
-                    <div class="relative text-white font-bold h-screen">
-                        {{-- @php
-                            echo"<pre>";
-                            var_dump($photo0);
-                            echo"</pre>";
-                        @endphp --}}
-                       
-                       
-                        @if ($photo0)
-                                             
-                            <img class="w-full max-h-9/12 object-contain" src="{{ $photo0->temporaryUrl() }}">
-                            <div class="flex justify-between items-center my-4">
-                               
-                                <label for="photo0" wire:loading.remove wire:target="photo0">
-                                    <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
-                                        EDITAR IMAGEN
-                                    </div>
-                                </label>
-                                <x-jet-button wire:click="savePhoto" >
-                                    GUARDAR IMAGEN
-                                </x-jet-button>     
-                            </div>
-                        @else
-                            @if (($product_selected != ""))
-                                @if ($product_selected->image)    
-                                    <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
-                                @else
-                                    <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ asset('images/otros/sinFoto.png')}}" alt="">
-                                @endif
-                                <label for="photo0" wire:loading.remove wire:target="photo0" >
-                                    <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
-                                        EDITAR IMAGEN
-                                    </div>
-                                </label>
-                            @else
-                                No hay nada seleccionado
-                                <x-jet-button class="my-4" >
-                                    AGREGAR IMAGEN
-                                </x-jet-button>
-                            @endif
-                            
-                        @endif         
-                        
-                    </div>   
-                    <div x-show="isUploading">
-                        <progress max="100" class="w-full" x-bind:value="progress"></progress>
-                    </div>
-                    <form>
-                        <input type="file" class="hidden" id="photo0" wire:model="photo0">
-                        {{-- @error('photo') <span class="error">{{ $message }}</span> @enderror    --}}
-                        <x-jet-input-error for="photo0" class="mt-2" />                    
-                    </form>         
+    @if (isset($product))
+        <div x-show="openChangePhoto"  class="hidden" :class="{'hidden' : !openChangePhoto}">
+            <x-modal.modal_screen>
+                <div x-on:click="openChangePhoto=!openChangePhoto" class="p-2 px-4 bg-gray-800 opacity-25 hover:opacity-75 w-max-content rounded-full text-white cursor-pointer">
+                    <i class="fas fa-times"></i>
                 </div>
-            </div>
-        </x-modal.modal_screen>
-       
-    </div>
+                <div class="flex items-center justify-center">
+
+                
+                    <div id="subir_imagen_{{$product->id}}" x-data="{ isUploading: false, progress: 0 }"
+                        x-on:livewire-upload-start="isUploading = true"
+                        x-on:livewire-upload-finish="isUploading = false"
+                        x-on:livewire-upload-error="isUploading = false"
+                        x-on:livewire-upload-progress="progress = $event.detail.progress">
+
+                        <div class="relative text-white font-bold h-screen">
+                            {{-- @php
+                                echo"<pre>";
+                                var_dump($photo0);
+                                echo"</pre>";
+                            @endphp --}}
+                        
+                        
+                            @if ($photo0)
+                                                
+                                <img class="w-full max-h-9/12 object-contain" src="{{ $photo0->temporaryUrl() }}">
+                                <div class="flex justify-between items-center my-4">
+                                
+                                    <label for="photo0" wire:loading.remove wire:target="photo0">
+                                        <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
+                                            EDITAR IMAGEN
+                                        </div>
+                                    </label>
+                                    <x-jet-button wire:click="savePhoto" >
+                                        GUARDAR IMAGEN
+                                    </x-jet-button>     
+                                </div>
+                            @else
+                                @if (($product_selected != ""))
+                                    @if ($product_selected->image)    
+                                        <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
+                                    @else
+                                        <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ asset('images/otros/sinFoto.png')}}" alt="">
+                                    @endif
+                                    <label for="photo0" wire:loading.remove wire:target="photo0" >
+                                        <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
+                                            EDITAR IMAGEN
+                                        </div>
+                                    </label>
+                                @else
+                                    No hay nada seleccionado
+                                    <x-jet-button class="my-4" >
+                                        AGREGAR IMAGEN
+                                    </x-jet-button>
+                                @endif
+                                
+                            @endif         
+                            
+                        </div>   
+                        <div x-show="isUploading">
+                            <progress max="100" class="w-full" x-bind:value="progress"></progress>
+                        </div>
+                        <form>
+                            <input type="file" class="hidden" id="photo0" wire:model="photo0">
+                            {{-- @error('photo') <span class="error">{{ $message }}</span> @enderror    --}}
+                            <x-jet-input-error for="photo0" class="mt-2" />                    
+                        </form>         
+                    </div>
+                </div>
+            </x-modal.modal_screen>
+        
+        </div>
+    @endif
 
     <div>
         @push('js')
