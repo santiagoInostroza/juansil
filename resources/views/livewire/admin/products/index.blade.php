@@ -1,4 +1,4 @@
-<div id="productsMain" x-data="productsMain()">
+<div id="productsMain" x-data="productsMain()" x-init="start()">
    
     <div class="mb-20">
         <div class="flex justify-between items-center">
@@ -707,6 +707,7 @@
                     showRemoveTag:false,
                     openChangePhoto:@entangle('openChangePhoto'),
                     showCreateProduct: @entangle('showCreateProduct'),
+                    url:'',
                     openCreateProduct(){
                         this.showCreateProduct = true;
                     },
@@ -719,15 +720,38 @@
                     closeShowRemoveTag(){
                         this.showRemoveTag = false;
                     },
+                    start(){
+
+                        url='https://juansil.cl/admin/productos?page=2';
+                        this.recargar();
+                        console.log(url);
+                    },
+                    recargar(){ 
+
+                    }
 
                 }
             }
         </script>
         <script>
-            window.onscroll = function(){
-                if((window.innerHeight + window.pageXOffset) >= document.body.offsetHeight){
-                    const section = document.getElementById('')
-                    section.innerHTML +='';
+           window.onscroll = function(){
+               
+
+                if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight){
+                  
+                    fetch('/', {
+                        method: 'get'
+                    })
+                    .then((response) => {
+                        console.log(response)
+                        response.text()
+                    })
+                    .then((htmlContent) => {
+                        console.log(htmlContent)
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+                  
                 }
             }
         </script>

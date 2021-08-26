@@ -45,7 +45,7 @@ class Index extends Component{
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }
-        $products = $query->paginate(20);
+        $products = $query->paginate(15);
 
         $brands= Brand::all();
         $categories= Category::all();
