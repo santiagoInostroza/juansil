@@ -606,9 +606,9 @@
         </div>
     </div>
 
-    <div  wire:loading wire:target="onlyStock">
-        <x-spinner.spinner2 size="20">
-        </x-spinner.spinner2>
+    <div  wire:loading wire:target="onlyStock,render()">
+        <x-spinner.spinner_screen size="20">
+        </x-spinner.spinner_screen>
     </div>
 
 
