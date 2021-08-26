@@ -125,7 +125,13 @@
                                     @if ($product->image)
                                         <div id="imagen_{{$product->id}}" x-data="{loading:false,product_id:''}" x-init="product_id={{$product->id}}">
                                             <div x-on:click="{loading=true; $wire.changePhoto(product_id).then(()=>loading=false) }" class="cursor-pointer relative">
-                                                <figure><img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt=""></figure>
+                                                <figure>
+                                                    @if (isset(Storage::url('products_thumb/' .$product->image->url)))
+                                                        <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
+                                                    @else
+                                                        <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                    @endif
+                                                </figure>
                                                 <div x-show="loading" class="hidden" :class="{'hidden' : !loading}">
                                                     <x-spinner.spinner2 size="16"></x-spinner.spinner2>
                                                 </div>
@@ -643,7 +649,11 @@
                             </div>
                         @else
                             @if (($product_selected != ""))
-                                <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
+                                @if ($product_selected->image)    
+                                    <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
+                                @else
+                                    <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ asset('images/otros/sinFoto.png')}}" alt="">
+                                @endif
                                 <label for="photo0" wire:loading.remove wire:target="photo0" >
                                     <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
                                         EDITAR IMAGEN
