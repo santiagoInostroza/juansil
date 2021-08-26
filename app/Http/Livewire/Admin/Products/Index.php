@@ -53,6 +53,11 @@ class Index extends Component{
 
         return view('livewire.admin.products.index', compact('products','brands','categories','tags'));
     }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
     
     public function order($sort){
         if ($this->sort == $sort) {
