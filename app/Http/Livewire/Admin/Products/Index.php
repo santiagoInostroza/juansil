@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\SalePrice;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Facades\Image;
@@ -17,8 +18,9 @@ use Illuminate\Support\Facades\Storage;
 
 
 class Index extends Component{
-
+    
     use WithFileUploads;
+    use WithPagination;
 
     public $search;
     public $sort = "id";
@@ -32,6 +34,7 @@ class Index extends Component{
 
     protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
 
+
     public function closeCreateProduct(){
         $this->showCreateProduct = false;
     }
@@ -42,7 +45,7 @@ class Index extends Component{
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }
-        $products = $query->get();
+        $products = $query->paginate(2);
 
         $brands= Brand::all();
         $categories= Category::all();
