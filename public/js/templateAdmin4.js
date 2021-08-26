@@ -1,12 +1,12 @@
-var sidebar = document.getElementById('sidebar');
+// var sidebar = document.getElementById('sidebar');
 
-function sidebarToggle() {
-    if (sidebar.style.display === "none") {
-        sidebar.style.display = "block";
-    } else {
-        sidebar.style.display = "none";
-    }
-}
+// function sidebarToggle() {
+//     if (sidebar.style.display === "none") {
+//         sidebar.style.display = "block";
+//     } else {
+//         sidebar.style.display = "none";
+//     }
+// }
 
 var profileDropdown = document.getElementById('ProfileDropDown');
 

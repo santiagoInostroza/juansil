@@ -1,5 +1,6 @@
 <div id="productsMain" x-data="productsMain()">
-    <div>
+   
+    <div class="mb-20">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
             <x-jet-button x-on:click="openCreateProduct" >Agregar Producto</x-jet-button>
@@ -19,7 +20,7 @@
 
         <div>
             <x-table>
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="min-w-full divide-y divide-gray-200 mb-20">
                     <thead class="bg-gray-50">
                         <tr>
                             {{-- ID --}}
@@ -110,7 +111,7 @@
                         </tr>
                     </thead>
                     
-                    <tbody class="bg-white divide-y divide-gray-200 text-gray-600">
+                    <tbody class="bg-white divide-y divide-gray-200 text-gray-600 ">
                         @foreach ($products as $product)
                         <tr>
                             {{-- ID --}}
@@ -605,10 +606,15 @@
         </div>
     </div>
 
+    <div  wire:loading wire:target="onlyStock">
+        <x-spinner.spinner2 size="20">
+        </x-spinner.spinner2>
+    </div>
+
 
 
     <div x-show="showCreateProduct" class="hidden" :class="{'hidden' : !showCreateProduct }">
-            @livewire('admin.products.create-product', ['user' => ''] )
+            @livewire('admin.products.create-product', ['user' => '']  )
     </div>
 
     <div x-show="openChangePhoto"  class="hidden" :class="{'hidden' : !openChangePhoto}">

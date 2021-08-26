@@ -97,14 +97,17 @@ class CreateProduct extends Component{
             
         }
 
-        foreach ($this->salePrices as  $price) {
-            $salePrice = new SalePrice();
-            $salePrice->product_id = $product->id;
-            $salePrice->quantity = $price['quantity'];
-            $salePrice->price = $price['price'];
-            $salePrice->total_price = $price['total_price'];
-            $salePrice->save();
+        if($this->salePrices){
+            foreach ($this->salePrices as  $price) {
+                $salePrice = new SalePrice();
+                $salePrice->product_id = $product->id;
+                $salePrice->quantity = $price['quantity'];
+                $salePrice->price = $price['price'];
+                $salePrice->total_price = $price['total_price'];
+                $salePrice->save();
+            }
         }
+        
 
         $this->dispatchBrowserEvent('alerta', [
             'msj' =>  "Producto $product->name se ha creado con exito",
@@ -113,6 +116,8 @@ class CreateProduct extends Component{
         ]); 
 
         $this->reset();
+        $this->emitUp('closeCreateProduct');
+        
 
 
 

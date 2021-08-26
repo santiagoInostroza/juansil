@@ -14,13 +14,15 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
+
+
 class Index extends Component{
 
     use WithFileUploads;
 
     public $search;
     public $sort = "id";
-    public $direction = "asc";
+    public $direction = "desc";
 
     public $openBrand = false;
     public $showCreateProduct = false;
@@ -28,7 +30,11 @@ class Index extends Component{
     public $productStatus;
     public $onlyStock = true;
 
-    protected $listeners = ['refreshComponent' => '$refresh'];
+    protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
+
+    public function closeCreateProduct(){
+        $this->showCreateProduct = false;
+    }
 
     public function render(){
 

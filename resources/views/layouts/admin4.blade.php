@@ -45,14 +45,14 @@
     <!--Container -->
     <div class="mx-auto bg-grey-400">
         <!--Screen-->
-        <div class="min-h-screen flex flex-col">
+        <div class="min-h-screen flex flex-col" x-data="{openSidebar:false}">
             <!--Header Section Starts Here-->
+            
             <header class="bg-nav">
                 <div class="flex justify-between">
                     <div class="p-1 mx-3 inline-flex items-center">
-                        <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
+                        <i class="fas fa-bars pr-2 text-white cursor-pointer p-3" x-on:click="openSidebar=!openSidebar"></i>
                         <div class="flex-1 sm:flex-none  flex items-center justify-center ml-8  sm:mx-0 ">
-                    
                             <a href="/" class="flex-shrink-0 flex items-center">
                                 {{-- DISPOSITIVOS PEQUEÑOS --}}
                                 <div class=" text-white transform p-2 flex items-center lg:hidden" >
@@ -87,94 +87,93 @@
 
             <div class="flex flex-1">
                 <!--Sidebar-->
-                <aside id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden">
+                <aside x-show="openSidebar" id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden" :class="{'hidden' : !openSidebar}">
 
                     <ul class="list-reset flex flex-col">
-                        <li class=" w-full h-full py-3 px-2 border-b border-light-border @if (Request::is('admin')) bg-white @endif">
-                            <a href="{{route('admin.home')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                        <li class=" w-full h-full  border-b border-light-border @if (Request::is('admin')) bg-white @endif">
+                        <a href="{{route('admin.home')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fas fa-tachometer-alt float-left mx-2"></i>
                                 Dashboard
                                 <span><i class="fas fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/inventory*')) bg-white @endif">
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/inventory*')) bg-white @endif">
                             <a href="{{route('admin.inventory')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Inventario
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
                         
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/routes*')) bg-white @endif">
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/routes*')) bg-white @endif">
                             <a href="{{route('routes.index')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Calendario
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/routes*')) bg-white @endif">
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/routes*')) bg-white @endif">
                             <a href="{{route('admin.resumen')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Resumen
                                 
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/ventas*')) bg-white @endif">
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/ventas*')) bg-white @endif">
                             <a href="{{route('admin.sales.index')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Ventas
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/compras*')) bg-white @endif">
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/compras*')) bg-white @endif">
                             <a href="{{route('admin.purchases.index')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Compras
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/sectors*')) bg-white @endif">
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/sectors*')) bg-white @endif">
                             <a href="{{route('routes.sectors')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Sectores
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('')) bg-white @endif">
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('')) bg-white @endif">
                             <a href="{{route('admin.deliveries.index')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Deliveries
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('')) bg-white @endif">
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('')) bg-white @endif">
                             <a href="{{route('admin.deliveries.index')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Deliveries2
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/report*')) bg-white @endif">
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/report*')) bg-white @endif">
                             <a href="{{route('admin.report')}}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Reportes
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full py-3 px-2 border-b border-light-border  @if (Request::is('admin/productos*')) bg-white @endif">
-                            <a href="{{ route('admin.products.index') }}"
-                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/productos*')) bg-white @endif">
+                            <a href="{{ route('admin.products.index') }}" class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
                                 Productos
                                 <span><i class="fa fa-angle-right float-right"></i></span>
@@ -251,7 +250,18 @@
                             </ul>
                         </li> --}}
                         <li>
-                            {{Request::url()}}</li>
+                            <div class="flex justify-end">
+                                <x-tooltip.tooltip>
+                                    <x-slot name="tooltip">
+                                     {{Request::url()}}
+                                    </x-slot>
+                                
+                                     <i class="far fa-comment"></i>
+                                    
+                                </x-tooltip.tooltip>
+                            </div>
+                           
+                        </li>
                     </ul>
 
                 </aside>
