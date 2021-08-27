@@ -71,7 +71,7 @@ class CreateProduct extends Component{
 
             // Valida
             request()->validate([
-                'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'photo' => 'image',
             ]);
 
              //consigue el nombre
