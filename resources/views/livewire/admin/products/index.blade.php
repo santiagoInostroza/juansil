@@ -5,6 +5,8 @@
             <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
             <x-jet-button x-on:click="openCreateProduct" >Agregar Producto</x-jet-button>
         </div>
+
+        {{phpinfo()}}
         
         <div class="my-4 p-4 border rounded flex gap-2 items-center">
             <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
