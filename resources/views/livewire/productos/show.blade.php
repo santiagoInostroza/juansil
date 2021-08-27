@@ -2,13 +2,37 @@
         <div class="mx-6 mb-6" >
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
                 @isset($producto->image->url)
-                    <figure class=""> 
-                        @if ( Storage::exists('products_thumb/' .$producto->image->url))
-                            <img class="object-contain transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
-                        @else
-                            <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
-                        @endif
-                    </figure>
+                    <div x-data="{openImage:false}">
+
+                
+                        <figure class=""  x-on:click="openImage = true"> 
+                            @if ( Storage::exists('products_thumb/' .$producto->image->url))
+                                <img class="object-contain transform hover:scale-105 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75 cursor-pointer "  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="">
+                            @else
+                                <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
+                            @endif
+                        </figure>
+                        <div x-show="openImage">
+                            <x-modal.modal_image>
+                                <div class="fixed top-4 right-4 ">
+                                    <div x-on:click="openImage=false" class="p-4 px-6 shadow rounded-full hover:bg-red-700 hover:text-white transform hover:scale-110">
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+                                <figure class=""> 
+                                    <img x-show="openImage"
+                                    x-transition:enter="transition ease-out duration-1000" 
+                                    x-transition:enter-start="opacity-0 transform scale-90"  
+                                    x-transition:enter-end="opacity-100 transform scale-100"  
+                                    x-transition:leave="transition ease-in duration-1000"  
+                                    x-transition:leave-start="opacity-100 transform scale-100"  
+                                    x-transition:leave-end="opacity-0 transform scale-90"
+                                    class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
+                                </figure>
+                            </x-modal.modal_image>
+                           
+                        </div>
+                    </div>
                 @endisset
 
                 <div class="flex flex-col justify-center">
