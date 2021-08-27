@@ -220,6 +220,14 @@ class Index extends Component{
 
                 //guarda en products
                 $this->photo0->store('products');
+
+
+                 // guarda en products
+                $manager =  new ImageManager();
+                $image = $manager->make('storage/products/'.$url)->resize(1024, 1024, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
     
                 // guarda en thumbs
                 $manager =  new ImageManager();
