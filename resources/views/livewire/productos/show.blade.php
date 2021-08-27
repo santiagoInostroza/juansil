@@ -20,14 +20,26 @@
                                     </div>
                                 </div>
                                 <figure class=""> 
-                                    <img x-show="openImage"
-                                    x-transition:enter="transition ease-out duration-1000" 
-                                    x-transition:enter-start="opacity-0 transform scale-90"  
-                                    x-transition:enter-end="opacity-100 transform scale-100"  
-                                    x-transition:leave="transition ease-in duration-1000"  
-                                    x-transition:leave-start="opacity-100 transform scale-100"  
-                                    x-transition:leave-end="opacity-0 transform scale-90"
-                                    class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
+                                    @if ( Storage::exists('products_thumb/' .$producto->image->url))
+                                        <img x-show="openImage"
+                                            x-transition:enter="transition ease-out duration-1000" 
+                                            x-transition:enter-start="opacity-0 transform scale-90"  
+                                            x-transition:enter-end="opacity-100 transform scale-100"  
+                                            x-transition:leave="transition ease-in duration-1000"  
+                                            x-transition:leave-start="opacity-100 transform scale-100"  
+                                            x-transition:leave-end="opacity-0 transform scale-90"
+                                            class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
+                                    @else
+                                        <img x-show="openImage"
+                                            x-transition:enter="transition ease-out duration-1000" 
+                                            x-transition:enter-start="opacity-0 transform scale-90"  
+                                            x-transition:enter-end="opacity-100 transform scale-100"  
+                                            x-transition:leave="transition ease-in duration-1000"  
+                                            x-transition:leave-start="opacity-100 transform scale-100"  
+                                            x-transition:leave-end="opacity-0 transform scale-90"
+                                            class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url($producto->image->url) }}" alt="">
+                           
+                                    @endif
                                 </figure>
                             </x-modal.modal_image>
                            
