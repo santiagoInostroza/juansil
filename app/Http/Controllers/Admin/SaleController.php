@@ -55,6 +55,7 @@ class SaleController extends Controller{
         $delivery_date = ($delivery == 1) ? $request->delivery_date : null;
         $delivery_stage = (isset($request->delivery_stage) && $request->delivery_stage == 'on') ? 1 : 0;
         $payment_date=($request->payment_status==3) ? Carbon::now()->toDateString(): null;
+        
 
         //CREA LA VENTA
         $sale = Sale::create([
@@ -70,6 +71,7 @@ class SaleController extends Controller{
             'delivery_stage' => $delivery_stage,
             'comments' => $request->comments,
             'user_created' => Auth::user()->id,
+            
         ]);
 
         //CREA LOS ITEMS DE VENTA
@@ -360,6 +362,7 @@ class SaleController extends Controller{
         $sale->delivery_value          = $arrayVenta['sale']['delivery_value'];
         $sale->subtotal                = $arrayVenta['sale']['subtotal'];
         $sale->delivered_user          = $arrayVenta['sale']['delivered_user'];
+        $sale->sale_type               =(isset($arrayVenta['sale']['sale_type']))? $arrayVenta['sale']['sale_type']:'';
         $sale->save();
 
 

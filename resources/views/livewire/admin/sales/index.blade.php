@@ -202,8 +202,15 @@
                 <tr>
                     {{-- ID --}}
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
+                        <div class="flex items-center relative">
                             {{$sale->id}}
+                            <div class="absolute right-0 transform translate-x-3">
+                                @if ($sale->sale_type== 3)
+                                <i class="fas fa-user"></i>
+                                @elseif($sale->sale_type== 2)
+                                <i class="fas fa-shopping-cart"></i>
+                                @endif
+                            </div>
                         </div>
                     </td>
                    {{-- NOMBRE Y DIRECCION --}}
@@ -214,6 +221,7 @@
                                     {{$sale->customer->direccion}} 
                                     @isset($sale->customer->block) Torre {{$sale->customer->block}} @endisset 
                                     @isset($sale->customer->depto) depto {{$sale->customer->depto}} @endisset    
+                                  
                             </div>
                         </div>
                     </td>

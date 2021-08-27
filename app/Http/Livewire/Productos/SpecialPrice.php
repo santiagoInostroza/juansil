@@ -71,11 +71,12 @@ class SpecialPrice extends Component{
             'delivery_date' => null,
             'date_delivered' => null,
             'delivery_stage' => null,
-            'comments' => 'VENTA ESPECIAL',
+            'comments' => '',
             'user_created' => Auth::user()->id,//
             'delivery_value' => null,
             'delivered_user' => null,
             'subtotal' => session('totalCarritoSpecial'),
+            'sale_type' => 3,
         ];
        
 

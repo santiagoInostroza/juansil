@@ -32,7 +32,7 @@ class CreateProduct extends Component{
     public $description;
 
     protected $rules=[
-        'photo' => 'image|max:1024', // 1MB Max
+        'photo' => 'image', //
         'name'=>'required',
         'brand'=>'required',
         'category'=>'required',
@@ -41,7 +41,6 @@ class CreateProduct extends Component{
 
     protected $messages=[
         'photo.image' =>"Selecciona una imágen",
-        'photo.max:1024' =>"Imágen no puede pesar más de 1 mega",
         'name.required' =>"Ingresa un nombre para el producto",
         'brand.required' =>"Selecciona marca",
         'category.required' =>"Selecciona categoría",
@@ -86,6 +85,14 @@ class CreateProduct extends Component{
            
             //guarda en products
             $this->photo->store('products');
+    
+            // guarda en products
+            $manager =  new ImageManager();
+            $image = $manager->make('storage/products/'.$url)->resize(1024, 1024, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image->save('storage/products/'.$url);          
     
             // guarda en thumbs
             $manager =  new ImageManager();

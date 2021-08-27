@@ -130,9 +130,9 @@
                                                 <div x-on:click="{loading=true; $wire.changePhoto(product_id).then(()=>loading=false) }" class="cursor-pointer relative">
                                                     <figure>
                                                         @if ( Storage::exists('products_thumb/' .$product->image->url))
-                                                            <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
+                                                            <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
                                                         @else
-                                                            <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                            <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt="">
                                                         @endif
                                                     </figure>
                                                     <div x-show="loading" class="hidden" :class="{'hidden' : !loading}">
