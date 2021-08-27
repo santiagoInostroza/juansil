@@ -2,9 +2,9 @@
         <div class="mx-6 mb-6" >
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
                 @isset($producto->image->url)
-                    <figure> 
+                    <figure class="bg-red-700"> 
                         @if ( Storage::exists('products_thumb/' .$producto->image->url))
-                            <img class="object-contain h-52 sm:h-96 w-full object-center hover:bg-gray-500"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
+                            <img class="object-contain h-52 sm:h-96 w-full object-center "  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
                         @else
                             <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
                         @endif
