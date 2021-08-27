@@ -236,6 +236,14 @@ class Index extends Component{
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
+
+
+                if (!Storage::disk('public')->exists('products_thumb')) {
+                    Storage::disk('public')->makeDirectory('products_thumb');
+                }
+
+
+
                 $image->save('storage/products_thumb/'.$url);
 
                 // guarda en base de datos (ACTUALIZA)

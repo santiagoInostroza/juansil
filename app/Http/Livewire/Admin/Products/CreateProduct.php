@@ -101,7 +101,10 @@ class CreateProduct extends Component{
                 $constraint->upsize();
             });
 
-            Storage::disk('public')->makeDirectory('products_thumb');
+            if (!Storage::disk('public')->exists('products_thumb')) {
+                Storage::disk('public')->makeDirectory('products_thumb');
+            }
+
 
 
             $image->save('storage/products_thumb/'.$url);          
