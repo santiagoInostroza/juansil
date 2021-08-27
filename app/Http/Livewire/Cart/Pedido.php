@@ -518,7 +518,7 @@ class Pedido extends Component
             'delivery_date' => $this->fechaDespacho->toDateString(),
             'date_delivered' => null,
             'delivery_stage' => 0,
-            'comments' => '',
+            'comments' => 'VENTA POR INTERNET',
             'user_created' => 0,//cero es: que lo creo un usuario de internet
             'delivery_value' => session('cliente.totalDespacho'),
             'delivered_user' => null,

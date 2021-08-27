@@ -39,7 +39,14 @@
                         
                                 <div class="w-full">
                                     @if ($product->image)
-                                        <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                        @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                            <img class=" object-contain h-48 w-full transform hover:scale-110 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
+                                        @else
+                                            <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                            {{-- <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt=""> --}}
+                                        @endif
+
+                                       
                                     @endif
                                     
                                     <div class="text-gray-600 w-max-content m-auto max-w-full">
@@ -116,9 +123,6 @@
         <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
             <div class="fixed inset-0 bg-gray-900 opacity-25"></div>
             <div class="fixed top-0 right-0 h-full w-screen sm:w-max-content bg-white py-4 shadow" >
-             
-
-                
                     <div class="flex justify-between items-center gap-4 border-b p-4">
                         <h2 class="text-xl font-bold text-gray-600">Detalle de compra</h2>
                         <div x-on:click="closeCart" class="cursor-pointer">
@@ -130,11 +134,18 @@
                             <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">
                                 @foreach (session('carritoSpecial') as $item)
                                     <figure>
-                                    <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt="">
+                                       
+                                        @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                            <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
+                                        @else
+                                            <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt="">
+                                            {{-- <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt=""> --}}
+                                        @endif
                                     </figure>
                                     <div class="col-span-2">
                                         <div>
                                             {{$item['name']}} 
+                                          
                                         </div>   
                                         <div>
                                             ${{ number_format($item['precio'],0,',','.')}}
@@ -176,7 +187,7 @@
                         @endif
                         
                     </div>
-                    <div class="absolute bottom-0 h-20 border-t w-full flex justify-between items-center gap-4 px-4">
+                    <div class="absolute bottom-0 h-20 border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
                         <div class="text-2xl">
                             Total  {{ number_format(session('totalCarritoSpecial'),0,',','.') }}
                         </div>
@@ -190,6 +201,11 @@
 
             </div>
         </div>
+
+        
+
+
+
         
     </div>
     @push('js')
