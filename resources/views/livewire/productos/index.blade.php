@@ -141,9 +141,19 @@
                               <a href="{{route('products.show',$product)}}">
                                  <div class="w-full">
                                     @if ($product->image)
-                                       <figure class="splide__slide__container">
+
+
+                                    <figure class="splide__slide__container">
+                                       @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                          <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url('products_thumb/' . $product->image->url) }}" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
+                                       @else
                                           <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}" src="{{ Storage::url($product->image->url) }}">
-                                       </figure>
+                                       @endif
+                                    </figure>
+
+
+
+                                         
                                     @endif
                                     
                                     <div class="text-gray-600 w-max-content m-auto max-w-full">
@@ -273,8 +283,14 @@
                                  <div class="w-full">
                                     @if ($item->product->image)
                                        <figure class="splide__slide__container">
-                                          <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($item->product->image->url) }}" src="{{ Storage::url($item->product->image->url) }}">
+                                          @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                             <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url('products_thumb/' . $product->image->url) }}" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
+                                          @else
+                                             <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}" src="{{ Storage::url($product->image->url) }}">
+                                          @endif
                                        </figure>
+
+
                                     @endif
                                     
                                     <div class="text-gray-600 w-max-content m-auto max-w-full">
@@ -391,8 +407,13 @@
                            <a href="{{route('products.show',$product[0])}}">
                               <div class="w-full">
                                  @if ($product[0]->image)
+
                                     <figure class="splide__slide__container">
-                                       <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product[0]->image->url) }}" src="{{ Storage::url($product[0]->image->url) }}">
+                                       @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                          <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url('products_thumb/' . $product[0]->image->url) }}" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
+                                       @else
+                                          <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product->image->url) }}" src="{{ Storage::url($product[0]->image->url) }}">
+                                       @endif
                                     </figure>
                                  @endif
                                  
