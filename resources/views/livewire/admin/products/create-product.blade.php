@@ -8,7 +8,7 @@
                 <i x-on:click="closeCreateProduct" class="fas fa-times p-2 transform hover:scale-110 hover:bg-red-500 hover:text-white rounded"></i>
             </div>
         </x-slot>
-        <div  class="relative p-4 px-6 max-w-screen-md">
+        <div  class="relative p-4 px-6 w-screen md:w-max-content">
            
             <div class="grid grid-cols-2 gap-4">
                 <div class="col-span-2 w-full">
