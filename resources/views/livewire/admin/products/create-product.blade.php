@@ -178,7 +178,7 @@
                                             <x-slot name="footer">
                                                 <div class="flex justify-between gap-4 mx-2">                    
                                                     <x-jet-button  wire:click='agregarPrecio' class="btn btn-light my-3">GUARDAR</x-jet-button>
-                                                    <x-jet-button  x-on:click="open=false" class="btn btn-primary my-3">Canelar</x-jet-button>
+                                                    <x-jet-button  x-on:click="open=false" class="btn btn-primary my-3">Cancelar</x-jet-button>
                                                 </div>
                                             </x-slot>
                             

@@ -31,6 +31,7 @@ class Index extends Component{
     public $openChangePhoto = false;
     public $productStatus;
     public $onlyStock = true;
+    public $show=5;
 
     protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
 
@@ -45,7 +46,7 @@ class Index extends Component{
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }
-        $products = $query->paginate(15);
+        $products = $query->paginate($this->show);
 
         $brands= Brand::all();
         $categories= Category::all();

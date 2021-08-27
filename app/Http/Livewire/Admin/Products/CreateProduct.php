@@ -100,6 +100,10 @@ class CreateProduct extends Component{
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
+
+            Storage::disk('public')->makeDirectory('products_thumb');
+
+
             $image->save('storage/products_thumb/'.$url);          
             
         }
