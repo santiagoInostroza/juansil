@@ -1,19 +1,15 @@
     <div class="container py-11 lg:max-w-7xl ">
         <div class="mx-6 mb-6" >
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
-                <figure>
-                    @isset($producto->image->url)
-                           
-                            <figure class="splide__slide__container">
-                                @if ( Storage::exists('products_thumb/' .$producto->image->url))
-                                   <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="">
-                                   @else
-                                    <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
-                                 
-                                @endif
-                             </figure>  
-                    @endisset
-                </figure>
+                @isset($producto->image->url)
+                    <figure> 
+                        @if ( Storage::exists('products_thumb/' .$producto->image->url))
+                            <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="">
+                        @else
+                            <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
+                        @endif
+                    </figure>
+                @endisset
 
                 <div class="flex flex-col justify-center">
                     <div class="mb-2">
