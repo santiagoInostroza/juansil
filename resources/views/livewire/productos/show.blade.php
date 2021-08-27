@@ -3,8 +3,15 @@
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
                 <figure>
                     @isset($producto->image->url)
-                            <img class="object-contain h-52 sm:h-96 w-full object-center"
-                        src="{{ Storage::url($producto->image->url) }}" alt="">
+                           
+                            <figure class="splide__slide__container">
+                                @if ( Storage::exists('products_thumb/' .$producto->image->url))
+                                   <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="">
+                                   @else
+                                    <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
+                                 
+                                @endif
+                             </figure>  
                     @endisset
                 </figure>
 
