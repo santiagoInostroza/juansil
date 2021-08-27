@@ -4,7 +4,7 @@
                 @isset($producto->image->url)
                     <figure> 
                         @if ( Storage::exists('products_thumb/' .$producto->image->url))
-                            <img class="object-contain h-52 sm:h-96 w-full object-center hover:bg-gray-500"  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="">
+                            <img class="object-contain h-52 sm:h-96 w-full object-center hover:bg-gray-500"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
                         @else
                             <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
                         @endif
