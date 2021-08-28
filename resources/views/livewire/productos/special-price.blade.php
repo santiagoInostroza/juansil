@@ -136,8 +136,8 @@
                                 @foreach (session('carritoSpecial') as $item)
                                     <figure>
                                        
-                                        @if ( Storage::exists('products_thumb/' .$product->image->url))
-                                            <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
+                                        @if ( Storage::exists('products_thumb/' .$item->image->url))
+                                            <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$item->image->url) }}" alt="">
                                         @else
                                             <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt="">
                                             {{-- <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt=""> --}}
