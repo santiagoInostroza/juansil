@@ -335,7 +335,7 @@
                                                 <div x-data="{open:false,loading:false,nameTag:'',product_id:''}" x-init="product_id={{$product->id}}">
                                                     <div x-on:click="open=true">
                                                         <x-jet-button class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125"> Crear nueva</x-jet-button>
-                                                        <div x-show="loading">
+                                                        <div x-show="loading" class="hidden" :class="{'hidden':!loading}">
                                                             <x-spinner.spinner2></x-spinner.spinner2>
                                                         </div>
                                                     </div>
