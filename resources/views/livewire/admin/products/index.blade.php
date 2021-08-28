@@ -27,13 +27,15 @@
                 </label>
                 <label for="" class="flex items-center">
                     Mostrar
-                    <select class="border rounded p-2"  wire:model="show">
-                        <option value="5" @if($this->show==5) selected @endif >5</option>
-                        <option value="10" @if($this->show==10) selected @endif >10</option>
-                        <option value="20" @if($this->show==20) selected @endif >20</option>
-                        <option value="50" @if($this->show==50) selected @endif >50</option>
-                        <option value="100" @if($this->show==100) selected @endif >100</option>
-                    </select>
+                    <div wire:ignore>
+                        <select class="border rounded p-2"  wire:model="show">
+                            <option value="5" @if($this->show==5) selected @endif >5</option>
+                            <option value="10" @if($this->show==10) selected @endif >10</option>
+                            <option value="20" @if($this->show==20) selected @endif >20</option>
+                            <option value="50" @if($this->show==50) selected @endif >50</option>
+                            <option value="100" @if($this->show==100) selected @endif >100</option>
+                        </select>
+                    </div>
                     productos
                     <div wire:loading wire:target="show">
                         <x-spinner.spinner size='10'></x-spinner.spinner>
