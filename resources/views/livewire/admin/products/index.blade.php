@@ -666,7 +666,7 @@
                         x-on:livewire-upload-error="isUploading = false"
                         x-on:livewire-upload-progress="progress = $event.detail.progress">
 
-                        <div class="relative text-white font-bold h-screen">
+                        <div class="relative text-white font-bold max-h-screen">
                             {{-- @php
                                 echo"<pre>";
                                 var_dump($photo0);
