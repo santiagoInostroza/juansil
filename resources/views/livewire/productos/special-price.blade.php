@@ -10,7 +10,7 @@
                 <h1 class=" text-2xl text-center py-4 uppercase text-gray-500 font-bold tracking-widest">
                     Precios Especiales
                 </h1>
-                <div class="p-4 rounded-full text-xl relative cursor-pointer" x-on:click="openCart">
+                <div class="fixed right-4 p-4 rounded-full text-xl cursor-pointer border shadow bg-white z-10" x-on:click="openCart">
                     <i class="fas fa-shopping-cart text-gray-600"></i>
                     @if (session('totalProductosSpecial'))
                         <div class="rounded-full bg-red-600 p-1 px-2 text-white text-xs font-bold absolute right-10 top-4">{{ session('totalProductosSpecial') }}</div>
@@ -31,6 +31,7 @@
                         <span class="slider round"></span>
                     </label>
                 </label>
+
             </div>
             <div>
                 <ul class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
@@ -121,8 +122,8 @@
 
          {{-- CARRITO --}}
         <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
-            <div class="fixed inset-0 bg-gray-900 opacity-25"></div>
-            <div class="fixed top-0 right-0 h-full w-screen sm:w-max-content bg-white py-4 shadow" >
+            <div class="fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
+            <div class="fixed z-10 top-0 right-0 h-full w-screen sm:w-max-content bg-white py-4 shadow" >
                     <div class="flex justify-between items-center gap-4 border-b p-4">
                         <h2 class="text-xl font-bold text-gray-600">Detalle de compra</h2>
                         <div x-on:click="closeCart" class="cursor-pointer">
