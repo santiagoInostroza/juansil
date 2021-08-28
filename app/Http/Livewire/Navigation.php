@@ -13,7 +13,7 @@ class Navigation extends Component{
 
     public function render()
     {
-        $categories = Category::where('name','!=','otros');
+        $categories = Category::where('name','!=','otros')->get();
         return view('livewire.navigation', compact('categories'));
     }
 }
