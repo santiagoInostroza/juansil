@@ -30,8 +30,13 @@
               <template x-for="(item,index) in filteredOptions()" :key="item">
                 <div  @click="onOptionClick(index)" :class="classOption(item.id, index)" :aria-selected="focusedOptionIndex === index" :id="'{{$id}}_opcion_' + index" x-ref="item.name" >       
                   <template x-if="item.image">
-                 
-                      <img class="w-10 h-10 rounded-full mr-4" :src="`/storage/products_thumb/${item.image.url}`" />
+                      <figure>
+                        @if ( Storage::exists('products_thumb/' .$item->product->image->url))
+                        <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/products_thumb/${item.image.url}`" />
+                        @else
+                        <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/products/${item.image.url}`" />
+                        @endif
+                    </figure>
                   </template>
                   <p class="leading-none text-gray-900" x-text="item.name" ></p>
                 </div>
