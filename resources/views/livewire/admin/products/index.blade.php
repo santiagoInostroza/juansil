@@ -320,6 +320,7 @@
                                         </div>
 
                                         <template x-if="openButtons">
+                                            
                                             <div class="absolute flex justify-center gap-4 transform -translate-x-4/12 p-4">
                                                 <x-jet-button x-on:click="openAddTag=true" class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125">
                                                     Agregar existente
