@@ -678,20 +678,30 @@
                                                 
                                 <img class="w-full max-h-9/12 object-contain" src="{{ $photo0->temporaryUrl() }}">
                                 <div class="flex justify-between items-center my-4">
-                                
-                                    <label for="photo0" wire:loading.remove wire:target="photo0">
-                                        <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
-                                            EDITAR IMAGEN
-                                        </div>
-                                    </label>
-                                    <x-jet-button wire:click="savePhoto" >
-                                        GUARDAR IMAGEN
-                                    </x-jet-button>     
+                                    <div>
+                                        <label for="photo0" wire:loading.remove wire:target="photo0">
+                                            <div class="my-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
+                                                EDITAR IMAGEN
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <x-jet-button wire:click="savePhoto" >
+                                            GUARDAR IMAGEN
+                                        </x-jet-button>     
+                                    </div>
                                 </div>
                             @else
                                 @if (($product_selected != ""))
-                                    @if ($product_selected->image)    
-                                        <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
+                                    @if ($product_selected->image)  
+
+                                        @if ( Storage::exists('products_thumb/' .$item->product->image->url))
+                                            <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
+                                        @else
+                                            <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url($product_selected->image->url ) }}" alt="">
+                                        @endif
+
+                                       
                                     @else
                                         <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ asset('images/otros/sinFoto.png')}}" alt="">
                                     @endif
