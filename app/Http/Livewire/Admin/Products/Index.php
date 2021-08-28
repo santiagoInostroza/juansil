@@ -32,7 +32,7 @@ class Index extends Component{
     public $openChangePhoto = false;
     public $productStatus;
     public $onlyStock = true;
-    public $show=5;
+    public $show=1;
 
     protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
 
