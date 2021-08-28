@@ -31,10 +31,11 @@
                 <div  @click="onOptionClick(index)" :class="classOption(item.id, index)" :aria-selected="focusedOptionIndex === index" :id="'{{$id}}_opcion_' + index" x-ref="item.name" >       
                   <template x-if="item.image">
                       <figure>
-                        <template x-if="`/storage/products_thumb/${item.image.url}`">
+                        @if ( Storage::exists('products_thumb/' .'item.image.url' ))
                           <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/products_thumb/${item.image.url}`" />
-                          <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/${item.image.url}`" />
-                        </template>
+                        @else
+                          <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/products/${item.image.url}`" />
+                        @endif
                     </figure>
                   </template>
                   <p class="leading-none text-gray-900" x-text="item.name" ></p>
