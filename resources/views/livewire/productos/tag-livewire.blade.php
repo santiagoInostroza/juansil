@@ -16,7 +16,13 @@
                 <a href="{{route('products.show',$product)}}">
                     <div class="w-full">
                         @if ($product->image)
-                            <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                            <figure>
+                                @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                    <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
+                                @else
+                                    <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                @endif
+                            </figure>   
                         @endif
                         
                         <div class="text-gray-600 w-max-content m-auto max-w-full">
@@ -117,7 +123,13 @@
                     <a href="{{route('products.show',$product)}}">
                         <div class="w-full">
                             @if ($product->image)
-                                <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                <figure>
+                                    @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                        <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
+                                    @else
+                                        <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                    @endif
+                            </figure>        
                             @endif
                             
                             <div class="text-gray-600 w-max-content m-auto max-w-full">
