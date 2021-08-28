@@ -9,8 +9,13 @@
        
         
         <div class="my-4 p-4 border rounded ">
-          
-            <x-jet-input class="w-full" wire:model.debounce.1s="search" placeholder="Buscar..."></x-jet-input>
+            <div class="relative">
+                <x-jet-input class="w-full" wire:model.debounce.500ms="search" placeholder="Buscar..."></x-jet-input>
+                <div class="absolute right-0 top-0" wire:loading>
+                    <x-spinner.spinner size='10'></x-spinner.spinner>
+                </div>
+            </div>
+        
           
             <div class=" flex gap-2 items-center mt-2">
                 <label for="onlyStock" class="flex justify-center items-center border rounded p-2">
