@@ -191,13 +191,7 @@ class Index extends Component{
         $tag_id=$tagController->saveNewTag($tag);
 
         if($tag_id>0){
-
             $this->saveTag($product_id, $tag_id);
-            $this->dispatchBrowserEvent('alerta', [
-                'msj' =>  "Etiqueta " . $tag['name'] . " se ha creado con exito",
-                'icon' => 'success',
-                'title' => "Etiquta creada!!",
-            ]); 
         }else{
 
         }
