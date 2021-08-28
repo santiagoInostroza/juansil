@@ -29,7 +29,7 @@
                     Mostrar
                     <div wire:ignore>
                         <select class="border rounded p-2"  wire:model="show">
-                            <option value="1" @if($this->show==5) selected @endif >5</option>
+                            <option value="1" @if($this->show==1) selected @endif >1</option>
                             <option value="5" @if($this->show==5) selected @endif >5</option>
                             <option value="10" @if($this->show==10) selected @endif >10</option>
                             <option value="20" @if($this->show==20) selected @endif >20</option>
