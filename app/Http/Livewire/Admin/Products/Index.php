@@ -49,7 +49,7 @@ class Index extends Component{
         $products = $query->paginate($this->show);
 
         $brands= Brand::all();
-        $categories= Category::all();
+        $categories= Category::where('name','!=','otros')->get();
         $tags= Tag::all();
 
         return view('livewire.admin.products.index', compact('products','brands','categories','tags'));
