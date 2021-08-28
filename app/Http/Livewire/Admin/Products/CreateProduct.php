@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
+use App\Http\Controllers\Admin\TagController;
 use App\Models\Tag;
 use App\Models\Brand;
 use App\Models\Product;
@@ -191,5 +192,24 @@ class CreateProduct extends Component{
 
     public function restaurarPrecio($cantidad){
         $this->salePrices[$cantidad]['check']=true;
+    }
+
+    public $nameTag;
+    public $typeTag;
+
+    public function saveNewTag(){
+        $tagController= new TagController();
+        $tag['name']= $this->nameTag;
+        $tag['type']= $this->typeTag;
+
+        if($tagController->saveNewTag($tag)){
+            $this->dispatchBrowserEvent('alerta', [
+                'msj' =>  "Etiqueta " . $tag['name'] . " se ha creado con exito",
+                'icon' => 'success',
+                'title' => "Etiquta creada!!",
+            ]); 
+        }else{
+
+        }
     }
 }

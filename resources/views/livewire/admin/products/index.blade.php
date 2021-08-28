@@ -299,7 +299,7 @@
                                     <div class="relative">
                                         <div class="flex flex-col items-center justify-start p-4">
                                             @foreach ($product->tags as $tag)
-                                                <div id="etiquetas_{{$product->id}}" x-data="{openRemove:false,product_id:'',tag_id:'', loading:false}" x-init="product_id = {{$product->id}}; tag_id={{$tag->id}}" class="relative p-1" x-on:mouseenter="openRemove=true" x-on:mouseleave="openRemove=false">
+                                                <div x-data="{openRemove:false,product_id:'',tag_id:'', loading:false}" x-init="product_id = {{$product->id}}; tag_id={{$tag->id}}" class="relative p-1" x-on:mouseenter="openRemove=true" x-on:mouseleave="openRemove=false">
                                                     <div  class="px-1 border rounded-full bg-orange-200 ">{{$tag->name}}</div>
                                                     <div x-on:click="{loading=true; $wire.removeTag(product_id,tag_id).then( ()=> loading=false) }" x-show="openRemove" class="absolute top-0 right-0 transform translate-x-4 p-1 bg-white cursor-pointer hidden" :class="{'hidden': !openRemove}"><i class="fas fa-trash"></i></div>
                                                     <div x-show="loading" class="absolute z-10 inset-0 bg-gray-800 opacity-25 hidden" :class="{'hidden' : !loading}"></div>
@@ -309,8 +309,7 @@
                                                 </div>
                                             @endforeach
                                         </div> 
-                                        <div id="agrega_etiquetas_{{ $product->id }}" 
-                                            x-data="{ openAddTag: false,  valor: '',   product_id: '', loading: false, 
+                                        <div  x-data="{ openAddTag: false,  valor: '',   product_id: '', loading: false, 
                                                 addTag(){
                                                     
                                                     valor = document.getElementById('buscador_searchTag_{{ $product->id }}').value;
@@ -329,9 +328,46 @@
                                                 } 
                                             }" 
                                             x-init="product_id={{$product->id}}" >
-                                            <div class="flex justify-center">
-                                                <div x-on:click="openAddTag=true" class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125">
-                                                    <i class="fas fa-plus"></i>
+                                            <div class="flex justify-center gap-2">
+                                                <x-jet-button x-on:click="openAddTag=true" class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125">
+                                                   Agregar existente
+                                                </x-jet-button>
+                                                <div x-data="{open:false,loading:false,nameTag:'',product_id:''}" x-init="product_id={{$product->id}}">
+                                                    <div x-on:click="open=true">
+                                                        <x-jet-button class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125"> Crear nueva</x-jet-button>
+                                                        <div x-show="loading">
+                                                            <x-spinner.spinner2></x-spinner.spinner2>
+                                                        </div>
+                                                    </div>
+                                                    <template x-if="open">                                           
+                                                            <x-modal.modal2>
+                                                                <div class="p-2 grid gap-2">
+                                                                    <div class="flex justify-between items-center gap-4">
+                                                                        <div class="text-xl uppercase font-bold text-gray-600">Crear etiqueta</div>
+                                                                        <div x-on:click="open=false" class="p-1 px-3 cursor-pointer hover:bg-red-500 hover:text-white border shadow rounded-full">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <x-jet-label>Nombre</x-jet-label>
+                                                                        <x-jet-input x-model="nameTag" class="w-full"></x-jet-input>
+                                                                       
+                                                                    </div>
+                                                                    <div>
+                                                                        <x-jet-label>Tipo</x-jet-label>
+                                                                        <select name="" id="" x-ref="typeTag" class="p-2 border shadow rounded w-full">
+                                                                            <option value="1">Nombre</option>
+                                                                            <option value="2">Grupo</option>
+                                                                            <option value="3">Especial</option>
+                                                                        </select>
+                                                                    </div>   
+                                                                    <div class="mt-4">
+                                                                        <x-jet-button class="w-full text-center" x-on:click="loading=true;open=false;$wire.saveNewTag(product_id,nameTag,$refs.typeTag.value).then( ()=> loading=false)">Agregar</x-jet-button>    
+                                                                    </div>                                         
+                                                                </div>
+                                                            </x-modal.modal2>
+                                                       
+                                                    </template>
                                                 </div>
                                             </div>
                                         
@@ -351,6 +387,7 @@
                                             </div>
                                         </div> 
                                     </div>
+                               
                                 </td>
                                 {{-- Description --}}
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative">

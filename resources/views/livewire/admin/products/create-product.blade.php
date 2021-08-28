@@ -108,15 +108,53 @@
                    
                     <div class="col-span-2">
                         <x-jet-label>Etiquetas</x-jet-label>
-                        <div class="p-2 border rounded" wire:ignore>
+                        <div class="relative p-2 border rounded flex items-center gap-2" wire:ignore>
                             <select name="tags[]" id="" class="selectMultiple w-full" style="width: 100%" multiple="multiple" data-placeholder="Seleccione las etiquetas" >
                                 <option value="">Selecione las etiquetas</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>
                                 @endforeach
                             </select>
+                            <div x-data="{open:false,loading:false}">
+                                <div x-on:click="open=true">
+                                    <x-jet-button>Nueva</x-jet-button>
+                                    <div x-show="loading">
+                                        <x-spinner.spinner2></x-spinner.spinner2>
+                                    </div>
+                                </div>
+                                <template x-if="open">
+                                   
+                                        <x-modal.modal2>
+                                            <div class="p-2 grid gap-2">
+                                                <div class="flex justify-between items-center gap-4">
+                                                    <div class="text-xl uppercase font-bold text-gray-600">Agregar etiqueta</div>
+                                                    <div x-on:click="open=false" class="p-1 px-3 cursor-pointer hover:bg-red-500 hover:text-white border shadow rounded-full">
+                                                        <i class="fas fa-times"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <x-jet-label>Nombre</x-jet-label>
+                                                    <x-jet-input wire:model.defer="nameTag" class="w-full"></x-jet-input>
+                                                </div>
+                                                <div>
+                                                    <x-jet-label>Tipo</x-jet-label>
+                                                    <select name="" id="" wire:model="typeTag" class="p-2 border shadow rounded w-full">
+                                                        <option value="1">Nombre</option>
+                                                        <option value="2">Grupo</option>
+                                                        <option value="3">Especial</option>
+                                                    </select>
+                                                </div>   
+                                                <div class="mt-4">
+                                                    <x-jet-button class="w-full text-center" x-on:click="loading=true;open=false;$wire.saveNewTag().then( ()=> loading=false)">Agregar</x-jet-button>    
+                                                </div>                                         
+                                            </div>
+                                        </x-modal.modal2>
+                                   
+                                </template>
+                            </div>
                         </div>
                         <x-jet-input-error for="etiquetas" class="mt-2" />
+                       
                     </div>
                    
 

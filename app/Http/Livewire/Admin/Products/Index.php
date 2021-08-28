@@ -14,6 +14,7 @@ use Livewire\WithFileUploads;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\TagController;
 
 
 
@@ -181,6 +182,26 @@ class Index extends Component{
         
        
     }
+    
+    public function saveNewTag($product_id,$nameTag, $typeTag){
+        $tagController= new TagController();
+        $tag['name']= $nameTag;
+        $tag['type']= $typeTag;
+
+        $tag_id=$tagController->saveNewTag($tag);
+
+        if($tag_id>0){
+
+            $this->saveTag($product_id, $tag_id);
+            $this->dispatchBrowserEvent('alerta', [
+                'msj' =>  "Etiqueta " . $tag['name'] . " se ha creado con exito",
+                'icon' => 'success',
+                'title' => "Etiquta creada!!",
+            ]); 
+        }else{
+
+        }
+    }
 
     public function saveDescription($product_id, $description){
         $product = Product::find($product_id);
@@ -260,6 +281,9 @@ class Index extends Component{
         $this->openChangePhoto = false;
         $this->photo0 = "";
     }
+
+  
+
 
 
 
