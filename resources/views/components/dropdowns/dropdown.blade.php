@@ -25,15 +25,31 @@
         <input {!! $attributes->merge(['class' => '']) !!} type="hidden" id="buscador_{{ $id }}" onchange="setName()"  />
        
         <div class="shadow absolute w-full z-50 bg-white overflow-auto max-h-96" :class=" show ? '':'hidden'" id="opcion_{{ $id }}">
-            <template x-for="(item,index) in filteredOptions()" :key="item">
-              <div  @click="onOptionClick(index)" :class="classOption(item.id, index)" :aria-selected="focusedOptionIndex === index" :id="'{{$id}}_opcion_' + index" x-ref="item.name" >       
-                <template x-if="item.image">
-                    <img class="w-10 h-10 rounded-full mr-4" :src="`/storage/${item.image.url}`" />
-                </template>
-                <p class="leading-none text-gray-900" x-text="item.name" ></p>
-              </div>
-            </template>
+          <template x-if="filteredOptions().length > 0">
+            <div>          
+              <template x-for="(item,index) in filteredOptions()" :key="item">
+                <div  @click="onOptionClick(index)" :class="classOption(item.id, index)" :aria-selected="focusedOptionIndex === index" :id="'{{$id}}_opcion_' + index" x-ref="item.name" >       
+                  <template x-if="item.image">
+                      <img class="w-10 h-10 rounded-full mr-4" :src="`/storage/${item.image.url}`" />
+                  </template>
+                  <p class="leading-none text-gray-900" x-text="item.name" ></p>
+                </div>
+              </template>
           </div>
+          </template>
+          {{-- @if (isset($slot))
+            <div :class="classOption(0, 0)" :aria-selected="focusedOptionIndex === 0" :id="'{{$id}}_opcion_' + 0" x-ref="nuevo" >
+              <template x-if="filteredOptions().length==0">
+              
+                  <p class="leading-none text-gray-900"  >
+                    {{$slot}}
+                  </p>
+              
+              </template>
+            </div>
+          @endif --}}
+          
+        </div>
     </div>  
 
   

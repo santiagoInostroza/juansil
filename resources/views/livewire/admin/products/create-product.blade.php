@@ -101,7 +101,8 @@
                     </div>
                     <div>
                         <x-jet-label>Categoria</x-jet-label>
-                        <x-dropdowns.dropdown wire:model.lazy="category" :items="$categories"  id="searchCategory"></x-dropdowns.dropdown>
+                        <x-dropdowns.dropdown wire:model.lazy="category" :items="$categories"  id="searchCategory">
+                        </x-dropdowns.dropdown>
                         <x-jet-input-error for="category" class="mt-2" />
                     </div>
                    
