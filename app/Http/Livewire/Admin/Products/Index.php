@@ -107,11 +107,6 @@ class Index extends Component{
         $oldValue = $product->formato;
         $product->formato = $value; 
         $product->save();
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' =>  "Se ha cambiado '$oldValue' por '$value'",
-            'icon' => 'success',
-            'title' => "El formato ha sido cambiado",
-        ]); 
     }
 
 
