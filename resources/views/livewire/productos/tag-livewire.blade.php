@@ -129,7 +129,7 @@
                                     @else
                                         <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
                                     @endif
-                            </figure>        
+                                </figure>        
                             @endif
                             
                             <div class="text-gray-600 w-max-content m-auto max-w-full">

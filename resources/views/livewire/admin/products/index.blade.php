@@ -296,7 +296,7 @@
                                 </td>
                                 {{-- ETIQUETAS --}}
                                 <td class=" whitespace-nowrap text-sm text-gray-500 relative ">
-                                    <div class="w-full h-full px-6 py-4" x-data="{ openAddTag: false,  valor: '', product_id: '', loading: false, openButtons:false,}"  x-init="product_id={{$product->id}}"  x-on:mouseenter="openButtons=true"  x-on:mouseleave.debounce.3s="openButtons=false">
+                                    <div class="w-full h-full px-6 py-4" x-data="{ openAddTag: false,  valor: '', product_id: '', loading: false}"  x-init="product_id={{$product->id}}" >
                                         
                                         <div class="flex flex-col items-center justify-start p-4">
                                             @foreach ($product->tags as $tag)
@@ -318,9 +318,6 @@
                                                 </div>
                                             @endforeach
                                         </div>
-
-                                        <template x-if="openButtons">
-                                            
                                             <div class="absolute flex justify-center gap-4 transform -translate-x-4/12 p-4">
                                                 <x-jet-button x-on:click="openAddTag=true" class="px-2 border shadow rounded-full hover:bg-green-400 hover:text-white  cursor-pointer transform hover:scale-125">
                                                     Agregar existente
@@ -343,7 +340,7 @@
                                                                         </div>
                                                                         <div>
                                                                             <x-jet-label>Nombre</x-jet-label>
-                                                                            <x-jet-input x-model="nameTag" class="w-full"></x-jet-input>
+                                                                            <x-jet-input x-model.defer="nameTag" class="w-full"></x-jet-input>
                                                                         
                                                                         </div>
                                                                         <div>
@@ -372,7 +369,7 @@
 
                                                 </div>
                                             </div>
-                                        </template>
+                                       
 
                                         <template x-if="openAddTag">
                                             <div x-show="openAddTag" x-on:click.away="openAddTag = !openAddTag" class="hidden" :class="{'hidden': !openAddTag}">
