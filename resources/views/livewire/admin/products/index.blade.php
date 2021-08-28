@@ -11,7 +11,7 @@
         <div class="my-4 p-4 border rounded ">
             <div class="relative">
                 <x-jet-input class="w-full" wire:model.debounce.500ms="search" placeholder="Buscar..."></x-jet-input>
-                <div class="absolute right-0 top-0" wire:loading>
+                <div class="absolute right-0 top-0" wire:loading wire:target="search">
                     <x-spinner.spinner size='10'></x-spinner.spinner>
                 </div>
             </div>
