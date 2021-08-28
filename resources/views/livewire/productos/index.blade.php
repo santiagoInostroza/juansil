@@ -289,8 +289,6 @@
                                              <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($item->product->image->url) }}" src="{{ Storage::url($item->product->image->url) }}">
                                           @endif
                                        </figure>
-
-
                                     @endif
                                     
                                     <div class="text-gray-600 w-max-content m-auto max-w-full">
