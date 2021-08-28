@@ -659,14 +659,14 @@
         <div x-show="openChangePhoto"  class="hidden" :class="{'hidden' : !openChangePhoto}">
             <x-modal.modal_screen>
             
-                <div class="flex items-center justify-center h-screen w-screen">
+                <div class="flex items-center justify-center ">
                     <div id="subir_imagen_{{$product->id}}" x-data="{ isUploading: false, progress: 0 }"
                         x-on:livewire-upload-start="isUploading = true"
                         x-on:livewire-upload-finish="isUploading = false"
                         x-on:livewire-upload-error="isUploading = false"
                         x-on:livewire-upload-progress="progress = $event.detail.progress">
 
-                        <div class="relative text-white font-bold">
+                        <div class="relative text-white font-bold h-screen">
                             {{-- @php
                                 echo"<pre>";
                                 var_dump($photo0);
