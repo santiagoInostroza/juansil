@@ -658,9 +658,7 @@
     @if (isset($product))
         <div x-show="openChangePhoto"  class="hidden" :class="{'hidden' : !openChangePhoto}">
             <x-modal.modal_screen>
-                <div x-on:click="openChangePhoto=!openChangePhoto" class="p-2 px-4 bg-gray-800 opacity-25 hover:opacity-75 w-max-content rounded-full text-white cursor-pointer">
-                    <i class="fas fa-times"></i>
-                </div>
+            
                 <div class="absolute inset-0 flex items-center justify-center">
                     <div id="subir_imagen_{{$product->id}}" x-data="{ isUploading: false, progress: 0 }"
                         x-on:livewire-upload-start="isUploading = true"
@@ -721,6 +719,9 @@
                             <x-jet-input-error for="photo0" class="mt-2" />                    
                         </form>         
                     </div>
+                </div>
+                <div x-on:click="openChangePhoto=!openChangePhoto" class="absolute p-2 px-4 bg-gray-800 opacity-25 hover:opacity-75 w-max-content rounded-full text-white cursor-pointer">
+                    <i class="fas fa-times"></i>
                 </div>
             </x-modal.modal_screen>
         
