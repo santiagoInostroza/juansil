@@ -661,9 +661,7 @@
                 <div x-on:click="openChangePhoto=!openChangePhoto" class="p-2 px-4 bg-gray-800 opacity-25 hover:opacity-75 w-max-content rounded-full text-white cursor-pointer">
                     <i class="fas fa-times"></i>
                 </div>
-                <div class="flex items-center justify-center">
-
-                
+                <div class="absolute inset-0 flex items-center justify-center">
                     <div id="subir_imagen_{{$product->id}}" x-data="{ isUploading: false, progress: 0 }"
                         x-on:livewire-upload-start="isUploading = true"
                         x-on:livewire-upload-finish="isUploading = false"
