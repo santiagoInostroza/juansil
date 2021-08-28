@@ -694,14 +694,11 @@
                             @else
                                 @if (($product_selected != ""))
                                     @if ($product_selected->image)  
-
-                                        @if ( Storage::exists('products_thumb/' .$item->product->image->url))
+                                        @if ( Storage::exists('products_thumb/' .$product_selected->image->url))
                                             <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product_selected->image->url ) }}" alt="">
                                         @else
                                             <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url($product_selected->image->url ) }}" alt="">
                                         @endif
-
-                                       
                                     @else
                                         <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ asset('images/otros/sinFoto.png')}}" alt="">
                                     @endif
