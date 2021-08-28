@@ -10,7 +10,7 @@
         
         <div class="my-4 p-4 border rounded ">
           
-            <x-jet-input class="w-full" wire:model="search" placeholder="Buscar..."></x-jet-input>
+            <x-jet-input class="w-full" wire:model.debounce.1s="search" placeholder="Buscar..."></x-jet-input>
           
             <div class=" flex gap-2 items-center mt-2">
                 <label for="onlyStock" class="flex justify-center items-center border rounded p-2">
