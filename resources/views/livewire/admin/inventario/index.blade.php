@@ -63,9 +63,9 @@
                                             @if ($product->image)
                                                 <figure>
                                                     @if ( Storage::exists('products_thumb/' .  $product->image->url))
-                                                    <img class="object-cover w-12 h-12" src="{{Storage::url('products_thumb/' . $product->image->url)}}" alt="">
+                                                    <img class="object-contain w-12 h-12" src="{{Storage::url('products_thumb/' . $product->image->url)}}" alt="">
                                                     @else
-                                                        <img class="object-cover w-12 h-12" src="{{Storage::url($product->image->url)}}" alt="">
+                                                        <img class="object-contain w-12 h-12" src="{{Storage::url($product->image->url)}}" alt="">
                                                     @endif
                                                 </figure>
                                             
