@@ -314,7 +314,7 @@
                                            <div class=" overflow-auto" style="max-height: 60vh">
                                                @if (count($products))
                                                    @foreach ($products as $product)
-                                                       <div class="flex justify-between items-center hover:shadow-lg pt-2 pb-2 pl-2 pr-6 hover:transform hover:scale-50 cursor-pointer" 
+                                                       <div class="flex justify-between items-center hover:shadow-lg pt-2 pb-2 pl-2 pr-6 hover:transform hover:scale-50 cursor-pointer  @if ($product->stock <= 0) text-red-500 font-bold  @endif" 
                                                            data-product_id='{{$product->id}}'
                                                            wire:click="seleccionar({{$product->id}})"
                                                            wire:keydown.enter="seleccionar({{$product->id}})"
@@ -352,7 +352,7 @@
                                                                    @endforeach
                                                                </div>
 
-                                                               <div class="text-gray-400 text-center  @if ($product->stock <= 0) text-red-500 font-bold  @endif">
+                                                               <div class="text-gray-400 text-center ">
                                                                   
                                                                    <div class="text-xl">
                                                                        {{$product->stock}}
