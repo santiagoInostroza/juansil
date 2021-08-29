@@ -326,7 +326,7 @@
 
                                                                     <figure>
                                                                         @if ( Storage::exists('products_thumb/' .$product->image->url))
-                                                                            <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products_thumb/' . $product->image->url ) }}" alt="">
+                                                                            <img class="object-contain h-24 w-24" src="{{ Storage::url( 'products_thumb/' . $product->image->url ) }}" alt="">
                                                                         @else
                                                                             <img class="object-contain h-24 w-24" src="{{ Storage::url($product->image->url) }}" alt="">
                                                                         @endif
