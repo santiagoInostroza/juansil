@@ -61,7 +61,15 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center gap-1">
                                             @if ($product->image)
-                                               <img class="object-cover w-12 h-12" src="{{Storage::url($product->image->url)}}" alt="">
+                                                <figure>
+                                                    @if ( Storage::exists('products_thumb/' .  $product->image->url))
+                                                    <img class="object-cover w-12 h-12" src="{{Storage::url('products_thumb/' . $product->image->url)}}" alt="">
+                                                    @else
+                                                        <img class="object-cover w-12 h-12" src="{{Storage::url($product->image->url)}}" alt="">
+                                                    @endif
+                                                </figure>
+                                            
+                                               
                                             @endif
                                         
                                             <div class="ml-2">
