@@ -353,7 +353,7 @@
                                                                </div>
 
                                                                <div class="text-gray-400 text-center">
-                                                                   <div class="text-xl">
+                                                                   <div class="text-xl  @if ($product->stock <= 0) text-red-500 font-bold  @endif">
                                                                        {{$product->stock}}
                                                                    </div>
                                                                    <div class="text-sm">
