@@ -362,7 +362,7 @@ class SaleController extends Controller{
         $sale->delivery_value          = $arrayVenta['sale']['delivery_value'];
         $sale->subtotal                = $arrayVenta['sale']['subtotal'];
         $sale->delivered_user          = $arrayVenta['sale']['delivered_user'];
-        $sale->sale_type               =(isset($arrayVenta['sale']['sale_type']))? $arrayVenta['sale']['sale_type']:'';
+        $sale->sale_type               =(isset($arrayVenta['sale']['sale_type']))? $arrayVenta['sale']['sale_type']:'1';
         $sale->save();
 
 

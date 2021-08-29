@@ -186,6 +186,7 @@ class CreateSale extends Component{
             'delivered_user' => $delivered_user,
             'delivery_value' =>  $delivery_value,
             'subtotal' => $subtotal,
+            'sale_type' => 1,
         ];
        
 
