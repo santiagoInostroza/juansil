@@ -352,8 +352,9 @@
                                                                    @endforeach
                                                                </div>
 
-                                                               <div class="text-gray-400 text-center">
-                                                                   <div class="text-xl  @if ($product->stock <= 0) text-red-500 font-bold  @endif">
+                                                               <div class="text-gray-400 text-center  @if ($product->stock <= 0) text-red-500 font-bold  @endif">
+                                                                  
+                                                                   <div class="text-xl">
                                                                        {{$product->stock}}
                                                                    </div>
                                                                    <div class="text-sm">
