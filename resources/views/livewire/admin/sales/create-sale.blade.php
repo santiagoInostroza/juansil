@@ -315,12 +315,12 @@
                                                @if (count($products))
                                                    @foreach ($products as $product)
                                                        <div class="flex justify-between items-center hover:shadow-lg pt-2 pb-2 pl-2 pr-6 hover:transform hover:scale-50 cursor-pointer  " 
+                                                       data-product_id='{{$product->id}}'
                                                        @if ($product->stock <= 0)  
-                                                        data-product_id='{{$product->id}}'
                                                        @else
-                                                        wire:click="seleccionar({{$product->id}})"
-                                                        wire:keydown.enter="seleccionar({{$product->id}})"
                                                        @endif
+                                                       wire:click="seleccionar({{$product->id}})"
+                                                       wire:keydown.enter="seleccionar({{$product->id}})"
                                                           
                                                           
                                                        
