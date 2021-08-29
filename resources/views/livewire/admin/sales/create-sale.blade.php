@@ -118,7 +118,7 @@
                                                         <div class="flex items-center justify-center">
                                                             <figure>
                                                                 @if ( Storage::exists('products_thumb/' .$item['image']))
-                                                                <img  class="object-contain h-24 w-24" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                                                    <img  class="object-contain h-24 w-24" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
                                                                 @else
                                                                     <img  class="object-contain h-24 w-24" src="{{Storage::url($item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
                                                                 @endif
@@ -326,7 +326,7 @@
 
                                                                     <figure>
                                                                         @if ( Storage::exists('products_thumb/' .$product->->image->url))
-                                                                            <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products/' . $product->->image->url ) }}" alt="">
+                                                                            <img class="w-full  max-h-9/12 object-contain" id='picture' src="{{ Storage::url( 'products_thumb/' . $product->->image->url ) }}" alt="">
                                                                         @else
                                                                             <img class="object-contain h-24 w-24" src="{{ Storage::url($product->image->url) }}" alt="">
                                                                         @endif
@@ -389,11 +389,17 @@
                                        <div class="flex items-center justify-between w-full">
                                            <div>
                                                 @if ($selected_product->image)
-                                                    @if (Storage::exists('products_thumb/'. $selected_product->image->url))
-                                                        <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url('products_thumb/'.$selected_product->image->url)}}" alt=""> 
-                                                    @else
-                                                        <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
+
+                                                <figure>
+                                                    @if ( Storage::exists('products_thumb/' .$product->->image->url))
+                                                        <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url('products_thumb/' . $selected_product->image->url)}}" alt=""> 
+                                                        @else
+                                                    <img class="object-contain h-24 w-16  sm:w-24 mr-4" src="{{Storage::url($selected_product->image->url)}}" alt=""> 
                                                     @endif
+                                                </figure>
+
+                                                
+                                                   
                                                 @endif
                                             </div>
                                             <div class="w-full ">
