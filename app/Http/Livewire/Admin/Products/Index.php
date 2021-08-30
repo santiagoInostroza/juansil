@@ -85,6 +85,9 @@ class Index extends Component{
     public function editRowFalse($product_id){
        $this->editRow[$product_id] = false;
     }
+    public function editOk(){
+       $this->editRow[$this->rowTrue] = false;
+    }
 
     public function updatingSearch()
     {

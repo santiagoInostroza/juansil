@@ -146,8 +146,7 @@
                     <tbody class="bg-white divide-y divide-gray-200 text-gray-600 ">
                         @foreach ($products as $product)
                             @if ($this->editRow[$product->id])
-                                <tr>
-                                   {{ $this->editRow[$product->id]}}
+                                <tr class="bg-yellow-50">
                                     {{-- ID --}}
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center font-bold text-gray-600">
@@ -679,12 +678,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                                         <div class="flex lg:flex-col items-center gap-2">
                                             {{-- <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button> --}}
-                                        
+                                        <x-jet-button class="bg-green-400 hover:bg-green-500" wire:click="editOk"><i class="fas fa-check"></i></x-jet-button>
                                         </div>
                                     </td>
                                 </tr>
                             @else
-                                <tr>
+                                <tr wire:click="editRowTrue({{ $product->id }})">
                                     {{-- ID --}}
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center font-bold text-gray-600">
