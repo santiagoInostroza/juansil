@@ -36,20 +36,21 @@ class Index extends Component{
 
     public $editRow;
     public $editRowVerify = true;
+    public $rowTrue;
 
     protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
 
 
-    public function closeCreateProduct(){
-        $this->showCreateProduct = false;
-    }
+    // public function closeCreateProduct(){
+    //     $this->showCreateProduct = false;
+    // }
 
-    public function updatingOnlyStock(){
-        $this->editRowVerify = true;
-    }
-    public function updatingShow(){
-        $this->editRowVerify = true;
-    }
+    // public function updatingOnlyStock(){
+    //     $this->editRowVerify = true;
+    // }
+    // public function updatingShow(){
+    //     $this->editRowVerify = true;
+    // }
   
 
 
@@ -66,33 +67,47 @@ class Index extends Component{
         $categories= Category::all();
         $tags= Tag::all();
 
-        if($this->editRowVerify){
+
+
+        
             foreach ($products as  $product) {
                 $this->editRow[$product->id] = false;
             }
-            $this->editRowVerify = false;
+            // $this->editRowVerify = false;
+        if($this->editRowVerify){
+            if ( $this->rowTrue) {
+                $this->editRow[$this->rowTrue] = true;
+            }
         }
+       
 
         return view('livewire.admin.products.index', compact('products','brands','categories','tags'));
     }
 
-    public $rowTrue;
+    public function openCreateProduct(){
+        $this->editRow[$this->rowTrue] =false;
+        $this->editRowVerify = false;
+        $this->showCreateProduct = true;
+    }
+
+    
     public function editRowTrue($product_id){
         $this->editRow[$this->rowTrue] = false;
         $this->editRow[$product_id] = true;
         $this->rowTrue = $product_id;
+        $this->editRowVerify = true;
     }
     public function editRowFalse($product_id){
        $this->editRow[$product_id] = false;
     }
     public function editOk(){
        $this->editRow[$this->rowTrue] = false;
+       $this->editRowVerify = false;
     }
 
-    public function updatingSearch()
-    {
+    public function updatingSearch(){
         $this->resetPage();
-        $this->editRowVerify = true;
+        // $this->editRowVerify = true;
     }
     
     public function order($sort){

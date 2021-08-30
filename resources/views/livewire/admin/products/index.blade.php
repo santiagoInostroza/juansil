@@ -3,7 +3,7 @@
     <div class="mb-20">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
-            <x-jet-button x-on:click="openCreateProduct" >Agregar Producto</x-jet-button>
+            <x-jet-button wire:click="openCreateProduct" >Agregar Producto</x-jet-button>
         </div>
 
        
@@ -146,7 +146,7 @@
                     <tbody class="bg-white divide-y divide-gray-200 text-gray-600 ">
                         @foreach ($products as $product)
                             @if ($this->editRow[$product->id])
-                                <tr class="bg-yellow-50">
+                                <tr class="bg-yellow-50" wire:key="row_{{$product->id}}">
                                     {{-- ID --}}
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center font-bold text-gray-600">
