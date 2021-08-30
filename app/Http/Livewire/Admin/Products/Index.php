@@ -50,6 +50,7 @@ class Index extends Component{
     public function updatingShow(){
         $this->editRowVerify = true;
     }
+  
 
 
 
@@ -88,6 +89,7 @@ class Index extends Component{
     public function updatingSearch()
     {
         $this->resetPage();
+        $this->editRowVerify = true;
     }
     
     public function order($sort){
