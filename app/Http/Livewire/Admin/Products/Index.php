@@ -31,8 +31,11 @@ class Index extends Component{
     public $showCreateProduct = false;
     public $openChangePhoto = false;
     public $productStatus;
-    public $onlyStock = true;
-    public $show=1;
+    public $onlyStock = false;
+    public $show=20;
+
+    public $editRow;
+    public $editRowVerify = true;
 
     protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
 
@@ -40,6 +43,15 @@ class Index extends Component{
     public function closeCreateProduct(){
         $this->showCreateProduct = false;
     }
+
+    public function updatingOnlyStock(){
+        $this->editRowVerify = true;
+    }
+    public function updatingShow(){
+        $this->editRowVerify = true;
+    }
+
+
 
     public function render(){
 
@@ -53,7 +65,24 @@ class Index extends Component{
         $categories= Category::all();
         $tags= Tag::all();
 
+        if($this->editRowVerify){
+            foreach ($products as  $product) {
+                $this->editRow[$product->id] = false;
+            }
+            $this->editRowVerify = false;
+        }
+
         return view('livewire.admin.products.index', compact('products','brands','categories','tags'));
+    }
+
+    public $rowTrue;
+    public function editRowTrue($product_id){
+        $this->editRow[$this->rowTrue] = false;
+        $this->editRow[$product_id] = true;
+        $this->rowTrue = $product_id;
+    }
+    public function editRowFalse($product_id){
+       $this->editRow[$product_id] = false;
     }
 
     public function updatingSearch()
