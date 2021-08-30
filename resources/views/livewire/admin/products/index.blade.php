@@ -678,7 +678,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                                         <div class="flex lg:flex-col items-center gap-2">
                                             {{-- <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button> --}}
-                                        <x-jet-button class="bg-green-400 hover:bg-green-500" wire:click="editOk"><i class="fas fa-check"></i></x-jet-button>
+                                        <x-jet-button class="bg-red-400 hover:bg-red-500" wire:click="editOk"><i class="fas fa-times"></i></x-jet-button>
                                         </div>
                                     </td>
                                 </tr>
