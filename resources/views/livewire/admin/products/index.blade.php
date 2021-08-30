@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     productos
-                    <div wire:loading wire:target="show">
+                    <div wire:loading wire:target="show,onlyStock">
                         <x-spinner.spinner size='10'></x-spinner.spinner>
                     </div>
                 </label>
@@ -890,10 +890,10 @@
       
     </div>
 
-    <div  wire:loading wire:target="onlyStock">
+    {{-- <div  wire:loading wire:target="onlyStock">
         <x-spinner.spinner_screen size="20">
         </x-spinner.spinner_screen>
-    </div>
+    </div> --}}
 
 
 
