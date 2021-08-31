@@ -13,17 +13,25 @@ use App\Http\Controllers\CarritoController;
 
 class Index extends Component{
 
+    public $onlyStock = true;
+
     protected $listeners = (['render','setCantidad','addToCart','removeFromCart2','buscar']);
     
     public function render(){
         // session()->forget('carrito');
         $categories = Category::with(['products' => function($query) {
             $query->where('status',1);
+            if ($this->onlyStock) {
+                $query->where('stock','>',0);
+            }
         }])
         ->where('id','!=', 3)->get();
 
         $ultimasCompras = Purchase::with(['purchase_items.product' => function($query){
             $query->where('status',1);
+            if ($this->onlyStock) {
+                $query->where('stock','>',0);
+            }
         }])
         ->orderBy('fecha','desc')->take(5)->get();
 
@@ -35,7 +43,13 @@ class Index extends Component{
 
         $loMasVendido = collect();
         foreach ($idLoMasVendido as $value) {
-            $loMasVendido->push(collect(Product::where('id',$value->product_id)->where('status',1)->get()));
+            $item = Product::where('id',$value->product_id)->where('status',1) ;
+            if ($this->onlyStock) {
+                $item = $item->where('stock','>',0);
+            }
+            $item = $item->get();
+            $loMasVendido->push(collect( $item ));
+          
         }
 
         return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido'));

@@ -122,6 +122,16 @@
          </div>
       </div>
 
+      <div class="my-10">
+         <label for="onlyStock" class="flex justify-center items-center border rounded p-2">
+            <div class="w-max-content">Solo stock</div>
+            <label class="switch">
+                <input id="onlyStock" type="checkbox" wire:model="onlyStock">
+                <span class="slider round"></span>
+            </label>
+        </label>
+      </div>
+
       {{-- LO  MÁS VENDIDO --}}
       <div class="px-5 sm:px-20 mt-10" >
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Mira <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> lo más vendido</span> </h2>
@@ -227,6 +237,7 @@
             </div>
          @endif
       </div>
+
 
       <a href="{{route('products.lista')}}">
          <div class="bg-orange-800 px-5 py-5 sm:px-20 mt-10 cursor-pointer flex flex-col sm:flex-row items-center gap-4 justify-center" >
