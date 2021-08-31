@@ -16,7 +16,7 @@ class Index extends Component{
 
 
     public function render(){
-        // session()->forget('carrito');
+        session()->forget('carrito');
         return view('livewire.cart.index');
     }
 
