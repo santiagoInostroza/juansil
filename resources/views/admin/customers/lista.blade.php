@@ -24,7 +24,7 @@
                             <div>{{$customer->user_id}} </div>
                         </div>
                        
-                    @elseif ($users->contains($customer->email))
+                    @elseif ($users->contains(Str::lower($customer->email)))
                         <div class="bg-red-600 text-white p-2">
                             Vincular cliente con usuario
                         </div>
