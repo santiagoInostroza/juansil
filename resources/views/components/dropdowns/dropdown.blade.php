@@ -34,7 +34,7 @@
                         @if ( Storage::exists('products_thumb/item.image.url' ))
                           <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/products_thumb/${item.image.url}`" />
                         @else
-                          <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/products/${item.image.url}`" />
+                          <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="`/storage/${item.image.url}`" />
                         @endif
                     </figure>
                   </template>
