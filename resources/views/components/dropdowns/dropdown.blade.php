@@ -31,7 +31,7 @@
                 <div  @click="onOptionClick(index)" :class="classOption(item.id, index)" :aria-selected="focusedOptionIndex === index" :id="'{{$id}}_opcion_' + index" x-ref="item.name" >       
                   <template x-if="item.image">
                       <figure>
-                          <img class="w-10 h-10 rounded-full mr-4 object-contain" :src="(item.image.url.indexOf('products') >=0) ? `/storage/${item.image.url}` : `/storage/products_thumb/${item.image.url}` "  />
+                          <img class="w-10 h-10 rounded mr-4 object-contain" :src="(item.image.url.indexOf('products') >=0) ? `/storage/${item.image.url}` : `/storage/products_thumb/${item.image.url}` "  />
                     </figure>
                   </template>
                   <p class="leading-none text-gray-900" x-text="item.name" ></p>
