@@ -34,6 +34,11 @@
                     <div> {{$customer->telefono}}  {{$customer->celular}}</div>
                     <div> {{$customer->direccion}}  {{$customer->block}} {{$customer->depto}}</div>
                 </div>  
+
+                <div> Cantidad ventas {{$customer->sales->count()}} </div>
+                <div>Total ventas ${{ number_format($customer->sales->sum('total'),0,',','.')}}</div>
+
+                
                     
 
             </div>

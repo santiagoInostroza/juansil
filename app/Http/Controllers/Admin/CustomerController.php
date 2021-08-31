@@ -17,7 +17,7 @@ class CustomerController extends Controller
     }
 
     public function lista(){
-        $customers = Customer::all();
+        $customers = Customer::with('sales')->get();
         $users = User::all();
         return view('admin.customers.lista',compact('customers','users') );
     }
