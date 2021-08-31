@@ -100,7 +100,6 @@ class CreateProduct extends Component{
             }
     
             // guarda en thumbs
-            $manager =  new ImageManager();
             $image2 = $manager->make($this->photo)->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();

@@ -279,31 +279,28 @@ class Index extends Component{
                 Storage::delete('products_thumb/' .  $this->product_selected->image->url);
 
                 //guarda en products
-                $this->photo0->store('products');
+                // $this->photo0->store('products');
 
 
                  // guarda en products
                 $manager =  new ImageManager();
-                $image = $manager->make('storage/products/'.$url)->resize(1024, 1024, function ($constraint) {
+                $image1 = $manager->make($this->photo0)->resize(1024, 1024, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
-    
-                // guarda en thumbs
-                $manager =  new ImageManager();
-                $image = $manager->make('storage/products/'.$url)->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-
+                $image1->save('storage/products/'.$url);
 
                 if (!Storage::disk('public')->exists('products_thumb')) {
                     Storage::disk('public')->makeDirectory('products_thumb');
                 }
-
-
-
-                $image->save('storage/products_thumb/'.$url);
+    
+                // guarda en thumbs
+               
+                $image2 = $manager->make($this->photo0)->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->save('storage/products_thumb/'.$url);
 
                 // guarda en base de datos (ACTUALIZA)
                 $this->product_selected->image->update([
