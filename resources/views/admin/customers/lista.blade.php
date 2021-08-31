@@ -10,7 +10,7 @@
     @foreach ($customers as $customer)
 
         <div class="border rounded p-4  @isset($customer->user_id) bg-green-50  @endisset  ">
-            <div class="">
+            <div class="flex flex-col justify-between gap-4 h-full">
                 <div class="flex justify-between items-center gap-4">
                     <div>
                         <h2 class="text-xl font-bold text-gray-600 "> {{$customer->name}}</h2>
@@ -29,17 +29,18 @@
                             Vincular cliente con usuario
                         </div>
                     @endif 
-                </div>      
+                  
+                </div>  
                 <div class="my-2"> 
                     <div> {{$customer->telefono}}  {{$customer->celular}}</div>
                     <div> {{$customer->direccion}}  {{$customer->block}} {{$customer->depto}}</div>
                 </div>  
-
-                <div> Cantidad ventas {{$customer->sales->count()}} </div>
-                <div>Total ventas ${{ number_format($customer->sales->sum('total'),0,',','.')}}</div>
-
-                
+                <div>
+                  
                     
+                    <div> Cantidad ventas {{$customer->sales->count()}} </div>
+                    <div>Total ventas ${{ number_format($customer->sales->sum('total'),0,',','.')}}</div>
+                </div>                       
 
             </div>
 
