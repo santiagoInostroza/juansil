@@ -17,9 +17,15 @@ class Index extends Component{
     
     public function render(){
         // session()->forget('carrito');
-        $categories = Category::with('products')->where('id','!=', 3)->get();
+        $categories = Category::with(['products' => function($query) {
+            $query->where('status',1);
+        }])
+        ->where('id','!=', 3)->get();
 
-        $ultimasCompras = Purchase::with('purchase_items')->orderBy('fecha','desc')->take(5)->get();
+        $ultimasCompras = Purchase::with(['purchase_items.product' => function($query){
+            $query->where('status',1);
+        }])
+        ->orderBy('fecha','desc')->take(5)->get();
 
         $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
         ->groupBy('product_id')
@@ -29,7 +35,7 @@ class Index extends Component{
 
         $loMasVendido = collect();
         foreach ($idLoMasVendido as $value) {
-            $loMasVendido->push(collect(Product::where('id',$value->product_id)->get()));
+            $loMasVendido->push(collect(Product::where('id',$value->product_id)->where('status',1)->get()));
         }
 
         return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido'));
