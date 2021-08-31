@@ -85,30 +85,27 @@ class CreateProduct extends Component{
 
            
             //guarda en products
-            $this->photo->store('products');
+            // $this->photo->store('products');
     
             // guarda en products
             $manager =  new ImageManager();
-            $image = $manager->make('storage/products/'.$url)->resize(1024, 1024, function ($constraint) {
+            $image1 = $manager->make( $this->photo )->resize(1024, 1024, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $image->save('storage/products/'.$url);          
-    
-            // guarda en thumbs
-            $manager =  new ImageManager();
-            $image = $manager->make('storage/products/'.$url)->resize(300, 300, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
+            $image1->save('storage/products/'.$url);  
+            
             if (!Storage::disk('public')->exists('products_thumb')) {
                 Storage::disk('public')->makeDirectory('products_thumb');
             }
-
-
-
-            $image->save('storage/products_thumb/'.$url);          
+    
+            // guarda en thumbs
+            $manager =  new ImageManager();
+            $image2 = $manager->make($this->photo)->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image2->save('storage/products_thumb/'.$url);          
             
         }
 
