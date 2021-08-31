@@ -29,9 +29,6 @@ class Index extends Component{
 
         $ultimasCompras = Purchase::with(['purchase_items.product' => function($query){
             $query->where('status',1);
-            if ($this->onlyStock) {
-                $query->where('stock','>',0);
-            }
         }])
         ->orderBy('fecha','desc')->take(5)->get();
 
@@ -44,11 +41,8 @@ class Index extends Component{
         $loMasVendido = collect();
         foreach ($idLoMasVendido as $value) {
             $item = Product::where('id',$value->product_id)->where('status',1) ;
-            if ($this->onlyStock) {
-                $item = $item->where('stock','>',0);
-            }
-            $item = $item->get();
-            $loMasVendido->push(collect( $item ));
+          
+            $loMasVendido->push(collect( $item->get()));
           
         }
 
