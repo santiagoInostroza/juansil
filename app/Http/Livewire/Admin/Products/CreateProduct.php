@@ -27,7 +27,7 @@ class CreateProduct extends Component{
     public $stock_min;
     public $brand;
     public $category;
-    public $etiquetas;
+    public $etiquetas=[];
     public $salePrices;
     public $special_sale_price;
     public $description;
@@ -138,11 +138,12 @@ class CreateProduct extends Component{
 
     }
 
+    public $tags;
     public function render(){
         $brands= Brand::all();
         $categories= Category::all();
-        $tags= Tag::all();
-        return view('livewire.admin.products.create-product',compact('brands','categories','tags'));
+        $this->tags= Tag::all();
+        return view('livewire.admin.products.create-product',compact('brands','categories'));
     }
 
 
@@ -197,19 +198,18 @@ class CreateProduct extends Component{
     public $nameTag;
     public $typeTag;
 
-    public function saveNewTag(){
+    public function saveNewTag($nameTag,$typeTag){
         $tagController= new TagController();
-        $tag['name']= $this->nameTag;
-        $tag['type']= $this->typeTag;
+        $tag['name']= $nameTag;
+        $tag['type']= $typeTag;
 
-        if($tagController->saveNewTag($tag)){
-            $this->dispatchBrowserEvent('alerta', [
-                'msj' =>  "Etiqueta " . $tag['name'] . " se ha creado con exito",
-                'icon' => 'success',
-                'title' => "Etiquta creada!!",
-            ]); 
+        $tag_id = $tagController->saveNewTag($tag);
+
+        if($tag_id >0){
+            $this->tags= Tag::all();
+            return $tag_id;
         }else{
-
+            return 0;
         }
     }
 }

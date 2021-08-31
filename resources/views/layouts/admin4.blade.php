@@ -179,6 +179,20 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/customers*')) bg-white @endif">
+                            <a href="{{ route('admin.customers.index') }}" class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fab fa-wpforms float-left mx-2"></i>
+                                Clientes
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/customers*')) bg-white @endif">
+                            <a href="{{ route('admin.customers.lista') }}" class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fab fa-wpforms float-left mx-2"></i>
+                                Clientes Nuevo
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
                         {{-- <li class="w-full h-full py-3 px-2 border-b border-light-border">
                             <a href="forms.html"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
@@ -413,8 +427,7 @@
                 },
 
 
-                filteredOptions() {
-                    
+                filteredOptions() {                    
                 
                     if (this.filter === "") {
                         return this.items;
@@ -439,6 +452,7 @@
                                 }
                             );
                         });
+                       
                         return elementos;
                     }
                 },

@@ -10,10 +10,14 @@ use App\Http\Controllers\Controller;
 class CustomerController extends Controller
 {
 
-    public function index()
-    {
+    public function index(){
         $customers = Customer::all();
         return view("admin.customers.index", compact('customers'));
+    }
+
+    public function lista(){
+        $customers = Customer::all();
+        return view('admin.customers.lista',compact('customers') );
     }
 
 

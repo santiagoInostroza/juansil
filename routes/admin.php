@@ -44,6 +44,7 @@ Route::resource('deliveries', DeliveryController::class)->names('admin.deliverie
 Route::resource('movimientos', MovementController::class)->names('admin.movements');
 Route::resource('stock', StockController::class)->names('admin.stock');
 Route::get('inventory', [InventarioController::class,'index'])->name('admin.inventory');
+Route::get('customer', [CustomerController::class,'lista'])->name('admin.customers.lista');
 Route::resource('clientes', CustomerController::class)->names('admin.customers');
 Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerData'])->name('admin.customers.datos_cliente');
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->name('admin.sales.create');

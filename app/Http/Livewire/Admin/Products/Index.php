@@ -41,9 +41,9 @@ class Index extends Component{
     protected $listeners = ['refreshComponent' => '$refresh','closeCreateProduct'];
 
 
-    // public function closeCreateProduct(){
-    //     $this->showCreateProduct = false;
-    // }
+    public function closeCreateProduct(){
+        $this->showCreateProduct = false;
+    }
 
     // public function updatingOnlyStock(){
     //     $this->editRowVerify = true;
