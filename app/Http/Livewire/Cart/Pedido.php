@@ -493,7 +493,7 @@ class Pedido extends Component
             $this->customer->celular = $this->celular;
             $this->customer->block = $this->block;
             $this->customer->depto = $this->depto;
-            $this->customer->email = $this->email;
+            $this->customer->email =Str::lower($this->email);
             $this->customer->comentario = $this->comentario;
             
             $this->customer->direccion = $this->direccion;

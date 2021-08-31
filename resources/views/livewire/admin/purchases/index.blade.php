@@ -186,14 +186,13 @@
                                                 <tr>
                                                     <td class="py-4 whitespace-nowrap">
                                                         <div class="flex items-center justify-center">
-
-                                                            @if ( Storage::exists('products_thumb/'. $item['image'] ))
-                                                                <img  class="object-contain h-24 w-24" src="{{Storage::url('products_thumb/'.$item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
-                                                            @else
-                                                                <img  class="object-contain h-24 w-24" src="{{Storage::url($item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
-                                                            
-                                                            @endif
-                                                            
+                                                            <figure>
+                                                                @if ( Storage::exists('products_thumb/'. $item['image'] ))
+                                                                    <img  class="object-contain h-24 w-24" src="{{Storage::url('products_thumb/'.$item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                                                @else
+                                                                    <img  class="object-contain h-24 w-24" src="{{Storage::url($item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                                                @endif
+                                                            </figure>
                                                         </div>
                                                         
                                                     </td>
@@ -384,7 +383,13 @@
                                 <tr>
                                     <td class="">
                                         <div class="flex justify-center">
-                                            <img class="object-contain w-20 h-20 text-center" src="{{Storage::url($item->product->image->url)}}" alt="">
+                                            <figure>
+                                                @if (Storage::exists('products_thumb/'. $item->product->image->url))
+                                                    <img class="object-contain w-20 h-20 text-center" src="{{Storage::url('products_thumb/' . $item->product->image->url)}}" alt="">
+                                                @else
+                                                    <img class="object-contain w-20 h-20 text-center" src="{{Storage::url($item->product->image->url)}}" alt="">
+                                                @endif
+                                            </figure>
                                         </div>
                                     </td>
                                     <td class="text-left">  {{$item->cantidad}}  {{$item->product->name}} x  {{$item->cantidad_por_caja}} un. </td>
