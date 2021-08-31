@@ -24,24 +24,43 @@ class Lista extends Component{
        
         $str = explode(' ', $this->search);
 
-        $productos = Product::where('products.status','1')->where('products.name','!=','despacho')->where(function($query) use($str) {
-            foreach($str as $s) {
-                $query = $query->where('products.name','like',"%" . $s . "%");
-            }
-        })
-        ->orderBy('name','asc')->get();
 
-        $tags = Tag::with('products')
-        
+
+        // PRODUCTS
+        $productos = Product::where('name','!=','despacho')
+        ->where('status','1')
+        ->where('stock','>',0)
         ->where(function($query) use($str) {
             foreach($str as $s) {
                 $query = $query->where('name','like',"%" . $s . "%");
             }
         })
-     
         ->orderBy('name','asc')->get();
+
+       
+       
+        //    TAGS
+        $tags = Tag::with(['products' =>function($query){
+            $query->where('status',1);
+            $query->where('stock','>', 0);
+        }])
+        ->where(function($query) use($str) {
+            foreach($str as $s) {
+                $query = $query->where('name','like',"%" . $s . "%");
+            }
+        })
+        ->orderBy('name','asc')
+        ->get();
+
+
+
         
-        $brands = Brand::with('products')->where(function($query) use($str) {
+        // BRANDS
+        $brands = Brand::with(['products' =>function($query){
+            $query->where('status',1);
+            $query->where('stock','>', 0);
+        }])
+        ->where(function($query) use($str) {
             foreach($str as $s) {
                 $query = $query->where('name','like',"%" . $s . "%");
             }

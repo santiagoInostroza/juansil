@@ -17,11 +17,13 @@ class Show extends Component{
         $misma_categoria = Product::where('category_id', $this->producto->category_id)
         ->where('status',1)
         ->where('id', '!=', $this->producto->id)
+        ->where('stock','>', 0) 
         ->get();
 
         $misma_marca = Product::where('brand_id', $this->producto->brand_id)
         ->where('id', '!=',$this->producto->id)
         ->where('status',1)
+        ->where('stock','>', 0) 
         ->get();
    
        foreach ($this->producto->tags as $tag) {
@@ -31,6 +33,7 @@ class Show extends Component{
             ->where('products.id', '!=',$this->producto->id)
             ->where('product_tag.tag_id', '=',$tag->id)
             ->where('products.status',1)
+            ->where('products.stock','>', 0) 
             ->select('products.*')
             ->get();
         }
