@@ -7,12 +7,22 @@
                         <!-- Stats Row Starts Here -->
                         <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
                             <div class="shadow-lg bg-red-vibrant border-l-8 hover:bg-red-vibrant-dark border-red-vibrant-dark mb-2 p-2 md:w-1/4 mx-2">
-                                <div class="p-4 flex flex-col">
-                                    <a href="#" class="no-underline text-white text-2xl">
-                                        $244
+                                <div class="p-4 ">
+                                    <a href="#" class="no-underline text-white text-lg grid grid-cols-2 gap-4">
+                                        <div>Total Ventas</div>
+                                        <div class="text-right"> ${{ number_format($totalSales,0,',','.')}}</div>
                                     </a>
-                                    <a href="#" class="no-underline text-white text-lg">
-                                        Total Sales
+                                    <a href="#" class="no-underline text-white text-lg grid grid-cols-2 gap-4">
+                                       <div> Total Costo </div>
+                                       <div class="text-right"> ${{ number_format($totalCost,0,',','.')}}</div>
+                                    </a>
+                                    <a href="#" class="no-underline text-white text-lg grid grid-cols-2 gap-4">
+                                       <div> Diferencia </div>
+                                       <div class="text-right"> ${{ number_format($diferencia,0,',','.')}}</div>
+                                    </a>
+                                    <a href="#" class="no-underline text-white text-lg grid grid-cols-2 gap-4">
+                                       <div> Porcentaje </div>
+                                       <div class="text-right"> {{ number_format($porcentaje,2,',','.')}}% </div>
                                     </a>
                                 </div>
                             </div>
@@ -20,21 +30,22 @@
                             <div class="shadow bg-info border-l-8 hover:bg-info-dark border-info-dark mb-2 p-2 md:w-1/4 mx-2">
                                 <div class="p-4 flex flex-col">
                                     <a href="#" class="no-underline text-white text-2xl">
-                                        $199.4
+                                        ${{ number_format($totalPurchases,0,',','.')}}
                                     </a>
                                     <a href="#" class="no-underline text-white text-lg">
-                                        Total Cost
-                                    </a>
+                                        Total Compras 
+                                    </a>                                  
                                 </div>
                             </div>
+                       
 
                             <div class="shadow bg-warning border-l-8 hover:bg-warning-dark border-warning-dark mb-2 p-2 md:w-1/4 mx-2">
                                 <div class="p-4 flex flex-col">
                                     <a href="#" class="no-underline text-white text-2xl">
-                                        900
+                                        ${{ number_format($inventario,0,',','.')}}
                                     </a>
                                     <a href="#" class="no-underline text-white text-lg">
-                                        Total Users
+                                       Inventario
                                     </a>
                                 </div>
                             </div>
