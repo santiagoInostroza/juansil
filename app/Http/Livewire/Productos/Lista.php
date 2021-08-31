@@ -31,18 +31,22 @@ class Lista extends Component{
         })
         ->orderBy('name','asc')->get();
 
-        $tags = Tag::where(function($query) use($str) {
+        $tags = Tag::with('products')
+        
+        ->where(function($query) use($str) {
             foreach($str as $s) {
                 $query = $query->where('name','like',"%" . $s . "%");
             }
         })
+     
         ->orderBy('name','asc')->get();
         
-        $brands = Brand::where(function($query) use($str) {
+        $brands = Brand::with('products')->where(function($query) use($str) {
             foreach($str as $s) {
                 $query = $query->where('name','like',"%" . $s . "%");
             }
         })
+   
         ->orderBy('name','asc')->get();
 
 

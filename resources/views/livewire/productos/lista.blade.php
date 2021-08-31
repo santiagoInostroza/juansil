@@ -101,7 +101,7 @@
             @if (count($tags)>0)
                 <h2 class="mt-2 py-2  font-bold text-gray-600 text-xl">Etiquetas : {{$search}}</h2>
                 @foreach ($tags as $tag)
-                    <a href="" class="p-4 ">
+                    <a href="{{route('products.tag')}}" class="p-4 ">
                         {{$tag->name}}
                     </a>
                 @endforeach

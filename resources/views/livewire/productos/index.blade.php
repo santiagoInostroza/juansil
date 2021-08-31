@@ -121,6 +121,13 @@
             </div>
          </div>
       </div>
+
+      <a href="{{route('products.lista')}}">
+         <div class="bg-orange-800 px-5 py-5 sm:px-20 mt-10 cursor-pointer flex flex-col sm:flex-row items-center gap-4 justify-center" >
+            <h2 class="text-3xl font-hairline  sm:text-5xl  text-white ">Ver catalogo completo </h2>
+            <img class=" h-24 object-contain rounded-full shadow" src="{{url('images/portada/banner_leches_xl.png')}}" alt="">
+         </div>
+      </a>
    
 
       {{-- PRODUCTOS POR CATEGORIA --}}
@@ -236,6 +243,8 @@
          @endforeach
       </div>
 
+
+
                
 
          
@@ -243,7 +252,7 @@
          <div class="px-20 my-20" >
             <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">Explora nuestros <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0">productos</span></h2>
             <p class="max-w-md text-gray-600">
-               <span class="font-extrabold"></span>Somos un joven emprendimiento y lucharemos por hacer crecer nuestra variedad de productos para que no te falte nada.
+               <span class="font-extrabold"></span>Somos un joven emprendimiento enfocados en hacer crecer nuestra variedad de productos para que no te falte nada.
             </p>
             
          

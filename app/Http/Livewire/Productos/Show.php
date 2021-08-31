@@ -15,12 +15,13 @@ class Show extends Component{
     public function render(){
 
         $misma_categoria = Product::where('category_id', $this->producto->category_id)
+        ->where('status',1)
         ->where('id', '!=', $this->producto->id)
         ->get();
 
         $misma_marca = Product::where('brand_id', $this->producto->brand_id)
         ->where('id', '!=',$this->producto->id)
-        
+        ->where('status',1)
         ->get();
    
        foreach ($this->producto->tags as $tag) {
@@ -29,6 +30,7 @@ class Show extends Component{
             $mismas_etiquetas[$this->tag->name] =Product::join('product_tag','product_tag.product_id','=','products.id')
             ->where('products.id', '!=',$this->producto->id)
             ->where('product_tag.tag_id', '=',$tag->id)
+            ->where('products.status',1)
             ->select('products.*')
             ->get();
         }
