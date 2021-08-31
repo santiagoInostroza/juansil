@@ -17,12 +17,18 @@
                         <h3 class="text-gray-500 font-semibold">  {{$customer->email}}  </h3>
                         <h3 class="text-gray-500 font-semibold"> {{$customer->comentario}} </h3>
                     </div>
-                    @isset($customer->user_id)
+                 
+                    @if (isset($customer->user_id))
                         <div>
-                           <div> Usuario </div>
+                            <div> Usuario </div>
                             <div>{{$customer->user_id}} </div>
                         </div>
-                    @endisset 
+                   
+                    @elseif ($users->contains('email',$customer->email))
+                        <div class="bg-red-600 text-white p-2">
+                            Vincular cliente con usuario
+                        </div>
+                    @endif 
                 </div>      
                 <div class="my-2"> 
                     <div> {{$customer->telefono}}  {{$customer->celular}}</div>

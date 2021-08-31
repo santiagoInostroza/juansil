@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Customer;
 use App\Models\CustomerData;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class CustomerController extends Controller
 
     public function lista(){
         $customers = Customer::all();
-        return view('admin.customers.lista',compact('customers') );
+        $users = User::all();
+        return view('admin.customers.lista',compact('customers','users') );
     }
 
 
