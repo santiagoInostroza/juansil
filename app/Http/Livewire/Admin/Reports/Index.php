@@ -40,8 +40,7 @@ class Index extends Component{
     }
 
     public function lastMonth(){
-        $this->month =  Carbon::createFromFormat('Y-m', $this->month)->locale('es')->subMonth()->format('Y-m');
-        
+        $this->month =  Carbon::createFromFormat('Y-m', $this->month)->locale('es')->subMonth()->format('Y-m');  
     }
 
     public $sale_selected;

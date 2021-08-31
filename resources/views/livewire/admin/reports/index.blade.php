@@ -5,7 +5,7 @@
         <div class="flex justify-center items-center gap-4">
             <div wire:click="lastMonth" class="cursor-pointer text-sm font-bold">Anterior</div>
             <div class="relative">
-                <x-jet-input class="" type="month" id="start" name="start" min="2021-06" value="{{date('Y-m')}}" max="{{date('Y')}}-12" wire:change="seleccionaMes" wire:model="month"></x-jet-input>
+                <x-jet-input class="" type="month" id="start" name="start" min="2021-06" value="{{date('Y-m')}}" max="{{date('Y')}}-12" wire:model="month"></x-jet-input>
                 <div wire:loading wire:target="month" class="absolute right-10 top-2">
                     <x-spinner.spinner size="7"></x-spinner.spinner>
                 </div>
