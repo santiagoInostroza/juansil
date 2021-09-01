@@ -23,7 +23,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($users as $user)
                         @if (!$this->editRow[$user->id])
-                            <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-200 @elseif($user->eventualCustomer()) bg-yellow-200 @endif">
+                            <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-100 @elseif($user->eventualCustomer()) bg-yellow-100 @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if($user->customer())
                                         <div> Esta enlazado a {{ $user->customer()->count() }} cuenta(s) </div>
