@@ -1,5 +1,5 @@
 <div>
-    <div class="relative">
+    <div class="relative py-4">
         <x-jet-input wire:model.debounce.500ms="search" class="w-full"></x-jet-input>
         <div  wire:loading wire:target="search" >
             <x-spinner.spinner2 size="6" ></x-spinner.spinner2>
@@ -132,7 +132,7 @@
                             <tr>
                                 <td colspan="4">
 
-                                    <div class="p-8 py-4">
+                                    <div class="p-8 py-4 shadow">
 
                                         @if ( $user->customer() )
                                         <h2 class="py-2 text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
