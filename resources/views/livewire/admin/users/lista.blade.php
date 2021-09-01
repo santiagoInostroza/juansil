@@ -140,17 +140,17 @@
                                     <div class="p-8 py-4 shadow-xl border ">
 
                                         @if ( $user->customer() )
-                                        <h2 class="py-2 text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
-                                        @foreach ($user->customer() as $cust)
-                                        <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
-                                        @endforeach
+                                            <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
+                                            @foreach ($user->customer() as $cust)
+                                                <div>Cliente {{ $cust->id }} {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
+                                            @endforeach
                                         @endif
                                         
                                         @if( $user->eventualCustomer() )
-                                        <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la o las siguientes cuentas de cliente: </h2>
-                                        @foreach ($user->eventualCustomer() as $cust)
-                                        <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
-                                        @endforeach
+                                            <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la(s) siguiente(s) cuenta(s) de cliente: </h2>
+                                            @foreach ($user->eventualCustomer() as $cust)
+                                                <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
+                                            @endforeach
                                         @endif
                                         
                                     </div>
