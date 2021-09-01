@@ -143,7 +143,7 @@
                                             <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
                                             @foreach ($user->customer() as $cust)
                                                 <div>Cliente {{ $cust->id }} {{ $cust->name }} 
-                                                    @if ($cust->email != $user->email){{ $cust->email }}@endif  
+                                                    @if ( Str::lower($cust->email) !=  Str::lower($user->email) ) {{ $cust->email }} @endif  
                                                     @if ($cust->celular != $user->celular){{ $cust->celular }}@endif  
                                                 </div>
                                             @endforeach
