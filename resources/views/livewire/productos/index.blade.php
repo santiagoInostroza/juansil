@@ -369,6 +369,7 @@
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Mira <span class="block sm:inline-block mb-5 -mt-5 font-sans font-bold text-5xl sm:mb-0 sm:mt-0">Por categoria</span> </h2>
       </div>
       <div>
+
          @foreach ($categories as $categoria)
             @if ( count($categoria->products) )
                <a href="{{route('products.category',$categoria)}}">

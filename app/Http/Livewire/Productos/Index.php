@@ -19,14 +19,16 @@ class Index extends Component{
     
     public function render(){
         // session()->forget('carrito');
+      
+
+
         $categories = Category::with(['products.salePrices','products.brand','products.image','products' => function($query) {
-            $query->where('status',1);
-            if ($this->onlyStock) {
-                $query->where('stock','>',0);
-            }
-            $query->limit(10);
+          return  $query->where('status',1)->where('stock','>',0);
         }])
-        ->where('id','!=', 3)->get();
+        ->where('id','!=', 3)->get()->map(function($query) {
+            $query->setRelation('products', $query->products->take(10));
+            return $query;
+        });
 
 
 
