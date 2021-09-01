@@ -25,7 +25,12 @@
                         @if (!$this->editRow[$user->id])
                             <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-200 @elseif($user->eventualCustomer()) bg-yellow-200 @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($user->customer())Esta enlazado a {{ $user->customer()->count() }} cuenta(s) @endif @if($user->eventualCustomer())Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s) @endif
+                                    @if($user->customer())
+                                        <div> Esta enlazado a {{ $user->customer()->count() }} cuenta(s) </div>
+                                    @endif 
+                                    @if($user->eventualCustomer())
+                                        <div>Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s) </div>
+                                    @endif
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
                                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -132,7 +137,7 @@
                             <tr>
                                 <td colspan="4">
 
-                                    <div class="p-8 py-4 shadow-xl">
+                                    <div class="p-8 py-4 shadow-xl border ">
 
                                         @if ( $user->customer() )
                                         <h2 class="py-2 text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
