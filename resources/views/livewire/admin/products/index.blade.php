@@ -48,7 +48,7 @@
         </div>
 
        
-<div class="p-4">
+<div class="p-4 hidden">
 
     <div class="p-4 relative border rounded">
         <x-jet-button wire:click="optimizarImagenes">Optimizar imagen</x-jet-button>
