@@ -27,9 +27,9 @@ class Index extends Component{
         },'products.salePrices'])
         ->where('id','!=', 3)->get();
 
-        $ultimasCompras = Purchase::with(['purchase_items.product' => function($query){
+        $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product' => function($query){
             $query->where('status',1);
-        }])
+        },'purchase_items.product.salePrices'])
         ->orderBy('fecha','desc')->take(5)->get();
 
         $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
