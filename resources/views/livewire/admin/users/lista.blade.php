@@ -144,7 +144,6 @@
                                             @foreach ($user->customer() as $cust)
                                                 <div>Cliente {{ $cust->id }} {{ $cust->name }} 
                                                     @if ( Str::lower($cust->email) !=  Str::lower($user->email) ) {{ $cust->email }} @endif  
-                                                    @if ($cust->celular != $user->celular){{ $cust->celular }}@endif  
                                                 </div>
                                             @endforeach
                                         @endif
