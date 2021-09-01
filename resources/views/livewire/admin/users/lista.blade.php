@@ -112,9 +112,9 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if($user->customer()) 
                                        @foreach ($user->customer() as $cust)  
-                                           <div class="text-sm text-gray-900">
+                                           <div class="text-sm @if($user->customer())  text-white @elseif($user->eventualCustomer())   @else text-gray-900  @endif" >
                                                {{ $cust->direccion }} {{ $cust->block }} {{ $cust->depto }} 
-                                           <div class="text-sm text-gray-500">
+                                           <div class="text-sm  @if($user->customer())  text-gray-200 @elseif($user->eventualCustomer())   @else text-gray-500  @endif">
                                                {{ $cust->telefono }} {{ $cust->celular }} {{ $cust->comments }} 
                                            </div>
                                        @endforeach
