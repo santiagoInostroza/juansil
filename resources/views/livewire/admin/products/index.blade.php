@@ -714,8 +714,6 @@
                                         <div class="flex justify-between items-center gap-4 w-max-content relative" >
 
                                             @if ($product->image)
-                                            {{$product->image->url}}
-
                                                 <figure>
                                                     @if ( Storage::exists('products_thumb/' .$product->image->url))
                                                         <img class=" rounded h-24 w-24 object-contain" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">

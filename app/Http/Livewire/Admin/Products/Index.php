@@ -378,12 +378,12 @@ class Index extends Component{
                     $url2=$url;
                 }
             
-                // $manager =  new ImageManager();
-                // $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
-                //     $constraint->aspectRatio();
-                //     $constraint->upsize();
-                // });
-                // $image1->save( 'storage/products/' .  $url2 );        
+                $manager =  new ImageManager();
+                $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image1->save( 'storage/products/' .  $url2 );        
 
                 $manager =  new ImageManager();
                 //   guarda en thumbs           
