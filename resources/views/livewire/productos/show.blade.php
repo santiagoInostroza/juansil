@@ -126,7 +126,13 @@
             @isset($producto->description)
                 <div class="my-6">
                     <h2 class="text-2xl my-4 py-2 ">Descripcion del producto</h2>
-                    <div class="ck-content">
+                    <style>
+                        .descripcion h1{
+                            text-3xl 
+                        }
+
+                    </style>
+                    <div class="descripcion">
                         {!!$producto->description!!}
                     </div>
                 </div>
