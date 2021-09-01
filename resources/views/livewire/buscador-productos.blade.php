@@ -138,7 +138,12 @@
                     @endif
 
                     @if (count($products)==0 && count($tags)==0)
-                        <h2 class="font-bold">No se encontraron resultados...</h2>
+                        @if ($search=="")
+                            <h2 class="font-bold">Busca por nombre de producto o categoria...</h2>
+                        @else
+                            <h2 class="font-bold">No se encontraron resultados...</h2>
+                        @endif
+                        
                     @endif
                    
                 </div>
