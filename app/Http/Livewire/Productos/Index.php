@@ -19,7 +19,7 @@ class Index extends Component{
     
     public function render(){
         // session()->forget('carrito');
-        $categories = Category::with(['products.salePrices','products.brands','products.image','products' => function($query) {
+        $categories = Category::with(['products.salePrices','products.brand','products.image','products' => function($query) {
             $query->where('status',1);
             if ($this->onlyStock) {
                 $query->where('stock','>',0);
@@ -35,7 +35,7 @@ class Index extends Component{
         ->orderBy('fecha','desc')->take(5)->get();
 
 
-        
+
 
         $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
         ->groupBy('product_id')
