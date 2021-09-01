@@ -1,9 +1,6 @@
 <div>
-   <div class="">
-   
-   </div>
    <div  wire:ignore >
-      <div class="mt-10">
+      <div class="mt-10"></div>
       
          {{-- BANNER --}}
          {{-- <div
@@ -73,52 +70,58 @@
          </div> --}}
 
       {{-- BANNER OPCION 2 --}}
-      <div class="hidden md:block">
-         <div class="splide splideBanner ">
-            <div class="splide__track">
-               <ul class="splide__list">
-                  <li class="splide__slide">
-                     <div class="splide__slide__container">
-                        <img data-splide-lazy="{{url('images/portada/banner_leches_xl.png')}}">
-                     </div>
-                  </li>
-                  <li class="splide__slide">
-                     <div class="splide__slide__container">
-                        <img data-splide-lazy="{{url('images/portada/banner_paltas_xl.png')}}">
-                     </div>
-                  </li>
-                  <li class="splide__slide">
-                     <div class="splide__slide__container">
-                        <img data-splide-lazy="{{url('images/portada/banner_registrarse_xl.png')}}">
-                     </div>
-                  </li>
-               </ul>
+
+      <div class="relative">
+         <div class="hidden md:block">
+            <div class="splide splideBanner ">
+               <div class="splide__track">
+                  <ul class="splide__list">
+                     <li class="splide__slide">
+                        <div class="splide__slide__container">
+                           <img data-splide-lazy="{{url('images/portada/banner_leches_xl.png')}}">
+                        </div>
+                     </li>
+                     <li class="splide__slide">
+                        <div class="splide__slide__container">
+                           <img data-splide-lazy="{{url('images/portada/banner_paltas_xl.png')}}">
+                        </div>
+                     </li>
+                     <li class="splide__slide">
+                        <div class="splide__slide__container">
+                           <img data-splide-lazy="{{url('images/portada/banner_registrarse_xl.png')}}">
+                        </div>
+                     </li>
+                  </ul>
+               </div>
             </div>
          </div>
-      </div>
-   
-      <div class="block md:hidden">
-         <div class="splide splideBanner">
-            <div class="splide__track">
-         
-               <ul class="splide__list">
-                  <li class="splide__slide">
-                     <div class="splide__slide__container">
-                        <img data-splide-lazy="{{url('images/portada/banner_leches_lg.png')}}">
-                     </div>
-                  </li>
-                  <li class="splide__slide">
-                     <div class="splide__slide__container">
-                        <img data-splide-lazy="{{url('images/portada/banner_paltas_lg.png')}}">
-                     </div>
-                  </li>
-                  <li class="splide__slide">
-                     <div class="splide__slide__container">
-                        <img data-splide-lazy="{{url('images/portada/banner_registrarse_lg.png')}}">
-                     </div>
-                  </li>
-               </ul>
+      
+         <div class="block md:hidden">
+            <div class="splide splideBanner">
+               <div class="splide__track">
+            
+                  <ul class="splide__list">
+                     <li class="splide__slide">
+                        <div class="splide__slide__container">
+                           <img data-splide-lazy="{{url('images/portada/banner_leches_lg.png')}}">
+                        </div>
+                     </li>
+                     <li class="splide__slide">
+                        <div class="splide__slide__container">
+                           <img data-splide-lazy="{{url('images/portada/banner_paltas_lg.png')}}">
+                        </div>
+                     </li>
+                     <li class="splide__slide">
+                        <div class="splide__slide__container">
+                           <img data-splide-lazy="{{url('images/portada/banner_registrarse_lg.png')}}">
+                        </div>
+                     </li>
+                  </ul>
+               </div>
             </div>
+         </div>
+         <div>
+            <x-spinner.spinner2></x-spinner.spinner2>
          </div>
       </div>
 
@@ -473,11 +476,14 @@
                      </ul>
                   </div>
                </div>
+               <a href="{{route('products.category',$categoria)}}">
+                  <div class="font-bold p-2 flex justify-end mr-10 uppercase hover:text-orange-700 text-orange-600 hover:underline transform cursor-pointer">
+                     VER TODO {{$categoria->name}}...
+                  </div>
+               </a>
             @endif
          @endforeach
-         <div class=" p-2 flex justify-end uppercase hover:text-orange-700 text-orange-600 hover:underline transform cursor-pointer">
-            VER TODO {{$categoria->name}}...
-         </div>
+        
       </div>
 
             
