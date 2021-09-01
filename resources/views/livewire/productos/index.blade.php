@@ -475,6 +475,9 @@
                </div>
             @endif
          @endforeach
+         <div class=" p-2 flex justify-end uppercase hover:text-orange-700 text-orange-600 hover:underline transform cursor-pointer">
+            VER TODO {{$categoria->name}}...
+         </div>
       </div>
 
             
