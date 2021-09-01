@@ -52,9 +52,9 @@
                                         <div class="pr-2 w-16 sm:w-28">
                                             @if ($product->image)
                                                 @if (Storage::exists('products_thumb/' . $product->image->url))
-                                                    <img class="object-cover w-full" src="{{Storage::url('products_thumb/' . $product->image->url)}}" alt=""> 
+                                                    <img class="object-contain h-26 w-full" src="{{Storage::url('products_thumb/' . $product->image->url)}}" alt="{{ $product->name }}"> 
                                                 @else
-                                                    <img class="object-cover w-full" src="{{Storage::url($product->image->url)}}" alt=""> 
+                                                    <img class="object-contain h-26 w-full" src="{{Storage::url($product->image->url)}}" alt="{{$product->name}}"> 
                                                 @endif
                                             @endif
                                         </div>
