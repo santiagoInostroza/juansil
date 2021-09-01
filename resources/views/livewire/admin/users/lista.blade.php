@@ -33,7 +33,7 @@
                         @if (!$this->editRow[$user->id])
                             <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-200 @elseif($user->eventualCustomer()) bg-yellow-200 @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($user->customer())Esta enlazado 3 {{ $user->customer()->count() }} @endif @if($user->eventualCustomer())Tiene {{ $user->eventualCustomer()->count() }} posibles cuentas @endif
+                                    @if($user->customer())Esta enlazado a {{ $user->customer()->count() }} cuenta(s) @endif @if($user->eventualCustomer())Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s) @endif
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
                                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
