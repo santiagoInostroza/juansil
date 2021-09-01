@@ -40,7 +40,7 @@ class Index extends Component{
 
         $loMasVendido = collect();
         foreach ($idLoMasVendido as $value) {
-            $item = Product::where('id',$value->product_id)->where('status',1) ;
+            $item = Product::with('salePrices')->where('id',$value->product_id)->where('status',1) ;
           
             $loMasVendido->push(collect( $item->get()));
           
