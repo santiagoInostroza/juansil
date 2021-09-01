@@ -25,24 +25,27 @@ class BuscadorProductos extends Component{
                 $this->search2 =  $_GET['search'];
             }
 
-            // session()->pull('carrito');
-            $str = explode(' ', $this->search);
+            $products=[];
+            $tags=[];
+            if($this->search!=""){
+                $str = explode(' ', $this->search);
+            
+                $products = Product::where('status',1)->where(function($query) use($str) {
+                    foreach($str as $s) {
+                        $query = $query->where('name','like',"%" . $s . "%");
+                    }
+                })
+                ->take(5)
+                ->get();
 
-            $products = Product::where('status',1)->where(function($query) use($str) {
-                foreach($str as $s) {
-                    $query = $query->where('name','like',"%" . $s . "%");
-                }
-            })
-            ->take(5)
-            ->get();
-
-            $tags = Tag::where(function($query) use($str) {
-                foreach($str as $s) {
-                    $query = $query->where('name','like',"%" . $s . "%");
-                }
-            })
-            ->take(5)
-            ->get();
+                $tags = Tag::where(function($query) use($str) {
+                    foreach($str as $s) {
+                        $query = $query->where('name','like',"%" . $s . "%");
+                    }
+                })
+                ->take(5)
+                ->get();
+            }
         
 
 
