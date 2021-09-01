@@ -7,9 +7,9 @@
                 
                         <figure class=""  x-on:click="openImage = true"> 
                             @if ( Storage::exists('products_thumb/' .$producto->image->url))
-                                <img class="object-contain transform hover:scale-105 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75 cursor-pointer "  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="">
+                                <img class="object-contain transform hover:scale-105 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75 cursor-pointer "  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="{{$producto->name}}">
                             @else
-                                <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
+                                <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="{{$producto->name}}">
                             @endif
                         </figure>
                         <div x-show="openImage"  class="hidden" :class="{'hidden': !openImage}">
@@ -28,7 +28,7 @@
                                             x-transition:leave="transition ease-in duration-1000"  
                                             x-transition:leave-start="opacity-100 transform scale-100"  
                                             x-transition:leave-end="opacity-0 transform scale-90"
-                                            class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="">
+                                            class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="{{$producto->name}}">
                                     @else
                                         <img x-show="openImage"
                                             x-transition:enter="transition ease-out duration-1000" 
@@ -37,7 +37,7 @@
                                             x-transition:leave="transition ease-in duration-1000"  
                                             x-transition:leave-start="opacity-100 transform scale-100"  
                                             x-transition:leave-end="opacity-0 transform scale-90"
-                                            class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url($producto->image->url) }}" alt="">
+                                            class="object-contain max-h-96 transform hover:scale-150 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75"  src="{{ Storage::url($producto->image->url) }}" alt="{{$producto->name}}">
                            
                                     @endif
                                 </figure>
@@ -152,9 +152,9 @@
                                                 @if ($product->image)
                                                     <figure>
                                                         @if (Storage::exists('products_thumb/'. $product->image->url))
-                                                            <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/'. $product->image->url) }}" alt="">
+                                                            <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/'. $product->image->url) }}" alt="{{$product->name}}">
                                                         @else
-                                                            <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                            <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="{{$product->name}}">
                                                         @endif
                                                     </figure>
                                                 @endif
@@ -257,9 +257,9 @@
                                         @if ($product->image)
                                             <figure>
                                                 @if (Storage::exists('products_thumb/'. $product->image->url))
-                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/'. $product->image->url) }}" alt="">
+                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/'. $product->image->url) }}" alt="{{$product->name}}">
                                                 @else
-                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="{{$product->name}}">
                                                 @endif
                                             </figure>
                                            
@@ -359,9 +359,9 @@
                                         @if ($product->image)
                                             <figure>
                                                 @if (Storage::exists('products_thumb/'. $product->image->url))
-                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/'. $product->image->url) }}" alt="">
+                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/'. $product->image->url) }}" alt="{{$product->name}}">
                                                 @else
-                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
+                                                    <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="{{$product->name}}">
                                                 @endif
                                             </figure>
                                            
