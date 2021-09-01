@@ -339,7 +339,7 @@ class Index extends Component{
         }else{
             $url2=$url;
         }
-        
+
         $manager =  new ImageManager();
         $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
             $constraint->aspectRatio();
@@ -367,34 +367,37 @@ class Index extends Component{
 
         $products = Product::all(); 
         foreach ($products as  $product) {
-          
-            $url = $product->image->url;
-
-            if (strpos($url, 'products/') !== false) {
-                $url2 = substr($url, 9 );
-            }else{
-                $url2=$url;
-            }
-        
-            $manager =  new ImageManager();
-            $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $image1->save( 'storage/products/' .  $url2 );        
-
-            $manager =  new ImageManager();
-            //   guarda en thumbs           
-            $image2 = $manager->make( 'storage/products/' . $url2 );
-            $image2->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $image2->save('storage/products_thumb/' . $url2);   
+            if ($product->image) {
+                
             
-            $product->image->update([
-                'url' =>  $url2,
-            ]);
+                $url = $product->image->url;
+
+                if (strpos($url, 'products/') !== false) {
+                    $url2 = substr($url, 9 );
+                }else{
+                    $url2=$url;
+                }
+            
+                $manager =  new ImageManager();
+                $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image1->save( 'storage/products/' .  $url2 );        
+
+                $manager =  new ImageManager();
+                //   guarda en thumbs           
+                $image2 = $manager->make( 'storage/products/' . $url2 );
+                $image2->resize(150, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->save('storage/products_thumb/' . $url2);   
+                
+                $product->image->update([
+                    'url' =>  $url2,
+                ]);
+            }
             
         }    
     }
