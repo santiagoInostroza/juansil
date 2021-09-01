@@ -1,8 +1,8 @@
-    <div class="container py-11 lg:max-w-7xl ">
+    <section class="container py-11 lg:max-w-7xl ">
         <div class="mx-6 mb-6" >
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
                 @isset($producto->image->url)
-                    <div x-data="{openImage:false}">
+                    <section x-data="{openImage:false}">
 
                 
                         <figure class=""  x-on:click="openImage = true"> 
@@ -44,10 +44,10 @@
                             </x-modal.modal_image>
                            
                         </div>
-                    </div>
+                    </section>
                 @endisset
 
-                <div class="flex flex-col justify-center">
+                <section class="flex flex-col justify-center">
                     <div class="mb-2">
                         @foreach ($producto->tags as $tag)
                             <a href="{{route('products.tag',$tag)}}">
@@ -85,7 +85,7 @@
                         </div>
                         
                     @endforeach
-                </div>
+                </section>
             </div>
             <hr>
             <div class="fixed left-0 bottom-0 py-6  text-center w-full border-t mr-6 bg-gray-200" style="z-index: 1 ">
@@ -124,18 +124,18 @@
             </div>
 
             @isset($producto->description)
-                <div class="my-6">
-                    <h2 class="text-2xl my-4 py-2 ">Descripcion del producto</h2>
+                <section class="my-6">
+                    <h1 class="text-2xl my-4 py-2 ">Descripcion del producto</h1>
                     <style>
                         .descripcion h1{
                             text-3xl 
                         }
 
                     </style>
-                    <div class="descripcion">
+                    <section class="descripcion">
                         {!!$producto->description!!}
-                    </div>
-                </div>
+                    </section>
+                </section>
             @endisset
             <hr>
         </div>
@@ -149,7 +149,7 @@
                 @foreach ($mismas_etiquetas as $key => $productos)
                     @if (count($productos))
                         <div class="mt-4 mb-8">
-                            <h1 class="text-2xl font-bold text-gray-600 mb-4">Más de {{ $key }}</h1>
+                            <h2 class="text-2xl font-bold text-gray-600 mb-4">Más de {{ $key }}</h2>
                             <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
                                 @foreach ($productos as $product)
                                     <li class="border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
@@ -253,7 +253,7 @@
           
 
             @if (count($misma_marca)>0)
-                <div class="mt-4 mb-8">
+                <section class="mt-4 mb-8">
                     <h1 class="text-2xl font-bold text-gray-600 mb-4">Más de {{ $producto->brand->name }}</h1>
                     <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
                         @foreach ($misma_marca as $product)
@@ -348,14 +348,14 @@
                             </li>  
                         @endforeach
                     </ul>
-                </div>
+                </section>
                 <hr>
             @endif
 
          
                  
             @if (count($misma_categoria)>0)
-                <div class="mt-4 mb-8">
+                <section class="mt-4 mb-8">
                     <h1 class="text-2xl font-bold text-gray-600 mb-4">Más de {{ $producto->category->name }}</h1>
                     <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-gray-200">
                         @foreach ($misma_categoria as $product)
@@ -450,7 +450,7 @@
                             </li>  
                         @endforeach
                     </ul>
-                </div>
+                </section>
             @endif
         </aside>
        
@@ -513,5 +513,5 @@
 
 
 
-    </div>
+        </section>
 
