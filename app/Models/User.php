@@ -76,7 +76,7 @@ class User extends Authenticatable
     }
 
     public function eventualCustomer(){
-        $customer = Customer::where(Customer::raw( 'lower(email) '),'=', Str::lower($this->email)  ) ->get();
+        $customer = Customer::where('user_id',null)->where(Customer::raw( 'lower(email) '),'=', Str::lower($this->email)  ) ->get();
 
         if($customer->count()){
             return $customer;
