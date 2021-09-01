@@ -151,7 +151,7 @@
                                         @if( $user->eventualCustomer() )
                                             <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la(s) siguiente(s) cuenta(s) de cliente: </h2>
                                             @foreach ($user->eventualCustomer() as $cust)
-                                                <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
+                                                <div> Cliente {{ $cust->id }} {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
                                             @endforeach
                                         @endif
                                         
