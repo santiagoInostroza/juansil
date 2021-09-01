@@ -68,8 +68,8 @@ class User extends Authenticatable
     ];
 
     public function customer(){
-        $customer = Customer::where('user_id',$this->id)->first();
-        if($customer){
+        $customer = Customer::where('user_id',$this->id)->get();
+        if($customer->count()){
             return $customer;
         }
         return false;
