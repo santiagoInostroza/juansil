@@ -175,10 +175,10 @@
                                         <p>{{$user->eventualCustomer()->email}}</p>
                                         <p>{{$user->eventualCustomer()->celular}}</p>
                                         <p>{{$user->eventualCustomer()->direccion}}</p>
-                                        <p>{{$user->eventualCustomer()->comentario}}</p>
+                                        <p>{{$user->eventualCustomer()->comments}}</p>
                                         <p>{{$user->eventualCustomer()->email}}</p>
                                     @endif
-                                    
+
                                 </td>
                             </tr>
                         @endif
