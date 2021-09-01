@@ -120,9 +120,7 @@
                </div>
             </div>
          </div>
-         <div>
-            <x-spinner.spinner2></x-spinner.spinner2>
-         </div>
+       
       </div>
 
       {{-- LO  MÁS VENDIDO --}}
