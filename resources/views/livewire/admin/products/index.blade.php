@@ -183,7 +183,7 @@
                                                             <x-spinner.spinner2 size="16"></x-spinner.spinner2>
                                                         </div>
                                                     </div>
-                                                    <div class="p-4 relative border rounded">
+                                                    <div class="p-4 relative border rounded hidden">
                                                         <x-jet-button wire:click="optimizarImagen({{ $product->id}})" >Optimizar imagen</x-jet-button>
                                                         <div wire:loading >
                                                             <x-spinner.spinner2></x-spinner.spinner2>
