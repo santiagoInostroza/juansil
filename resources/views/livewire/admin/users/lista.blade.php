@@ -168,11 +168,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @elseif($user->eventualCustomer())
-                                        Esta cuenta de usuario se puede vincular con la siguiente cuenta de cliente: 
-                                        <p>{{$user->eventualCustomer()}}</p>
-                                        <p>{{$user->eventualCustomer()}}</p>
                                     @endif
+                                    @if($user->eventualCustomer())
+                                        Esta cuenta de usuario se puede vincular con la siguiente cuenta de cliente: 
+                                        <p>{{$user->eventualCustomer()->name}}</p>
+                                        <p>{{$user->eventualCustomer()->email}}</p>
+                                        <p>{{$user->eventualCustomer()->celular}}</p>
+                                        <p>{{$user->eventualCustomer()->direccion}}</p>
+                                        <p>{{$user->eventualCustomer()->comentario}}</p>
+                                        <p>{{$user->eventualCustomer()->email}}</p>
+                                    @endif
+                                    
                                 </td>
                             </tr>
                         @endif

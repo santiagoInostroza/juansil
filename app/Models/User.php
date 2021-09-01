@@ -76,8 +76,6 @@ class User extends Authenticatable
     }
 
     public function eventualCustomer(){
-        // Customer::whereRaw('UPPER('{$column}') LIKE ?', ['%' . strtoupper($value) . '%']);
-
         $customer = Customer::where(Customer::raw( 'lower(email) '),'=', Str::lower($this->email)  ) ->get();
 
         if($customer->count()){
