@@ -2,7 +2,7 @@
         <div class="mx-6 mb-6" >
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
                 @isset($producto->image->url)
-                    <div x-data="{openImage:false}" class="hidden" :class="{'hidden': !openImage}">
+                    <div x-data="{openImage:false}">
 
                 
                         <figure class=""  x-on:click="openImage = true"> 
@@ -12,7 +12,7 @@
                                 <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="">
                             @endif
                         </figure>
-                        <div x-show="openImage">
+                        <div x-show="openImage"  class="hidden" :class="{'hidden': !openImage}">
                             <x-modal.modal_image>
                                 <div class="fixed top-4 right-4 ">
                                     <div x-on:click="openImage=false" class="p-4 px-6 shadow rounded-full hover:bg-red-700 hover:text-white transform hover:scale-110">
