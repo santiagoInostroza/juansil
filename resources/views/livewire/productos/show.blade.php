@@ -6,11 +6,11 @@
 
                 
                         <figure class=""  x-on:click="openImage = true"> 
-                            @if ( Storage::exists('products_thumb/' .$producto->image->url))
-                                <img class="object-contain transform hover:scale-105 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75 cursor-pointer "  src="{{ Storage::url('products_thumb/' . $producto->image->url) }}" alt="{{$producto->name}}">
-                            @else
+                            {{-- @if ( Storage::exists('products_thumb/' .$producto->image->url)) --}}
+                                <img class="object-contain transform hover:scale-105 h-52 sm:h-96 w-full object-center transition-all duration-500 ease-in-out delay-75 cursor-pointer "  src="{{ Storage::url('products/' . $producto->image->url) }}" alt="{{$producto->name}}">
+                            {{-- @else
                                 <img class="object-contain h-52 sm:h-96 w-full object-center"  src="{{ Storage::url($producto->image->url) }}" alt="{{$producto->name}}">
-                            @endif
+                            @endif --}}
                         </figure>
                         <div x-show="openImage"  class="hidden" :class="{'hidden': !openImage}">
                             <x-modal.modal_image>
