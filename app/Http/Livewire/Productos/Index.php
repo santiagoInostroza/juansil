@@ -19,18 +19,23 @@ class Index extends Component{
     
     public function render(){
         // session()->forget('carrito');
-        $categories = Category::with(['products' => function($query) {
+        $categories = Category::with(['products.salePrices','products.brands','products.image','products' => function($query) {
             $query->where('status',1);
             if ($this->onlyStock) {
                 $query->where('stock','>',0);
             }
-        },'products.salePrices'])
+        }])
         ->where('id','!=', 3)->get();
+
+
 
         $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product' => function($query){
             $query->where('status',1);
         },'purchase_items.product.salePrices'])
         ->orderBy('fecha','desc')->take(5)->get();
+
+
+        
 
         $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
         ->groupBy('product_id')
