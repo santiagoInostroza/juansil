@@ -132,7 +132,7 @@
                             <tr>
                                 <td colspan="4">
 
-                                    <div class="p-8 py-4 shadow">
+                                    <div class="p-8 py-4 shadow-xl">
 
                                         @if ( $user->customer() )
                                         <h2 class="py-2 text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
