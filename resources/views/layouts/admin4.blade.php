@@ -98,6 +98,38 @@
                                 <span><i class="fas fa-angle-right float-right"></i></span>
                             </a>
                         </li>
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/users*')) bg-white @endif">
+                            <a href="{{route('admin.users.index')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fas fa-users float-left mx-2"></i>
+                                Usuarios
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/users*')) bg-white @endif">
+                            <a href="{{route('admin.users.newIndex')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fas fa-users float-left mx-2"></i>
+                                Usuarios Nuevo
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/users*')) bg-white @endif">
+                            <a href="{{route('admin.users.newIndex')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fas fa-users float-left mx-2"></i>
+                                Roles
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/users*')) bg-white @endif">
+                            <a href="{{route('admin.users.newIndex')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fas fa-users float-left mx-2"></i>
+                                Roles Nuevo
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
                         <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/inventory*')) bg-white @endif">
                             <a href="{{route('admin.inventory')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">

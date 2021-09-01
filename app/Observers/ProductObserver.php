@@ -11,7 +11,7 @@ class ProductObserver
     public function deleting(Product $product)
     {
         if($product->image){
-            Storage::delete($product->image->url);
+            // Storage::delete($product->image->url);
         }
     }
     

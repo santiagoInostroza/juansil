@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Customer;
+use Illuminate\Support\Str;
+use Laravel\Cashier\Billable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Laravel\Jetstream\HasProfilePhoto;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
-use Laravel\Cashier\Billable;
-
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -63,4 +66,24 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function customer(){
+        $customer = Customer::where('user_id',$this->id)->first();
+        if($customer){
+            return $customer;
+        }
+        return false;
+    }
+
+    public function eventualCustomer(){
+        // Customer::whereRaw('UPPER('{$column}') LIKE ?', ['%' . strtoupper($value) . '%']);
+
+        $customer = Customer::where(Customer::raw( 'lower(email) '),'=', Str::lower($this->email)  ) ->get();
+
+        if($customer->count()){
+            return $customer;
+        }
+        return false;
+    }
+
 }

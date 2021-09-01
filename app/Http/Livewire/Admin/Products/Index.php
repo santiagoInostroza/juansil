@@ -70,9 +70,9 @@ class Index extends Component{
 
 
         
-            foreach ($products as  $product) {
-                $this->editRow[$product->id] = false;
-            }
+        foreach ($products as  $product) {
+            $this->editRow[$product->id] = false;
+        }
             // $this->editRowVerify = false;
         if($this->editRowVerify){
             if ( $this->rowTrue) {

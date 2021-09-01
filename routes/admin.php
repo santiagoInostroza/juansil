@@ -51,6 +51,7 @@ Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->name
 Route::resource('ventas', SaleController::class)->names('admin.sales');
 Route::resource('comunas', ComunaController::class)->names('admin.comunas');
 
+Route::get('users/index',[UserController::class,'newIndex'])->name('admin.users.newIndex');
 Route::resource('users',  UserController::class)->only('index','edit','update')->names('admin.users');
 Route::resource('roles',  RoleController::class)->names('admin.roles');
 Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->name('admin.sales.pagos_pendientes');

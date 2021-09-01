@@ -18,6 +18,9 @@ class UserController extends Controller{
     public function index(){
        return view('admin.users.index');
     }
+    public function newIndex(){
+       return view('admin.users.newIndex');
+    }
 
     public function edit(User $user){
         $roles = Role::all();
