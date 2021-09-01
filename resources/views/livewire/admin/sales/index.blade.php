@@ -482,7 +482,13 @@
                                                 <td class="text-center">
                                                     @if ($item->product->image)
                                                     <div class="flex justify-center">
-                                                        <img class="object-contain w-20 h-20" src="{{Storage::url($item->product->image->url)}}" alt=""> 
+                                                        <figure>
+                                                            @if (Storage::exists('products_thumb/' . $item->product->image->url))
+                                                                <img class="object-contain w-20 h-20" src="{{Storage::url('products_thumb/' . $item->product->image->url)}}" alt=""> 
+                                                            @else
+                                                                <img class="object-contain w-20 h-20" src="{{Storage::url($item->product->image->url)}}" alt=""> 
+                                                            @endif
+                                                        </figure>
                                                     </div>
                                                     @endif
                                                 </td>
