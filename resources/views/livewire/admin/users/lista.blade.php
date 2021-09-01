@@ -77,7 +77,7 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="bg-green-50  @if($user->customer()) bg-green-300 @elseif($user->eventualCustomer()) bg-yellow-300 @endif"">
+                            <tr class="@if($user->customer()) bg-green-300 @elseif($user->eventualCustomer()) bg-yellow-300 @else bg-green-50  @endif"">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
