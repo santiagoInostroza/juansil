@@ -159,9 +159,9 @@
             <div class="hidden sm:block">
                 <div class="flex space-x-4">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <a href="{{ route('products.lista') }}" class="text-gray-500 hover:text-gray-800 hover:font-bold px-3 py-2 rounded-md text-sm font-medium transform hover:scale-110">Todo</a>
                     @foreach ($categories as $category)
-                        <a href="{{ route('products.category', $category) }}"
-                            class="text-gray-500 hover:text-gray-800 hover:font-bold px-3 py-2 rounded-md text-sm font-medium transform hover:scale-110">{{ $category->name }}</a>
+                        <a href="{{ route('products.category', $category) }}" class="text-gray-500 hover:text-gray-800 hover:font-bold px-3 py-2 rounded-md text-sm font-medium transform hover:scale-110">{{ $category->name }}</a>
                     @endforeach
 
                     {{-- <a href="#"
