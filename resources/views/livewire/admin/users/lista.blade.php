@@ -172,13 +172,16 @@
                                     @endif
                                     @if($user->eventualCustomer())
                                         Esta cuenta de usuario se puede vincular con la siguiente cuenta de cliente: 
-                                        @foreach ($user->eventualCustomer as $cust)
+                                        @foreach ($user->eventualCustomer() as $cust)
+                                        <div>
+
                                             <p>{{ $cust->name }}</p>
                                             <p>{{ $cust->email }}</p>
                                             <p>{{ $cust->celular }}</p>
                                             <p>{{ $cust->direccion }}</p>
                                             <p>{{ $cust->comentario }}</p>
                                             <p>{{ $cust->email }}</p>
+                                        </div>
                                         @endforeach
                                        
                                     @endif
