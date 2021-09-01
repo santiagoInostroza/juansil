@@ -33,6 +33,7 @@
                         @if (!$this->editRow[$user->id])
                             <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-200 @elseif($user->eventualCustomer()) bg-yellow-200 @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($user->customer())Esta enlazado @endif @if($user->eventualCustomer())Tiene posibles cuentas @endif
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
                                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -171,14 +172,17 @@
                                     @endif
                                     @if($user->eventualCustomer())
                                         Esta cuenta de usuario se puede vincular con la siguiente cuenta de cliente: 
-                                        <p>{{$user->eventualCustomer()->name}}</p>
-                                        <p>{{$user->eventualCustomer()->email}}</p>
-                                        <p>{{$user->eventualCustomer()->celular}}</p>
-                                        <p>{{$user->eventualCustomer()->direccion}}</p>
-                                        <p>{{$user->eventualCustomer()->comments}}</p>
-                                        <p>{{$user->eventualCustomer()->email}}</p>
+                                        @foreach ($user->eventualCustomer as $cust)
+                                            <p>{{ $cust->name }}</p>
+                                            <p>{{ $cust->email }}</p>
+                                            <p>{{ $cust->celular }}</p>
+                                            <p>{{ $cust->direccion }}</p>
+                                            <p>{{ $cust->comentario }}</p>
+                                            <p>{{ $cust->email }}</p>
+                                        @endforeach
+                                       
                                     @endif
-
+                                    
                                 </td>
                             </tr>
                         @endif
