@@ -1,7 +1,7 @@
 <div class="w-full">
     <div x-data="buscadorMain()" x-init="document.getElementById('buscar').focus()">
         <div @click="openSearch" class="hidden sm:flex items-center w-full relative"> 
-            <input  class="w-full h-8 px-3 rounded" type="text" placeholder="¿Qué estás buscando?" id="buscador"  wire:model='search2'>
+            <input  class="w-full h-8 px-3 rounded" type="text" placeholder="¿Qué estás buscando?" id="buscador"  wire:model.debounce.500ms='search2'>
             <div class=" text-black absolute px-2 right-0" >     
                 <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
@@ -19,7 +19,7 @@
 
                 <div class="flex justify-between items-center">
                     <div class="px-3 mb-1 flex relative flex-1">
-                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model='search' id='buscar'   wire:keydown.enter=@if(Request::is('productos/lista*')) 'buscar()' @else 'irBuscar()' @endif>
+                        <input wire:ignore type="text" class="border w-full h-8 pl-2 rounded" placeholder="Ingresa nombre" wire:model.debounce.500ms='search' id='buscar'   wire:keydown.enter=@if(Request::is('productos/lista*')) 'buscar()' @else 'irBuscar()' @endif>
                         <i class="fas fa-times absolute right-7 p-2 cursor-pointer text-gray-400" x-on:click="limpiar_buscador"></i>
                         <div wire:loading.delay class="absolute mt-1 right-12">
                             <x-spinner.spinner size="6"></x-spinner.spinner>

@@ -91,6 +91,7 @@ class BuscadorProductos extends Component{
     }
 
     public function updatedSearch2(){
+        $this->search = $this->search2 ;
         $this->emitTo('productos.lista','buscar',$this->search);
     }
 
