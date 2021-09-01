@@ -40,6 +40,7 @@ class BuscadorProductos extends Component{
                     $query = $query->where('name','like',"%" . $s . "%");
                 }
             })
+            ->take(5)
             ->get();
         
 
