@@ -11,21 +11,13 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Nombre
-                    </th>
-                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                       Direccion
-                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Nombre </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Direccion </th>
                     {{-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                     </th> --}}
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Rol
-                    </th>
-                    <th scope="col" class="relative px-6 py-3">
-                    <span class="sr-only">Edit</span>
-                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol </th>
+                    <th scope="col" class="relative px-6 py-3"><span class="sr-only">Edit</span> </th>
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -85,7 +77,7 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="bg-green-50">
+                            <tr class="bg-green-50  @if($user->customer()) bg-green-300 @elseif($user->eventualCustomer()) bg-yellow-300 @endif"">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -112,10 +104,17 @@
                                         </div>
                                     </div>
                                 </td>
-                                {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                    <div class="text-sm text-gray-500">Optimization</div>
-                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($user->customer()) 
+                                       @foreach ($user->customer() as $cust)  
+                                           <div class="text-sm text-gray-900">
+                                               {{ $cust->direccion }} {{ $cust->block }} {{ $cust->depto }} 
+                                           <div class="text-sm text-gray-500">
+                                               {{ $cust->telefono }} {{ $cust->celular }} {{ $cust->comments }} 
+                                           </div>
+                                       @endforeach
+                                   @endif
+                               </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                         Active
@@ -134,14 +133,14 @@
                                 <td colspan="4">
 
                                     @if ( $user->customer() )
-                                        <h2 class="text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
+                                        <h2 class="py-2 text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
                                         @foreach ($user->customer() as $cust)
                                             <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
                                         @endforeach
                                     @endif
 
                                     @if( $user->eventualCustomer() )
-                                        <h2 class="text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la o las siguientes cuentas de cliente: </h2>
+                                        <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la o las siguientes cuentas de cliente: </h2>
                                         @foreach ($user->eventualCustomer() as $cust)
                                             <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
                                         @endforeach
