@@ -168,7 +168,7 @@
                                     <td class="px-6 py-4  whitespace-nowrap ">
                                         <div class="flex justify-between items-center gap-4 w-max-content relative" >
                                             @if ($product->image)
-                                                <div id="imagen_{{$product->id}}" x-data="{loading:false,product_id:''}" x-init="product_id={{$product->id}}">
+                                                <div id="imagen_{{$product->id}}" x-data="{loading:false,product_id:''}" x-init="product_id={{$product->id}}" wire:key="imagen_{{$product->id}}">
                                                     <div x-on:click="{loading=true; $wire.changePhoto(product_id).then(()=>loading=false) }" class="cursor-pointer relative">
                                                         <figure>
                                                             
@@ -184,7 +184,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="p-4 relative border rounded">
-                                                        <x-jet-button wire:click="optimizarImagen({{ $product->id}})">Optimizar imagen</x-jet-button>
+                                                        <x-jet-button wire:click="optimizarImagen({{ $product->id}})" >Optimizar imagen</x-jet-button>
                                                         <div wire:loading wire:target="optimizarImagen({{ $product->id}})">
                                                             <x-spinner.spinner2></x-spinner.spinner2>
                                                         </div>
