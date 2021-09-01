@@ -23,17 +23,23 @@ class CarritoController extends Controller{
                 'stock' => $producto->stock,
             ];
 
-        session([
-            'carrito' => $listaProductos
-        ]);
-
-        $precio = $this->calcularPrecioVenta($product_id, $cantidad);
-        $total = $precio * $cantidad;
-
-        session(['carrito.' . $product_id . '.precio' => $precio]);
-        session(['carrito.' . $product_id . '.total' => $total]);
-
-        $this->updateTotal();
+            try {
+                $precio = $this->calcularPrecioVenta($product_id, $cantidad);
+                $total = $precio * $cantidad;
+        
+                session([
+                    'carrito' => $listaProductos
+                ]);
+        
+                session(['carrito.' . $product_id . '.precio' => $precio]);
+                session(['carrito.' . $product_id . '.total' => $total]);
+        
+                $this->updateTotal();
+            } catch (\Throwable $th) {
+               
+            }
+      
+       
         
     }
     public function addToCartSpecial($product_id, $cantidad){
