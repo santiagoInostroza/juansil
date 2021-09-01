@@ -57,7 +57,7 @@
                             <div class=" h-24 flex items-center justify-between relative ">
                                
                                 <div class="w-16">
-                                    <img class="max-h-24 object-cover" src=" {{ Storage::url($producto['url']) }}" alt="">
+                                    <img class="max-h-24 object-contain" src=" {{ Storage::url('products_thumb' . $producto['url']) }}" alt="">
                                 </div>
                         
                                 {{-- NOMBRE --}}
