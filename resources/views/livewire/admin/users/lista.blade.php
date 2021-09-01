@@ -33,7 +33,7 @@
                         @if (!$this->editRow[$user->id])
                             <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-200 @elseif($user->eventualCustomer()) bg-yellow-200 @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($user->customer())Esta enlazado @endif @if($user->eventualCustomer())Tiene posibles cuentas @endif
+                                    @if($user->customer())Esta enlazado 3 {{ $user->customer()->count() }} @endif @if($user->eventualCustomer())Tiene {{ $user->eventualCustomer()->count() }} posibles cuentas @endif
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
                                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -60,8 +60,15 @@
                                     </div>
                                 </td>
                                  <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">@if($user->customer()) {{$user->customer()->direccion}} {{$user->customer()->block}} {{$user->customer()->depto}} @endif </div>
-                                    <div class="text-sm text-gray-500">@if($user->customer()) {{$user->customer()->telefono}} {{$user->customer()->celular}} {{$user->customer()->comments}} @endif</div>
+                                     @if($user->customer()) 
+                                        @foreach ($user->customer() as $cust)  
+                                            <div class="text-sm text-gray-900">
+                                                {{ $cust->direccion }} {{ $cust->block }} {{ $cust->depto }} 
+                                            <div class="text-sm text-gray-500">
+                                                {{ $cust->telefono }} {{ $cust->celular }} {{ $cust->comments }} 
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </td>
                                 {{--<td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -129,14 +136,14 @@
                                     @if ( $user->customer() )
                                         <h2 class="text-xl font-bold text-gray-600"> Esta cuenta de usuario está vinculada a la o las siguientes cuentas de cliente:</h2>
                                         @foreach ($user->customer() as $cust)
-                                            <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }}  {{ $cust->comentario }}</div>
+                                            <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
                                         @endforeach
                                     @endif
 
                                     @if( $user->eventualCustomer() )
                                         <h2 class="text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la o las siguientes cuentas de cliente: </h2>
                                         @foreach ($user->eventualCustomer() as $cust)
-                                            <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }}  {{ $cust->comentario }}</div>
+                                            <div> {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
                                         @endforeach
                                     @endif
                                     
