@@ -28,7 +28,7 @@ class BuscadorProductos extends Component{
             // session()->pull('carrito');
             $str = explode(' ', $this->search);
 
-            $products = Product::where(function($query) use($str) {
+            $products = Product::where('status',1)->where(function($query) use($str) {
                 foreach($str as $s) {
                     $query = $query->where('name','like',"%" . $s . "%");
                 }
