@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Brand;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -51,5 +52,21 @@ class BrandController extends Controller
     {
        $marca->delete();
        return redirect()->route('admin.brands.index')->with('eliminado','ok');
+    }
+
+    public function saveNewBrand($nameBrand){
+
+        $brand = Brand::where('name',$nameBrand)->first();
+
+        if($nameBrand=="" || $brand){
+            return 0;
+        }
+        
+        $brand = new Brand();
+        $brand->name = $nameBrand;
+        $brand->slug = Str::slug($nameBrand);
+        $brand->save();
+        return $brand->id;
+        
     }
 }

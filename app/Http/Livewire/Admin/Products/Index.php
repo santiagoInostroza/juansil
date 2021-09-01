@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Models\Tag;
 use App\Models\Brand;
 use App\Models\Product;
@@ -242,6 +243,17 @@ class Index extends Component{
 
         if($tag_id>0){
             $this->saveTag($product_id, $tag_id);
+        }else{
+
+        }
+    }
+
+    public function saveNewBrand($product_id,$nameBrand){
+        $brandController= new BrandController();
+        $brand_id=$brandController->saveNewBrand($nameBrand);
+
+        if($brand_id>0){
+            $this->saveBrand($product_id, $brand_id);
         }else{
 
         }

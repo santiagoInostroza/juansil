@@ -1,7 +1,7 @@
 <div id="productsMain" x-data="productsMain()" x-init="start()">
    
     <div class="mb-20">
-
+        
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
             <x-jet-button wire:click="openCreateProduct" >Agregar Producto</x-jet-button>
@@ -189,6 +189,7 @@
                                             @endif
 
                                             <div class="grid w-full">
+                                                {{-- NOMBRE --}}
                                                 <div  id="nombre_{{ $product->id }}" x-data="{ open : false,  edit: false, product_id: 'algo', loading: false, name: '' }"  x-init=" name='{{ $product->name }}' ; product_id={{ $product->id }}"  x-on:mouseenter="edit = true" x-on:mouseleave="edit = false">
                                                     <div class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative w-full p-1 px-2 rounded">
                                                         <div class="flex justify-start gap-x-1 h-6">
@@ -202,15 +203,10 @@
                                                                     <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" ></i>
                                                                 </div>
                                                             </div>
-                                                        </div> 
-                                                        <div x-show="edit" :class="{'hidden' : !edit}">
-                                                            <div  x-on:click="open=true" class="absolute right-0 p-1 px-2 cursor-pointer bg-gray-100 rounded"  >
-                                                                <i class="fas fa-pen"></i>
-                                                            </div>
-                                                            <div>
-                                                                <i class="fas fa-pen"></i>
-                                                            </div>
-                                                        </div>                                    
+                                                        </div>                                     
+                                                        <div x-show="edit" x-on:click="open=true" class="absolute right-0 p-1 px-2 cursor-pointer bg-gray-100 rounded hidden" :class="{'hidden' : !edit}" >
+                                                            <i class="fas fa-pen"></i>
+                                                        </div>
                                                         <div x-show="loading" class="hidden z-10" :class="{'hidden' : !loading}">
                                                             <x-spinner.spinner2 size="8"></x-spinner.spinner2>
                                                         </div> 
@@ -219,7 +215,7 @@
 
                                                 {{-- MARCA --}}
                                                 <div id="marca_{{ $product->id }}" class="text-sm text-gray-500 hover:bg-gray-100  flex justify-between items-center relative  p-1 px-2 rounded  w-full"  x-on:mouseenter="edit = true" x-on:mouseleave="edit = false" 
-                                                    x-data="{open : false, edit: false, product_id: '', loading:false}" x-init=" product_id = {{$product->id}}">
+                                                    x-data="{open : false, edit: false, product_id: '', loading:false, add:false, nameBrand:'',loading2:false}" x-init=" product_id = {{$product->id}}">
                                                     <div class="flex justify-start gap-x-1">
                                                         <div>Marca: </div>
                                                         <div x-show="!open">{{ $product->brand->name }}</div>
@@ -233,10 +229,31 @@
                                                             <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" x-on:click="open=false"></i>
                                                         </div>
                                                     </div>
-                                                    <div x-show="edit" class="cursor-pointer hidden absolute right-0 bg-gray-100  p-1 px-2 rounded " :class="{'hidden' : !edit}" x-on:click="open=true"><i class="fas fa-pen"></i></div>
+                                                    <div x-show="edit" class="hidden absolute right-0 flex items-center gap-2" :class="{'hidden' : !edit}">
+                                                        <div  class="cursor-pointer bg-gray-100  p-1 px-2 rounded "  x-on:click="open=true"><i class="fas fa-pen"></i></div>
+                                                        <div  class="cursor-pointer bg-gray-100  p-1 px-2 rounded "  x-on:click="add=true"><i class="fas fa-plus"></i></div>                                                        
+                                                    </div>
+                                                    
                                                     <div x-show="loading" class="hidden z-10" :class="{'hidden' : !loading}">
                                                         <x-spinner.spinner2 size="8"></x-spinner.spinner2>
                                                     </div> 
+                                                    <div x-show="add">
+                                                        <x-modal.modal2>
+                                                            <div class="p-4">
+                                                                <div class="flex justify-between items-center gap-4">
+                                                                    <h3 class="text-gray-600 font-bold text-xl">CREAR MARCA</h3>
+                                                                    <div x-on:click="add=false" class="p-2 px-3 border rounded-full transform hover:scale-125 hover:bg-red-500 hover:text-white"> <i class="fas fa-times"></i></div>
+                                                                </div>
+                                                                <div>
+                                                                    <x-jet-label>Nombre</x-jet-label>
+                                                                    <x-jet-input x-model="nameBrand" class="w-full"></x-jet-input>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                    <x-jet-button class="w-full text-center" x-on:click="loading2=true;add=false;$wire.saveNewBrand(product_id,nameBrand).then( ()=> loading2=false)">Agregar</x-jet-button>    
+                                                                </div>           
+                                                            </div>
+                                                        </x-modal.modal2>
+                                                    </div>
                                                 </div>
 
                                                 {{-- FORMATO --}}
