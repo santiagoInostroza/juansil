@@ -2,7 +2,7 @@
         <div class="mx-6 mb-6" >
             <div class="grid grid-cols md:grid-cols-2 gap-4 mb-6">
                 @isset($producto->image->url)
-                    <div x-data="{openImage:false}">
+                    <div x-data="{openImage:false}" class="hidden" :class="{'hidden': !openImage}">
 
                 
                         <figure class=""  x-on:click="openImage = true"> 
