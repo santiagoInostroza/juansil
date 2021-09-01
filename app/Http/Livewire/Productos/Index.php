@@ -24,7 +24,7 @@ class Index extends Component{
             if ($this->onlyStock) {
                 $query->where('stock','>',0);
             }
-        }])
+        },'products.salePrices'])
         ->where('id','!=', 3)->get();
 
         $ultimasCompras = Purchase::with(['purchase_items.product' => function($query){
