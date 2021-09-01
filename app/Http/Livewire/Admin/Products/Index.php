@@ -340,34 +340,25 @@ class Index extends Component{
             $url2=$url;
         }
         
-        
-            $manager =  new ImageManager();
-            $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            // $image1 = $manager->make( Storage::url('products/'.$url2))->resize(500, 500, function ($constraint) {
-            //     $constraint->aspectRatio();
-            //     $constraint->upsize();
-            // });
-            $image1->save( 'storage/products/' .  $url2 );  
-    
-    
-        
-       
+        $manager =  new ImageManager();
+        $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image1->save( 'storage/products/' .  $url2 );  
 
-            $manager =  new ImageManager();
-            //   guarda en thumbs           
-            $image2 = $manager->make( 'storage/products/' . $url2 );
-            $image2->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $image2->save('storage/products_thumb/' . $url2);   
-            
-            $product->image->update([
-                'url' =>  $url2,
-            ]);
+        $manager =  new ImageManager();
+        //   guarda en thumbs           
+        $image2 = $manager->make( 'storage/products/' . $url2 );
+        $image2->resize(150, 150, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image2->save('storage/products_thumb/' . $url2);   
+        
+        $product->image->update([
+            'url' =>  $url2,
+        ]);
             
         
     }
