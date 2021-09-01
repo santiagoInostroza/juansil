@@ -89,7 +89,8 @@ class CreateProduct extends Component{
     
             // guarda en products
             $manager =  new ImageManager();
-            $image1 = $manager->make( $this->photo )->resize(1024, 1024, function ($constraint) {
+            $image1 = $manager->make( $this->photo )->encode('webp');
+            $image1->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -100,7 +101,8 @@ class CreateProduct extends Component{
             }
     
             // guarda en thumbs
-            $image2 = $manager->make($this->photo)->resize(300, 300, function ($constraint) {
+            $image2 = $manager->make($this->photo)->encode('webp');
+            $image2->resize(150, 150, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -208,4 +210,6 @@ class CreateProduct extends Component{
             return 0;
         }
     }
+
+   
 }

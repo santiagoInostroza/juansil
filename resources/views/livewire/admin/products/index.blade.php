@@ -47,6 +47,17 @@
           
         </div>
 
+       
+<div class="p-4">
+
+    <div class="p-4 relative border rounded">
+        <x-jet-button wire:click="optimizarImagenes">Optimizar imagen</x-jet-button>
+        <div wire:loading>
+            <x-spinner.spinner2></x-spinner.spinner2>
+        </div>
+    </div>
+  
+</div>
       
 
        
@@ -165,9 +176,16 @@
                                                             @else
                                                                 <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt="">
                                                             @endif
+                                                           
                                                         </figure>
                                                         <div x-show="loading" class="hidden" :class="{'hidden' : !loading}">
                                                             <x-spinner.spinner2 size="16"></x-spinner.spinner2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-4 relative border rounded">
+                                                        <x-jet-button wire:click="optimizarImagen({{ $product->id}})">Optimizar imagen</x-jet-button>
+                                                        <div wire:loading>
+                                                            <x-spinner.spinner2></x-spinner.spinner2>
                                                         </div>
                                                     </div>
                                                     
@@ -700,6 +718,8 @@
                                                     @else
                                                         <img class=" rounded h-24 w-24 object-contain" src="{{ Storage::url($product->image->url) }}" alt="">
                                                     @endif
+
+                                                    
                                                 </figure>
                                             @endif
 

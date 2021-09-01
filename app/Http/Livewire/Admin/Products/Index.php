@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\TagController;
 
 
 
+
 class Index extends Component{
     
     use WithFileUploads;
@@ -284,10 +285,12 @@ class Index extends Component{
 
                  // guarda en products
                 $manager =  new ImageManager();
-                $image1 = $manager->make($this->photo0)->resize(1024, 1024, function ($constraint) {
+                $image1 = $manager->make($this->photo0)->resize(500, 500, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
+
+                $image1->encode('webp');
                 $image1->save('storage/products/'.$url);
 
                 if (!Storage::disk('public')->exists('products_thumb')) {
@@ -296,10 +299,11 @@ class Index extends Component{
     
                 // guarda en thumbs
                
-                $image2 = $manager->make($this->photo0)->resize(300, 300, function ($constraint) {
+                $image2 = $manager->make($this->photo0)->resize(150, 150, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
+                $image2->encode('webp');
                 $image2->save('storage/products_thumb/'.$url);
 
                 // guarda en base de datos (ACTUALIZA)
@@ -325,7 +329,82 @@ class Index extends Component{
   
 
 
+    public function optimizarImagen($product_id){
 
+        $product = Product::find($product_id);  
+        $url = $product->image->url;
 
+        if (strpos($url, 'products/') !== false) {
+            $url2 = substr($url, 9 );
+        }else{
+            $url2=$url;
+        }
+        
+        
+            $manager =  new ImageManager();
+            $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            // $image1 = $manager->make( Storage::url('products/'.$url2))->resize(500, 500, function ($constraint) {
+            //     $constraint->aspectRatio();
+            //     $constraint->upsize();
+            // });
+            $image1->save( 'storage/products/' .  $url2 );  
+    
+    
+        
+       
 
+            $manager =  new ImageManager();
+            //   guarda en thumbs           
+            $image2 = $manager->make( 'storage/products/' . $url2 );
+            $image2->resize(150, 150, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image2->save('storage/products_thumb/' . $url2);   
+            
+            $product->image->update([
+                'url' =>  $url2,
+            ]);
+            
+        
+    }
+
+    public function optimizarImagenes(){
+
+        $products = Product::all(); 
+        foreach ($products as  $product) {
+          
+            $url = $product->image->url;
+
+            if (strpos($url, 'products/') !== false) {
+                $url2 = substr($url, 9 );
+            }else{
+                $url2=$url;
+            }
+        
+            $manager =  new ImageManager();
+            $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image1->save( 'storage/products/' .  $url2 );        
+
+            $manager =  new ImageManager();
+            //   guarda en thumbs           
+            $image2 = $manager->make( 'storage/products/' . $url2 );
+            $image2->resize(150, 150, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image2->save('storage/products_thumb/' . $url2);   
+            
+            $product->image->update([
+                'url' =>  $url2,
+            ]);
+            
+        }    
+    }
 }
