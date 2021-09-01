@@ -24,6 +24,7 @@ class Index extends Component{
             if ($this->onlyStock) {
                 $query->where('stock','>',0);
             }
+            $query->take(10);
         }])
         ->where('id','!=', 3)->get();
 
