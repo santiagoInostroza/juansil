@@ -38,7 +38,13 @@
                                     <tr class="border-b border-gray-200 hover:bg-gray-100 h-32">
                                         <td class="pl-6 text-left flex items-center h-32">
                                             <div class="flex items-center justify-center w-32 mx-3">
-                                                <img class=" object-cover w-24 mx-auto" src=" {{ Storage::url($item['url']) }}" alt="">
+                                                <figure>
+                                                    @if (Storage::exists('products_thumb/' . $item['url']))
+                                                        <img class=" object-cover w-24 mx-auto" src=" {{ Storage::url('products_thumb/' . $item['url']) }}" alt="">
+                                                    @else
+                                                        <img class=" object-cover w-24 mx-auto" src=" {{ Storage::url($item['url']) }}" alt="">
+                                                    @endif
+                                                </figure>
                                             </div>
                                             <div class="w-full">
                                                 <span class="font-bold"> {{ $item['name'] }} </span>
