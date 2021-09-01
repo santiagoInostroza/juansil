@@ -171,6 +171,7 @@
                                                 <div id="imagen_{{$product->id}}" x-data="{loading:false,product_id:''}" x-init="product_id={{$product->id}}">
                                                     <div x-on:click="{loading=true; $wire.changePhoto(product_id).then(()=>loading=false) }" class="cursor-pointer relative">
                                                         <figure>
+                                                            
                                                             @if ( Storage::exists('products_thumb/' .$product->image->url))
                                                                 <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
                                                             @else
@@ -711,7 +712,10 @@
                                     {{-- NOMBRE --}}
                                     <td class="px-6 py-4  whitespace-nowrap ">
                                         <div class="flex justify-between items-center gap-4 w-max-content relative" >
+
                                             @if ($product->image)
+                                            {{$product->image->url}}
+
                                                 <figure>
                                                     @if ( Storage::exists('products_thumb/' .$product->image->url))
                                                         <img class=" rounded h-24 w-24 object-contain" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">

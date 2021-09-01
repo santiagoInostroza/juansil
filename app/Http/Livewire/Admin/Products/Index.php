@@ -388,7 +388,7 @@ class Index extends Component{
                 $manager =  new ImageManager();
                 //   guarda en thumbs           
                 $image2 = $manager->make( 'storage/products/' . $url2 );
-                $image2->resize(150, 150, function ($constraint) {
+                $image2->resize(200, 200, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
