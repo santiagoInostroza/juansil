@@ -100,10 +100,10 @@
                                             @endif
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
+                                            <div class="text-sm font-medium @if($user->customer())  text-white @elseif($user->eventualCustomer())   @else text-gray-900  @endif">
                                                 {{$user->name}}
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm  @if($user->customer())  text-gray-200 @elseif($user->eventualCustomer())   @else text-gray-500  @endif">
                                                 {{$user->email}}
                                             </div>
                                         </div>
@@ -127,11 +127,11 @@
                                 </td> --}}
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @foreach ($user->roles as $role)
-                                        <div>{{$role->name}}</div>
+                                        <div class="@if($user->customer())  text-white @elseif($user->eventualCustomer())   @else text-gray-900  @endif">{{$role->name}}</div>
                                     @endforeach
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a href="#" class=" @if($user->customer())  text-white hover:text-gray-400 @elseif($user->eventualCustomer())   @else text-indigo-600 hover:text-indigo-900  @endif">Edit</a>
                                 </td>
                             </tr>
                             <tr>
