@@ -33,7 +33,7 @@ class Index extends Component{
     public $openChangePhoto = false;
     public $productStatus;
     public $onlyStock = false;
-    public $show=20;
+    public $show=5;
 
     public $editRow;
     public $editRowVerify = true;
@@ -299,7 +299,7 @@ class Index extends Component{
     
                 // guarda en thumbs
                
-                $image2 = $manager->make($this->photo0)->resize(150, 150, function ($constraint) {
+                $image2 = $manager->make($this->photo0)->resize(250, 250, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });

@@ -1,6 +1,7 @@
 <div id="productsMain" x-data="productsMain()" x-init="start()">
    
     <div class="mb-20">
+
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-600 py-4">PRODUCTOS</h1>
             <x-jet-button wire:click="openCreateProduct" >Agregar Producto</x-jet-button>
@@ -43,23 +44,17 @@
                     </div>
                 </label>
             </div>
-           
-          
         </div>
 
        
-<div class="p-4 hidden">
-
-    <div class="p-4 relative border rounded">
-        <x-jet-button wire:click="optimizarImagenes">Optimizar imagen</x-jet-button>
-        <div wire:loading wire:target="optimizarImagenes">
-            <x-spinner.spinner2></x-spinner.spinner2>
+        <div class="p-4 hidden">
+            <div class="p-4 relative border rounded">
+                <x-jet-button wire:click="optimizarImagenes">Optimizar imagen</x-jet-button>
+                <div wire:loading wire:target="optimizarImagenes">
+                    <x-spinner.spinner2></x-spinner.spinner2>
+                </div>
+            </div>
         </div>
-    </div>
-  
-</div>
-      
-
        
         <div>
             <x-table>
@@ -207,10 +202,15 @@
                                                                     <i class="fas fa-times p-1 text-red-500 cursor-pointer transform hover:scale-125 hover:shadow rounded-full" ></i>
                                                                 </div>
                                                             </div>
-                                                        </div>                                     
-                                                        <div x-show="edit" x-on:click="open=true" class="absolute right-0 p-1 px-2 cursor-pointer bg-gray-100 rounded hidden" :class="{'hidden' : !edit}" >
-                                                            <i class="fas fa-pen"></i>
-                                                        </div>
+                                                        </div> 
+                                                        <div x-show="edit" :class="{'hidden' : !edit}">
+                                                            <div  x-on:click="open=true" class="absolute right-0 p-1 px-2 cursor-pointer bg-gray-100 rounded"  >
+                                                                <i class="fas fa-pen"></i>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fas fa-pen"></i>
+                                                            </div>
+                                                        </div>                                    
                                                         <div x-show="loading" class="hidden z-10" :class="{'hidden' : !loading}">
                                                             <x-spinner.spinner2 size="8"></x-spinner.spinner2>
                                                         </div> 
