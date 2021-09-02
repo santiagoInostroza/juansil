@@ -176,6 +176,7 @@
                 rewind : true,
                 perPage: 6,
                 trimSpace: false,
+                autoplay: true,
                 // focus : 'center' ,
                 breakpoints: {
                         // 640: {
