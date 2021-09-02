@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Users;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -27,8 +28,10 @@ class Lista extends Component{
             }
         }
 
+        $roles = Role::all();
 
-        return view('livewire.admin.users.lista',compact('users'));
+
+        return view('livewire.admin.users.lista',compact('users','roles'));
     }
 
     public function editRowTrue($user_id){

@@ -1,152 +1,57 @@
-<div class="flex flex-col items-center">
-    <div class="w-full md:w-1/2 flex flex-col items-center h-64">
-        <div class="w-full px-4">
-            <div x-data="selectConfigs()" x-init="fetchOptions()" class="flex flex-col items-center relative">
-                <div class="w-full">
-                    <div @click.away="close()" class="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                        <input 
-                               x-model="filter"
-                               x-transition:leave="transition ease-in duration-100"
-                               x-transition:leave-start="opacity-100"
-                               x-transition:leave-end="opacity-0"
-                               @mousedown="open()"
-                               @keydown.enter.stop.prevent="selectOption()"
-                               @keydown.arrow-up.prevent="focusPrevOption()"
-                               @keydown.arrow-down.prevent="focusNextOption()"
-                               class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
-                        <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
-                            <button @click="toggle()" class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
-                                <svg  xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline x-show="!isOpen()" points="18 15 12 20 6 15"></polyline>
-                                    <polyline x-show="isOpen()" points="18 15 12 9 6 15"></polyline>
-                                </svg>
-                              
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="isOpen()" class="absolute shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
-                    <div class="flex flex-col w-full">
-                      <template x-for="(option, index) in filteredOptions()" :key="index">
-                        <div @click="onOptionClick(index)" :class="classOption(option.login.uuid, index)" :aria-selected="focusedOptionIndex === index">
-                            <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                                <div class="w-6 flex flex-col items-center">
-                                    <div class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full "><img class="rounded-full" alt="A" x-bind:src="option.picture.thumbnail"> </div>
-                                </div>
-                                <div class="w-full items-center flex">
-                                    <div class="mx-2 -mt-1"><span x-text="option.name.first + ' ' + option.name.last"></span>
-                                        <div class="text-xs truncate w-full normal-case font-normal -mt-1 text-gray-500" x-text="option.email"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                      </template>
-                    </div>
-                </div>
-            </div>
+@props([
+    'id' => 'search',
+    'name'=>'', 
+    'value' => 0, 
+    'placeholder' => 'Buscar...',
+    'items'=>[],
+    ])
+
+<div class="font-sans leading-normal tracking-normal bg-grey-100">    
+    <div :id="id"  x-data="dropdown2()" x-init="filter='{{$name}}', id='{{$id}}';value={{$value}}; items= {{ $items }}; start();"  @click.away="close()">    
+        <div>
+            <x-jet-input 
+                id="{{$id}}_name"
+                x-model="filter"
+                {{-- x-ref="searchField"  --}}
+                {{-- x-on:keydown.window.prevent.slash="$refs.searchField.focus()" --}}
+                @keydown="openIf"
+                @keydown.escape="close()"
+                @keydown.tab="selectOption()"
+                @click="open()"
+                @focus="open()"
+                @keydown.arrow-up.prevent="focusPrevOption()"
+                @keydown.arrow-down.prevent="focusNextOption()"
+                @keydown.enter.stop.prevent="selectOption()"
+                placeholder="{{$placeholder}}" type="search"
+                class="block w-full h-full px-4 py-3 font-bold text-gray-700  rounded-lg focus:outline-none  focus:shadow" 
+              
+            />
         </div>
-    </div>
+     
 
-    @push('js')
-        <script>
-            function selectConfigs() {
-                return {
-                    filter: '',
-                    show: false,
-                    selected: null,
-                    focusedOptionIndex: null,
-                    options: null,
-                    close() { 
-                        this.show = false;
-                        this.filter = this.selectedName();
-                        this.focusedOptionIndex = this.selected ? this.focusedOptionIndex : null;
-                    },
-                    open() { 
-                        this.show = true; 
-                        this.filter = '';
-                    },
-                    toggle() { 
-                        if (this.show) {
-                            this.close();
-                        }
-                        else {
-                            this.open()
-                        }
-                    },
-                    isOpen() { return this.show === true },
+        <input {!! $attributes->merge(['class' => '']) !!} type="hidden" id="{{ $id }}_value" :value="value" x-on:change="setName()"  />
+       
+        <div class="shadow absolute w-full z-50 bg-white overflow-auto max-h-96" :class=" show ? '':'hidden'" id="opcion_{{ $id }}">
+          <template x-if="filteredOptions().length > 0">
+            <div>          
+                <template x-for="(item,index) in filteredOptions()" :key="item">
+                    <div  @click="onOptionClick(index)" :class="classOption(item.id, index)" :aria-selected="focusedOptionIndex === index" :id="'{{$id}}_opcion_' + index" x-ref="item.name" >       
+                    <template x-if="item.image">
+                        <figure>
+                            <img class="w-32 h-32 rounded mr-4 object-contain transform hover:scale-150" :src="(item.image.url.indexOf('products') >=0) ? `/storage/${item.image.url}` : `/storage/products_thumb/${item.image.url}` "  />
+                        </figure>
+                    </template>
+                    <p class="leading-none text-gray-900" x-text="item.name" ></p>
+                    </div>
+                </template>
+            </div>
+          </template>
+        
+        </div>
+    </div>  
 
-                    selectedName() { return this.selected ? this.selected.name.first + ' ' + this.selected.name.last : this.filter; },
 
-                    classOption(id, index) {
-                        const isSelected = this.selected ? (id == this.selected.login.uuid) : false;
-                        const isFocused = (index == this.focusedOptionIndex);
-                        return {
-                            'cursor-pointer w-full border-gray-100 border-b hover:bg-blue-50': true,
-                            'bg-blue-100': isSelected,
-                            'bg-blue-50': isFocused
-                        };
-                    },
-                    fetchOptions() {
-                        fetch('https://randomuser.me/api/?results=5')
-                            .then(response => response.json())
-                            .then(data => this.options = data);
-                    },
-                    filteredOptions() {
-                        return this.options
-                            ? this.options.results.filter(option => {
-                                return (option.name.first.toLowerCase().indexOf(this.filter) > -1) 
-                                || (option.name.last.toLowerCase().indexOf(this.filter) > -1)
-                                || (option.email.toLowerCase().indexOf(this.filter) > -1)
-                            })
-                        : {}
-                    },
-                    onOptionClick(index) {
-                        this.focusedOptionIndex = index;
-                        this.selectOption();
-                    },
-                    selectOption() {
-                        if (!this.isOpen()) {
-                            return;
-                        }
-                        this.focusedOptionIndex = this.focusedOptionIndex ?? 0;
-                        const selected = this.filteredOptions()[this.focusedOptionIndex]
-                        if (this.selected && this.selected.login.uuid == selected.login.uuid) {
-                            this.filter = '';
-                            this.selected = null;
-                        }
-                        else {
-                            this.selected = selected;
-                            this.filter = this.selectedName();
-                        }
-                        this.close();
-                    },
-                    focusPrevOption() {
-                        if (!this.isOpen()) {
-                            return;
-                        }
-                        const optionsNum = Object.keys(this.filteredOptions()).length - 1;
-                        if (this.focusedOptionIndex > 0 && this.focusedOptionIndex <= optionsNum) {
-                            this.focusedOptionIndex--;
-                        }
-                        else if (this.focusedOptionIndex == 0) {
-                            this.focusedOptionIndex = optionsNum;
-                        }
-                    },
-                    focusNextOption() {
-                        const optionsNum = Object.keys(this.filteredOptions()).length - 1;
-                        if (!this.isOpen()) {
-                            this.open();
-                        }
-                        if (this.focusedOptionIndex == null || this.focusedOptionIndex == optionsNum) {
-                            this.focusedOptionIndex = 0;
-                        }
-                        else if (this.focusedOptionIndex >= 0 && this.focusedOptionIndex < optionsNum) {
-                            this.focusedOptionIndex++;
-                        }
-                    }
-                }
-                
-            }
-        </script>
-    @endpush
+    
+     
+  
 </div>

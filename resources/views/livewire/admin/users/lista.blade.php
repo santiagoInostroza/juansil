@@ -120,40 +120,60 @@
                                        @endforeach
                                    @endif
                                </td>
-                                {{--<td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Active
-                                    </span>
-                                </td> --}}
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @foreach ($user->roles as $role)
-                                        <div class=" text-gray-900">{{$role->name}}</div>
+                                        <div x-data="{showButtonEdit:false,openEdit:false}" x-on:mouseenter="showButtonEdit=true" x-on:mouseleave="showButtonEdit=false" class="relative hover:bg-green-50 p-1">
+                                            <div class=" text-gray-900">{{$role->name}}</div>
+                                            <div x-on:click="openEdit = true" class="absolute right-0 top-0 p-1 cursor-pointer" :class="{'hidden': !showButtonEdit}"><i class="fas fa-pen"></i></div>
+                                            <div :class="{'hidden':!openEdit}">
+                                                <x-modal.modal2>
+                                                    <div class="p-4">
+                                                        <div class="flex justify-between items-center gap-4 mb-4">
+                                                            <h2 class="text-xl font-bold text-gray-600">Cambiar Rol </h2>
+                                                            <div x-on:click="openEdit=false" class="p-2 px-3 rounded-full border hover:bg-red-600 hover:text-white"><i class="fas fa-times"></i></div>
+                                                        </div>
+                                                        <div>
+                                                            <x-jet-label>Cambiar rol {{$role->name}} por:</x-jet-label>
+                                                            <x-dropdowns.dropdown2 :items="$roles" :value="$role->id"  id="select_roles">
+
+                                                            </x-dropdowns.dropdown2>
+
+                                                        </div>
+
+                                                    </div>
+                                                </x-modal.modal2>
+                                            </div>
+                                        </div>
+                                        
                                     @endforeach
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="#" class=" hover:text-gray-500 ">Edit</a>
                                 </td>
                             </tr>
-                            <tr class=" @if($user->customers->count()) bg-green-100  @else bg-yellow-100  @endif">
+                            <tr class=" @if($user->customers->count()) bg-green-100  @elseif($user->eventualCustomer()) bg-yellow-100  @endif">
                                 <td colspan="4">
-                                    <div  class="p-8 py-4 shadow">
-
+                                    <div>
                                         @if ( $user->customers->count() )
-                                            <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
-                                            @foreach ($user->customers as $cust)
+                                            <div  class="p-8 py-4 shadow">
+                                                <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
+                                                @foreach ($user->customers as $cust)
                                                 <div>Cliente {{ $cust->id }} {{ $cust->name }} 
                                                     @if ( Str::lower($cust->email) !=  Str::lower($user->email) ) {{ $cust->email }} @endif  
                                                 </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                         @endif
-                                        
+                                            
                                         @if( $user->eventualCustomer() )
-                                            <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la(s) siguiente(s) cuenta(s) de cliente: </h2>
-                                            @foreach ($user->eventualCustomer() as $cust)
+                                            <div  class="p-8 py-4 shadow">
+                                                <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la(s) siguiente(s) cuenta(s) de cliente: </h2>
+                                                @foreach ($user->eventualCustomer() as $cust)
                                                 <div> Cliente {{ $cust->id }} {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
-                                            @endforeach
-                                        @endif
-                                        
+                                                @endforeach
+                                            </div>
+                                        @endif    
+
                                     </div>
                                 </td>
                             </tr>
