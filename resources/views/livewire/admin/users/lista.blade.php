@@ -29,7 +29,7 @@
                                         <div> Esta enlazado a {{ $user->customers->count() }} cuenta(s)  <i class="fas fa-check text-green-400"></i></div>
                                     @endif 
                                     @if($user->eventualCustomer())
-                                        <div>Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s)  <i class="fas fa-warning text-yellow-400"></i></div>
+                                        <div>Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s)  <i class="fas fa-exclamation text-yellow-400"></i></div>
                                     @endif
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -82,7 +82,7 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="text-gray-900  @if($user->customers) bg-green-200  @elseif($user->eventualCustomer()) bg-yellow-200  @endif">
+                            <tr class="text-gray-900  @if($user->customers->count()) bg-green-200  @elseif($user->eventualCustomer()) bg-yellow-200  @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -134,7 +134,7 @@
                                 <a href="#" class=" hover:text-gray-500 ">Edit</a>
                                 </td>
                             </tr>
-                            <tr class=" @if($user->customers) bg-green-100  @else bg-yellow-100  @endif">
+                            <tr class=" @if($user->customers->count()) bg-green-100  @else bg-yellow-100  @endif">
                                 <td colspan="4">
                                     <div  class="p-8 py-4 shadow">
 
