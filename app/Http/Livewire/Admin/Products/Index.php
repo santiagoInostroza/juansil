@@ -357,19 +357,27 @@ class Index extends Component{
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $image1->save( 'storage/products/' .  $url2 );  
+        $image1->encode('webp');
+        $image1->save( 'storage/products/' .  $product->slug . '.webp' );  
+
 
         $manager =  new ImageManager();
         //   guarda en thumbs           
-        $image2 = $manager->make( 'storage/products/' . $url2 )->resize(150, 150, function ($constraint) {
+        $image2 = $manager->make( 'storage/products/' . $url2 )->resize(250, 250, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $image2->save('storage/products_thumb/' . $url2);   
+        $image2->encode('webp');
+        $image2->save('storage/products_thumb/'  .  $product->slug . '.webp'); 
+        
+        
         
         $product->image->update([
-            'url' =>  $url2,
+            'url' =>  $product->slug . '.webp',
         ]);
+
+        Storage::delete('products/'. $url2);
+        Storage::delete('products_thumb/' .  $url2);
             
         
     }
@@ -379,8 +387,6 @@ class Index extends Component{
         $products = Product::all(); 
         foreach ($products as  $product) {
             if ($product->image) {
-                
-            
                 $url = $product->image->url;
 
                 if (strpos($url, 'products/') !== false) {
@@ -394,19 +400,24 @@ class Index extends Component{
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
-                $image1->save( 'storage/products/' .  $url2 );        
+                $image1->encode('webp');
+                $image1->save( 'storage/products/' .  $product->slug . '.webp' );        
 
                 $manager =  new ImageManager();
                 //   guarda en thumbs           
-                $image2 = $manager->make( 'storage/products/' . $url2 )->resize(200, 200, function ($constraint) {
+                $image2 = $manager->make( 'storage/products/' . $url2 )->resize(250, 250, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
-                $image2->save('storage/products_thumb/' . $url2);   
+                $image2->encode('webp');
+                $image2->save('storage/products_thumb/' .  $product->slug . '.webp');   
                 
                 $product->image->update([
-                    'url' =>  $url2,
+                    'url' =>  $product->slug . '.webp',
                 ]);
+
+                Storage::delete('products/'. $url2);
+                Storage::delete('products_thumb/' .  $url2);
             }
             
         }    

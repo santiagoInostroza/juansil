@@ -47,7 +47,7 @@
         </div>
 
        
-        <div class="p-4 hidden">
+        <div class="p-4 ">
             <div class="p-4 relative border rounded">
                 <x-jet-button wire:click="optimizarImagenes">Optimizar imagen</x-jet-button>
                 <div wire:loading wire:target="optimizarImagenes">
@@ -178,7 +178,7 @@
                                                             <x-spinner.spinner2 size="16"></x-spinner.spinner2>
                                                         </div>
                                                     </div>
-                                                    <div class="p-4 relative border rounded hidden">
+                                                    <div class="p-4 relative border rounded">
                                                         <x-jet-button wire:click="optimizarImagen({{ $product->id}})" >Optimizar imagen</x-jet-button>
                                                         <div wire:loading >
                                                             <x-spinner.spinner2></x-spinner.spinner2>
