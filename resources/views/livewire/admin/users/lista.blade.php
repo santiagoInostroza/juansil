@@ -134,7 +134,7 @@
                                                         </div>
                                                         <div>
                                                             <x-jet-label>Cambiar rol {{$role->name}} por:</x-jet-label>
-                                                            <x-dropdowns.dropdown2 :items="$roles" :value="$role->id"  id="select_roles">
+                                                            <x-dropdowns.dropdown2 :items="$roles" :value="$role->id"  id="select_roles_{{$user->id}}">
 
                                                             </x-dropdowns.dropdown2>
 
