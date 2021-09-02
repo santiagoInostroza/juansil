@@ -249,7 +249,7 @@
                                                                     <x-jet-input x-model="nameBrand" class="w-full"></x-jet-input>
                                                                 </div>
                                                                 <div class="mt-4">
-                                                                    <x-jet-button class="w-full text-center" x-on:click="loading2=true;add=false;$wire.saveNewBrand(product_id,nameBrand).then( ()=> loading2=false)">Agregar</x-jet-button>    
+                                                                    <x-jet-button class="w-full text-center" x-on:click="loading=true;add=false;$wire.saveNewBrand(product_id,nameBrand).then( ()=> loading=false)">Agregar</x-jet-button>    
                                                                 </div>           
                                                             </div>
                                                         </x-modal.modal2>
