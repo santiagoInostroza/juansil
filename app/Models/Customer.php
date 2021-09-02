@@ -36,5 +36,10 @@ class Customer extends Model
           return $pending;
       }
 
+      //RELACION UNO A MUCHOS INVERSA
+     public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 
 }

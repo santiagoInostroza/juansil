@@ -246,6 +246,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <x-jet-label>Nombre</x-jet-label>
+                                                                    <x-dropdowns.dropdown :items="$brands"></x-dropdowns.dropdown>
                                                                     <x-jet-input x-model="nameBrand" class="w-full"></x-jet-input>
                                                                 </div>
                                                                 <div class="mt-4">

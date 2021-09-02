@@ -23,13 +23,13 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($users as $user)
                         @if (!$this->editRow[$user->id])
-                            <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer @if($user->customer()) bg-green-100 @elseif($user->eventualCustomer()) bg-yellow-100 @endif">
+                            <tr wire:click="editRowTrue({{ $user->id }})" wire:key="row_{{$user->id}}" class="cursor-pointer">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($user->customer())
-                                        <div> Esta enlazado a {{ $user->customer()->count() }} cuenta(s) </div>
+                                    @if($user->customers->count())
+                                        <div> Esta enlazado a {{ $user->customers->count() }} cuenta(s)  <i class="fas fa-check text-green-400"></i></div>
                                     @endif 
                                     @if($user->eventualCustomer())
-                                        <div>Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s) </div>
+                                        <div>Tiene {{ $user->eventualCustomer()->count() }} posible(s) cuenta(s)  <i class="fas fa-warning text-yellow-400"></i></div>
                                     @endif
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -57,8 +57,8 @@
                                     </div>
                                 </td>
                                  <td class="px-6 py-4 whitespace-nowrap">
-                                     @if($user->customer()) 
-                                        @foreach ($user->customer() as $cust)  
+                                     @if($user->customers->count()) 
+                                        @foreach ($user->customers as $cust)  
                                             <div class="text-sm text-gray-900">
                                                 {{ $cust->direccion }} {{ $cust->block }} {{ $cust->depto }} 
                                             <div class="text-sm text-gray-500">
@@ -82,7 +82,7 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="@if($user->customer()) bg-green-500 text-white @elseif($user->eventualCustomer()) bg-yellow-300 @else bg-green-50  @endif"">
+                            <tr class="text-gray-900  @if($user->customers) bg-green-200  @elseif($user->eventualCustomer()) bg-yellow-200  @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -100,21 +100,21 @@
                                             @endif
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium @if($user->customer())  text-white @elseif($user->eventualCustomer())   @else text-gray-900  @endif">
+                                            <div class="text-sm font-medium text-gray-900">
                                                 {{$user->name}}
                                             </div>
-                                            <div class="text-sm  @if($user->customer())  text-gray-200 @elseif($user->eventualCustomer())   @else text-gray-500  @endif">
+                                            <div class="text-sm  text-gray-600 ">
                                                 {{$user->email}}
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($user->customer()) 
-                                       @foreach ($user->customer() as $cust)  
-                                           <div class="text-sm @if($user->customer())  text-white @elseif($user->eventualCustomer())   @else text-gray-900  @endif" >
+                                    @if($user->customers->count()) 
+                                       @foreach ($user->customers as $cust)  
+                                           <div class="text-sm " >
                                                {{ $cust->direccion }} {{ $cust->block }} {{ $cust->depto }} 
-                                           <div class="text-sm  @if($user->customer())  text-gray-200 @elseif($user->eventualCustomer())   @else text-gray-500  @endif">
+                                           <div class="text-sm   text-gray-600 ">
                                                {{ $cust->telefono }} {{ $cust->celular }} {{ $cust->comments }} 
                                            </div>
                                        @endforeach
@@ -127,21 +127,20 @@
                                 </td> --}}
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @foreach ($user->roles as $role)
-                                        <div class="@if($user->customer())  text-white @elseif($user->eventualCustomer())   @else text-gray-900  @endif">{{$role->name}}</div>
+                                        <div class=" text-gray-900">{{$role->name}}</div>
                                     @endforeach
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class=" @if($user->customer())  text-white hover:text-gray-400 @elseif($user->eventualCustomer())   @else text-indigo-600 hover:text-indigo-900  @endif">Edit</a>
+                                <a href="#" class=" hover:text-gray-500 ">Edit</a>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class=" @if($user->customers) bg-green-100  @else bg-yellow-100  @endif">
                                 <td colspan="4">
+                                    <div  class="p-8 py-4 shadow">
 
-                                    <div class="p-8 py-4 shadow-xl border ">
-
-                                        @if ( $user->customer() )
+                                        @if ( $user->customers->count() )
                                             <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
-                                            @foreach ($user->customer() as $cust)
+                                            @foreach ($user->customers as $cust)
                                                 <div>Cliente {{ $cust->id }} {{ $cust->name }} 
                                                     @if ( Str::lower($cust->email) !=  Str::lower($user->email) ) {{ $cust->email }} @endif  
                                                 </div>

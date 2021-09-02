@@ -67,13 +67,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function customer(){
-        $customer = Customer::where('user_id',$this->id)->get();
-        if($customer->count()){
-            return $customer;
-        }
-        return false;
-    }
+    // public function customer(){
+    //     $customer = Customer::where('user_id',$this->id)->get();
+    //     if($customer->count()){
+    //         return $customer;
+    //     }
+    //     return false;
+    // }
 
     public function eventualCustomer(){
         $customer = Customer::where('user_id',null)->where(Customer::raw( 'lower(email) '),'=', Str::lower($this->email)  ) ->get();
@@ -82,6 +82,10 @@ class User extends Authenticatable
             return $customer;
         }
         return false;
+    }
+
+    public function customers(){
+        return $this->hasMany(Customer::class);
     }
 
 }

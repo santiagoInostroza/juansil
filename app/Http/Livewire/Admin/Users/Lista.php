@@ -16,7 +16,7 @@ class Lista extends Component{
 
     public function render(){
 
-        $users = User::where('name', 'like', '%'. $this->search . '%')->get();
+        $users = User::with('customers')->where('name', 'like', '%'. $this->search . '%')->get();
         foreach ($users as  $user) {
            $this->editRow[$user->id] = false;
         }
