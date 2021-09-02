@@ -126,7 +126,7 @@
       {{-- TENTACIONES --}}
       @if ( $tentaciones )
       <div class="px-5 sm:px-20 mt-10" >
-         <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">  <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> tentaciones</span> </h2>
+         <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">  Ten<span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> taciones</span> </h2>
       </div>
       <div class="mb-20">
         
