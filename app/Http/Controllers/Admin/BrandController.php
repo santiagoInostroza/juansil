@@ -58,8 +58,11 @@ class BrandController extends Controller
 
         $brand = Brand::where('name',$nameBrand)->first();
 
-        if($nameBrand=="" || $brand){
+        if($nameBrand==""){
             return 0;
+        }
+        if($brand){
+            return $brand->id;
         }
         
         $brand = new Brand();
