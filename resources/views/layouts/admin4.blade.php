@@ -585,10 +585,11 @@
         
             return {
                 start(){
-                    item = this.items.filter(item => this.value == item.id);
-                    this.name=item[0].name;
-                    this.filter = this.name;
-
+                    if(this.value>0){
+                        item = this.items.filter(item => this.value == item.id);
+                        this.name=item[0].name;
+                        this.filter = this.name;
+                    }
                 },
 
                 setName(){
@@ -718,6 +719,9 @@
                         if( this.value > 0){
                             this.filter = item.name;
                             this.show=false;
+                            var element = document.getElementById( this.id + '_value');
+                            element.value=this.value;
+                            console.log(element);
                             
                             // nameWire =element.getAttribute('wire:model') ;
                             // nameWire2 =element.getAttribute('wire:model.defer') ;

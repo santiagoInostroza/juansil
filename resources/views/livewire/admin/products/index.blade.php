@@ -245,8 +245,7 @@
                                                                     <div x-on:click="add=false" class="p-2 px-3 border rounded-full transform hover:scale-125 hover:bg-red-500 hover:text-white"> <i class="fas fa-times"></i></div>
                                                                 </div>
                                                                 <div>
-                                                                    <x-jet-label>Nombre</x-jet-label>
-                                                                    <x-dropdowns.dropdown :items="$brands"></x-dropdowns.dropdown>
+                                                                    <x-jet-label>Nombre</x-jet-label>                                                                 
                                                                     <x-jet-input x-model="nameBrand" class="w-full"></x-jet-input>
                                                                 </div>
                                                                 <div class="mt-4">

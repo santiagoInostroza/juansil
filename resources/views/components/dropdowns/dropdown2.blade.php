@@ -29,7 +29,7 @@
         </div>
      
 
-        <input {!! $attributes->merge(['class' => '']) !!} type="hidden" id="{{ $id }}_value" :value="value" x-on:change="setName()"  />
+        <input type="hidden" id="{{ $id }}_value" x-ref="{{ $id }}_value" :value="value" x-on:change="setName()"  />
        
         <div class="shadow absolute w-full z-50 bg-white overflow-auto max-h-96" :class=" show ? '':'hidden'" id="opcion_{{ $id }}">
           <template x-if="filteredOptions().length > 0">

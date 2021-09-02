@@ -39,17 +39,6 @@
               </template>
           </div>
           </template>
-          {{-- @if (isset($slot))
-            <div :class="classOption(0, 0)" :aria-selected="focusedOptionIndex === 0" :id="'{{$id}}_opcion_' + 0" x-ref="nuevo" >
-              <template x-if="filteredOptions().length==0">
-              
-                  <p class="leading-none text-gray-900"  >
-                    {{$slot}}
-                  </p>
-              
-              </template>
-            </div>
-          @endif --}}
           
         </div>
     </div>  

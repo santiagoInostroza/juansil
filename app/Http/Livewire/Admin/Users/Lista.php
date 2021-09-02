@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Http\Controllers\Admin\RoleController;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Livewire\Component;
@@ -40,6 +41,17 @@ class Lista extends Component{
         $this->rowTrue = $user_id;
         $this->editRowVerify = true;
         
+    }
+
+    public function saveRole($user_id,$role_id){
+       $roleController = new RoleController();
+       $roleController->saveRole($user_id,$role_id);
+    }
+
+    public function removeRole( $user_id,$role_id){
+        $roleController = new RoleController();
+        $roleController->removeRole( $user_id,$role_id);
+       
     }
    
 }

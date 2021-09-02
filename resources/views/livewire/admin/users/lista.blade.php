@@ -122,30 +122,40 @@
                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @foreach ($user->roles as $role)
-                                        <div x-data="{showButtonEdit:false,openEdit:false}" x-on:mouseenter="showButtonEdit=true" x-on:mouseleave="showButtonEdit=false" class="relative hover:bg-green-50 p-1">
+                                        <div x-data="{showButtonRemove:false,user_id:''}" x-init="user_id='{{$user->id}}';" x-on:mouseenter="showButtonRemove=true" x-on:mouseleave="showButtonRemove=false" class="relative hover:bg-green-50 p-1">
                                             <div class=" text-gray-900">{{$role->name}}</div>
-                                            <div x-on:click="openEdit = true" class="absolute right-0 top-0 p-1 cursor-pointer" :class="{'hidden': !showButtonEdit}"><i class="fas fa-pen"></i></div>
-                                            <div :class="{'hidden':!openEdit}">
-                                                <x-modal.modal2>
-                                                    <div class="p-4">
-                                                        <div class="flex justify-between items-center gap-4 mb-4">
-                                                            <h2 class="text-xl font-bold text-gray-600">Cambiar Rol </h2>
-                                                            <div x-on:click="openEdit=false" class="p-2 px-3 rounded-full border hover:bg-red-600 hover:text-white"><i class="fas fa-times"></i></div>
-                                                        </div>
-                                                        <div>
-                                                            <x-jet-label>Cambiar rol {{$role->name}} por:</x-jet-label>
-                                                            <x-dropdowns.dropdown2 :items="$roles" :value="$role->id"  id="select_roles_{{$user->id}}">
-
-                                                            </x-dropdowns.dropdown2>
-
-                                                        </div>
-
-                                                    </div>
-                                                </x-modal.modal2>
-                                            </div>
+                                            <div wire:click="removeRole({{$user->id}},{{$role->id}})" class="absolute right-0 top-0 p-1 cursor-pointer" :class="{'hidden': !showButtonRemove}"><i class="fas fa-trash"></i></div>
                                         </div>
                                         
                                     @endforeach
+                                    <div x-data="{user_id:'',loading:false,openAddRole:false}" x-init="user_id = {{$user->id}}">
+                                        <div class="flex justify-center items-center">
+                                            <div  x-on:click="openAddRole= true"  class="p-1 px-2 rounded-full border cursor-pointer"><i class="fas fa-plus"></i></div> 
+                                            <div class="hidden" :class="{'hidden':!loading}">
+                                                <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                                            </div>
+                                         </div>
+                                         <div class="hidden" :class="{'hidden':!openAddRole}">
+                                             <x-modal.modal2>
+                                                 <div class="p-4">
+                                                     <div class="flex justify-between items-center gap-4 mb-4">
+                                                         <h2 class="text-xl font-bold text-gray-600">Agregar Rol </h2>
+                                                         <div x-on:click="openAddRole=false" class="p-2 px-3 rounded-full border hover:bg-red-600 hover:text-white"><i class="fas fa-times"></i></div>
+                                                     </div>
+                                                     <div>
+                                                         <x-jet-label>Seleccionar rol:</x-jet-label>
+                                                         <x-dropdowns.dropdown2 :items="$roles" :value="0"  id="select_roles_{{$user->id}}"></x-dropdowns.dropdown2>
+
+                                                     </div>
+                                                     <div class="p-4">
+                                                         <x-jet-button x-on:click="console.log($refs.select_roles_{{$user->id}}_value).value;">Probar</x-jet-button>
+                                                         <x-jet-button x-on:click="openAddRole = false;loading = true; $wire.saveRole( user_id,document.getElementById(select_roles_{{$user->id}}_value).value ).then( ()=>loading=false )">Agregar</x-jet-button>
+                                                     </div>
+
+                                                 </div>
+                                             </x-modal.modal2>
+                                         </div>
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="#" class=" hover:text-gray-500 ">Edit</a>
