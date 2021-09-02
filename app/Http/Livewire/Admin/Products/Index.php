@@ -376,8 +376,8 @@ class Index extends Component{
             'url' =>  $product->slug . '.webp',
         ]);
 
-        Storage::delete('products/'. $url2);
-        Storage::delete('products_thumb/' .  $url2);
+        // Storage::delete('products/'. $url2);
+        // Storage::delete('products_thumb/' .  $url2);
             
         
     }
@@ -416,8 +416,8 @@ class Index extends Component{
                     'url' =>  $product->slug . '.webp',
                 ]);
 
-                Storage::delete('products/'. $url2);
-                Storage::delete('products_thumb/' .  $url2);
+                // Storage::delete('products/'. $url2);
+                // Storage::delete('products_thumb/' .  $url2);
             }
             
         }    
