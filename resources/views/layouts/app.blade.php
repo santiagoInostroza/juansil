@@ -9,7 +9,6 @@
         <link rel="icon" type="image/png" href="{{url('images/iconos/jsyellow.png')}}" />
 
         <meta name="google-site-verification" content="ERZr-zK0pEA3MxEAyEHN7kOmzFqhQ45PseekfBfJ3yM" />
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

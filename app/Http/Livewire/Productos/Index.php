@@ -10,6 +10,7 @@ use App\Models\Purchase;
 use App\Models\MovementSale;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CarritoController;
+use App\Models\Tag;
 
 class Index extends Component{
 
@@ -22,7 +23,7 @@ class Index extends Component{
       
 
 
-        $categories = Category::with(['products.salePrices','products.brand','products.image','products' => function($query) {
+        $categories = Category::with(['products.salePrices','products.tags','products.brand','products.image','products' => function($query) {
            $query->where('status',1)->where('stock','>',0);
         }])
         ->where('id','!=', 3)->get()->map(function($query) {
@@ -32,10 +33,15 @@ class Index extends Component{
 
 
 
-        $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product.brand','purchase_items.product.image','purchase_items.product' => function($query){
+        $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product.brand','purchase_items.product.image','purchase_items.product.category','purchase_items.product' => function($query){
             $query->where('status',1);
         },'purchase_items.product.salePrices'])
         ->orderBy('fecha','desc')->take(5)->get();
+
+        // $tentaciones =Tag::where('name','Tentaciones')->with(['products'=> function($query){
+        $tentaciones =Tag::where('name','Tentaciones')->with(['products'=> function($query){
+            $query->where('stock','>',0)->where('status','=',1);
+        },'products.brand','products.tags','products.category','products.image'])->first();
 
 
 
@@ -54,7 +60,7 @@ class Index extends Component{
           
         }
 
-        return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido'));
+        return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido','tentaciones'));
     }
 
 
