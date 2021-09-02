@@ -59,15 +59,15 @@ class Index extends Component{
 
     public function render(){
 
-        $query = Product::with(['salePrices','tags'])->where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction);
+        $query = Product::with(['salePrices','category','tags','brand','image'])->where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction);
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }
         $products = $query->paginate($this->show);
 
-        $brands= Brand::orderBy('name'.'asc');
-        $categories= Category::orderBy('name','asc');
-        $tags= Tag::all();
+        $brands= Brand::orderBy('name','asc')->get();
+        $categories= Category::orderBy('name','asc')->get();
+        $tags= Tag::orderBy('name','asc')->get();
 
 
 
