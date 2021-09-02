@@ -30,7 +30,7 @@ class BuscadorProductos extends Component{
             if($this->search!=""){
                 $str = explode(' ', $this->search);
             
-                $products = Product::where('status',1)->where(function($query) use($str) {
+                $products = Product::where('status',1)->where('stock', '>', 0)->where(function($query) use($str) {
                     foreach($str as $s) {
                         $query = $query->where('name','like',"%" . $s . "%");
                     }
