@@ -65,8 +65,8 @@ class Index extends Component{
         }
         $products = $query->paginate($this->show);
 
-        $brands= Brand::all();
-        $categories= Category::all();
+        $brands= Brand::orderBy('name'.'asc');
+        $categories= Category::orderBy('name','asc');
         $tags= Tag::all();
 
 
