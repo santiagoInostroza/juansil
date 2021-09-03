@@ -102,11 +102,11 @@ class Index extends Component{
    }
 
    public static function fecha($fecha){
-    return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
-}
-public static function fechaHora($fecha){
-    return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
-}
+        return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
+    }
+    public static function fechaHora($fecha){
+        return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
+    }
 
 
 }

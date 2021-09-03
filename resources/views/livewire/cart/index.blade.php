@@ -1,5 +1,6 @@
 
 <div>
+ 
     <style>
         .cuerpoCarrito::-webkit-scrollbar {
             display: none;

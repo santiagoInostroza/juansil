@@ -45,8 +45,12 @@
         @isset($jsCabecera)
             {{$jsCabecera}}
         @endisset
+
         
-    </head>
+      
+        
+</head>
+    
     <body class="font-sans antialiased">
         <div class="min-h-screen ">
             {{-- @livewire('navigation-dropdown') --}}
@@ -214,6 +218,7 @@
             }
             
         </script>
+
 
 
        
