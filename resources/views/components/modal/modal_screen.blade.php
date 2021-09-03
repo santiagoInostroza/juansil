@@ -11,16 +11,16 @@
             
             <main class="p-4 bg-white overflow-auto w-full h-full"  
                 style="
-                    @if( isset($footer) && isset($header) ) max-height: calc(100vh - 112px); my-15 @endif
-                    @if( isset($footer) ) max-height: calc(100vh - 56px); mb-8 @endif
-                    @if( isset($header) ) max-height: calc(100vh - 56px); mt-8 @endif
+                    @if( isset($footer) && isset($header) ) max-height: calc(100vh - 112px); margin-bottom: 2rem;margin-top: 2rem; @endif
+                    @if( isset($footer) ) max-height: calc(100vh - 56px); margin-bottom: 2rem @endif
+                    @if( isset($header) ) max-height: calc(100vh - 56px); margin-top: 2rem; @endif
                 "
             >
                 {{$slot}}
             </main>
 
             @isset($footer)
-                <footer class="header fixed bottom-0 w-screen bg-gray-200 h-15">
+                <footer class="header fixed bottom-0 w-screen bg-gray-200 h-15 mt-8">
                     {{$footer}}
                 </footer>
             @endisset
