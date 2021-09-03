@@ -24,7 +24,16 @@ class Index extends Component{
                 'msj' => "Se borro productos del carrito",
             ]);
 
+
         }
+
+        session()->forget('carrito');
+            $this->dispatchBrowserEvent('alerta_timer', [
+                'icon' => 'warning',
+                'msj' => "Se borro productos del carrito",
+            ]);
+
+            
         return view('livewire.cart.index');
     }
 
