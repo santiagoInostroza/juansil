@@ -54,7 +54,7 @@
                         @foreach (session('carrito') as $producto)
                          @php
                              echo "<pre>";
-                            var_dump($producto)
+                            var_dump($producto):
                              echo "</pre>";
                          @endphp
                             @if (false)
