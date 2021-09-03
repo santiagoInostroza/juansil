@@ -287,21 +287,25 @@ class CreateSale extends Component{
             return false;
         }
 
-        $cantTotal = 0;
-        foreach (session('venta.items') as  $item) {
-          if($item['product_id'] == $this->product_id){
-               $cantTotal += $item['cantidad_total'];
-          }
+        if(session()->has('venta.items')){
+            $cantTotal = 0;
+            foreach (session('venta.items') as  $item) {
+              if($item['product_id'] == $this->product_id){
+                   $cantTotal += $item['cantidad_total'];
+              }
+            }
+            $cantTotal += $this->cantidad_total;
+            if( $cantTotal > $product->stock){
+                $this->dispatchBrowserEvent('alerta', [
+                    'msj' => "Ya ingresaste este producto en esta compra y no hay suficiente stock, en total ingresaste " . $cantTotal . ". Quedan " . $product->stock . " en stock!! ",
+                    'icon' => 'warning',
+                    'title' => "No hay sufuciente  " . $this->name . "!!",
+                ]); 
+                return false;
+            }
+
         }
-        $cantTotal += $this->cantidad_total;
-        if( $cantTotal > $product->stock){
-            $this->dispatchBrowserEvent('alerta', [
-                'msj' => "Ya ingresaste este producto en esta compra y no hay suficiente stock, en total ingresaste " . $cantTotal . ". Quedan " . $product->stock . " en stock!! ",
-                'icon' => 'warning',
-                'title' => "No hay sufuciente  " . $this->name . "!!",
-            ]); 
-            return false;
-        }
+       
 
         $this->validar = 1;
         $this->validate();
@@ -409,6 +413,7 @@ class CreateSale extends Component{
             'venta.items' => $items
         ]);
 
+        
         $this->total = 0;
         foreach (session('venta.items') as  $value) {
             $this->total += $value['precio_total'];
