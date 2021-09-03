@@ -9,7 +9,7 @@
             @endisset
            
             
-            <main class="p-4 bg-white overflow-auto"  
+            <main class="p-4 bg-white overflow-auto w-full h-full"  
                 style="
                     @if( isset($footer) && isset($header) ) max-height: calc(100vh - 112px); my-15 @endif>
                     @if( isset($footer) ) max-height: calc(100vh - 56px); mb-8 @endif>
