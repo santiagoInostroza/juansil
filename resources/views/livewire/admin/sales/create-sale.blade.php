@@ -14,7 +14,7 @@
 
 
 
-        <div  class="hidden" :class="{'hidden': !open}"   @keyup.shift.c.window="$wire.open_add_item()">
+        <div  class="hidden" :class="{'hidden': !open}"   x-on:keyup.shift.a.window="$wire.open_add_item()">
             <div class="bg-gray-500 w-full h-full fixed top-0 right-0 left-0 bottom-0 opacity-50 z-10 "></div>     
             <div class="absolute bg-white rounded-lg shadow-xl top-0 right-0 left-0 z-10 mt-4 mx-auto max-w-4xl">
                 <div class="px-6 pt-4">
