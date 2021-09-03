@@ -323,7 +323,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center gap-2">
-                                                <figure class="w-32">
+                                                <figure class="w-36">
                                                     <img class="h-24 w-full object-contain transform hover:scale-150" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="{{$item->product->name}}">
                                                 </figure>
                                             
