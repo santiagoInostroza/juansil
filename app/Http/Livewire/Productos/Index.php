@@ -43,7 +43,7 @@ class Index extends Component{
             $query->where('stock','>',0)->where('status','=',1);
         },'products.brand','products.tags','products.category','products.image'])->first();
 
-        
+
 
 
         $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
@@ -61,6 +61,10 @@ class Index extends Component{
         }
 
         return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido','tentaciones'));
+    }
+
+    public function restaurarSesion(){
+        session()->forget('carrito');
     }
 
 
