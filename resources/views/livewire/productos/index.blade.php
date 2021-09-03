@@ -1,18 +1,16 @@
 <div>
-   @if (Auth::user() && Auth::user()->id == 1)
- 
-      <script>
-  
-         const inFromBack = performance && performance.getEntriesByType( 'navigation' ).map( nav =>{ 
-            nav.type;
-            console.log(nav.type); 
 
-               if(nav.type === "back_forward"){
-                  location.reload();
-               }
-            } 
-         ).includes( 'back_forward' );       
-      </script>
+   <script>
+      const inFromBack = performance && performance.getEntriesByType( 'navigation' ).map( nav =>{ 
+         nav.type;
+         console.log(nav.type); 
+            if(nav.type === "back_forward"){
+               location.reload();
+            }
+         } 
+      ).includes( 'back_forward' );       
+   </script>
+   @if (Auth::user() && Auth::user()->id == 1)    
  
       <div x-data="{show:true}">
          <div x-show="!show" class="fixed top-0 mt-4 bg-white z-40 "  >
