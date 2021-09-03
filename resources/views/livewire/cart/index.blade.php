@@ -58,7 +58,7 @@
                              echo "</pre>";
                          @endphp --}}
 
-                         @if (Auth::user()->id == 1)
+                         @if (Aut::user() && Auth::user()->id == 1)
                              Solo lo puede ver el santy
                          @endif
 
