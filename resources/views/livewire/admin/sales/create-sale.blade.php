@@ -1,7 +1,7 @@
 <div>
 
 
-    <div  x-data='main()'>
+    <div  x-data='main()' @keyup.shift.c.window="open_add_item=true">
         @if ($editSale)
             <x-jet-button>
                 <i class="fas fa-pen"></i>
