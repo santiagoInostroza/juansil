@@ -57,7 +57,7 @@
                             <div class=" h-24 flex items-center justify-between relative ">
                                
                                 <div class="w-16">
-                                    @if (count($producto)>0)
+                                    {{-- @if (count($producto)>0)
                                     <figure>
                                             
                                        
@@ -67,7 +67,7 @@
                                             <img class="max-h-24 object-contain" src=" {{ Storage::url('products/' . $producto['url']) }}" alt="">
                                         @endif
                                     </figure>
-                                    @endif
+                                    @endif --}}
                                 </div>
                         
                                 {{-- NOMBRE --}}
