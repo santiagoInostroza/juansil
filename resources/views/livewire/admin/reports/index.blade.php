@@ -322,7 +322,7 @@
                                             <div>{{$item->id}}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex justify-between items-center gap-2">
+                                            <div class="flex items-center gap-2">
                                                 <figure class="w-28">
                                                     <img class="h-20 w-full object-contain" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="{{$item->product->name}}">
                                                 </figure>
