@@ -57,7 +57,7 @@
                             <div class=" h-24 flex items-center justify-between relative ">
                                
                                 <div class="w-16">
-                                    @if ($producto['url'])
+                                    @if (count($producto)>0)
                                     <figure>
                                             
                                        
