@@ -324,7 +324,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center gap-2">
                                                 <figure>
-                                                    <img class="h-16 w-16 object-cover" src="{{ Storage::url($item->product->image->url) }}" alt="">
+                                                    <img class="h-16 w-16 object-cover" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="">
                                                 </figure>
                                             
                                                 <div class="text-sm font-medium text-gray-900">
