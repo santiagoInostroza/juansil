@@ -22,7 +22,7 @@ class SpecialPrice extends Component{
 
     public function render(){
 
-        $query = Product::where('name','like','%' . $this->search . '%');
+        $query = Product::where('name','like','%' . $this->search . '%')->where('special_sale_price','>',0);
 
         if($this->onlyStock){
             $products = $query->where('stock','>', 0);

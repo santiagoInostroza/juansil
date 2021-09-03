@@ -260,6 +260,17 @@ class CreateSale extends Component{
 
 
     public function addItem(){
+        $product = Product::find($this->product_id);
+
+        if($this->cantidad_total > $product->stock){
+
+            $this->dispatchBrowserEvent('alerta', [
+                'msj' => "Estás ingresando " . $this->cantidad_total . ". Quedan " . $product->stock . " en stock!! ",
+                'icon' => 'warning',
+                'title' => "No hay sufuciente  " . $this->name . "!!",
+            ]); 
+            return false;
+        }
         $this->validar = 1;
         $this->validate();
 
@@ -273,10 +284,14 @@ class CreateSale extends Component{
     }
 
     public function addToSale(){
+      
+
+
         $items = [];
         if (session()->has('venta.items')) {
             $items = session('venta.items');
         }
+
 
         $items[] =
             [

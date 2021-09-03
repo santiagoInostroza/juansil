@@ -439,18 +439,18 @@
 
                                        <div>
                                            <x-jet-label value="Cantidad"/> 
-                                           <x-jet-input  wire:ignore  class="w-full" id='cantidad'  @keyup='calculo' value="{{$cantidad}}" />
+                                           <x-jet-input  wire:ignore  class="w-full" id='cantidad' type="number"   @keyup='calculo' value="{{$cantidad}}" />
                                            @error('cantidad') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                        </div>
                                        <div>
                                            <x-jet-label value="CantidadXcaja"/> 
-                                           <x-jet-input wire:ignore  id='cantidad_por_caja'  class="w-full"  @keyup='calculo' value='{{$cantidad_por_caja}}'/>
+                                           <x-jet-input wire:ignore  id='cantidad_por_caja' type="number"   class="w-full"  @keyup='calculo' value='{{$cantidad_por_caja}}'/>
                                            @error('cantidad_por_caja') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                        </div>
 
                                        <div>
                                            <x-jet-label value="CantidadTotal"/> 
-                                           <x-jet-input wire:ignore   id='cantidad_total'  class="w-full"  readonly value="{{$cantidad_total}}" />
+                                           <x-jet-input wire:ignore   id='cantidad_total' type="number"  class="w-full"   value="{{$cantidad_total}}"  />
                                            @error('cantidad_total') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                                        </div>
 
