@@ -1,8 +1,16 @@
 <div>
    @if (Auth::user() && Auth::user()->id == 1)
-      <div x-data>
-         <div class="fixed top-0 bg-white z-40 overflow-auto h-screen w-max-content shadow p-4"  >
+ 
+      <div x-data="{show:true}">
+         <div x-show="!show" class="fixed top-0 mt-4 bg-white z-40 "  >
+            <div x-on:click="show= !show"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer"> -> </div>
+         </div>
+         <div x-show="show" class="fixed top-0 bg-white z-40 overflow-auto h-screen w-max-content shadow p-4 " >
+            <div class="flex justify-end">
+               <div x-on:click="show= !show"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer"> <- </div>
+            </div>
             Solo lo puede ver el santy
+
             @php
                echo "<pre>";
                var_dump(session('carrito'));
