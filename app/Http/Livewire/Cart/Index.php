@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Cart;
 
 use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CarritoController;
 
 class Index extends Component{
@@ -16,7 +17,9 @@ class Index extends Component{
 
 
     public function render(){
-         //session()->forget('carrito');//
+        if (Auth::user() && Auth::user()->id == 1) {
+            session()->forget('carrito');
+        }
         return view('livewire.cart.index');
     }
 
