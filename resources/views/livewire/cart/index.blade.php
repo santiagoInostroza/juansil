@@ -52,12 +52,12 @@
                 {{-- CUERPO --}}
                 <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                         @foreach (session('carrito') as $producto)
-                         @php
+                         {{-- @php
                              echo "<pre>";
                             var_dump($producto);
                              echo "</pre>";
-                         @endphp
-                            @if (false)
+                         @endphp --}}
+                            @if (true)
                                 
                         
                                 {{-- {{var_dump($producto)}} --}}
