@@ -1,12 +1,14 @@
 <div>
    @if (Auth::user() && Auth::user()->id == 1)
-      <div class="fixed top-0 bg-white z-40 overflow-auto h-screen w-max-content">
-         Solo lo puede ver el santy
-         @php
-            echo "<pre>";
-            var_dump(session('carrito'));
-            echo "</pre>";
-         @endphp
+      <div x-data>
+         <div class="fixed top-0 bg-white z-40 overflow-auto h-screen w-max-content shadow p-4"  >
+            Solo lo puede ver el santy
+            @php
+               echo "<pre>";
+               var_dump(session('carrito'));
+               echo "</pre>";
+            @endphp
+         </div>
       </div>
    @endif
    <div  wire:ignore >
