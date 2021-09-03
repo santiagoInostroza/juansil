@@ -11,9 +11,9 @@
             
             <main class="p-4 bg-white overflow-auto w-full h-full"  
                 style="
-                    @if( isset($footer) && isset($header) ) max-height: calc(100vh - 112px); margin-bottom: 2rem;margin-top: 2rem; @endif
-                    @if( isset($footer) ) max-height: calc(100vh - 56px); margin-bottom: 2rem @endif
-                    @if( isset($header) ) max-height: calc(100vh - 56px); margin-top: 2rem; @endif
+                    @if( isset($footer) && isset($header) ) max-height: calc(100vh - 112px); margin-bottom: 4rem;margin-top: 4rem; @endif
+                    @if( isset($footer) ) max-height: calc(100vh - 56px); margin-bottom: 4rem @endif
+                    @if( isset($header) ) max-height: calc(100vh - 56px); margin-top: 4rem; @endif
                 "
             >
                 {{$slot}}
