@@ -322,9 +322,9 @@
                                             <div>{{$item->id}}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center gap-2">
-                                                <figure class="w-max-content">
-                                                    <img class="h-24 w-full object-contain transform hover:scale-150" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="{{$item->product->name}}">
+                                            <div class="flex justify-between items-center gap-4 w-max-content relative">
+                                                <figure >
+                                                    <img class="h-24 w-24 object-contain transform hover:scale-150" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="{{$item->product->name}}">
                                                 </figure>
                                             
                                                 <div class="text-sm font-medium text-gray-900">
