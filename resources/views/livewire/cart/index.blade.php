@@ -52,14 +52,15 @@
                 {{-- CUERPO --}}
                 <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                         @foreach (session('carrito') as $producto)
-                         {{-- @php
-                             echo "<pre>";
-                            var_dump($producto);
-                             echo "</pre>";
-                         @endphp --}}
+                       
 
                          @if (Auth::user() && Auth::user()->id == 1)
-                             Solo lo puede ver el santy
+                            Solo lo puede ver el santy
+                            @php
+                                echo "<pre>";
+                                var_dump($producto);
+                                echo "</pre>";
+                            @endphp
                          @endif
 
 
