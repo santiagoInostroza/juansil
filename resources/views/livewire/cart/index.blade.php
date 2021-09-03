@@ -52,104 +52,107 @@
                 {{-- CUERPO --}}
                 <div class="card-body overflow-auto h-8/12 cuerpoCarrito">
                         @foreach (session('carrito') as $producto)
-                        {{-- {{var_dump($producto)}} --}}
-                        <div class="pb-4  text-cool-gray-600 border-b-2 border-gray-200">
-                            <div class=" h-24 flex items-center justify-between relative ">
-                               
-                                <div class="w-16">
-                                    {{-- @if (count($producto)>0)
-                                    <figure>
-                                            
-                                       
-                                        @if (Storage::exists('products_thumb/' . $producto['url']))
-                                            <img class="max-h-24 object-contain" src=" {{ Storage::url('products_thumb/' . $producto['url']) }}" alt="">
-                                        @else
-                                            <img class="max-h-24 object-contain" src=" {{ Storage::url('products/' . $producto['url']) }}" alt="">
-                                        @endif
-                                    </figure>
-                                    @endif --}}
-                                </div>
-                        
-                                {{-- NOMBRE --}}
-                                <div class="text-sm sm:text-2xl pl-1 sm:px-2 ml-2 sm:mx-4 w-2/3 sm:w-1/2">
-                                    <div class="font-bold">
-                                        {{ $producto['name'] }}
-                                    </div>
-                                    <div class="text-xs">
-                                        ${{ number_format($producto['precio'], 0, ',', '.') }}
-                                    </div>
-                                </div>
-                        
-                                {{-- CANTIDAD --}}
-                                <div class=" text-right w-20">
-                                    <label class="text-xs font-bold flex items-baseline justify-end">
-                                        <input wire:ignore id="carrito_cantidad_producto_{{ $producto['producto_id'] }}" class="w-10 inline-block text-right p-1 cantidad_producto_{{ $producto['producto_id'] }}" onchange="carritoSetCantidad({{ $producto['producto_id'] }}, {{ $producto['stock'] }});" value="{{$producto['cantidad']}}" type="number" > un.
-                                    </label>
-                                    <div>
-                                        ${{ number_format($producto['total'], 0, ',', '.') }}
-                                    </div>
-                                </div>
-                        
-                                {{-- BOTONES --}}
-                                <div x-data class="flex items-center justify-center ml-4 ">
-                                    <button class="cursor-pointer hover:bg-purple-100 rounded-full" onclick="return carritoDisminuyeCantidad({{ $producto['producto_id'] }})">
-                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    </button>
-
-                                    <button class="cursor-pointer hover:bg-purple-100 rounded-full" onclick="return carritoAumentaCantidad({{ $producto['producto_id'] }}, {{ $producto['stock'] }})">
-                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="cursor-pointer hover:bg-purple-100 rounded-full p-1 sm:p-3 ml-1 sm:ml-5" onclick="return removeFromCart({{ $producto['producto_id'] }});">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                </div>
-                            </div>
-                        
-                        
-                            @if ($producto['faltan']>0 && $producto['nivel']==1)
-                                <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg sm:ml-20">
-                                    Agrega 
-                                    <span class="font-bold">{{$producto['faltan']}}</span> 
-                                    productos más, para obtener un precio más bajo
-                                </div>
-                            @endif
-                            @if ($producto['nivel']>1 && $producto['nivel'] < $producto['cantidadNiveles'] )
+                            @if ($producto)
                                 
+                        
+                            {{-- {{var_dump($producto)}} --}}
+                            <div class="pb-4  text-cool-gray-600 border-b-2 border-gray-200">
+                                <div class=" h-24 flex items-center justify-between relative ">
                                 
-                            <div class="sm:flex justify-start items-center">
-                                <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20 ">
+                                    <div class="w-16">
+                                        {{-- @if (count($producto)>0)
+                                        <figure>
+                                                
+                                        
+                                            @if (Storage::exists('products_thumb/' . $producto['url']))
+                                                <img class="max-h-24 object-contain" src=" {{ Storage::url('products_thumb/' . $producto['url']) }}" alt="">
+                                            @else
+                                                <img class="max-h-24 object-contain" src=" {{ Storage::url('products/' . $producto['url']) }}" alt="">
+                                            @endif
+                                        </figure>
+                                        @endif --}}
+                                    </div>
+                            
+                                    {{-- NOMBRE --}}
+                                    <div class="text-sm sm:text-2xl pl-1 sm:px-2 ml-2 sm:mx-4 w-2/3 sm:w-1/2">
+                                        <div class="font-bold">
+                                            {{ $producto['name'] }}
+                                        </div>
+                                        <div class="text-xs">
+                                            ${{ number_format($producto['precio'], 0, ',', '.') }}
+                                        </div>
+                                    </div>
+                            
+                                    {{-- CANTIDAD --}}
+                                    <div class=" text-right w-20">
+                                        <label class="text-xs font-bold flex items-baseline justify-end">
+                                            <input wire:ignore id="carrito_cantidad_producto_{{ $producto['producto_id'] }}" class="w-10 inline-block text-right p-1 cantidad_producto_{{ $producto['producto_id'] }}" onchange="carritoSetCantidad({{ $producto['producto_id'] }}, {{ $producto['stock'] }});" value="{{$producto['cantidad']}}" type="number" > un.
+                                        </label>
+                                        <div>
+                                            ${{ number_format($producto['total'], 0, ',', '.') }}
+                                        </div>
+                                    </div>
+                            
+                                    {{-- BOTONES --}}
+                                    <div x-data class="flex items-center justify-center ml-4 ">
+                                        <button class="cursor-pointer hover:bg-purple-100 rounded-full" onclick="return carritoDisminuyeCantidad({{ $producto['producto_id'] }})">
+                                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </button>
 
-                                    Precio de oferta aplicado
-                                    @for($i = 0; $i < $producto['nivel']-1; $i++)
-                                        <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                    @endfor
+                                        <button class="cursor-pointer hover:bg-purple-100 rounded-full" onclick="return carritoAumentaCantidad({{ $producto['producto_id'] }}, {{ $producto['stock'] }})">
+                                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </button>
+                                    </div>
+                                    <div class="cursor-pointer hover:bg-purple-100 rounded-full p-1 sm:p-3 ml-1 sm:ml-5" onclick="return removeFromCart({{ $producto['producto_id'] }});">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </div>
                                 </div>
-                                <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg sm:ml-2 ">
-                                    Agrega 
-                                    <span class="font-bold">{{$producto['faltan']}}</span> 
-                                    productos más, si quieres obtener un precio aún más bajo
+                            
+                            
+                                @if ($producto['faltan']>0 && $producto['nivel']==1)
+                                    <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg sm:ml-20">
+                                        Agrega 
+                                        <span class="font-bold">{{$producto['faltan']}}</span> 
+                                        productos más, para obtener un precio más bajo
+                                    </div>
+                                @endif
+                                @if ($producto['nivel']>1 && $producto['nivel'] < $producto['cantidadNiveles'] )
+                                    
+                                    
+                                <div class="sm:flex justify-start items-center">
+                                    <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20 ">
+
+                                        Precio de oferta aplicado
+                                        @for($i = 0; $i < $producto['nivel']-1; $i++)
+                                            <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        @endfor
+                                    </div>
+                                    <div class="text-xs text-gray-500 bg-yellow-100 p-1 w-max-content rounded-lg sm:ml-2 ">
+                                        Agrega 
+                                        <span class="font-bold">{{$producto['faltan']}}</span> 
+                                        productos más, si quieres obtener un precio aún más bajo
+                                    </div>
                                 </div>
-                            </div>
-                            @elseif($producto['nivel']>2 &&  $producto['nivel'] == $producto['cantidadNiveles'] )
-                            <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20">
-                                Mejor precio de oferta aplicado
-                                @for($i = 0; $i < $producto['nivel']-1; $i++)
-                                    <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                @endfor
-                            </div>
-                            @elseif ($producto['nivel']>1)
+                                @elseif($producto['nivel']>2 &&  $producto['nivel'] == $producto['cantidadNiveles'] )
                                 <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20">
-                                    Precio de oferta aplicado
+                                    Mejor precio de oferta aplicado
                                     @for($i = 0; $i < $producto['nivel']-1; $i++)
                                         <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                     @endfor
-                                   
                                 </div>
+                                @elseif ($producto['nivel']>1)
+                                    <div class=" flex text-xs bg-green-100 p-1 w-max-content rounded-lg sm:ml-20">
+                                        Precio de oferta aplicado
+                                        @for($i = 0; $i < $producto['nivel']-1; $i++)
+                                            <svg class="w-6 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        @endfor
+                                    
+                                    </div>
+                                @endif
+                            
+                            
+                            </div>
                             @endif
-                        
-                        
-                        </div>
-
                         @endforeach
                 </div>
     
