@@ -197,7 +197,7 @@
         @if ($openShowSale)
             <div x-show="openShowSale">
                 <x-modal.modal_screen>
-                    <x-slot name="titulo">
+                    <x-slot name="header">
             
                             <div class="p-4 flex justify-between items-center">
                                 <div>
