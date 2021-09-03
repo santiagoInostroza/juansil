@@ -225,15 +225,30 @@ class CreateSale extends Component{
    
 
     public function render(){
+
+        $str = explode(' ', $this->search);
+
+
+
         if($this->tagId>0){
             $products = Product::join('product_tag', 'product_tag.product_id','=','products.id')
-            ->where('products.name', 'like', '%' . $this->search . '%')
+            ->where(function($query) use($str) {
+                foreach($str as $s) {
+                    $query = $query->where('products.name','like',"%" . $s . "%");
+                }
+            })
+            // ->where('products.name', 'like', '%' . $this->search . '%')
             ->where('product_tag.tag_id', '=',  $this->tagId)
             ->select('products.*')
             ->orderBy('products.name','asc')
             ->get();
         }else{
-            $products = Product::where('name', 'like', '%' . $this->search . '%')
+            $products = Product::where(function($query) use($str) {
+                foreach($str as $s) {
+                    $query = $query->where('products.name','like',"%" . $s . "%");
+                }
+            })
+            // ->where('name', 'like', '%' . $this->search . '%')
             ->orderBy('name','asc')
             ->get();
         }
