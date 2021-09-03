@@ -58,7 +58,7 @@
                             Solo lo puede ver el santy
                             @php
                                 echo "<pre>";
-                                var_dump($producto);
+                                var_dump(session('carrito'));
                                 echo "</pre>";
                             @endphp
                          @endif

@@ -123,6 +123,16 @@
        
       </div>
 
+      @if (Auth::user() && Auth::user()->id == 1)
+         Solo lo puede ver el santy
+         @php
+            echo "<pre>";
+            var_dump(session('carrito'));
+            echo "</pre>";
+         @endphp
+      @endif
+
+
       {{-- TENTACIONES --}}
       @if ( $tentaciones )
       <div class="px-5 sm:px-20 mt-10" >
