@@ -64,18 +64,14 @@
                                 <div class="pb-4  text-cool-gray-600 border-b-2 border-gray-200">
                                     <div class=" h-24 flex items-center justify-between relative ">
                                     
-                                        <div class="w-16">
-                                            {{-- @if (count($producto)>0)
+                                        <div class="w-16">                                          
                                             <figure>
-                                                    
-                                            
                                                 @if (Storage::exists('products_thumb/' . $producto['url']))
                                                     <img class="max-h-24 object-contain" src=" {{ Storage::url('products_thumb/' . $producto['url']) }}" alt="">
                                                 @else
                                                     <img class="max-h-24 object-contain" src=" {{ Storage::url('products/' . $producto['url']) }}" alt="">
                                                 @endif
                                             </figure>
-                                            @endif --}}
                                         </div>
                                 
                                         {{-- NOMBRE --}}
