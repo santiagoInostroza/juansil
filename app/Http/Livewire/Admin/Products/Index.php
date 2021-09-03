@@ -303,7 +303,7 @@ class Index extends Component{
                 });
 
                 $image1->encode('webp');
-                $image1->save('storage/products/'.$url);
+                $image1->save('storage/products/' . $this->product_selected->slug . '.webp');
 
                 if (!Storage::disk('public')->exists('products_thumb')) {
                     Storage::disk('public')->makeDirectory('products_thumb');
@@ -316,19 +316,44 @@ class Index extends Component{
                     $constraint->upsize();
                 });
                 $image2->encode('webp');
-                $image2->save('storage/products_thumb/'.$url);
+                $image2->save('storage/products_thumb/'. $this->product_selected->slug . '.webp');
 
                 // guarda en base de datos (ACTUALIZA)
                 $this->product_selected->image->update([
-                    'url' =>  $url,
+                    'url' =>  $this->product_selected->slug . '.webp',
                 ]);
                 
             } else {
 
                  // guarda en base de datos (CREA NUEVO)
                 $this->product_selected->image()->create([
-                    'url' => $url
+                    'url' => $this->product_selected->slug . '.webp',
                 ]);
+
+                $manager =  new ImageManager();
+                $image1 = $manager->make( $this->photo0 );
+                $image1->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image1->encode('webp');
+                $image1->save('storage/products/' . $this->product_selected->slug . '.webp');  
+                
+                if (!Storage::disk('public')->exists('products_thumb')) {
+                    Storage::disk('public')->makeDirectory('products_thumb');
+                }
+        
+                // guarda en thumbs
+                $image2 = $manager->make($this->photo0);
+                $image2->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->encode('webp');
+                $image2->save('storage/products_thumb/' . $this->product_selected->slug . '.webp');   
+
+
+
             }
 
 

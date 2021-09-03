@@ -76,11 +76,11 @@ class CreateProduct extends Component{
             ]);
 
              //consigue el nombre
-            $url  = $this->photo->hashName();
+            // $url  = $this->photo->hashName();
 
             // guarda en base de datos (CREA NUEVO)
             $product->image()->create([
-                'url' => $url
+                'url' => $product->slug . '.webp'
             ]);
 
            
@@ -89,24 +89,26 @@ class CreateProduct extends Component{
     
             // guarda en products
             $manager =  new ImageManager();
-            $image1 = $manager->make( $this->photo )->encode('webp');
+            $image1 = $manager->make( $this->photo );
             $image1->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $image1->save('storage/products/'.$url);  
+            $image1->encode('webp');
+            $image1->save('storage/products/' . $product->slug . '.webp');  
             
             if (!Storage::disk('public')->exists('products_thumb')) {
                 Storage::disk('public')->makeDirectory('products_thumb');
             }
     
             // guarda en thumbs
-            $image2 = $manager->make($this->photo)->encode('webp');
-            $image2->resize(150, 150, function ($constraint) {
+            $image2 = $manager->make($this->photo);
+            $image2->resize(250, 250, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $image2->save('storage/products_thumb/'.$url);          
+            $image2->encode('webp');
+            $image2->save('storage/products_thumb/' . $product->slug . '.webp');          
             
         }
 
