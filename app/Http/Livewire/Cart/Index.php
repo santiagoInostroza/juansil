@@ -18,7 +18,7 @@ class Index extends Component{
 
     public function render(){
         if (Auth::user() && Auth::user()->id == 1) {
-            session()->forget('carrito');
+            //session()->forget('carrito');
         }
         return view('livewire.cart.index');
     }
