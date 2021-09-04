@@ -68,4 +68,5 @@ class RoleController extends Controller
        $role->delete();
        return redirect()->route('admin.roles.index')->with('info','El rol "'. $name . '" se eliminó con exito');
     }
+
 }

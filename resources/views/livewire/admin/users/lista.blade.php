@@ -78,11 +78,11 @@
                                     @endforeach
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    {{-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a> --}}
                                 </td>
                             </tr>
                         @else
-                            <tr class="text-gray-900  @if($user->customers->count()) bg-green-200  @elseif($user->eventualCustomer()) bg-yellow-200  @endif">
+                            <tr class="text-gray-900  @if($user->customers->count()) bg-green-200  @elseif($user->eventualCustomer()) bg-yellow-200 @else bg-gray-50  @endif">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -122,14 +122,17 @@
                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @foreach ($user->roles as $role)
-                                        <div x-data="{showButtonRemove:false,user_id:''}" x-init="user_id='{{$user->id}}';" x-on:mouseenter="showButtonRemove=true" x-on:mouseleave="showButtonRemove=false" class="relative hover:bg-green-50 p-1">
+                                        <div id="roleUser_{{$role->id}}" x-data="{showButtonRemove:false,user_id:''}" x-init="user_id='{{$user->id}}';" x-on:mouseenter="showButtonRemove=true" x-on:mouseleave="showButtonRemove=false" class="relative hover:bg-green-50 p-1">
                                             <div class=" text-gray-900">{{$role->name}}</div>
-                                            <div wire:click="removeRole({{$user->id}},{{$role->id}})" class="absolute right-0 top-0 p-1 cursor-pointer" :class="{'hidden': !showButtonRemove}"><i class="fas fa-trash"></i></div>
+                                            @if ($user->id == 1)
+                                            @else
+                                                <div wire:click="removeUserRole({{$user->id}},{{$role->id}})" class="absolute right-0 top-0 p-1 cursor-pointer" :class="{'hidden': !showButtonRemove}"><i class="fas fa-trash"></i></div>
+                                            @endif
                                         </div>
                                         
                                     @endforeach
-                                    <div x-data="{user_id:'',loading:false,openAddRole:false}" x-init="user_id = {{$user->id}}">
-                                        <div class="flex justify-center items-center">
+                                    <div  x-data="{user_id:'',loading:false,openAddRole:false}" x-init="user_id = {{$user->id}}">
+                                        <div class="flex">
                                             <div  x-on:click="openAddRole= true"  class="p-1 px-2 rounded-full border cursor-pointer"><i class="fas fa-plus"></i></div> 
                                             <div class="hidden" :class="{'hidden':!loading}">
                                                 <x-spinner.spinner2 size="8"></x-spinner.spinner2>
@@ -148,8 +151,7 @@
 
                                                      </div>
                                                      <div class="p-4">
-                                                         <x-jet-button x-on:click="console.log($refs.select_roles_{{$user->id}}_value).value;">Probar</x-jet-button>
-                                                         <x-jet-button x-on:click="openAddRole = false;loading = true; $wire.saveRole( user_id,document.getElementById(select_roles_{{$user->id}}_value).value ).then( ()=>loading=false )">Agregar</x-jet-button>
+                                                         <x-jet-button x-on:click="openAddRole = false;loading = true; $wire.saveUserRole( user_id,document.getElementById('select_roles_{{$user->id}}_value').value ).then( ()=>loading=false )">Agregar</x-jet-button>
                                                      </div>
 
                                                  </div>
@@ -158,35 +160,43 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class=" hover:text-gray-500 ">Edit</a>
-                                </td>
-                            </tr>
-                            <tr class=" @if($user->customers->count()) bg-green-100  @elseif($user->eventualCustomer()) bg-yellow-100  @endif">
-                                <td colspan="4">
-                                    <div>
-                                        @if ( $user->customers->count() )
-                                            <div  class="p-8 py-4 shadow">
-                                                <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
-                                                @foreach ($user->customers as $cust)
-                                                <div>Cliente {{ $cust->id }} {{ $cust->name }} 
-                                                    @if ( Str::lower($cust->email) !=  Str::lower($user->email) ) {{ $cust->email }} @endif  
-                                                </div>
-                                                @endforeach
-                                            </div>
+                                    <div  wire:click="$set('showInfoTrue',{{!$this->showInfoTrue}})" wire:key="row_info_{{$user->id}}"  class="p-2 px-3 flex">
+                                        @if ($showInfoTrue)
+                                            <a href="#" class=" hover:text-gray-500 "><i class="fas fa-arrow-up"></i></a>  
+                                        @else
+                                            <a href="#" class=" hover:text-gray-500 "><i class="fas fa-arrow-down"></i></a>
                                         @endif
-                                            
-                                        @if( $user->eventualCustomer() )
-                                            <div  class="p-8 py-4 shadow">
-                                                <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la(s) siguiente(s) cuenta(s) de cliente: </h2>
-                                                @foreach ($user->eventualCustomer() as $cust)
-                                                <div> Cliente {{ $cust->id }} {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
-                                                @endforeach
-                                            </div>
-                                        @endif    
-
                                     </div>
                                 </td>
                             </tr>
+                            @if ($showInfo[$user->id])
+                                <tr class=" @if($user->customers->count()) bg-green-100  @elseif($user->eventualCustomer()) bg-yellow-100  @endif">
+                                    <td colspan="4">
+                                        <div>
+                                            @if ( $user->customers->count() )
+                                                <div  class="p-8 py-4 shadow">
+                                                    <h2 class="py-2 text-xl font-bold text-gray-600"> Cuenta vinculada a:</h2>
+                                                    @foreach ($user->customers as $cust)
+                                                    <div>Cliente {{ $cust->id }} {{ $cust->name }} 
+                                                        @if ( Str::lower($cust->email) !=  Str::lower($user->email) ) {{ $cust->email }} @endif  
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                                
+                                            @if( $user->eventualCustomer() )
+                                                <div  class="p-8 py-4 shadow">
+                                                    <h2 class="py-2 text-xl font-bold text-gray-600">Esta cuenta de usuario se puede vincular con la(s) siguiente(s) cuenta(s) de cliente: </h2>
+                                                    @foreach ($user->eventualCustomer() as $cust)
+                                                    <div> Cliente {{ $cust->id }} {{ $cust->name }}  {{ $cust->email }} {{ $cust->celular }} {{ $cust->direccion }} {{ $cust->comentario }}</div>
+                                                    @endforeach
+                                                </div>
+                                            @endif    
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
                         @endif
                     @endforeach
     

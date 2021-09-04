@@ -32,7 +32,7 @@ class UserController extends Controller{
        return redirect()->route('admin.users.edit',$user)->with('info','Se asignó los roles correctamente');
     }
     
-    public function saveRole($user_id,$role_id){
+    public function saveUserRole($user_id,$role_id){
         if($role_id>0){
             $user= User::find($user_id);
             if( !$user->roles->contains('id',$role_id)){
@@ -46,7 +46,7 @@ class UserController extends Controller{
         }
     }
 
-    public function removeRole($user_id,$role_id){
+    public function removeUserRole($user_id,$role_id){
         $user= User::find($user_id);
         if($user){
             $user->roles()->detach($role_id);

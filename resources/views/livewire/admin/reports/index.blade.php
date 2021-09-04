@@ -206,8 +206,8 @@
                                     </h2>
                                 
                                 </div>
-                                <div class="p-4 hover:shadow-xl cursor-pointer rounded-full">
-                                    <i class="fas fa-times" @click="closeOpenShowSale"></i>
+                                <div  @click="closeOpenShowSale" class="p-3 px-4 hover:shadow-xl cursor-pointer rounded-full">
+                                    <i class="fas fa-times"></i>
                                 </div>
                             </div>             
                     </x-slot>

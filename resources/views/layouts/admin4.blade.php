@@ -85,6 +85,7 @@
             </header>
             <!--/Header-->
 
+            {{-- body --}}
             <div class="flex flex-1">
                 <!--Sidebar-->
                 <aside x-show="openSidebar" id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden" :class="{'hidden' : !openSidebar}">
@@ -114,19 +115,27 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/users*')) bg-white @endif">
-                            <a href="{{route('admin.users.newIndex')}}"
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/roles*')) bg-white @endif">
+                            <a href="{{route('admin.roles.index')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
-                                <i class="fas fa-users float-left mx-2"></i>
+                                <i class="fas fa-users-cog float-left mx-2"></i>
                                 Roles
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/users*')) bg-white @endif">
-                            <a href="{{route('admin.users.newIndex')}}"
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/roles/new*')) bg-white @endif">
+                            <a href="{{route('admin.roles.index')}}"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
+                                <i class="fas fa-users-cog float-left mx-2"></i>
+                                Roles Nuevo
+                                <span><i class="fa fa-angle-right float-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/roles/new*')) bg-white @endif">
+                            <a href="{{route('admin.roles.index')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fas fa-users float-left mx-2"></i>
-                                Roles Nuevo
+                                Permisos
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
@@ -321,6 +330,10 @@
                 </main>
               
             </div>
+             {{-- /body --}}
+
+
+
             <!--Footer-->
             <footer class="bg-grey-darkest text-white p-2">
                 <div class="flex flex-1 mx-auto">&copy; My Design</div>
@@ -721,7 +734,6 @@
                             this.show=false;
                             var element = document.getElementById( this.id + '_value');
                             element.value=this.value;
-                            console.log(element);
                             
                             // nameWire =element.getAttribute('wire:model') ;
                             // nameWire2 =element.getAttribute('wire:model.defer') ;
