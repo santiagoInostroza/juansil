@@ -88,7 +88,7 @@
             {{-- body --}}
             <div class="flex flex-1">
                 <!--Sidebar-->
-                <aside x-show="openSidebar" id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden" :class="{'hidden' : !openSidebar}">
+                <aside x-show="openSidebar" x-on:click.away="openSidebar = false" id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden" :class="{'hidden' : !openSidebar}">
 
                     <ul class="list-reset flex flex-col">
                         <li class=" w-full h-full  border-b border-light-border @if (Request::is('admin')) bg-white @endif">
@@ -131,8 +131,8 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/roles/new*')) bg-white @endif">
-                            <a href="{{route('admin.roles.index')}}"
+                        <li class="w-full h-full  border-b border-light-border  @if (Request::is('admin/permission*')) bg-white @endif">
+                            <a href="{{route('admin.permission')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fas fa-users float-left mx-2"></i>
                                 Permisos
@@ -351,6 +351,25 @@
             // alert(event.detail.msj);
             Swal.fire(event.detail.msj)
         })
+        window.addEventListener('alertaEliminar', event => {
+                Swal.fire({
+                    icon: event.detail.icon,
+                    title: event.detail.title,
+                    text: event.detail.msj,
+                    footer: event.detail.footer,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emit(event.detail.delete)
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                });           
+        })
         window.addEventListener('alerta', event => {
             Swal.fire({
                 icon: event.detail.icon,
@@ -359,6 +378,8 @@
                 footer: event.detail.footer,
             })
         })
+
+
         window.addEventListener('alerta_timer', event => {
         
             Swal.fire({

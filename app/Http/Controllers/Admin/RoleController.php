@@ -69,4 +69,11 @@ class RoleController extends Controller
        return redirect()->route('admin.roles.index')->with('info','El rol "'. $name . '" se eliminó con exito');
     }
 
+
+    public function permission(){
+
+
+        return view('admin.roles.permission');
+    }
+
 }

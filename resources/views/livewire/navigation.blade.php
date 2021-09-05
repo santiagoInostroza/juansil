@@ -92,11 +92,7 @@
                                 @endcan
                                 @can('products.specialPrice')
                                     <a href="{{ route('products.specialPrice') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Precios especiales</a>
-                                @endcan
-                                @can('products.specialPrice')
-                                    <a href="{{ route('products.specialPrice') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Precios especiales</a>
-                                @endcan
-                               
+                                @endcan                     
                                
                                 <form method="POST" action="{{ route('logout') }}">@csrf
                                     <a 
