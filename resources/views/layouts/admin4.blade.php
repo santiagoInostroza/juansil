@@ -156,7 +156,7 @@
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
                         </li>
-                        <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/routes*')) bg-white @endif">
+                        {{-- <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/routes*')) bg-white @endif">
                             <a href="{{route('admin.resumen')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
                                 <i class="fab fa-wpforms float-left mx-2"></i>
@@ -164,7 +164,7 @@
                                 
                                 <span><i class="fa fa-angle-right float-right"></i></span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="w-full h-full border-b border-light-border  @if (Request::is('admin/ventas*')) bg-white @endif">
                             <a href="{{route('admin.sales.index')}}"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline block p-3 px-2 w-full h-full">
