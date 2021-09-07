@@ -1,5 +1,5 @@
 <div x-data="{open:false}">
-    <div wire:poll.60s>
+    <div wire:poll.1s>
 
         <div x-on:click="open=!open;$wire.markAsRead()" class="relative ml-6 bg-white rounded-full text-gray-500 hover:text-gray-800 transform hover:scale-110 cursor-pointer">
             <i class="fas fa-bell"></i>
