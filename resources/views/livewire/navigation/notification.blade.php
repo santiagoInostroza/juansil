@@ -1,5 +1,5 @@
 <div x-data="{open:false}">
-    <div wire:poll.1s>
+    <div wire:poll.20s>
 
         <div x-on:click="open=!open;$wire.markAsRead()" class="relative ml-6 bg-white rounded-full text-gray-500 hover:text-gray-800 transform hover:scale-110 cursor-pointer">
             <i class="fas fa-bell"></i>
@@ -25,6 +25,7 @@
                                 , {{ Helper::fecha( $noti->data['date'] )->diffForHumans() }}
                             </p>
                         </a>
+                       
                     @endforeach
                     
                     {{-- <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
@@ -45,6 +46,8 @@
                             <span class="font-bold" href="#">Abigail Bennett</span> start following you . 3h
                         </p>
                     </a> --}}
+                    
+                    <a href="https://api.whatsapp.com/send?phone=56973231830&text=Me%20gustaría%20saber%20el%20precio%20del%20sitio%20web«%0D%0A»">ws</a>
                   
                 @else
                     <p class="text-gray-600 text-sm m-2 text-center">No tienes notificaciones</p>
