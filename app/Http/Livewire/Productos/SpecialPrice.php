@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\Productos;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\SaleNotification;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\Admin\SaleController;
 
@@ -92,8 +94,8 @@ class SpecialPrice extends Component{
             ];
         }
 
-        $sale = new SaleController();
-        $sale->createSale($arrayVenta);
+        $saleController = new SaleController();
+        $sale = $saleController->createSale($arrayVenta);
 
         session()->forget('carritoSpecial');
         session()->forget('totalCarritoSpecial');
@@ -107,7 +109,8 @@ class SpecialPrice extends Component{
 
         $this->showCart = false;
 
-
+       
+        
         
     }
 

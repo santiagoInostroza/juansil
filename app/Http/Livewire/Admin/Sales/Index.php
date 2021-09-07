@@ -19,6 +19,15 @@ class Index extends Component{
 
     protected $listeners = ['render'];
 
+    public function mount(){
+
+        if(isset($_GET['id'])){
+
+            $this->open_show($_GET['id']);
+        }
+        
+    }
+
     public function render(){
         
         $sales =  Sale::join('customers','sales.customer_id','=','customers.id')

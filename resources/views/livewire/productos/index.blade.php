@@ -12,7 +12,7 @@
    </script>
    @if (Auth::user() && Auth::user()->id == 1)    
  
-      <div x-data="{show:true}">
+      <div x-data="{show:true}" class="hidden">
          <div x-show="!show" class="fixed top-0 mt-4 bg-white z-40 "  >
             <div x-on:click="show= !show"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer"> -> </div>
          </div>

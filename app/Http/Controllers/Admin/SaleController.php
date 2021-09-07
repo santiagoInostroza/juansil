@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\Sale;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\SaleItem;
+use App\Models\ErrorNotice;
+use App\Models\MovementSale;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 use App\Models\PurchasePrice;
 use App\Models\ProductMovement;
 use App\Http\Controllers\Controller;
-use App\Models\ErrorNotice;
-use App\Models\MovementSale;
-use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\SaleNotification;
 
 class SaleController extends Controller{
 
@@ -469,6 +471,8 @@ class SaleController extends Controller{
 
         $sale->total_cost = $total_cost;
         $sale->save();
+
+        User::find(1)->notify(new SaleNotification($sale));
 
         return $sale;
 
