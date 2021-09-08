@@ -70,7 +70,7 @@
 
                         {{-- REPARTOS --}}
                         <div>
-
+                            @livewire('admin.deliveries.deliveries-notification')
                         </div>
                             
                         {{-- NOTIFICACIONES --}}
