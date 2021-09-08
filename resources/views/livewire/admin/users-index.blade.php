@@ -18,8 +18,14 @@
             <tbody>
                 @foreach ($userCounts as $user)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->ip }}</td>
+                        <td>  {{ $user->id }}</td>
+                        <td>
+                            @if ($user->ip == '190.114.35.111')
+                                Santi
+                            @else
+                            {{ $user->ip }}
+                            @endif
+                        </td>
                         <td>{{ $user->page }}</td>
                         <td>{{ $user->visitas }}</td>
                         <td>{{ $user->dateCreate }}</td>
