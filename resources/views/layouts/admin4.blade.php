@@ -43,12 +43,12 @@
 
 <body>
     <!--Container -->
-    <div class="mx-auto bg-grey-400">
+    <div class="mx-auto bg-grey-400 ">
         <!--Screen-->
         <div class="min-h-screen flex flex-col" x-data="{openSidebar:false}">
             <!--Header Section Starts Here-->
             
-            <header class="bg-nav">
+            <header class="bg-nav py-4">
                 <div class="flex justify-between">
                     <div class="p-1 mx-3 inline-flex items-center">
                         <i class="fas fa-bars pr-2 text-white cursor-pointer p-3" x-on:click="openSidebar=!openSidebar"></i>
@@ -66,9 +66,61 @@
                             </a>  
                         </div>
                     </div>
-                    <div class="p-1 flex flex-row items-center">
+                    <div class="flex items-center gap-4 mr-8">
+
+                        {{-- REPARTOS --}}
+                        <div>
+
+                        </div>
+                            
+                        {{-- NOTIFICACIONES --}}
+                      <div class="">
+                          @livewire('navigation.notification')
+                      </div>
+                    
+
+                      {{-- MENU USUARIO --}}
+                      <div class=" relative" x-data="{ open:false }">
+                          {{-- BOTON MENU USUARIO --}}
+                          <div>
+                              <button x-on:click="open=true"
+                                  class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                                  id="user-menu" aria-haspopup="true">
+                                  <span class="sr-only">Open user menu</span>
+                                  <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
+                              </button>
+                          </div>                                
+                          <div x-show='open'  x-on:click.away="open=false"
+                              class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 z-40 hidden" :class="{'hidden': !open}"
+                              role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                              <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Perfil</a>
+                              
+                              @can('admin.home')
+                                  <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero</a>
+                              @endcan
+                              @can('products.specialPrice')
+                                  <a href="{{ route('products.specialPrice') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Precios especiales</a>
+                              @endcan                     
+                          
+                              <form method="POST" action="{{ route('logout') }}">@csrf
+                                  <a 
+                                      href="{{ route('logout') }}"  
+                                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                                      role="menuitem" 
+                                      onclick="event.preventDefault();this.closest('form').submit();">
+                                      Cerrar sesion
+                                  </a>
+                              </form>
+
+                          </div>
+                      </div>
+                  </div>
+                    {{-- <div class="p-1 flex flex-row items-center">
                         <a href="https://github.com/tailwindadmin/admin" class="text-white p-2 mr-2 no-underline hidden md:block lg:block">Github</a>
 
+                        <div>
+                            @livewire('navigation.notification')
+                        </div>
 
                         <img onclick="profileToggle()" class="inline-block h-8 w-8 rounded-full" src="https://avatars0.githubusercontent.com/u/4323180?s=460&v=4" alt="">
                         <a href="#" onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block">Adam Wathan</a>
@@ -80,7 +132,7 @@
                             <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </header>
             <!--/Header-->
