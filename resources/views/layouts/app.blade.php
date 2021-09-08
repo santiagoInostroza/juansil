@@ -161,15 +161,6 @@
 
 
 
-<script>
-        
-    window.addEventListener('notification', event => {
-       
-        const audio = new Audio('/sounds/notification/iphoneNotification.mp3');
-        audio.play();
-     
-   })
-</script>
 
         @stack('modals')
         @stack('js')

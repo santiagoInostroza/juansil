@@ -1,12 +1,11 @@
-<div x-data="{open:false}">
+<div x-data="{open:@entangle('isOpenNotification')}">
   
   
     <div wire:poll.6s>
 
-        <div x-on:click="open=!open;$wire.openNotification()" class="relative ml-8 bg-white rounded-full text-gray-500 hover:text-gray-800 transform hover:scale-110 cursor-pointer p-1 px-2 shadow">
+        <div x-on:click="$wire.openNotification()" class="relative ml-8 bg-white rounded-full text-gray-500 hover:text-gray-800 transform hover:scale-110 cursor-pointer p-1 px-2 shadow">
             <i class="fas fa-bell"></i>
             @if (auth()->user()->unreadNotifications->count())
-
                 <span class="absolute  right-6 top-0 flex rounded-full bg-red-600 uppercase px-2 py-1 text-xs font-bold text-white">{{auth()->user()->unreadNotifications->count()}}</span>
             @endif
           

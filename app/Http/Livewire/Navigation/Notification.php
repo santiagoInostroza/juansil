@@ -7,11 +7,8 @@ use Livewire\Component;
 class Notification extends Component
 {
     public $isOpenNotification;
-    public function render()
-    {
-        if(auth()->user()->unreadNotifications->count()){
-            $this->dispatchBrowserEvent('notification'); 
-        }
+    public function render(){
+      
         return view('livewire.navigation.notification');
     }
 
@@ -22,8 +19,7 @@ class Notification extends Component
         // auth()->user()->unreadNotifications->markAsRead();
     }
 
-    public function openNotification()
-    {
+    public function openNotification(){
         $this->isOpenNotification = true;
     }
 }
