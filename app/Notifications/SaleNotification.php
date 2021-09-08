@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\UserCount;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -20,6 +21,8 @@ class SaleNotification extends Notification
     public function __construct($sale)
     {
         $this->sale = $sale;
+
+        
     }
 
     /**
