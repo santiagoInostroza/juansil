@@ -48,6 +48,7 @@ class AppLayout extends Component
             $userCounts->countryCode = $this->countryCode;
             $userCounts->countryAbbreviation = $this->countryAbbreviation;
             $userCounts->countryName = $this->countryName;
+            $userCounts->date = Carbon::now()->locale('es_ES')->timezone('America/Santiago');
 
             $userCounts->save();
         }else{
@@ -61,6 +62,7 @@ class AppLayout extends Component
             $userCounts->page = $page;
             $userCounts->visitas = 1;
             $userCounts->dateCreate = Carbon::now()->locale('es_ES')->timezone('America/Santiago');
+            $userCounts->date = Carbon::now()->locale('es_ES')->timezone('America/Santiago');
 
             $userCounts->save();
         }
