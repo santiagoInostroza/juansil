@@ -1,5 +1,6 @@
 <div class="card">
 
+   
 
     <div class="card-body" wire:poll.10s>
 
