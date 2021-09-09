@@ -127,6 +127,7 @@ class CreateSale extends Component{
     public function mount(){
        $this->fecha = Carbon::now()->locale('es_ES')->timezone('America/Santiago')->toDateString();
        $this->fecha_entrega = Carbon::now()->tomorrow()->toDateString();
+       $this->delivered = 0;
     }
 
     public function updatedTagId(){
@@ -164,7 +165,7 @@ class CreateSale extends Component{
 
         $payment_date =($this->estado_pago == 3)? Carbon::now()->toDateString(): null;
         $delivery_date = ($this->delivery)? $this->fecha_entrega: null;
-        $date_delivered = ($this->delivered)? $delivery_date : null ;
+        $date_delivered = ($this->delivered)? Carbon::now()->timezone('America/Santiago') : null ;
         $delivered_user=($this->delivered)? Auth::user()->id:null;
         $delivery_value=($this->delivery)? $this->valor_despacho: null;
 

@@ -5,8 +5,8 @@
 
         <div x-on:click="$wire.openNotification()" class="relative ml-8 bg-white rounded-full text-gray-500 hover:text-gray-800 transform hover:scale-110 cursor-pointer p-1 px-2 shadow">
             <i class="fas fa-truck"></i>
-            @if ($sales->count())
-                <span class="absolute  right-6 top-0 flex rounded-full bg-red-600 uppercase px-2 py-1 text-xs font-bold text-white">{{ $sales->count() }}</span>
+            @if ($pendings->count())
+                <span class="absolute  right-6 top-0 flex rounded-full bg-red-600 uppercase px-2 py-1 text-xs font-bold text-white">{{ $pendings->count() }}</span>
             @endif
           
         </div>
@@ -14,39 +14,37 @@
 
         <div x-show="open" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20 hidden" :class="{'hidden':!open}" style="width:20rem;" x-on:click.away="open=false">
             <div class="py-2">
-             
-                @if (auth()->user()->notifications->count())
-                    <h3 class="text-gray-400 text-center">Notificaciones no leidas</h3>
-                    @foreach (auth()->user()->unreadNotifications as $noti) 
-                        @if ($noti->type == "App\Notifications\SaleNotification")
-                            <a href="{{ route('admin.sales.show', $noti->data['sale_id']) }}"" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2 bg-gray-200">
+            
+                @if ($pendings->count() || $delivereds->count())
+                    <h3 class="text-gray-400 text-center p-1">Pendientes {{ $pendings->count() }} </h3>
+                    @foreach ($pendings as $pending)                        
+                            <a href="" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2 bg-gray-200">
                                 {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-truck"></i>
                                 <p class="text-gray-600 text-sm mx-2">
-                                    <span class="font-bold" href="#">{{$noti->data['customer']}}</span> 
-                                    ha agendado un  <span class="font-bold text-blue-500" href="#">pedido </span> por ${{number_format($noti->data['total'],0,',','.')}} 
-                                    @if($noti->data['delivery_date']!=null) para el {{Helper::fecha( $noti->data['delivery_date'] )->dayName }} @endif, 
-                                    {{ Helper::fecha( $noti->data['date'] )->diffForHumans() }}
-                              
+                                    <span class="font-bold" href="#">{{$pending->customer->comuna}}</span> 
+                                    {{ $pending->customer->name}}
+                                    <span class="font-bold text-blue-500" href="#">  </span> 
+                                    por ${{ number_format($pending->total,0,',','.') }}                       
                                 </p>
                             </a>                            
-                        @endif    
+                      
                     @endforeach
                     <hr>
-                    <h3 class="text-gray-400 text-center">Notificaciones leidas</h3>
-                    @foreach (auth()->user()->readNotifications as $noti)  
-                        @if ($noti->type == "App\Notifications\SaleNotification")
-                            <a href="{{ route('admin.sales.show', $noti->data['sale_id']) }}"" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                    <h3 class="text-gray-400 text-center p-1">Entregadas  {{ $delivereds->count() }} </h3>
+                    @foreach ($delivereds as $delivered)  
+                      
+                            <a href="" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
                                 {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-truck"></i>
                                 <p class="text-gray-600 text-sm mx-2">
-                                    <span class="font-bold" href="#">{{$noti->data['customer']}}</span> 
-                                    ha agendado un  <span class="font-bold text-blue-500" href="#">pedido </span> por ${{number_format($noti->data['total'],0,',','.')}} 
-                                    @if($noti->data['delivery_date']!=null) para el {{Helper::fecha( $noti->data['delivery_date'] )->dayName }} @endif 
-                                    , {{ Helper::fecha( $noti->data['date'] )->diffForHumans() }}
+                                    <span class="font-bold" href="#">{{ $delivered->customer->comuna }}</span> 
+                                    {{ $delivered->customer->name }}
+                                    <span class="font-bold text-blue-500" href="#"> </span> 
+                                    por ${{ number_format($delivered->total,0,',','.') }} 
                                 </p>
                             </a>
-                        @endif
+                     
                     @endforeach
                     
                     {{-- <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">

@@ -46,7 +46,7 @@
                         <td>{{ $user->visitas }}</td>
                         <td>{{ $user->countryName }}</td>
                         <td>{{   Helper::fecha($user->dateCreate)->dayName }} {{  Helper::fecha($user->dateCreate)->format('d-m-y H:i:s') }}</td>
-                        <td> {{ ($user->date != null) ?  Helper::fecha($user->dateModificate)->dayName .' ' . Helper::fecha($user->dateModificate)->format('d-m-y H:i:s') : '-' }}
+                        <td> {{ ($user->dateModificate != null) ?  Helper::fecha($user->dateModificate)->dayName .' ' . Helper::fecha($user->dateModificate)->format('d-m-y H:i:s') : '' }}
                         </td>
                       
                         <td>{{ ($user->date != null) ?  Helper::fecha($user->date)->diffForHumans() :'' }}</td>
