@@ -23,7 +23,7 @@ class UsersIndex extends Component{
     {
 
 
-        $userCounts = UserCount::orderBy('fechaModificado')->get();
+        $userCounts = UserCount::orderBy('dateModificate','desc')->orderBy('dateCreate','desc')->get();
 
 
         $users = User::where('name', 'like', '%'. $this->search .'%')->orWhere('email', 'like', '%'. $this->search .'%')->paginate();
