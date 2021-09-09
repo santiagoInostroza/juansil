@@ -24,7 +24,17 @@ class AppLayout extends Component
     public function render()
     {
  
-        $this->getDataIp();
+        try {
+            $this->getDataIp();
+        } catch (\Throwable $th) {
+            $this->ip2 = "-";
+            $this->country = "-";
+            $this->countryCode = "-";
+            $this->countryAbbreviation = "-";
+            $this->countryName = "-";
+        }
+       
+
         $ip =  $this->getRealIP();
         $page = Request::url();
       
@@ -38,7 +48,7 @@ class AppLayout extends Component
             $userCounts->countryCode = $this->countryCode;
             $userCounts->countryAbbreviation = $this->countryAbbreviation;
             $userCounts->countryName = $this->countryName;
-            
+
             $userCounts->save();
         }else{
             $userCounts = new UserCount();
