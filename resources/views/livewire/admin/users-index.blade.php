@@ -49,7 +49,7 @@
                         <td> {{ ($user->date != null) ?  Helper::fecha($user->dateModificate)->dayName .' ' . Helper::fecha($user->dateModificate)->format('d-m-y H:i:s') : '-' }}
                         </td>
                       
-                        <td>{{ ($user->date != null) ?  Helper::fecha($user->date) . '  '.  Helper::fecha($user->date)->diffForHumans() :'' }}</td>
+                        <td>{{ ($user->date != null) ?  Helper::fecha($user->date)->diffForHumans() :'' }}</td>
 
                         <td width='10'>
                             <a class='btn btn-primary' href="{{ route('admin.users.edit', $user) }}">Editar</a>
