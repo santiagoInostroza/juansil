@@ -3,6 +3,7 @@ const ta_gallery_safelist = require('./node_modules/@markusantonwolf/ta-gallery/
 
 
 module.exports = {
+    mode: 'jit',
     purge: [
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
