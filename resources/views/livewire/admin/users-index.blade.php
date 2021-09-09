@@ -4,6 +4,12 @@
 
     <div class="card-body" wire:poll.10s>
 
+        <div>
+            <h2>Cantidad total de visitas {{ $userCounts->count() }}</h2>
+            <h2>Cantidad total de usuarios que han visitado {{ $userCountsTotalDistinct }}</h2>
+            <h2>Cantidad total de usuarios chilenos que han visitado {{ $userCountsChile }}</h2>
+        </div>
+
         <table class="table table-stripe">
             <thead>
                 <tr>

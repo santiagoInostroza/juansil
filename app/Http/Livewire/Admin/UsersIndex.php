@@ -24,10 +24,12 @@ class UsersIndex extends Component{
 
 
         $userCounts = UserCount::orderBy('date','desc')->orderBy('dateModificate','desc')->orderBy('dateCreate','desc')->get();
+        $userCountsTotalDistinct = UserCount::distinct()->count('ip');
+        $userCountsChile = UserCount::where('countryName','Chile')->distinct()->count('ip');
 
 
         $users = User::where('name', 'like', '%'. $this->search .'%')->orWhere('email', 'like', '%'. $this->search .'%')->paginate();
         
-        return view('livewire.admin.users-index',compact('users','userCounts'));
+        return view('livewire.admin.users-index',compact('users','userCounts','userCountsTotalDistinct','userCountsChile'));
     }
 }
