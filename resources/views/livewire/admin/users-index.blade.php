@@ -37,7 +37,7 @@
                         <td>{{ $user->ip2 }}</td>
                         <td>{{ $user->page }}</td>
                         <td>{{ $user->visitas }}</td>
-                        <td>{{ $user->country }}</td>
+                        <td>{{ $user->countryName }}</td>
                         <td>{{ $user->dateCreate }}</td>
                         <td>{{ $user->dateModificate }}</td>
                         <td width='10'>
