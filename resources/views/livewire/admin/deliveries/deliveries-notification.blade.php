@@ -69,10 +69,10 @@
                     {{-- <a href="https://api.whatsapp.com/send?phone=56973231830&text=Me%20gustaría%20saber%20el%20precio%20del%20sitio%20web«%0D%0A»">ws</a> --}}
                   
                 @else
-                    <p class="text-gray-600 text-sm m-2 text-center">No tienes notificaciones</p>
+                    <p class="text-gray-600 text-sm m-2 text-center">No tienes Pedidos para hoy</p>
                 @endif
             </div>
-            <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">Ver todas las notificaciones</a>
+            <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">Ver todos los pedidos</a>
            
         </div>
 
