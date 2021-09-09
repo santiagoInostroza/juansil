@@ -5,9 +5,9 @@
     <div class="card-body" wire:poll.10s>
 
         <div>
-            <h2>Cantidad total de visitas {{ $userCounts->count() }}</h2>
-            <h2>Cantidad total de usuarios que han visitado {{ $userCountsTotalDistinct }}</h2>
-            <h2>Cantidad total de usuarios chilenos que han visitado {{ $userCountsChile }}</h2>
+            <h4>Cantidad total de visitas {{ $userCounts->count() }}</h4>
+            <h4>Cantidad total de usuarios que han visitado {{ $userCountsTotalDistinct }}</h4>
+            <h4>Cantidad total de usuarios chilenos que han visitado {{ $userCountsChile }}</h4>
         </div>
 
         <table class="table table-stripe">
@@ -21,6 +21,7 @@
                     <th>Pais</th>
                     <th>Fecha creeado</th>
                     <th>Fecha modificado</th>
+                    <th>Ultima visita</th>
                     <th></th>
                 </tr>
             </thead>
@@ -44,8 +45,10 @@
                         <td>{{ $user->page }}</td>
                         <td>{{ $user->visitas }}</td>
                         <td>{{ $user->countryName }}</td>
-                        <td>{{ $user->dateCreate }}</td>
-                        <td>{{ $user->dateModificate }}</td>
+                        <td>{{  Helper::fecha($user->dateCreate)->dayName }} {{  Helper::fecha($user->dateCreate)->format('d-m-y H:i:s') }}</td>
+                        <td>{{  Helper::fecha($user->dateModificate)->dayName }} {{  Helper::fecha($user->dateModificate)->format('d-m-y H:i:s') }}</td>
+                      
+                        <td>{{ ($user->date!= null) && Helper::fecha($user->date)->diffForHumans() }}</td>
                         <td width='10'>
                             <a class='btn btn-primary' href="{{ route('admin.users.edit', $user) }}">Editar</a>
                         </td>
