@@ -9,8 +9,10 @@
                 <tr>
                     <th>Id</th>
                     <th>IP</th>
+                    <th>IP2</th>
                     <th>Pagina</th>
                     <th>Visitas</th>
+                    <th>Pais</th>
                     <th>Fecha creeado</th>
                     <th>Fecha modificado</th>
                     <th></th>
@@ -31,8 +33,11 @@
                             {{ $user->ip }}
                             @endif
                         </td>
+
+                        <td>{{ $user->ip2 }}</td>
                         <td>{{ $user->page }}</td>
                         <td>{{ $user->visitas }}</td>
+                        <td>{{ $user->country }}</td>
                         <td>{{ $user->dateCreate }}</td>
                         <td>{{ $user->dateModificate }}</td>
                         <td width='10'>
