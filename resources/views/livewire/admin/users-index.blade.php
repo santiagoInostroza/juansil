@@ -1,7 +1,7 @@
 <div class="card">
 
 
-    <div class="card-body">
+    <div class="card-body" wire:poll.10s>
 
         <table class="table table-stripe">
             <thead>
@@ -24,6 +24,8 @@
                                 Santi
                             @elseif($user->ip == '45.232.92.56')
                             Romi Celu
+                            @elseif($user->ip == '201.219.236.243')
+                            Santy Celu 1
                             @else
                             {{ $user->ip }}
                             @endif
