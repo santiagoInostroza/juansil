@@ -22,6 +22,8 @@
                         <td>
                             @if ($user->ip == '190.114.35.111')
                                 Santi
+                            @elseif($user->ip == '45.232.92.56')
+                            Romi Celu
                             @else
                             {{ $user->ip }}
                             @endif
