@@ -41,7 +41,7 @@
                                             </div>
                                         </label>
                                     </div>
-                                    <img class="w-full  max-h-96 object-contain" id='picture' src="{{asset('images/otros/sinFoto.png')}}" alt="">
+                                    <img class="w-full  max-h-96 object-contain" id='picture' src="{{asset('images/otros/sinFoto.webp')}}" alt="">
                                 @endif
                             </div>
                         </label>

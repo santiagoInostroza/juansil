@@ -3,8 +3,8 @@
         <div class="card-header">Sectores</div>
 
         <div class="card-body">
-            <div>
-                <img src="{{url('images/comunas.png')}}" alt="">
+            <div class="flex justify-center items-center">
+                <img src="{{url('images/comunas.webp')}}" alt="">
             </div>
             <div class="">
                 <div class="flex flex-col">

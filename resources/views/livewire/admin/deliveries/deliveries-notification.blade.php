@@ -18,32 +18,73 @@
                 @if ($pendings->count() || $delivereds->count())
                     <h3 class="text-gray-400 text-center p-1">Pendientes {{ $pendings->count() }} </h3>
                     @foreach ($pendings as $pending)                        
-                            <a href="" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2 bg-gray-200">
+                        <div x-data="{openOrder:false}">
+                            <div  x-on:click="openOrder=true"  class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2 bg-gray-200 cursor-pointer">
                                 {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
                                 <i class="fas fa-truck"></i>
                                 <p class="text-gray-600 text-sm mx-2">
-                                    <span class="font-bold" href="#">{{$pending->customer->comuna}}</span> 
+                                    <span class="font-bold" >{{$pending->customer->comuna}}</span> 
                                     {{ $pending->customer->name}}
-                                    <span class="font-bold text-blue-500" href="#">  </span> 
+                                    <span class="font-bold text-blue-500" >  </span> 
                                     por ${{ number_format($pending->total,0,',','.') }}                       
                                 </p>
-                            </a>                            
+                            </div>  
+                            <div x-show="openOrder">
+                                <x-modal.modal2>
+                                    <div class="p-4">
+                                        <div>
+                                            <h2>Pedido</h2>
+                                            <div >
+                                                <i class="fas fa-times"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {{ $pending }}
+                                            @foreach ($pending as $item)
+                                                {{$item}}
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </x-modal.modal2>
+
+                            </div> 
+                        </div>                         
                       
+
                     @endforeach
                     <hr>
                     <h3 class="text-gray-400 text-center p-1">Entregadas  {{ $delivereds->count() }} </h3>
                     @foreach ($delivereds as $delivered)  
-                      
-                            <a href="" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                      <div x-data="{openOrder:false}">
+                          
+                            <div x-on:click="openOrder=true" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
                                 {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
                                 <i class="fas fa-truck"></i>
                                 <p class="text-gray-600 text-sm mx-2">
-                                    <span class="font-bold" href="#">{{ $delivered->customer->comuna }}</span> 
+                                    <span class="font-bold" >{{ $delivered->customer->comuna }}</span> 
                                     {{ $delivered->customer->name }}
-                                    <span class="font-bold text-blue-500" href="#"> </span> 
+                                    <span class="font-bold text-blue-500" > </span> 
                                     por ${{ number_format($delivered->total,0,',','.') }} 
                                 </p>
-                            </a>
+                            </div>
+                            <div x-show="openOrder">
+                                <x-modal.modal2>
+                                    <div class="p-4">
+                                        <div>
+                                            <h2>Pedido</h2>
+                                            <div >
+                                                <i class="fas fa-times"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {{$delivered}}
+                                        </div>
+                                    </div>
+                                </x-modal.modal2>
+
+                            </div>
+                            
+                      </div>
                      
                     @endforeach
                     
