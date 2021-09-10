@@ -45,7 +45,7 @@ class AppLayout extends Component
         $this->plattform = '';
 
         try {
-            $this->nameNavigator = Browser::browserName();
+            $this->nameNavigator = $this->get_browser_name( $this->agent );
         } catch (\Throwable $th) {
             $this->nameNavigator = 'error'; 
         }
