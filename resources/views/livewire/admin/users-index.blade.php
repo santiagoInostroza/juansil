@@ -15,8 +15,8 @@
                 <tr>
                     <th>Id</th>
                     <th>IP</th>
-                    <th>IP2</th>
                     <th>Pagina</th>
+                    <th>Navegador</th>
                     <th>Visitas</th>
                     <th>Pais</th>
                     <th>Fecha creeado</th>
@@ -41,8 +41,8 @@
                             @endif
                         </td>
 
-                        <td>{{ $user->ip2 }}</td>
                         <td>{{ $user->page }}</td>
+                        <td>{{ $user->nameNavigator }}</td>
                         <td>{{ $user->visitas }}</td>
                         <td>{{ $user->countryName }}</td>
                         <td>{{   Helper::fecha($user->dateCreate)->dayName }} {{  Helper::fecha($user->dateCreate)->format('d-m-y H:i:s') }}</td>
