@@ -16,6 +16,11 @@ class AppLayout extends Component
     public $countryCode;
     public $countryAbbreviation;
     public $countryName;
+
+    public $agent;
+    public $nameNavigator;
+    public $plattform;
+    public $version;
     /**
      * Get the view / contents that represents the component.
      *
@@ -33,6 +38,16 @@ class AppLayout extends Component
             $this->countryAbbreviation = "-";
             $this->countryName = "-";
         }
+
+        $this->agent  = $_SERVER['HTTP_USER_AGENT'];
+        $this->version = '';
+        $this->plattform = '';
+
+        try {
+            $this->nameNavigator = $this->get_browser_name($this->agent);
+        } catch (\Throwable $th) {
+            $this->nameNavigator = 'error'; 
+        }
        
 
         $ip =  $this->getRealIP();
@@ -49,6 +64,10 @@ class AppLayout extends Component
             $userCounts->countryAbbreviation = $this->countryAbbreviation;
             $userCounts->countryName = $this->countryName;
             $userCounts->date = Carbon::now();
+            $userCounts->agent = $this->agent;
+            $userCounts->nameNavigator = $this->nameNavigator;
+            $userCounts->version = $this->version;
+            $userCounts->plattform = $this->plattform;
 
             $userCounts->save();
         }else{
@@ -63,6 +82,10 @@ class AppLayout extends Component
             $userCounts->visitas = 1;
             $userCounts->dateCreate = Carbon::now()->locale('es_ES')->timezone('America/Santiago');
             $userCounts->date = Carbon::now();
+            $userCounts->agent = $this->agent;
+            $userCounts->nameNavigator = $this->nameNavigator;
+            $userCounts->version = $this->version;
+            $userCounts->plattform = $this->plattform;
 
             $userCounts->save();
         }
@@ -72,6 +95,18 @@ class AppLayout extends Component
 
         return view('layouts.app');
     }
+
+    function get_browser_name($user_agent){
+        if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
+        elseif (strpos($user_agent, 'Edge')) return 'Edge';
+        elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
+        elseif (strpos($user_agent, 'Safari')) return 'Safari';
+        elseif (strpos($user_agent, 'Firefox')) return 'Firefox';
+        elseif (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) return 'Internet Explorer';
+    
+        return 'Other';
+    }
+
 
     function getRealIP() {
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
@@ -116,4 +151,21 @@ class AppLayout extends Component
         $this->countryName = getCountryFromIP($ip, " NamE ");
        
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 }

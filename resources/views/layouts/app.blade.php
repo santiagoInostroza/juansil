@@ -60,9 +60,11 @@
       
         
 </head>
+
    
     <body class="font-sans antialiased">
         <div class="min-h-screen ">
+            
             {{-- @livewire('navigation-dropdown') --}}
             @livewire('navigation')
             <!-- Page Content -->
