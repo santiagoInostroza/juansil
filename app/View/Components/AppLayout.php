@@ -7,10 +7,11 @@ use Carbon\Carbon;
 use App\Models\UserCount;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Request;
+use DeviceDetector\Parser\Client\Browser;
 
 class AppLayout extends Component
 {
-
+  
     public $ip2;
     public $country;
     public $countryCode;
@@ -44,7 +45,7 @@ class AppLayout extends Component
         $this->plattform = '';
 
         try {
-            $this->nameNavigator = $this->get_browser_name($this->agent);
+            $this->nameNavigator = Browser::browserName();
         } catch (\Throwable $th) {
             $this->nameNavigator = 'error'; 
         }
