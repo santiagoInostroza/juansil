@@ -23,7 +23,7 @@ class UsersIndex extends Component{
     {
 
 
-        $userCounts = UserCount::orderBy('date','desc')->orderBy('dateModificate','desc')->orderBy('dateCreate','desc')->get();
+        $userCounts = UserCount::orderBy('date','desc')->where('countryName','Chile')->orderBy('dateModificate','desc')->orderBy('dateCreate','desc')->get();
         $userCountsTotalDistinct = UserCount::distinct()->count('ip');
         $userCountsChile = UserCount::where('countryName','Chile')->distinct()->count('ip');
 
