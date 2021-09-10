@@ -2,7 +2,7 @@
 
    
 
-    <div class="card-body" wire:poll.10s>
+    <div class="card-body" wire:poll.60s>
 
         <div>
             <h4>Cantidad total de visitas {{ $userCounts->count() }}</h4>
