@@ -179,6 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        hisorange\BrowserDetect\ServiceProvider::class,
      
 
     ],
@@ -234,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Helper' => App\Http\Controllers\Helper::class,
+        'BrowserDetect' => hisorange\BrowserDetect\Facade::class,
 
     ],
 

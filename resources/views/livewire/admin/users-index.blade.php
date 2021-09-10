@@ -17,6 +17,7 @@
                     <th>IP</th>
                     <th>Pagina</th>
                     <th>Navegador</th>
+                    <th>Agente</th>
                     <th>Visitas</th>
                     <th>Pais</th>
                     <th>Fecha creeado</th>
@@ -43,6 +44,7 @@
 
                         <td>{{ $user->page }}</td>
                         <td>{{ $user->nameNavigator }}</td>
+                        <td>{{ $user->agent }}</td>
                         <td>{{ $user->visitas }}</td>
                         <td>{{ $user->countryName }}</td>
                         <td>{{   Helper::fecha($user->dateCreate)->dayName }} {{  Helper::fecha($user->dateCreate)->format('d-m-y H:i:s') }}</td>

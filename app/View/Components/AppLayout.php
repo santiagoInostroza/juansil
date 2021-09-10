@@ -7,10 +7,11 @@ use Carbon\Carbon;
 use App\Models\UserCount;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Request;
-use DeviceDetector\Parser\Client\Browser;
+// use DeviceDetector\Parser\Client\Browser;
 
-class AppLayout extends Component
-{
+
+
+class AppLayout extends Component{
   
     public $ip2;
     public $country;
@@ -27,6 +28,9 @@ class AppLayout extends Component
      *
      * @return \Illuminate\View\View
      */
+
+    
+
     public function render()
     {
  
@@ -90,9 +94,6 @@ class AppLayout extends Component
 
             $userCounts->save();
         }
-
-       
-
 
         return view('layouts.app');
     }
