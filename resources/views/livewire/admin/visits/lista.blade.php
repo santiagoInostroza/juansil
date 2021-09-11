@@ -67,7 +67,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900 p-2">
+                                                <div class="text-sm font-medium text-gray-900 ">
                                                     @if ($user->ip == '190.114.35.111')
                                                         Santi
                                                     @elseif($user->ip == '45.232.92.56')
