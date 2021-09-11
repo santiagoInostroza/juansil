@@ -94,7 +94,7 @@
                     @if ($sale->comments)
                         <div class="p-4 rounded-xl border "> {{$sale->comments}}</div>
                     @endif
-                    <div class="p-5 mx-auto border rounded-xl h-96   overflow-auto my-4">
+                    <div class="p-5 mx-auto border rounded-xl max-h-96   overflow-auto my-4">
                         <table class="mx-auto table-fixed w-max-content">
                             <thead>
                                 <tr>
