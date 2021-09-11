@@ -20,7 +20,7 @@ class Lista extends Component{
 
 
     public function mount(){
-        $this->orderBy="dateModificate";
+        $this->orderBy="date";
         $this->direction="desc";
         $this->openAddNew = false;
         $this->editRowVerify = true;
@@ -44,8 +44,6 @@ class Lista extends Component{
             ->where('nameNavigator', 'like', '%'. $this->search . '%')
             ->orWhere('id', '=',  $this->search)
             ->orderBy( $this->orderBy,$this->direction)
-          
-            ->orderBy('dateCreate','desc')
             ->get();
 
             foreach ($userCounts as  $item) {
