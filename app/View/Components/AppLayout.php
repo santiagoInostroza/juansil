@@ -102,6 +102,7 @@ class AppLayout extends Component{
     function get_browser_name($user_agent){
         if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
         elseif (strpos($user_agent, 'Version')) return 'Navegador de Facebook';
+        elseif (strpos($user_agent, 'SamsungBrowser')) return 'Navegador de Samsung';
         elseif (strpos($user_agent, 'Edge')) return 'Edge';
         elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
         elseif (strpos($user_agent, 'Safari')) return 'Safari';
