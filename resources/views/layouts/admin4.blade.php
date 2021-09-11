@@ -48,7 +48,7 @@
         <div class="min-h-screen flex flex-col" x-data="{openSidebar:false}">
             <!--Header Section Starts Here-->
             
-            <header class="bg-nav py-4">
+            <header class="bg-nav py-4 fixed top-0 left-0 right-0 " style="z-index: 999999999">
                 <div class="flex justify-between">
                     <div class="p-1 mx-3 inline-flex items-center">
                         <i class="fas fa-bars pr-2 text-white cursor-pointer p-3" x-on:click="openSidebar=!openSidebar"></i>
@@ -136,7 +136,7 @@
                 </div>
             </header>
             <!--/Header-->
-
+            <div class="h-20 w-full"></div>
             {{-- body --}}
             <div class="flex flex-1">
                 <!--Sidebar-->

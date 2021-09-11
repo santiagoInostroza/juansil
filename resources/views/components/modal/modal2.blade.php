@@ -9,7 +9,13 @@
                     </header>
                 @endisset
                 
-                <main class="p-2 bg-white overflow-y-auto overflow-x-hidden" style="max-height: calc(100vh - 150px);">
+                <main class="p-2 bg-white overflow-y-auto overflow-x-hidden" style="
+               
+                    @if( isset($footer) && isset($titulo) ) max-height: calc(100vh - 112px); margin-bottom: 4rem;margin-top: 4rem; @endif
+                    @if( isset($footer) ) max-height: calc(100vh - 56px); margin-bottom: 4rem @endif
+                    @if( isset($titulo) ) max-height: calc(100vh - 56px); margin-top: 4rem; @endif
+                
+                ">
                     {{$slot}}
                 </main>
                 @isset($footer)

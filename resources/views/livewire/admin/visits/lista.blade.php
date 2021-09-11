@@ -77,7 +77,9 @@
                                                     @else
                                                         {{ $user->ip }}
                                                     @endif
-                                                    {{ $user->nameNavigator }}
+                                                    <span class="font-bold">
+                                                        {{ $user->nameNavigator }}
+                                                    </span>
                                                 </div>
                                                 <div class="text-sm text-gray-500">
                                                     {{ $user->page }}
