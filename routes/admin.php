@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\StockController;
+use App\Http\Controllers\admin\VisitController;
 use App\Http\Controllers\Admin\ComunaController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ProductController;
@@ -52,6 +53,7 @@ Route::resource('ventas', SaleController::class)->middleware('can:admin.home')->
 Route::resource('comunas', ComunaController::class)->middleware('can:admin.home')->names('admin.comunas');
 
 Route::get('users/index',[UserController::class,'newIndex'])->middleware('can:admin.home')->name('admin.users.newIndex');
+Route::get('visits',[VisitController::class,'index'])->middleware('can:admin.home')->name('admin.visits.index');
 Route::resource('users',  UserController::class)->only('index','edit','update')->middleware('can:admin.home')->names('admin.users');
 Route::resource('roles',  RoleController::class)->middleware('can:admin.home')->names('admin.roles');
 Route::get('permission',[RoleController::class,'permission'])->middleware('can:admin.home')->name('admin.permission');
