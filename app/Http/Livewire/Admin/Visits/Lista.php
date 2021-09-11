@@ -11,6 +11,7 @@ class Lista extends Component{
         $userCounts = UserCount::orderBy('date','desc')->where('countryName','Chile')->orderBy('dateModificate','desc')->orderBy('dateCreate','desc')->get();
         $userCountsTotalDistinct = UserCount::distinct()->count('ip');
         $userCountsChile = UserCount::where('countryName','Chile')->distinct()->count('ip');
+        
         return view('livewire.admin.visits.lista',compact('userCounts','userCountsTotalDistinct','userCountsChile'));
     }
 }

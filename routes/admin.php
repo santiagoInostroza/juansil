@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\StockController;
-use App\Http\Controllers\admin\VisitController;
+use App\Http\Controllers\Admin\VisitController;
 use App\Http\Controllers\Admin\ComunaController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ProductController;
