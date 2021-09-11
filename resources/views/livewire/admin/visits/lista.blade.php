@@ -11,7 +11,7 @@
                     <x-spinner.spinner2 size="6"></x-spinner.spinner2>
                 </div>
             </div>
-            <x-jet-button wire:click="$set('openAddNew',true)"  class="flex items-center gap-2"><div><i class="fas fa-plus"></i> </div><div>Agregar nuevo</div></x-jet-button>
+            {{-- <x-jet-button wire:click="$set('openAddNew',true)"  class="flex items-center gap-2"><div><i class="fas fa-plus"></i> </div><div>Agregar nuevo</div></x-jet-button> --}}
         </div>
         {{-- FILTROS --}}
         <div class="p-4 border rounded my-4 flex items-center gap-4">
@@ -19,7 +19,7 @@
                 <x-jet-label>Orden</x-jet-label>
                 <select class="border p-2 rounded" name="orderBy" id="" wire:model="orderBy">
                     <option value="id">Id</option>
-                    <option value="name">Nombre</option>
+                    <option value="ip">Ip</option>
                 </select>
             </div>
             <div class="flex items-center gap-2">
