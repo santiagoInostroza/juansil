@@ -20,8 +20,8 @@ class Lista extends Component{
 
 
     public function mount(){
-        $this->orderBy="id";
-        $this->direction="asc";
+        $this->orderBy="dateModificate";
+        $this->direction="desc";
         $this->openAddNew = false;
         $this->editRowVerify = true;
     }
@@ -43,7 +43,8 @@ class Lista extends Component{
             ->where('countryName','Chile') 
             ->where('nameNavigator', 'like', '%'. $this->search . '%')
             ->orWhere('id', '=',  $this->search)
-            ->orderBy('dateModificate','desc')
+            ->orderBy( $this->orderBy,$this->direction)
+          
             ->orderBy('dateCreate','desc')
             ->get();
 
