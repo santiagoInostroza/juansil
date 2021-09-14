@@ -389,7 +389,7 @@
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Lo ultimo <span class="inline-block mb-5 -mt-5 font-sans font-bold text-3xl sm:text-5xl sm:mb-0 sm:mt-0"> que ha llegado</span> </h2>
       </div>
       <div>
-         @foreach ($ultimasCompras as $compra)
+         {{-- @foreach ($ultimasCompras as $compra)
             @if ( count($compra->purchase_items) )
                <h2 class="p-5 text-2xl font-bold text-gray-600 text-center">
                   LLegó el {{$this->fecha($compra->fecha)->format('d')}} {{ $this->fecha($compra->fecha)->monthName }}
@@ -488,7 +488,7 @@
                   </div>
                </div>
             @endif
-         @endforeach
+         @endforeach --}}
       </div>
 
       <div class="flex flex-col-reverse sm:flex-row justify-end items-center | bg-gradient-to-r from-gray-200 via-white to-white | pb-20  mb-10 sm:p-20">
