@@ -291,6 +291,8 @@ class Index extends Component{
                 Storage::delete('products/'. $this->product_selected->image->url);
                 Storage::delete('products_thumb/' .  $this->product_selected->image->url);
 
+               
+
                 //guarda en products
                 // $this->photo0->store('products');
 
@@ -305,30 +307,67 @@ class Index extends Component{
                 $image1->encode('webp');
                 $image1->save('storage/products/' . $this->product_selected->slug . '.webp');
 
+
+
                 if (!Storage::disk('public')->exists('products_thumb')) {
                     Storage::disk('public')->makeDirectory('products_thumb');
                 }
+
+                if (!Storage::disk('public')->exists('products_png')) {
+                    Storage::disk('public')->makeDirectory('products_png');
+                    Storage::disk('public')->makeDirectory('products_png_thumb');
+                }
     
+                
                 // guarda en thumbs
-               
                 $image2 = $manager->make($this->photo0)->resize(250, 250, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
                 $image2->encode('webp');
                 $image2->save('storage/products_thumb/'. $this->product_selected->slug . '.webp');
+    
+
+                // guarda en png
+                $image2 = $manager->make($this->photo0)->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->encode('png');
+                $image2->save('storage/products_png/'. $this->product_selected->slug . '.png');
+    
+
+                // guarda en png_thumbs
+                $image2 = $manager->make($this->photo0)->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->encode('png');
+                $image2->save('storage/products_png_thumb/'. $this->product_selected->slug . '.png');
 
                 // guarda en base de datos (ACTUALIZA)
                 $this->product_selected->image->update([
                     'url' =>  $this->product_selected->slug . '.webp',
+                    'url2' =>  $this->product_selected->slug . '.png',
                 ]);
+               
                 
             } else {
 
                  // guarda en base de datos (CREA NUEVO)
                 $this->product_selected->image()->create([
                     'url' => $this->product_selected->slug . '.webp',
+                    'url2' => $this->product_selected->slug . '.png',
                 ]);
+
+                if (!Storage::disk('public')->exists('products_thumb')) {
+                    Storage::disk('public')->makeDirectory('products_thumb');
+                }
+
+                if (!Storage::disk('public')->exists('products_png')) {
+                    Storage::disk('public')->makeDirectory('products_png');
+                    Storage::disk('public')->makeDirectory('products_png_thumb');
+                }
 
                 $manager =  new ImageManager();
                 $image1 = $manager->make( $this->photo0 );
@@ -338,10 +377,6 @@ class Index extends Component{
                 });
                 $image1->encode('webp');
                 $image1->save('storage/products/' . $this->product_selected->slug . '.webp');  
-                
-                if (!Storage::disk('public')->exists('products_thumb')) {
-                    Storage::disk('public')->makeDirectory('products_thumb');
-                }
         
                 // guarda en thumbs
                 $image2 = $manager->make($this->photo0);
@@ -351,6 +386,26 @@ class Index extends Component{
                 });
                 $image2->encode('webp');
                 $image2->save('storage/products_thumb/' . $this->product_selected->slug . '.webp');   
+
+
+                // guarda en png
+                $image2 = $manager->make($this->photo0);
+                $image2->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->encode('png');
+                $image2->save('storage/products_png/' . $this->product_selected->slug . '.png');   
+
+
+                // guarda en png_thumbs
+                $image2 = $manager->make($this->photo0);
+                $image2->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image2->encode('png');
+                $image2->save('storage/products_png_thumb/' . $this->product_selected->slug . '.png');   
 
 
 
@@ -364,7 +419,46 @@ class Index extends Component{
     }
 
   
+    public function webpToPng($product_id){
+        $product = Product::find($product_id);  
+        $url = $product->image->url;   
+        
+        
+        if (!Storage::disk('public')->exists('products_png')) {
+            Storage::disk('public')->makeDirectory('products_png');
+            Storage::disk('public')->makeDirectory('products_png_thumb');
+        }
 
+
+        $manager =  new ImageManager();
+        $image1 = $manager->make( 'storage/products/' . $url)->resize(500, 500, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image1->encode('png');
+        $image1->save( 'storage/products_png/' .  $product->slug . '.png' );  
+
+
+        $manager =  new ImageManager();
+        //   guarda en thumbs           
+        $image2 = $manager->make( 'storage/products/' . $url )->resize(250, 250, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image2->encode('webp');
+        $image2->save('storage/products_png_thumb/'  .  $product->slug . '.png'); 
+        
+        
+        
+        $product->image->update([
+            'url2' =>  $product->slug . '.png',
+        ]);
+
+
+        // Storage::delete('products/'. $url2);
+        // Storage::delete('products_thumb/' .  $url2);
+        
+    }
 
     public function optimizarImagen($product_id){
 
@@ -406,6 +500,8 @@ class Index extends Component{
             
         
     }
+
+
 
     public function optimizarImagenes(){
 

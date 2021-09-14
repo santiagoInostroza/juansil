@@ -86,6 +86,11 @@ class CreateProduct extends Component{
            
             //guarda en products
             // $this->photo->store('products');
+
+            if (!Storage::disk('public')->exists('products_png')) {
+                Storage::disk('public')->makeDirectory('products_png');
+                Storage::disk('public')->makeDirectory('products_png_thumb');
+            }
     
             // guarda en products
             $manager =  new ImageManager();
@@ -101,14 +106,33 @@ class CreateProduct extends Component{
                 Storage::disk('public')->makeDirectory('products_thumb');
             }
     
-            // guarda en thumbs
+            // GUARDA EN THUMB
             $image2 = $manager->make($this->photo);
             $image2->resize(250, 250, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
             $image2->encode('webp');
-            $image2->save('storage/products_thumb/' . $product->slug . '.webp');          
+            $image2->save('storage/products_thumb/' . $product->slug . '.webp');        
+
+            // GUARDA EN PNG
+            $image2 = $manager->make($this->photo);
+            $image2->resize(500, 500, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image2->encode('png');
+            $image2->save('storage/products_thumb/' . $product->slug . '.png');      
+            
+            
+            //GUARDA EN PNG_THUMB
+            $image2 = $manager->make($this->photo);
+            $image2->resize(250, 250, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $image2->encode('png');
+            $image2->save('storage/products_thumb/' . $product->slug . '.png');          
             
         }
 
