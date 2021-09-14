@@ -12,7 +12,7 @@
                         <div class="w-full">
                             @if ($product->image)
                                 <figure>
-                                    @if ( Storage::exists('products_png_thumb/' .$product->image->url))
+                                    @if ( Storage::exists('products_png_thumb/' .$product->image->url2))
                                         <img class="object-contain h-48 w-full" src="{{ Storage::url('products_png_thumb/' . $product->image->url2) }}">
                                     @else
                                         <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}" alt="">
