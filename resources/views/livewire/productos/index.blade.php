@@ -169,7 +169,7 @@
             <div class="splide splideIndex"> 
                <div class="splide__track">
                   <ul class="splide__list">
-                     {{-- @foreach ($tentaciones->products as $product)
+                     @foreach ($tentaciones->products as $product)
                         <li class="splide__slide border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $product->id }}">
                            <a href="{{route('products.show',$product)}}">
                               <div class="w-full">
@@ -256,7 +256,7 @@
                               </div>
                            @endif                    
                         </li>    
-                     @endforeach --}}
+                     @endforeach
                   </ul>
                </div>
             </div>
