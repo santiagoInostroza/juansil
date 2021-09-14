@@ -27,7 +27,7 @@ class BuscadorProductos extends Component{
 
             $products=[];
             $tags=[];
-            if($this->search!=""){
+            if(trim($this->search)!=""){
                 $str = explode(' ', $this->search);
             
                 $products = Product::where('status',1)->where('stock', '>', 0)->where(function($query) use($str) {
@@ -35,7 +35,7 @@ class BuscadorProductos extends Component{
                         $query = $query->where('name','like',"%" . $s . "%");
                     }
                 })
-                ->take(15)
+                ->take(20)
                 ->get();
 
                 $tags = Tag::where(function($query) use($str) {
