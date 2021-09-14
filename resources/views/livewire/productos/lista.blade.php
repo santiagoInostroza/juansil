@@ -12,10 +12,10 @@
                         <div class="w-full">
                             @if ($product->image)
                                 <figure>
-                                    @if ( Storage::exists('products_png_thumb/' .$product->image->url2))
-                                        <img class="object-contain h-48 w-full" src="{{ Storage::url('products_png_thumb/' . $product->image->url2) }}">
+                                    @if ( Storage::exists('products_thumb/' .$product->image->url))
+                                        <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
                                     @else
-                                        <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}" alt="">
+                                        <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
                                    @endif
                                 </figure>                               
                             @endif
