@@ -518,7 +518,7 @@
       </div>
       <div>
          @foreach ($categories as $categoria)
-            @if ( count($categoria->products) )
+            {{-- @if ( count($categoria->products) )
                <a href="{{route('products.category',$categoria)}}">
                   <h2 class="p-5 text-2xl font-bold text-gray-600 text-center bg-gray-100">{{$categoria->name}}</h2>
                </a>
@@ -626,7 +626,7 @@
                      VER TODO {{$categoria->name}}...
                   </div>
                </a>
-            @endif
+            @endif --}}
          @endforeach
         
       </div>
