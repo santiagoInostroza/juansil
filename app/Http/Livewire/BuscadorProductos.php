@@ -35,7 +35,7 @@ class BuscadorProductos extends Component{
                         $query = $query->where('name','like',"%" . $s . "%");
                     }
                 })
-                ->take(5)
+                ->take(15)
                 ->get();
 
                 $tags = Tag::where(function($query) use($str) {
@@ -43,7 +43,7 @@ class BuscadorProductos extends Component{
                         $query = $query->where('name','like',"%" . $s . "%");
                     }
                 })
-                ->take(5)
+                ->take(15)
                 ->get();
             }
         
