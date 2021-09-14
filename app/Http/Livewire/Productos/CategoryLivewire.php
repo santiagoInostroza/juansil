@@ -13,8 +13,10 @@ class CategoryLivewire extends Component{
 
     public function render(){
 
-        $products = Product::where('category_id',$this->category->id)->get();
-        $categories = Category::with('products')->where('id', '!=', $this->category->id )->where('id', '!=' , 3)->get();
+        $products = Product::where('category_id',$this->category->id)->where('stock','>',0)->get();
+        $categories = Category::with(['products'=>function($query){
+             $query->where('stock','>',0); 
+            }])->where('id', '!=', $this->category->id )->where('id', '!=' , 3)->get();
 
         return view('livewire.productos.category-livewire',compact('products', 'categories'));
     }
