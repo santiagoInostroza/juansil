@@ -274,7 +274,7 @@
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Lo más <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0">  vendido</span> </h2>
       </div>
       <div class="mb-20">
-         {{-- @if ( count($loMasVendido) )
+         @if ( count($loMasVendido) )
             <h2 class="p-5 text-2xl font-bold text-gray-600 text-center ">
                Top 10 más vendido
             </h2>
@@ -373,7 +373,7 @@
                </div>
             </div>
            
-         @endif --}}
+         @endif
       </div>
 
 
