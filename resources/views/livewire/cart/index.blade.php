@@ -64,11 +64,11 @@
                                     
                                         <div class="w-16">                                          
                                             <figure>
-                                                @if (Storage::exists('products_thumb/' . $producto['url']))
-                                                    <img class="max-h-24 object-contain" src=" {{ Storage::url('products_thumb/' . $producto['url']) }}" alt="">
-                                                @else
-                                                    <img class="max-h-24 object-contain" src=" {{ Storage::url('products/' . $producto['url']) }}" alt="">
-                                                @endif
+                                                {{-- @if (Storage::exists('products_thumb/' . $producto['url'])) --}}
+                                                    <img class="max-h-24 object-contain" src=" {{ ('/storage/products_thumb/' . $producto['url']) }}" alt="{{ $producto['name'] }}">
+                                                {{-- @else --}}
+                                                    {{-- <img class="max-h-24 object-contain" src=" {{ Storage::url('products/' . $producto['url']) }}" alt=""> --}}
+                                                {{-- @endif --}}
                                             </figure>
                                         </div>
                                 

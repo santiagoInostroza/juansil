@@ -39,11 +39,11 @@
                                         <td class="pl-6 text-left flex items-center h-32">
                                             <div class="flex items-center justify-center w-32 mx-3">
                                                 <figure>
-                                                    @if (Storage::exists('products_thumb/' . $item['url']))
-                                                        <img class=" object-cover h-24 mx-auto transform hover:scale-150" src=" {{ Storage::url('products_thumb/' . $item['url']) }}" alt="">
-                                                    @else
-                                                        <img class=" object-cover h-24 mx-auto transform hover:scale-150" src=" {{ Storage::url($item['url']) }}" alt="">
-                                                    @endif
+                                                    {{-- @if (Storage::exists('products_thumb/' . $item['url'])) --}}
+                                                        <img class=" object-cover h-24 mx-auto transform hover:scale-150" src=" {{ ('/storage/products_thumb/' . $item['url']) }}" alt="{{ $item['name'] }}">
+                                                    {{-- @else --}}
+                                                        {{-- <img class=" object-cover h-24 mx-auto transform hover:scale-150" src=" {{ Storage::url($item['url']) }}" alt=""> --}}
+                                                    {{-- @endif --}}
                                                 </figure>
                                             </div>
                                             <div class="w-full">
