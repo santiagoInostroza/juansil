@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div class="h-full px-4">
-                    {{var_dump(session('carritoSpecial')) }}
+                 
                        @if ( false || session('carritoSpecial'))
                             <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">
                                 @foreach (session('carritoSpecial') as $item)
