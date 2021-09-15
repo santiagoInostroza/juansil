@@ -160,12 +160,12 @@
 
       {{-- TENTACIONES --}}
       @if ( $tentaciones )
-      <div class="px-5 sm:px-20 mt-10" >
-         <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">  <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> </span>Tentaciones</h2>
-      </div>
-      <div class="mb-20">
-        
-          
+         <div class="px-5 sm:px-20 mt-10" >
+            <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">  <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> </span>Tentaciones</h2>
+         </div>
+         <div class="mb-20">
+         
+            
             <div class="splide splideIndex"> 
                <div class="splide__track">
                   <ul class="splide__list">
@@ -177,7 +177,7 @@
 
                                     <figure class="splide__slide__container">
                                        @if ( Storage::exists('products_thumb/' . $product->image->url))
-                                          <img class="object-contain h-48 w-full" alt="{{ $product->name }}" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
+                                          <img class="object-contain h-48 w-full" alt="{{ $product->name }}" data-splide-lazy="{{ Storage::url('products_thumb/' . $product->image->url) }}" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
                                        @else
                                           <img class="object-contain h-48 w-full" alt="{{ $product->name }}" data-splide-lazy="{{ Storage::url($product->image->url) }}" src="{{ Storage::url($product->image->url) }}">
                                        @endif
@@ -266,7 +266,7 @@
                </div>
             </a>
          </div>
-         @endif
+      @endif
 
 
       {{-- LO  MÁS VENDIDO --}}
@@ -289,7 +289,7 @@
 
                                     <figure class="splide__slide__container">
                                        @if ( Storage::exists('products_thumb/' .$product[0]->image->url))
-                                          <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url('products_thumb/' . $product[0]->image->url) }}" src="{{ Storage::url('products_thumb/' . $product[0]->image->url) }}">
+                                          <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ ('products_thumb/' . $product[0]->image->url) }}" src="{{ Storage::url('products_thumb/' . $product[0]->image->url) }}">
                                        @else
                                           <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($product[0]->image->url) }}" src="{{ Storage::url($product[0]->image->url) }}">
                                        @endif
