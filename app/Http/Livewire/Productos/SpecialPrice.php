@@ -24,9 +24,9 @@ class SpecialPrice extends Component{
 
     public function render(){
 
-        if (Auth::user() && Auth::user()->id == 6) {
-            session()->forget('carritoSpecial');
-            session()->pull('carritoSpecial');
+        if ( Auth::user() ) {
+            session()->forget();
+            session()->pull();
 
         }
 
