@@ -133,7 +133,7 @@
                     </div>
                     <div class="h-full px-4">
                  
-                        @if ( false || session('carritoSpecial'))
+                        @if (  session('carritoSpecial'))
                             <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">
                                 @foreach (session('carritoSpecial') as $item)
                                     <figure>
@@ -187,7 +187,7 @@
                     </div>
                     <div class="absolute bottom-0 h-20 border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
                         <div class="text-2xl">
-                            {{-- Total  {{ number_format(session('totalCarritoSpecial'),0,',','.') }} --}}
+                            Total  {{ number_format(session('totalCarritoSpecial'),0,',','.') }}
                         </div>
                       
                         <div>
