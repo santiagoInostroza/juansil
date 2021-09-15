@@ -116,7 +116,7 @@
         </div> --}}
 
          {{-- CARRITO --}}
-        <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
+        {{-- <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
             <div class="fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
             <div class="fixed z-10 top-0 right-0 h-full w-screen sm:w-max-content bg-white py-4 shadow" >
                     <div class="flex justify-between items-center gap-4 border-b p-4">
@@ -135,8 +135,7 @@
                                             <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$item['url']) }}" alt="">
                                         @else
                                             <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt="">
-                                            {{-- <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt=""> --}}
-                                        @endif
+                                       @endif
                                     </figure>
                                     <div class="col-span-2">
                                         <div>
@@ -147,11 +146,7 @@
                                             ${{ number_format($item['precio'],0,',','.')}}
                                         </div>
                                         <div>
-                                            {{-- @php
-                                                echo "<pre>";
-                                                    echo var_dump($item);
-                                                echo "<pre>";
-                                            @endphp --}}
+                               
                                         </div>
                                     </div>
                                     <div>  
@@ -196,7 +191,7 @@
 
 
             </div>
-        </div>
+        </div> --}}
 
         
 
