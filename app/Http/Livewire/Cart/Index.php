@@ -23,8 +23,6 @@ class Index extends Component{
             //     'icon' => 'warning',
             //     'msj' => "Se borro productos del carrito",
             // ]);
-
-
         }
 
        

@@ -1,7 +1,8 @@
 @extends('layouts.simple')
 
 @section('content')
-    @livewire('productos.special-price')  
+hola
+    {{-- @livewire('productos.special-price')   --}}
 @endsection
     
    

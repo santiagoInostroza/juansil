@@ -24,21 +24,14 @@ class SpecialPrice extends Component{
 
     public function render(){
 
-        if ( Auth::user() ) {
-            session()->forget();
-            session()->pull();
-
-        }
-
-
         $query = Product::where('name','like','%' . $this->search . '%')->where('special_sale_price','>',0);
 
         if($this->onlyStock){
             $products = $query->where('stock','>', 0);
         }
         $products = $query->get();
-        return "hfr";
-        // return view('livewire.productos.special-price',compact('products'));
+
+        return view('livewire.productos.special-price',compact('products'));
     }
 
     public function addToCart($product_id){
