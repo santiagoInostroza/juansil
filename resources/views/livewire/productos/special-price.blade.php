@@ -139,7 +139,7 @@
                                                 onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
                                                 id='cantidad_product_{{ $item['producto_id'] }}'  
                                                 data-pid="{{ $item['producto_id'] }}"
-                                            >un
+                                            >
                                         </div>                         
                                         <figure>
                                         
