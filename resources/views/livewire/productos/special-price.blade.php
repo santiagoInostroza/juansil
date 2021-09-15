@@ -130,7 +130,7 @@
                     <div class="h-full px-4">
                  
                         @if ( session('carritoSpecial'))
-                            <div class=" overflow-auto h-screen pb-48">
+                            <div class=" overflow-auto h-screen pb-48 text-sm sm:text-base">
                                 @foreach (session('carritoSpecial') as $item)
                                     <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">                                
                                         <figure>
