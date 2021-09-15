@@ -11,11 +11,11 @@
                     <div class="w-full">
                         @if ($product->image)
                             <figure>
-                                @if ( Storage::exists('products_thumb/' .$product->image->url))
-                                    <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
-                                @else
-                                    <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
-                                @endif
+                                {{-- @if ( Storage::exists('products_thumb/' .$product->image->url)) --}}
+                                    <img class="object-contain h-48 w-full" src="{{ ('/storage/products_thumb/' . $product->image->url) }}" alt="{{ $product->name }}">
+                                {{-- @else --}}
+                                    {{-- <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt=""> --}}
+                                {{-- @endif --}}
                             </figure>                            
                         @endif
                         
@@ -118,11 +118,11 @@
                         <div class="w-full">
                             @if ($product->image)
                                 <figure>
-                                    @if ( Storage::exists('products_thumb/' .$product->image->url))
-                                        <img class="object-contain h-48 w-full" src="{{ Storage::url('products_thumb/' . $product->image->url) }}">
-                                    @else
+                                    {{-- @if ( Storage::exists('products_thumb/' .$product->image->url)) --}}
+                                        <img class="object-contain h-48 w-full" src="{{ ('/storage/products_thumb/' . $product->image->url) }}" alt="{{ $product->name }}">
+                                    {{-- @else
                                         <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
-                                    @endif
+                                    @endif --}}
                                 </figure>  
 
 
