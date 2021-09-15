@@ -122,7 +122,7 @@
         </div>
 
          {{-- CARRITO --}}
-        {{-- <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
+        <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
             <div class="fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
             <div class="fixed z-10 top-0 right-0 h-full w-screen sm:w-max-content bg-white py-4 shadow" >
                     <div class="flex justify-between items-center gap-4 border-b p-4">
@@ -132,7 +132,8 @@
                         </div>
                     </div>
                     <div class="h-full px-4">
-                        @if (session('carritoSpecial'))
+                    {{var_dump(session('carritoSpecial')) }}
+                       @if ( false || session('carritoSpecial'))
                             <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">
                                 @foreach (session('carritoSpecial') as $item)
                                     <figure>
@@ -197,7 +198,7 @@
 
 
             </div>
-        </div> --}}
+        </div>
 
         
 
