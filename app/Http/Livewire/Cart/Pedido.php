@@ -549,7 +549,7 @@ class Pedido extends Component
         $this->dispatchBrowserEvent('alerta', [
             'icon' => 'success',
             'title' => "Pedido agendado!!",
-            'msj' => "En breve te enviaremos un mail y un wasap con el pedido y la información",
+            'msj' => "En breve recibiras un mail con el pedido y la información",
         ]); 
             
             // redirect()->route('products.lista')->with('msj','pedido_agendado');

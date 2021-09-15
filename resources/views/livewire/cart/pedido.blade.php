@@ -1,5 +1,5 @@
 <div>
-    <div class="container xl:max-w-7xl text-gray-500 pt-10" x-data="pedidoMain()">   
+    <div class="container m-auto xl:max-w-7xl text-gray-500 pt-10" x-data="pedidoMain()">   
         @if (session('carrito'))
             {{-- REVISAR PEDIDO --}}
             <div class="card my-10">
@@ -358,7 +358,7 @@
                                     <div class="text-sm my-5 font-bold">
                                         Los despachos serán realizados entre las 09:00 hrs y las 19:00 hrs, debes contar con disponibilidad para recibir durante ese horario. En caso de no concretar, se reagendará el envío para otra fecha.
                                     </div>
-                                    <div class=" form-group flex justify-between items-center  text-sm  overflow-x-auto overflow-y-hidden w-full gap-2">
+                                    <div class=" form-group flex justify-between items-center  text-sm  overflow-x-auto overflow-y-hidden w-full ">
                                             @foreach ($fechasDespacho as $fecha)
                                                 <div  @if($fecha['agendable'] && !$fecha['copado'])  wire:click="validateLevel3('{{ $fecha['fecha_despacho'] }}','{{ $fecha['valor_despacho'] }}' ) " @endif
                                                     class="relative w-full h-full mx-1 shadow p-1  transform @if($fecha['agendable'] && !$fecha['copado']) hover:scale-110 hover:bg-green-300 cursor-pointer @endif   @if ($fechaDespacho==$fecha['fecha_despacho']) scale-110 border-b-4 border-yellow-400 @elseif($fecha['oferta']) text-green-600 @endif " >
