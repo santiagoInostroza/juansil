@@ -2,7 +2,7 @@
     <div x-data="specialMain()">
         @php
          echo "<pre>";
-            var_dump(session('carritoSpecial'))
+            // var_dump(session('carritoSpecial'))
          echo "</pre>";
         @endphp
 
