@@ -132,15 +132,8 @@
                         @if ( session('carritoSpecial'))
                             <div class=" overflow-auto h-screen pb-48 text-sm sm:text-base">
                                 @foreach (session('carritoSpecial') as $item)
-                                    <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">       
-                                        <div>  
-                                            <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{ $item['producto_id'] }}" value="{{ $item['cantidad'] }}"
-                                                wire:ignore 
-                                                onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
-                                                id='cantidad_product_{{ $item['producto_id'] }}'  
-                                                data-pid="{{ $item['producto_id'] }}"
-                                            >
-                                        </div>                         
+                                    <div class="grid grid-cols-6 items-center justify-between gap-1 mt-4">       
+                                                            
                                         <figure>
                                         
                                             {{-- @if ( Storage::exists('products_thumb/' .$item['url'])) --}}
@@ -166,7 +159,15 @@
                                             ${{ number_format($item['total'],0,',','.')}}
                                         </div>
                                         <div class="p-2 flex flex-col justify-between items-center">
-                                                <x-jet-secondary-button onclick="return listaAumentaCantidad({{  $item['producto_id'] }}, {{ $item['stock'] }})">+</x-jet-secondary-button>                          
+                                                <x-jet-secondary-button onclick="return listaAumentaCantidad({{  $item['producto_id'] }}, {{ $item['stock'] }})">+</x-jet-secondary-button> 
+                                                <div>  
+                                                    <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{ $item['producto_id'] }}" value="{{ $item['cantidad'] }}"
+                                                        wire:ignore 
+                                                        onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
+                                                        id='cantidad_product_{{ $item['producto_id'] }}'  
+                                                        data-pid="{{ $item['producto_id'] }}"
+                                                    >
+                                                </div>                            
                                                 <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $item['producto_id'] }})">-</x-jet-secondary-button>
                                         </div>
                                         <div  wire:click="removeFromCart({{ $item['producto_id'] }})">
