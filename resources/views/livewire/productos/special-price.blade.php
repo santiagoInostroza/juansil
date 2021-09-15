@@ -3,7 +3,7 @@
         @php
          
         @endphp
-        <div>
+        {{-- <div>
             <div class="flex justify-between items-center">
                 <h1 class=" text-2xl text-center py-4 uppercase text-gray-500 font-bold tracking-widest">
                     Precios Especiales
@@ -42,8 +42,7 @@
                                             <img class=" object-contain h-48 w-full transform hover:scale-110 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
                                         @else
                                             <img class="object-contain h-48 w-full" src="{{ Storage::url($product->image->url) }}" alt="">
-                                            {{-- <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt=""> --}}
-                                        @endif
+                                         @endif
 
                                        
                                     @endif
@@ -81,8 +80,7 @@
                             @if ($product->stock>0)
                                 <div class="text-center mt-4 relative" >
                                     @if (!session()->has('carritoSpecial.'.$product->id))
-                                        {{-- <div wire:loading wire:target="{{$product->id}}" class="font-bold text-yellow-300 p-2 font-xl">Agregando al carrito ...</div> --}}
-                                        <x-jet-secondary-button wire:click="addToCart({{ $product->id }})"> 
+                                       <x-jet-secondary-button wire:click="addToCart({{ $product->id }})"> 
                                             <i class="fas fa-cart-plus mr-1 mb-1" ></i> 
                                             Agregar
                                         </x-jet-secondary-button>
@@ -108,7 +106,6 @@
                                 <div class="text-center mt-4 flex items-center justify-center">
                                     <div class="relative w-max-content">
                                         <div class="cursor-default inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-red-500  uppercase tracking-widest shadow-sm  focus:outline-none    transition ease-in-out duration-150" disabled> AGOTADO</div>
-                                        {{-- <div class="absolute font-bold text-red-500 uppercase top-0 mt-2 ml-1 transform "> AGOTADO</div> --}}
                                     </div>
                                 </div>
                             @endif                    
@@ -116,7 +113,7 @@
                     @endforeach
                 </ul>
             </div>
-        </div>
+        </div> --}}
 
          {{-- CARRITO --}}
         <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
