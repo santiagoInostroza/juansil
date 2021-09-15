@@ -24,16 +24,10 @@ class SpecialPrice extends Component{
 
     public function render(){
 
-        if (Auth::user() && Auth::user()->id == 6) {
+       
             session()->forget('carritoSpecial');
             session()->forget('totalCarritoSpecial');
-            $this->dispatchBrowserEvent('alerta_timer', [
-                'icon' => 'warning',
-                'msj' => "Se borro productos del carrito",
-            ]);
-
-
-        }
+      
 
 
         $query = Product::where('name','like','%' . $this->search . '%')->where('special_sale_price','>',0);
