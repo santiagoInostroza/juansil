@@ -31,7 +31,6 @@ class SpecialPrice extends Component{
                 'msj' => "Se borro productos del carrito",
             ]);
 
-
         }
 
 
