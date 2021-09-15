@@ -37,8 +37,8 @@ class SpecialPrice extends Component{
             $products = $query->where('stock','>', 0);
         }
         $products = $query->get();
-
-        return view('livewire.productos.special-price',compact('products'));
+        return "hfr";
+        // return view('livewire.productos.special-price',compact('products'));
     }
 
     public function addToCart($product_id){
