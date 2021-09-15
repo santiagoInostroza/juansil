@@ -3,7 +3,7 @@
         @php
          
         @endphp
-        {{-- <div>
+        <div>
             <div class="flex justify-between items-center">
                 <h1 class=" text-2xl text-center py-4 uppercase text-gray-500 font-bold tracking-widest">
                     Precios Especiales
@@ -113,7 +113,7 @@
                     @endforeach
                 </ul>
             </div>
-        </div> --}}
+        </div>
 
          {{-- CARRITO --}}
         {{-- <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
