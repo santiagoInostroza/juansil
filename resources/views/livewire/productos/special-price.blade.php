@@ -136,13 +136,13 @@
                                         <figure>
                                         
                                             {{-- @if ( Storage::exists('products_thumb/' .$item['url'])) --}}
-                                                <img class=" rounded h-24 w-24 object-cover transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$item['url']) }}" alt="{{ $item['name'] }}">
+                                                <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$item['url']) }}" alt="{{ $item['name'] }}">
                                             {{-- @else --}}
                                                 {{-- <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt=""> --}}
                                         {{-- @endif --}}
                                         </figure>
                                         <div class="col-span-2">
-                                            <div>
+                                            <div class="text-sm sm:text-base">
                                                 {{$item['name']}} 
                                             
                                             </div>   
