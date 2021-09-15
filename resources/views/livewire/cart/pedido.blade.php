@@ -370,12 +370,12 @@
                                                     
                                                     </div>
                                                     @if ($fecha['copado'])
-                                                        <div class="absolute inset-0 bg-gray-200 opacity-50  text-red-600 underline flex justify-center items-center font-bold z-10">
+                                                        <div class="absolute inset-0 bg-gray-200 opacity-75  text-red-600 underline flex justify-center items-center font-bold z-10">
                                                             Agotado
                                                             
                                                         </div>
                                                     @elseif (!$fecha['agendable'])
-                                                        <div class="absolute inset-0 bg-gray-200 opacity-50 text-red-600 underline flex justify-center items-center font-bold z-10">
+                                                        <div class="absolute inset-0 bg-gray-200 opacity-75 text-red-600 underline flex justify-center items-center font-bold z-10">
                                                             No disponible
                                                             
                                                         </div>
