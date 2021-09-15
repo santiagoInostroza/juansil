@@ -1,10 +1,6 @@
 <div>
     <div x-data="specialMain()">
-        @php
-         echo "<pre>";
-            // var_dump(session('carritoSpecial'))
-         echo "</pre>";
-        @endphp
+      
 
 
 
@@ -133,7 +129,7 @@
                     </div>
                     <div class="h-full px-4">
                  
-                        @if (  session('carritoSpecial'))
+                        @if ( session('carritoSpecial'))
                             <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">
                                 @foreach (session('carritoSpecial') as $item)
                                     <figure>

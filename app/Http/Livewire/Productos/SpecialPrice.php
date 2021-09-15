@@ -25,8 +25,8 @@ class SpecialPrice extends Component{
     public function render(){
 
        
-            session()->forget('carritoSpecial');
-            session()->forget('totalCarritoSpecial');
+            // session()->forget('carritoSpecial');
+            // session()->forget('totalCarritoSpecial');
       
 
 
