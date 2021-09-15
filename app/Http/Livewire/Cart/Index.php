@@ -17,12 +17,12 @@ class Index extends Component{
 
 
     public function render(){
-        if (Auth::user() && Auth::user()->id == 1) {
-            // session()->forget('carrito');
-            // $this->dispatchBrowserEvent('alerta_timer', [
-            //     'icon' => 'warning',
-            //     'msj' => "Se borro productos del carrito",
-            // ]);
+        if (Auth::user() && Auth::user()->id == 6) {
+            session()->forget('carrito');
+            $this->dispatchBrowserEvent('alerta_timer', [
+                'icon' => 'warning',
+                'msj' => "Se borro productos del carrito",
+            ]);
 
 
         }
