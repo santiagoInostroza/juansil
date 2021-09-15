@@ -358,10 +358,10 @@
                                     <div class="text-sm my-5 font-bold">
                                         Los despachos serán realizados entre las 09:00 hrs y las 19:00 hrs, debes contar con disponibilidad para recibir durante ese horario. En caso de no concretar, se reagendará el envío para otra fecha.
                                     </div>
-                                    <div class=" form-group flex items-center justify-center text-sm ">
+                                    <div class=" form-group flex justify-between items-center  text-sm  overflow-x-auto overflow-y-hidden w-full gap-2">
                                             @foreach ($fechasDespacho as $fecha)
                                                 <div  @if($fecha['agendable'] && !$fecha['copado'])  wire:click="validateLevel3('{{ $fecha['fecha_despacho'] }}','{{ $fecha['valor_despacho'] }}' ) " @endif
-                                                    class="relative mx-1 shadow p-1  transform @if($fecha['agendable'] && !$fecha['copado']) hover:scale-110 hover:bg-green-300 cursor-pointer @endif   @if ($fechaDespacho==$fecha['fecha_despacho']) scale-110 border-b-4 border-yellow-400 @elseif($fecha['oferta']) text-green-600 @endif " style="width: 100%; height: 100px;">
+                                                    class="relative w-full h-full mx-1 shadow p-1  transform @if($fecha['agendable'] && !$fecha['copado']) hover:scale-110 hover:bg-green-300 cursor-pointer @endif   @if ($fechaDespacho==$fecha['fecha_despacho']) scale-110 border-b-4 border-yellow-400 @elseif($fecha['oferta']) text-green-600 @endif " >
                                                 
 
                                                     {{ $fecha['nombre_dia'] }} <br> {{ $fecha['dia_del_mes'] }}
