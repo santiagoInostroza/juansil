@@ -184,7 +184,7 @@
                                                             <x-spinner.spinner2></x-spinner.spinner2>
                                                         </div>
                                                     </div>
-                                                    <div wire:click="webpToPng({{ $product->id }})" class="cursor-pointer">
+                                                    <div wire:click="webpToPng({{ $product->id }})" class="cursor-pointer hidden">
                                                         <i class="fas fa-edit"></i>
                                                     </div>
                                                     
