@@ -1,8 +1,14 @@
 <div>
     <div x-data="specialMain()">
         @php
-         
+         echo "<pre>";
+            var_dump(session('carritoSpecial'))
+         echo "</pre>";
         @endphp
+
+
+
+
         <div>
             <div class="flex justify-between items-center">
                 <h1 class=" text-2xl text-center py-4 uppercase text-gray-500 font-bold tracking-widest">
