@@ -132,7 +132,15 @@
                         @if ( session('carritoSpecial'))
                             <div class=" overflow-auto h-screen pb-48 text-sm sm:text-base">
                                 @foreach (session('carritoSpecial') as $item)
-                                    <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">                                
+                                    <div class="grid grid-cols-7 items-center justify-between gap-1 mt-4">       
+                                        <div>  
+                                            <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{ $item['producto_id'] }}" value="{{ $item['cantidad'] }}"
+                                                wire:ignore 
+                                                onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
+                                                id='cantidad_product_{{ $item['producto_id'] }}'  
+                                                data-pid="{{ $item['producto_id'] }}"
+                                            >un
+                                        </div>                         
                                         <figure>
                                         
                                             {{-- @if ( Storage::exists('products_thumb/' .$item['url'])) --}}
@@ -153,14 +161,7 @@
                                 
                                             </div>
                                         </div>
-                                        <div>  
-                                            <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{ $item['producto_id'] }}" value="{{ $item['cantidad'] }}"
-                                                wire:ignore 
-                                                onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
-                                                id='cantidad_product_{{ $item['producto_id'] }}'  
-                                                data-pid="{{ $item['producto_id'] }}"
-                                            >un.
-                                        </div>
+                                        
                                         <div>
                                             ${{ number_format($item['total'],0,',','.')}}
                                         </div>
