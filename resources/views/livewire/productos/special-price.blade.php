@@ -20,11 +20,11 @@
                     @endif
                 </div>
             </div>
-            <div class="p-4  rounded my-2">
+            <div class="p-4  rounded my-2 flex flex-col gap-2">
                 <label for="">
                     <x-jet-input class="w-full" placeholder="Buscar..." wire:model="search"></x-jet-input>
                 </label>
-                <label for="onlyStock">
+                <label for="onlyStock" class="flex items-center gap-2">
                     Mostrar solo productos con stock
                     <label class="switch">
                         <input id="onlyStock" type="checkbox" wire:model="onlyStock">
