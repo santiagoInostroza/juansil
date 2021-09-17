@@ -543,4 +543,26 @@ class Index extends Component{
             
         }    
     }
+
+    public function guardarImagenes(){
+        $products = Product::all(); 
+        foreach ($products as  $product) {
+            if ($product->image) {
+                $url = $product->image->url;
+                $url2=$url;
+              
+            
+                $manager =  new ImageManager();
+                $image1 = $manager->make( 'storage/products/' . $url2)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image1->encode('webp');
+                $image1->save( 'images/products/' .  $product->slug . '.webp' );                       
+               
+
+            }
+            
+        }    
+    }
 }

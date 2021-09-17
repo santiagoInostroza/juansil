@@ -47,6 +47,15 @@
         </div>
 
        
+        <div class="p-4 ">
+            <div class="p-4 relative border rounded">
+                <x-jet-button wire:click="guardarImagenes">Guardar imagen public</x-jet-button>
+                <div wire:loading wire:target="optimizarImagenes">
+                    <x-spinner.spinner2></x-spinner.spinner2>
+                </div>
+            </div>
+        </div>
+       
         <div class="p-4 hidden">
             <div class="p-4 relative border rounded">
                 <x-jet-button wire:click="optimizarImagenes">Optimizar imagen</x-jet-button>
