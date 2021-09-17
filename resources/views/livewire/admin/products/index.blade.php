@@ -46,15 +46,7 @@
             </div>
         </div>
 
-       
-        <div class="p-4 ">
-            <div class="p-4 relative border rounded">
-                <x-jet-button wire:click="guardarImagenes">Guardar imagen public</x-jet-button>
-                <div wire:loading wire:target="optimizarImagenes">
-                    <x-spinner.spinner2></x-spinner.spinner2>
-                </div>
-            </div>
-        </div>
+    
        
         <div class="p-4 hidden">
             <div class="p-4 relative border rounded">
@@ -727,6 +719,7 @@
                                         <div class="flex lg:flex-col items-center gap-2">
                                             {{-- <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button> --}}
                                         <x-jet-button class="bg-red-400 hover:bg-red-500" wire:click="editOk"><i class="fas fa-times"></i></x-jet-button>
+                                       
                                         </div>
                                     </td>
                                 </tr>
@@ -924,7 +917,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                                         <div class="flex lg:flex-col items-center gap-2">
                                            <x-jet-button wire:click="editRowTrue({{ $product->id }})"><i class="fas fa-pen"></i></x-jet-button>
-                                        
+                                           <x-jet-button wire:click="guardarImagenes({{ $product->id }})">Descargar imagen</x-jet-button>
                                         </div>
                                     </td>
                                 </tr>
