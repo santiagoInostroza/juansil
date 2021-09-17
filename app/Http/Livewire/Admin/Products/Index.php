@@ -546,7 +546,7 @@ class Index extends Component{
 
     public function guardarImagenes(){
         $products = Product::all(); 
-        $path = public_path('images/products');
+        $path = public_path('images/products2');
         mkdir($path);
         foreach ($products as  $product) {
             if ($product->image) {
