@@ -562,7 +562,7 @@ class Index extends Component{
                     $constraint->upsize();
                 });
                 $image1->encode('webp');
-                $image1->save( 'images/products/' .  $product->slug . '.webp' );                       
+                $image1->save( 'images/products2/' .  $product->slug . '.webp' );                       
                
 
             }
