@@ -1,26 +1,36 @@
 <div>
-    <div class="fixed inset-0 rounded-xl  shadow-2xl bg-white z-10  h-screen w-screen">
-        <section class="bg-white w-screen h-screen">
+    <style>
+        body {
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        .modalMain::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .modalMain {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+
+    </style>
+    <div class="fixed top-20 left-0 right-0 bottom-20 rounded-xl  shadow-2xl bg-white z-10 ">
+        <section class="bg-white ">
             
             @isset($header)
-                <header class="header fixed top-0  w-screen h-15">
+                <header class="">
                     {{$header}}
                 </header>
             @endisset
-           
             
-            <main class="p-4 bg-white overflow-auto w-full h-full"  
-                style="
-                    @if( isset($footer) && isset($header) ) max-height: calc(100vh - 112px); margin-bottom: 4rem;margin-top: 4rem; @endif
-                    @if( isset($footer) ) max-height: calc(100vh - 56px); margin-bottom: 4rem @endif
-                    @if( isset($header) ) max-height: calc(100vh - 56px); margin-top: 4rem; @endif
-                "
-            >
+            <main class="modalMain p-4 bg-white overflow-y-auto overflow-x-hidden w-full"   style=" max-height: calc(100vh - 160px);">
                 {{$slot}}
             </main>
 
             @isset($footer)
-                <footer class="header fixed bottom-0 w-screen bg-gray-200 h-15 mt-8">
+                <footer class="header  bg-gray-200 h-15 ">
                     {{$footer}}
                 </footer>
             @endisset
