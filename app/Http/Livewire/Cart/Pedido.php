@@ -547,7 +547,7 @@ class Pedido extends Component
         $this->dispatchBrowserEvent('alerta', [
             'icon' => 'success',
             'title' => "Pedido agendado!!",
-            'msj' => "Haz agendado para el " . $this->fechaDespacho->dayName . ". Recuerda que el reparto es entre las 9:00 y 18:00 aprox. Total $" . number_format(session('totalCarrito'),0,',','.'),
+            'msj' => "Haz agendado para el " . $this->fechaDespacho->dayName . ". Recuerda que el reparto es entre las 9:00 y 18:00 aprox. Total $" . number_format(session('totalCarrito') + session('cliente.totalDespacho'),0,',','.'),
         ]); 
         session()->forget('carrito');
         session()->forget('totalCarrito');
