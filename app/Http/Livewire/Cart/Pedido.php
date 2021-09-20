@@ -542,15 +542,18 @@ class Pedido extends Component
         $sale = new SaleController();
         $sale->createSale($arrayVenta);
 
-        session()->forget('carrito');
-        session()->forget('totalCarrito');
-        session()->forget('totalProductos');
-        $this->emitTo('cart.index','render');
+       
+        
         $this->dispatchBrowserEvent('alerta', [
             'icon' => 'success',
             'title' => "Pedido agendado!!",
-            'msj' => "En breve recibiras un mail con el pedido y la información",
+            'msj' => "Haz agendado para el " . $this->fechaDespacho->dayName . ". Recuerda que el reparto es entre las 9:00 y 18:00 aprox. Total $" . number_format(session('totalCarrito'),0,',','.'),
         ]); 
+        session()->forget('carrito');
+        session()->forget('totalCarrito');
+        session()->forget('totalProductos');
+
+        $this->emitTo('cart.index','render');
             
             // redirect()->route('products.lista')->with('msj','pedido_agendado');
            
