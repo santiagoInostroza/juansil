@@ -29,23 +29,26 @@
                                 ${{ number_format($item->precio_total, 0, ',', '.') }}
                             </div>
                             <div style="width: 60px">
+                                @php
+                                    $costoXItem = $item->cantidad_total * $item->costo;
+                                @endphp
                                 @if ( count($item->product->purchasePrices)>0 )
-                                    ${{  number_format($item->cantidad_total * $item->product->purchasePrices[0]->precio,0,',','.') }}
+                                    ${{  number_format( $costoXItem,0,',','.') }}
                                 @else
                                     0
                                 @endif
                             </div>
                             <div style="width: 60px">
                                 @php
-                                    $costo = $item->costo;
+                                  
                                     if(count($item->product->purchasePrices)>0){
-                                        $diferencia =  $item->precio_total - ( $item->cantidad_total * $item->product->purchasePrices[0]->precio );
+                                        $diferencia =  $item->precio_total - ($item->cantidad_total * $item->costo);
                                     }else{
                                         $diferencia = $item->precio_total;
                                     }
-                                    $totalisimo += $costo;
+                                    $totalisimo += $diferencia;
                                 @endphp
-                                    ${{number_format( $costo ,0,',','.')}}
+                                    ${{number_format( $diferencia ,0,',','.')}}
                             </div>
                         </div>
 
