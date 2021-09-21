@@ -17,7 +17,7 @@
 
     </style>
     <div class="fixed top-20 left-0 right-0 bottom-20 rounded-xl  shadow-2xl bg-white z-10 ">
-        <section class="bg-white ">
+        <section class="bg-white flex flex-col justify-between items-end">
             
             @isset($header)
                 <header class="">
@@ -30,7 +30,7 @@
             </main>
 
             @isset($footer)
-                <footer class="header  bg-gray-200 h-15 ">
+                <footer class="bg-gray-200 h-15 ">
                     {{$footer}}
                 </footer>
             @endisset
