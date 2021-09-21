@@ -37,14 +37,15 @@
                             </div>
                             <div style="width: 60px">
                                 @php
-                                if(count($item->product->purchasePrices)>0){
-                                    $diferencia =  $item->precio_total - ( $item->cantidad_total * $item->product->purchasePrices[0]->precio );
-                                }else{
-                                    $diferencia = $item->precio_total;
-                                }
-                                $totalisimo += $diferencia;
+                                    $costo = $item->costo;
+                                    if(count($item->product->purchasePrices)>0){
+                                        $diferencia =  $item->precio_total - ( $item->cantidad_total * $item->product->purchasePrices[0]->precio );
+                                    }else{
+                                        $diferencia = $item->precio_total;
+                                    }
+                                    $totalisimo += $costo;
                                 @endphp
-                                 ${{number_format($diferencia,0,',','.')}}
+                                    ${{number_format( $costo ,0,',','.')}}
                             </div>
                         </div>
 
