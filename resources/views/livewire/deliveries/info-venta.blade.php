@@ -1,13 +1,16 @@
 <div class="px-2">
     @if ($mostrar_venta)
-    <div class="text-danger" style="font-size: 2rem">
-       <div>
-           {{ $venta->customer->comentario }}
-        </div>
-        <div>
-            {{ $venta->comments }}
-        </div>
-    </div>
+   
+        @if ( $venta->customer->comentario != null || $venta->comments != null )
+            <div class="p-1 mb-2 bg-danger text-white"  style="font-size: 1.5rem">
+                <div>
+                    {{ $venta->customer->comentario }}
+                </div>
+                <div>
+                    {{ $venta->comments }}
+                </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md">
                 <div class="h3 form-group pb-0 mb-0 d-flex" style="justify-content: space-between; align-items: center;">
