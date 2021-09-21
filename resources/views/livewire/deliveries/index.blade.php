@@ -45,6 +45,7 @@
                 Cargando mapa...
             </div>
             <div class="card-body" id='info_venta'>
+            
                 <livewire:deliveries.info-venta>
             </div>
           

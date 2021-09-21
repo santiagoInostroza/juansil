@@ -1,5 +1,13 @@
 <div class="px-2">
     @if ($mostrar_venta)
+    <div class="text-danger" style="font-size: 2rem">
+       <div>
+           {{ $venta->customer->comentario }}
+        </div>
+        <div>
+            {{ $venta->comments }}
+        </div>
+    </div>
         <div class="row">
             <div class="col-md">
                 <div class="h3 form-group pb-0 mb-0 d-flex" style="justify-content: space-between; align-items: center;">
@@ -88,9 +96,7 @@
 
         </div>
 
-        <div>
-            {{ $venta->comments }}
-        </div>
+       
 
         <hr>
         @foreach ($venta->sale_items as $item)
