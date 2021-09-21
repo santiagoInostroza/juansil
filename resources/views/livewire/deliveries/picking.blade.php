@@ -48,7 +48,9 @@
                             </div>
                         </div>
 
+
                     @endforeach
+                    <hr>
                 @endforeach
 
             @else
