@@ -13,8 +13,13 @@
             <label wire:click="$set('vistaPicking','1')" class="btn @if ($vistaPicking==1) btn-dark @endif">Detalle</label>
             <label wire:click="$set('vistaPicking','2')" class="btn @if ($vistaPicking==2) btn-dark @endif">Total</label>
             @if ($vistaPicking == 1)
-
+            @php
+                $despacho= 0;
+            @endphp
                 @foreach ($ventas as $venta)
+                    @php
+                        $despacho+=$venta->delivery_value;
+                    @endphp
                     @foreach ($venta->sale_items as $item)
 
                         <div class="d-flex" style="width: max-content">
@@ -65,7 +70,13 @@
                 @endforeach
             @endif
             <div>
-              Total  ${{number_format($totalisimo,0,',','.')}}
+              SubTotal  ${{number_format($totalisimo,0,',','.')}}
+            </div>
+            <div>
+                Despacho ${{number_format($despacho,0,',','.')}}
+            </div>
+            <div>
+                Total ${{number_format($totalisimo + $despacho,0,',','.')}}
             </div>
 
         </div>
