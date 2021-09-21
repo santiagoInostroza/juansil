@@ -12,10 +12,11 @@
         <div class="card-body">
             <label wire:click="$set('vistaPicking','1')" class="btn @if ($vistaPicking==1) btn-dark @endif">Detalle</label>
             <label wire:click="$set('vistaPicking','2')" class="btn @if ($vistaPicking==2) btn-dark @endif">Total</label>
-            @if ($vistaPicking == 1)
             @php
-                $despacho= 0;
+                $despacho = 0;
             @endphp
+            @if ($vistaPicking == 1)
+            
                 @foreach ($ventas as $venta)
                     @php
                         $despacho+=$venta->delivery_value;
