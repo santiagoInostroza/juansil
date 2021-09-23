@@ -123,7 +123,9 @@
                                                     
                                                 @endforeach
                                               @else
-                                                  No hay revision de stock
+                                                 <div class="bg-red-200">
+                                                    No hay revision de stock
+                                                 </div>
                                               @endif
                                              
                                             </div>
