@@ -48,7 +48,7 @@ class InventarioController extends Controller{
     public function ajustarStock($product_id, $quantity,$comments = null){
         $product = Product::find($product_id);
         $diferencia = $product->stock - $quantity;
-        $diferencia3 = $diferencia;
+        $diferencia3 = $diferencia *-1;
 
         $precioProducto=0;
 
@@ -75,7 +75,7 @@ class InventarioController extends Controller{
             $purchasePrice->save();
         }
 
-        $diferencia3= $diferencia3*-1;
+       
 
         $product->stock = $quantity;
         $product->ajuste++;
