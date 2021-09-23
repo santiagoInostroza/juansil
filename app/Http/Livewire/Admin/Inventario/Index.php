@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Inventario;
 
 use Carbon\Carbon;
 use App\Models\Product;
+use App\Models\StockInventory;
 use Livewire\Component;
 
 class Index extends Component{
@@ -25,6 +26,8 @@ class Index extends Component{
         ->with('purchasePrices')
         ->orderBy($this->order_by,$this->asc)->get();;
 
+
+
         return view('livewire.admin.inventario.index',compact('products'));
     }
     public function desactivar($product_id){
@@ -41,5 +44,16 @@ class Index extends Component{
     
     public static function fecha($fecha){
         return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
+    }
+
+    public function actualizateStock($product_id, $quantity){
+        $stock = new StockInventory();
+        $stock->product_id = $product_id;
+        $stock->quantity = $quantity;
+        $stock->user_id = auth()->user()->id;
+        $stock->date = Carbon::now();
+        $stock->save();
+        
+       
     }
 }

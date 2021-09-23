@@ -44,6 +44,7 @@
                                 <th scope="col" width="10" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Producto</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock now</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock por precios</th>
                                 
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Estado</th>
@@ -102,6 +103,35 @@
 
                                         </x-tooltip.tooltip>
                                         
+                                        
+                                    </td>
+                                   
+                                    <td class="px-6 py-4 whitespace-nowrap">
+
+                                        <div class="flex flex-col gap-2" x-data="{quantity:''}">
+
+                                            <div>
+                                              @if ($product->stockInventory->count())
+                                                @foreach ($product->stockInventory as $item)
+                                                @if ($loop->last)
+                                                    <div class="flex gap-4 items-center">
+                                                        <div>{{ $item->quantity}} un.  </div>
+                                                        <div class="text-xs">{{ Helper::fecha($item->date)->diffForHumans() }}</div> 
+                                                    </div>
+                                                @endif
+                                            
+                                                    
+                                                @endforeach
+                                              @else
+                                                  No hay revision de stock
+                                              @endif
+                                             
+                                            </div>
+
+                                            <x-jet-input x-model="quantity"></x-jet-input>
+                                            <x-jet-button x-on:click="$wire.actualizateStock('{{ $product->id }}', quantity);quantity=''">Actualizar Stock</x-jet-button>
+                                            
+                                        </div>
                                         
                                     </td>
                                   
