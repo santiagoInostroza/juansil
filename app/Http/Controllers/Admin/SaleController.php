@@ -270,8 +270,7 @@ class SaleController extends Controller{
     }
 
 
-    public function actualizarStockYMovimientos($movement_type, $movement_id, $product_id, $cantidad, $observacion = "")
-    {
+    public function actualizarStockYMovimientos($movement_type, $movement_id, $product_id, $cantidad, $observacion = ""){
         //$product_id = $request->products[$i];
         //$movement_id = $sale->id; // id de compra o venta segun el caso
         //$movement_type = 'Venta'; // compra o venta segun el caso

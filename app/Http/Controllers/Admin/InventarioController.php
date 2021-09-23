@@ -43,4 +43,37 @@ class InventarioController extends Controller{
 
     }
 
+    public function ajustarStock($product_id, $quantity){
+        $product = Product::find($product_id);
+        $diferencia = $product->stock - $quantity;
+
+        $product->stock = $quantity;
+        $product->save();
+
+        if ($diferencia>0) { //disminuir stock
+            $purchasePrice = PurchasePrice::where('product_id',$product_id)->where('stock','>',0)->orderBy('fecha','asc')->get();
+            foreach ($purchasePrice as  $product) {
+                if($product->stock >= $diferencia){
+                    $product->stock -= $diferencia;
+                    $product->save();
+                    break;
+                }else{
+                    $diferencia -= $product->stock;
+                    $product->stock = 0;
+                    $product->save();
+                }              
+            }
+            
+        }elseif ($diferencia<0){ //aumentar stock
+            $diferencia = $diferencia*-1;
+            $purchasePrice = PurchasePrice::where('product_id',$product_id)->orderBy('fecha','desc')->first();
+            $purchasePrice->stock += $diferencia;
+            $purchasePrice->save();
+        }
+
+       
+        
+
+    }
+
 }

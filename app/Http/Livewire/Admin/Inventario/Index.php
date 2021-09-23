@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Inventario;
 
+use App\Http\Controllers\Admin\InventarioController;
 use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\StockInventory;
@@ -55,5 +56,11 @@ class Index extends Component{
         $stock->save();
         
        
+    }
+
+    public function ajustarStock($product_id, $quantity){
+        $inventoryController = new InventarioController();
+        $inventoryController->ajustarStock($product_id, $quantity);
+        
     }
 }

@@ -114,13 +114,13 @@
                                               @if ($product->stockInventory->count())
                                                 @foreach ($product->stockInventory as $item)
                                                     @if ($loop->last)
-                                                        <div class="flex items-center gap-2 justify-between">
-                                                            <div class="flex gap-4 items-center">
+                                                        <div class="flex flex-col">
+                                                            <div class="flex gap-4 items-center justify-between">
                                                                 <div>{{ $item->quantity }} un.  </div>
                                                                 <div class="text-xs">{{ Helper::fecha($item->date)->diffForHumans() }}</div> 
                                                             </div>
                                                             @if ($product->stock != $item->quantity )
-                                                                <x-jet-button class="bg-yellow-500 text-white"> Ajustar</x-jet-button>
+                                                                <x-jet-button class="bg-yellow-500 text-white hover:bg-yellow-600" wire:click="ajustarStock({{ $product->id }}, {{ $item->quantity }})"> Ajustar stock</x-jet-button>
                                                             @endif
                                                         </div>
                                                     @endif
