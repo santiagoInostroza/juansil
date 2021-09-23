@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\AjusteStock;
 use Illuminate\Http\Request;
 use App\Models\PurchasePrice;
 use App\Http\Controllers\Controller;
@@ -43,35 +45,51 @@ class InventarioController extends Controller{
 
     }
 
-    public function ajustarStock($product_id, $quantity){
+    public function ajustarStock($product_id, $quantity,$comments = null){
         $product = Product::find($product_id);
         $diferencia = $product->stock - $quantity;
 
-        $product->stock = $quantity;
-        $product->save();
+        $precioProducto=0;
 
         if ($diferencia>0) { //disminuir stock
             $purchasePrice = PurchasePrice::where('product_id',$product_id)->where('stock','>',0)->orderBy('fecha','asc')->get();
-            foreach ($purchasePrice as  $product) {
-                if($product->stock >= $diferencia){
-                    $product->stock -= $diferencia;
-                    $product->save();
+            foreach ($purchasePrice as  $product2) {
+                if($product2->stock >= $diferencia){
+                    $product2->stock -= $diferencia;
+                    $product2->save();
+                    $precioProducto= $product2->precio;
                     break;
                 }else{
-                    $diferencia -= $product->stock;
-                    $product->stock = 0;
-                    $product->save();
+                    $diferencia -= $product2->stock;
+                    $product2->stock = 0;
+                    $product2->save();
                 }              
             }
             
         }elseif ($diferencia<0){ //aumentar stock
-            $diferencia = $diferencia*-1;
+            $diferencia2 = $diferencia*-1;
             $purchasePrice = PurchasePrice::where('product_id',$product_id)->orderBy('fecha','desc')->first();
-            $purchasePrice->stock += $diferencia;
+            $purchasePrice->stock += $diferencia2;
+            $precioProducto=$purchasePrice->precio;
             $purchasePrice->save();
         }
 
-       
+        $diferencia= $diferencia*-1;
+
+        $product->stock = $quantity;
+        $product->ajuste++;
+        $product->cantAjuste += $diferencia;
+        $product->totalAjuste += $precioProducto * $diferencia;
+        $product->save();
+
+        $ajuste = new AjusteStock();
+        $ajuste->product_id = $product_id;
+        $ajuste->quantity = $diferencia;
+        $ajuste->total = $precioProducto * $diferencia;
+        $ajuste->date = Carbon::now();
+        $ajuste->comments = $comments;
+        $ajuste->user_id = auth()->user()->id;
+        $ajuste->save();
         
 
     }

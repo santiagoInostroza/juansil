@@ -14,6 +14,8 @@ class Index extends Component{
     public $search;
     public $order_by = "name";
     public $asc = 'asc';
+
+    public $commentAjuste="";
     
     public function render(){
 
@@ -60,7 +62,7 @@ class Index extends Component{
 
     public function ajustarStock($product_id, $quantity){
         $inventoryController = new InventarioController();
-        $inventoryController->ajustarStock($product_id, $quantity);
-        
+        $inventoryController->ajustarStock($product_id, $quantity, $this->commentAjuste);
+
     }
 }

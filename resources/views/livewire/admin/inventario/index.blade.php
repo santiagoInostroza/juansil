@@ -121,6 +121,8 @@
                                                             </div>
                                                             @if ($product->stock != $item->quantity )
                                                                 <x-jet-button class="bg-yellow-500 text-white hover:bg-yellow-600" wire:click="ajustarStock({{ $product->id }}, {{ $item->quantity }})"> Ajustar stock</x-jet-button>
+                                                            <textarea x-ref="comment" x-on:blur="$wire.commentAjuste=$refs.comment.value" class="border p-2" placeholder="Ingresa un comentario"></textarea>
+                         
                                                             @endif
                                                         </div>
                                                     @endif
