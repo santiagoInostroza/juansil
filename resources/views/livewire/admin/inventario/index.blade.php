@@ -120,7 +120,7 @@
                                                                 <div class="text-xs">{{ Helper::fecha($item->date)->diffForHumans() }}</div> 
                                                             </div>
                                                             @if ($product->stock != $item->quantity )
-                                                                <x-jet-button> Ajustar</x-jet-button>
+                                                                <x-jet-button class="bg-yellow-500 text-white"> Ajustar</x-jet-button>
                                                             @endif
                                                         </div>
                                                     @endif
