@@ -123,7 +123,7 @@
                                                     
                                                 @endforeach
                                               @else
-                                                 <div class="bg-red-200">
+                                                 <div class="bg-red-600 text-white py-1">
                                                     No hay revision de stock
                                                  </div>
                                               @endif
