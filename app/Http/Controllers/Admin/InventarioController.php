@@ -48,6 +48,7 @@ class InventarioController extends Controller{
     public function ajustarStock($product_id, $quantity,$comments = null){
         $product = Product::find($product_id);
         $diferencia = $product->stock - $quantity;
+        $diferencia3 = $diferencia;
 
         $precioProducto=0;
 
@@ -74,18 +75,18 @@ class InventarioController extends Controller{
             $purchasePrice->save();
         }
 
-        $diferencia= $diferencia*-1;
+        $diferencia3= $diferencia3*-1;
 
         $product->stock = $quantity;
         $product->ajuste++;
-        $product->cantAjuste += $diferencia;
-        $product->totalAjuste += $precioProducto * $diferencia;
+        $product->cantAjuste += $diferencia3;
+        $product->totalAjuste += $precioProducto * $diferencia3;
         $product->save();
 
         $ajuste = new AjusteStock();
         $ajuste->product_id = $product_id;
-        $ajuste->quantity = $diferencia;
-        $ajuste->total = $precioProducto * $diferencia;
+        $ajuste->quantity = $diferencia3;
+        $ajuste->total = $precioProducto * $diferencia3;
         $ajuste->date = Carbon::now();
         $ajuste->comments = $comments;
         $ajuste->user_id = auth()->user()->id;
