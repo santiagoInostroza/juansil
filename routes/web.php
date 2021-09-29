@@ -32,7 +32,7 @@ Route::get('productos/lista', [ProductController::class,'lista'])->name('product
 Route::get('productos/categoria/{category}', [ProductController::class,'category'])->name('products.category');
 Route::get('productos/etiqueta/{tag}', [ProductController::class,'tag'])->name('products.tag');
 Route::get('productos/specialPrice', [ProductController::class,'specialPrice'])->middleware('can:products.specialPrice')->name('products.specialPrice');
-Route::get('Compras', [ProductController::class,'orders'])->middleware('can:products.specialPrice')->name('orders');
+Route::get('Compras', [ProductController::class,'orders'])->middleware('auth')->name('orders');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
