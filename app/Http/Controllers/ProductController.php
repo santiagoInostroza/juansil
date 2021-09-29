@@ -44,6 +44,11 @@ class ProductController extends Controller{
     public function specialPrice(){
         return view('products.specialPrice');
     }
+
+    public function orders(){
+     
+        return view('products.orders');
+    }
   
 
     public function category(Category $category){ 

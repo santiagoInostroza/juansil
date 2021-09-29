@@ -24,6 +24,9 @@ class Sale extends Model
      public function sale_items(){
         return $this->hasMany(SaleItem::class);
     }
+     public function saleItems(){
+        return $this->hasMany(SaleItem::class);
+    }
      public function movement_sales(){
         return $this->hasMany(MovementSale::class);
     }
@@ -50,6 +53,9 @@ class Sale extends Model
         $user = User::find($this->user_boleta); 
         return $user;
     }
+
+
+   
 
     
 

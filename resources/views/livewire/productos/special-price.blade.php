@@ -121,81 +121,77 @@
         <div x-show="showCart" class="hidden" :class="{'hidden':!showCart}">
             <div class="fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
             <div class="fixed z-10 top-0 right-0 h-full w-screen sm:w-max-content bg-white py-4 shadow " >
-                    <div class="flex justify-between items-center gap-4 border-b p-4">
-                        <h2 class="text-xl font-bold text-gray-600">Detalle de compra</h2>
-                        <div x-on:click="closeCart" class="cursor-pointer">
-                            <i class="fas fa-times"></i>
-                        </div>
+                <div class="flex justify-between items-center gap-4 border-b p-4">
+                    <h2 class="text-xl font-bold text-gray-600">Detalle de compra</h2>
+                    <div x-on:click="closeCart" class="cursor-pointer">
+                        <i class="fas fa-times"></i>
                     </div>
-                    <div class="h-full px-4">
-                 
-                        @if ( session('carritoSpecial'))
-                            <div class=" overflow-auto h-screen pb-48 text-sm sm:text-base">
-                                @foreach (session('carritoSpecial') as $item)
-                                    <div class="grid grid-cols-6 items-center justify-between gap-1 mt-4">       
-                                                            
-                                        <figure>
+                </div>
+                <div class="h-full px-4">
+                    @if ( session('carritoSpecial'))
+                        <div class=" overflow-auto h-screen pb-48 text-sm sm:text-base">
+                            @foreach (session('carritoSpecial') as $item)
+                                <div class="grid grid-cols-6 items-center justify-between gap-1 mt-4">       
+                                                        
+                                    <figure>
+                                    
+                                        {{-- @if ( Storage::exists('products_thumb/' .$item['url'])) --}}
+                                            <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$item['url']) }}" alt="{{ $item['name'] }}">
+                                        {{-- @else --}}
+                                            {{-- <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt=""> --}}
+                                    {{-- @endif --}}
+                                    </figure>
+                                    <div class="col-span-2">
+                                        <div class="text-sm sm:text-base">
+                                            {{$item['name']}} 
                                         
-                                            {{-- @if ( Storage::exists('products_thumb/' .$item['url'])) --}}
-                                                <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$item['url']) }}" alt="{{ $item['name'] }}">
-                                            {{-- @else --}}
-                                                {{-- <img class="w-16 h-16 object-cover" src="{{Storage::url($item['url'])}}" alt=""> --}}
-                                        {{-- @endif --}}
-                                        </figure>
-                                        <div class="col-span-2">
-                                            <div class="text-sm sm:text-base">
-                                                {{$item['name']}} 
-                                            
-                                            </div>   
-                                            <div>
-                                                ${{ number_format($item['precio'],0,',','.')}}
-                                            </div>
-                                            <div>
-                                
-                                            </div>
-                                        </div>
-                                        
+                                        </div>   
                                         <div>
-                                            ${{ number_format($item['total'],0,',','.')}}
+                                            ${{ number_format($item['precio'],0,',','.')}}
                                         </div>
-                                        <div class="p-2 flex flex-col justify-between items-center">
-                                                <x-jet-secondary-button onclick="return listaAumentaCantidad({{  $item['producto_id'] }}, {{ $item['stock'] }})">+</x-jet-secondary-button> 
-                                                <div>  
-                                                    <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{ $item['producto_id'] }}" value="{{ $item['cantidad'] }}"
-                                                        wire:ignore 
-                                                        onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
-                                                        id='cantidad_product_{{ $item['producto_id'] }}'  
-                                                        data-pid="{{ $item['producto_id'] }}"
-                                                    >
-                                                </div>                            
-                                                <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $item['producto_id'] }})">-</x-jet-secondary-button>
-                                        </div>
-                                        <div  wire:click="removeFromCart({{ $item['producto_id'] }})">
-                                            <x-jet-danger-button><i class="far fa-trash-alt"></i></x-jet-danger-button>
+                                        <div>
+                            
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="flex justify-center items-center h-full">
-                                <h3 class="font-bold text-xl text-gray-500 mx-4">No hay productos agregados</h3>
-                            </div>
-
-                        @endif
-                        
-                    </div>
-                    <div class="absolute bottom-0 h-20 border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
-                        <div class="text-2xl">
-                            Total  {{ number_format(session('totalCarritoSpecial'),0,',','.') }}
+                                    
+                                    <div>
+                                        ${{ number_format($item['total'],0,',','.')}}
+                                    </div>
+                                    <div class="p-2 flex flex-col justify-between items-center">
+                                            <x-jet-secondary-button onclick="return listaAumentaCantidad({{  $item['producto_id'] }}, {{ $item['stock'] }})">+</x-jet-secondary-button> 
+                                            <div>  
+                                                <input type="number" min="1" class="p-1 w-9 text-center text-gray-500 cantidad_producto_{{ $item['producto_id'] }}" value="{{ $item['cantidad'] }}"
+                                                    wire:ignore 
+                                                    onchange="return listaSetCantidad({{ $item['producto_id'] }}, {{$item['stock'] }})"  
+                                                    id='cantidad_product_{{ $item['producto_id'] }}'  
+                                                    data-pid="{{ $item['producto_id'] }}"
+                                                >
+                                            </div>                            
+                                            <x-jet-secondary-button onclick="return listaDisminuyeCantidad({{ $item['producto_id'] }})">-</x-jet-secondary-button>
+                                    </div>
+                                    <div  wire:click="removeFromCart({{ $item['producto_id'] }})">
+                                        <x-jet-danger-button><i class="far fa-trash-alt"></i></x-jet-danger-button>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                      
-                        <div>
-                        <x-jet-button wire:click="save"> Generar pedido</x-jet-button>
+                    @else
+                        <div class="flex justify-center items-center h-full">
+                            <h3 class="font-bold text-xl text-gray-500 mx-4">No hay productos agregados</h3>
                         </div>
+
+                    @endif
+                    
+                </div>
+                <div class="absolute bottom-0 h-20 border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
+                    <div class="text-2xl">
+                        Total  {{ number_format(session('totalCarritoSpecial'),0,',','.') }}
                     </div>
-               
-
-
+                    
+                    <div>
+                    <x-jet-button wire:click="save"> Generar pedido</x-jet-button>
+                    </div>
+                </div>
             </div>
         </div>
 
