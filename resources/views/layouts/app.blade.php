@@ -125,8 +125,9 @@
                     <div>
                         <h3 class="text-2xl text-gray-200 ">Siguenos</h3>
                         <div class="flex my-2">
-                            <a href="http://"></a>
-                            <i style="background-color: #3B5998;" class="flex items-center justify-center h-12 w-12 mx-1 rounded-full fab fill-current text-white text-xl fa-facebook-f"></i>
+                            <a href="https://www.facebook.com/Juansil-103743992069476/">
+                                <i style="background-color: #3B5998;" class="flex items-center justify-center h-12 w-12 mx-1 rounded-full fab fill-current text-white text-xl fa-facebook-f"></i>
+                            </a>
                             {{-- <i style="background-color:#dd4b39"
                                     class="flex items-center justify-center h-12 w-12 mx-1 rounded-full fas fill-current text-white text-xl fa-envelope">
                                 </i>
