@@ -10,8 +10,7 @@
          } 
       ).includes( 'back_forward' );       
    </script>
-   @if (Auth::user() && Auth::user()->id == 1)    
- 
+   @if (Auth::user() && Auth::user()->id == 1)     
       <div x-data="{show:true}" class="hidden">
          <div x-show="!show" class="fixed top-0 mt-4 bg-white z-40 "  >
             <div x-on:click="show= !show"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer"> -> </div>
@@ -31,6 +30,31 @@
          </div>
       </div>
    @endif
+   <!-- Your plugin de chat code -->
+   <div id="fb-customer-chat" class="fb-customerchat">
+   </div>
+
+   <script>
+         var chatbox = document.getElementById('fb-customer-chat');
+         chatbox.setAttribute("page_id", "103743992069476");
+         chatbox.setAttribute("attribution", "biz_inbox");
+
+         window.fbAsyncInit = function() {
+            FB.init({
+            xfbml            : true,
+            version          : 'v12.0'
+            });
+         };
+
+         (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+   </script>
+
    <div  wire:ignore >
       <div class="mt-10"></div>
       

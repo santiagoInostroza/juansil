@@ -62,38 +62,7 @@
 </head>
 
    
-    <body class="font-sans antialiased">
-
-        <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>  
-
-        <!-- Messenger plugin de chat Code -->
-    <div id="fb-root"></div>
-
-        <!-- Your plugin de chat code -->
-        <div id="fb-customer-chat" class="fb-customerchat">
-        </div>
-
-        <script>
-            var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "103743992069476");
-            chatbox.setAttribute("attribution", "biz_inbox");
-
-            window.fbAsyncInit = function() {
-                FB.init({
-                xfbml            : true,
-                version          : 'v12.0'
-                });
-            };
-
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
-
+    <body class="font-sans antialiased">     
 
         <div class="min-h-screen ">
             
@@ -107,14 +76,9 @@
 
 
     
-        <div class="flex items-center justify-center mb-10">
-            
-            {{-- <div class="fb-post" 
-                data-href="https://www.facebook.com/20531316728/posts/10154009990506729/"
-                data-width="500">
-            </div> --}}
+        {{-- <div class="flex items-center justify-center mb-10">
             <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D104680765309132%26id%3D103743992069476&show_text=true&width=500" width="500" height="700" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-        </div>
+        </div> --}}
 
 
         <footer>
