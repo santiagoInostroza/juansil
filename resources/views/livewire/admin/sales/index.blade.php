@@ -31,11 +31,11 @@
         
         <div> Consumos {{ $sales->where('customer_id',65)->count() }} </div>
         <div> Total  ${{ number_format($sales->where('customer_id',65)->sum('total_cost'),0,',','.') }}</div>
-        <div> Diferencia </div>
+        <div> Diferencia ${{ number_format(0 - $sales->where('customer_id',65)->sum('total_cost'),0,',','.') }}</div>
         
         <div> Mermas {{ $sales->where('customer_id',88)->count() }} </div>
         <div> Total  ${{ number_format($sales->where('customer_id',88)->sum('total_cost'),0,',','.') }}</div>
-        <div> Diferencia </div>
+        <div> Diferencia ${{ number_format(0 - $sales->where('customer_id',88)->sum('total_cost'),0,',','.') }}</div>
     </div>
 
 
