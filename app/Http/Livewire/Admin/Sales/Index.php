@@ -23,8 +23,8 @@ class Index extends Component{
 
     public function mount(){
 
-        $this->month = Carbon::now()->locale('es')->timezone('America/Santiago')->format('Y-m');
-       
+        $this->month = Carbon::now()->locale('es')->timezone('America/Santiago');
+        $this->month = $this->month->format('Y-m');
 
         if(isset($_GET['id'])){
 
