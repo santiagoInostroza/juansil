@@ -14,22 +14,22 @@
             <x-jet-button wire:click="$set('openAddNew',true)"  class="flex items-center gap-2"><div><i class="fas fa-plus"></i> </div><div>Agregar nuevo</div></x-jet-button>
         </div> --}}
         {{-- FILTROS --}}
-        {{-- <div class="p-4 border rounded my-4 flex items-center gap-4">
-            <div class="flex items-center gap-2">
+        <div class="p-4 border rounded my-4 flex items-center gap-4">
+            {{-- <div class="flex items-center gap-2">
                 <x-jet-label>Orden</x-jet-label>
                 <select class="border p-2 rounded" name="orderBy" id="" wire:model="orderBy">
-                    <option value="id">Id</option>
+                    <option value="id">Fecha</option>
                     <option value="name">Nombre</option>
                 </select>
-            </div>
+            </div> --}}
             <div class="flex items-center gap-2">
-                <x-jet-label>Direccion</x-jet-label>
+                <x-jet-label>Ordenar</x-jet-label>
                 <select class="border p-2 rounded" name="direction" id="" wire:model="direction">
-                    <option value="asc">asc</option>
-                    <option value="desc">desc</option>
+                    <option value="asc">Más antigua</option>
+                    <option value="desc">Más reciente</option>
                 </select>
             </div>
-        </div> --}}
+        </div>
 
         {{-- TABLA --}}
         <div>
@@ -46,22 +46,20 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($collection as $sale)
-                                <tr class="text-gray-900  bg-gray-50
-                                @if ($sale->payment_status == 3)
-                                    bg-green-200
-                                @elseif ($sale->payment_status == 2)
-                                bg-green-100
-                                @elseif ($sale->payment_status == 1)
-                                bg-yellow-100
-                                @endif
+                                <tr class="text-gray-900
+                                    @if ($sale->payment_status == 3)
+                                        bg-green-200
+                                    @elseif ($sale->payment_status == 2)
+                                        bg-green-100
+                                    @elseif ($sale->payment_status == 1)
+                                        bg-yellow-100
+                                    @endif
                                 ">
-                                    <td class="hidden sm:block px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                          
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    {{ $sale->id }}
-                                                </div>
-                                          
+                                    <td class="hidden sm:flex px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center ">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $sale->id }}
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -96,9 +94,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex items-center gap-2">
-                                            <div  wire:click="$set('showInfoTrue',{{!$this->showInfoTrue}})" wire:key="row_info_{{$sale->id}}"  class="p-2 px-3 flex " title="Ver más info">
+                                            <div  wire:click="isShowInfo({{$sale->id}})" wire:key="row_info_{{$sale->id}}"  class="p-2 px-3 flex " title="Ver más info">
                                                
-                                                @if ($showInfoTrue) 
+                                                @if ($showInfo == $sale->id) 
                                                     <a href="#" class=" hover:text-gray-500 flex w-max-content justify-between items-center gap-1"><span class="hidden sm:block ">Ocultar detalle</span> <i class="fas fa-arrow-up"></i></a>  
                                                 @else
                                                     <a href="#" class=" hover:text-gray-500 flex w-max-content justify-between items-center gap-1"><span class="hidden sm:block ">Ver detalle</span><i class="fas fa-arrow-down"></i></a>
@@ -109,13 +107,13 @@
                                        
                                     </td>
                                 </tr>
-                                @if ($showInfoTrue)
+                                @if ($showInfo == $sale->id)
                                     <tr class="bg-gray-50">
                                         <td colspan="5">
-                                            <div class="p-4">
-                                                <div class="text-sm sm:text-base border p-4 bg-white" >
+                                            <div class="p-4 bg-white shadow">
+                                                <div class="text-sm sm:text-base border p-4" >
                                                     @foreach ($sale->saleItems as $item)
-                                                        <div class="grid grid-cols-6 gap-1 mt-4 items-center justify-between border-b">       
+                                                        <div class="grid grid-cols-6 gap-1 mt-4 items-center justify-between">       
                                                                                 
                                                             <figure>
                                                                 <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="{{ $item->product->image->url }}">
@@ -148,9 +146,23 @@
                                                 </div>
                                                     
                                               
-                                                <div class="h-20 border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
-                                                    <div class="text-2xl">
-                                                        Total  {{ number_format($sale->total) }}
+                                                <div class="border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
+                                                    <div class="p-4">
+                                                        @if ($sale->subtotal != $sale->total && $sale->subtotal > 0 )
+                                                           <div class="grid grid-cols-2 gap-2">
+                                                                <div> Sub Total </div>
+                                                                <div> ${{ number_format($sale->subtotal,0,',','.') }}</div>
+                                                            
+                                                                <div> Reparto </div>
+                                                                <div> ${{ number_format($sale->delivery_value,0,',','.') }}</div>
+                                                            
+                                                                <div> Total </div>
+                                                                <div> ${{ number_format($sale->total,0,',','.') }}</div>
+                                                                                                                    
+                                                           </div>
+                                                        @else
+                                                            Total  ${{ number_format($sale->total,0,',','.') }}
+                                                        @endif
                                                     </div>                                                   
                                                 </div>
                                             </div>

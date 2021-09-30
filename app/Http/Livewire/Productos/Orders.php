@@ -22,8 +22,8 @@ class Orders extends Component{
 
 
     public function mount(){
-        $this->orderBy="id";
-        $this->direction="asc";
+        $this->orderBy="date";
+        $this->direction="desc";
         $this->openAddNew = false;
         $this->editRowVerify = true;
     }
@@ -38,23 +38,23 @@ class Orders extends Component{
 
     public function render(){
 
-        $collection = Sale::where('customer_id', auth()->user()->id)
+
+        $collection = Sale::with(['customer' => function($query){
+            $query->where('email',auth()->user()->email);
+        }])
             // ->where('name', 'like', '%'. $this->search . '%')->orWhere('id', '=',  $this->search)
             ->orderBy($this->orderBy, $this->direction)
             ->get();
 
         foreach ($collection as  $item) {
-        $this->editRow[$item->id] = false;
-        $this->showInfo[$this->rowSelected] = false;
+            $this->editRow[$item->id] = false;
         }
 
         if($this->editRowVerify){
             if ( $this->rowSelected) {
                 $this->editRow[$this->rowSelected] = true;
 
-                if ( $this->showInfoTrue) {
-                    $this->showInfo[$this->rowSelected] = true;
-                }
+               
             }
         
         }
@@ -70,7 +70,6 @@ class Orders extends Component{
         $this->editRow[$user_id] = true;
         $this->rowSelected = $user_id;
         $this->editRowVerify = true;
-        $this->showInfoTrue = false;
     }
 
     public $deleteItemId;
@@ -84,6 +83,14 @@ class Orders extends Component{
         ]); 
         
        
+    }
+
+    public function isShowInfo($sale_id){
+        if($this->showInfo == $sale_id){
+            $this->showInfo = null;
+        }else{
+            $this->showInfo = $sale_id;
+        }
     }
 
     public function deleteItemSure(){
