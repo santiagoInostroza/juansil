@@ -14,12 +14,17 @@ class Index extends Component{
     public $sort = 'id';
     public $direction = 'desc';
 
+    public $month;
+
     public $open_show;
     public $selected_sale;
 
     protected $listeners = ['render'];
 
     public function mount(){
+
+        $this->month = Carbon::now()->locale('es')->timezone('America/Santiago')->format('Y-m');
+       
 
         if(isset($_GET['id'])){
 
@@ -29,8 +34,12 @@ class Index extends Component{
     }
 
     public function render(){
+
+        $month =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('m');
+        $year =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('Y');
         
         $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
+        ->whereMonth('date', $month)->whereYear('date', $year)
         ->where('sales.id','like','%'. $this->search . '%')
         ->orWhere('customers.name','like','%'. $this->search . '%')
         ->orWhere('customers.direccion','like','%'. $this->search . '%')
@@ -39,6 +48,7 @@ class Index extends Component{
         ->orWhere('customers.celular','like','%'. $this->search . '%')
         ->orWhere('sales.total','like','%'. $this->search . '%')
         ->orWhere('sales.date','like','%'. $this->search . '%')
+
         ->with('movement_sales.purchase_price')
         
         ->select('sales.*')
