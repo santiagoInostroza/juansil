@@ -13,10 +13,13 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+        .max_z{
+            z-index: 999999999999999;
+        }
 
 
     </style>
-    <div class="fixed top-20 left-0 right-0 bottom-20 rounded-xl  shadow-2xl bg-white z-10 ">
+    <div class="fixed inset-0 rounded-xl  shadow-2xl bg-white  max_z">
         <section class="bg-white flex flex-col justify-between items-end">
             
             @isset($header)
