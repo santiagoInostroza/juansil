@@ -167,13 +167,7 @@
                                                 <div id="imagen_{{$product->id}}" x-data="{loading:false,product_id:''}" x-init="product_id={{$product->id}}" wire:key="imagen_{{$product->id}}">
                                                     <div x-on:click="{loading=true; $wire.changePhoto(product_id).then(()=>loading=false) }" class="cursor-pointer relative">
                                                         <figure>
-                                                            
-                                                            @if ( Storage::exists('products_thumb/' .$product->image->url))
-                                                                <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
-                                                            @else
-                                                                <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url($product->image->url) }}" alt="">
-                                                            @endif
-                                                           
+                                                            <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/'.$product->image->url) }}" alt="">
                                                         </figure>
                                                         <div x-show="loading" class="hidden" :class="{'hidden' : !loading}">
                                                             <x-spinner.spinner2 size="16"></x-spinner.spinner2>
@@ -1031,60 +1025,60 @@
 
     <div>
         @push('js')
-        <script>
-            function productsMain(){
-                return {
-                    showRemoveTag:false,
-                    openChangePhoto:@entangle('openChangePhoto'),
-                    showCreateProduct: @entangle('showCreateProduct'),
-                    url:'',
-                    openCreateProduct(){
-                        this.showCreateProduct = true;
-                    },
-                    closeCreateProduct(){
-                        this.showCreateProduct = false;
-                    },
-                    openShowRemoveTag(){
-                        this.showRemoveTag = true;
-                    },
-                    closeShowRemoveTag(){
-                        this.showRemoveTag = false;
-                    },
-                    start(){
+            <script>
+                function productsMain(){
+                    return {
+                        showRemoveTag:false,
+                        openChangePhoto:@entangle('openChangePhoto'),
+                        showCreateProduct: @entangle('showCreateProduct'),
+                        url:'',
+                        openCreateProduct(){
+                            this.showCreateProduct = true;
+                        },
+                        closeCreateProduct(){
+                            this.showCreateProduct = false;
+                        },
+                        openShowRemoveTag(){
+                            this.showRemoveTag = true;
+                        },
+                        closeShowRemoveTag(){
+                            this.showRemoveTag = false;
+                        },
+                        start(){
 
-                        url='https://juansil.cl/admin/productos?page=2';
-                        this.recargar();
-                        console.log(url);
-                    },
-                    recargar(){ 
+                            url='https://juansil.cl/admin/productos?page=2';
+                            this.recargar();
+                            console.log(url);
+                        },
+                        recargar(){ 
+
+                        }
 
                     }
-
                 }
-            }
-        </script>
-        {{-- <script>
-           window.onscroll = function(){
-               
+            </script>
+            {{-- <script>
+            window.onscroll = function(){
+                
 
-                if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight){
-                  
-                    fetch('/', {
-                        method: 'get'
-                    })
-                    .then((response) => {
-                        console.log(response)
-                        response.text()
-                    })
-                    .then((htmlContent) => {
-                        console.log(htmlContent)
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-                  
+                    if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight){
+                    
+                        fetch('/', {
+                            method: 'get'
+                        })
+                        .then((response) => {
+                            console.log(response)
+                            response.text()
+                        })
+                        .then((htmlContent) => {
+                            console.log(htmlContent)
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                    
+                    }
                 }
-            }
-        </script> --}}
+            </script> --}}
             
         @endpush
     </div>

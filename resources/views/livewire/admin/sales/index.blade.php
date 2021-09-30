@@ -353,6 +353,10 @@
             </tbody>
         </table>
     </x-table>
+
+    <div class="mb-24">
+        {{ $sales->links() }}
+    </div>
     
    
 
