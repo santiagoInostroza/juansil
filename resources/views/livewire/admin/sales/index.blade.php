@@ -354,7 +354,7 @@
         </table>
     </x-table>
 
-    <div class="mb-24">
+    <div class="my-4">
         {{ $sales->links() }}
     </div>
     
