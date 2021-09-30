@@ -28,7 +28,7 @@
                 </header>
             @endisset
             
-            <main class="modalMain p-4 bg-white overflow-y-auto overflow-x-hidden w-full"   style=" max-height: calc(100vh - 160px);">
+            <main class="modalMain p-4 bg-white overflow-y-auto overflow-x-hidden w-full" >
                 {{$slot}}
             </main>
 
