@@ -1,7 +1,7 @@
 <div x-data="{open:@entangle('isOpenNotification')}">
   
   
-    <div wire:poll.60s class="">
+    <div class="">
 
         <div x-on:click="$wire.openNotification()" class="relative ml-8 bg-white rounded-full text-gray-500 hover:text-gray-800 transform hover:scale-110 cursor-pointer p-1 px-2 shadow">
             <i class="fas fa-bell"></i>
