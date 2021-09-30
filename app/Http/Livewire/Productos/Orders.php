@@ -39,8 +39,9 @@ class Orders extends Component{
     public function render(){
 
 
-        $collection = Sale::inner('customers','customers.id','=','sales.customer_id')->where('customers.email',auth()->user()->email)
+        $collection = Sale::join('customers','customers.id','=','sales.customer_id')->where('customers.email',auth()->user()->email)
             // ->where('name', 'like', '%'. $this->search . '%')->orWhere('id', '=',  $this->search)
+            ->select('sales.*')
             ->orderBy($this->orderBy, $this->direction)
             ->get();
 
