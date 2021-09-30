@@ -16,8 +16,13 @@
         </div>
     </div>
 
-    <div>
-      Ventas totales {{ $sales->count() }}  total  ${{ number_format($sales->sum('total'),0,',','.') }}
+    <div class="grid grid-cols-2 gap-4 w-max-content">
+        <div> Ventas totales {{ $sales->count() }} </div>
+        <div> total  ${{ number_format($sales->sum('total'),0,',','.') }}</div>
+        <div> Ventas pagadas {{ $sales->where('payment_status',3)->count() }} </div>
+        <div> total  ${{ number_format($sales->where('payment_status',3)->sum('total'),0,',','.') }}</div>
+        <div> Ventas pendientes {{ $sales->where('payment_status',1)->count() }} </div>
+        <div> total  ${{ number_format($sales->where('payment_status',1)->sum('total'),0,',','.') }}</div>
     </div>
 
 
