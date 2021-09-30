@@ -206,6 +206,14 @@
             <div class="flex items-center justify-center mt-12 text-xl text-gray-600 font-bold">
                Comienza a agregar productos al carrito y luego dentro del carrito haz click en continuar para poder realizar tu pedido
             </div>
+            <div>
+                <a href="{{route('products.lista')}}">
+                    <div class="bg-orange-800 px-5 py-5 sm:px-20 mt-10 cursor-pointer flex flex-col sm:flex-row items-center gap-4 justify-center" >
+                       <h2 class="text-3xl font-hairline  sm:text-5xl  text-white font-bold">Ver catalogo completo </h2>
+                       <img class=" h-24 object-contain rounded-full shadow" src="{{url('images/portada/banner_leches_xl.webp')}}" alt="ver_catalogo_completo">
+                    </div>
+                 </a>
+            </div>
         </div>
        
         
