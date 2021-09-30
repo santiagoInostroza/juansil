@@ -110,11 +110,16 @@
                                 @if ($showInfo == $sale->id)
                                     <tr class="bg-gray-50">
                                         <td colspan="5">
-                                            <div class="p-4 bg-white shadow">
+                                            <x-modal.modal_screen>
+                                                <div class="flex justify-between items-center gap-4 my-4">
+                                                    <h2> {{$sale->date}}</h2>
+                                                    <div wire:click="isShowInfo({{$sale->id}})" class="p-1 px-3 border rounded-full cursor-pointer">
+                                                        <i class="fas fa-times"></i>
+                                                    </div>
+                                                </div>
                                                 <div class="text-sm sm:text-base border p-4" >
                                                     @foreach ($sale->saleItems as $item)
-                                                        <div class="grid grid-cols-6 gap-1 mt-4 items-center justify-between">       
-                                                                                
+                                                        <div class="grid grid-cols-6 gap-1 mt-4 items-center justify-between">               
                                                             <figure>
                                                                 <img class=" rounded h-24 w-24 object-contain transform hover:scale-150 transition-all duration-500 ease-in-out delay-75" src="{{ Storage::url('products_thumb/' . $item->product->image->url) }}" alt="{{ $item->product->image->url }}">
                                                             </figure>
@@ -139,15 +144,11 @@
                                                             <div>
                                                                 ${{ number_format($item->precio_total,0,',','.')}}
                                                             </div>
-                                                        
-                                                        
                                                         </div>
                                                     @endforeach
                                                 </div>
-                                                    
-                                              
-                                                <div class="border-t w-full flex justify-between items-center gap-4 px-4 bg-white">
-                                                    <div class="p-4">
+                                                <div class="border-t w-full flex justify-between items-center gap-4 my-4 bg-white">
+                                                    <div class="my-4">
                                                         @if ($sale->subtotal != $sale->total && $sale->subtotal > 0 )
                                                            <div class="grid grid-cols-2 gap-2">
                                                                 <div> Sub Total </div>
@@ -165,7 +166,8 @@
                                                         @endif
                                                     </div>                                                   
                                                 </div>
-                                            </div>
+
+                                            </x-modal.modal_screen>
                                         </td>
                                     </tr>
                                 @endif
