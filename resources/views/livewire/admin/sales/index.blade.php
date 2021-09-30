@@ -19,7 +19,7 @@
     <div class="flex justify-center">
         <div>
             <h2>Totales</h2>
-            <div class="grid grid-cols-3 gap-4 w-max-content">
+            <div class="grid grid-cols-3 gap-4 w-max-content border rounded p-4">
                 <div> Ventas totales {{ $sales->count() }} </div>
                 <div> Total  ${{ number_format($sales->sum('total'),0,',','.') }}</div>
                 <div> Diferencia  ${{ number_format(  $sales->sum('total') - $sales->sum('total_cost'),0,',','.') }}</div>
@@ -33,7 +33,7 @@
                 <div> Diferencia ${{ number_format(0 - $sales->where('customer_id',88)->sum('total_cost'),0,',','.') }}</div>
             </div>
         
-            <div class="grid grid-cols-3 gap-4 w-max-content">
+            <div class="grid grid-cols-3 gap-4 w-max-content border rounded p-4">
                 <div> Ventas pagadas {{ $sales->where('payment_status',3)->count() }} </div>
                 <div> Total  ${{ number_format($sales->where('payment_status',3)->sum('total'),0,',','.') }}</div>
                 <div> Diferencia  ${{ number_format( $sales->where('payment_status',3)->sum('total') - $sales->where('payment_status',3)->sum('total_cost'),0,',','.') }}</div>
