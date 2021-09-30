@@ -39,7 +39,7 @@ class Index extends Component{
         $year =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('Y');
         
         $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
-        ->whereMonth('date', $month)->whereYear('date', $year)
+        ->whereMonth('sales.date', $month)->whereYear('sales.date', $year)
         ->where('sales.id','like','%'. $this->search . '%')
         ->orWhere('customers.name','like','%'. $this->search . '%')
         ->orWhere('customers.direccion','like','%'. $this->search . '%')
