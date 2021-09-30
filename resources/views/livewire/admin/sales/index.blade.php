@@ -19,11 +19,11 @@
     <div class="grid grid-cols-3 gap-4 w-max-content">
         <div> Ventas totales {{ $sales->count() }} </div>
         <div> Total  ${{ number_format($sales->sum('total'),0,',','.') }}</div>
-        <div> Diferencia  ${{ $sales->sum('total') - number_format($sales->sum('total_cost'),0,',','.') }}</div>
+        <div> Diferencia  ${{ number_format(  $sales->sum('total') - $sales->sum('total_cost'),0,',','.') }}</div>
         
         <div> Ventas pagadas {{ $sales->where('payment_status',3)->count() }} </div>
         <div> Total  ${{ number_format($sales->where('payment_status',3)->sum('total'),0,',','.') }}</div>
-        <div> Diferencia  ${{ $sales->where('payment_status',3)->sum('total') - number_format($sales->where('payment_status',3)->sum('total_cost'),0,',','.') }}</div>
+        <div> Diferencia  ${{ number_format( $sales->where('payment_status',3)->sum('total') - $sales->where('payment_status',3)->sum('total_cost'),0,',','.') }}</div>
         
         <div> Ventas pendientes {{ $sales->where('payment_status',1)->count() }} </div>
         <div> Total  ${{ number_format($sales->where('payment_status',1)->sum('total'),0,',','.') }}</div>
