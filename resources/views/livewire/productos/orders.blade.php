@@ -112,7 +112,11 @@
                                         <td colspan="5">
                                             <x-modal.modal_screen>
                                                 <div class="flex justify-between items-center gap-4 my-4">
-                                                    <h2> {{$sale->date}}</h2>
+                                                    <h2> 
+                                                        {{Helper::fecha($sale->date)->dayName}}
+                                                        {{Helper::fecha($sale->date)->format('d')}}
+                                                        {{Helper::fecha($sale->date)->monthName}}
+                                                    </h2>
                                                     <div wire:click="isShowInfo({{$sale->id}})" class="p-1 px-3 border rounded-full cursor-pointer">
                                                         <i class="fas fa-times"></i>
                                                     </div>
