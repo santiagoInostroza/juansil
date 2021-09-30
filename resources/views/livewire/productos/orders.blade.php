@@ -199,12 +199,15 @@
 
     @else
         <h1 class="p-4 text-center uppercase text-3xl text-gray-600 font-bold my-4">Mis compras</h1>
-        <div class="flex items-center justify-center ">
-            No has realizado compras aun
+        <div class="flex flex-col justify-around">
+            <div class="flex items-center justify-center ">
+                No has realizado compras aun
+            </div>
+            <div class="flex items-center justify-center ">
+               Comienza a agregar productos al carrito y luego dentro del carrito haz click en continuar para poder realizar tu pedido
+            </div>
         </div>
-        <div class="flex items-center justify-center ">
-           Comienza a agregar productos al carrito y luego dentro del carrito haz click en continuar para poder realizar tu pedido
-        </div>
+       
         
     @endif
 
