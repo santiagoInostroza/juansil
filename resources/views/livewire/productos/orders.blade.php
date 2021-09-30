@@ -200,7 +200,7 @@
     @else
         <h1 class="p-4 text-center uppercase text-3xl text-gray-600 font-bold my-4">Mis compras</h1>
         <div class="flex flex-col justify-around">
-            <div class="flex items-center justify-center text-xl text-gray-600 font-bold">
+            <div class="flex items-center justify-center text-xl text-gray-600 font-bold mt-12">
                 No has realizado compras aún...
             </div>
             <div class="flex items-center justify-center mt-12 text-xl text-gray-600 font-bold">
