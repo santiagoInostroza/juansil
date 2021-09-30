@@ -16,6 +16,10 @@
         </div>
     </div>
 
+    <div>
+      Ventas totales {{ $sales->count() }}  total  ${{ number_format($sales->sum('total'),0,',','.') }}
+    </div>
+
 
     <div class="py-4 flex items-center">
         <x-jet-input wire:model='search' class="flex-1 mr-4" type="" placeholder='Buscar palabra...'  />
