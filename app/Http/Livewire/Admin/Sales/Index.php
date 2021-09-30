@@ -24,6 +24,11 @@ class Index extends Component{
 
     protected $listeners = ['render'];
 
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     public function mount(){
 
         $this->month = Carbon::now()->locale('es')->timezone('America/Santiago');
