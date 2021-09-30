@@ -1,5 +1,22 @@
 <div x-data="ventas()">
     <h1 class="uppercase text-2xl text-gray-600 font-bold text-center mb-10">LISTA DE VENTAS</h1>
+
+    <div class="p-4">
+        <div class="flex justify-center items-center gap-4">
+            <div wire:click="lastMonth" class="cursor-pointer text-sm font-bold">Anterior</div>
+            <div class="relative">
+                <x-jet-input class="" type="month" id="start" name="start" min="2021-06" value="{{date('Y-m')}}" max="{{date('Y')}}-12" wire:model="month"></x-jet-input>
+                <div wire:loading wire:target="month" class="absolute right-10 top-2">
+                    <x-spinner.spinner size="7"></x-spinner.spinner>
+                </div>
+            </div>
+
+            <div wire:click="nextMonth" class="cursor-pointer text-sm font-bold">Siguiente</div>
+
+        </div>
+    </div>
+
+
     <div class="py-4 flex items-center">
         <x-jet-input wire:model='search' class="flex-1 mr-4" type="" placeholder='Buscar palabra...'  />
         @livewire('admin.sales.create-sale', ['user' => ''])

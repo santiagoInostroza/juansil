@@ -61,6 +61,14 @@ class Index extends Component{
         return view('livewire.admin.sales.index',compact('sales'));
     }
 
+    public function nextMonth(){
+        $this->month =  Carbon::createFromFormat('Y-m', $this->month)->locale('es')->addMonth()->format('Y-m');
+    }
+
+    public function lastMonth(){
+        $this->month =  Carbon::createFromFormat('Y-m', $this->month)->locale('es')->subMonth()->format('Y-m');  
+    }
+
     public function order($sort){
         if ($this->sort == $sort) {
            
