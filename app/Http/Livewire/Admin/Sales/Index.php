@@ -40,14 +40,17 @@ class Index extends Component{
         
         $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
         ->whereMonth('sales.date', $month)->whereYear('sales.date', $year)
-        ->where('sales.id','like','%'. $this->search . '%')
-        ->orWhere('customers.name','like','%'. $this->search . '%')
-        ->orWhere('customers.direccion','like','%'. $this->search . '%')
-        ->orWhere('customers.block','like','%'. $this->search . '%')
-        ->orWhere('customers.depto','like','%'. $this->search . '%')
-        ->orWhere('customers.celular','like','%'. $this->search . '%')
-        ->orWhere('sales.total','like','%'. $this->search . '%')
-        ->orWhere('sales.date','like','%'. $this->search . '%')
+        ->where(function($query){
+            $query->orWhere('sales.id','like','%'. $this->search . '%')
+            ->orWhere('customers.name','like','%'. $this->search . '%')
+            ->orWhere('customers.direccion','like','%'. $this->search . '%')
+            ->orWhere('customers.block','like','%'. $this->search . '%')
+            ->orWhere('customers.depto','like','%'. $this->search . '%')
+            ->orWhere('customers.celular','like','%'. $this->search . '%')
+            ->orWhere('sales.total','like','%'. $this->search . '%')
+            ->orWhere('sales.date','like','%'. $this->search . '%');
+        })
+        
 
         ->with('movement_sales.purchase_price')
         
