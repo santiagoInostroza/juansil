@@ -199,7 +199,7 @@
 
     @else
         <h1 class="p-4 text-center uppercase text-3xl text-gray-600 font-bold my-4">Mis compras</h1>
-        <div class="flex flex-col justify-around p-6 sm:p-24">
+        <div class="flex flex-col justify-around p-12 sm:p-32">
             <div class="flex items-center justify-center text-xl text-gray-600 font-bold mt-4 sm:mt-12">
                 No has realizado compras aún...
             </div>
@@ -209,7 +209,7 @@
             <div>
                 <a href="{{route('products.lista')}}">
                     <div class="bg-orange-800 px-5 py-5 sm:px-20 mt-10 cursor-pointer flex flex-col sm:flex-row items-center gap-4 justify-center" >
-                       <h2 class="text-3xl font-hairline  sm:text-5xl  text-white font-bold">Ver catalogo completo </h2>
+                       <h2 class="text-3xl font-hairline  sm:text-5xl  text-white font-bold">Ver catalogo </h2>
                        <img class=" h-24 object-contain rounded-full shadow" src="{{url('images/portada/banner_leches_xl.webp')}}" alt="ver_catalogo_completo">
                     </div>
                  </a>
