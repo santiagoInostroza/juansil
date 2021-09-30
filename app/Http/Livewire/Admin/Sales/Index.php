@@ -5,10 +5,13 @@ namespace App\Http\Livewire\Admin\Sales;
 use Carbon\Carbon;
 use App\Models\Sale;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\SaleController;
 
+
 class Index extends Component{
+    use WithPagination;
 
     public $search;
     public $sort = 'id';
