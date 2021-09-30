@@ -202,6 +202,10 @@
         <div class="flex items-center justify-center ">
             No has realizado compras aun
         </div>
+        <div class="flex items-center justify-center ">
+           Comienza a agregar productos al carrito y luego dentro del carrito haz click en continuar para poder realizar tu pedido
+        </div>
+        
     @endif
 
     {{-- MODALES --}}
