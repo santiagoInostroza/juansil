@@ -28,6 +28,10 @@
         <div> Ventas pendientes {{ $sales->where('payment_status',1)->count() }} </div>
         <div> Total  ${{ number_format($sales->where('payment_status',1)->sum('total'),0,',','.') }}</div>
         <div> Diferencia  ${{ number_format(  $sales->where('payment_status',1)->sum('total') - $sales->where('payment_status',1)->sum('total_cost'),0,',','.' ) }}</div>
+        
+        <div> Consumos {{ $sales->where('customer',65)->count() }} </div>
+        <div> Total  ${{ number_format($sales->where('customer',65)->sum('total'),0,',','.') }}</div>
+        <div> Diferencia  ${{ number_format(  $sales->where('payment_status',1)->sum('total') - $sales->where('payment_status',1)->sum('total_cost'),0,',','.' ) }}</div>
     </div>
 
 
