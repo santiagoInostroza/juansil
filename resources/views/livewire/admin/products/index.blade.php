@@ -911,7 +911,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                                         <div class="flex lg:flex-col items-center gap-2">
                                            <x-jet-button wire:click="editRowTrue({{ $product->id }})"><i class="fas fa-pen"></i></x-jet-button>
-                                           <x-jet-button wire:click="guardarImagenes({{ $product->id }})">Descargar imagen</x-jet-button>
+                                           {{-- <x-jet-button wire:click="guardarImagenes({{ $product->id }})">Descargar imagen</x-jet-button> --}}
                                         </div>
                                     </td>
                                 </tr>
