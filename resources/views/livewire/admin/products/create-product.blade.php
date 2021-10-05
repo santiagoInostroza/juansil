@@ -2,7 +2,7 @@
     <x-modal.modal2>
         <x-slot name='titulo'>
             <div class="flex items-center justify-between">
-                <h2 class="text-gray-600 font-bold text-xl px-6">
+                <h2 class="text-gray-600 font-bold text-xl">
                         CREAR PRODUCTO
                 </h2>
                 <i x-on:click="closeCreateProduct" class="fas fa-times p-2 transform hover:scale-110 hover:bg-red-500 hover:text-white rounded"></i>
@@ -41,7 +41,7 @@
                                             </div>
                                         </label>
                                     </div>
-                                    <img class="w-full  max-h-96 object-contain" id='picture' src="{{asset('images/otros/sinFoto.webp')}}" alt="">
+                                    <img class="w-full  max-h-96 object-contain" id='picture' src="{{asset('images/otros/sin-Foto.webp')}}" alt="">
                                 @endif
                             </div>
                         </label>

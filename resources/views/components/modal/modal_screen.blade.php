@@ -1,7 +1,9 @@
 <div>
     <style>
-        body {
-            overflow: hidden; /* Hide scrollbars */
+        body::-webkit-scrollbar  {
+            /* overflow: hidden; */
+             /* Hide scrollbars */
+             display: none;
         }
 
         .modalMain::-webkit-scrollbar {
