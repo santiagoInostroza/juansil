@@ -12,13 +12,13 @@
         </div>
        
         <div x-show="open" class="fixed inset-0 opacity-0 hidden" :class="{'hidden':!open}" x-on:click="open=false; $wire.isOpenSale = false"></div>
-        <div x-show="open" class="fixed right-0 mt-2 bg-white rounded-md shadow-lg overflow-y-auto overflow-x-hidden max-h-96  hidden" :class="{'hidden':!open}" style="width:20rem;" >
+        <div x-show="open" class="fixed right-0 mt-2 bg-white rounded-md shadow-lg  hidden" :class="{'hidden':!open}" style="width:20rem;" >
           
           
-            <div>
+            <div class="overflow-y-auto overflow-x-hidden max-h-96">
              
                 @if (auth()->user()->notifications->count())
-                    @foreach (auth()->user()->notifications as $noti) 
+                    @foreach (auth()->user()->notifications->take(20) as $noti) 
                             @if ($noti->type == "App\Notifications\SaleNotification")
                                 <div x-on:click="$wire.openSale({{ $noti->data['sale_id'] }}, '{{ $noti->id }}' );" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2   @if ($noti->read_at == null) bg-gray-200 @endif cursor-pointer">
                                     {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
@@ -34,37 +34,16 @@
                             @endif 
              
                     @endforeach
-                  
-             
-                    
-                    {{-- <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-                        <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="avatar">
-                        <p class="text-gray-600 text-sm mx-2">
-                            <span class="font-bold" href="#">Slick Net</span> start following you . 45m
-                        </p>
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-                        <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
-                        <p class="text-gray-600 text-sm mx-2">
-                            <span class="font-bold" href="#">Jane Doe</span> Like Your reply on <span class="font-bold text-blue-500" href="#">Test with TDD</span> artical . 1h
-                        </p>
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-100 -mx-2">
-                        <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=398&q=80" alt="avatar">
-                        <p class="text-gray-600 text-sm mx-2">
-                            <span class="font-bold" href="#">Abigail Bennett</span> start following you . 3h
-                        </p>
-                    </a> --}}
-                    
-                    {{-- <a href="https://api.whatsapp.com/send?phone=56973231830&text=Me%20gustaría%20saber%20el%20precio%20del%20sitio%20web«%0D%0A»">ws</a> --}}
-                  
+            
                 @else
                     <p class="text-gray-600 text-sm m-2 text-center">No tienes notificaciones</p>
                 @endif
             </div>
             <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">Ver todas las notificaciones</a>
            
-        </div>      
+        </div>  
+        <div>
+            </div>   
 
     </div>
 
