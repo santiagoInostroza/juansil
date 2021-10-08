@@ -64,6 +64,7 @@ class SaleNotification extends Notification
             'total'=>$this->sale->total,
             'date'=>$this->sale->date,
             'delivery_date'=>$this->sale->delivery_date,
+            'sale_type'=>$this->sale->sale_type,
         ];
     }
 }

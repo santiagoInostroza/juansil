@@ -33,9 +33,13 @@ class Notification extends Component{
     public function mark_a_notification($notification_id){
         auth()->user()->unreadNotifications->when($notification_id, function($query) use($notification_id){
             return $query->where('id', $notification_id);
-        })->markAsRead();
+        })->markAsRead();      
 
-      
+    }
+    public function setAllAsRead(){
+        auth()->user()->unreadNotifications->markAsRead();
+        
+
     }
 
     public function openNotification(){
