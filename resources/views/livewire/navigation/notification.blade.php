@@ -18,6 +18,9 @@
             
                 <div x-on:click="$wire.setAllAsRead()" class="p-8 py-2  cursor-pointer hover:font-bold">
                     Marcar todas como leidas
+                    <span wire:loading wire:target="setAllAsRead()">
+                       ...
+                    </span>
                 </div>
                 <div class="overflow-y-auto overflow-x-hidden max-h-96">
                 
