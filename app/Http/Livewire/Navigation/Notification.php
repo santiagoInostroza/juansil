@@ -11,6 +11,7 @@ class Notification extends Component{
     public $isOpenSale;
 
     public $sale;
+    
 
     public function mount(){
         $this->isOpenSale = false;
@@ -38,7 +39,7 @@ class Notification extends Component{
     }
     public function setAllAsRead(){
         auth()->user()->unreadNotifications->markAsRead();
-        
+
 
     }
 

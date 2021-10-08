@@ -11,54 +11,55 @@
           
         </div>
        
-        <div x-show="open" class="fixed inset-0 opacity-0 hidden" :class="{'hidden':!open}" x-on:click="open=false; $wire.isOpenSale = false"></div>
-        <div x-show="open" class="fixed right-0 mt-2 bg-white rounded-md shadow-lg  hidden" :class="{'hidden':!open}" style="width:20rem;" >
-          
-          
-            <div x-on:click="$wire.setAllAsRead()" class="p-8 py-2  cursor-pointer hover:font-bold">
-                Marcar todas como leidas
-            </div>
-            <div class="overflow-y-auto overflow-x-hidden max-h-96">
-             
-                @if (auth()->user()->notifications->count())
-                    @foreach (auth()->user()->notifications->take(20) as $noti) 
-                            @if ($noti->type == "App\Notifications\SaleNotification")
-                                <div x-on:click="$wire.openSale({{ $noti->data['sale_id'] }}, '{{ $noti->id }}' );" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2   @if ($noti->read_at == null) bg-gray-200 @endif cursor-pointer">
-                                    {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
-                                    @if ( isset($noti->data['sale_type']) && $noti->data['sale_type'] == 1) 
-                                    
-                                       
-                                    @elseif ( isset($noti->data['sale_type']) && $noti->data['sale_type'] == 2) 
-                                        <i class="fas fa-shopping-cart"></i>
-                                       
-                                       
-                                    @elseif ( isset($noti->data['sale_type']) && $noti->data['sale_type'] == 3) 
-                                        <i class="fas fa-user"></i>
-                                    @else 
-                                        
-                                    @endif
-                                   
-                                    <p class="text-gray-600 text-sm mx-2">
-                                        <span class="font-bold" href="#">{{$noti->data['customer']}}</span> 
-                                        ha agendado un  <span class="font-bold text-blue-500" href="#">pedido </span> por ${{number_format($noti->data['total'],0,',','.')}} 
-                                        @if($noti->data['delivery_date']!=null) para el {{Helper::fecha( $noti->data['delivery_date'] )->dayName }} @endif, 
-                                        {{ Helper::fecha( $noti->data['date'] )->diffForHumans() }}
-                                
-                                    </p>
-                                </div>                  
-                            @endif 
-             
-                    @endforeach
+        @if ($isOpenNotification)
+            <div x-show="open" class="fixed inset-0 opacity-0 hidden" :class="{'hidden':!open}" x-on:click="open=false; $wire.isOpenSale = false"></div>
+            <div x-show="open" class="fixed right-0 mt-2 bg-white rounded-md shadow-lg  hidden" :class="{'hidden':!open}" style="width:20rem;" >
             
-                @else
-                    <p class="text-gray-600 text-sm m-2 text-center">No tienes notificaciones</p>
-                @endif
+            
+                <div x-on:click="$wire.setAllAsRead()" class="p-8 py-2  cursor-pointer hover:font-bold">
+                    Marcar todas como leidas
+                </div>
+                <div class="overflow-y-auto overflow-x-hidden max-h-96">
+                
+                    @if (auth()->user()->notifications->count())
+                        @foreach (auth()->user()->notifications->take(20) as $noti) 
+                                @if ($noti->type == "App\Notifications\SaleNotification")
+                                    <div x-on:click="$wire.openSale({{ $noti->data['sale_id'] }}, '{{ $noti->id }}' );" class="flex items-center px-4 py-3 border-b hover:bg-gray-300 -mx-2   @if ($noti->read_at == null) bg-gray-200 @endif cursor-pointer">
+                                        {{-- <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar"> --}}
+                                        @if ( isset($noti->data['sale_type']) && $noti->data['sale_type'] == 1) 
+                                        
+                                        
+                                        @elseif ( isset($noti->data['sale_type']) && $noti->data['sale_type'] == 2) 
+                                            <i class="fas fa-shopping-cart"></i>
+                                        
+                                        
+                                        @elseif ( isset($noti->data['sale_type']) && $noti->data['sale_type'] == 3) 
+                                            <i class="fas fa-user"></i>
+                                        @else 
+                                            
+                                        @endif
+                                    
+                                        <p class="text-gray-600 text-sm mx-2">
+                                            <span class="font-bold" href="#">{{$noti->data['customer']}}</span> 
+                                            ha agendado un  <span class="font-bold text-blue-500" href="#">pedido </span> por ${{number_format($noti->data['total'],0,',','.')}} 
+                                            @if($noti->data['delivery_date']!=null) para el {{Helper::fecha( $noti->data['delivery_date'] )->dayName }} @endif, 
+                                            {{ Helper::fecha( $noti->data['date'] )->diffForHumans() }}
+                                    
+                                        </p>
+                                    </div>                  
+                                @endif 
+                
+                        @endforeach
+                
+                    @else
+                        <p class="text-gray-600 text-sm m-2 text-center">No tienes notificaciones</p>
+                    @endif
+                </div>
+                <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">Ver todas las notificaciones</a>
+            
             </div>
-            <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">Ver todas las notificaciones</a>
-           
-        </div>  
-        <div>
-            </div>   
+        @endif
+       
 
     </div>
 
