@@ -83,18 +83,21 @@
                                                 </div>
                                             </td>
                                             <td class="px-6 py-2 text-sm font-medium text-right whitespace-nowrap">
-                                                <div class="flex items-center justify-between gap-1 w-max-content">                                            
-                                                    <x-jet-secondary-button wire:click="showPurchase({{$purchase}})"> <i class="fas fa-eye"></i></x-jet-secondary-button>
-                                                    <x-jet-secondary-button  > <i class="fas fa-pen"></i> </x-jet-secondary-button>
-                                                    <x-jet-secondary-button wire:click="deletePurchase({{$purchase}})"><i class="far fa-trash-alt"></i></x-jet-secondary-button>
-                                                    {{-- <a href="{{ route('admin.purchases.show', $purchase) }}" title="Ver datos del cliente" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-eye"></i></a>
-                                                    <a href="{{ route('admin.purchases.edit', $purchase) }}" class="mr-2 btn btn-secondary btn-sm"><i class="fas fa-pen"></i></a>
-                                                    <form action="{{ route('admin.purchases.destroy', $purchase) }}" method='POST' class="mr-2 alerta_eliminar">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
-                                                    </form> --}}
+                                                <div x-data="{loading:false}">
+                                                    <div class="flex items-center justify-between gap-1 w-max-content"> 
+                                                        <div class="relative">
+                                                            <template x-if="loading">
+                                                                <x-spinner.spinner2 size="8"></x-spinner.spinner2> 
+                                                            </template>  
+                                                        
+                                                           
+                                                            <x-jet-secondary-button x-on:click="loading=true; $wire.showPurchase({{$purchase}}).then( ()=>loading=false); "> <i class="fas fa-eye"></i></x-jet-secondary-button>
+                                                            <x-jet-secondary-button  > <i class="fas fa-pen"></i> </x-jet-secondary-button>
+                                                            <x-jet-secondary-button wire:click="deletePurchase({{$purchase}})"><i class="far fa-trash-alt"></i></x-jet-secondary-button>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                               
                                             </td>
                                         </tr>
                         
@@ -392,7 +395,7 @@
                                             </figure>
                                         </div>
                                     </td>
-                                    <td class="text-left">  {{$item->cantidad}}  {{$item->product->name}} x  {{$item->cantidad_por_caja}} un. </td>
+                                    <td class="text-left">  {{$item->cantidad}}  x  {{$item->cantidad_por_caja}} {{$item->product->name}}</td>
                                     <td class="text-center">${{number_format($item->precio,0,',','.')}}</td>
                                     <td class="text-center">${{number_format($item->precio_por_caja,0,',','.')}}</td>
                                     <td class="text-center">${{number_format($item->precio_total,0,',','.')}}</td>
@@ -402,9 +405,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
 
-            <x-slot name="footer">
                 <div class="flex justify-between p-4 px-8">
 
                     <x-jet-button wire:click="$set('openShowDetails',false)">Cerrar</x-jet-button>
@@ -416,9 +417,13 @@
                             ${{number_format($purchase_selected->total,0,',','.')}}
                         </div>
                     </div>
-
+    
                 </div>
-            </x-slot>
+            </div>
+
+          
+            
+          
         </x-modal.modal_screen>
     @endif
  

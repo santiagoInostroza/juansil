@@ -1,13 +1,17 @@
 <div>
     
-    
+    {{-- TITULO --}}
     <h1 class="text-2xl p-4 text-center font-bold bg-gray-50">INVENTARIO</h1>
+
+    {{-- BUSCADOR --}}
     <div class="my-4 flex gap-4 relative">
         <x-jet-input wire:model.debounce="search" class="w-full" placeholder="Buscar por producto"></x-jet-input>
         <div class="absolute right-4">
             <x-spinner.spinner :size="10" wire:loading.delay wire:target="search"></x-spinner.spinner>
         </div>
     </div>
+
+    {{-- FILTROS --}}
     <div class="flex gap-4 my-4">
         Ordenar por...
         <div class="relative">
@@ -34,6 +38,8 @@
 
     </div>
   
+
+    {{-- LISTA PRODUCTOS --}}
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -41,7 +47,7 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" width="10" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
+                                <th scope="col" width="10" class="hidden sm:block px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Producto</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock now</th>
@@ -56,7 +62,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($products as $product)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="hidden sm:block px-6 py-4 whitespace-nowrap">
                                         <div>{{$product->id}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -76,7 +82,9 @@
                                             <div class="ml-2">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{$product->name}}
+                                                    {{}}
                                                 </div>
+
                                                 <div class="flex gap-4">
                                                     <div class="text-sm text-gray-500">
                                                         {{$product->brand->name}}
