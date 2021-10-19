@@ -15,7 +15,7 @@
 
         </div>
     </div>
-
+{{-- 
     <div class="flex justify-center">
         <h2 class=" mt-4 mb-2">Total</h2>
     </div>
@@ -26,8 +26,8 @@
             <div> Diferencia  ${{ number_format(  $sales->sum('total') - $sales->sum('total_cost'),0,',','.') }}</div>
            
         </div>
-    </div>
-    
+    </div> --}}
+
     {{-- <div class="flex justify-center ">
         <h2 class=" mt-4 mb-2">Desglose</h2>
     </div>
