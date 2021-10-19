@@ -27,10 +27,11 @@
            
         </div>
     </div>
-    <div class="flex justify-center ">
+    
+    {{-- <div class="flex justify-center ">
         <h2 class=" mt-4 mb-2">Desglose</h2>
     </div>
-    {{-- <div class="flex justify-center ">
+    <div class="flex justify-center ">
         <div class="grid grid-cols-3 gap-4 w-max-content border rounded p-4">
             <div> Ventas pagadas {{ $sales->where('payment_status',3)->count() }} </div>
             <div> Total  ${{ number_format($sales->where('payment_status',3)->sum('total'),0,',','.') }}</div>
