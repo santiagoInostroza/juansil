@@ -43,19 +43,7 @@
 
 <body>
 
-    <div class="absolute inset-0 flex justify-center items-end ">
-
-        <div class="bg-white p-4 shadow">
-            @php
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            
-            error_reporting(E_ALL);
-            @endphp 
-        </div>
-       
-
-    </div>
+ 
 
 
     <!--Container -->
