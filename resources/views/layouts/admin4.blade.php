@@ -91,7 +91,7 @@
                             
                         {{-- NOTIFICACIONES --}}
                       <div class="">
-                          @livewire('navigation.notification')
+                          {{-- @livewire('navigation.notification') --}}
                       </div>
                     
 
