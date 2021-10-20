@@ -42,6 +42,22 @@
 </head>
 
 <body>
+
+    <div class="absolute inset-0 flex justify-center items-end ">
+
+        <div class="bg-white p-4 shadow">
+            @php
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            
+            error_reporting(E_ALL);
+            @endphp 
+        </div>
+       
+
+    </div>
+
+
     <!--Container -->
     <div class="mx-auto bg-grey-400 ">
         <!--Screen-->
@@ -70,7 +86,7 @@
 
                         {{-- REPARTOS --}}
                         <div>
-                            @livewire('admin.deliveries.deliveries-notification')
+                            {{-- @livewire('admin.deliveries.deliveries-notification') --}}
                         </div>
                             
                         {{-- NOTIFICACIONES --}}
@@ -138,6 +154,7 @@
             <!--/Header-->
             <div class="h-20 w-full"></div>
             {{-- body --}}
+
             <div class="flex flex-1">
                 <!--Sidebar-->
                 <aside x-show="openSidebar" x-on:click.away="openSidebar = false" id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden" :class="{'hidden' : !openSidebar}">
