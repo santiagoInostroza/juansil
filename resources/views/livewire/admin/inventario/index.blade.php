@@ -82,7 +82,7 @@
                                             <div class="ml-2">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{$product->name}}
-                                                    {{}}
+                                                  
                                                 </div>
 
                                                 <div class="flex gap-4">

@@ -47,7 +47,7 @@ class Index extends Component{
         $year =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('Y');
         
         $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
-        ->with('customer')
+         ->with('customer')
         ->whereMonth('sales.date', $month)->whereYear('sales.date', $year)
         ->where(function($query){
             $query->orWhere('sales.id','like','%'. $this->search . '%')
@@ -61,7 +61,7 @@ class Index extends Component{
         })
         
 
-        ->with('movement_sales.purchase_price')
+        // ->with('movement_sales.purchase_price')
         
         ->select('sales.*')
         ->orderBy($this->sort,$this->direction)
