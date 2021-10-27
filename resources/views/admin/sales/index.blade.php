@@ -1,7 +1,7 @@
-@extends('layouts.admin3')
+{{-- @extends('layouts.admin3')
 
 @section('content')
-    @livewire('admin.sales.index')      
-@endsection
+@endsection --}}
+@livewire('admin.sales.index')      
     
    
