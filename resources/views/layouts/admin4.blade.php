@@ -54,6 +54,7 @@
             
             <header class="bg-nav py-4 fixed top-0 left-0 right-0 " style="z-index: 999999999">
                 <div class="flex justify-between">
+                    
                     <div class="p-1 mx-3 inline-flex items-center">
                         <i class="fas fa-bars pr-2 text-white cursor-pointer p-3" x-on:click="openSidebar=!openSidebar"></i>
                         <div class="flex-1 sm:flex-none  flex items-center justify-center ml-8  sm:mx-0 ">
@@ -70,6 +71,7 @@
                             </a>  
                         </div>
                     </div>
+                    
                     <div class="flex items-center gap-4 mr-8">
 
                         {{-- REPARTOS --}}
@@ -99,14 +101,15 @@
                               role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                               <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Perfil</a>
                               
-                              @can('admin.home')
+                              {{-- @can('admin.home')
                                   <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero</a>
                               @endcan
                               @can('products.specialPrice')
                                   <a href="{{ route('products.specialPrice') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Precios especiales</a>
-                              @endcan                     
+                              @endcan                      --}}
                           
-                              <form method="POST" action="{{ route('logout') }}">@csrf
+                              <form method="POST" action="{{ route('logout') }}">
+                                @csrf
                                   <a 
                                       href="{{ route('logout') }}"  
                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
@@ -119,24 +122,6 @@
                           </div>
                       </div>
                   </div>
-                    {{-- <div class="p-1 flex flex-row items-center">
-                        <a href="https://github.com/tailwindadmin/admin" class="text-white p-2 mr-2 no-underline hidden md:block lg:block">Github</a>
-
-                        <div>
-                            @livewire('navigation.notification')
-                        </div>
-
-                        <img onclick="profileToggle()" class="inline-block h-8 w-8 rounded-full" src="https://avatars0.githubusercontent.com/u/4323180?s=460&v=4" alt="">
-                        <a href="#" onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block">Adam Wathan</a>
-                        <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r">
-                            <ul class="list-reset">
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">My account</a></li>
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Notifications</a></li>
-                            <li><hr class="border-t mx-2 border-grey-ligght"></li>
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
-                            </ul>
-                        </div>
-                    </div> --}}
                 </div>
             </header>
             <!--/Header-->
@@ -145,10 +130,9 @@
 
             <div class="flex flex-1">
                 
-                <!--Sidebar-->
+             
 
                 <aside x-show="openSidebar" x-on:click.away="openSidebar = false" id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden" :class="{'hidden' : !openSidebar}">
-{{-- 
                     <ul class="list-reset flex flex-col">
                         <li class=" w-full h-full  border-b border-light-border @if (Request::is('admin')) bg-white @endif">
                         <a href="{{route('admin.home')}}"
@@ -375,16 +359,16 @@
                             </div>
                            
                         </li>
-                    </ul> --}}
-
+                    </ul> 
                 </aside>
 
-                <!--/Sidebar-->
+           
               
                 <main class="bg-white-300 flex-1 p-3 overflow-hidden">
                     @isset($slot)
                         {{ $slot }}
                     @endisset
+
                     @yield('content')
                 </main>
               
@@ -396,8 +380,8 @@
 
             <!--Footer-->
             <footer class="bg-grey-darkest text-white p-2">
-                <div class="flex flex-1 mx-auto">&copy; My Design</div>
-                <div class="flex flex-1 mx-auto">Distributed by:  <a href="https://themewagon.com/" target=" _blank">Themewagon</a></div>
+                <div class="flex flex-1 mx-auto">&copy; Juansil</div>
+                <div class="flex flex-1 mx-auto"></div>
             </footer>
             <!--/footer-->
 
