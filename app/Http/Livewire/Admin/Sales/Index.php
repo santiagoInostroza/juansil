@@ -45,11 +45,7 @@ class Index extends Component{
         $month =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('m');
         $year =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('Y');
         
-        $prueba = 1;
-        if($prueba == 1){
-            $sales =  Sale::take(2)->get();
-        }else{
-
+   
         
             $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
             ->with('customer')
@@ -74,7 +70,7 @@ class Index extends Component{
             ->get()
             // ->paginate(10)
             ;
-        }
+        
         return view('livewire.admin.sales.index',compact('sales'));
     }
 
@@ -135,13 +131,6 @@ class Index extends Component{
         $sale->fecha_boleta =Carbon::now();
         $sale->user_boleta = Auth::id();
         $sale->save();
-    }
-
-    public static function fecha($fecha){
-        return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
-    }
-    public static function fechaHora($fecha){
-        return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
     }
 
     
