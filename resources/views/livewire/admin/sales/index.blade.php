@@ -290,7 +290,7 @@
 
                       {{--  FECHA VENTA  --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $this->fecha($sale->date)->format('d-m-Y') }}
+                        {{ Helper::fecha($sale->date)->format('d-m-Y') }}
                         <div class="w-max-content">  por {{ ($sale->created_by()) ? $sale->created_by()->name:"" }}</div>
                     </td>
 
@@ -304,7 +304,7 @@
                         @elseif ($sale->payment_status == 2)
                             <div class=""> 
                                 @if ($sale->payment_date!="")
-                                    <div>{{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }}</div>
+                                    <div>{{  Helper::fecha($sale->payment_date)->format('d-m-Y') }}</div>
                                 @endif
                                 <span class="text-green-500">Abonado</span> 
                                 ${{number_format($sale->payment_amount,0,',','.')}} 
@@ -316,7 +316,7 @@
                             
                         @elseif ($sale->payment_status == 3)
                             @if ($sale->payment_date != "")
-                               <div> {{ $this->fechaHora($sale->payment_date)->format('d-m-Y') }} </div>
+                               <div> {{ Helper::fecha($sale->payment_date)->format('d-m-Y') }} </div>
                             @endif
                             <i class="fas fa-check text-green-500 d-block"></i> Pagado
                         @endif
@@ -327,7 +327,7 @@
                             @if ($sale->delivery_stage == 1)
                             <div>
                                  {{-- {{date("d-m-Y",strtotime($sale->delivery_date))}} --}}
-                                 {{ $this->fecha($sale->delivery_date)->format('d-m-Y') }}
+                                 {{ Helper::fecha($sale->delivery_date)->format('d-m-Y') }}
                             </div>
                             <div>
                                 <i class="fas fa-check text-green-500"></i> Entregado
@@ -394,7 +394,7 @@
                             @else
                                 @if ($sale->boleta)
                                     <x-tooltip.tooltip>
-                                        <x-slot name='tooltip'>Boleta generada {{ $this->fechaHora($sale->fecha_boleta)->format('d-m-y H:i') }} por {{$sale->boleta_by()->name}}</x-slot>
+                                        <x-slot name='tooltip'>Boleta generada {{ Helper::fecha($sale->fecha_boleta)->format('d-m-y H:i') }} por {{$sale->boleta_by()->name}}</x-slot>
                                         <x-jet-secondary-button class="bg-green-500"><i class="fas fa-file-alt"></i></x-jet-secondary-button>
                                     </x-tooltip.tooltip>
                                 @else
