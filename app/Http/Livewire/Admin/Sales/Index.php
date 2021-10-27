@@ -24,8 +24,7 @@ class Index extends Component{
 
     protected $listeners = ['render'];
 
-    public function updatingSearch()
-    {
+    public function updatingSearch(){
         $this->resetPage();
     }
 
@@ -61,12 +60,14 @@ class Index extends Component{
         })
         
 
-        // ->with('movement_sales.purchase_price')
+        ->with('movement_sales.purchase_price')
         
         ->select('sales.*')
         ->orderBy($this->sort,$this->direction)
-        ->take(20)
-        ->paginate(10);
+        ->take(10)
+        ->get()
+        // ->paginate(10)
+        ;
         return view('livewire.admin.sales.index',compact('sales'));
     }
 

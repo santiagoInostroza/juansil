@@ -413,7 +413,9 @@
     </x-table>
 
     <div class="my-4">
-        {{ $sales->links() }}
+       
+            {{-- {{ $sales->links() }} --}}
+      
     </div>
     
    
