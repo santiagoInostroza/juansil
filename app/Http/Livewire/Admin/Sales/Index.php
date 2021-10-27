@@ -47,7 +47,7 @@ class Index extends Component{
         
         $prueba = 1;
         if($prueba == 1){
-            $sales =  Sale::take(10)->get();
+            $sales =  Sale::take(2)->get();
         }else{
 
         
