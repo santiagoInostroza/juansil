@@ -45,29 +45,36 @@ class Index extends Component{
         $month =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('m');
         $year =Carbon::createFromFormat('Y-m', $this->month)->locale('es')->format('Y');
         
-        $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
-         ->with('customer')
-        ->whereMonth('sales.date', $month)->whereYear('sales.date', $year)
-        ->where(function($query){
-            $query->orWhere('sales.id','like','%'. $this->search . '%')
-            ->orWhere('customers.name','like','%'. $this->search . '%')
-            ->orWhere('customers.direccion','like','%'. $this->search . '%')
-            ->orWhere('customers.block','like','%'. $this->search . '%')
-            ->orWhere('customers.depto','like','%'. $this->search . '%')
-            ->orWhere('customers.celular','like','%'. $this->search . '%')
-            ->orWhere('sales.total','like','%'. $this->search . '%')
-            ->orWhere('sales.date','like','%'. $this->search . '%');
-        })
-        
+        $prueba = 1;
+        if($prueba == 1){
+            $sales =  Sale::take(10)->get();
+        }else{
 
-        ->with('movement_sales.purchase_price')
         
-        ->select('sales.*')
-        ->orderBy($this->sort,$this->direction)
-        ->take(10)
-        ->get()
-        // ->paginate(10)
-        ;
+            $sales =  Sale::join('customers','sales.customer_id','=','customers.id')
+            ->with('customer')
+            ->whereMonth('sales.date', $month)->whereYear('sales.date', $year)
+            ->where(function($query){
+                $query->orWhere('sales.id','like','%'. $this->search . '%')
+                ->orWhere('customers.name','like','%'. $this->search . '%')
+                ->orWhere('customers.direccion','like','%'. $this->search . '%')
+                ->orWhere('customers.block','like','%'. $this->search . '%')
+                ->orWhere('customers.depto','like','%'. $this->search . '%')
+                ->orWhere('customers.celular','like','%'. $this->search . '%')
+                ->orWhere('sales.total','like','%'. $this->search . '%')
+                ->orWhere('sales.date','like','%'. $this->search . '%');
+            })
+            
+
+            ->with('movement_sales.purchase_price')
+            
+            ->select('sales.*')
+            ->orderBy($this->sort,$this->direction)
+            ->take(10)
+            ->get()
+            // ->paginate(10)
+            ;
+        }
         return view('livewire.admin.sales.index',compact('sales'));
     }
 
