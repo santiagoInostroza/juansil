@@ -49,6 +49,7 @@ Route::get('customer', [CustomerController::class,'lista'])->middleware('can:adm
 Route::resource('clientes', CustomerController::class)->middleware('can:admin.home')->names('admin.customers');
 Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerData'])->middleware('can:admin.home')->name('admin.customers.datos_cliente');
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->middleware('can:admin.home')->name('admin.sales.create');
+Route::get('ventas/index2', [SaleController::class,'index2'])->middleware('can:admin.home')->name('admin.sales.index2');
 Route::resource('ventas', SaleController::class)->middleware('can:admin.home')->names('admin.sales');
 Route::resource('comunas', ComunaController::class)->middleware('can:admin.home')->names('admin.comunas');
 

@@ -321,8 +321,6 @@ class CreateSale extends Component{
     }
 
     public function addToSale(){
-      
-
 
         $items = [];
         if (session()->has('venta.items')) {

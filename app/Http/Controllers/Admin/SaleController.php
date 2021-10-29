@@ -23,6 +23,9 @@ class SaleController extends Controller{
     public function index(){
         return view('admin.sales.index');
     }
+    public function index2(){
+        return view('admin.sales.index2');
+    }
 
     public function pagosPendientes(){
         return view('admin.sales.pagos_pendientes');

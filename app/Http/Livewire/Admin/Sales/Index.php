@@ -66,7 +66,7 @@ class Index extends Component{
             
             ->select('sales.*')
             ->orderBy($this->sort,$this->direction)
-            ->take(10)
+            ->take(20)
             ->get()
             // ->paginate(10)
             ;
