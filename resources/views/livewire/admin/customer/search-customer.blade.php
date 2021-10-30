@@ -83,7 +83,9 @@
                   
                         <h2 class="text-lg font-bold text-gray-600 flex gap-4 items-center"> 
                             {{$selected_customer->name}} 
-                            <a href="{{ route('admin.customers.edit',$customer->id) }}" target="_blank"> <i class="fas fa-pen"></i>  </a>
+                            @if (isset($customer))
+                                <a href="{{ route('admin.customers.edit',$customer->id) }}" target="_blank"> <i class="fas fa-pen"></i>  </a>
+                            @endif
                         </h2>
                        <div>
                             <strong class="text-right pr-2">Direccion</strong>
