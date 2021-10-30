@@ -388,13 +388,13 @@
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                         <div class="flex lg:flex-col items-center gap-2">
                             <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button>
-                            @if ($sale->payment_status != 3 || auth()->user()->id == 1)
-                            @if (auth()->user()->id == 1)
-                                <div>JEFE</div>
-                            @endif
+                            @if ($sale->payment_status != 3 )
                                  {{-- <x-jet-button wire:click="editSale({{ $sale }})"><i class="fas fa-pen"></i></x-jet-button>  --}}
                                 <x-jet-button wire:click="deleteSale({{ $sale }})"><i class="far fa-trash-alt"></i></x-jet-button>
                             @else
+                                @if (auth()->user()->id == 1)
+                                    <x-jet-button wire:click="deleteSale({{ $sale }})"><i class="far fa-trash-alt"></i></x-jet-button>
+                                @endif
                                 @if ($sale->boleta)
                                     <x-tooltip.tooltip>
                                         <x-slot name='tooltip'>Boleta generada {{ Helper::fecha($sale->fecha_boleta)->format('d-m-y H:i') }} por {{$sale->boleta_by()->name}}</x-slot>
