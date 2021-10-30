@@ -388,7 +388,10 @@
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
                         <div class="flex lg:flex-col items-center gap-2">
                             <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button>
-                            @if ($sale->payment_status != 3)
+                            @if ($sale->payment_status != 3 || auth()->user()->id == 1)
+                            @if (auth()->user()->id == 1)
+                                <div>JEFE</div>
+                            @endif
                                  {{-- <x-jet-button wire:click="editSale({{ $sale }})"><i class="fas fa-pen"></i></x-jet-button>  --}}
                                 <x-jet-button wire:click="deleteSale({{ $sale }})"><i class="far fa-trash-alt"></i></x-jet-button>
                             @else
