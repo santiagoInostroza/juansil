@@ -50,6 +50,7 @@
                     >
                         <div class="font-bold">
                             {{ $customer->name }}
+                          
                         </div>
                         <div class="">
                             {{ $customer->direccion }}
@@ -80,7 +81,10 @@
             @if ($customer_id>0)
                 <div x-show='open_data_customer' class="border rounded p-4 mt-2">
                   
-                        <h2 class="text-lg font-bold text-gray-600"> {{$selected_customer->name}}</h2>
+                        <h2 class="text-lg font-bold text-gray-600 flex gap-4 items-center"> 
+                            {{$selected_customer->name}} 
+                            <a href="{{ route('admin.customers.edit',$customer->id) }}" target="_blank"> <i class="fas fa-pen"></i>  </a>
+                        </h2>
                        <div>
                             <strong class="text-right pr-2">Direccion</strong>
                             <span>
