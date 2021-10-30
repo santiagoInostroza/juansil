@@ -386,7 +386,7 @@
                     </td>
                     {{-- ACCION --}}
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
-                        <div x-data="{deleteSale:false}" class="flex lg:flex-col items-center gap-2">
+                        <div x-data="{deleteSale:false, loading:false}" class="flex lg:flex-col items-center gap-2">
                             <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button>
                             @if ($sale->payment_status != 3 )
                                  {{-- <x-jet-button wire:click="editSale({{ $sale }})"><i class="fas fa-pen"></i></x-jet-button>  --}}
@@ -407,13 +407,13 @@
                                     </x-tooltip.tooltip>
                                 @endif
                             @endif
-                            <div x-show="deleteSale">
+                            <div x-show="deleteSale" class="hidden" :class="{ 'hidden' : !deletesale }">
                                 <x-modal.modal2>
                                     <div class="p-4">
                                         <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
                                         <div class="flex gap-4">
-                                            <x-jet-danger-button wire:click="deleteSale({{ $sale }})">Si, eliminar</x-jet-button>
-                                            <x-jet-button x-on:click="deleteSale=false">No, me arrepentí</x-jet-button>
+                                            <x-jet-danger-button x-on:click="loading=true; $wire.deleteSale({{ $sale }}); loading=false;deleteSale=false;" >Si, eliminar</x-jet-button>
+                                            <x-jet-button x-on:click="deleteSale=false">No por favorsito</x-jet-button>
                                         </div>
                                        
                                     </div>
