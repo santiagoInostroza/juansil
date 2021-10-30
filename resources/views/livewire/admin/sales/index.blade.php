@@ -409,9 +409,15 @@
                             @endif
                             <div x-show="deleteSale">
                                 <x-modal.modal2>
-                                    <h2>¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
-                                    <x-jet-button wire:click="deleteSale({{ $sale }})">Si, eliminar</x-jet-button>
-                                    <x-jet-button x-on:click="deleteSale=false">No, me arrepentí</x-jet-button>
+                                    <div class="p-4">
+                                        <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
+                                        <div class="flex gap-4">
+                                            <x-jet-danger-button wire:click="deleteSale({{ $sale }})">Si, eliminar</x-jet-button>
+                                            <x-jet-button x-on:click="deleteSale=false">No, me arrepentí</x-jet-button>
+                                        </div>
+                                       
+                                    </div>
+                                   
                                 </x-modal.modal2>
                             </div>
                         </div>
