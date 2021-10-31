@@ -11,7 +11,7 @@ class Products extends Component{
 
     public function render(){
 
-        $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->take(20)->get();
+        $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->get();
         return view('livewire.admin.sales.products',compact('products'));
     }
 
