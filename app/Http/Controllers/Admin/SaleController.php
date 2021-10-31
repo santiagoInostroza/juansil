@@ -512,11 +512,11 @@ class SaleController extends Controller{
         }
 
         foreach ($items as  $item) {
-            if ($item) {
-                # code...
+            if ($item['product_id'] == $product->id) {
+                return 1;//Producto ya está ingresado
             }
         }
-
+       
         $items[] =
             [
                 'product_id' => $product->id,
@@ -528,7 +528,7 @@ class SaleController extends Controller{
                 'precio' => $price,
                 'precio_por_caja' => $quantity * $price,
                 'precio_total' =>$quantity * $price ,
-            ];
+            ];       
 
         session([
             'venta.items' => $items
@@ -545,6 +545,104 @@ class SaleController extends Controller{
         ]);
        
     }
+
+    public function removeFromTemporalOrder($itemId){
+
+        session()->pull('venta.items.' . $itemId, 'default');
+
+        if (session('venta.items')) {
+            $total = 0;
+            foreach (session('venta.items') as  $value) {
+                $total += $value['precio_total'];
+            }
+            session([
+                'venta.total' => $total
+            ]);
+        }else{
+            session()->forget(['venta', 'items']);
+            session()->forget(['venta', 'total']);
+            session()->forget('venta');
+        }
+
+    }
+
+    public function setTemporalOrder($data){
+
+        $precio = 0;
+        $itemId = (isset($data['itemId'])) ? $data['itemId'] : 0;
+        
+        $item= session('venta.items.' . $itemId );
+        $quantity =(isset($data['quantity'])) ? intval($data['quantity']) : $item['cantidad'];
+        $quantityBox =(isset($data['quantityBox'])) ? intval($data['quantityBox']) : $item['cantidad_por_caja'];
+        $totalQuantity =$quantity * $quantityBox;
+
+        $price = $this->calcularPrecioVenta($item['product_id'], $totalQuantity);
+       
+       
+        
+       
+        $price =(isset($data['price'])) ? floatval($data['price']) : $price;
+        $priceBox =(isset($data['priceBox'])) ? floatval($data['priceBox']) : $price * $quantityBox;
+        $totalPrice = $price * $totalQuantity;
+       
+
+        session([
+            'venta.items.' . $itemId . '.cantidad' => $quantity,
+            'venta.items.' . $itemId . '.cantidad_por_caja' => $quantityBox,
+            'venta.items.' . $itemId . '.cantidad_total' => $totalQuantity,
+            'venta.items.' . $itemId . '.precio' => $price ,
+            'venta.items.' . $itemId . '.precio_por_caja' => $priceBox,
+            'venta.items.' . $itemId . '.precio_total' => $totalPrice,
+        ]);
+
+        $total = 0;
+        foreach (session('venta.items') as  $value) {
+            $total += $value['precio_total'];
+        }
+
+        session([
+            'venta.total' => $total
+        ]);
+
+    }
+
+
+    public function calcularPrecioVenta($product_id, $miCantidad){
+        $producto = Product::find($product_id);
+        $precio = 0;
+        $faltan = 0;
+        $nivel = 0;
+        $sigCantidad = 0;
+        $cantidadNiveles = count($producto->salePrices);
+        for ($i=0; $i < count($producto->salePrices) ; $i++) { 
+            $nivel++;
+            
+            $cantidad = $producto->salePrices[$i]['quantity'];
+            $precio = $producto->salePrices[$i]['price'];
+
+            if($nivel< $cantidadNiveles){
+                $sigCantidad =  $producto->salePrices[$i+1]['quantity'];
+            }else{
+                $sigCantidad = -1;
+            }
+                
+            if($miCantidad >= $cantidad && ($miCantidad < $sigCantidad || $sigCantidad == -1 )){
+                if($sigCantidad>0){
+                    $faltan = $sigCantidad - $miCantidad;
+                }
+                // session(['carrito.' . $product_id . '.cantidadNiveles' => $cantidadNiveles]);
+                // session(['carrito.' . $product_id . '.nivel' => $nivel]);
+                // session(['carrito.' . $product_id . '.faltan' => $faltan]);
+                
+                break;
+            }
+         
+        }
+
+        return $precio;
+    }
+
+   
 
 
 }

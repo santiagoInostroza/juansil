@@ -4,7 +4,7 @@
     </div>
 
     {{-- ITEMS --}}
-    <div class=" ">
+    <div>
         @if (session()->has('venta.items') && count(session('venta.items')) > 0)
             <div class="my-5">
                 <x-table>
@@ -34,12 +34,20 @@
                             @foreach (session('venta.items') as $key => $item)
                                 <tr>
                                     <td class="py-2 whitespace-nowrap">
-                                        <div class="flex items-center justify-center">
+                                        {{-- @php
+                                            echo "<pre>";
+                                                var_dump($item);
+                                            echo "</pre>";
+                                        @endphp --}}
+                                        <div x-data="{quantityBox:0, quantity:0}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
                                             
                                             <figure>
                                                 <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
-                                            </figure> 
-                                            {{ $item['cantidad'] }}  x {{ $item['cantidad_por_caja'] }}                                                       
+                                            </figure>
+                                            <x-jet-input x-model="quantity" x-on:change="$wire.setQuantity({{$key}}, quantity )"  type="number" min=1 class="w-12"> </x-jet-input>
+                                            <span class="mx-2">x</span> 
+                                            <x-jet-input x-model="quantityBox" x-on:change="$wire.setQuantityBox({{$key}}, quantityBox )"  type="number" min=1 class="w-12" > </x-jet-input>
+                                                                                                    
                                         </div>
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap">
@@ -50,30 +58,19 @@
 
                                             <div class="text-sm font-semibold text-gray-400">
                                                 ${{ number_format($item['precio'],0,',','.') }} c/u  
-                                                
                                                 @if ($item['cantidad_por_caja'] != 1)
-                                                ${{ number_format($item['precio_por_caja'],0,',','.') }} x {{$item['cantidad_por_caja']}}
-                                                
+                                                    ${{ number_format($item['precio_por_caja'],0,',','.') }} x {{$item['cantidad_por_caja']}}
                                                 @endif
-                                                
                                             </div>
-                                            
-
-
-                                            
                                         </div>
                                     </td>
                                     <td>
                                         <div  class="mr-4">
-                                            
-                                                <div> ${{ number_format($item['precio_total'],0,',','.') }} </div>
-                                            
-                                        
-                                        </div>
-                                        
+                                            <div> ${{ number_format($item['precio_total'],0,',','.') }} </div>
+                                        </div> 
                                     </td>
                                     <td>
-                                        <div class="p-2 cursor-pointer">
+                                        <div class="p-2 cursor-pointer" wire:click="removeFromTemporalOrder({{ $key }})">
                                             <i class="fas fa-times"></i>
                                         </div>
                                     </td>
@@ -174,22 +171,23 @@
 
     {{-- ESTADO DEL PAGO --}}
        
-        <div class="w-full border rounded p-2 ">
-            <div class="flex justify-between items-center">
-                <h2 class="font-bold">Estado del pago</h2>
-                <div class="flex justify-around">
-                    <div wire:click="$set('estado_pago', 1 )" class="p-1 font-boldw-max-content cursor-pointer hover:text-gray-600 rounded @if ($estado_pago==1)bg-gray-900 text-white @endif">Pendiente</div>
-                    <div wire:click="$set('estado_pago', 2 )" class="mx-2 p-1 font-boldw-max-content cursor-pointer hover:text-gray-600 rounded @if ($estado_pago==2)bg-gray-900 text-white @endif">Abono</div>
-                    <div wire:click="$set('estado_pago', 3 )" class="p-1 font-boldw-max-content cursor-pointer hover:text-gray-600 rounded @if ($estado_pago==3)bg-gray-900 text-white @endif">Pagado</div>
-                </div>
+    <div class="w-full border rounded p-2 ">
+        <div class="flex justify-between items-center">
+            <h2 class="font-bold">Estado del pago</h2>
+            <div class="flex justify-around">
+                <div wire:click="$set('estado_pago', 1 )" class="p-1 font-boldw-max-content cursor-pointer hover:text-gray-600 rounded @if ($estado_pago==1)bg-gray-900 text-white @endif">Pendiente</div>
+                <div wire:click="$set('estado_pago', 2 )" class="mx-2 p-1 font-boldw-max-content cursor-pointer hover:text-gray-600 rounded @if ($estado_pago==2)bg-gray-900 text-white @endif">Abono</div>
+                <div wire:click="$set('estado_pago', 3 )" class="p-1 font-boldw-max-content cursor-pointer hover:text-gray-600 rounded @if ($estado_pago==3)bg-gray-900 text-white @endif">Pagado</div>
             </div>
-            @if ($estado_pago==2)
-                <div class="my-2">
-                    <x-jet-input class="w-full" placeholder="Ingresa monto" wire:model="abono"></x-jet-input>
-                </div>
-            @endif
         </div>
-<br>
+        @if ($estado_pago==2)
+            <div class="my-2">
+                <x-jet-input class="w-full" placeholder="Ingresa monto" wire:model="abono"></x-jet-input>
+            </div>
+        @endif
+    </div>
+    <br>
+    
     {{-- COMENTARIOS --}}
     <div class=" w-full border rounded p-2 ">
         <div  class="flex items-center  w-max-content">

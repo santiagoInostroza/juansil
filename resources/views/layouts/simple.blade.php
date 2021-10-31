@@ -150,6 +150,20 @@
             })
         
         })
+        window.addEventListener('toast', event => {
+        
+            Swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: event.detail.icon,
+                title: event.detail.title,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        
+        })
+
+
 
      
 

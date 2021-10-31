@@ -18,7 +18,17 @@ class Products extends Component{
 
     public function addToTemporalOrder($id, $quantity, $price){
         $saleController = new SaleController();
-        $saleController->addToTemporalOrder($id, $quantity, $price);
-        $this->emitTo('admin.sales.new-order', 'render');
+        if($saleController->addToTemporalOrder($id, $quantity, $price) == 1){
+            $this->dispatchBrowserEvent('toast', [
+                'icon' => 'info',
+                'title' => "Ya está en lista",
+            ]); 
+        }else{
+            $this->dispatchBrowserEvent('toast', [
+                'icon' => 'success',
+                'title' => "Agregado",
+            ]); 
+           $this->emitTo('admin.sales.new-order', 'render');
+        }
     }
 }
