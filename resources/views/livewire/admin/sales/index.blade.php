@@ -386,7 +386,7 @@
                     </td>
                     {{-- ACCION --}}
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium ">
-                        <div x-data="{deleteSale:false}" class="flex lg:flex-col items-center gap-2" :key="{{$sale->id}}" id="{{$sale->id}}">
+                        <div x-data="{deleteSale:false}" class="flex lg:flex-col items-center gap-2" id="{{$sale->id}}">
                             <x-jet-button wire:click="open_show({{$sale}})" class=""><i class="far fa-eye"></i></x-jet-button>
                             @if ($sale->payment_status != 3 )
                                  {{-- <x-jet-button wire:click="editSale({{ $sale }})"><i class="fas fa-pen"></i></x-jet-button>  --}}
