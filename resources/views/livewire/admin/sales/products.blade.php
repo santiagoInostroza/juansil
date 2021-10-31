@@ -91,7 +91,12 @@
                 <div class="flex flex-col justify-between border rounded p-2 cursor-default ">
                     <div class="relative">
                         <figure>
-                            <img class="object-contain w-16 h-16"  src="{{ Storage::url('products_thumb/' . $product->image->url)}}" alt="{{$product->name}}">
+                            @if ($product->image)
+                                <img class="object-contain w-16 h-16"  src="{{ Storage::url('products_thumb/' . $product->image->url)}}" alt="{{$product->name}}">
+                            @else
+                                <img class="object-contain w-16 h-16"  src="{{ Storage::url('products_thumb/' . $product->name)}}" alt="{{$product->name}}">
+                            @endif
+                            
                             <figcaption class="text-gray-800 mt-2">{{$product->name}}</figcaption>
                         </figure>
                         <div class="absolute top-0 right-0 mr-4 mt-4 p-1 rounded font-bold  @if($product->stock <= 0) bg-red-200 text-red-600   @elseif($product->stock <= $product->stock_min) bg-yellow-100 @else text-gray-800 @endif">
