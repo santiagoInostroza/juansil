@@ -407,7 +407,7 @@
                                     </x-tooltip.tooltip>
                                 @endif
                             @endif
-                            <div x-show="deleteSale" :class="deleteSale ? 'hidden' : ''">
+                            <div x-show="deleteSale" class="hidden" :class="{'hidden': !deleteSale}">
                                 <x-modal.modal2>
                                     <div class="p-4">
                                         <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
