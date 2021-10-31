@@ -89,9 +89,9 @@
                             <img class="object-contain w-16 h-16"  src="{{ Storage::url('products_thumb/' . $product->image->url)}}" alt="{{$product->name}}">
                             <figcaption class="text-gray-800 mt-2">{{$product->name}}</figcaption>
                         </figure>
-                        <div class="absolute top-0 right-0 mr-4 mt-4 p-1 rounded @if($product->stock <= 0) bg-red-200 @elseif($product->stock <= $product->stock_min) bg-yellow-100 @endif">
+                        <div class="absolute top-0 right-0 mr-4 mt-4 p-1 rounded font-bold  @if($product->stock <= 0) bg-red-200 text-red-600   @elseif($product->stock <= $product->stock_min) bg-yellow-100 @else text-gray-800 @endif">
                             <div>Stock</div>
-                            <div>
+                            <div class="text-center">
                                 {{$product->stock}}
                             </div>
                         </div>
@@ -100,16 +100,11 @@
 
                     <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full">
                         @foreach ($product->salePrices as $price)
-                            <div class="text-xs cursor-pointer transform hover:scale-105 "  wire:dblclick="addToSale({{ $product->id }},{{$price->quantity}},{{ $price->price }})">
-                                <div class="border p-2 rounded flex flex-col" >
-                                   <div>x {{$price->quantity}}</div>
-                                   <div>${{ number_format($price->total_price,0,',','.') }}</div>
-                                   <div class="text-red-600">(${{ number_format($price->price,0,',','.') }})</div>
-                                    
-                                </div>
-                               
+                            <div class="border p-2 rounded flex flex-col text-xs cursor-pointer  hover:shadow-xl hover:bg-gray-200"  wire:dblclick="addToSale({{ $product->id }},{{$price->quantity}},{{ $price->price }})">
+                                <div class="select-none">x {{$price->quantity}}</div>
+                                <div class="select-none">${{ number_format($price->total_price,0,',','.') }}</div>
+                                <div class="text-red-600 select-none">(${{ number_format($price->price,0,',','.') }})</div>
                             </div>
-                            
                         @endforeach 
                     </div>
                 </div>

@@ -4,8 +4,9 @@ namespace App\Http\Livewire\Admin\Sales;
 
 use Livewire\Component;
 
-class PendingOrders extends Component{
-    public $estado_pago=0;
+class NewOrder extends Component{
+
+    public $estado_pago=1;
     public $openComentario=false;
     public $delivery=false;
 
@@ -13,7 +14,8 @@ class PendingOrders extends Component{
         'render'
     ];
 
-    public function render(){
-        return view('livewire.admin.sales.pending-orders');
+    public function render()
+    {
+        return view('livewire.admin.sales.new-order');
     }
 }

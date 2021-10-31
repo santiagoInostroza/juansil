@@ -5,7 +5,7 @@
         height: calc(55vh - 110px);
     }
     .miti2{
-        height: calc(83vh - 110px);
+        height: calc(100vh - 220px);
     }
 </style>
 
@@ -41,7 +41,7 @@
                 Nuevo Pedido
             </h2>
             <div class=" rounded bg-white p-2 overflow-auto overflow-x-hidden" style="height: calc(100vh - 182px)">
-                @livewire('admin.sales.pending-orders')
+                @livewire('admin.sales.new-order')
             </div>
         </div>
     </div>
