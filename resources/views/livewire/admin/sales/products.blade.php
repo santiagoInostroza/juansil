@@ -36,7 +36,12 @@
                         <td>
                             <div class="p-2 flex items-center gap-2" >
                                 <figure>
-                                    <img width="30" src="{{ Storage::url('products_thumb/' . $product->image->url)}}" alt="{{$product->name}}">
+                                    @if ($product->image)
+                                        <img width="30" src="{{ Storage::url('products_thumb/' . $product->image->url)}}" alt="{{$product->name}}">
+                                        
+                                    @else
+                                        <img width="30" src="{{ Storage::url('products_thumb/' . $product->name)}}" alt="{{$product->name}}">
+                                    @endif
                                 </figure>
                                 <div>
                                     <div>
