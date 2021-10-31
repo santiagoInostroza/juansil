@@ -233,8 +233,7 @@ class SaleController extends Controller{
 
 
 
-    public function getProductStock($product_id)
-    {
+    public function getProductStock($product_id){
         $producto =  Product::where('id', $product_id)->first();
         $stock = 0;
         try {
@@ -244,8 +243,8 @@ class SaleController extends Controller{
         }
         return $stock;
     }
-    public function getNewProductStock($product_id, $nueva_cantidad)
-    {
+
+    public function getNewProductStock($product_id, $nueva_cantidad){
         $producto =  Product::where('id', $product_id)->first();
         $stock = 0;
         try {
@@ -257,8 +256,7 @@ class SaleController extends Controller{
         return $stock + $nueva_cantidad;
     }
 
-    public function updateProductStock($product_id, $nueva_cantidad)
-    {
+    public function updateProductStock($product_id, $nueva_cantidad){
         $producto =  Product::where('id', $product_id)->first();
         $stock = 0;
         try {
@@ -501,4 +499,52 @@ class SaleController extends Controller{
         $sale->delete();
         
     }
+
+
+    public function addToTemporalOrder($pid, $quantity, $price){
+        
+        
+        $product = Product::find($pid);
+
+        $items = [];
+        if (session()->has('venta.items')) {
+            $items = session('venta.items');
+        }
+
+        foreach ($items as  $item) {
+            if ($item) {
+                # code...
+            }
+        }
+
+        $items[] =
+            [
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+                'image' => $product->image->url,
+                'cantidad' =>1,
+                'cantidad_por_caja' => $quantity,
+                'cantidad_total' => $quantity,
+                'precio' => $price,
+                'precio_por_caja' => $quantity * $price,
+                'precio_total' =>$quantity * $price ,
+            ];
+
+        session([
+            'venta.items' => $items
+        ]);
+
+        $total = 0;
+        foreach (session('venta.items') as  $value) {
+            $total += $value['precio_total'];
+        }
+
+
+        session([
+            'venta.total' => $total
+        ]);
+       
+    }
+
+
 }

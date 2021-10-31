@@ -66,9 +66,7 @@ class Index extends Component{
             
             ->select('sales.*')
             ->orderBy($this->sort,$this->direction)
-            ->take(20)
-            ->get()
-            // ->paginate(10)
+            ->paginate(10)
             ;
         
         return view('livewire.admin.sales.index',compact('sales'));

@@ -76,7 +76,7 @@
                         </td>
                         <td width="10">
                             <div class="text-right pr-5">
-                                <x-jet-button wire:loading.attr="disabled" wire:click="addToSale({{ $product->id }})">Agregar</x-jet-button>
+                                <x-jet-button wire:loading.attr="disabled" wire:click="addToTemporalOrder({{ $product->id }})">Agregar</x-jet-button>
                             </div>
                         </td>
                     </tr>
@@ -110,7 +110,7 @@
 
                     <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full">
                         @foreach ($product->salePrices as $price)
-                            <div class="border p-2 rounded flex flex-col text-xs cursor-pointer  hover:shadow-xl hover:bg-gray-200"  wire:dblclick="addToSale({{ $product->id }},{{$price->quantity}},{{ $price->price }})">
+                            <div class="border p-2 rounded flex flex-col text-xs cursor-pointer  hover:shadow-xl hover:bg-gray-300"  wire:dblclick="addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }})">
                                 <div class="select-none">x {{$price->quantity}}</div>
                                 <div class="select-none">${{ number_format($price->total_price,0,',','.') }}</div>
                                 <div class="text-red-600 select-none">(${{ number_format($price->price,0,',','.') }})</div>
