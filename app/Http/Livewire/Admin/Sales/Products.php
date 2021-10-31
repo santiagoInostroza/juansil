@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class Products extends Component{
     public $search;
+    public $view = 2;
 
     public function render(){
 
@@ -14,7 +15,7 @@ class Products extends Component{
         return view('livewire.admin.sales.products',compact('products'));
     }
 
-    public function addToSale($id){
+    public function addToSale($id, $quantity, $price){
         $product = Product::find($id);
 
         $items = [];
@@ -29,11 +30,11 @@ class Products extends Component{
                 'product_name' => $product->name,
                 'image' => $product->image->url,
                 'cantidad' =>1,
-                'cantidad_por_caja' => 1,
-                'cantidad_total' => 1,
-                'precio' => 0,
-                'precio_por_caja' => 0,
-                'precio_total' =>0 ,
+                'cantidad_por_caja' => $quantity,
+                'cantidad_total' => $quantity,
+                'precio' => $price,
+                'precio_por_caja' => $quantity * $price,
+                'precio_total' =>$quantity * $price ,
             ];
 
         session([

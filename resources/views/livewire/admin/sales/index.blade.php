@@ -412,7 +412,7 @@
                                     <div class="p-4">
                                         <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
                                         <div class="flex gap-4">
-                                            <x-jet-danger-button wire:loading.attr="disabled"  x-on:click="$wire.deleteSale({{ $sale }}).then( ()=> deleteSale=false ) ;" >Si, eliminar</x-jet-button>
+                                            <x-jet-danger-button x-on:click="loading=true; $wire.deleteSale({{ $sale }}); loading=false;deleteSale=false;" >Si, eliminar</x-jet-button>
                                             <x-jet-button x-on:click="deleteSale=false">No por favorsito</x-jet-button>
                                         </div>
                                        

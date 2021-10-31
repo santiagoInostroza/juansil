@@ -6,7 +6,8 @@
         </div>
 
         <div class="">
-            <div  class="flex items-center  w-max-content">
+            <div class="grid grid-cols-2">
+                <div  class="flex items-center  w-max-content">
                     <label class="switch">
                         <input type="checkbox" wire:model="delivery" id='delivery'>
                         <span class="slider round"></span>
@@ -15,11 +16,28 @@
                         <i class="fas fa-truck pl-3 cursor-pointer"> </i>
                         <div class="ml-3 font-bold cursor-pointer">Delivery</div>
                     </label>
-            </div>
-            @if ($delivery)
-                <div  class="w-full border rounded p-4 my-3 ">
+                </div>
+                @if ($delivery)
+                    <div  class="flex items-center  w-max-content mt-3">
+                        <label class="switch">
+                            <input type="checkbox" wire:model="delivered" id='delivered'>
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="delivered" class="flex items-center" >
+                            <i class="fas fa-truck pl-3 cursor-pointer"> </i>
+                            <div class="ml-3 font-bold cursor-pointer">Entregado</div>
+                        </label>
+                    </div>
+                @endif
 
-                    <div class="grid grid-cols-2 gap-6">
+            </div>
+           
+
+            @if ($delivery)
+
+                <div  class="w-full ">
+
+                    <div class="grid grid-cols-2 gap-2">
                         <div>
                             <x-jet-label value="Fecha de entrega"></x-jet-label>
                             <x-jet-input type="date" class="w-full" wire:model="fecha_entrega"></x-jet-input>
@@ -32,15 +50,7 @@
                         </div>
                     
                     </div>
-                    <div  class="flex items-center  w-max-content mt-3">
-                        <label class="switch">
-                            <input type="checkbox" wire:model="delivered" id='delivered'>
-                            <span class="slider round"></span>
-                        </label>
-                        <label for="delivered" class="flex items-center" >
-                            <i class="fas fa-truck pl-3 cursor-pointer"> </i>
-                            <div class="ml-3 font-bold cursor-pointer">Entregado</div>
-                        </label>
+                    
                 </div>
             @endif
         </div>
@@ -55,61 +65,47 @@
                                 <tr>
                                     <th class="  py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
                                         <div class="flex items-center justify-center">
-                                            Imagen  
+                                            
                                         </div>
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        PRODUCTO   
+                                         
                                     </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        CANTIDAD total   
-                                    </th>
+                                   
                                     
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        Precio total
-                                    </th>
-                                    
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        <span class="sr-only">Accion</span>
-                                    </th>
+                                   
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach (session('venta.items') as $key => $item)
                                     <tr>
-                                        <td class="py-4 whitespace-nowrap">
+                                        <td class="py-2 whitespace-nowrap">
                                             <div class="flex items-center justify-center">
+                                                {{ $item['cantidad'] }}  x {{ $item['cantidad_por_caja'] }}
                                                 <figure>
-                                                    @if ( Storage::exists('products_thumb/' .$item['image']))
-                                                        <img  class="object-contain h-24 w-24" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
-                                                    @else
-                                                        <img  class="object-contain h-24 w-24" src="{{Storage::url($item['image'])}}" alt="{{ $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
-                                                    @endif
-                                                </figure>
-                                                
-                                                        
-                                            </div>
-                                            
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div>
-                                                {{ $item['cantidad'] }}  {{ $item['product_name'] }} x {{ $item['cantidad_por_caja'] }} un.
-                                            </div>
-                                            <div class="text-sm font-semibold text-gray-400">
-                                                ${{ number_format($item['precio'],0,',','.') }} x unidad   ${{ number_format($item['precio_por_caja'],0,',','.') }} x caja
+                                                    <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                                </figure>                                                        
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $item['cantidad_total'] }}  un.
+                                        <td class="px-2 py-2 whitespace-nowrap">
+                                            <div class="relative">
+                                                <div>
+                                                    {{ $item['product_name'] }}
+                                                </div>
+
+                                                <div class="text-sm font-semibold text-gray-400">
+                                                    ${{ number_format($item['precio'],0,',','.') }} c/u   ${{ number_format($item['precio_por_caja'],0,',','.') }} x caja
+                                                    {{ $item['cantidad_total'] }}  un.  ${{ number_format($item['precio_total'],0,',','.') }} 
+                                                </div>
+
+
+                                                <div class="absolute top-0 right-0 p-2 cursor-pointer">
+                                                    <i class="fas fa-times"></i>
+                                                </div>
+                                            </div>
                                         </td>
-                                        
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            ${{ number_format($item['precio_total'],0,',','.') }}  
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <x-jet-button wire:click="open_mod_item({{ $key }})"><i class="fas fa-edit"></i></x-jet-button>
-                                            <x-jet-danger-button wire:click="deleteItem({{ $key }})"><i class="far fa-trash-alt"></i></x-jet-danger-button>
-                                        </td>
+                                       
+                                
                                     </tr>
                                 @endforeach
                             </tbody>
