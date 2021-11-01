@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Sales;
 
 use App\Models\Sale;
 use Livewire\Component;
+use App\Http\Controllers\Admin\SaleController;
 
 class TodayOrders extends Component{
     public $orderEdit;
@@ -28,6 +29,16 @@ class TodayOrders extends Component{
 
     public function modificateOrder(){
        
+    }
+
+    public function deleteSale(Sale $sale){
+        $saleController = new SaleController();
+        $saleController->deleteSale($sale);
+        $this->dispatchBrowserEvent('alerta', [
+                'msj' =>  "Pedido " . $sale->id ." eliminado !!. Total ". number_format($sale->total,0,',','.'),
+                'icon' => 'success',
+                'title' => "Pedido Eliminado",
+        ]); 
     }
 
 

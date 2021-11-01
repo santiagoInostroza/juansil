@@ -62,10 +62,22 @@
                         </div>
                     </td>
                     <td>
-                        <div>
+                        <div x-data="{deleteSale:false}">
                             <div class="text-right">
                                 <x-jet-button class="bg-yellow-200 hover:bg-yellow-400"><i class="fas fa-pen"></i></x-jet-button>
-                                <x-jet-button class="bg-red-500 hover:bg-red-700"><i class="fas fa-trash"></i></x-jet-button>
+                                <x-jet-button x-on:click="deleteSale=true" class="bg-red-500 hover:bg-red-700"><i class="fas fa-trash"></i></x-jet-button>
+
+                                <div x-show="deleteSale" class="hidden" :class="{'hidden': !deleteSale}">
+                                    <x-modal.modal2>
+                                        <div class="p-4">
+                                            <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
+                                            <div class="flex gap-4">
+                                                <x-jet-danger-button x-on:click="$wire.deleteSale({{ $sale }})" >Si, eliminar</x-jet-button>
+                                                <x-jet-button x-on:click="deleteSale=false">No por favorsito</x-jet-button>
+                                            </div>
+                                        </div>
+                                    </x-modal.modal2>
+                                </div>
                             </div>
                             
                         </div>
