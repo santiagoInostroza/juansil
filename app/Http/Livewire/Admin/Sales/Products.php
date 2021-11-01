@@ -31,4 +31,11 @@ class Products extends Component{
            $this->emitTo('admin.sales.new-order', 'render');
         }
     }
+
+    public function alertStock($quantity){
+        $this->dispatchBrowserEvent('alerta', [
+            'icon' => 'error',
+            'title' => "No hay suficiente stock" ,
+        ]); 
+    }
 }

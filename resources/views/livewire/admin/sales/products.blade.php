@@ -110,7 +110,7 @@
 
                     <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full">
                         @foreach ($product->salePrices as $price)
-                            <div class="border p-2 rounded flex flex-col text-xs cursor-pointer  hover:shadow-xl hover:bg-gray-300"  wire:dblclick="addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }})">
+                            <div class="border p-2 rounded flex flex-col text-xs cursor-pointer  hover:shadow-xl hover:bg-gray-300" @if($price->quantity <= $product->stock) wire:dblclick="addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }})" @else wire:dblclick="alertStock({{$price->quantity}})" @endif >
                                 <div class="select-none">x {{$price->quantity}}</div>
                                 <div class="select-none">${{ number_format($price->total_price,0,',','.') }}</div>
                                 <div class="text-red-600 select-none">(${{ number_format($price->price,0,',','.') }})</div>

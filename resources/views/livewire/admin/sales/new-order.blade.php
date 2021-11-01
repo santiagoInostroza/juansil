@@ -1,124 +1,14 @@
 <div class="max-w-4xl m-auto">
     <div class="mb-4">
+
         @livewire('admin.customer.search-customer')
+        @error('customerId')
+            <span class="text-xs text-red-600">Selecciona cliente</span>
+        @enderror
     </div>
 
-    {{-- ITEMS --}}
-    <div>
-        @if (session()->has('venta.items') && count(session('venta.items')) > 0)
-            <div class="my-5">
-                <x-table>
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="  py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                    <div class="flex items-center justify-center">
-                                        
-                                    </div>
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                        
-                                </th>
-                                
-                                
-                                
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach (session('venta.items') as $key => $item)
-                                <tr>
-                                    <td class="py-2 whitespace-nowrap">
-                                        {{-- @php
-                                            echo "<pre>";
-                                                var_dump($item);
-                                            echo "</pre>";
-                                        @endphp --}}
-                                        <div x-data="{quantityBox:0, quantity:0}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
-                                            
-                                            <figure>
-                                                <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
-                                            </figure>
-                                            <x-jet-input x-model="quantity" x-on:change="$wire.setQuantity({{$key}}, quantity )"  type="number" min=1 class="w-12"> </x-jet-input>
-                                            <span class="mx-2">x</span> 
-                                            <x-jet-input x-model="quantityBox" x-on:change="$wire.setQuantityBox({{$key}}, quantityBox )"  type="number" min=1 class="w-12" > </x-jet-input>
-                                                                                                    
-                                        </div>
-                                    </td>
-                                    <td class="px-2 py-2 whitespace-nowrap">
-                                        <div class="">
-                                            <div>
-                                                {{ $item['product_name'] }}
-                                            </div>
-
-                                            <div class="text-sm font-semibold text-gray-400">
-                                                ${{ number_format($item['precio'],0,',','.') }} c/u  
-                                                @if ($item['cantidad_por_caja'] != 1)
-                                                    ${{ number_format($item['precio_por_caja'],0,',','.') }} x {{$item['cantidad_por_caja']}}
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div  class="mr-4">
-                                            <div> ${{ number_format($item['precio_total'],0,',','.') }} </div>
-                                        </div> 
-                                    </td>
-                                    <td>
-                                        <div class="p-2 cursor-pointer" wire:click="removeFromTemporalOrder({{ $key }})">
-                                            <i class="fas fa-times"></i>
-                                        </div>
-                                    </td>
-                                    
-                            
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </x-table>       
-            </div>
-        @endif
-    </div> 
-
-    {{-- TOTAL --}}
-    <div class="flex justify-end p-4">
-        @if (false)
-            <div class="grid grid-cols-2 max-w-xs gap-3">
-                <div>Sub Total</div>
-                <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
-                <div>Delivery</div>
-                <div>@if(false)
-                        ${{ number_format($valor_despacho,0,',','.') }}
-                    @else
-                        $0
-                    @endif
-                </div>
-                <div>Total</div>
-                <div>
-                    @if(false)
-                        ${{ number_format($valor_despacho + session('venta.total'),0,',','.') }}
-                    @else
-                        ${{ number_format(session('venta.total'),0,',','.') }}
-                    @endif
-                </div>
-            </div>
-        @else
-            <div class="grid grid-cols-2 max-w-xs ">
-                <div>Total</div>
-                <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
-            </div>
-        @endif
-    
-    </div>
-
-   
-    {{-- DELIVERY --}}
-    <div  class="w-full border rounded p-2">
+     {{-- DELIVERY --}}
+     <div  class="w-full border rounded p-2">
         <div class="grid grid-cols-2">
             <div  class="flex items-center  w-max-content">
                 <label class="switch">
@@ -168,6 +58,115 @@
         @endif
     </div>
     <br>
+    {{-- ITEMS --}}
+    <div class="w-full border rounded p-2">
+        <h2 class="font-bold">Lista de productos</h2>
+        @if (session()->has('venta.items') && count(session('venta.items')) > 0)
+            <div class="my-5">
+                <x-table>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="  py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                    <div class="flex items-center justify-center">
+                                        
+                                    </div>
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                        
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                        
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                                        
+                                </th>
+                                
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach (session('venta.items') as $key => $item)
+                                <tr>
+                                    <td class="py-2 whitespace-nowrap">
+                                       
+                                        <div x-data="{quantityBox:0, quantity:0}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
+                                            
+                                            <figure>
+                                                <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
+                                            </figure>
+                                            <x-jet-input x-model="quantity" x-on:keyup="$wire.setQuantity({{$key}}, quantity ).then((response)=>{if(response>0){quantity=response}})"  type="number" min=1 class="w-12"> </x-jet-input>
+                                            <span class="mx-2">x</span> 
+                                            <x-jet-input x-model="quantityBox" x-on:keyup="$wire.setQuantityBox({{$key}}, quantityBox ).then((response)=>{if(response>0){quantityBox=response}})"  type="number" min=1 class="w-12" > </x-jet-input>
+                                                                                                    
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-2 whitespace-nowrap">
+                                        <div class="">
+                                            <div>
+                                                {{ $item['product_name'] }}
+                                            </div>
+
+                                            <div class="text-sm font-semibold text-gray-400">
+                                                ${{ number_format($item['precio'],0,',','.') }} c/u  
+                                                @if ($item['cantidad_por_caja'] != 1)
+                                                    ${{ number_format($item['precio_por_caja'],0,',','.') }} x {{$item['cantidad_por_caja']}}
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div  class="mr-4 text-right">
+                                            <div>
+                                                {{$item['cantidad_total']}} un.
+                                            </div>
+                                            <div >
+                                                <div> ${{ number_format($item['precio_total'],0,',','.') }} </div>
+                                            </div>
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <div class="p-2 cursor-pointer" wire:click="removeFromTemporalOrder({{ $key }})">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                    </td>
+                                    
+                            
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </x-table>       
+            </div>
+        @endif
+        @error('items')
+            <span class="text-xs text-red-600">No has seleccionado productos</span>
+        @enderror
+    </div> 
+  
+
+    {{-- TOTAL --}}
+    <div class="flex justify-end p-4">
+        @if ($valor_despacho)
+            <div class="grid grid-cols-2 max-w-xs gap-3">
+                <div>Sub Total</div>
+                <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
+                <div>Delivery</div>
+                <div> ${{ number_format($valor_despacho,0,',','.') }}</div>
+                <div>Total</div>
+                <div> ${{ number_format($valor_despacho + session('venta.total'),0,',','.') }} </div>
+            </div>
+        @else
+            <div class="grid grid-cols-2 max-w-xs ">
+                <div>Total</div>
+                <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
+            </div>
+        @endif
+    
+    </div>
+
+   
 
     {{-- ESTADO DEL PAGO --}}
        
@@ -207,8 +206,8 @@
     </div>
     
 
-    <div class="my-4">
-        <x-jet-button class="w-full">Crear Pedido</x-jet-button>
+    <div x-data class="my-4">
+        <x-jet-button class="w-full" x-on:click="$wire.createOrder()">Crear Pedido</x-jet-button>
     </div>
         
 

@@ -577,6 +577,12 @@ class SaleController extends Controller{
         $totalQuantity =$quantity * $quantityBox;
 
         $price = $this->calcularPrecioVenta($item['product_id'], $totalQuantity);
+        $product = Product::find($item['product_id']);
+        $stock = $product->stock;
+        if($totalQuantity > $stock){
+            return 'sinStock';// No hay sufuciente stock
+        }
+
        
        
         
