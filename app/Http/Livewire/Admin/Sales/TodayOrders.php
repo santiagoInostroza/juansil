@@ -14,6 +14,10 @@ class TodayOrders extends Component{
     public $estado_pago;
     public $openComentario ;
 
+    protected $listeners=[
+        'render'
+    ];
+
     public function mount(){
       
     }
