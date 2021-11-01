@@ -10,6 +10,11 @@ class Products extends Component{
     public $search;
     public $view = 2;
 
+    protected $listeners=[
+        'render'
+    ];
+
+
     public function render(){
 
         $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->get();
