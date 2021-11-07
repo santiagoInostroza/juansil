@@ -240,11 +240,11 @@ class NewOrder extends Component{
        
         $this->reset();
         $this->eliminarSesionVenta();
-        $this->dispatchBrowserEvent('alerta', [
-            'msj' => "Venta a " . $sale->customer->name . " Total ". number_format($sale->total,0,',','.'),
-            'icon' => 'success',
-            'title' => "Venta " . $sale->id ." creada !!",
-        ]); 
+        // $this->dispatchBrowserEvent('alerta', [
+        //     'msj' => "Venta a " . $sale->customer->name . " Total ". number_format($sale->total,0,',','.'),
+        //     'icon' => 'success',
+        //     'title' => "Venta " . $sale->id ." creada !!",
+        // ]); 
     }
 
     public function eliminarSesionVenta(){

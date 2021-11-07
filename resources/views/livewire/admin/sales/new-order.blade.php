@@ -340,8 +340,11 @@
             </div>
             
         
-            <div x-data class="my-4">
-                <x-jet-button class="w-full" x-on:click="$wire.createOrder()">Crear Pedido</x-jet-button>
+            <div x-data="{loading:false}" class="my-4">
+                <div class="hidden" :class="{'hidden':!loading}">
+                    <x-spinner.spinner2></x-spinner.spinner2>
+                </div>
+                <x-jet-button class="w-full" x-on:click="loading=true;$wire.createOrder().then(()=>{toast('Pedido Creado!!');loading=false})">Crear Pedido</x-jet-button>
             </div>
                 
         

@@ -158,10 +158,20 @@
                 icon: event.detail.icon,
                 title: event.detail.title,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 5000
             })
         
         })
+        function toast(title,icon){
+            Swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: icon,
+                title:title,
+                showConfirmButton: false,
+                timer: 7000
+            })
+        }
 
 
 

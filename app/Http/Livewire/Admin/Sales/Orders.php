@@ -40,4 +40,15 @@ class Orders extends Component{
                  'title' => "Pedido Eliminado",
          ]); 
      }
+     public function changeDeliveryDate($id,$delivery_date){
+         $sale= Sale::find($id);
+         $sale->delivery_date=$delivery_date;
+         $sale->save();       
+     }
+
+     public function editComment($id,$comment){
+         $sale= Sale::find($id);
+         $sale->comments=$comment;
+         $sale->save();       
+     }
 }
