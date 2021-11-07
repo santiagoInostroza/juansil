@@ -39,8 +39,50 @@
         {{-- LISTA PEDIDOS --}}
         <div class="flex justify-between items-center gap-4 bg-gray-300 text-gray-800">
             <div></div>
-            <h2 class="text-xl font-bold text-center p-2">Lista Pedidos</h2>
-            <div x-show="!showMenuListOrders"></div>
+            <h2 class="text-xl font-bold text-center p-2">Lista Pedidos
+                
+            </h2>
+            <div x-show="!showMenuListOrders">
+                <div x-data="{show:false}" class="relative" >
+
+                    <div x-on:click="show=!show" class="p-2 hover:bg-pink-600 cursor-pointer">
+                     <i class="fas fa-arrow-right text-xl bg-red-700 p-2"></i>  LEER <i class="fas fa-question"></i>
+                    </div>
+                    <div class="hidden" :class="{'hidden': !show}">
+                        <x-modal.modal2>
+                            <div class="p-4">
+                                <h2 class="text-2xl font-bold text-center text-gray-800">Informativo</h2>
+                                <p class="my-4">
+                                    Por favor use esta pantalla para ingresar las ventas, se añadieron nuevas funcionalidades.
+                                </p>
+                                <p class="mb-4">-Se puede editar comentarios</p>
+                                <p class="mb-4">-Se puede editar la fecha de entrega</p>
+                                <p class="mb-4">-Se puede eliminar las ventas</p>
+                                <p class="mb-4">-Se puede editar las ventas</p>
+                                <p class="my-4">
+                                    * Si necesita ocupar la pantalla de ventas antiguo acá está
+                                   
+                                    <a class="p-2 my-2 bg-gray-200 rounded shadow-xl hover:bg-pink-600" href="{{route('admin.sales.index')}}">Ventas antiguo</a>
+                                </p>
+                                <div>
+                                    <x-jet-button x-on:click="show=!show; alerta_timer({title:'Yo tambien!!! ',timer:5000})" class="bg-pink-600 ">Me quiere <i class="fas fa-heart"></i></x-jet-button>
+                                    <x-jet-button x-on:click="show=!show;alerta_timer({title:'Pesaitaaa... igual la quiero!!! ',timer:5000,icon:'warning'})"><i class="fas fa-heart-broken"></i> 
+                                        No me quiere 
+                                        <i class="fas fa-sad-cry"></i>
+                                        <i class="fas fa-sad-cry"></i>
+                                        <i class="fas fa-sad-cry"></i>
+                                        <i class="fas fa-sad-cry"></i>
+                                    </x-jet-button>
+                                </div>
+
+                                
+
+                            </div>
+                        </x-modal.modal2>
+                    </div>
+                </div>
+               
+            </div>
             <div x-show="showMenuListOrders" class="hidden" :class="{'hidden':!showMenuListOrders}" class="menu">
                 <div x-show="!showOrders" x-on:click="showOrders=true" class="hover:bg-gray-600 p-4">
                     <i class="fas fa-chevron-up"></i>

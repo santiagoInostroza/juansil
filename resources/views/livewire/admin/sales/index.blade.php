@@ -1,5 +1,8 @@
 <div x-data="ventas()">
-    <h1 class="uppercase text-2xl text-gray-600 font-bold text-center mb-10">VENTAS</h1>
+    <h1 class="uppercase text-2xl text-gray-600 font-bold text-center mb-10">VENTAS </h1>
+    <div class="text-center">amor empieze a ingresar en la nueva pantalla
+        <br> <br> <a class="p-2 my-2 bg-pink-600 text-white rounded shadow-xl hover:bg-pink-500" href="{{route('admin.sales.index2')}}">Ir a nueva pantalla de ventas</a>
+    </div>
 
     <div class="p-4">
         <div class="flex justify-center items-center gap-4">
