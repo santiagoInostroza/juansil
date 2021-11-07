@@ -112,7 +112,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-left">
                             <div class="">
                            
-                                @if (Str::length($sale->comments)>5)
+                                @if (Str::length($sale->comments)>10)
                                     <x-tooltip.tooltip>
                                         <x-slot name="tooltip">
                                             <div class="p-4">
@@ -120,7 +120,7 @@
                                             </div>
                                         </x-slot>
                                         <div class="cursor-default">
-                                            {{Str::limit($sale->comments,5)}}
+                                            {{Str::limit($sale->comments,10)}}
                                         </div>
                                     </x-tooltip.tooltip>
 
