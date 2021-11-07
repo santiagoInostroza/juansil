@@ -59,14 +59,16 @@
                                 <p class="mb-4">-Se puede editar la fecha de entrega</p>
                                 <p class="mb-4">-Se puede eliminar las ventas</p>
                                 <p class="mb-4">-Se puede editar las ventas</p>
+                                <p class="mb-4">-En el boton '+' que está abajo a la derecha se ingresan las ventas nuevas</p>
+
                                 <p class="my-4">
                                     * Si necesita ocupar la pantalla de ventas antiguo acá está
                                    
                                     <a class="p-2 my-2 bg-gray-200 rounded shadow-xl hover:bg-pink-600" href="{{route('admin.sales.index')}}">Ventas antiguo</a>
                                 </p>
                                 <div>
-                                    <x-jet-button x-on:click="show=!show; alerta_timer({title:'Yo tambien!!! ',timer:5000})" class="bg-pink-600 ">Me quiere <i class="fas fa-heart"></i></x-jet-button>
-                                    <x-jet-button x-on:click="show=!show;alerta_timer({title:'Pesaitaaa... igual la quiero!!! ',timer:5000,icon:'warning'})"><i class="fas fa-heart-broken"></i> 
+                                    <x-jet-button x-on:click="show=!show; alerta_timer({title:'Yo tambien!!!',timer:5000})" class="bg-pink-600 ">Me quiere <i class="fas fa-heart"></i></x-jet-button>
+                                    <x-jet-button x-on:click="show=!show;alerta_timer({title:'Pesaitaaa... igual la quiero!!! ...haga muchas ventitas  ',timer:5000,icon:'warning'})"><i class="fas fa-heart-broken"></i> 
                                         No me quiere 
                                         <i class="fas fa-sad-cry"></i>
                                         <i class="fas fa-sad-cry"></i>
