@@ -3,12 +3,16 @@
 namespace App\Http\Livewire\Admin\Sales;
 
 use Carbon\Carbon;
+use App\Models\Product;
 use Livewire\Component;
 use Hamcrest\Core\HasToString;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\SaleController;
 
 class NewOrder extends Component{
+
+    public $search;
+    public $view = 2;
 
     public $estado_pago=1;
     public $openComentario=false;
@@ -18,13 +22,9 @@ class NewOrder extends Component{
     public $delivered;
     public $customerId;
     public $comentario;
-    public $fecha;
     public $items;
 
 
-    public function mount(){
-        $this->fecha = Carbon::now();
-    }
 
     protected $listeners=[
         'render',
@@ -39,10 +39,35 @@ class NewOrder extends Component{
 
 
     public function render(){
+        $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->get();
+
         if (session()->has('venta.items')) {
             $this->items = session('venta.items');
         }
-        return view('livewire.admin.sales.new-order');
+        return view('livewire.admin.sales.new-order',compact('products'));
+    }
+
+    public function addToTemporalOrder($id, $quantity, $price){
+        $saleController = new SaleController();
+        if($saleController->addToTemporalOrder($id, $quantity, $price) == 1){
+            $this->dispatchBrowserEvent('toast', [
+                'icon' => 'info',
+                'title' => "Ya está en lista",
+            ]); 
+        }else{
+            $this->dispatchBrowserEvent('toast', [
+                'icon' => 'success',
+                'title' => "Agregado",
+            ]); 
+           $this->emitTo('admin.sales.new-order', 'render');
+        }
+    }
+
+    public function alertStock($quantity){
+        $this->dispatchBrowserEvent('alerta', [
+            'icon' => 'error',
+            'title' => "No hay suficiente stock" ,
+        ]); 
     }
 
                   
@@ -101,12 +126,13 @@ class NewOrder extends Component{
     public function rules(){  
         if($this->delivery){
             return[
+                'customerId' => 'required',
+                'items' => 'required',
                 'valor_despacho' => 'required|numeric|min:0',
                 'fecha_entrega' => 'required|date',
             ];
         }else{
             return[
-                'fecha' => 'required|date',
                 'customerId' => 'required',
                 'items' => 'required',
             ];
@@ -135,8 +161,7 @@ class NewOrder extends Component{
         'precio_por_caja.min' => 'Revisar.',
         'precio_por_caja.not_in' => 'Ingresar cantidad valida.',
 
-        'fecha.required' => 'Ingresa fecha.',
-        'fecha.date' => 'Ingresa formato fecha.',
+
 
         'valor_despacho.required' => 'Ingresa valor.',
         'valor_despacho.numeric' => 'Ingresa valor numerico.',
@@ -176,7 +201,7 @@ class NewOrder extends Component{
         $arrayVenta['sale']=[
             'customer_id' => $this->customerId,
             'total' => $total,
-            'date' => $this->fecha,
+            'date' => Carbon::now(),
             'payment_amount' => $payment_amount,
             'payment_status' => $this->estado_pago,
             'pending_amount' => $pending_amount,
