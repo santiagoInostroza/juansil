@@ -68,50 +68,55 @@
                                 </div>
                                 <div>
                                     @if ($sale->delivery == 1)
-                                        {{ Str::substr(Helper::fecha($sale->delivery_date)->dayName, 0, 3)  }} {{ Helper::fecha($sale->delivery_date)->format('d') }} {{ Str::substr(Helper::fecha($sale->delivery_date)->monthName, 0, 3)  }}
-                                        @if ($sale->date_delivered == null)
-                                            <div id="changeDeliveryDate_{{$sale->id}}" x-data="{showEditDate:false,loading:false}">
-                                                <x-jet-secondary-button x-on:click="showEditDate=true" class=""><i class="fas fa-pen"></i></x-jet-secondary-button>
-                                                <div x-show="showEditDate" class="hidden" :class="{'hidden': !showEditDate}">
-                                                    <x-modal.modal2>
-                                                        <div class="p-4 relative">
-                                                            <div class="hidden" :class="{'hidden': !loading}">
-                                                                <x-spinner.spinner2></x-spinner.spinner2>
-                                                            </div>
-                                                            <div class="flex items-center justify-between gap-4">
-                                                                <h2 class="text-xl text-gray-800 text-center font-bold"> Cambiar fecha </h2>
-                                                                <div x-on:click="showEditDate = !showEditDate" class="p-2 px-3 border rounded-full hover:bg-red-600 hover:text-white">
-                                                                    <i class="fas fa-times"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="my-4 flex flex-col gap-2">
-                                                                <div>
-
-                                                                    {{$sale->customer->name}}
-                                                                </div>
-                                                                <div>
-                                                                    {{$sale->customer->direccion}}
-                                                                </div>
-
-                                                                <x-jet-input x-ref="delivery_date" type="date" value="{{$sale->delivery_date}}"></x-jet-input>
-
-                                                            </div>
-                                                            <div class="flex justify-between gap-4 items-center mt-4">
-                                                                <x-jet-button x-on:click="loading=true;$wire.changeDeliveryDate({{$sale->id}},$refs.delivery_date.value).then((fecha)=>{loading=false;showEditDate = !showEditDate;toast('Fecha reparto de {{$sale->customer->name}} cambiada!!','success')})">Cambiar</x-jet-button>
-                                                                <x-jet-danger-button  x-on:click="showEditDate = !showEditDate" >Cancelar</x-jet-danger-button>
-                                                            </div>
-                                                        </div>
-                                                    </x-modal.modal2>
-                                                </div>
+                                        <div class="flex items-center gap-2">
+                                            <div>
+                                                {{ Str::substr(Helper::fecha($sale->delivery_date)->dayName, 0, 3)  }} {{ Helper::fecha($sale->delivery_date)->format('d') }} {{ Str::substr(Helper::fecha($sale->delivery_date)->monthName, 0, 3)  }}
                                             </div>
-                                        @endif
+                                            @if ($sale->date_delivered == null)
+                                                <div x-data="{showEditDate:false,loading:false}" id="changeDeliveryDate_{{$sale->id}}" class="cursor-pointer text-xs ">
+                                                    <div x-on:click="showEditDate=true" class="p-2 text-xs text-gray-400 hover:text-gray-600 cursor-pointer" >
+                                                        <i class="fas fa-pen"></i>
+                                                    </div>
+                                                    <div x-show="showEditDate" class="hidden" :class="{'hidden': !showEditDate}">
+                                                        <x-modal.modal2>
+                                                            <div class="p-4 relative">
+                                                                <div class="hidden" :class="{'hidden': !loading}">
+                                                                    <x-spinner.spinner2></x-spinner.spinner2>
+                                                                </div>
+                                                                <div class="flex items-center justify-between gap-4">
+                                                                    <h2 class="text-xl text-gray-800 text-center font-bold"> Cambiar fecha </h2>
+                                                                    <div x-on:click="showEditDate = !showEditDate" class="p-2 px-3 border rounded-full hover:bg-red-600 hover:text-white">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="my-4 flex flex-col gap-2">
+                                                                    <div>
+
+                                                                        {{$sale->customer->name}}
+                                                                    </div>
+                                                                    <div>
+                                                                        {{$sale->customer->direccion}}
+                                                                    </div>
+
+                                                                    <x-jet-input x-ref="delivery_date" type="date" value="{{$sale->delivery_date}}"></x-jet-input>
+
+                                                                </div>
+                                                                <div class="flex justify-between gap-4 items-center mt-4">
+                                                                    <x-jet-button x-on:click="loading=true;$wire.changeDeliveryDate({{$sale->id}},$refs.delivery_date.value).then((fecha)=>{loading=false;showEditDate = !showEditDate;toast('Fecha reparto de {{$sale->customer->name}} cambiada!!','success')})">Cambiar</x-jet-button>
+                                                                    <x-jet-danger-button  x-on:click="showEditDate = !showEditDate" >Cancelar</x-jet-danger-button>
+                                                                </div>
+                                                            </div>
+                                                        </x-modal.modal2>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
                                     @endif
                                 </div>
                             </div>
                         </td> 
                         <td class="px-6 py-4 whitespace-nowrap text-left">
-                            <div class="">
-                           
+                            <div class="flex gap-2">                           
                                 @if (Str::length($sale->comments)>10)
                                     <x-tooltip.tooltip>
                                         <x-slot name="tooltip">
@@ -128,7 +133,13 @@
                                     {{$sale->comments}}
                                 @endif
                                 <div id="comment_{{$sale->id}}" x-data="{showEditComment:false,loading:false}">
-                                    <x-jet-secondary-button x-on:click="showEditComment=true"><i class="fas fa-pen"></i></x-jet-secondary-button>
+                                    <div x-on:click="showEditComment=true" class="p-2 text-xs text-gray-400 hover:text-gray-600 cursor-pointer">
+                                        @if ($sale->comments)
+                                            <i class="fas fa-pen"></i>
+                                        @else
+                                            <i class="fas fa-plus"></i>
+                                        @endif
+                                    </div>                                   
                                     <div x-show="showEditComment" class="hidden" :class="{'hidden':!showEditComment}">
                                         <x-modal.modal2>
                                             <div class="p-4 relative">
@@ -161,7 +172,6 @@
                                         </x-modal.modal2>
 
                                     </div>
-                                   
                                 </div>
                                 
                             </div>
