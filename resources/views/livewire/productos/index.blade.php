@@ -137,11 +137,11 @@
                            <img data-splide-lazy="{{url('images/portada/banner_leches_xl.webp')}}">
                         </div>
                      </li>
-                     <li class="splide__slide">
+                     {{-- <li class="splide__slide">
                         <div class="splide__slide__container">
                            <img data-splide-lazy="{{url('images/portada/banner_paltas_xl.webp')}}">
                         </div>
-                     </li>
+                     </li> --}}
                      <li class="splide__slide">
                         <div class="splide__slide__container">
                            <img data-splide-lazy="{{url('images/portada/banner_registrarse_xl.webp')}}">
@@ -162,11 +162,11 @@
                            <img data-splide-lazy="{{url('images/portada/banner_leches_lg.webp')}}">
                         </div>
                      </li>
-                     <li class="splide__slide">
+                     {{-- <li class="splide__slide">
                         <div class="splide__slide__container">
                            <img data-splide-lazy="{{url('images/portada/banner_paltas_lg.webp')}}">
                         </div>
-                     </li>
+                     </li> --}}
                      <li class="splide__slide">
                         <div class="splide__slide__container">
                            <img data-splide-lazy="{{url('images/portada/banner_registrarse_lg.webp')}}">
