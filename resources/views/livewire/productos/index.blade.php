@@ -409,7 +409,7 @@
       </a>
 
       {{-- LO ULTIMO QUE HA LLEGADO --}}
-      {{-- <div class="px-5 sm:px-20 mt-10" >
+      <div class="px-5 sm:px-20 mt-10" >
          <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Lo ultimo <span class="inline-block mb-5 -mt-5 font-sans font-bold text-3xl sm:text-5xl sm:mb-0 sm:mt-0"> que ha llegado</span> </h2>
       </div>
       <div>
@@ -427,11 +427,7 @@
                                  <div class="w-full">
                                     @if ($item->product->image)
                                        <figure class="splide__slide__container">
-                                          @if ( Storage::exists('products_thumb/' .$item->product->image->url))
-                                             <img class="object-contain h-48 w-full"  alt="{{ $product->name }}" data-splide-lazy="{{ '/storage/products_thumb/' . $item->product->image->url }}">
-                                          @else
-                                             <img class="object-contain h-48 w-full"  alt="" data-splide-lazy="{{ Storage::url($item->product->image->url) }}" src="{{ Storage::url($item->product->image->url) }}">
-                                          @endif
+                                          <img class="object-contain h-48 w-full"  alt="{{ $item->product->name }}" data-splide-lazy="{{ '/storage/products_thumb/' . $item->product->image->url }}">
                                        </figure>
                                     @endif
                                     
@@ -513,7 +509,7 @@
                </div>
             @endif
          @endforeach
-      </div> --}}
+      </div>
 
       <div class="flex flex-col-reverse sm:flex-row justify-end items-center | bg-gradient-to-r from-gray-200 via-white to-white | pb-20  mb-10 sm:p-20">
    
