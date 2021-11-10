@@ -7,8 +7,7 @@
                     <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-left">EstadoPago</th>
                     <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-left">FechaReparto</th>
                     <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-left">Comentario</th>
-                    <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-right">Subtotal</th>
-                    <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-right">ValorDespacho</th>
+                 
                     <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-right">Total</th>
                     <th class=" px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider  text-right"></th>
                    
@@ -20,9 +19,20 @@
     
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div>
-                                <div class=" text-sm text-gray-900">{{$sale->customer->name}}</div>
-                                <div class=" text-sm text-gray-500">{{$sale->customer->direccion}}</div>
+                            <div class="flex items-center gap-2">
+                                <div>
+                                    @if ($sale->sale_type== 1)
+                                        <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
+                                    @elseif ($sale->sale_type== 2)  
+                                        <i class="fas fa-shopping-cart"></i>
+                                    @elseif ($sale->sale_type== 3)  
+                                        <i class="fas fa-user"></i>
+                                    @endif
+                                </div>
+                                <div>
+                                    <div class=" text-sm text-gray-900">{{$sale->customer->name}}</div>
+                                    <div class=" text-sm text-gray-500">{{$sale->customer->direccion}}</div>
+                                </div>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -176,19 +186,19 @@
                                 
                             </div>
                         </td> 
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-right">
-                                ${{ number_format($sale->subtotal,0,',','.') }}
-                            </div> 
-                        </td>
                         <td class="px-6 py-4 whitespace-nowrap"> 
-                            <div class="text-right">
-                                ${{ number_format($sale->delivery_value,0,',','.') }} 
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap"> 
-                            <div class="text-right">
-                                ${{ number_format($sale->total,0,',','.') }}
+                            <div>
+                                @if ($sale->delivery_value>0)
+                                    <div class="text-right">
+                                        ${{ number_format($sale->subtotal,0,',','.') }}
+                                    </div> 
+                                    <div class="text-right">
+                                    <i class="fas fa-truck text-gray-400 text-xs"></i>   <span class=" border-b"> ${{ number_format($sale->delivery_value,0,',','.') }} </span>
+                                    </div>
+                                @endif
+                                <div class="text-right">
+                                    ${{ number_format($sale->total,0,',','.') }}
+                                </div>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
