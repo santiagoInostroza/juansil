@@ -1,13 +1,5 @@
 <div  class="text-gray-800">
-    <div class="flex items-center gap-4 hidden">
-        Mostrar 
-        <div wire:click="$set('show',10)" class="p-2 cursor-pointer shadow @if($show == 10) bg-gray-400 @endif">10</div>
-        <div wire:click="$set('show',20)" class="p-2 cursor-pointer shadow @if($show == 20) bg-gray-400 @endif">20</div>
-        <div wire:click="$set('show',30)" class="p-2 cursor-pointer shadow @if($show == 30) bg-gray-400 @endif">30</div>
-        <div wire:click="$set('show',40)" class="p-2 cursor-pointer shadow @if($show == 40) bg-gray-400 @endif">40</div>
-        <div wire:click="$set('show',50)" class="p-2 cursor-pointer shadow @if($show == 50) bg-gray-400 @endif">50</div>
-        Resultados
-    </div>
+
     <x-table>
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">

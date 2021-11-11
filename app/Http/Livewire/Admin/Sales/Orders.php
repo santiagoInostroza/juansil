@@ -14,7 +14,6 @@ class Orders extends Component{
     public $estado_pago;
     public $openComentario ;
     public $editSale = false;
-    public $show=15;
 
     protected $listeners=[
         'render'
@@ -35,9 +34,6 @@ class Orders extends Component{
         return view('livewire.admin.sales.orders',compact('sales'));
     }
 
-    public function updateShow(){
-        $this->editSale=false;
-    }
 
     public function selectedOrderEdit($id){
         $this->orderEdit=Sale::find($id);
