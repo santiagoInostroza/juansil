@@ -13,7 +13,7 @@
         }
 
         #map {
-            height: 400px;
+            height: 500px;
         }
 
     </style>

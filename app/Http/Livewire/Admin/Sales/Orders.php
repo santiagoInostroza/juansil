@@ -24,7 +24,7 @@ class Orders extends Component{
     }
     
     public function render(){
-        $sales = Sale::orderBy('id','desc')->take(200)->get();
+        $sales = Sale::orderBy('id','desc')->take(10)->get();
         if (!$this->editSale) {
             foreach ($sales as $key => $sale) {
                 $this->editSale[$sale->id]=false;

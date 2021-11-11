@@ -18,9 +18,6 @@
                 {{ $fecha2->locale('es')->monthName }}
             </h3>
         @endif
-        <div wire:click="$set('showAgregarDespacho', true)" class="btn btn-secondary ">
-            Agregar
-        </div>
     </div>
 
 
@@ -55,8 +52,6 @@
     <livewire:deliveries.pendientes :fecha='$fecha'>
     <livewire:deliveries.entregados :fecha='$fecha'>
     <livewire:deliveries.picking :fecha='$fecha'>
-    @if ($showAgregarDespacho)
-        @livewire('deliveries.agregar-despacho', ['delivery_date' => $fecha,'' => ''])  
-    @endif
+
 
 </div>

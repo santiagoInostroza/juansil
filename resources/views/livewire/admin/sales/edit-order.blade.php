@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4 h-full" >
+<div class="grid grid-cols-2 gap-4 h-full bg-yellow-300 px-4 pb-4" >
 
     {{-- LISTA DE PRODUCTOS --}}
     <div class="rounded bg-white p-2 overflow-auto h-full "  >
@@ -132,10 +132,10 @@
         @endif
     </div>
     {{-- PEDIDO NUEVO --}}
-    <div class=" rounded bg-white p-2 overflow-auto overflow-x-hidden h-full">
+    <div class=" text-left rounded bg-white p-2  overflow-auto overflow-x-hidden h-full">
         <div class="max-w-4xl m-auto">
             <div class="mb-4">
-                {{$sale->customer->name}}
+               <h2 class=" text-xl font-bold text-gray-600"> {{$sale->customer->name}}</h2>
             </div>
         
              {{-- DELIVERY --}}
@@ -271,6 +271,8 @@
                             </table>
                         </x-table>       
                     </div>
+                @else
+                   (AGREGAR PRODUCTOS)
                 @endif
                 @error('items')
                     <span class="text-xs text-red-600">No has seleccionado productos</span>
@@ -338,11 +340,11 @@
             </div>
             
         
-            <div x-data="{loading:false}" class="my-4">
+            <div x-data="{loading:false}" class="my-4 ">
                 <div class="hidden" :class="{'hidden':!loading}">
                     <x-spinner.spinner2></x-spinner.spinner2>
                 </div>
-                <x-jet-button class="w-full" x-on:click="loading=true;$wire.createOrder().then(()=>{toast('Pedido Creado!!');loading=false})">Crear Pedido</x-jet-button>
+                <x-jet-button class="w-full bg-yellow-300 hover:bg-yellow-400" x-on:click="loading=true;$wire.createOrder().then(()=>{toast('Pedido Creado!!');loading=false})">Modificar Pedido</x-jet-button>
             </div>
                 
         

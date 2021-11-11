@@ -1,14 +1,14 @@
-<div class="card  mt-5">
+<div class="card  mt-5" x-data="{open:false}">
     @if ($ventas_entregadas == 0)
         <div class="card-header">
             <h2>No hay nada entregado</h2>
         </div>
     @else
         <div class="card-header">
-            <h2>Entregados ({{ $ventas_entregadas }})</h2>
+            <h2 x-on:click="open=!open">Entregados ({{ $ventas_entregadas }})</h2>
         </div>
 
-        <div class="card-body">
+        <div class="card-body" class="d-none" :class="{'d-none':!open}">
             <table id="tablaEntregarHoy" class="table table-hover table-bordered table-responsive" style="width:100%">
                 <thead>
                     <tr>

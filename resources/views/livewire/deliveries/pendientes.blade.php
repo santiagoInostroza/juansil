@@ -1,14 +1,14 @@
-    <div class="card mt-5">
+    <div class="card mt-5" x-data="{open:false}">
         @if ($entregas_pendientes == 0)
             <div class="card-header">
                 <h2>No hay pendientes</h2>
             </div>
         @else
             <div class="card-header">
-                <h2>Pendientes ({{ $entregas_pendientes }})</h2>
+                <h2 class="" x-on:click="open=!open" style="cursor: pointer">Pendientes ({{ $entregas_pendientes }})</h2>
             </div>
 
-            <div class="card-body">
+            <div class="card-body d-none" :class="{'d-none':!open}" >
                 <table id="tablaEntregarHoy" class="table table-hover table-bordered table-responsive"
                     style="width:100%">
                     <thead>

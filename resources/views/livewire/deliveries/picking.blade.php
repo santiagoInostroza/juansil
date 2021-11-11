@@ -18,12 +18,13 @@
             @if ($vistaPicking == 1)
             
                 @foreach ($ventas as $venta)
+                <h6>{{$venta->customer->id}} {{$venta->customer->name}}</h6>
                     @php
                         $despacho+=$venta->delivery_value;
                     @endphp
                     @foreach ($venta->sale_items as $item)
 
-                        <div class="d-flex" style="width: max-content">
+                        <div class="d-flex " style="width: max-content">
                             <div class="" style="width: 60px">
                                 {{ $item->cantidad }} x {{ $item->cantidad_por_caja }}
                             </div>
@@ -63,22 +64,30 @@
                     <hr>
                 @endforeach
 
+                <div>
+                    SubTotal  ${{number_format($totalisimo,0,',','.')}}
+                  </div>
+                  <div>
+                      Despacho ${{number_format($despacho,0,',','.')}}
+                  </div>
+                  <div>
+                      Total ${{number_format($totalisimo + $despacho,0,',','.')}}
+                  </div>
+
             @else
                 @foreach ($arreglo as $key => $value)
-                    <div>
-                        {{ $value }} {{ $key }}
+                    <div style="font-size: 20px" class=" mb-2">
+                        <input id="{{$value}}"  type="checkbox">  
+                        <label for="{{$value}}">
+                            <span class="mr-4 ml-4">{{ $value }}</span>  
+                            {{ $key }}
+                           
+                        </label>
+                       
                     </div>
                 @endforeach
             @endif
-            <div>
-              SubTotal  ${{number_format($totalisimo,0,',','.')}}
-            </div>
-            <div>
-                Despacho ${{number_format($despacho,0,',','.')}}
-            </div>
-            <div>
-                Total ${{number_format($totalisimo + $despacho,0,',','.')}}
-            </div>
+           
 
         </div>
     @endif
