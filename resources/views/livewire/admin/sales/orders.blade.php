@@ -202,42 +202,47 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,editSale:false}">
+                           
                                 <div class="text-right">
-                                    <x-jet-button x-on:click="editSale=true"  class="bg-yellow-200 hover:bg-yellow-400"><i class="fas fa-pen"></i></x-jet-button>
-                                    <div x-show="editSale" class="hidden" :class="{'hidden': !editSale}">
-                                        <x-modal.modal2>
-                                            <div class="p-4">
-                                                <h2 class="my-4 text-xl font-bold text-center">Editar venta {{$sale->id}} de {{$sale->customer->name}}</h2>
+                                    
+                                    <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,loading:false}">
+                                        <div class="hidden" :class="{'hidden':!loading}">
+                                            <x-spinner.spinner2></x-spinner.spinner2>
+                                        </div>
+                                        <x-jet-button x-on:click="loading=true;$wire.setOrderEdit({{ $sale->id}}).then(()=>loading=false)" class="bg-yellow-200 hover:bg-yellow-400"><i class="fas fa-pen"></i></x-jet-button>
+                                        
+                                        @if ($editSale[$sale->id])
+                                            <x-modal.modal_screen>
                                                 <div>
-                                                    Amorsito todavía no le arreglo esta pantallita, no se enoje pue
+                                                    <div class="flex items-center justify-between bg-yellow-300 ">
+                                                        <div></div>
+                                                        <h2 class=" text-gray-800 text-xl font-bold text-center p-2 mb-2">Modificar Pedido</h2>
+                                                        <div x-on:click="loading=true;$wire.setOrderEditFalse({{$sale->id}}).then(()=>loading=false)" class="hover:bg-gray-600 p-4">
+                                                            <i class="fas fa-times"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="" style="height: calc(100vh - 140px)">
+                                                        @livewire('admin.sales.edit-order', ['sale' => $sale], key( $sale->id))
+                                                    </div>
                                                 </div>
-                                                <br>
-                                                <div class="flex gap-4">
-                                                    {{-- <x-jet-danger-button x-on:click="$wire.deleteSale({{ $sale }})" >Si, eliminar</x-jet-button> --}}
-                                                      
-                                                       
-                                                        <x-jet-button x-on:click="editSale=false">Pinche cabron!!</x-jet-button>
-                                                </div>
-                                            </div>
-                                        </x-modal.modal2>
-                                    </div>
-                                    <x-jet-button x-on:click="deleteSale=true" class="bg-red-500 hover:bg-red-700"><i class="fas fa-trash"></i></x-jet-button>
+                                            </x-modal.modal_screen>
+                                        @endif
+                                        <x-jet-button x-on:click="deleteSale=true" class="bg-red-500 hover:bg-red-700"><i class="fas fa-trash"></i></x-jet-button>
     
-                                    <div x-show="deleteSale" class="hidden" :class="{'hidden': !deleteSale}">
-                                        <x-modal.modal2>
-                                            <div class="p-4">
-                                                <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
-                                                <div class="flex gap-4">
-                                                    <x-jet-danger-button x-on:click="$wire.deleteSale({{ $sale }})" >Si, eliminar</x-jet-button>
-                                                        <x-jet-button x-on:click="deleteSale=false">No por favorsito</x-jet-button>
+                                        <div x-show="deleteSale" class="hidden" :class="{'hidden': !deleteSale}">
+                                            <x-modal.modal2>
+                                                <div class="p-4">
+                                                    <h2 class="my-4 text-xl font-bold">¿Seguro desea eliminar la venta {{$sale->id}} de {{$sale->customer->name}}?</h2>
+                                                    <div class="flex gap-4">
+                                                        <x-jet-danger-button x-on:click="$wire.deleteSale({{ $sale }})" >Si, eliminar</x-jet-button>
+                                                            <x-jet-button x-on:click="deleteSale=false">No por favorsito</x-jet-button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </x-modal.modal2>
+                                            </x-modal.modal2>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                            </div>
+                             
                         </td>
                     </tr>
             
@@ -247,9 +252,6 @@
         </table>
     </x-table>
 
- 
-
-
-    
+   
    
 </div>

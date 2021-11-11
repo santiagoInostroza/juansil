@@ -13,13 +13,24 @@ class Orders extends Component{
     public $valor_despacho ;
     public $estado_pago;
     public $openComentario ;
+    public $editSale = false;
 
     protected $listeners=[
         'render'
     ];
+
+    public function mount(){
+       
+    }
     
     public function render(){
-        $sales = Sale::orderBy('id','desc')->take(50)->get();
+        $sales = Sale::orderBy('id','desc')->take(200)->get();
+        if (!$this->editSale) {
+            foreach ($sales as $key => $sale) {
+                $this->editSale[$sale->id]=false;
+             }
+        }
+
         return view('livewire.admin.sales.orders',compact('sales'));
     }
 
@@ -51,4 +62,16 @@ class Orders extends Component{
          $sale->comments=$comment;
          $sale->save();       
      }
+
+    
+
+    public function setOrderEdit($sale_id){
+        
+        $this->editSale[$sale_id]=true;
+    }
+
+    public function setOrderEditFalse($sale_id){
+        
+        $this->editSale[$sale_id]=false;
+    }
 }

@@ -1,4 +1,5 @@
 <div class="grid grid-cols-2 gap-4 h-full" >
+
     {{-- LISTA DE PRODUCTOS --}}
     <div class="rounded bg-white p-2 overflow-auto h-full "  >
         <div class="flex justify-between gap-8 items-center pr-4">
@@ -134,11 +135,7 @@
     <div class=" rounded bg-white p-2 overflow-auto overflow-x-hidden h-full">
         <div class="max-w-4xl m-auto">
             <div class="mb-4">
-        
-                @livewire('admin.customer.search-customer')
-                @error('customerId')
-                    <span class="text-xs text-red-600">Selecciona cliente</span>
-                @enderror
+                {{$sale->customer->name}}
             </div>
         
              {{-- DELIVERY --}}
@@ -351,4 +348,5 @@
         
         </div>
     </div>
+
 </div>
