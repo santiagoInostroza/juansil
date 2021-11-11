@@ -242,17 +242,17 @@
                                                     
                                                 </div>
                                                 @if ($sale->delivery)
-                                                    <div class="flex justify-between items-center gap-4 my-4">
+                                                    <div class="flex justify-between items-center gap-4 mt-2">
                                                         <div>SubTotal</div>
                                                         <div>${{number_format($sale->subtotal,0,',','.')}}</div>
                                                     </div>
-                                                    <div class="flex justify-between items-center gap-4 my-4">
+                                                    <div class="flex justify-between items-center gap-4 mt-2">
                                                         <div>delivery</div>
                                                         <div>${{number_format($sale->delivery_value,0,',','.')}}</div>
                                                     </div>
                                                 @endif
                                                
-                                                <div class="flex justify-between items-center gap-4 my-4">
+                                                <div class="flex justify-between items-center gap-4 mt-2">
                                                     <div>Total</div>
                                                     <div>${{number_format($sale->total,0,',','.')}}</div>
                                                 </div>
