@@ -209,7 +209,7 @@
                             <div class="text-right flex items-center gap-2">
                                 <div x-data="{open:false}">
                                     <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
-                                    {{-- <div class="hidden" :class="{'hidden':!open}">
+                                    <div class="hidden" :class="{'hidden':!open}">
                                         <x-modal.modal2>
                                             <div class="p-4">
                                                 <div class="flex items-center justify-between gap-4">
@@ -259,7 +259,7 @@
                                                 </div>
                                             </div>
                                         </x-modal.modal2>
-                                    </div> --}}
+                                    </div>
                                 </div>
                                 
                                 <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,loading:false,editSale:false}" class="flex items-center gap-2">
@@ -267,7 +267,7 @@
                                         <x-spinner.spinner2></x-spinner.spinner2>
                                     </div>
                                     <x-jet-button x-on:click="loading=true; editSale=true; $wire.setOrderEdit({{ $sale->id}}).then(()=>loading=false)" class="bg-yellow-200 hover:bg-yellow-400"><i class="fas fa-pen"></i></x-jet-button>
-                                    @if ($editSale[$sale->id])
+                                    {{-- @if ($editSale[$sale->id])
                                         <span class="hidden" :class="{'hidden': !editSale}">
                                             <x-modal.modal_screen>
                                                 <div>
@@ -284,7 +284,7 @@
                                                 </div>
                                             </x-modal.modal_screen>
                                         </span>
-                                    @endif
+                                    @endif --}}
                                     
                                     <x-jet-button x-on:click="deleteSale=true" class="bg-red-500 hover:bg-red-700"><i class="fas fa-trash"></i></x-jet-button>
 
