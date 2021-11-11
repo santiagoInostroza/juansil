@@ -205,7 +205,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                            
-                            <div class="text-right">
+                            <div class="text-right flex items-center gap-2">
                                 <div x-data="{open:false}">
                                     <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
                                     <div class="hidden" :class="{'hidden':!open}">
@@ -261,7 +261,7 @@
                                     </div>
                                 </div>
                                 
-                                <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,loading:false,editSale:false}">
+                                <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,loading:false,editSale:false}" class="flex items-center gap-2">
                                     <div class="hidden" :class="{'hidden':!loading}">
                                         <x-spinner.spinner2></x-spinner.spinner2>
                                     </div>
