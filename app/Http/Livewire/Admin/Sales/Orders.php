@@ -14,6 +14,7 @@ class Orders extends Component{
     public $estado_pago;
     public $openComentario ;
     public $editSale = false;
+    public $show=15;
 
     protected $listeners=[
         'render'
@@ -24,7 +25,7 @@ class Orders extends Component{
     }
     
     public function render(){
-        $sales = Sale::orderBy('id','desc')->take(10)->get();
+        $sales = Sale::orderBy('id','desc')->take($this->show)->get();
         if (!$this->editSale) {
             foreach ($sales as $key => $sale) {
                 $this->editSale[$sale->id]=false;

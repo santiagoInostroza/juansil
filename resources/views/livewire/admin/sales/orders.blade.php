@@ -1,4 +1,9 @@
 <div  class="text-gray-800">
+    <div class="flex items-center gap-4">
+        <div wire:click="$set('show',10)" class="p-2 shadow @if($show == 10) bg-gray-400" >10</div>
+        <div wire:click="$set('show',10)" class="p-2 shadow @if($show == 20) bg-gray-400">20</div>
+        <div wire:click="$set('show',10)" class="p-2 shadow @if($show == 30) bg-gray-400">30</div>
+    </div>
     <x-table>
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
