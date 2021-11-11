@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4 h-full" >
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full" >
 
     {{-- LISTA DE PRODUCTOS --}}  
     <div class="rounded bg-white p-2 overflow-hidden h-full "  >
@@ -23,7 +23,7 @@
             
     
         </div>
-        <div class="overflow-auto h-full">
+        <div class="hidden md:flex overflow-auto h-full ">
             @if ($view == 1)
                 <table class="table-fixed w-full">
                     <thead>

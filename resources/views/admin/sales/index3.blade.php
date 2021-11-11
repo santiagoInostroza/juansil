@@ -35,23 +35,6 @@
                 </div>
             </div>
 
-            {{-- MODIFICAR PEDIDO --}}
-            {{-- <div x-show="showEditOrder" class="hidden" :class="{'hidden': !showEditOrder}" >
-                <div class="flex items-center justify-between bg-yellow-300 ">
-                    <div></div>
-                    <h2 class="bg-yellow-300 text-gray-800 text-xl font-bold text-center p-2">Modificar Pedido</h2>
-                    <div x-on:click="closeEditOrder" class="hover:bg-gray-600 p-4">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </div>
-                <div :class="showOrders ? 'miti' : 'miti2' ">
-                    @livewire('admin.sales.edit-order')
-                   
-                </div>
-            </div> --}}
-
-
-
             {{-- LISTA PEDIDOS --}}
             <div class="flex items-center gap-4 bg-gray-300 text-gray-800" :class="!showMenuListOrders ? 'justify-center': 'justify-between';">
                 <div></div>
