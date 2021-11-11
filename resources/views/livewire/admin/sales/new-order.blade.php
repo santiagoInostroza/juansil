@@ -1,13 +1,14 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full" >
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full"  >
 
     {{-- LISTA DE PRODUCTOS --}}  
     <div class="rounded bg-white p-2 overflow-hidden h-full "  >
-        <div class=" col-span- flex justify-between gap-8 items-center mb-2 pr-2">
+        <div class=" flex justify-between gap-8 items-center mb-2 pr-2">
             <div class="relative flex-1">
                 <div wire:loading.flex wire:target="search" >
                     <x-spinner.spinner2></x-spinner.spinner2>
                 </div>
                 <x-jet-input class="w-full" wire:model.debounce.500ms="search" placeholder="Buscar producto..."></x-jet-input>
+                
             </div>
             <div>
                 @if ($view == 1)
@@ -20,10 +21,14 @@
                     </div>
                 @endif
             </div>
+
+            <div class="flex md:hidden" x-on:click="">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
             
     
         </div>
-        <div class="hidden md:flex overflow-auto h-full ">
+        <div class=" overflow-auto h-full ">
             @if ($view == 1)
                 <table class="table-fixed w-full">
                     <thead>
@@ -139,7 +144,7 @@
     </div>
     
     {{-- PEDIDO NUEVO --}}
-    <div class=" rounded bg-white p-2 overflow-auto overflow-x-hidden h-full">
+    <div class="hidden md:flex rounded bg-white p-2 overflow-auto overflow-x-hidden h-full">
         <div class="max-w-4xl m-auto">
             <div class="mb-4">
         
