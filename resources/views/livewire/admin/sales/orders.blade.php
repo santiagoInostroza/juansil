@@ -206,6 +206,49 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                            
                             <div class="text-right">
+                                <div x-data="{open:false}">
+                                    <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
+                                    <div class="hidden" :class="{'hidden':!open}">
+                                        <x-modal.modal2>
+                                            <div class="p-4">
+                                                <div class="flex items-center justify-between gap-4">
+                                                    <h2>Detalle de venta {{$sale->id}} {{$sale->customer->name}}</h2>
+                                                    <div x-on:click="open=!open" class="p-2 px-3 cursor-pointer">
+                                                        <i class="fas fa-times"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <x-table>
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Producto</th>
+                                                                    <th>Total</th>
+                                                                   
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($sale->saleItems as $item)
+                                                                    <tr>
+                                                                        <td> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}}</td>
+                                                                        <td>${{number_format($item->precio_total,0,',','.')}}</td>
+                                                                      
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </x-table>
+
+                                                    
+                                                </div>
+                                                <div class="flex justify-between items-center gap-4 my-4">
+                                                    <div>Total</div>
+                                                    <div>${{number_format($sale->total,0,',','.')}}</div>
+                                                </div>
+                                            </div>
+                                        </x-modal.modal2>
+                                    </div>
+                                </div>
                                 
                                 <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,loading:false,editSale:false}">
                                     <div class="hidden" :class="{'hidden':!loading}">
