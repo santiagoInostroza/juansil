@@ -76,10 +76,10 @@
 
             @else
                 @foreach ($arreglo as $key => $value)
-                    <div style="font-size: 20px" class=" mb-2">
+                    <div style="font-size: 16px" class=" mb-2">
                         <input id="{{$value}}"  type="checkbox">  
                         <label for="{{$value}}">
-                            <span class="mr-4 ml-4">{{ $value }}</span>  
+                            <span class="mr-2 ml-2">{{ $value }}</span>  
                             {{ $key }}
                            
                         </label>
