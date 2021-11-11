@@ -18,7 +18,7 @@
             @if ($vistaPicking == 1)
             
                 @foreach ($ventas as $venta)
-                <h6>{{$venta->customer->id}} {{$venta->customer->name}}</h6>
+                <h6>{{$venta->id}} {{$venta->customer->name}}</h6>
                     @php
                         $despacho+=$venta->delivery_value;
                     @endphp
@@ -78,11 +78,10 @@
                 @foreach ($arreglo as $key => $value)
                     <div style="font-size: 16px" class=" mb-2">
 
-                        <input id="{{$value}}"  type="checkbox">  
-                        <label for="{{$value}}">
+                        <label for="{{$key}}">
+                            <input id="{{$key}}"  type="checkbox">  
                             <span class="mr-2 ml-2">{{ $value }}</span>  
                             {{ $key }}
-                           {{$value}}
                         </label>
                        
                     </div>
