@@ -25,7 +25,7 @@ class Orders extends Component{
     }
     
     public function render(){
-        $sales = Sale::orderBy('id','desc')->take($this->show)->get();
+        $sales = Sale::orderBy('id','desc')->take(30)->get();
         if (!$this->editSale) {
             foreach ($sales as $key => $sale) {
                 $this->editSale[$sale->id]=false;
@@ -33,6 +33,10 @@ class Orders extends Component{
         }
 
         return view('livewire.admin.sales.orders',compact('sales'));
+    }
+
+    public function updateShow(){
+        $this->editSale=false;
     }
 
     public function selectedOrderEdit($id){
