@@ -144,7 +144,7 @@
     </div>
     
     {{-- PEDIDO NUEVO --}}
-    <div class="hidden md:flex rounded bg-white p-2 overflow-auto overflow-x-hidden h-full">
+    <div class="hidden md:block rounded bg-white p-2 overflow-auto overflow-x-hidden h-full">
         <div class="max-w-4xl m-auto">
             <div class="mb-4">
         
