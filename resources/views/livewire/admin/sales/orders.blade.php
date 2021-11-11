@@ -209,7 +209,7 @@
                             <div class="text-right flex items-center gap-2">
                                 <div x-data="{open:false}">
                                     <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
-                                    <div class="hidden" :class="{'hidden':!open}">
+                                    {{-- <div class="hidden" :class="{'hidden':!open}">
                                         <x-modal.modal2>
                                             <div class="p-4">
                                                 <div class="flex items-center justify-between gap-4">
@@ -259,7 +259,7 @@
                                                 </div>
                                             </div>
                                         </x-modal.modal2>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 
                                 <div id="deleteOrder_{{$sale->id}}" x-data="{deleteSale:false,loading:false,editSale:false}" class="flex items-center gap-2">
