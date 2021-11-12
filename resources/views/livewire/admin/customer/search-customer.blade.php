@@ -79,7 +79,7 @@
         {{-- DATOS DEL CLIENTE OPCIONAL --}}
         @if ($showDataCustomer)  
             @if ($customer_id>0)
-                <div x-show='open_data_customer' class="border rounded p-4 mt-2">
+                <div x-show='open_data_customer' class="border rounded p-4">
                   
                         <h2 class="text-lg font-bold text-gray-600 flex gap-4 items-center"> 
                             {{$selected_customer->name}} 
@@ -136,9 +136,9 @@
 
         {{-- AGREGAR NUEVO CLIENTE --}}
         <div x-show='open_new_customer' >
-            <div class="bg-gray-900 fixed opacity-75 top-0 left-0 right-0 bottom-0"></div>
+            <div class="bg-gray-900 fixed opacity-75 top-0 left-0 right-0 bottom-0 "></div>
             
-            <div class="p-6 border absolute bg-white w-full rounded-xl" style="top: -60px">
+            <div class="p-6 border absolute bg-white w-full rounded-xl mt-20" style="top: -60px">
                   
                 <h2 class="text-xl my-2">Crear Cliente Nuevo</h2>
                 
