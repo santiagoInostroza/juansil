@@ -71,7 +71,7 @@ class SearchCustomer extends Component{
     protected $rules = [
         'name' => 'required|min:3',
         'direccion' => 'required',
-        'numero' => 'numeric',
+        'numero' => 'required',
         'comuna' => 'required',
         'latitud' => 'required',
         'longitud' => 'required',
