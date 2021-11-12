@@ -360,7 +360,7 @@
                 <div class="hidden" :class="{'hidden':!loading}">
                     <x-spinner.spinner2></x-spinner.spinner2>
                 </div>
-                <x-jet-button class="w-full" x-on:click="loading=true;$wire.createOrder().then(()=>{toast('Pedido Creado!!');loading=false})">Crear Pedido</x-jet-button>
+                <x-jet-button class="w-full" x-on:click="loading=true;$wire.createOrder().then((response)=>{ if(response){toast('Pedido Creado!!');} ;loading=false})">Crear Pedido</x-jet-button>
             </div>
                 
         

@@ -163,7 +163,7 @@
 
                 <div>
                     <x-jet-label value='Direccion'></x-label>
-                    <x-jet-input wire:model.defer='direccion'  id='direccion' class="w-full"></x-input>
+                    <x-jet-input wire:model.defer='direccion'  id='direccion' class="w-full"></x-input> <input type="checkbox" name="" id="" wire:model="strict"> Estricto {{$strict}}
                     @error('direccion') <span class="text-xs text-red-400">{{ $message }}</span> @enderror    
                 </div>
             

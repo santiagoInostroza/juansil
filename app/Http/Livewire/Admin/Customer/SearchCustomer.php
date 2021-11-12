@@ -35,8 +35,11 @@ class SearchCustomer extends Component{
     public $block;
     public $depto;
     public $comentario;
+    public $strict = true;
 
     public $index = 0;
+
+    
 
     
     
@@ -44,12 +47,17 @@ class SearchCustomer extends Component{
     public $msjErrorCelular;
 
     protected $listeners = [
-        'setSearch',
+        'setSearch','resetear'
     ];
+
+    public function resetear(){
+        $this->reset();
+    }
 
 
     public function render(){
 
+       
         $customers = Customer::where('name','like', '%' . $this->search . '%')
         ->orWhere('direccion','like', '%' . $this->search . '%')
         ->get();
@@ -68,20 +76,24 @@ class SearchCustomer extends Component{
         $this->emitUp('setCustomerId',$this->customer_id);
     }
 
-    protected $rules = [
-        'name' => 'required|min:3',
-        'direccion' => 'required',
-        'numero' => 'required',
-        'comuna' => 'required',
-        'latitud' => 'required',
-        'longitud' => 'required',
-    ];
+  
+
+    protected function rules(){
+        return[
+            'name' => 'required|min:3',
+            'direccion' => 'required',
+            'numero' => ($this->strict)?'numeric':'required',
+            'comuna' => 'required',
+            'latitud' => 'required',
+            'longitud' => 'required',
+        ];
+    }
 
     protected $messages = [
         'name.required' => 'Ingresa un nombre.',
         'name.min' => 'Nombre muy corto.',
         'direccion.required' => 'Ingresa dirección',
-        'numero.numeric' => 'Debes ingresar numeración de dirección. ',
+        'numero.numeric' => 'Está en modo estricto debes preocuparte de ingresar numeración de dirección valida. ',
         'comuna.required' => 'Revisa la direccion, no se ha ingresado la comuna.',
     ];
 
@@ -115,6 +127,7 @@ class SearchCustomer extends Component{
             'icon' => 'success',
             'title' => 'Cliente creado !!'
         ]); 
+        $this->reset('name','telefono','celular','direccion','numero','latitud','longitud','place_id','comuna','block','depto','comentario','strict');
 
     }
 

@@ -237,6 +237,7 @@ class NewOrder extends Component{
 
       
         $this->emit('render');
+        $this->emit('resetear');
        
         $this->reset();
         $this->eliminarSesionVenta();
@@ -245,6 +246,7 @@ class NewOrder extends Component{
         //     'icon' => 'success',
         //     'title' => "Venta " . $sale->id ." creada !!",
         // ]); 
+        return true;
     }
 
     public function eliminarSesionVenta(){
