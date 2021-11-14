@@ -43,7 +43,7 @@ class Orders extends Component{
 
         $dt=Carbon::now();
 
-        if (!Cache::has('sales')) {
+        if (Cache::has('sales')) {
            $sales= Cache::get('sales');
         } else {
             $sales = Sale::all();
