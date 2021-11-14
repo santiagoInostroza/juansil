@@ -46,7 +46,7 @@ class Orders extends Component{
         if (Cache::has('sales')) {
            $sales= Cache::get('sales');
         } else {
-            $sales = Sale::join('customers','customers.id','=','sales.customer_id')->get();
+            $sales = Sale::all();
             Cache::put('sales',$sales);
         }
         
