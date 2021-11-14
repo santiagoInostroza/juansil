@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Models\Sale;
 use Livewire\Component;
 use App\Http\Controllers\Admin\SaleController;
-use Illuminate\Support\Facades\Cache;
 
 class Orders extends Component{ 
     public $orderEdit;
@@ -42,29 +41,20 @@ class Orders extends Component{
     public function render(){
 
         $dt=Carbon::now();
-
-        if (Cache::has('sales')) {
-           $sales= Cache::get('sales');
-        } else {
-            $sales = Sale::all();
-            Cache::put('sales',$sales);
+        $sales = Sale::join('customers','customers.id','=','sales.customer_id')->where('customers.name','like','%'. $this->search . '%')->orderBy('sales.id','desc');
+        if ($this->filter==1) {
+            $sales = $sales->whereDate('sales.created_at',$dt);
+        }elseif ($this->filter==2) {
+            $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(3));
+        }elseif ($this->filter==3) {
+            $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(7));
+        }elseif ($this->filter==4) {
+            $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(30));
+        }else{
+           $sales = $sales->take(30);
         }
-        
 
-        // $sales = $sales->where('customers.name','like','%'. $this->search . '%');
-        // if ($this->filter==1) {
-        //     $sales = $sales->whereDate('sales.created_at',$dt);
-        // }elseif ($this->filter==2) {
-        //     $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(3));
-        // }elseif ($this->filter==3) {
-        //     $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(7));
-        // }elseif ($this->filter==4) {
-        //     $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(30));
-        // }else{
-        //    $sales = $sales->take(30);
-        // }
-
-        // $sales = $sales->orderBy('sales.id','desc')->get();
+        $sales = $sales->get();
 
         if (!$this->editSale) {
             foreach ($sales as $key => $sale) {
