@@ -237,6 +237,7 @@ class NewOrder extends Component{
 
       
         $this->emit('render');
+        $this->emit('renderizar');
         $this->emit('resetear');
        
         $this->reset();

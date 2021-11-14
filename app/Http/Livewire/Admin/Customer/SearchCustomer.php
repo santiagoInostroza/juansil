@@ -54,6 +54,12 @@ class SearchCustomer extends Component{
         $this->reset();
     }
 
+    public function mount(){
+        
+
+
+    }
+
 
     public function render(){
 

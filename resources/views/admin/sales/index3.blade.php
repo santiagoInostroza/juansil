@@ -50,7 +50,7 @@
                 </div>
             </div>
             
-            <div x-show="showOrders" class="rounded bg-white p-2 overflow-auto" :class="(showOrders && (showNewOrder || showEditOrder )) ? 'mite' : 'mite2'"  >
+            <div x-show="showOrders" class="rounded bg-white p-2 overflow-hidden" :class="(showOrders && (showNewOrder || showEditOrder )) ? 'mite' : 'mite2'"  >
                 @livewire('admin.sales.orders')
             </div>
             
