@@ -12,6 +12,7 @@
                 <div x-on:click="loading= true; $wire.$set('filter',1).then(()=>loading=false);" class="p-2 shadow @if($filter==1) bg-gray-600 text-white @else cursor-pointer @endif" >hoy</div>
                 <div x-on:click="loading= true; $wire.$set('filter',2).then(()=>loading=false);"  class="p-2 shadow @if($filter==2) bg-gray-600 text-white @else cursor-pointer @endif" >3 días</div>
                 <div x-on:click="loading= true; $wire.$set('filter',3).then(()=>loading=false);"  class="p-2 shadow @if($filter==3) bg-gray-600 text-white @else cursor-pointer @endif" >7 días</div>            
+                <div x-on:click="loading= true; $wire.$set('filter',4).then(()=>loading=false);"  class="p-2 shadow @if($filter==4) bg-gray-600 text-white @else cursor-pointer @endif" >30 días</div>            
             </div>
             <div class="pr-4">
             

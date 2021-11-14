@@ -48,6 +48,8 @@ class Orders extends Component{
             $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(3));
         }elseif ($this->filter==3) {
             $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(7));
+        }elseif ($this->filter==4) {
+            $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(30));
         }else{
            $sales = $sales->take(30);
         }
