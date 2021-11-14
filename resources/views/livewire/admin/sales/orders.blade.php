@@ -54,7 +54,12 @@
                                 <div class="flex items-center gap-2">
                                     <div>
                                         @if ($sale->sale_type== 1)
-                                            <img class="h-8 w-8 rounded-full" src="{{ $sale->created_by()->profile_photo_url }}" alt="">
+                                            @if ($sale->created_by())
+                                                <img class="h-8 w-8 rounded-full" src="{{ $sale->created_by()->profile_photo_url }}" alt="">
+                                            @else
+                                                
+                                            @endif
+                                            
                                         @elseif ($sale->sale_type== 2)  
                                             <i class="fas fa-shopping-cart"></i>
                                         @elseif ($sale->sale_type== 3)  
