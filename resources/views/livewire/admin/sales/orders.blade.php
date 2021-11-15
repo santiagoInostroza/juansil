@@ -260,10 +260,10 @@
                                                                 {{$sale->customer->celular}}
                                                             </div>
                                                         </div>
-                                                        <div class="text-gray-400 my-2">
+                                                        <div class="text-gray-400 my-2 font-semibold">
                                                             {{$sale->customer->direccion}}
                                                         </div>
-                                                        <div class="text-gray-400">
+                                                        <div class="text-gray-400 font-semibold">
                                                             Reparto para el {{Helper::fecha($sale->delivery_date)->dayName}} {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
                                                         </div>
                                                         <div class="my-4">
@@ -276,7 +276,7 @@
                                                                         
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody class="text-gray-400">
+                                                                    <tbody class="text-gray-400 font-semibold">
                                                                         @foreach ($sale->sale_items as $item)
                                                                             <tr>
                                                                                 <td> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}}</td>
@@ -290,11 +290,11 @@
                                                             
                                                         </div>
                                                         @if ($sale->delivery)
-                                                            <div class="flex justify-between items-center gap-4 mt-2">
+                                                            <div class="flex justify-between items-center gap-4 mt-2 font-semibold">
                                                                 <div>SubTotal</div>
                                                                 <div>${{number_format($sale->subtotal,0,',','.')}}</div>
                                                             </div>
-                                                            <div class="flex justify-between items-center gap-4 mt-2">
+                                                            <div class="flex justify-between items-center gap-4 mt-2 font-semibold">
                                                                 <div>Valor delivery</div>
                                                                 <div>${{number_format($sale->delivery_value,0,',','.')}}</div>
                                                             </div>
