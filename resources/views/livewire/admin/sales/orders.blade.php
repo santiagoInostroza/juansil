@@ -252,8 +252,13 @@
                                                                 <i class="fas fa-times"></i>
                                                             </div>
                                                         </div>
-                                                        <div class="font-bold text-gray-500">
-                                                            {{$sale->customer->name}}
+                                                        <div class="font-bold text-gray-500 flex items-center justify-between gap-4">
+                                                            <div>
+                                                                {{$sale->customer->name}}
+                                                            </div>
+                                                            <div>
+                                                                {{$sale->customer->celular}}
+                                                            </div>
                                                         </div>
                                                         <div class="text-gray-400 my-2">
                                                             {{$sale->customer->direccion}}
@@ -290,7 +295,7 @@
                                                                 <div>${{number_format($sale->subtotal,0,',','.')}}</div>
                                                             </div>
                                                             <div class="flex justify-between items-center gap-4 mt-2">
-                                                                <div>delivery</div>
+                                                                <div>Valor delivery</div>
                                                                 <div>${{number_format($sale->delivery_value,0,',','.')}}</div>
                                                             </div>
                                                         @endif
