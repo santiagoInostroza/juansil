@@ -247,6 +247,9 @@
                                                     <div class="px-4 py-2">
                                                         <div class="flex items-center justify-between gap-4 mb-2">
                                                             <h2 class="text-2xl text-gray-500 font-bold">Detalle de venta</h2>
+                                                            @if ($sale->payment_status == 3)
+                                                                <div class="text-green-800 "> pagado<i class="fas fa-check"></i></div>
+                                                            @endif
                                                        
                                                             <div x-on:click="open=!open" class="p-2 px-3 cursor-pointer">
                                                                 <i class="fas fa-times"></i>
