@@ -264,7 +264,7 @@
                                                             {{$sale->customer->direccion}}
                                                         </div>
                                                         <div class="text-gray-500 ">
-                                                            Reparto para el {{Helper::fecha($sale->delivery_date)->dayName}} {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
+                                                            Despacho para el <span class="font-bold">{{Helper::fecha($sale->delivery_date)->dayName}}</span> {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
                                                         </div>
                                                         <div class="my-4">
                                                             <x-table>
@@ -295,7 +295,7 @@
                                                                 <div>${{number_format($sale->subtotal,0,',','.')}}</div>
                                                             </div>
                                                             <div class="flex justify-between items-center gap-4 mt-2  text-gray-500 border-b">
-                                                                <div>Valor delivery</div>
+                                                                <div>Valor despacho</div>
                                                                 <div>${{number_format($sale->delivery_value,0,',','.')}}</div>
                                                             </div>
                                                         @endif
