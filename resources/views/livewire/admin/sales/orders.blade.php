@@ -260,10 +260,10 @@
                                                                 {{$sale->customer->celular}}
                                                             </div>
                                                         </div>
-                                                        <div class="text-gray-400 my-2 font-semibold">
+                                                        <div class="text-gray-500 my-2 font-semibold">
                                                             {{$sale->customer->direccion}}
                                                         </div>
-                                                        <div class="text-gray-400 font-semibold">
+                                                        <div class="text-gray-500 font-semibold">
                                                             Reparto para el {{Helper::fecha($sale->delivery_date)->dayName}} {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
                                                         </div>
                                                         <div class="my-4">
@@ -276,7 +276,7 @@
                                                                         
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody class="text-gray-400 font-semibold">
+                                                                    <tbody class="text-gray-500 font-semibold">
                                                                         @foreach ($sale->sale_items as $item)
                                                                             <tr>
                                                                                 <td> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}}</td>
