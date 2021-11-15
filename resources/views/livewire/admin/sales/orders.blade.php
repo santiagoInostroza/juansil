@@ -316,7 +316,7 @@
                                                             <div>${{number_format($sale->total,0,',','.')}}</div>
                                                         </div>
                                                         @if ($sale->payment_status == 3)
-                                                        <div class="text-green-800 text-xl font-bold"> pagado <i class="fas fa-check"></i></div>
+                                                        <div class="text-green-800 text-xl text-center"> Pagado <i class="fas fa-check"></i></div>
                                                     @endif
                                                     </div>
                                                 </x-modal.modal2>
