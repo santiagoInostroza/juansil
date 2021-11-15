@@ -244,8 +244,8 @@
                                             <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
                                             <div class="hidden" :class="{'hidden':!open}">
                                                 <x-modal.modal2>
-                                                    <div class="px-4">
-                                                        <div class="flex items-center justify-between gap-4 mb-4">
+                                                    <div class="px-4 py-2">
+                                                        <div class="flex items-center justify-between gap-4 mb-2">
                                                             <h2 class="text-2xl text-gray-500 font-bold">Detalle de venta</h2>
                                                        
                                                             <div x-on:click="open=!open" class="p-2 px-3 cursor-pointer">
