@@ -253,6 +253,12 @@
                                                                 <i class="fas fa-times"></i>
                                                             </div>
                                                         </div>
+                                                        @if ($sale->payment_status == 3)
+                                                            <div class="text-green-800 text-xl text-center bg-green-200 p-1"> Pagado <i class="fas fa-check"></i></div>
+                                                        @endif
+                                                        @if ($sale->payment_status < 3)
+                                                            <div class="text-yellow-400 text-xl text-center bg-yellow-200 p-1"> Pago Pendiente</div>
+                                                        @endif
                                                         <div class=" text-gray-500 flex items-center justify-between gap-8">
                                                             <div>
                                                                 {{$sale->customer->name}}
@@ -315,12 +321,7 @@
                                                             <div>Total</div>
                                                             <div>${{number_format($sale->total,0,',','.')}}</div>
                                                         </div>
-                                                        @if ($sale->payment_status == 3)
-                                                            <div class="text-green-800 text-xl text-center bg-green-200"> Pagado <i class="fas fa-check"></i></div>
-                                                        @endif
-                                                        @if ($sale->payment_status < 3)
-                                                            <div class="text-yellow-400 text-xl text-center bg-yellow-200 p-1"> Pago Pendiente</div>
-                                                        @endif
+                                                       
                                                     </div>
                                                 </x-modal.modal2>
                                             </div>
