@@ -246,7 +246,7 @@
                                                 <x-modal.modal2>
                                                     <div class="p-4 text-gray-500 font-semibold">
                                                         <div class="flex items-center justify-between gap-4 mb-4">
-                                                            <h2 class="text-2xl text-gray-500 font-bold">Detalle de venta</h2>
+                                                            <h2 class="text-2xl text-gray-400 font-bold">Detalle de venta</h2>
                                                        
                                                             <div x-on:click="open=!open" class="p-2 px-3 cursor-pointer">
                                                                 <i class="fas fa-times"></i>
@@ -269,7 +269,7 @@
                                                         <div class="my-4">
                                                             <x-table>
                                                                 <table class="table">
-                                                                    <thead class="text-gray-500 font-bold">
+                                                                    <thead class="text-gray-400 font-bold">
                                                                         <tr>
                                                                             <th>Producto</th>
                                                                             <th>Total</th>
