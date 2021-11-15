@@ -239,29 +239,39 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                 
-                                    <div class="text-right flex items-center gap-2">
+                                    <div class="flex items-center gap-2">
                                         <div x-data="{open:false}">
                                             <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
                                             <div class="hidden" :class="{'hidden':!open}">
                                                 <x-modal.modal2>
-                                                    <div class="p-4">
-                                                        <div class="flex items-center justify-between gap-4">
-                                                            <h2>Detalle de venta {{$sale->id}} {{$sale->customer->name}}</h2>
+                                                    <div class="p-4 text-gray-500">
+                                                        <div class="flex items-center justify-between gap-4 my-4">
+                                                            <h2 class="text-2xl text-gray-500 font-bold">Detalle de venta</h2>
+                                                       
                                                             <div x-on:click="open=!open" class="p-2 px-3 cursor-pointer">
                                                                 <i class="fas fa-times"></i>
                                                             </div>
                                                         </div>
-                                                        <div>
+                                                        <div class="font-bold text-gray-500 text-xl">
+                                                            {{$sale->customer->name}}
+                                                        </div>
+                                                        <div class="text-gray-400">
+                                                            {{$sale->customer->direccion}}
+                                                        </div>
+                                                        <div class="text-gray-400">
+                                                            Reparto para el {{Helper::fecha($sale->delivery_date)->dayName}} {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
+                                                        </div>
+                                                        <div class="my-4">
                                                             <x-table>
                                                                 <table class="table">
-                                                                    <thead>
+                                                                    <thead class="text-gray-500 font-bold">
                                                                         <tr>
                                                                             <th>Producto</th>
                                                                             <th>Total</th>
                                                                         
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
+                                                                    <tbody class="text-gray-400">
                                                                         @foreach ($sale->sale_items as $item)
                                                                             <tr>
                                                                                 <td> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}}</td>
@@ -285,7 +295,7 @@
                                                             </div>
                                                         @endif
                                                     
-                                                        <div class="flex justify-between items-center gap-4 mt-2">
+                                                        <div class="flex justify-between items-center gap-4 mt-2 text-gray-500 font-bold">
                                                             <div>Total</div>
                                                             <div>${{number_format($sale->total,0,',','.')}}</div>
                                                         </div>
