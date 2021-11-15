@@ -268,6 +268,13 @@
                                                             Despacho para el <span class="font-bold uppercase">{{Helper::fecha($sale->delivery_date)->dayName}}</span> {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
                                                         </div>
                                                         @endif
+                                                        @if ($sale->comments)
+                                                            <div class="text-gray-500 ">
+                                                                {{$sale->comments}}
+                                                            </div>
+                                                        @endif
+                                                       
+                                                        
                                                         
                                                         <div class="my-4">
                                                             <x-table>
