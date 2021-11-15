@@ -263,9 +263,12 @@
                                                         <div class="text-gray-500 my-2">
                                                             {{$sale->customer->direccion}}
                                                         </div>
-                                                        <div class="text-gray-500 ">
+                                                        @if ($sale->delivery)
+                                                            <div class="text-gray-500 ">
                                                             Despacho para el <span class="font-bold uppercase">{{Helper::fecha($sale->delivery_date)->dayName}}</span> {{Helper::fecha($sale->delivery_date)->format('d')}} {{Helper::fecha($sale->delivery_date)->monthName}}
                                                         </div>
+                                                        @endif
+                                                        
                                                         <div class="my-4">
                                                             <x-table>
                                                                 <table class="table">
