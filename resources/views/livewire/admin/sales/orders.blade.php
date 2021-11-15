@@ -314,7 +314,7 @@
                                                     
                                                         <div class="flex justify-between items-center gap-4 mt-2 text-gray-500 font-bold">
                                                             <div>Total</div>
-                                                            <div>${{number_format($sale->total,0,',','.')}}</div>
+                                                            <div class="text-xl">${{number_format($sale->total,0,',','.')}}</div>
                                                         </div>
 
                                                         @if ($sale->payment_status == 3)
