@@ -252,10 +252,10 @@
                                                                 <i class="fas fa-times"></i>
                                                             </div>
                                                         </div>
-                                                        <div class="font-bold text-gray-500 text-xl">
+                                                        <div class="font-bold text-gray-500">
                                                             {{$sale->customer->name}}
                                                         </div>
-                                                        <div class="text-gray-400">
+                                                        <div class="text-gray-400 my-2">
                                                             {{$sale->customer->direccion}}
                                                         </div>
                                                         <div class="text-gray-400">
