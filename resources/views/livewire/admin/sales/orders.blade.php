@@ -319,7 +319,7 @@
                                                             <div class="text-green-800 text-xl text-center"> Pagado <i class="fas fa-check"></i></div>
                                                         @endif
                                                         @if ($sale->payment_status < 3)
-                                                            <div class="text-yellow-400 text-xl text-center"> Pago Pendiente <i class="fas fa-check"></i></div>
+                                                            <div class="text-yellow-400 text-xl text-center"> Pago Pendiente <i class="fas fa-warning"></i></div>
                                                         @endif
                                                     </div>
                                                 </x-modal.modal2>
