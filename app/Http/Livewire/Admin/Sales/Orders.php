@@ -41,7 +41,7 @@ class Orders extends Component{
     public function render(){
 
         $dt=Carbon::now();
-        $sales = Sale::join('customers','customers.id','=','sales.customer_id')->where('customers.name','like','%'. $this->search . '%')->orderBy('sales.id','desc');
+        $sales = Sale::join('customers','customers.id','=','sales.customer_id')->with('saleItems')->where('customers.name','like','%'. $this->search . '%');
         if ($this->filter==1) {
             $sales = $sales->whereDate('sales.created_at',$dt);
         }elseif ($this->filter==2) {
@@ -54,7 +54,7 @@ class Orders extends Component{
            $sales = $sales->take(30);
         }
 
-        $sales = $sales->get();
+        $sales = $sales->select('sales.*')->orderBy('sales.id','desc')->get();
 
         if (!$this->editSale) {
             foreach ($sales as $key => $sale) {

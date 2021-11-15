@@ -345,6 +345,10 @@ class SaleController extends Controller{
         } while ($go);
     }
 
+
+
+    
+
     public function createSale($arrayVenta){
 
         $sale = new Sale();
@@ -481,6 +485,13 @@ class SaleController extends Controller{
         
     }
 
+    public function editSale(Sale $sale, $arrayVenta){
+
+       $this->deleteSale($sale);
+       $this->createSale($arrayVenta); 
+        
+    }
+
     public function deleteSale(Sale $sale){
 
         foreach ($sale->movement_sales as $movement) {
@@ -489,7 +500,6 @@ class SaleController extends Controller{
                 $movement->purchase_price->stock+=$movement->cantidad; 
                 $movement->purchase_price->save(); 
             } catch (\Throwable $th) {
-              
             }
            
             $movement->product->stock += $movement->cantidad;
@@ -501,6 +511,11 @@ class SaleController extends Controller{
         
     }
 
+
+
+
+
+    // ORDEN TEMPORAL PARA CREAR PEDIDO
 
     public function addToTemporalOrder($pid, $quantity, $price){
         
@@ -614,6 +629,154 @@ class SaleController extends Controller{
     }
 
 
+
+    //  ORDEN TEMPORAL PARA EDITAR PEDIDO
+
+    public function loadEditSale(Sale $sale){
+       
+        $items=[];
+        foreach ($sale->saleItems as  $item) {
+            $items[] =[
+                'product_id' => $item->product_id,
+                'product_name' => $item->product->name,
+                'image' => $item->product->image->url,
+                'cantidad' =>$item->cantidad,
+                'cantidad_por_caja' => $item->cantidad_por_caja,
+                'cantidad_total' => $item->cantidad_total,
+                'precio' => $item->precio,
+                'precio_por_caja' => $item->precio_por_caja,
+                'precio_total' =>$item->precio_total ,
+            ]; 
+        }   
+
+        session([
+            'editOrder.items' => $items
+        ]);
+
+
+        session([
+            'editOrder.total' => $sale->total
+        ]);
+        session([
+            'editOrder.delivery' => $sale->total
+        ]);
+        
+    }
+    
+    public function addToTemporalEditOrder($pid, $quantity, $price){
+        
+        
+        $product = Product::find($pid);
+
+        $items = [];
+        if (session()->has('editOrder.items')) {
+            $items = session('editOrder.items');
+        }
+
+        foreach ($items as  $item) {
+            if ($item['product_id'] == $product->id) {
+                return 1;//Producto ya está ingresado
+            }
+        }
+       
+        $items[] =
+            [
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+                'image' => $product->image->url,
+                'cantidad' =>1,
+                'cantidad_por_caja' => $quantity,
+                'cantidad_total' => $quantity,
+                'precio' => $price,
+                'precio_por_caja' => $quantity * $price,
+                'precio_total' =>$quantity * $price ,
+            ];       
+
+        session([
+            'editOrder.items' => $items
+        ]);
+
+        $total = 0;
+        foreach (session('editOrder.items') as  $value) {
+            $total += $value['precio_total'];
+        }
+
+
+        session([
+            'editOrder.total' => $total
+        ]);
+       
+    }
+
+    public function setTemporalEditOrder($data){
+
+        $precio = 0;
+        $itemId = (isset($data['itemId'])) ? $data['itemId'] : 0;
+        
+        $item= session('editOrder.items.' . $itemId );
+        $quantity =(isset($data['quantity'])) ? intval($data['quantity']) : $item['cantidad'];
+        $quantityBox =(isset($data['quantityBox'])) ? intval($data['quantityBox']) : $item['cantidad_por_caja'];
+        $totalQuantity =$quantity * $quantityBox;
+
+        $price = $this->calcularPrecioVenta($item['product_id'], $totalQuantity);
+        $product = Product::find($item['product_id']);
+        $stock = $product->stock;
+        if($totalQuantity > $stock){
+            return 'sinStock';// No hay sufuciente stock
+        }
+
+       
+       
+        
+       
+        $price =(isset($data['price'])) ? floatval($data['price']) : $price;
+        $priceBox =(isset($data['priceBox'])) ? floatval($data['priceBox']) : $price * $quantityBox;
+        $totalPrice = $price * $totalQuantity;
+       
+
+        session([
+            'editOrder.items.' . $itemId . '.cantidad' => $quantity,
+            'editOrder.items.' . $itemId . '.cantidad_por_caja' => $quantityBox,
+            'editOrder.items.' . $itemId . '.cantidad_total' => $totalQuantity,
+            'editOrder.items.' . $itemId . '.precio' => $price ,
+            'editOrder.items.' . $itemId . '.precio_por_caja' => $priceBox,
+            'editOrder.items.' . $itemId . '.precio_total' => $totalPrice,
+        ]);
+
+        $total = 0;
+        foreach (session('editOrder.items') as  $value) {
+            $total += $value['precio_total'];
+        }
+
+        session([
+            'editOrder.total' => $total
+        ]);
+
+    }
+
+    public function removeFromTemporalEditOrder($itemId){
+
+        session()->pull('editOrder.items.' . $itemId, 'default');
+
+        if (session('editOrder.items')) {
+            $total = 0;
+            foreach (session('editOrder.items') as  $value) {
+                $total += $value['precio_total'];
+            }
+            session([
+                'editOrder.total' => $total
+            ]);
+        }else{
+            session()->forget(['editOrder', 'items']);
+            session()->forget(['editOrder', 'total']);
+            session()->forget('editOrder');
+        }
+
+    }
+
+
+
+
     public function calcularPrecioVenta($product_id, $miCantidad){
         $producto = Product::find($product_id);
         $precio = 0;
@@ -648,6 +811,8 @@ class SaleController extends Controller{
 
         return $precio;
     }
+
+   
 
    
 

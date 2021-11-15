@@ -16,7 +16,7 @@
             scrollbar-width: none;  /* Firefox */
         }
         .max_z{
-            z-index: 999999999999999;
+            z-index: 9;
         }
 
 

@@ -131,11 +131,13 @@
             
         @endif
     </div>
-    {{-- PEDIDO NUEVO --}}
+
+
+    {{-- EDITAR PEDIDO --}}
     <div class=" text-left rounded bg-white p-2  overflow-auto overflow-x-hidden h-full">
         <div class="max-w-4xl m-auto">
             <div class="mb-4">
-               <h2 class=" text-xl font-bold text-gray-600"> {{$sale->customer->name}}</h2>
+               <h2 class=" text-2xl font-bold text-gray-600"> {{$name}}</h2>
             </div>
         
              {{-- DELIVERY --}}
@@ -191,8 +193,9 @@
             <br>
             {{-- ITEMS --}}
             <div class="w-full border rounded p-2">
+
                 <h2 class="font-bold">Lista de productos</h2>
-                @if (session()->has('venta.items') && count(session('venta.items')) > 0)
+                @if (session()->has('editOrder.items') && count(session('editOrder.items')) > 0)
                     <div class="my-5">
                         <x-table>
                             <table class="min-w-full divide-y divide-gray-200">
@@ -218,7 +221,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach (session('venta.items') as $key => $item)
+                                    @foreach (session('editOrder.items') as $key => $item)
                                         <tr>
                                             <td class="py-2 whitespace-nowrap">
                                                
@@ -285,16 +288,16 @@
                 @if ($valor_despacho)
                     <div class="grid grid-cols-2 max-w-xs gap-3">
                         <div>Sub Total</div>
-                        <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
+                        <div>${{ number_format(session('editOrder.total'),0,',','.') }}</div>
                         <div>Delivery</div>
                         <div> ${{ number_format($valor_despacho,0,',','.') }}</div>
                         <div>Total</div>
-                        <div> ${{ number_format($valor_despacho + session('venta.total'),0,',','.') }} </div>
+                        <div> ${{ number_format($valor_despacho + session('editOrder.total'),0,',','.') }} </div>
                     </div>
                 @else
                     <div class="grid grid-cols-2 max-w-xs ">
                         <div>Total</div>
-                        <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
+                        <div>${{ number_format(session('editOrder.total'),0,',','.') }}</div>
                     </div>
                 @endif
             
@@ -344,7 +347,7 @@
                 <div class="hidden" :class="{'hidden':!loading}">
                     <x-spinner.spinner2></x-spinner.spinner2>
                 </div>
-                <x-jet-button class="w-full bg-yellow-300 hover:bg-yellow-400" x-on:click="loading=true;$wire.createOrder().then(()=>{toast('Pedido Creado!!');loading=false})">Modificar Pedido</x-jet-button>
+                <x-jet-button class="w-full bg-yellow-300 hover:bg-yellow-400" x-on:click="loading=true;$wire.editOrder().then(()=>{toast('Pedido Modificado!!');loading=false})">Modificar Pedido</x-jet-button>
             </div>
                 
         

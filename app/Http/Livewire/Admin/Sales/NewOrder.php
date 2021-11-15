@@ -32,11 +32,52 @@ class NewOrder extends Component{
         'setCustomerId'
     ];
 
-    public function setCustomerId($customerId){
-        $this->customerId = $customerId;
-        // $this->selectedCustomer = Customer::find($this->customerId);
-    }
+    protected $messages = [
+        'cantidad.required' => 'Ingresar cantidad.',
+        'cantidad.numeric' => 'Ingresar valor numerico.',
+        'cantidad.min' => 'Revisar.',
+        'cantidad.not_in' => 'Ingresar cantidad valida.',
 
+        'cantidad_por_caja.required' => 'Ingresar cantidad por caja.',
+        'cantidad_por_caja.numeric' => 'Ingresar valor numerico.',
+        'cantidad_por_caja.min' => 'Revisar.',
+        'cantidad_por_caja.not_in' => 'Ingresar cantidad valida.',
+       
+        'precio.required' => 'Ingresar precio.',
+        'precio.numeric' => 'Ingresar valor numerico.',
+        'precio.min' => 'Revisar.',
+        'precio.not_in' => 'Ingresar cantidad valida.',
+
+        'precio_por_caja.required' => 'Ingresar precio por caja.',
+        'precio_por_caja.numeric' => 'Ingresar valor numerico.',
+        'precio_por_caja.min' => 'Revisar.',
+        'precio_por_caja.not_in' => 'Ingresar cantidad valida.',
+
+
+
+        'valor_despacho.required' => 'Ingresa valor.',
+        'valor_despacho.numeric' => 'Ingresa valor numerico.',
+        'fecha_entrega.required' => 'Ingresa fecha de entrega.',
+        'fecha_entrega.date' => 'Ingresa formato fecha.',
+        
+    ];
+
+    public function rules(){  
+        if($this->delivery){
+            return[
+                'customerId' => 'required',
+                'items' => 'required',
+                'valor_despacho' => 'required|numeric|min:0',
+                'fecha_entrega' => 'required|date',
+            ];
+        }else{
+            return[
+                'customerId' => 'required',
+                'items' => 'required',
+            ];
+        }
+        
+    }
 
     public function render(){
         $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->get();
@@ -45,6 +86,11 @@ class NewOrder extends Component{
             $this->items = session('venta.items');
         }
         return view('livewire.admin.sales.new-order',compact('products'));
+    }
+
+    public function setCustomerId($customerId){
+        $this->customerId = $customerId;
+        // $this->selectedCustomer = Customer::find($this->customerId);
     }
 
     public function addToTemporalOrder($id, $quantity, $price){
@@ -61,23 +107,6 @@ class NewOrder extends Component{
             ]); 
            $this->emitTo('admin.sales.new-order', 'render');
         }
-    }
-
-    public function alertStock($quantity){
-        $this->dispatchBrowserEvent('alerta', [
-            'icon' => 'error',
-            'title' => "No hay suficiente stock" ,
-        ]); 
-    }
-
-                  
-    public function removeFromTemporalOrder($itemId){
-        $saleController= new SaleController();
-        $saleController->removeFromTemporalOrder($itemId);
-        $this->dispatchBrowserEvent('toast', [
-            'icon' => 'success',
-            'title' => "Eliminado",
-        ]); 
     }
 
     public function setQuantity($itemId,$quantity){
@@ -120,56 +149,24 @@ class NewOrder extends Component{
         }
         return"ok";
     }
-
-
-
-    public function rules(){  
-        if($this->delivery){
-            return[
-                'customerId' => 'required',
-                'items' => 'required',
-                'valor_despacho' => 'required|numeric|min:0',
-                'fecha_entrega' => 'required|date',
-            ];
-        }else{
-            return[
-                'customerId' => 'required',
-                'items' => 'required',
-            ];
-        }
-        
+                  
+    public function removeFromTemporalOrder($itemId){
+        $saleController= new SaleController();
+        $saleController->removeFromTemporalOrder($itemId);
+        $this->dispatchBrowserEvent('toast', [
+            'icon' => 'success',
+            'title' => "Eliminado",
+        ]); 
     }
 
-    protected $messages = [
-        'cantidad.required' => 'Ingresar cantidad.',
-        'cantidad.numeric' => 'Ingresar valor numerico.',
-        'cantidad.min' => 'Revisar.',
-        'cantidad.not_in' => 'Ingresar cantidad valida.',
+    public function alertStock($quantity){
+        $this->dispatchBrowserEvent('alerta', [
+            'icon' => 'error',
+            'title' => "No hay suficiente stock" ,
+        ]); 
+    }
 
-        'cantidad_por_caja.required' => 'Ingresar cantidad por caja.',
-        'cantidad_por_caja.numeric' => 'Ingresar valor numerico.',
-        'cantidad_por_caja.min' => 'Revisar.',
-        'cantidad_por_caja.not_in' => 'Ingresar cantidad valida.',
-       
-        'precio.required' => 'Ingresar precio.',
-        'precio.numeric' => 'Ingresar valor numerico.',
-        'precio.min' => 'Revisar.',
-        'precio.not_in' => 'Ingresar cantidad valida.',
-
-        'precio_por_caja.required' => 'Ingresar precio por caja.',
-        'precio_por_caja.numeric' => 'Ingresar valor numerico.',
-        'precio_por_caja.min' => 'Revisar.',
-        'precio_por_caja.not_in' => 'Ingresar cantidad valida.',
-
-
-
-        'valor_despacho.required' => 'Ingresa valor.',
-        'valor_despacho.numeric' => 'Ingresa valor numerico.',
-        'fecha_entrega.required' => 'Ingresa fecha de entrega.',
-        'fecha_entrega.date' => 'Ingresa formato fecha.',
-        
-    ];
-
+  
 
     public function createOrder(){
         $this->validate();

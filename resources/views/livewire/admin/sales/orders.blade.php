@@ -68,6 +68,7 @@
                                             <div class=" text-sm text-gray-900">{{$sale->customer->name}}</div>
                                             <div class=" text-sm text-gray-500">{{$sale->customer->direccion}}</div>
                                         </div>
+                             
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -261,11 +262,10 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach ($sale->saleItems as $item)
+                                                                        @foreach ($sale->sale_items as $item)
                                                                             <tr>
                                                                                 <td> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}}</td>
                                                                                 <td>${{number_format($item->precio_total,0,',','.')}}</td>
-                                                                            
                                                                             </tr>
                                                                         @endforeach
                                                                     </tbody>
@@ -301,7 +301,7 @@
                                             <x-jet-button x-on:click="loading=true; editSale=true; $wire.setOrderEdit({{ $sale->id}}).then(()=>loading=false)" class="bg-yellow-200 hover:bg-yellow-400"><i class="fas fa-pen"></i></x-jet-button>
                                             @if ($editSale[$sale->id])
                                                 <span class="hidden" :class="{'hidden': !editSale}">
-                                                    <x-modal.modal_screen>
+                                                    <x-modal.modal_screen >
                                                         <div>
                                                             <div class="flex items-center justify-between bg-yellow-300 ">
                                                                 <div></div>
