@@ -244,7 +244,7 @@
                                             <x-jet-button x-on:click="open =!open"><i class="far fa-eye"></i></x-jet-button>
                                             <div class="hidden" :class="{'hidden':!open}">
                                                 <x-modal.modal2>
-                                                    <div class="p-4 text-gray-500">
+                                                    <div class="p-4 text-gray-500 font-semibold">
                                                         <div class="flex items-center justify-between gap-4 my-4">
                                                             <h2 class="text-2xl text-gray-500 font-bold">Detalle de venta</h2>
                                                        
@@ -252,7 +252,7 @@
                                                                 <i class="fas fa-times"></i>
                                                             </div>
                                                         </div>
-                                                        <div class="font-semibold text-gray-500 flex items-center justify-between gap-8">
+                                                        <div class=" text-gray-500 flex items-center justify-between gap-8">
                                                             <div>
                                                                 {{$sale->customer->name}}
                                                             </div>
