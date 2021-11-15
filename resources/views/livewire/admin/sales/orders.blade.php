@@ -252,7 +252,7 @@
                                                                 <i class="fas fa-times"></i>
                                                             </div>
                                                         </div>
-                                                        <div class="font-bold text-gray-500 flex items-center justify-between gap-4">
+                                                        <div class="font-semibold text-gray-500 flex items-center justify-between gap-8">
                                                             <div>
                                                                 {{$sale->customer->name}}
                                                             </div>
