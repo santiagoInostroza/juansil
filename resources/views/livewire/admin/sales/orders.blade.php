@@ -316,10 +316,10 @@
                                                             <div>${{number_format($sale->total,0,',','.')}}</div>
                                                         </div>
                                                         @if ($sale->payment_status == 3)
-                                                            <div class="text-green-800 text-xl text-center"> Pagado <i class="fas fa-check"></i></div>
+                                                            <div class="text-green-800 text-xl text-center bg-green-200"> Pagado <i class="fas fa-check"></i></div>
                                                         @endif
                                                         @if ($sale->payment_status < 3)
-                                                            <div class="text-yellow-400 text-xl text-center bg-yellow-200"> Pago Pendiente <i class="fas fa-exclamation"></i></div>
+                                                            <div class="text-yellow-400 text-xl text-center bg-yellow-200 p-1"> Pago Pendiente</div>
                                                         @endif
                                                     </div>
                                                 </x-modal.modal2>
