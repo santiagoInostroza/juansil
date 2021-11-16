@@ -5,7 +5,7 @@
         </div>
     @else
         <div class="card-header">
-            <h2 class="" x-on:click="open=!open" style="cursor: pointer">Pendientes ({{ $entregas_pendientes }} {{$venta->sum('total')}})</h2>
+            <h2 class="" x-on:click="open=!open" style="cursor: pointer">Pendientes ({{ $entregas_pendientes }} ) Total pendiente ${{ number_format($ventas->sum('total'),0,',','.')}}</h2>
         </div>
 
         <div class="hidden" :class="{'hidden':!open}" >
