@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class DeliveryController extends Controller
 {
@@ -18,13 +19,13 @@ class DeliveryController extends Controller
     }
 
 
-    public function index2($fecha=""){
+    public function index2($date=""){
 
-        if ($fecha =="") {
-            $fecha=date("Y-m-d");
+        if ($date =="") {
+            $date=date("Y-m-d");
         }
        
-       return view("admin.deliveries.index2",compact('fecha'));    
+       return view("admin.deliveries.index2",compact('date'));    
     }
 
     public function create()
@@ -55,5 +56,19 @@ class DeliveryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function payOrder(Sale $sale){
+       $sale->payment_status=3;
+       $sale->payment_date=Carbon::now()->timezone('America/Santiago');
+       $sale->payment_amount= $sale->pending_amount;
+       $sale->pending_amount=0;
+       $sale->save();
+    }
+    public function deliverOrder(Sale $sale){
+        $sale->delivery_stage=1;
+        $sale->date_delivered=Carbon::now()->timezone('America/Santiago');
+        $sale->delivered_user= auth()->user()->id;
+        $sale->save();
     }
 }

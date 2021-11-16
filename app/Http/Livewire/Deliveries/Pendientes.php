@@ -13,8 +13,7 @@ class Pendientes extends Component
 
    protected $listeners = ['pagar','entregar'];
   
-    public function render()
-    {
+    public function render(){
         $ventas = Sale::where('delivery','1')
         ->whereDate('delivery_date', $this->fecha)
         ->where(function($query){
@@ -25,10 +24,7 @@ class Pendientes extends Component
 
         
 
-        return view('livewire.deliveries.pendientes',[
-            "ventas" =>  $ventas,
-            'entregas_pendientes' => count($ventas)    
-            ] );
+        return view('livewire.deliveries.pendientes',["ventas" =>  $ventas,'entregas_pendientes' => count($ventas) ] );
     }
 
     public function pagar($id)

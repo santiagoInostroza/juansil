@@ -1,4 +1,4 @@
-@extends('layouts.admin4')
+@extends('layouts.simple')
  <style>
         .table td {
             vertical-align: middle;
@@ -6,16 +6,13 @@
         }
 
         #map {
-            height: 400px;
+            height: 600px;
         }
 
     </style>
 @section('content')
-    <div class="container">
-        {{-- <div class="float-right">
-            <a href="{{ route('admin.deliveries.create') }}" class="btn btn-secondary"> Agregar Delivery</a>
-        </div> --}}
-        <livewire:deliveries.index :fecha='$fecha'>
+    <div class="">
+        @livewire('admin.deliveries.index', ['date' => $date])
     </div>
 @endsection
 
@@ -150,6 +147,7 @@
                 (function(i, marker) {
 
                     google.maps.event.addListener(marker, 'click', function() {
+                       
                        
                         Livewire.emit('mostrar_venta', locations[i][1]);
 

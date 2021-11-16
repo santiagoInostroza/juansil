@@ -13,12 +13,7 @@ class InfoVenta extends Component
 
     protected $listeners = ['mostrar_venta'];
 
-    public function mount()
-    {
-        //$this->venta = request()->venta;
-
-      
-    }
+  
 
     public function render()
     {
