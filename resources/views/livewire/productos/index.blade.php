@@ -293,7 +293,7 @@
       @endif
 
             {{-- LO ULTIMO QUE HA LLEGADO --}}
-            {{-- <div class="px-5 sm:px-20 mt-10" >
+            <div class="px-5 sm:px-20 mt-10" >
                <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl"> Lo ultimo <span class="inline-block mb-5 -mt-5 font-sans font-bold text-3xl sm:text-5xl sm:mb-0 sm:mt-0"> que ha llegado</span> </h2>
             </div>
             <div>
@@ -307,25 +307,27 @@
                            <ul class="splide__list">
                               @foreach ($compra->purchase_items as $item)
                                  <li class="splide__slide border-b border-r  p-4 flex flex-col justify-between" wire:key="{{ $item->id }}">
-                                    <a href="{{route('products.show',$item->product)}}">
-                                       <div class="w-full">
-                                          @if ($item->product->image)
-                                             <figure class="splide__slide__container">
-                                                <img class="object-contain h-48 w-full"  alt="{{ $item->product->name }}" data-splide-lazy="{{ '/storage/products_thumb/' . $item->product->image->url }}">
-                                             </figure>
-                                          @endif
-                                          
-                                          <div class="text-gray-600 w-max-content m-auto max-w-full">
-                                                <div class="font-bold">
-                                                   {{$item->product->brand->name}}
-                                                </div>
-                           
-                                             <div class="max-w-full">
-                                                   {{$item->product->name}}
-                                                </div>                           
+                             
+                                       <a @if($item) href="{{route('products.show',$item->product)}}" @endif>
+                                          <div class="w-full">
+                                             @if ($item->product->image)
+                                                <figure class="splide__slide__container">
+                                                   <img class="object-contain h-48 w-full"  alt="{{ $item->product->name }}" data-splide-lazy="{{ '/storage/products_thumb/' . $item->product->image->url }}">
+                                                </figure>
+                                             @endif
+                                             
+                                             <div class="text-gray-600 w-max-content m-auto max-w-full">
+                                                   <div class="font-bold">
+                                                      {{$item->product->brand->name}}
+                                                   </div>
+                              
+                                                <div class="max-w-full">
+                                                      {{$item->product->name}}
+                                                   </div>                           
+                                             </div>
                                           </div>
-                                       </div>
-                                    </a>
+                                       </a>
+                                  
                                     <div class="text-gray-600 w-max-content m-auto text-center mt-4 h-full flex flex-col justify-center max-w-full">
                                     
                                        @if (isset($item->product->salePrices))
@@ -393,7 +395,7 @@
                      </div>
                   @endif
                @endforeach
-            </div> --}}
+            </div>
 
 
 
