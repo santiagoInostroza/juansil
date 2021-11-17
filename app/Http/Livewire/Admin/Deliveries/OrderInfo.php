@@ -26,14 +26,10 @@ class OrderInfo extends Component{
     }
 
     public function payOrder(Sale $sale){
-      $deliveryController= new DeliveryController();
-      $deliveryController->payOrder($sale);
-      $this->emit('render');
+      $this->emit('payOrder',$sale);
     }
 
     public function deliverOrder(Sale $sale){
-        $deliveryController= new DeliveryController();
-        $deliveryController->deliverOrder($sale);
-        $this->emit('render');
+        $this->emit('deliverOrder',$sale);
     }
 }

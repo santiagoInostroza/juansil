@@ -74,7 +74,7 @@
        <div class="flex justify-between md:justify-start gap-4">
            
         <div>
-            <div class="relative" x-data="{loading:false}">
+            <div class="relative" x-data="{loading:false}" id="pay_{{$venta->id}}">
                 <div class="hidden" :class="{'hidden': !loading}">
                     <x-spinner.spinner2 size="8"></x-spinner.spinner2>
                 </div>
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <div class="relative" x-data="{loading:false}">
+        <div class="relative" x-data="{loading:false}" id="deliver_{{$venta->id}}">
             <div class="hidden" :class="{'hidden': !loading}">
                 <x-spinner.spinner2 size="8"></x-spinner.spinner2>
             </div>

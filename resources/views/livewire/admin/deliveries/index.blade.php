@@ -33,7 +33,7 @@
                 <div>${{ number_format($orders->sum('total'),0,',','.') }}</div>
             </h2>
            
-            <div id="map" class="">
+            <div wire:ignore id="map" class="">
                 Cargando mapa...
             </div>
             <div class="" id='info_venta'>
