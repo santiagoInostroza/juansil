@@ -6,7 +6,7 @@
         }
 
         #map {
-            height: 600px;
+            height: 450px;
         }
 
     </style>
@@ -29,10 +29,10 @@
     let svgMarker = {
         path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
         fillColor: "blue",
-        fillOpacity: 0.9,
+        fillOpacity: 1,
         strokeWeight: 0,
         rotation: 0,
-        scale: 1,
+        scale: 1.3,
         anchor: new google.maps.Point(15, 30),
     };
 
@@ -75,12 +75,18 @@
             setMarkers(map, locations);
 
 
-            const locationButton = document.createElement("button");
+            const locationButton = document.createElement("div");
             locationButton.textContent = "Ver ubicacion actual";
-            locationButton.classList.add("p-2");
+            locationButton.classList.add("p-3");
+            locationButton.classList.add("rounded");
+            locationButton.classList.add("text-white");
+            locationButton.classList.add("text-lg");
+            locationButton.classList.add("shadow");
+            locationButton.classList.add("bg-gray-400");
             locationButton.classList.add("my-2");
             locationButton.classList.add("text-md");
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+
 
             locationButton.addEventListener("click", () => {
 
@@ -91,8 +97,9 @@
                     strokeWeight: 2,
                     rotation: 0,
                     scale: 1,
-                    anchor: new google.maps.Point(30, 5),
+                    anchor: new google.maps.Point(15, 30),
                 };
+               
 
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition((position) => {
@@ -100,21 +107,22 @@
                                 lat: position.coords.latitude,
                                 lng: position.coords.longitude,
                             };
-                            new google.maps.Marker({
+                       
+                        new google.maps.Marker({
                                 position: pos,
                                 map: map,
 
-                                //identificador: locations[i][1],
-                                //title: locations[i][2],
+                                // identificador: locations[i][1],
+                                // title: locations[i][2],
                                 icon: {
                                     path: google.maps.SymbolPath.CIRCLE,
                                     scale: 5,
                                 },
                                 animation: google.maps.Animation.DROP,
                             });
-                            //infoWindow.setPosition(pos);
-                            //infoWindow.setContent("estás aqui.");
-                            //infoWindow.open(map);
+                            // infoWindow.setPosition(pos);
+                            // infoWindow.setContent("estás aqui.");
+                            // infoWindow.open(map);
                             map.setCenter(pos);
                         },
                         () => {
@@ -129,8 +137,6 @@
 
 
         }
-
-
 
 
         function setMarkers(map, locations) {
