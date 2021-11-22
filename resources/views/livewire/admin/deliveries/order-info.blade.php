@@ -48,7 +48,7 @@
         <div class="p-4">
             
                 @foreach ($venta->sale_items as $item)
-                    <div class="flex items-center gap-2 justify-between">
+                    <div class="flex items-start gap-2 justify-between">
                         <div class="flex w-max-content">
                             {{ $item->cantidad }}x{{ $item->cantidad_por_caja }}
                         </div>
