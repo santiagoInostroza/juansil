@@ -19,8 +19,13 @@ class Index extends Component{
 
     public function render(){
         $orders = Sale::where('delivery','1')->whereDate('delivery_date', $this->date)->get();    
+
+        $porcDelivery = round( $orders->where('delivery_stage',1)->count() / $orders->count()* 100);
+        $porcPayment = round( $orders->where('payment_status',3)->count() / $orders->count()* 100);
+
+
       
-        return view('livewire.admin.deliveries.index',compact('orders'));
+        return view('livewire.admin.deliveries.index',compact('orders','porcDelivery','porcPayment'));
     }
     
     public function closeAgregarProducto(){
