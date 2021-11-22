@@ -9,132 +9,143 @@
         </div>
 
         <div class="hidden" :class="{'hidden':!open}" >
-            <table id="tablaEntregarHoy" class="table " >
+            <table id="tablaEntregarHoy" class="table" >
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Cliente</th>
-                       
-                        <th> <i class="far fa-money-bill-alt"></i> Estado Pago</th>
-                        <th> <i class="fas fa-truck"></i> Estado Entrega</th>
-                        <th>Comentarios</th>
-                        <th>Accion</th>
-                    </tr>
+                   
                 </thead>
                 <tbody>
                     @foreach ($ventas as $venta)
                         <tr>
-                            <td> {{ $venta->id }} </td>
-                            <td> 
-                                <div class="text-left font-bold text-gray-500">
-                                    <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
-                                </div>
-                                <div class="text-gray-500 text-left">
-                                    <a href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}' target='_blank'>{{ $venta->customer->direccion }}
-                                        @if ($venta->customer->block != '') Torre: {{$venta->customer->block}} @endif
-                                    </a>
-                                </div>
-                                <div class="text-sm flex items-center gap-2">
+                            <td>
+                                <div class="py-4 pb-8">
 
-                                    @if ($venta->customer->telefono)
-                                        <div class="flex items-center gap-2">
-                                            <div>
-                                                {{ $venta->customer->telefono }}
+                                
+                                    <div class="flex gap-4 items-center font-bold">
+                                        <div> {{ $venta->id }} </div>
+                                        <div class="text-left  text-gray-500 ">
+                                            <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
+                                        </div>
+                                    </div> 
+                                
+                                
+                                    <div class="text-gray-500 text-left">
+                                        <a href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}' target='_blank'>{{ $venta->customer->direccion }}
+                                            @if ($venta->customer->block != '') Torre: {{$venta->customer->block}} @endif
+                                        </a>
+                                    </div>
+                                    <div class="text-left">
+                                        {{ $venta->comments }}
+                                    </div>
+                                    <div class="text-sm flex items-center gap-2 ">
+
+                                        @if ($venta->customer->telefono)
+                                            <div class="flex items-center gap-2">
+                                                <a href="tel:+{{ $venta->customer->telefono }} " target="_blank"><i
+                                                        class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
                                             </div>
-                                            <a href="tel:+{{ $venta->customer->telefono }} " target="_blank"><i
-                                                    class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
-                                        </div>
-                                    @endif
-                                    @if ($venta->customer->celular)
-                                        <div class="flex items-center gap-2" >
-
-                                            <div > {{ $venta->customer->celular }} </div>
-
-                                            <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
-                                                    class="fas fa-phone-square p-1 bg-success"></i></a>
-                                            <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20hablo%20de:%20'Precios%20Convenientes'."
-                                                target="_blank"><i
-                                                    class="fab fa-whatsapp p-1 bg-success"></i></a>
-                                        </div>
-                                    @endif
-                                </div>
-                            </td>
+                                        @endif
+                                        @if ($venta->customer->celular)
+                                            <div class="flex items-center gap-2" >
+                                                <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
+                                                        class="fas fa-phone-square p-2 bg-success"></i></a>
+                                                <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20hablo%20de:%20'Precios%20Convenientes'."
+                                                    target="_blank"><i
+                                                        class="fab fa-whatsapp p-2 bg-success"></i></a>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="py-4">
+                
+                                        @foreach ($venta->sale_items as $item)
+                                            <div class="flex items-center gap-2 justify-between">
+                                                <div class="flex w-max-content">
+                                                    {{ $item->cantidad }}x{{ $item->cantidad_por_caja }}
+                                                </div>
+                                                <div>
+                                                    {{ $item->product->name }}
+                                                </div>
                         
-                            <td>{{-- ESTADO PAGO --}}
-                                <div class='text-sm' style="width: max-content;margin: auto">
-                                    <i class="far fa-money-bill-alt  mr-2"></i>
-                                    @if ($venta->payment_status == 1)
-                                        Pendiente
-                                        <div wire:click='payOrder({{ $venta }})' class="btn bg-warning  ml-2">
-                                            Pagar
+                                                <div class="text-right">
+                                                    ${{ number_format($item->precio_total, 0, ',', '.') }}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                        
+                                        <div class="flex justify-end mt-2 ">
+                                            <div class="grid grid-cols-2 gap-x-4">
+                                                <div>Subtotal</div>
+                                                <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
+                                                <div class="">Despacho</div>
+                                                <div class="text-right">${{ number_format($venta->delivery_value,0,',','.')}}</div>
+                                                <div class="font-bold">Total</div>
+                                                <div class="text-right font-bold">${{ number_format($venta->total,0,',','.')}}</div>
+                                            </div>
                                         </div>
-                                    @elseif($venta->payment_status==2)
-                                        Abonado
-                                        style="background: #d0e80a"
-                                        <div wire:click='pagarDiferencia({{ $venta->id }})'
-                                            class="btn bg-warning  ml-2">Pagar</div>
-                                    @elseif($venta->payment_status==3) {{-- PAGADO --}}
-                                        Pagado <span class="p-1 bg-success  ml-2"><i
-                                                class="fas fa-check"></i></span>
-                                    @endif
-                                </div>
-                            </td>
-                            <td>{{-- ESTADO ENTREGA --}}
-                                <div class="text-sm" style="width: max-content;margin: auto">
-                                    <i class="fas fa-truck mr-2"></i>
-                                    @if ($venta->delivery_stage == 0)
-                                        Pendiente <div wire:click='deliverOrder({{ $venta }})'
-                                            class="btn bg-warning  ml-2"> Entregar</div>
-                                    @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
-                                        Entregado <span class="p-1 bg-success ml-2"><i class="fas fa-check"></i></span>
-                                    @endif
-                                </div>
-                            </td>
-                            <td>
-                                {{ $venta->comments }}
-                            </td>
-                            <td>
-                                <div class="d-flex ">
-                                    <input type="hidden" class="latitud" value="{{ $venta->customer->latitud }}">
-                                    <input type="hidden" class="longitud"
-                                        value="{{ $venta->customer->longitud }}">
-                                    <input type="hidden" class="id_venta" value="{{ $venta->id }}">
-                                    <input type="hidden" class="direccion"
-                                        value="{{ $venta->customer->direccion }}">
+                                    </div>
 
-                                    {{-- <a href="{{ route('admin.sales.datos_cliente', $venta) }}" title="Ver datos del cliente" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a> --}}
-                                    <a href="{{ route('admin.sales.edit', $venta) }}"
-                                        class="btn btn-secondary btn-sm mx-2"><i class="fas fa-pen"></i></a>
-                                    <form action="{{ route('admin.sales.destroy', $venta) }}" method='POST'
-                                        class="alerta_eliminar">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-secondary btn-sm"><i
-                                                class="far fa-trash-alt"></i></button>
-                                    </form>
+                                    <div class="flex md:justify-start gap-6">
+                                        <div class="relative" x-data="{loading:false}" id="pay2_{{$venta->id}}">
+                                            <div class="hidden" :class="{'hidden': !loading}">
+                                                <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                                            </div>
+                                            {{-- <i class="far fa-money-bill-alt  mr-2"></i> --}}
+                                            @if ($venta->payment_status == 1)
+                                                <div>
+                                                    <x-jet-button x-on:click="loading=true; $wire.payOrder({{ $venta }}).then(()=>loading=false)"> Pagar </x-jet-button>
+                                                </div>
+                                            @elseif($venta->payment_status==2)
+                                                Abonado<div wire:click='pagarDiferencia({{ $venta->id }})' style="background: #d0e80a" class="btn ml-2">Pagar</div>
+                                            @elseif($venta->payment_status==3) {{-- PAGADO --}}
+                                            <div class="bg-green-500 text-white p-1 rounded">
+                                                <span> 
+                                                    Pagado el 
+                                                    {{ Helper::fecha($venta->payment_date)->dayName}} {{ Helper::fecha($venta->payment_date)->format('H:i') }} 
+                                                
+                                                    @if ($venta->paymentBy())
+                                                        por {{$venta->paymentBy()->name}}
+                                                    @endif
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </div>
+                                                
+                                            @endif
+                                        </div>
+                                        
+
+                                        <div class="relative" x-data="{loading:false}" id="deliver2_{{$venta->id}}">
+                                            <div class="hidden" :class="{'hidden': !loading}">
+                                                <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                                            </div>
+                                            <div class="flex justify-between items-center"  >
+                                                @if ($venta->delivery_stage == null)
+                                                    <x-jet-button  x-on:click="loading=true; $wire.deliverOrder({{ $venta }}).then(()=>loading=false)">Entregar</x-jet-button>
+                                                @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
+                                                    <div class="bg-green-500 text-white p-1 rounded">
+                                                        <span> 
+                                                            Entregado  el {{ Helper::fecha($venta->date_delivered)->dayName}} {{ Helper::fecha($venta->date_delivered)->format('H:i') }} </span>
+                                                            <i class="fas fa-check"></i>
+                                                            @if ($venta->deliveredBy())
+                                                                por  {{$venta->deliveredBy()->name}}
+                                                            @endif
+                                                            
+                                                        </span>
+                                                    </div>
+                                                
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                
+                                    <div>
+                                        <input type="hidden" class="latitud" value="{{ $venta->customer->latitud }}">
+                                        <input type="hidden" class="longitud" value="{{ $venta->customer->longitud }}">
+                                        <input type="hidden" class="id_venta" value="{{ $venta->id }}">
+                                        <input type="hidden" class="direccion" value="{{ $venta->customer->direccion }}">
+                                    </div>
+
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td colspan="5">
-                                <div class="">
-                                   @foreach ( $venta->saleItems as $item)
-                                       <div class="text-left flex items-center gap-4 w-max-content">
-                                           <div>{{$item->cantidad}} x {{$item->cantidad_por_caja}} </div>
-                                           <div> {{$item->product->name}}</div>
-                                           <div> ${{ number_format($item->precio_total,0,',','.')}}</div>
-                                          
-                                          
-                                       </div>                                       
-                                   @endforeach
-                                   <div class="text-left">
-                                   Delivery $ {{ number_format($venta->delivery_value, 0, ',', '.') }}
-                                   </div>
-                                   <div class="text-left">
-                                   Total $ {{ number_format($venta->total, 0, ',', '.') }}
-                                   </div>
-                                </div>
+                    
                             </td>
                         </tr>
                     @endforeach
