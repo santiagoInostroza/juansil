@@ -43,6 +43,10 @@ class Sale extends Model
         $user = User::find($this->delivered_user); 
         return $user;
     }
+    public function deliveredBy(){
+        $user = User::find($this->delivered_user); 
+        return $user;
+    }
 
      //RELACION MUCHOS A MUCHOS
      public function pays(){
@@ -55,6 +59,10 @@ class Sale extends Model
     }
     public function boletaBy(){
         $user = User::find($this->user_boleta); 
+        return $user;
+    }
+    public function paymentBy(){
+        $user = User::find($this->user_payment); 
         return $user;
     }
 

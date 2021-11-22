@@ -63,6 +63,7 @@ class DeliveryController extends Controller
        $sale->payment_date=Carbon::now()->timezone('America/Santiago');
        $sale->payment_amount= $sale->pending_amount;
        $sale->pending_amount=0;
+       $sale->user_payment= auth()->user()->id;
        $sale->save();
     }
     public function deliverOrder(Sale $sale){
