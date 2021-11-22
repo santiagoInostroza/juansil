@@ -48,11 +48,11 @@
     <livewire:deliveries.picking :fecha='$date'>
 
     <div class="fixed bottom-0 left-0 w-full h-12 bg-white">
-        <div class="bg-green-500 h-6 text-white border-b px-1" style="width: {{$porcDelivery}}%; text-shadow: 1px 1px #000000;">
+        <div class="bg-green-500 h-6 text-white border-b px-2" style="width: {{$porcDelivery}}%; text-shadow: 1px 1px #000000;">
            {{ $porcDelivery}} % entregados
         </div>
 
-        <div class="bg-green-500 h-6 text-white px-1" style="width: {{$porcPayment}}%; text-shadow: 1px 1px #000000;">
+        <div class="bg-green-500 h-6 text-white px-2" style="width: {{$porcPayment}}%; text-shadow: 1px 1px #000000;">
            {{ $porcPayment}} % pagados
         </div>
     </div>
