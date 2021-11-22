@@ -8,7 +8,7 @@ use Livewire\Component;
 class Delivered extends Component{ 
     public $fecha;
 
-    protected $listeners = ['actualizarEntregados'];
+    protected $listeners = ['render'];
 
     public function render()
     {
@@ -24,8 +24,5 @@ class Delivered extends Component{
             ]);
     }
 
-    public function actualizarEntregados($id){
-       $this->render();
-       $this->dispatchBrowserEvent('name-updated', ['id' => $id]);
-    }
+   
 }

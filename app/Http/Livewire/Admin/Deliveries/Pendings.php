@@ -23,8 +23,8 @@ class Pendings extends Component{
         return view('livewire.admin.deliveries.pendings',["ventas" =>  $ventas,'entregas_pendientes' => count($ventas) ]);
     }
 
-    public function payOrder(Sale $sale){
-        $this->emit('payOrder',$sale);
+    public function payOrder(Sale $sale,$account){
+        $this->emit('payOrder',$sale,$account);
       }
   
       public function deliverOrder(Sale $sale){
