@@ -32,11 +32,11 @@ class Index extends Component{
         $this->showAgregarDespacho = false;
     }
 
-    public function payOrder(Sale $sale){
+    public function payOrder(Sale $sale, $account = 1){
         $deliveryController= new DeliveryController();
-        $deliveryController->payOrder($sale);
-        $this->emit('render');
+        $deliveryController->payOrder($sale, $account);
         $this->dispatchBrowserEvent('name-updated', ['id' => $sale->id]);
+        $this->emit('render');
       }
 
       public function deliverOrder(Sale $sale){

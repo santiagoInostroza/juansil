@@ -25,8 +25,8 @@ class OrderInfo extends Component{
 
     }
 
-    public function payOrder(Sale $sale){
-      $this->emit('payOrder',$sale);
+    public function payOrder(Sale $sale, $account){
+      $this->emit('payOrder',$sale,$account);
     }
 
     public function deliverOrder(Sale $sale){

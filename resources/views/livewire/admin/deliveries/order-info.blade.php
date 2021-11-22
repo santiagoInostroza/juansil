@@ -76,39 +76,69 @@
         </div>
 
         <div class="flex justify-between md:justify-start gap-4">
-            <div class="relative" x-data="{loading:false}" id="pay_{{$venta->id}}">
-                <div class="hidden" :class="{'hidden': !loading}">
-                    <x-spinner.spinner2 size="8"></x-spinner.spinner2>
-                </div>
+            <div class="relative" x-data="{loading:false,showPay:false,loading2:false}" id="pay_{{$venta->id}}">
+                
                 {{-- <i class="far fa-money-bill-alt  mr-2"></i> --}}
                 @if ($venta->payment_status == 1)
+                    <div class="hidden" :class="{'hidden': !loading}">
+                        <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                    </div>
                     <div>
-                        <x-jet-button x-on:click="loading=true; $wire.payOrder({{ $venta }}).then(()=>loading=false)"> Pagar </x-jet-button>
+                        <x-jet-button x-on:click="showPay=true"> Pagar </x-jet-button>
+                        <div class="hidden" :class="{'hidden' : !showPay}">
+                            <x-modal.modal2>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <h2 class="text-gray-600 font-bold text-xl">Pagar</h2>
+                                        <div x-on:click="showPay=false" class="rounded-full shadow p-2 px-3">
+                                            <i class="fas fa-times "></i>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 gap-y-4 mt-8 relative">
+                                        <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 1).then(()=>{loading2=false; showPay=false;})"> Efectivo </x-jet-button>
+                                        <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 2).then(()=>{loading2=false; showPay=false;})"> Cuenta rut Paty </x-jet-button>
+                                        <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 3).then(()=>{loading2=false; showPay=false;})"> Cuenta rut Santy </x-jet-button>
+                                        <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 4).then(()=>{loading2=false; showPay=false;})"> Cuenta rut Silvia </x-jet-button>
+                                        <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 5).then(()=>{loading2=false; showPay=false;})"> Cuenta Santander </x-jet-button>
+                                        <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 6).then(()=>{loading2=false; showPay=false;})"> Otra </x-jet-button>
+                                    
+                                        <div class="hidden" :class="{'hidden': !loading2}">
+                                            <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </x-modal.modal2>
+                        </div>
+
                     </div>
                 @elseif($venta->payment_status==2)
                     Abonado<div wire:click='pagarDiferencia({{ $venta->id }})' style="background: #d0e80a" class="btn ml-2">Pagar</div>
                 @elseif($venta->payment_status==3) {{-- PAGADO --}}
-                <div class="bg-green-500 text-white p-1 rounded">
-                    <span> 
-                        Pagado el 
-                        {{ Helper::fecha($venta->payment_date)->dayName}} {{ Helper::fecha($venta->payment_date)->format('H:i') }} 
-                        
-                        @if ($venta->paymentBy())
-                            por {{$venta->paymentBy()->name}}
-                        @endif
-                        <i class="fas fa-check"></i>
-                    </span>
-                </div>
+
+                    <div class="bg-green-500 text-white p-1 rounded">
+                        <span> 
+                            Pagado el 
+                            {{ Helper::fecha($venta->payment_date)->dayName}} {{ Helper::fecha($venta->payment_date)->format('H:i') }} 
+                            
+                            @if ($venta->paymentBy())
+                                por {{$venta->paymentBy()->name}}
+                            @endif
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </div>
                     
                 @endif
             </div>
             <div class="relative" x-data="{loading:false}" id="deliver_{{$venta->id}}">
-                <div class="hidden" :class="{'hidden': !loading}">
-                    <x-spinner.spinner2 size="8"></x-spinner.spinner2>
-                </div>
+               
                 <div class="flex justify-between items-center"  >
                     @if ($venta->delivery_stage == null)
-                        <x-jet-button  x-on:click="loading=true; $wire.deliverOrder({{ $venta }}).then(()=>loading=false)">Entregar</x-jet-button>
+                        <div class="hidden" :class="{'hidden': !loading}">
+                            <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                        </div>
+                        <x-jet-button  x-on:click="loading=true; $wire.deliverOrder({{ $venta }}) ">Entregar</x-jet-button>
                     @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
                         <div class="bg-green-500 text-white p-1 rounded">
                             <span> 
