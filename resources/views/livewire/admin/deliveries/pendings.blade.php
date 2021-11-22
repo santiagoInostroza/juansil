@@ -33,7 +33,10 @@
                                             @if ($venta->customer->block != '') Torre: {{$venta->customer->block}} @endif
                                         </a>
                                     </div>
-                                    <div class="text-red-500 text-left">
+                                    <div class="text-red-700 text-left bg-red-200">
+                                        {{ $venta->customer->comments }}
+                                    </div>
+                                    <div class="text-red-700 text-left bg-red-200">
                                         {{ $venta->comments }}
                                     </div>
                                     <div class="w-full flex items-center gap-4 text-3xl" >
