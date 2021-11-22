@@ -20,7 +20,7 @@
                                 <div class="py-4 pb-8">
 
                                 
-                                    <div class="flex gap-4 items-center text-gray-500 font-bold">
+                                    <div class="flex gap-4 items-center text-gray-500 font-bold text-lg">
                                         <div> {{ $venta->id }} </div>
                                         <div class="text-left">
                                             <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
