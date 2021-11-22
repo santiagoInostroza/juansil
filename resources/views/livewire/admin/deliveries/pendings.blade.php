@@ -56,7 +56,7 @@
                                                 <div class="flex w-max-content">
                                                     {{ $item->cantidad }}x{{ $item->cantidad_por_caja }}
                                                 </div>
-                                                <div>
+                                                <div class="text-left">
                                                     {{ $item->product->name }}
                                                 </div>
                         
