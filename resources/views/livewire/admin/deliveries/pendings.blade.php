@@ -22,7 +22,7 @@
                                 
                                     <div class="flex gap-4 items-center text-gray-500 font-bold">
                                         <div> {{ $venta->id }} </div>
-                                        <div class="text-left   ">
+                                        <div class="text-left">
                                             <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
                                         </div>
                                     </div> 
@@ -52,7 +52,7 @@
                                     <div class="py-4 text-gray-500 ">
                 
                                         @foreach ($venta->sale_items as $item)
-                                            <div class="flex items-center gap-2 justify-between">
+                                            <div class="flex items-start gap-2 justify-between">
                                                 <div class="flex w-max-content">
                                                     {{ $item->cantidad }}x{{ $item->cantidad_por_caja }}
                                                 </div>
