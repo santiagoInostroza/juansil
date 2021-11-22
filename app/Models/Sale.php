@@ -53,6 +53,10 @@ class Sale extends Model
         $user = User::find($this->user_boleta); 
         return $user;
     }
+    public function boletaBy(){
+        $user = User::find($this->user_boleta); 
+        return $user;
+    }
 
 
    

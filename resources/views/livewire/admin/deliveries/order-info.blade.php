@@ -10,8 +10,9 @@
         <div class="">
             <div class="">
                 <div class="h3 form-group pb-0 mb-0 d-flex" style="justify-content: space-between; align-items: center;">
-                    <div class="text-2xl pt-2">
+                    <div class="text-2xl pt-2 relative">
                         <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
+                        <div class="absolute top-0 right-0 pt-1 px-4 p text-3xl bg-white "> ${{ number_format($venta->total,0,',','.')}}</div>
                     </div>
                     <div class="w-full pb-2">
                         <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>

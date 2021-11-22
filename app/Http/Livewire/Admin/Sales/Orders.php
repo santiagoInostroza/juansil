@@ -103,4 +103,13 @@ class Orders extends Component{
     public function setOrderEditFalse($sale_id){
         $this->editSale[$sale_id]=false;
     }
+
+    public function generateTicket(Sale $sale){
+
+        $sale->boleta = 1;
+        $sale->user_boleta = auth()->user()->id;
+        $sale->fecha_boleta = Carbon::now()->timezone('America/Santiago');
+        $sale->save();
+        
+    }
 }
