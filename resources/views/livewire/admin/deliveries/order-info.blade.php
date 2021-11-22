@@ -67,10 +67,10 @@
                 <div class="grid grid-cols-2 gap-x-4">
                     <div>Subtotal</div>
                     <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
-                    <div class="border-b">Despacho</div>
+                    <div class="">Despacho</div>
                     <div class="text-right">${{ number_format($venta->delivery_value,0,',','.')}}</div>
-                    <div>Total</div>
-                    <div class="text-right">${{ number_format($venta->total,0,',','.')}}</div>
+                    <div class="font-bold">Total</div>
+                    <div class="text-right font-bold">${{ number_format($venta->total,0,',','.')}}</div>
                 </div>
             </div>
        </div>
