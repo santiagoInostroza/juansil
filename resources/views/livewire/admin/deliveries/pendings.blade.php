@@ -68,11 +68,11 @@
                         
                                         <div class="flex justify-end mt-2 text-gray-500 ">
                                             <div class="grid grid-cols-2 gap-x-4">
-                                                <div>Subtotal</div>
+                                                <div class="text-left">Subtotal</div>
                                                 <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
-                                                <div class="">Despacho</div>
+                                                <div class="text-left">Despacho</div>
                                                 <div class="text-right">${{ number_format($venta->delivery_value,0,',','.')}}</div>
-                                                <div class="font-bold">Total</div>
+                                                <div class="font-bold text-left">Total</div>
                                                 <div class="text-right font-bold">${{ number_format($venta->total,0,',','.')}}</div>
                                             </div>
                                         </div>
