@@ -20,9 +20,9 @@
                                 <div class="py-4 pb-8">
 
                                 
-                                    <div class="flex gap-4 items-center font-bold">
+                                    <div class="flex gap-4 items-center text-gray-500 font-bold">
                                         <div> {{ $venta->id }} </div>
-                                        <div class="text-left  text-gray-500 ">
+                                        <div class="text-left   ">
                                             <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
                                         </div>
                                     </div> 
@@ -33,28 +33,23 @@
                                             @if ($venta->customer->block != '') Torre: {{$venta->customer->block}} @endif
                                         </a>
                                     </div>
-                                    <div class="text-left">
+                                    <div class="text-gray-500 text-left">
                                         {{ $venta->comments }}
                                     </div>
-                                    <div class="text-sm flex items-center gap-2 ">
-
-                                        @if ($venta->customer->telefono)
-                                            <div class="flex items-center gap-2">
-                                                <a href="tel:+{{ $venta->customer->telefono }} " target="_blank"><i
-                                                        class="fas fa-phone-square p-1 mr-1  bg-success"></i></a>
-                                            </div>
-                                        @endif
+                                    <div class="w-full flex items-center gap-4 text-3xl" >
                                         @if ($venta->customer->celular)
-                                            <div class="flex items-center gap-2" >
-                                                <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
-                                                        class="fas fa-phone-square p-2 bg-success"></i></a>
-                                                <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20hablo%20de:%20'Precios%20Convenientes'."
-                                                    target="_blank"><i
-                                                        class="fab fa-whatsapp p-2 bg-success"></i></a>
-                                            </div>
+                                            <a href="tel:{{ $venta->customer->celular }}" target="_blank"><i
+                                                    class="fas fa-phone-square p-2  bg-success"></i></a>
+                                            <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20soy%20el%20repartidor,%20traigo%20su%20pedido"
+                                                target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
+                                            <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20envío%20datos.%0ACuenta%20Rut%20Patricia%20Arias%2017.007.186-2%0Apatriciaariasolivares27@gmail.com"
+                                                target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
+                                            <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20envío%20datos.%0ACuenta%20corriente%20Santander%0ASantiago%20Inostroza%2016.720.449-k%0Anúmero%20cuenta%2076828369%0Asantiagoinostroza2@gmail.com"
+                                                target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
                                         @endif
+                                        <a href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'><i class="fas fa-map-marker-alt p-2 shadow border"></i></a>
                                     </div>
-                                    <div class="py-4">
+                                    <div class="py-4 text-gray-500 ">
                 
                                         @foreach ($venta->sale_items as $item)
                                             <div class="flex items-center gap-2 justify-between">
@@ -71,7 +66,7 @@
                                             </div>
                                         @endforeach
                         
-                                        <div class="flex justify-end mt-2 ">
+                                        <div class="flex justify-end mt-2 text-gray-500 ">
                                             <div class="grid grid-cols-2 gap-x-4">
                                                 <div>Subtotal</div>
                                                 <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
