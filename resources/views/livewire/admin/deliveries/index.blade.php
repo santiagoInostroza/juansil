@@ -33,14 +33,13 @@
                 <div>${{ number_format($orders->sum('total'),0,',','.') }}</div>
             </h2>
            <div class="flex flex-col md:flex-row items-start ">
-            
-            <div wire:ignore id="map" class="w-full">
-                Cargando mapa...
-            </div>
-            <div class="" id='info_venta'>
-             
-                <livewire:admin.deliveries.order-info>
-            </div>
+                <div wire:ignore id="map" class="w-full">
+                    Cargando mapa...
+                </div>
+                <div class="" id='info_venta'>
+                
+                    <livewire:admin.deliveries.order-info>
+                </div>
            </div>
            
           
