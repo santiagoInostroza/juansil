@@ -8,8 +8,8 @@
         #map {
        
             min-height: 450px;
-            max-height: 100%;
             height: 100%;
+            max-height: 1000px;
             
         }
 
