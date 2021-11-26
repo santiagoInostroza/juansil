@@ -9,6 +9,7 @@
        
             min-height: 450px;
             max-height: 100%;
+            height: 100%;
             
         }
 
