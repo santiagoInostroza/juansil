@@ -6,8 +6,7 @@
         }
 
         #map {
-            /* min-height: 500px;
-            height: 100%; */
+            height: 450px;
         }
 
     </style>

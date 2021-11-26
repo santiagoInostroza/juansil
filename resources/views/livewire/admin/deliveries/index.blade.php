@@ -32,11 +32,11 @@
                 <div>Pedidos {{ count($orders) }}</div> 
                 <div>${{ number_format($orders->sum('total'),0,',','.') }}</div>
             </h2>
-           <div class="flex flex-col md:flex-row items-start h-full max-h-6/12">
-                <div wire:ignore id="map" class="w-full h-full">
+           <div class="flex flex-col md:flex-row items-start ">
+                <div wire:ignore id="map" class="w-full">
                     Cargando mapa...
                 </div>
-                <div class="h-full" id='info_venta'>
+                <div class="" id='info_venta'>
                 
                     <livewire:admin.deliveries.order-info>
                 </div>
