@@ -59,7 +59,10 @@
                                 <x-slot name="tooltip">
                                     ${{number_format($venta->customer->sales->sum('total'),0,',','.')}}
                                 </x-slot>
-                                <i class="fas fa-info p-2 shadow border"> {{$venta->customer->sales->count()}}</i>
+                                <div class="shadow border px-2">
+                                    <i class="fas fa-info"> </i>
+                                    <span class="text-md">{{$venta->customer->sales->count()}}</span>
+                                </div>
                             </x-tooltip.tooltip>
                         </div>
                     </div>
