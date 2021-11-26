@@ -6,11 +6,8 @@
         }
 
         #map {
-       
-            min-height: 450px;
+            min-height: 500px;
             height: 100%;
-            max-height: 1000px;
-            
         }
 
     </style>

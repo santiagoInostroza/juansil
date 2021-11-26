@@ -32,7 +32,7 @@
                 <div>Pedidos {{ count($orders) }}</div> 
                 <div>${{ number_format($orders->sum('total'),0,',','.') }}</div>
             </h2>
-           <div class="flex flex-col md:flex-row items-start">
+           <div class="flex flex-col md:flex-row items-start max-h-full">
                 <div wire:ignore id="map" class="w-full h-full">
                     Cargando mapa...
                 </div>
