@@ -54,7 +54,13 @@
                                     target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
                             @endif
                             <a href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'><i class="fas fa-map-marker-alt p-2 shadow border"></i></a>
-                            <i class="fas fa-info p-2 shadow border"> {{$venta->customer->sales->count()}} ${{number_format($venta->customer->sales->sum('total'),0,',','.')}}</i>
+                           
+                            <x-tooltip.tooltip>
+                                <x-slot name="tooltip">
+                                    ${{number_format($venta->customer->sales->sum('total'),0,',','.')}}
+                                </x-slot>
+                                <i class="fas fa-info p-2 shadow border"> {{$venta->customer->sales->count()}}</i>
+                            </x-tooltip.tooltip>
                         </div>
                     </div>
                 
