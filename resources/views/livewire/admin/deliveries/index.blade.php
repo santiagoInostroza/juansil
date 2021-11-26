@@ -37,7 +37,7 @@
             <div wire:ignore id="map" class="w-full">
                 Cargando mapa...
             </div>
-            <div class="w-full" id='info_venta'>
+            <div class="" id='info_venta'>
              
                 <livewire:admin.deliveries.order-info>
             </div>
