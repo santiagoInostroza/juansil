@@ -1,6 +1,6 @@
-<div class="">
+<div class="p-2">
     @if ($mostrar_venta)
-        <div class=p-2" style="">    
+        <div class=" style="">    
             @if ( $venta->customer->comentario != null || $venta->comments != null )
                 <div class="p-2 bg-red-500 text-white text-xl"  >
                     <div> {{ $venta->customer->comentario }}</div>
