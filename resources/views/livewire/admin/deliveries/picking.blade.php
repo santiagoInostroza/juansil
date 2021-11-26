@@ -2,23 +2,17 @@
     @if (count($ventas) == 0)
 
     @else
-
-
         <div class="card-header">
             <h1  x-on:click="show = !show" class="w-full"> Picking </h1>
         </div>
-        <div class="card-body hidden" :class="{ 'hidden' : !show }">
+        <div id="picking" class="card-body hidden" :class="{ 'hidden' : !show }">
             <div class="mt-4">
                 <label wire:click="$set('vistaPicking','1')" class="p-2 shadow rounded  @if ($vistaPicking==1) bg-gray-500 text-white @endif">Detalle</label>
                 <label wire:click="$set('vistaPicking','2')" class="p-2 shadow rounded @if ($vistaPicking==2) bg-gray-500 text-white @endif">Total</label>
-
             </div>
-            @php
-                $despacho = 0;
-            @endphp
+            @php $despacho = 0;@endphp
             <div class="mt-4">
                 @if ($vistaPicking == 1)
-                
 
                     @foreach ($ventas as $venta)
                         <h2 class="font-bold">{{$venta->id}} {{$venta->customer->name}}</h2>
@@ -78,26 +72,22 @@
                         Total ${{number_format($totalisimo + $despacho,0,',','.')}}
                     </div>
 
-                @else
-                
-                        
-                        @foreach ($arreglo as $key => $value)
-                            <label for="{{$key}}">
-                                <div class="py-4">
+                @else        
+                    @foreach ($arreglo as $key => $value)
+                        <label for="{{$key}}">
+                            <div class="py-4">
 
-                                    <input id="{{$key}}"  type="checkbox">  
-                                    <span class="mr-2 ml-2">{{ $value }}</span>  
-                                    {{ $key }}
-                                    
-                                </div>
-                            </label>
-                        @endforeach
+                                <input id="{{$key}}"  type="checkbox">  
+                                <span class="mr-2 ml-2">{{ $value }}</span>  
+                                {{ $key }}
+                                
+                            </div>
+                        </label>
+                    @endforeach
                         
                 
                 @endif
             </div>
-           
-
         </div>
     @endif
 

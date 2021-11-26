@@ -10,7 +10,23 @@
         <div class="">
             <div class="">
                 <div class="h3 form-group pb-0 mb-0 d-flex" style="justify-content: space-between; align-items: center;">
-                    <div class="text-2xl pt-2 relative">
+                    
+                    <div class="flex items-center gap-2 text-2xl pt-2 relative">
+                        <div>
+                            @if ($venta->sale_type== 1)
+                                @if ($venta->created_by())
+                                    <img class="h-8 w-8 rounded-full" src="{{ $venta->created_by()->profile_photo_url }}" alt="">
+                                @else
+                                    
+                                @endif
+                                
+                            @elseif ($venta->sale_type== 2)  
+                                <i class="fas fa-shopping-cart"></i>
+                            @elseif ($venta->sale_type== 3)  
+                                <i class="fas fa-user"></i>
+                            @endif
+                        </div>
+                       
                         <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
                         <div class="absolute top-0 right-0 pt-1 px-4 p text-3xl bg-white "> ${{ number_format($venta->total,0,',','.')}}</div>
                     </div>
@@ -46,33 +62,32 @@
         </div>
 
         <div class="p-4">
-            
-                @foreach ($venta->sale_items as $item)
-                    <div class="flex items-start gap-2 justify-between">
-                        <div class="flex w-max-content">
-                            {{ $item->cantidad }}x{{ $item->cantidad_por_caja }}
-                        </div>
-                        <div>
-                            {{ $item->product->name }}
-                        </div>
-
-                        <div class="text-right">
-                            ${{ number_format($item->precio_total, 0, ',', '.') }}
-                        </div>
+            @foreach ($venta->sale_items as $item)
+                <div class="flex items-start gap-2 justify-between">
+                    <div class="flex w-max-content">
+                        {{ $item->cantidad }}x{{ $item->cantidad_por_caja }}
                     </div>
-                @endforeach
-                <hr>
+                    <div>
+                        {{ $item->product->name }}
+                    </div>
 
-                <div class="flex justify-end mt-2 ">
-                    <div class="grid grid-cols-2 gap-x-4">
-                        <div>Subtotal</div>
-                        <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
-                        <div class="">Despacho</div>
-                        <div class="text-right">${{ number_format($venta->delivery_value,0,',','.')}}</div>
-                        <div class="font-bold">Total</div>
-                        <div class="text-right font-bold">${{ number_format($venta->total,0,',','.')}}</div>
+                    <div class="text-right">
+                        ${{ number_format($item->precio_total, 0, ',', '.') }}
                     </div>
                 </div>
+            @endforeach
+            <hr>
+
+            <div class="flex justify-end mt-2 ">
+                <div class="grid grid-cols-2 gap-x-4">
+                    <div>Subtotal</div>
+                    <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
+                    <div class="">Despacho</div>
+                    <div class="text-right">${{ number_format($venta->delivery_value,0,',','.')}}</div>
+                    <div class="font-bold">Total</div>
+                    <div class="text-right font-bold">${{ number_format($venta->total,0,',','.')}}</div>
+                </div>
+            </div>
         </div>
 
         <div class="flex justify-between md:justify-start gap-4">
