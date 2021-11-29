@@ -126,7 +126,7 @@
             </div>
             <div class="flex justify-center flex-wrap gap-2  text-sm bg-gray-700 text-white p-2 ">
                 <div class="w-max-content"> Juansil Derechos reservados {{date('Y')}} </div>
-                <div  class="w-max-content"> Sistema comercial realizado por <div class="inline-block underline cursor-pointer font-bold tracking-widest transform hover:scale-110"> Vonaltein </div>
+                <div  class="w-max-content"> Sistema comercial realizado por <div class="inline-block underline cursor-pointer font-bold tracking-widest transform hover:scale-110 ml-1"> Vonaltein </div>
             </div>
             
         </footer>
