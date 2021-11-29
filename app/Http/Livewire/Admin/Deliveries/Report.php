@@ -8,7 +8,9 @@ use Livewire\Component;
 
 class Report extends Component{
     public $date;
-    
+
+    protected $listeners = ['render'];
+
     public function render(){
         $orders = Sale::where('delivery','1')->whereDate('delivery_date', $this->date)->get(); 
         return view('livewire.admin.deliveries.report',compact('orders'));
