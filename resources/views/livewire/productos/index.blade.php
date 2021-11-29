@@ -32,8 +32,7 @@
       </div>
    @endif
    <!-- Your plugin de chat code -->
-   <div id="fb-customer-chat" class="fb-customerchat mb-20"> </div>
-
+   {{-- <div id="fb-customer-chat" class="fb-customerchat mb-20"> </div>
    <script>
          var chatbox = document.getElementById('fb-customer-chat');
          chatbox.setAttribute("page_id", "103743992069476");
@@ -53,7 +52,7 @@
             js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
             fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'facebook-jssdk'));
-   </script>
+   </script> --}}
 
    <div  wire:ignore >
       <div class="mt-10"></div>
