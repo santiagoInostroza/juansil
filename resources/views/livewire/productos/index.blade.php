@@ -11,26 +11,7 @@
          } 
       ).includes( 'back_forward' );       
    </script>
-   @if (Auth::user() && Auth::user()->id == 1)     
-      <div x-data="{show:true}" class="hidden">
-         <div x-show="!show" class="fixed top-0 mt-4 bg-white z-40 "  >
-            <div x-on:click="show= !show"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer"> -> </div>
-         </div>
-         <div x-show="show" class="fixed top-0 bg-white z-40 overflow-auto h-screen w-max-content shadow p-4 " >
-            <div class="flex justify-end">
-               <div x-on:click="$wire.restaurarSesion()"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer">RS</div>
-               <div x-on:click="show= !show"  class="p-2 px-3 border shadow rounded-full text-center cursor-pointer"> <- </div>
-            </div>
-            Solo lo puede ver el user 1
 
-            @php
-               echo "<pre>";
-               var_dump(session('carrito'));
-               echo "</pre>";
-            @endphp
-         </div>
-      </div>
-   @endif
    <!-- Your plugin de chat code -->
    {{-- <div id="fb-customer-chat" class="fb-customerchat mb-20"> </div>
    <script>

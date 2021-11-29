@@ -9,24 +9,24 @@ use Carbon\Carbon;
 
 class DeliveryController extends Controller
 {
-    public function index($fecha=""){
-
-        if ($fecha =="") {
-            $fecha=date("Y-m-d");
-        }
-       
-       return view("admin.deliveries.index",compact('fecha'));    
-    }
-
-
-    public function index2($date=""){
+    public function index($date=""){
 
         if ($date =="") {
             $date=date("Y-m-d");
         }
        
-       return view("admin.deliveries.index2",compact('date'));    
+       return view("admin.deliveries.index",compact('date'));    
     }
+
+
+    // public function index2($date=""){
+
+    //     if ($date =="") {
+    //         $date=date("Y-m-d");
+    //     }
+       
+    //    return view("admin.deliveries.index2",compact('date'));    
+    // }
 
     public function create()
     {

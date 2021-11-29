@@ -37,9 +37,9 @@ Route::resource('proveedores', SupplierController::class)->middleware('can:admin
 Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create'])->middleware('can:admin.home')->name('admin.purchases.create');
 Route::resource('compras', PurchaseController::class)->middleware('can:admin.home')->names('admin.purchases');
 
-Route::get('deliveries2/{date?}', [DeliveryController::class,'index2'])->middleware('can:admin.home')->name('admin.deliveries.index2');
+Route::get('deliveries/{date?}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
 // Route::get('deliveries2', [DeliveryController::class,'index2'])->middleware('can:admin.home')->name('admin.deliveries.index2');
-Route::get('deliveries/{fecha}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
+// Route::get('deliveries/{fecha}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
 
 Route::resource('deliveries', DeliveryController::class)->middleware('can:admin.home')->names('admin.deliveries');
 

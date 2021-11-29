@@ -1,8 +1,8 @@
 <div class="bg-gray-200 p-4 rounded">
     <div class="flex items-center">
-        <a class="shadow rounded p-2 bg-white" href="{{ route('admin.deliveries.index2',['date'=> date("Y-m-d",strtotime($date . " -1 day"))]) }}"> Anterior </a>
+        <a class="shadow rounded p-2 bg-white" href="{{ route('admin.deliveries.index',['date'=> date("Y-m-d",strtotime($date . " -1 day"))]) }}"> Anterior </a>
         <x-jet-input  type="date" name="date" id="" class="w-full mx-4" value="{{ $date }}" onchange="return cambiarFecha(this);"></x-jet-input>
-        <a class="shadow rounded p-2 bg-white" href="{{ route('admin.deliveries.index2',['date'=> date("Y-m-d",strtotime($date . " +1 day"))] ) }}">Siguiente </a>
+        <a class="shadow rounded p-2 bg-white" href="{{ route('admin.deliveries.index',['date'=> date("Y-m-d",strtotime($date . " +1 day"))] ) }}">Siguiente </a>
     </div>
 
     <div class="my-4">
@@ -49,6 +49,7 @@
     <livewire:admin.deliveries.pendings :fecha='$date'>
     <livewire:admin.deliveries.delivered :fecha='$date'>
     <livewire:admin.deliveries.picking :fecha='$date'>
+    <livewire:admin.deliveries.report :fecha='$date'>
 
     <div class="fixed bottom-0 left-0 w-full h-12 bg-white">
         <div class="bg-green-500 h-6 text-white border-b" style="width: {{$porcDelivery}}%; text-shadow: 1px 1px #000000;">
