@@ -41,7 +41,7 @@ Route::get('deliveries/{date?}', [DeliveryController::class,'index'])->middlewar
 // Route::get('deliveries2', [DeliveryController::class,'index2'])->middleware('can:admin.home')->name('admin.deliveries.index2');
 // Route::get('deliveries/{fecha}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
 
-Route::resource('deliveries', DeliveryController::class)->middleware('can:admin.home')->names('admin.deliveries');
+// Route::resource('deliveries', DeliveryController::class)->middleware('can:admin.home')->names('admin.deliveries');
 
 Route::resource('movimientos', MovementController::class)->middleware('can:admin.home')->names('admin.movements');
 Route::resource('stock', StockController::class)->middleware('can:admin.home')->names('admin.stock');

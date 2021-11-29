@@ -17,16 +17,8 @@ class DeliveryController extends Controller
        
        return view("admin.deliveries.index",compact('date'));    
     }
+ 
 
-
-    // public function index2($date=""){
-
-    //     if ($date =="") {
-    //         $date=date("Y-m-d");
-    //     }
-       
-    //    return view("admin.deliveries.index2",compact('date'));    
-    // }
 
     public function create()
     {
