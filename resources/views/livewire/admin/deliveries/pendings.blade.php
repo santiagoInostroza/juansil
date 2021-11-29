@@ -9,7 +9,7 @@
         </div>
 
         <div class="hidden" :class="{'hidden':!open}" >
-            <div id="tablaEntregarHoy" class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:p-4 bg-gray-200" >
+            <div id="tablaEntregarHoy" class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:p-4 bg-gray-200" >
                 @foreach ($ventas as $venta)
                     <div class="shadow p-4 bg-white rounded">
                         <div class="py-4 pb-8">
@@ -177,5 +177,5 @@
                 @endforeach
             </div>
         </div>
-        @endif
+    @endif
 </div>
