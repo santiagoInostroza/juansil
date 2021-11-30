@@ -64,6 +64,17 @@
                                     @endforeach
                                 </div>
                         </td>
+                        <td class="px-6 py-2">
+                            <div class="text-sm text-gray-900">
+                                @if ($customer->celular)
+                           
+                                    <a href="https://api.whatsapp.com/send?phone={{ $customer->celular }}"
+                                        target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
+                            
+                                @endif
+                            </div>
+                        </td>
+
                     </tr>
                     @endforeach             
             </tbody>
