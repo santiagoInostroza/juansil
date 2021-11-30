@@ -72,7 +72,7 @@
                         <td class="px-6 py-2">
                             <div class="text-sm text-gray-900" x-data id="publicidad_{{$customer->id}}">
                                 @if ($customer->celular)
-                                    <a href="https://api.whatsapp.com/send?phone={{ $customer->celular }}" target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone={{ $customer->celular }}" target="wasap"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
                                     <i x-on:click="$wire.sendAdvertising({{$customer}})" class="fas fa-edit p-2 bg-yellow-200"></i> 
                             
                                 @endif
