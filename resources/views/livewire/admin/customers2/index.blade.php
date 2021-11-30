@@ -21,9 +21,9 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($customers as $customer)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">  {{$customer->id}} </td> 
+                        <td class="px-6 py-2 whitespace-nowrap">  {{$customer->id}} </td> 
                 
-                        <td class="px-6 py-4 ">
+                        <td class="px-6 py-2 ">
                             <div class="" style="max-width: 200px;" >
                                 <div class="text-sm text-gray-900">{{$customer->name}}</div>
                                 {{-- <div class="text-sm text-gray-500">
@@ -33,16 +33,16 @@
                                 </div> --}}
                             </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-2">
                                 <div class="text-sm text-gray-900">{{$customer->comuna}}</div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-2">
                                 <div class="text-sm text-gray-900">{{$customer->sales->count()}} </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-2">
                                 <div class="text-sm text-gray-900"> ${{ number_format($customer->sales->sum('total'),0,',','.' )}} </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-2">
                                 <div class="text-sm text-gray-900">
                                    
                                     @foreach ($customer->sales as $sale)
