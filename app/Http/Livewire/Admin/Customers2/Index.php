@@ -9,7 +9,10 @@ use App\Models\Customer;
 class Index extends Component{
     
     public function render(){
-        $customers = Customer::with('sales')->get();
+        $customers = Customer::join('sales', 'sales.customer_id','=','customers.id')
+        ->select('customers.*')
+        ->orderBy('sales.date_delivered','asc')
+        ->get();
         $users = User::all();
         return view('livewire.admin.customers2.index',compact('customers','users') );
     }
