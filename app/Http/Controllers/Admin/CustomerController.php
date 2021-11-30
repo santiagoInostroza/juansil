@@ -16,10 +16,8 @@ class CustomerController extends Controller
         return view("admin.customers.index", compact('customers'));
     }
 
-    public function lista(){
-        $customers = Customer::with('sales')->get();
-        $users = User::all();
-        return view('admin.customers.lista',compact('customers','users') );
+    public function index2(){
+        return view('admin.customers.index2');
     }
 
 

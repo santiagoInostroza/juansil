@@ -38,15 +38,11 @@ Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create']
 Route::resource('compras', PurchaseController::class)->middleware('can:admin.home')->names('admin.purchases');
 
 Route::get('deliveries/{date?}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
-// Route::get('deliveries2', [DeliveryController::class,'index2'])->middleware('can:admin.home')->name('admin.deliveries.index2');
-// Route::get('deliveries/{fecha}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
-
-// Route::resource('deliveries', DeliveryController::class)->middleware('can:admin.home')->names('admin.deliveries');
 
 Route::resource('movimientos', MovementController::class)->middleware('can:admin.home')->names('admin.movements');
 Route::resource('stock', StockController::class)->middleware('can:admin.home')->names('admin.stock');
 Route::get('inventory', [InventarioController::class,'index'])->middleware('can:admin.home')->name('admin.inventory');
-Route::get('customer', [CustomerController::class,'lista'])->middleware('can:admin.home')->name('admin.customers.lista');
+Route::get('customer', [CustomerController::class,'index2'])->middleware('can:admin.home')->name('admin.customers.lista');
 Route::resource('clientes', CustomerController::class)->middleware('can:admin.home')->names('admin.customers');
 Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerData'])->middleware('can:admin.home')->name('admin.customers.datos_cliente');
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->middleware('can:admin.home')->name('admin.sales.create');
@@ -64,6 +60,9 @@ Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->middle
 Route::resource('routes', RouteController::class)->middleware('can:admin.home')->names('routes');
 Route::get('sectors',[RouteController::class,'sectors'])->middleware('can:admin.home')->name('routes.sectors');
 Route::get('report', [ReportController::class,'index'])->middleware('can:admin.home')->name('admin.report');
+
+
+
 
 
 
