@@ -8,11 +8,12 @@
                 <div class="p-2 m-1 cursor-pointer shadow rounded @if($comuna->name == $nombreComuna) bg-gray-600 text-white @endif" wire:click="$set('nombreComuna','{{$comuna->name}}')">{{$comuna->name}} @if($comuna->name == $nombreComuna)  {{ $customers->count() }} @endif </div>
             @endforeach
         </div>
+        <div class="mt-2">
+            <x-jet-input type="search" wire:model.debounce.500ms="search" placeholder="Ingresa palabra a buscar" class="w-full"></x-jet-input>
+        </div>
     </div>
 
-    <div>
-        <x-jet-input type="search" wire:model.debounce.500ms="search"></x-jet-input>
-    </div>
+
 
     <x-table>
         <table class="min-w-full divide-y divide-gray-200">
