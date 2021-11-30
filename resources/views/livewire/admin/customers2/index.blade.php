@@ -3,9 +3,10 @@
     <h1 class="text-3xl font-bold text-gray-600 text-center">CLIENTES</h1>
     <div class="p-4 border rounded my-4">
         <div class="flex items-center flex-wrap">
-            <div class="p-2 m-1 cursor-pointer shadow rounded @if($nombreComuna == '') bg-gray-600 text-white @endif" wire:click="$set('nombreComuna','')">Todas {{ $customers->count() }}</div>
+            <div class="p-2 m-1 cursor-pointer shadow rounded @if($nombreComuna == '') bg-gray-600 text-white @endif" wire:click="$set('nombreComuna','')">TODOS @if($nombreComuna == '')  {{ $customers->count() }}  @endif</div>
             @foreach ($comunas as $comuna)
-                <div class="p-2 m-1 cursor-pointer shadow rounded @if($comuna->name == $nombreComuna) bg-gray-600 text-white @endif" wire:click="$set('nombreComuna','{{$comuna->name}}')">{{$comuna->name}}  {{ $customers->where('comuna', 'la granja')->count() }}</div>
+           
+                <div class="p-2 m-1 cursor-pointer shadow rounded @if($comuna->name == $nombreComuna) bg-gray-600 text-white @endif" wire:click="$set('nombreComuna','{{$comuna->name}}')">{{$comuna->name}} @if($comuna->name == $nombreComuna)  {{ $customers->count() }} @endif </div>
             @endforeach
         </div>
     </div>
