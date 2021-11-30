@@ -26,11 +26,11 @@
                         <td class="px-6 py-4 ">
                             <div class="" style="max-width: 200px;" >
                                 <div class="text-sm text-gray-900">{{$customer->name}}</div>
-                                <div class="text-sm text-gray-500">
+                                {{-- <div class="text-sm text-gray-500">
                                         {{$customer->direccion}} 
                                         @isset($customer->block) Torre {{$customer->block}} @endisset 
                                         @isset($customer->depto) depto {{$customer->depto}} @endisset    
-                                </div>
+                                </div> --}}
                             </div>
                         </td>
                         <td class="px-6 py-4">
