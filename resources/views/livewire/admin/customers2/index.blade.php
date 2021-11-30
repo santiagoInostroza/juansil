@@ -2,9 +2,12 @@
 
     <h1 class="text-3xl font-bold text-gray-600 text-center">CLIENTES</h1>
     <div class="p-4 border rounded my-4">
-        @foreach ($comunas as $comuna)
-            <div>{{$comuna}}</div>
-        @endforeach
+        <div class="flex items-center flex-wrap">
+
+            @foreach ($comunas as $comuna)
+            <div class="p-1 m-1">{{$comuna->name}} {{$customers->where('comuna', $comuna->name)->count()}}</div>
+            @endforeach
+        </div>
     </div>
 
     <x-table>

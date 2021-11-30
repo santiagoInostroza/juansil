@@ -10,7 +10,7 @@ use App\Models\Customer;
 class Index extends Component{
     
     public function render(){
-        $comunas = Comuna::all();
+        $comunas = Comuna::where('tiene_reparto',1)->get();
         $customers = Customer::with('sales')
         ->orderBy('comuna', 'asc')
         ->where('comuna','puente alto')
