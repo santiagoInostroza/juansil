@@ -41,5 +41,10 @@ class Customer extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function advertisingSentBy(){
+        $user = User::find($this->advertising_user); 
+        return $user;
+    }
+
 
 }

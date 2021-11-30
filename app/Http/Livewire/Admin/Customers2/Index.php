@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Customers2;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Comuna;
 use Livewire\Component;
@@ -25,5 +26,14 @@ class Index extends Component{
         ->get();
         $users = User::all();
         return view('livewire.admin.customers2.index',compact('customers','users','comunas') );
+    }
+
+    public function sendAdvertising(Customer $customer){
+
+        $customer->advertising_date = Carbon::now() ;
+        $customer->advertising_user = auth()->user()->id ;
+        $customer->save();
+
+       
     }
 }
