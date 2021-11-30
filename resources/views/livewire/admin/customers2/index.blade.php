@@ -2,7 +2,9 @@
 
     <h1 class="text-3xl font-bold text-gray-600 text-center">CLIENTES</h1>
     <div class="p-4 border rounded my-4">
-        FILTRO
+        @foreach ($comunas as $comuna)
+            <div>{{$comuna}}</div>
+        @endforeach
     </div>
 
     <x-table>
