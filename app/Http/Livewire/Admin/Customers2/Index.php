@@ -11,6 +11,7 @@ class Index extends Component{
     public function render(){
         $customers = Customer::with('sales')
         ->orderBy('comuna', 'asc')
+        ->where('comuna','puente alto')
         ->get();
         $users = User::all();
         return view('livewire.admin.customers2.index',compact('customers','users') );
