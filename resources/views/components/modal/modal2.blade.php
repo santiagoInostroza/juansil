@@ -1,7 +1,7 @@
 <div>
         <div class="inset-0 fixed opacity-75 bg-gray-800 flex justify-center items-center z-10"></div>
         
-        <div class="inset-0 fixed   flex justify-center items-center z-20">
+        <div class="inset-0 fixed   flex justify-center items-center z-20  max-w-sm md:max-w-full">
             <section class="bg-gray-200 rounded-lg shadow min-w-max-content max-w-screen-xl w-screen sm:w-max-content " style="max-height: calc(100vh - 160px)">
                
                 @isset($titulo)
