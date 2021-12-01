@@ -265,7 +265,7 @@
                                             
                                             <div class="hidden" :class="{'hidden':!open}">
                                                 <x-modal.modal2>
-                                                    <div id="imprimible_{{$sale->id}}"  class="px-4 py-2">
+                                                    <div id="imprimible_{{$sale->id}}"  class="px-4 py-2 max-w-xs md:max-h-full">
                                                         <div class="flex items-center justify-between gap-4 mb-2">
                                                             <h2 class="text-2xl text-gray-500 font-bold">Detalle de venta</h2>
                                                            
