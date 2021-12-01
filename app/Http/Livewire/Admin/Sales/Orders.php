@@ -65,7 +65,7 @@ class Orders extends Component{
                 $this->editSale[$sale->id]=false;
             }
         }
-        $purchases= Purchase::whereMonth('date',11)->get();
+        $purchases= Purchase::whereMonth('fecha',11)->get();
 
         return view('livewire.admin.sales.orders',compact('sales','purchases'));
     }
