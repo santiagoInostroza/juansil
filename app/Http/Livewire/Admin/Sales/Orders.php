@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Sales;
 use Carbon\Carbon;
 use App\Models\Sale;
 use Livewire\Component;
+use App\Models\Purchase;
 use App\Http\Controllers\Admin\SaleController;
 
 class Orders extends Component{ 
@@ -64,8 +65,9 @@ class Orders extends Component{
                 $this->editSale[$sale->id]=false;
             }
         }
+        $purchases= Purchase::whereMonth('date',11)->get();
 
-        return view('livewire.admin.sales.orders',compact('sales'));
+        return view('livewire.admin.sales.orders',compact('sales','purchases'));
     }
 
 

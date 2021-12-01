@@ -16,7 +16,7 @@
                 <div x-on:click="loading= true; $wire.$set('filter',5).then(()=>loading=false);"  class="p-2 shadow @if($filter==5) bg-gray-600 text-white @else cursor-pointer @endif" >este mes</div>            
                 
                 @if ($filter==5)
-                    Total de venta ${{number_format($sales->sum('total'),0,',','.')}} Total de boletas ${{number_format($sales->where('boleta',1)->sum('total'),0,',','.')}}
+                    Total de venta ${{number_format($sales->sum('total'),0,',','.')}} Total de boletas ${{number_format($sales->where('boleta',1)->sum('total'),0,',','.')}} cCompras ${{number_format($purchases->sum('total'),0,',','.')}}
                 @endif
             </div>
             <div class="pr-4">
