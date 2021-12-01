@@ -88,38 +88,124 @@
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900 w-max-content flex items-center gap-1">
-                                            <div class="font-bold tracking-wide"> 
-                                                <x-tooltip.tooltip>
-                                                    <x-slot name="tooltip"> Stock en bodega</x-slot>
-                                                    {{$product->stock}} +
-                                                </x-tooltip.tooltip>    
-                                            </div>
-                                            <div>
-                                                @php
-                                                    $stockReservado=0;
-                                                    foreach ($sales as $sale) {
-                                                        foreach ($sale->saleItems as  $item) {
-                                                            // echo "<div> $item </div>";
-                                                            if ($item->product_id == $product->id) {
-                                                                $stockReservado += $item->cantidad_total;
+                                        <div x-data="showChanges:false" id="stock_{{$product->id}}">
+                                            
+                                            <div class="text-sm text-gray-900 w-max-content flex items-center gap-1">
+                                                <div class="font-bold tracking-wide"> 
+                                                    <x-tooltip.tooltip>
+                                                        <x-slot name="tooltip"> Stock en bodega</x-slot>
+                                                        {{$product->stock}} +
+                                                    </x-tooltip.tooltip>    
+                                                </div>
+                                                <div>
+                                                    @php
+                                                        $stockReservado=0;
+                                                        foreach ($sales as $sale) {
+                                                            foreach ($sale->saleItems as  $item) {
+                                                                // echo "<div> $item </div>";
+                                                                if ($item->product_id == $product->id) {
+                                                                    $stockReservado += $item->cantidad_total;
+                                                                }
                                                             }
                                                         }
-                                                    }
-                                                @endphp
-                                                <x-tooltip.tooltip>
-                                                    <x-slot name="tooltip"> Stock en pedidos</x-slot>
-                                                    {{$stockReservado}} =
-                                                </x-tooltip.tooltip>
-                                            </div>
-                                            <div>
-                                                <x-tooltip.tooltip>
-                                                    <x-slot name="tooltip"> Stock Total</x-slot>
-                                                    {{$product->stock + $stockReservado}}
-                                                </x-tooltip.tooltip>
-                                               
-                                            </div>
-                                            <div class="p-2 shadow rounded cursor-pointer"><i class="fas fa-pen"></i></div>
+                                                    @endphp
+                                                    <x-tooltip.tooltip>
+                                                        <x-slot name="tooltip"> Stock en pedidos</x-slot>
+                                                        {{$stockReservado}} =
+                                                    </x-tooltip.tooltip>
+                                                </div>
+                                                <div>
+                                                    <x-tooltip.tooltip>
+                                                        <x-slot name="tooltip"> Stock Total</x-slot>
+                                                        {{$product->stock + $stockReservado}}
+                                                    </x-tooltip.tooltip>
+                                                
+                                                </div>
+                                                <div x-data="{openModal:false,stockTemp:'',loading:false}" id="editStock_{{$product->id}}">
+                                                    <div x-on:click="openModal=!openModal" class="p-2 shadow rounded cursor-pointer"><i class="fas fa-pen"></i></div>
+                                                    <div class="hidden" :class="{'hidden': !openModal}">
+                                                        <x-modal.modal2>
+                                                            <div class="hidden" :class="{'hidden': !loading}">
+                                                                <x-spinner.spinner2></x-spinner.spinner2>
+                                                            </div>
+                                                            <div class="p-4 flex flex-col gap-6">
+                                                                <div class="flex items-center justify-between gap-4">
+                                                                    <h2 class="text-xl text-gray-600">Modificar Stock de <span class="font-bold"> {{$product->name}} </span></h2>
+                                                                    <div x-on:click="openModal= !openModal" class="p-2 px-3 shadow rounded-full hover:bg-red-600 hover:text-white cursor-pointer">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                                <div class="grid grid-cols-2 gap-2">
+                                                                    <div class=""> Stock en bodega </div>
+                                                                    <div> {{$product->stock}} un.   </div>
+                                                                    <div class=""> Stock en pedidos </div>
+                                                                    <div>  {{$stockReservado}} un.</div>
+                                                                    <div class="">  Stock total </div>
+                                                                    <div>  {{$product->stock + $stockReservado}} un.</div>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="grid grid-cols-2 gap-2 items-center">
+                                                                    <div>Stock Real</div>
+                                                                    <div><x-jet-input x-model="stockTemp" type="number" class="w-12"></x-jet-input> un.</div>
+                                                                </div>
+
+                                                                <div class="flex items-center justify-between gap-4">
+                                                                    <x-jet-button x-on:click="loading=true;$wire.setStockTemp({{ $product->id}}, stockTemp).then(()=>{loading=false;openModal=false})">Modificar Stock</x-jet-button>
+                                                                    <x-jet-secondary-button x-on:click="openModal= !openModal">Cancelar</x-jet-secondary-button>
+                                                                </div>
+                                                                
+
+
+                                                            </div>
+                                                        </x-modal.modal2>
+
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                                   
+                                            @if ($product->stockTemp != -1)
+                                                <div class=" bg-red-200 text-sm text-gray-900 w-max-content flex items-center gap-1 " >
+                                                    <div class="font-bold tracking-wide"> 
+                                                        <x-tooltip.tooltip>
+                                                            <x-slot name="tooltip"> Stock en bodega</x-slot>
+                                                            {{$product->stockTemp}} + 
+                                                        </x-tooltip.tooltip>    
+                                                    </div>
+                                                    <div>
+                                                        @php
+                                                            $stockReservado=0;
+                                                            foreach ($sales as $sale) {
+                                                                foreach ($sale->saleItems as  $item) {
+                                                                    // echo "<div> $item </div>";
+                                                                    if ($item->product_id == $product->id) {
+                                                                        $stockReservado += $item->cantidad_total;
+                                                                    }
+                                                                }
+                                                            }
+                                                        @endphp
+                                                        <x-tooltip.tooltip>
+                                                            <x-slot name="tooltip"> Stock en pedidos</x-slot>
+                                                            {{$stockReservado}} =
+                                                        </x-tooltip.tooltip>
+                                                    </div>
+                                                    <div>
+                                                        <x-tooltip.tooltip>
+                                                            <x-slot name="tooltip"> Stock Total</x-slot>
+                                                            {{$product->stockTemp + $stockReservado}}
+                                                        </x-tooltip.tooltip>
+                                                    
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Ajuste por {{$product->stockTempBy()->name}}
+                                                    {{ Helper::fecha($product->stockTempDate)->diffForHumans() }}
+                                                    {{ Helper::fecha($product->stockTempDate)->timezone('America/Santiago')->format('d-m-y H:i') }}
+                                                </div>
+                                            @endif
                                         </div>                       
                                     </td>
 

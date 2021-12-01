@@ -84,4 +84,9 @@ class Product extends Model
         return $this->hasMany(StockInventory::class);   
     }
 
+    public function stockTempBy(){
+        $user = User::find($this->stockTempUser); 
+        return $user;
+    }
+
 }

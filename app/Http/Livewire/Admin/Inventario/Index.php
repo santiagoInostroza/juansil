@@ -85,4 +85,13 @@ class Index extends Component{
         $inventoryController->ajustarStock($product_id, $quantity, $this->commentAjuste);
 
     }
+
+    public function setStockTemp($product_id, $stockTemp){
+        $product = Product::find($product_id);
+        $product->stockTemp = $stockTemp;
+        $product->stockTempUser = auth()->user()->id;
+        $product->stockTempDate = Carbon::now();
+        $product->save();
+        
+    }
 }
