@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Inventario;
 
-use App\Http\Controllers\Admin\InventarioController;
 use Carbon\Carbon;
+use App\Models\Sale;
 use App\Models\Product;
+use Livewire\Component;
 use App\Models\PurchasePrice;
 use App\Models\StockInventory;
-use Livewire\Component;
+use App\Http\Controllers\Admin\InventarioController;
 
 class Index extends Component{
 
@@ -28,11 +29,12 @@ class Index extends Component{
             }
         })
         ->with('purchasePrices')
-        ->orderBy($this->order_by,$this->asc)->get();;
+        ->orderBy($this->order_by,$this->asc)->get();
+        
+        $sales = Sale::with('saleItems')->where('delivery','1')->where('delivery_stage','!=','1')->get();
+        
 
-
-
-        return view('livewire.admin.inventario.index',compact('products'));
+        return view('livewire.admin.inventario.index',compact('products','sales'));
     }
     public function desactivar($product_id){
         $product = Product::find($product_id);

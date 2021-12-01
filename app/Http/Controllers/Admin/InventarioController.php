@@ -14,8 +14,8 @@ class InventarioController extends Controller{
 
     public function index(){
 
-        $products = Product::all();
-        return view('admin.inventario.index', compact('products'));
+       
+        return view('admin.inventario.index');
     }
 
     public function restaurarStock(Purchase $purchase){
