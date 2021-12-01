@@ -15,6 +15,9 @@
                 <div x-on:click="loading= true; $wire.$set('filter',4).then(()=>loading=false);"  class="p-2 shadow @if($filter==4) bg-gray-600 text-white @else cursor-pointer @endif" >30 días</div>            
                 <div x-on:click="loading= true; $wire.$set('filter',5).then(()=>loading=false);"  class="p-2 shadow @if($filter==5) bg-gray-600 text-white @else cursor-pointer @endif" >este mes</div>            
                 
+                @if ($filter==5)
+                   Ventas totales {{$sales->sum('total')}}
+                @endif
             </div>
             <div class="pr-4">
             
@@ -49,7 +52,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @if ($sales->count())                   
                         @foreach ($sales as $sale)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <tr class="border-b border-gray-200 hover:bg-gray-100" id="sale_{{$sale}}">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-2">
                                         <div>
