@@ -51,8 +51,7 @@
                             <tr>
                                 <th scope="col" width="10" class="hidden sm:block px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Id</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Producto</th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock disponible</th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock reservado</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock now</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">stock por precios</th>
                                 
@@ -89,31 +88,30 @@
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900 w-max-content flex items-center gap-4">
-                                            <div class="font-bold tracking-wide"> {{ $product->stock}} un.</div>
+                                        <div class="text-sm text-gray-900 w-max-content grid grid-cols-4 gap-4">
+                                            <div class="font-bold tracking-wide"> {{ $product->stock}} /</div>
+                                            <div>
+                                                @php
+                                                    $stockReservado=0;
+                                                    foreach ($sales as $sale) {
+                                                        foreach ($sale->saleItems as  $item) {
+                                                            // echo "<div> $item </div>";
+                                                            if ($item->product_id == $product->id) {
+                                                                $stockReservado += $item->cantidad_total;
+                                                            }
+                                                        }
+                                                    }
+                                                    echo $stockReservado;
+                                                @endphp
+                                            </div>
+                                            <div>
+                                                {{$product->stock + $stockReservado}}
+                                            </div>
                                             <div class="p-2 shadow rounded cursor-pointer"><i class="fas fa-pen"></i></div>
                                         </div>                       
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900 w-max-content flex items-center gap-4">
-                                            <div class="font-bold tracking-wide"> 
-                                              
-                                               @php
-                                                    $stockReservado=0;
-                                                    foreach ($sales as $sale) {
-                                                        // echo $sale->saleItems;
-                                                        if($sale->saleItems->has('product_id',$product->id)){
-                                                            $stock += $sale->cantidad_total;
-                                                        }
-                                                    }
-                                               @endphp
-                                               {{$stockReservado}}
-                                            
-                                            </div>
-                                           
-                                        </div>                             
-                                    </td>
+                              
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex flex-col gap-2 hidden" x-data="{quantity:''}">
