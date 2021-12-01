@@ -51,7 +51,7 @@ class Orders extends Component{
         }elseif ($this->filter==4) {
             $sales = $sales->whereDate('sales.created_at','>=',$dt->subDays(30));
         }elseif ($this->filter==5) {
-            $sales = $sales->whereMonth('sales.payment_date','=', 11);
+            $sales = $sales->where('payment_status','3')->whereMonth('sales.payment_date','=', 11);
         }
         else{
            $sales = $sales->take(30);
