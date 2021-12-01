@@ -88,8 +88,13 @@
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900 w-max-content grid grid-cols-4 gap-4">
-                                            <div class="font-bold tracking-wide"> {{ $product->stock}} /</div>
+                                        <div class="text-sm text-gray-900 w-max-content flex items-center gap-1">
+                                            <div class="font-bold tracking-wide"> 
+                                                <x-tooltip.tooltip>
+                                                    <x-slot name="tooltip"> Stock en bodega</x-slot>
+                                                    {{$product->stock}} +
+                                                </x-tooltip.tooltip>    
+                                            </div>
                                             <div>
                                                 @php
                                                     $stockReservado=0;
@@ -101,11 +106,18 @@
                                                             }
                                                         }
                                                     }
-                                                    echo $stockReservado;
                                                 @endphp
+                                                <x-tooltip.tooltip>
+                                                    <x-slot name="tooltip"> Stock en pedidos</x-slot>
+                                                    {{$stockReservado}} =
+                                                </x-tooltip.tooltip>
                                             </div>
                                             <div>
-                                                {{$product->stock + $stockReservado}}
+                                                <x-tooltip.tooltip>
+                                                    <x-slot name="tooltip"> Stock Total</x-slot>
+                                                    {{$product->stock + $stockReservado}}
+                                                </x-tooltip.tooltip>
+                                               
                                             </div>
                                             <div class="p-2 shadow rounded cursor-pointer"><i class="fas fa-pen"></i></div>
                                         </div>                       
