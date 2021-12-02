@@ -122,13 +122,14 @@
                                                         {{$product->stock + $stockReservado}}
                                                     </x-tooltip.tooltip>
                                                 </div>
-                                                <div x-data="{openModal:false,stockTemp:'',loading:false}" id="editStock_{{$product->id}}">
+                                                <div x-data="{openModal:false,stockTemp:0,loading:false}" id="editStock_{{$product->id}}" class="relative">
                                                     <div x-on:click="openModal=!openModal" class="p-2 cursor-pointer text-gray-400"><i class="fas fa-pen"></i></div>
+                                                    <div class="hidden" :class="{'hidden': !loading}">
+                                                        <x-spinner.spinner2 size='8'></x-spinner.spinner2>
+                                                    </div>
                                                     <div class="hidden" :class="{'hidden': !openModal}">
                                                         <x-modal.modal2>
-                                                            <div class="hidden" :class="{'hidden': !loading}">
-                                                                <x-spinner.spinner2></x-spinner.spinner2>
-                                                            </div>
+                                                            
                                                             <div class="p-4 flex flex-col gap-6">
                                                                 <div class="flex items-center justify-between gap-4">
                                                                     <h2 class="text-xl text-gray-600">Modificar Stock de <span class="font-bold"> {{$product->name}} </span></h2>
@@ -148,11 +149,11 @@
                                                                 <hr>
                                                                 <div class="grid grid-cols-2 gap-2 items-center">
                                                                     <div>Stock Real</div>
-                                                                    <div><x-jet-input x-model="stockTemp" type="number" class="w-12"></x-jet-input> un.</div>
+                                                                    <div><x-jet-input x-model="stockTemp" type="number" min="0" class="w-12"></x-jet-input> un.</div>
                                                                 </div>
 
                                                                 <div class="flex items-center justify-between gap-4">
-                                                                    <x-jet-button x-on:click="loading=true;$wire.setStockTemp({{ $product->id }}, stockTemp).then( ()=>{ loading=false; openModal=false;} )">Modificar Stock</x-jet-button>
+                                                                    <x-jet-button x-on:click="loading=true;openModal=false;$wire.setStockTemp({{ $product->id }}, stockTemp).then( ()=>{ loading=false; } )">Modificar Stock</x-jet-button>
                                                                     <x-jet-secondary-button x-on:click="openModal= !openModal">Cancelar</x-jet-secondary-button>
                                                                 </div>
                                                                 
