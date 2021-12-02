@@ -33,8 +33,13 @@ class Index extends Component{
         
         $sales = Sale::with('saleItems')
         ->where('delivery','1')
-        ->where('delivery_stage', null) 
-        ->where('delivery_stage','!=','1')->get();
+        ->where( function ($query){
+            $query
+            ->where('delivery_stage', null)
+            ->orWhere('delivery_stage',0);
+        })
+       
+        ->get();
         
 
         return view('livewire.admin.inventario.index',compact('products','sales'));
