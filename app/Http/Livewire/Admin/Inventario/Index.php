@@ -31,7 +31,7 @@ class Index extends Component{
         ->with('purchasePrices')
         ->orderBy($this->order_by,$this->asc)->get();
         
-        $sales = Sale::with('saleItems')->where('delivery','1')->where('delivery_stage','!=','1')->get();
+        $sales = Sale::where('delivery','1')->where('delivery_stage','!=','1')->get();
         
 
         return view('livewire.admin.inventario.index',compact('products','sales'));
