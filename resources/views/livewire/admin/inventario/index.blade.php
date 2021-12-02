@@ -41,18 +41,6 @@
     
     </div>
 
-    <div class="border p-12 bg-white">
-        @foreach ($sales as $sale)
-            <div class="my-2 border-b">Venta {{$sale->id}}
-                @foreach ($sale->saleItems as $item)
-                    <div>
-                        {{$item->product->name}} {{$item->cantidad_total}}
-                    </div> 
-                @endforeach
-            </div>
-        @endforeach
-    </div>
-
     {{-- LISTA PRODUCTOS --}}
     <div class="flex flex-col p-4">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
