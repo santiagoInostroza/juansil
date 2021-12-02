@@ -41,6 +41,14 @@
     
     </div>
 
+   <div class="border p-12">
+   @php
+       echo "<pre>";
+    echo var_dump($sales);
+       echo "</pre>";
+   @endphp
+   </div>
+
     {{-- LISTA PRODUCTOS --}}
     <div class="flex flex-col p-4">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
