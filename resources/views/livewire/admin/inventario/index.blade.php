@@ -88,7 +88,7 @@
                                     </td>
                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div x-data="showChanges:false" id="stock_{{$product->id}}">
+                                        <div x-data="{showChanges:false}" id="stock_{{$product->id}}">
                                             
                                             <div class="text-sm text-gray-900 w-max-content flex items-center">
                                                 @php
@@ -152,7 +152,7 @@
                                                                 </div>
 
                                                                 <div class="flex items-center justify-between gap-4">
-                                                                    <x-jet-button x-on:click="loading=true;$wire.setStockTemp({{ $product->id}}, stockTemp).then(()=>{loading=false;openModal=false})">Modificar Stock</x-jet-button>
+                                                                    <x-jet-button x-on:click="loading=true;$wire.setStockTemp({{ $product->id }}, stockTemp).then( ()=>{ loading=false; openModal=false;} )">Modificar Stock</x-jet-button>
                                                                     <x-jet-secondary-button x-on:click="openModal= !openModal">Cancelar</x-jet-secondary-button>
                                                                 </div>
                                                                 
