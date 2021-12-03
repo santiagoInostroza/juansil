@@ -81,7 +81,7 @@
                                                     <li>
                                                         <div class="font-bold">
                                                     
-                                                            {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->delivery_date)->format('H:i') }}
+                                                            {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->date_delivered)->format('H:i') }}
                                                             
                                                           ${{number_format($sale->total,0,',','.')}}
                                                         
@@ -200,7 +200,7 @@
                         <div class="bg-green-500 text-white p-1 rounded">
                             <span> 
                                 Pagado el 
-                                {{ Helper::fecha($venta->payment_date)->dayName}} {{ Helper::fecha($venta->payment_date)->format('H:i') }} 
+                                {{ Helper::fecha($venta->payment_date)->timezone('America/Santiago')->dayName}} {{ Helper::fecha($venta->payment_date)->timezone('America/Santiago')->format('H:i') }}  
                                 
                                 @if ($venta->paymentBy())
                                     por {{$venta->paymentBy()->name}}
@@ -222,11 +222,12 @@
                         @elseif($venta->delivery_stage==1) {{-- PAGADO --}}
                             <div class="bg-green-500 text-white p-1 rounded">
                                 <span> 
-                                    Entregado  el {{ Helper::fecha($venta->date_delivered)->dayName}} {{ Helper::fecha($venta->date_delivered)->format('H:i') }} </span>
-                                    <i class="fas fa-check"></i>
+                                    Entregado  el {{ Helper::fecha($venta->date_delivered)->timezone('America/Santiago')->dayName}}  {{ Helper::fecha($venta->date_delivered)->timezone('America/Santiago')->format('H:i') }}  </span>
+                                    
                                     @if ($venta->deliveredBy())
                                         por  {{$venta->deliveredBy()->name}}
                                     @endif
+                                    <i class="fas fa-check"></i>
                                     
                                 </span>
                             </div>

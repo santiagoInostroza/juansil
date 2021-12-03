@@ -52,7 +52,7 @@ class DeliveryController extends Controller
 
     public function payOrder(Sale $sale, $account){
        $sale->payment_status=3;
-       $sale->payment_date=Carbon::now()->timezone('America/Santiago');
+       $sale->payment_date=Carbon::now();
        $sale->payment_amount= $sale->pending_amount;
        $sale->pending_amount=0;
        $sale->payment_account=$account;
@@ -61,7 +61,7 @@ class DeliveryController extends Controller
     }
     public function deliverOrder(Sale $sale){
         $sale->delivery_stage=1;
-        $sale->date_delivered=Carbon::now()->timezone('America/Santiago');
+        $sale->date_delivered=Carbon::now();
         $sale->delivered_user= auth()->user()->id;
         $sale->save();
     }
