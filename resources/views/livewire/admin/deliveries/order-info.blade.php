@@ -86,7 +86,7 @@
                                                                 
                                                                 ${{number_format($sale->total,0,',','.')}}
                                                             @else
-                                                                Por entregar  {{Helper::fecha($sale->delivery_date)->diffForHumans()}}
+                                                                Aún no se ha entregado
                                                             @endif
                                                            
                                                         
