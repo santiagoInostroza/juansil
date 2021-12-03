@@ -108,7 +108,7 @@
 
                                                                <div class="flex justify-between items-start">
                                                                    <div class="flex items-start gap-2">
-                                                                        <div class="w-12">
+                                                                        <div class="w-14">
                                                                             {{$item->cantidad}}0 x {{$item->cantidad_por_caja}}00
                                                                         </div>
                                                                         <div>
