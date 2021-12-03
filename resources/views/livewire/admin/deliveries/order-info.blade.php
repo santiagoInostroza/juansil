@@ -81,9 +81,14 @@
                                                     <li>
                                                         <div class="font-bold">
                                                     
-                                                            {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->format('H:i') }}
-                                                            
-                                                          ${{number_format($sale->total,0,',','.')}}
+                                                            @if ($sale->date_delivered)
+                                                                {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->format('H:i') }}
+                                                                
+                                                                ${{number_format($sale->total,0,',','.')}}
+                                                            @else
+                                                                Por entregar
+                                                            @endif
+                                                           
                                                         
                                                         </div>
                                                         @if ($sale->comments)
