@@ -108,7 +108,7 @@
 
                                                                <div class="flex justify-between items-start">
                                                                    <div class="flex items-start gap-2">
-                                                                        <div>
+                                                                        <div class="w-max-content">
                                                                             {{$item->cantidad}} x {{$item->cantidad_por_caja}}
                                                                         </div>
                                                                         <div>
