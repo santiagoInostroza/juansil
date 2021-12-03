@@ -80,7 +80,12 @@
                                                 @foreach ($venta->customer->sales as $sale)
                                                     <li>
                                                         <div class="font-bold">
-                                                            {{Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->diffForHumans()}} {{$sale->date_delivered}} ${{number_format($sale->total,0,',','.')}}
+                                                            @if ()
+                                                                
+                                                            @endif
+                                                            {{Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->diffForHumans()}} 
+                                                            
+                                                            {{$sale->date_delivered}} ${{number_format($sale->total,0,',','.')}}
                                                         
                                                         </div>
                                                         @if ($sale->comments)
