@@ -106,7 +106,7 @@
                                                         <div>
                                                             @foreach ($sale->saleItems as $item)
 
-                                                               <div class="flex justify-between items-center">
+                                                               <div class="flex justify-between items-start">
                                                                    <div> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}} </div>
                                                                    <div> ${{number_format($item->precio_total,0,',','.')}} </div>
                                                                   
