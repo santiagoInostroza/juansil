@@ -81,7 +81,7 @@
                                                     <li>
                                                         <div class="font-bold">
                                                     
-                                                            {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->date_delivered)->format('H:i') }}
+                                                            {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->format('H:i') }}
                                                             
                                                           ${{number_format($sale->total,0,',','.')}}
                                                         
