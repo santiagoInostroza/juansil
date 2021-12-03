@@ -120,12 +120,12 @@
                                                                </div>
                                                             @endforeach
                                                         </div>
-                                                        <div class="flex justify-end font-bold">
+                                                        <div class="flex justify-end">
                                                             <div class="w-max-content grid grid-cols-2 gap-x-2 text-right">
                                                                 <div> Delivery</div>
                                                                 <div> ${{number_format($sale->delivery_value,0,',','.')}} </div>
-                                                                <div> Total</div>
-                                                                <div> ${{number_format($sale->total,0,',','.')}} </div>
+                                                                <div class="font-bold"> Total</div>
+                                                                <div class="font-bold"> ${{number_format($sale->total,0,',','.')}} </div>
                                                             </div>
                                                             
                                                         </div>
