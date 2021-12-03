@@ -48,7 +48,7 @@
                                         class="fas fa-phone-square p-2  bg-success"></i></a>
                                 <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20soy%20el%20repartidor,%20traigo%20su%20pedido"
                                     target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
-                                <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20envío%20datos.%0ACuenta%20Rut%20Patricia%20Arias%2017.007.186-2%0Apatriciaariasolivares27@gmail.com"
+                                <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20envío%20datos.%0ACuenta%20Rut%20Patricia%20Arias%2017.008.186-2%0Apatriciaariasolivares27@gmail.com"
                                     target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
                                 <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20Le%20envío%20datos.%0ACuenta%20corriente%20Santander%0ASantiago%20Inostroza%2016.720.449-k%0Anúmero%20cuenta%2076828369%0Asantiagoinostroza2@gmail.com"
                                     target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
