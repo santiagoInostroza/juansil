@@ -65,7 +65,7 @@
                                         <div class="p-4">
                                             <div class="flex items-center justify-between gap-4">
                                                 <h2 class="text-xl text-gray-600 ">
-                                                    Info {{$venta->customer->name}}
+                                                    Pedidos {{$venta->customer->name}}
                                                 </h2>
                                                 <div  x-on:click="open= !open" class="p-2 px-3 border rounded-full hover:bg-red-600 hover:text-white">
                                                     <i class="fas fa-times"></i>
