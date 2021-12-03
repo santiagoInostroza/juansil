@@ -75,12 +75,14 @@
                                                 @foreach ($venta->customer->sales as $sale)
                                                     <li>
                                                         <div class="font-bold">
-                                                            {{Helper::fecha($sale->delivery_date)->diffForHumans()}}
+                                                            {{Helper::fecha($sale->delivery_date)->diffForHumans()}} ${{number_format($sale->total,0,',','.')}}
                                                         </div>
                                                         <div>
                                                             @foreach ($sale->saleItems as $item)
-                                                               <div>
-                                                                {{$item->cantidad_total}} {{$item->product->name}} {{$item->precio_total}}
+                                                               <div class="flex justify-between items-center">
+                                                                   <div> {{$item->cantidad_total}} {{$item->product->name}} </div>
+                                                                   <div> ${{number_format($item->precio_total,0,',','.')}} </div>
+                                                                  
                                                                </div>
                                                             @endforeach
                                                         </div>
