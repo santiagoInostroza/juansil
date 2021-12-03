@@ -55,15 +55,46 @@
                             @endif
                             <a href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'><i class="fas fa-map-marker-alt p-2 shadow border"></i></a>
                            
-                            <x-tooltip.tooltip>
-                                <x-slot name="tooltip">
-                                    ${{number_format($venta->customer->sales->sum('total'),0,',','.')}}
-                                </x-slot>
-                                <div class="shadow border px-2">
+                            <div x-data="{open:false}" id="info_{{$venta->id}}" class="text-base">
+                                <div x-on:click="open= !open" class="shadow border px-2 cursor-pointer">
                                     <i class="fas fa-info"> </i>
                                     <span class="text-md">{{$venta->customer->sales->count()}}</span>
                                 </div>
-                            </x-tooltip.tooltip>
+                                <div class="hidden" :class="{'hidden' : !open}">
+                                    <x-modal.modal2>
+                                        <div class="p-4">
+                                            <div class="flex items-center justify-between gap-4">
+                                                <h2 class="text-xl text-gray-600 ">
+                                                    Info {{$venta->customer->name}}
+                                                </h2>
+                                                <div  x-on:click="open= !open" class="p-2 px-3 border rounded-full hover:bg-red-600 hover:text-white">
+                                                    <i class="fas fa-times"></i>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                @foreach ($venta->customer->sales as $sale)
+                                                    <li>
+                                                        <div class="font-bold">
+                                                            {{Helper::fecha($sale->delivery_date)->diffForHumans()}}
+                                                        </div>
+                                                        <div>
+                                                            @foreach ($sale->saleItems as $item)
+                                                               <div>
+                                                                {{$item->cantidad_total}} {{$item->product->name}} {{$item->precio_total}}
+                                                               </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </li>
+                                                    <hr>
+                                                    
+                                                @endforeach
+                                                </ul>
+                                            
+                                        </div>
+                                    </x-modal.modal2>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 
