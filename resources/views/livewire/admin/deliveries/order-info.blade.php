@@ -71,16 +71,28 @@
                                                     <i class="fas fa-times"></i>
                                                 </div>
                                             </div>
-                                            <ul>
+                                            @if ($venta->customer->comentario)
+                                                <div class="bg-red-200">
+                                                    {{$venta->customer->comentario}}
+                                                </div>
+                                            @endif
+                                            <ul class="mt-2 flex flex-col gap-2">
                                                 @foreach ($venta->customer->sales as $sale)
                                                     <li>
                                                         <div class="font-bold">
                                                             {{Helper::fecha($sale->delivery_date)->diffForHumans()}} ${{number_format($sale->total,0,',','.')}}
                                                         </div>
+                                                        @if ($sale->comments)
+                                                            <div class="bg-red-200">
+                                                                {{$sale->comments}}
+                                                            </div>
+                                                        @endif
+                                                       
                                                         <div>
                                                             @foreach ($sale->saleItems as $item)
+
                                                                <div class="flex justify-between items-center">
-                                                                   <div> {{$item->cantidad_total}} {{$item->product->name}} </div>
+                                                                   <div> {{$item->cantidad}} x {{$item->cantidad_por_caja}} {{$item->product->name}} </div>
                                                                    <div> ${{number_format($item->precio_total,0,',','.')}} </div>
                                                                   
                                                                </div>
