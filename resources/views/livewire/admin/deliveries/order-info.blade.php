@@ -80,7 +80,8 @@
                                                 @foreach ($venta->customer->sales as $sale)
                                                     <li>
                                                         <div class="font-bold">
-                                                            {{Helper::fecha($sale->delivery_date)->diffForHumans()}} ${{number_format($sale->total,0,',','.')}}
+                                                            {{Helper::fecha($sale->delivery_date)->diffForHumans()}} {{$sale->delivery_date}} ${{number_format($sale->total,0,',','.')}}
+                                                        
                                                         </div>
                                                         @if ($sale->comments)
                                                             <div class="bg-red-200">
@@ -89,7 +90,7 @@
                                                         @endif
                                                         @if ($sale->deliveredBy() )
                                                             <div>
-                                                                {{$sale->deliveredBy()->name}}
+                                                               Entregado por {{$sale->deliveredBy()->name}}
                                                             </div>
                                                         @endif
 
