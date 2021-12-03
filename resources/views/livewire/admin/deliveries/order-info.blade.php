@@ -87,8 +87,9 @@
                                                                 {{$sale->comments}}
                                                             </div>
                                                         @endif
+                                                     
                                                         <div>
-                                                            {{$sale->deliveredBy->name}}
+                                                            {{$sale->deliveredBy()->name}}
                                                         </div>
                                                        
                                                         <div>
