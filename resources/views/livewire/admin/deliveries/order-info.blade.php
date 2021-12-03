@@ -87,10 +87,12 @@
                                                                 {{$sale->comments}}
                                                             </div>
                                                         @endif
-                                                     
-                                                        <div>
-                                                            {{$sale->deliveredBy()->name}}
-                                                        </div>
+                                                        @if ($sale->deliveredBy() )
+                                                            <div>
+                                                                {{$sale->deliveredBy()->name}}
+                                                            </div>
+                                                        @endif
+
                                                        
                                                         <div>
                                                             @foreach ($sale->saleItems as $item)
