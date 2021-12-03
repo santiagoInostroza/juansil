@@ -87,6 +87,9 @@
                                                                 {{$sale->comments}}
                                                             </div>
                                                         @endif
+                                                        <div>
+                                                            {{$sale->deliveredBy->name}}
+                                                        </div>
                                                        
                                                         <div>
                                                             @foreach ($sale->saleItems as $item)
