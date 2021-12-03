@@ -55,12 +55,12 @@
                             @endif
                             <a href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'><i class="fas fa-map-marker-alt p-2 shadow border"></i></a>
                            
-                            <div x-data="{open:false}" id="info_{{$venta->id}}" class="text-base">
+                            <div x-data="{open:false}" id="info_{{$venta->id}}" >
                                 <div x-on:click="open= !open" class="shadow border px-2 cursor-pointer">
                                     <i class="fas fa-info"> </i>
                                     <span class="text-md">{{$venta->customer->sales->count()}}</span>
                                 </div>
-                                <div class="hidden" :class="{'hidden' : !open}">
+                                <div class="hidden text-base" :class="{'hidden' : !open}">
                                     <x-modal.modal2>
                                         <div class="p-4">
                                             <div class="flex items-center justify-between gap-4">
