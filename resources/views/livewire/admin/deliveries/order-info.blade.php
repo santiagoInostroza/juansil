@@ -82,9 +82,8 @@
                                                         <div class="font-bold">
                                                     
                                                             @if ($sale->date_delivered)
-                                                                {{Helper::fecha($sale->date_delivered)->diffForHumans()}} a las {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->format('H:i') }}
+                                                                {{Helper::fecha($sale->date_delivered)->diffForHumans()}} {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->dayName }} a las {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->format('H:i') }}
                                                                 
-                                                                ${{number_format($sale->total,0,',','.')}}
                                                             @else
                                                                 Aún no se ha entregado
                                                             @endif
@@ -120,6 +119,9 @@
                                                                   
                                                                </div>
                                                             @endforeach
+                                                        </div>
+                                                        <div class="flex justify-end font-bold">
+                                                            ${{number_format($sale->total,0,',','.')}}
                                                         </div>
                                                     </li>
                                                     <hr>
