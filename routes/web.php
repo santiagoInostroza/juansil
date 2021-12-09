@@ -6,6 +6,7 @@ use App\Http\Livewire\Cart\Pagos;
 use App\Http\Livewire\Cart\Pedido;
 use App\Http\Livewire\Admin\Resumen;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\RouteController;
 use App\Http\Livewire\Admin\Ventas\Venta;
 use App\Http\Controllers\ProductController;
