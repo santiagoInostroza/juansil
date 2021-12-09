@@ -43,6 +43,7 @@ Route::get('categoria/{category}', [ProductController::class,'category'])->name(
 Route::get('etiqueta/{tag}', [ProductController::class,'tag'])->name('products.tag');
 
 Route::get('datatable/proveedores', [DatatableController::class,'proveedores'])->name('datatable.proveedores');
+Route::get('test', [TestController::class,'index'])->name('test');
 
 
 
