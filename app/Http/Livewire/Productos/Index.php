@@ -36,7 +36,7 @@ class Index extends Component{
         $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product.brand','purchase_items.product.image','purchase_items.product.category','purchase_items.product'
          => function($query){  $query->where('status',1); }
          ,'purchase_items.product.salePrices'])
-        ->orderBy('fecha','desc')->take(5)->get();
+        ->orderBy('fecha','desc')->take(8)->get();
 
       
         $tentaciones =Tag::where('name','Tentaciones')->with(['products'=> function($query){
