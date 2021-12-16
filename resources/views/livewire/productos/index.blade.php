@@ -163,7 +163,7 @@
 
 
       {{-- TENTACIONES --}}
-      @if ( $tentaciones )
+      {{-- @if ( $tentaciones )
          <div class="px-5 sm:px-20 mt-10" >
             <h2 class="text-3xl font-hairline text-red-500 sm:text-5xl">  <span class="inline-block mb-5 -mt-5 font-sans text-5xl font-bold sm:mb-0 sm:mt-0"> </span>Tentaciones</h2>
          </div>
@@ -180,11 +180,7 @@
                                  @if ($product->image)
 
                                     <figure class="splide__slide__container">
-                                       {{-- @if ( Storage::exists('products_thumb/' . $product->image->url)) --}}
-                                          <img class="object-contain h-48 w-full" alt="{{ $product->name }}" data-splide-lazy="{{ '/storage/products_thumb/' . $product->image->url }}">
-                                       {{-- @else
-                                          <img class="object-contain h-48 w-full" alt="{{ $product->name }}" data-splide-lazy="{{ Storage::url($product->image->url) }}" src="{{ Storage::url($product->image->url) }}">
-                                       @endif --}}
+                                         <img class="object-contain h-48 w-full" alt="{{ $product->name }}" data-splide-lazy="{{ '/storage/products_thumb/' . $product->image->url }}">
                                     </figure>
                                  @endif
                                  
@@ -270,7 +266,7 @@
                </div>
             </a>
          </div>
-      @endif
+      @endif --}}
 
       {{-- LO ULTIMO QUE HA LLEGADO --}}
       {{-- <div class="px-5 sm:px-20 mt-10" >
