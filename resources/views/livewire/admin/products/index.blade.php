@@ -563,6 +563,7 @@
                                                         @if ($price->total_price != $price->price)
                                                             <div class="text-red-500 px-2"> (${{number_format($price->price,0,',','.')}}) </div> 
                                                         @endif
+                                                        
                                                     </div>
                                                     <div x-show="show" class="absolute right-0 top-0 transform translate-x-14  bg-white cursor-pointer flex items-center gap-1 hidden" :class="{'hidden': !show}" >
                                                         <div x-on:click="openEdit=true" class="border rounded shadow p-2"> <i class="fas fa-pen  transform hover:scale-110"></i> </div>
@@ -594,6 +595,7 @@
                                                                 <x-spinner.spinner size="8"  class="spinner"></x-spinner.spinner>
                                                             </div>
                                                         </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -846,6 +848,13 @@
                                                         @if ($price->total_price != $price->price)
                                                             <div class="text-red-500 px-2"> (${{number_format($price->price,0,',','.')}}) </div> 
                                                         @endif
+                                                   
+                                                        @if ($price->price > 0 && count( $product->purchasePrices->where('stock','>','0')) )
+                                                            <div class="ml-1 text-gray-400">
+                                                                {{ number_format( ($price->price - ( $product->purchasePrices->where('stock','>','0')->sum('precio') / count( $product->purchasePrices->where('stock','>','0')) ) )  / $price->price * 100,2,',','.') }}%
+                                                            </div> 
+                                                        @endif
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
