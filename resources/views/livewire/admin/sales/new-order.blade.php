@@ -1,7 +1,7 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full"  >
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full"  x-data="{showDetail:false}">
 
     {{-- LISTA DE PRODUCTOS --}}  
-    <div class="rounded bg-white p-2 overflow-hidden h-full "  >
+    <div class="rounded bg-white p-2 overflow-hidden h-full "   :class="{'hidden' : showDetail}">
         <div class=" flex justify-between gap-8 items-center mb-2 pr-2">
             <div class="relative flex-1">
                 <div wire:loading.flex wire:target="search" >
@@ -144,8 +144,21 @@
     </div>
     
     {{-- PEDIDO NUEVO --}}
-    <div class=" rounded bg-white p-4 overflow-auto overflow-x-hidden h-full">
-        <div class="max-w-4xl m-auto">
+    <div class=" rounded bg-white  overflow-auto overflow-x-hidden h-full" >
+        <div class="flex justify-between shadow p-4 md:hidden" x-on:click="showDetail = !showDetail">
+            <span></span>
+            <span>Detalle</span>
+
+            <div class="hidden" :class="{'hidden' : showDetail}">
+                <i class="fas fa-chevron-up"  ></i>
+            </div>
+            <div class="hidden" :class="{'hidden' : !showDetail}">
+                <i class="fas fa-chevron-down"  ></i>
+            </div>
+            
+
+        </div>
+        <div class="max-w-4xl m-auto  hidden md:block p-4" :class="{'hidden' : !showDetail}">
             <div class="mb-4">
         
                 @livewire('admin.customer.search-customer')
