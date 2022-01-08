@@ -145,15 +145,15 @@
     
     {{-- PEDIDO NUEVO --}}
     <div class=" rounded bg-white  overflow-auto overflow-x-hidden h-full" >
-        <div class="flex justify-between shadow p-4 md:hidden" x-on:click="showDetail = !showDetail">
+        <div class="flex justify-between shadow p-2 px-4 md:hidden" x-on:click="showDetail = !showDetail">
             <span></span>
-            <span>Detalle</span>
+            <span class="font-bold">Detalle</span>
 
             <div class="hidden" :class="{'hidden' : showDetail}">
                 <i class="fas fa-chevron-up"  ></i>
             </div>
             <div class="hidden" :class="{'hidden' : !showDetail}">
-                <i class="fas fa-chevron-down"  ></i>
+                <i class="fas fa-minus"  ></i>
             </div>
             
 
