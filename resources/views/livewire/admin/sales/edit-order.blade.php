@@ -157,13 +157,14 @@
                                                
                                                 <div x-data="{quantityBox:0, quantity:0}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
                                                     
-                                                    <figure>
+                                                    <figure class="w-12">
                                                         <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>
                                                     </figure>
-                                                    <x-jet-input x-model="quantity" x-on:keyup.debounce.500="$wire.setQuantity({{$key}}, quantity ).then((response)=>{if(response>0){quantity=response}})"  type="number" min=1 class="w-12"> </x-jet-input>
-                                                    <span class="mx-2">x</span> 
-                                                    <x-jet-input x-model="quantityBox" x-on:keyup.debounce.500="$wire.setQuantityBox({{$key}}, quantityBox ).then((response)=>{if(response>0){quantityBox=response}})"  type="number" min=1 class="w-12" > </x-jet-input>
-                                                                                                            
+                                                    <div class="flex flex-col md:flex-row">
+                                                        <x-jet-input x-model="quantity" x-on:keyup.debounce.500="$wire.setQuantity({{$key}}, quantity ).then((response)=>{if(response>0){quantity=response}})"  type="number" min=1 class="w-12"> </x-jet-input>
+                                                        <span class="mx-2">x</span> 
+                                                        <x-jet-input x-model="quantityBox" x-on:keyup.debounce.500="$wire.setQuantityBox({{$key}}, quantityBox ).then((response)=>{if(response>0){quantityBox=response}})"  type="number" min=1 class="w-12" > </x-jet-input>
+                                                    </div>                                                 
                                                 </div>
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap">
