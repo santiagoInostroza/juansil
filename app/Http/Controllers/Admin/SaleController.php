@@ -658,7 +658,7 @@ class SaleController extends Controller{
             'editOrder.total' => $sale->total
         ]);
         session([
-            'editOrder.delivery' => $sale->total
+            'editOrder.subtotal' => $sale->subtotal
         ]);
         
     }
@@ -749,7 +749,7 @@ class SaleController extends Controller{
         }
 
         session([
-            'editOrder.total' => $total
+            'editOrder.subtotal' => $total
         ]);
 
     }

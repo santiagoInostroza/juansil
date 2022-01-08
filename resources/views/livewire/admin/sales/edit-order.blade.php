@@ -1,4 +1,4 @@
-<div class="md:grid grid-cols-2 gap-4 h-full bg-yellow-300 px-4 pb-8 md:pb-4" x-data="{showDetail:true}" >
+<div class="md:grid grid-cols-2 gap-4 h-full bg-yellow-300 px-4 pb-8 md:pb-4" x-data="{showDetail:false}" >
 
     {{-- LISTA DE PRODUCTOS --}}
     <div class="rounded bg-white p-2 overflow-auto h-full " :class="{'hidden' : showDetail}" >
@@ -219,11 +219,11 @@
                 @if ($valor_despacho)
                     <div class="grid grid-cols-2 max-w-xs gap-3">
                         <div>Sub Total</div>
-                        <div>${{ number_format(session('editOrder.total'),0,',','.') }}</div>
+                        <div>${{ number_format(session('editOrder.subtotal'),0,',','.') }}</div>
                         <div>Delivery</div>
                         <div> ${{ number_format($valor_despacho,0,',','.') }}</div>
                         <div>Total</div>
-                        <div> ${{ number_format($valor_despacho + session('editOrder.total'),0,',','.') }} </div>
+                        <div> ${{ number_format($valor_despacho + session('editOrder.subtotal'),0,',','.') }} </div>
                     </div>
                 @else
                     <div class="grid grid-cols-2 max-w-xs ">

@@ -187,8 +187,8 @@ class EditOrder extends Component{
         $this->validate();
         
 
-        $total =($this->valor_despacho>0)? $this->valor_despacho + session('editOrder.total'): session('editOrder.total');
-        $subtotal =  session('editOrder.total');
+        $total =($this->valor_despacho>0)? $this->valor_despacho + session('editOrder.subtotal'): session('editOrder.subtotal');
+        $subtotal =  session('editOrder.subtotal');
 
         $payment_amount = 0;
         $pending_amount = 0;
