@@ -1,4 +1,4 @@
-<div class="md:grid grid-cols-2 gap-4 h-full bg-yellow-300 px-4 pb-8 md:pb-4" x-data="{showDetail:false}" >
+<div class="md:grid grid-cols-2 gap-4 h-full bg-yellow-300 px-4 pb-8 md:pb-4" x-data="{showDetail:true}" >
 
     {{-- LISTA DE PRODUCTOS --}}
     <div class="rounded bg-white p-2 overflow-auto h-full " :class="{'hidden' : showDetail}" >
@@ -54,13 +54,15 @@
     <div class=" text-left rounded bg-white overflow-auto overflow-x-hidden h-full">
         <div class="flex justify-between shadow p-2 px-4 md:hidden" x-on:click="showDetail = !showDetail">
             <span></span>
-            <span class="font-bold">Detalle</span>
+            
 
             <div class="hidden" :class="{'hidden' : showDetail}">
+                <span class="font-bold">Ver detalles</span>
                 <i class="fas fa-chevron-up"  ></i>
             </div>
             <div class="hidden" :class="{'hidden' : !showDetail}">
-                <i class="fas fa-minus"  ></i>
+                <span class="font-bold">Ver productos</span>
+                <i class="fas fa-chevron-down"  ></i>
             </div>
         </div>
         <div class="max-w-4xl m-auto hidden md:block p-2" :class="{'hidden' : !showDetail}">
