@@ -130,7 +130,7 @@
                                
                                 <x-jet-input type="date" class="w-full" wire:model="fecha_entrega"></x-jet-input>
                                 <x-jet-input-error for="fecha_entrega" class="mt-2" />
-                                <div class="flex justify-between my-2 ">
+                                <div class="flex gap-4 my-2 ">
                                     @if ($lu == $fecha_entrega)
                                         <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$lu}}').then( ()=> loading=false)">LU</x-jet-button> 
                                     @else
