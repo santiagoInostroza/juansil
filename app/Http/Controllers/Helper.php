@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 class Helper extends Controller
 {
     public static function fecha($fecha){
-        return Carbon::parse($fecha);
-        // return Carbon::createFromFormat('Y-m-d', $fecha)->locale('es')->timezone('America/Santiago');
+        if ($fecha!="") {
+            return Carbon::parse($fecha);
+        }
+        return false;
     } 
+
     public static function fechaHora($fecha){
-        return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
+        if ($fecha!="") {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $fecha)->locale('es')->timezone('America/Santiago');
+        }
     }
 }

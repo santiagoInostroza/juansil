@@ -18,11 +18,17 @@ class NewOrder extends Component{
     public $openComentario=false;
     public $delivery=false;
     public $fecha_entrega;
-    public $valor_despacho;
+    public $valor_despacho = 1000;
     public $delivered;
     public $customerId;
     public $comentario;
     public $items;
+
+    public $lu;
+    public $ma;
+    public $mi;
+    public $ju;
+    public $vi;
 
 
 
@@ -62,6 +68,8 @@ class NewOrder extends Component{
         
     ];
 
+   
+
     public function rules(){  
         if($this->delivery){
             return[
@@ -77,6 +85,15 @@ class NewOrder extends Component{
             ];
         }
         
+    }
+
+    public function mount(){    
+        // $this->lu = Carbon::now()->nextMonday();  
+        $this->lu = date('Y-m-d', strtotime('monday'))  ;
+        $this->ma = date('Y-m-d', strtotime('tuesday'))  ;
+        $this->mi = date('Y-m-d', strtotime('wednesday'))  ;
+        $this->ju = date('Y-m-d', strtotime('thursday '))  ;
+        $this->vi = date('Y-m-d', strtotime('friday'))  ;
     }
 
     public function render(){

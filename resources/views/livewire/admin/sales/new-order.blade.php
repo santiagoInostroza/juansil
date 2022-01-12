@@ -110,16 +110,58 @@
         
                 </div>
             
+            
         
                 @if ($delivery)
         
                     <div  class="w-full ">
         
                         <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <x-jet-label value="Fecha de entrega"></x-jet-label>
+                            <div x-data="{loading:false}" class="relative">
+                                <div class="hidden" :class="{'hidden':!loading}">
+                                    <x-spinner.spinner2></x-spinner.spinner2>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <x-jet-label value="Fecha de entrega"></x-jet-label>
+                                    @if ($fecha_entrega!="") 
+                                        <div class="text-green-500 font-bold">{{ Helper::fecha($fecha_entrega)->dayName }} <i class="fas fa-check"></i> </div>
+                                    @endif
+                                </div>
+                               
                                 <x-jet-input type="date" class="w-full" wire:model="fecha_entrega"></x-jet-input>
                                 <x-jet-input-error for="fecha_entrega" class="mt-2" />
+                                <div class="flex justify-between my-2 ">
+                                    @if ($lu == $fecha_entrega)
+                                        <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$lu}}').then( ()=> loading=false)">LU</x-jet-button> 
+                                    @else
+                                        <x-jet-secondary-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$lu}}').then( ()=> loading=false)">LU</x-jet-secondary-button> 
+                                    @endif
+
+                                    @if ($ma == $fecha_entrega)
+                                        <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$ma}}').then( ()=> loading=false)">MA</x-jet-button> 
+                                    @else
+                                        <x-jet-secondary-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$ma}}').then( ()=> loading=false)">MA</x-jet-secondary-button> 
+                                    @endif
+
+                                    @if ($mi == $fecha_entrega)
+                                        <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$mi}}').then( ()=> loading=false)">MI</x-jet-button> 
+                                    @else
+                                        <x-jet-secondary-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$mi}}').then( ()=> loading=false)">MI</x-jet-secondary-button> 
+                                    @endif
+
+                                    @if ($ju == $fecha_entrega)
+                                        <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$ju}}').then( ()=> loading=false)">JU</x-jet-button> 
+                                    @else
+                                        <x-jet-secondary-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$ju}}').then( ()=> loading=false)">JU</x-jet-secondary-button> 
+                                    @endif
+                                    @if ($vi == $fecha_entrega)
+                                        <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$vi}}').then( ()=> loading=false)">VI</x-jet-button> 
+                                    @else
+                                        <x-jet-secondary-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$vi}}').then( ()=> loading=false)">VI</x-jet-secondary-button> 
+                                    @endif
+                                    
+                                 
+                                </div>
                             </div>
                             <div>
                                 <x-jet-label value="Valor despacho"></x-jet-label>
@@ -229,7 +271,7 @@
         
             {{-- TOTAL --}}
             <div class="flex justify-end p-4">
-                @if ($valor_despacho)
+                @if ($valor_despacho > 0 && $delivery)
                     <div class="grid grid-cols-2 max-w-xs gap-3">
                         <div>Sub Total</div>
                         <div>${{ number_format(session('venta.total'),0,',','.') }}</div>
