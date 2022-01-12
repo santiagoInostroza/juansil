@@ -123,13 +123,14 @@
                                 </div>
                                 <div class="flex items-center gap-4">
                                     <x-jet-label value="Fecha de entrega"></x-jet-label>
-                                    @if ($fecha_entrega!="") 
-                                        <div class="text-green-500 font-bold">{{ Helper::fecha($fecha_entrega)->dayName }} <i class="fas fa-check"></i> </div>
-                                    @endif
+                                   
                                 </div>
                                
                                 <x-jet-input type="date" class="w-full" wire:model="fecha_entrega"></x-jet-input>
                                 <x-jet-input-error for="fecha_entrega" class="mt-2" />
+                                @if ($fecha_entrega!="") 
+                                    <div class="text-green-500 font-bold">{{ Helper::fecha($fecha_entrega)->dayName }} <i class="fas fa-check"></i> </div>
+                                @endif
                                 <div class="flex gap-4 my-2 ">
                                     @if ($lu == $fecha_entrega)
                                         <x-jet-button class="" x-on:click="loading=true;$wire.$set('fecha_entrega', '{{$lu}}').then( ()=> loading=false)">LU</x-jet-button> 
