@@ -60,7 +60,8 @@ class Index extends Component{
           
         // }
 
-        return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido','tentaciones'));
+        return view('livewire.productos.index',compact('categories'));
+        // return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido','tentaciones'));
     }
 
     public function restaurarSesion(){
