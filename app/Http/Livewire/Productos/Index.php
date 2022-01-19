@@ -26,10 +26,8 @@ class Index extends Component{
         $categories = Category::with(['products.salePrices','products.tags','products.brand','products.image','products' => function($query) {
            $query->where('status',1)->where('stock','>',0);
         }])
-        ->where('id','!=', 3)->get()->map(function($query) {
-            $query->setRelation('products', $query->products->take(12));
-            return $query;
-        });
+        ->where('id','!=', 3)->get();
+        // ->where('id','!=', 3)->get()->map(function($query) { $query->setRelation('products', $query->products->take(12)); return $query; });
 
 
 
