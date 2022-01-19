@@ -33,32 +33,32 @@ class Index extends Component{
 
 
 
-        $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product.brand','purchase_items.product.image','purchase_items.product.category','purchase_items.product'
-         => function($query){  $query->where('status',1); }
-         ,'purchase_items.product.salePrices'])
-        ->orderBy('fecha','desc')->take(8)->get();
+        // $ultimasCompras = Purchase::with(['purchase_items','purchase_items.product.brand','purchase_items.product.image','purchase_items.product.category','purchase_items.product'
+        //  => function($query){  $query->where('status',1); }
+        //  ,'purchase_items.product.salePrices'])
+        // ->orderBy('fecha','desc')->take(8)->get();
 
       
-        $tentaciones =Tag::where('name','Tentaciones')->with(['products'=> function($query){
-            $query->where('stock','>',0)->where('status','=',1);
-        },'products.brand','products.tags','products.category','products.image'])->first();
+        // $tentaciones =Tag::where('name','Tentaciones')->with(['products'=> function($query){
+        //     $query->where('stock','>',0)->where('status','=',1);
+        // },'products.brand','products.tags','products.category','products.image'])->first();
 
 
 
 
-        $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
-        ->groupBy('product_id')
-        ->orderBy('cantidad', 'desc')
-        ->take('10')
-        ->get();
+        // $idLoMasVendido = MovementSale::select(DB::raw('sum(cantidad) as cantidad, product_id'))
+        // ->groupBy('product_id')
+        // ->orderBy('cantidad', 'desc')
+        // ->take('10')
+        // ->get();
 
-        $loMasVendido = collect();
-        foreach ($idLoMasVendido as $value) {
-            $item = Product::with('salePrices','brand','image')->where('id',$value->product_id)->where('status',1) ;
+        // $loMasVendido = collect();
+        // foreach ($idLoMasVendido as $value) {
+        //     $item = Product::with('salePrices','brand','image')->where('id',$value->product_id)->where('status',1) ;
           
-            $loMasVendido->push(collect( $item->get()));
+        //     $loMasVendido->push(collect( $item->get()));
           
-        }
+        // }
 
         return view('livewire.productos.index',compact('categories','ultimasCompras','loMasVendido','tentaciones'));
     }
