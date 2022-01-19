@@ -19,9 +19,6 @@ class ProductController extends Controller{
         return view('products.index');
     }
 
-    public function index2(){
-        return view('products.index2');
-    }
 
     public function lista(){   
         return view('products.lista');

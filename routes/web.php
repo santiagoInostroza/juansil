@@ -29,8 +29,8 @@ Route::get('pedido',Pedido::class)->name('pedido');
 // Route::get('productos/pagar',Carrito::class)->name('productos.pagar');
 
 Route::get('/', [ProductController::class,'index'])->name('products.index');
-Route::get('catalogo/', [ProductController::class,'index2'])->name('products.index');
 Route::get('productos/lista', [ProductController::class,'lista'])->name('products.lista');
+Route::get('catalogo/', [ProductController::class,'lista'])->name('products.lista');
 Route::get('productos/categoria/{category}', [ProductController::class,'category'])->name('products.category');
 Route::get('productos/etiqueta/{tag}', [ProductController::class,'tag'])->name('products.tag');
 Route::get('productos/specialPrice', [ProductController::class,'specialPrice'])->middleware('can:products.specialPrice')->name('products.specialPrice');
