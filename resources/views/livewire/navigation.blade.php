@@ -135,55 +135,21 @@
 
             </div>
         </div>
-
-        {{-- menu mobil --}}
-        <div class="hidden sm:hidden absolute" :class="{'hidden': !open}" x-show="open" x-on:click.away="open=false">
-            <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-800">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-
-                @foreach ($categories as $category)
-                    <a href="{{ route('products.category', $category) }}"
-                        class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">{{ $category->name }}</a>
-
-                @endforeach
-            </div>
-        </div>
     </div> 
 
    
-    <div  class=" flex sm:hidden  bg-gray-700 w-full h-10 px-3 items-center">
-         <label for="buscador" class="p-1 m-1 bg-white text-gray-400 flex items-center w-full rounded">
-           <div>
-               ¿Qué estás buscando?
-            </div>
-            <div class=" text-black absolute px-2 right-6" >     
-                <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-         </label>
-        {{-- @livewire('buscador-productos', ['user' => ''])  --}}
-    </div> 
-
-    {{-- BARRA DE ABAJO DE LA BARRA PRINCIPAL --}}
-
-    <div  class="hidden sm:block bg-white w-full h-10">
-        <div  class=" mx-auto px-2 sm:px-6 lg:max-w-7xl" >
-            <div class="hidden sm:block">
-                <div class="flex space-x-4">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="{{ route('products.lista') }}" class="text-gray-500 hover:text-gray-800 hover:font-bold px-3 py-2 rounded-md text-sm font-medium transform hover:scale-110">Todo</a>
-                    @foreach ($categories as $category)
-                        <a href="{{ route('products.category', $category) }}" class="text-gray-500 hover:text-gray-800 hover:font-bold px-3 py-2 rounded-md text-sm font-medium transform hover:scale-110">{{ $category->name }}</a>
-                    @endforeach
-
-                    {{-- <a href="#"
-                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a> --}}
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
 </nav>
-<div class="h-20 w-full">   
-</div>
+<div class="h-20 w-full">   </div>
+<div  class=" flex sm:hidden  bg-gray-700 w-full h-10 px-3 items-center">
+     <label for="buscador" class="p-1 m-1 bg-white text-gray-400 flex items-center w-full rounded">
+       <div>
+           ¿Qué estás buscando?
+        </div>
+        <div class=" text-black absolute px-2 right-6" >     
+            <svg class="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+     </label>
+</div> 
 
 
