@@ -13,7 +13,7 @@
         @foreach ($products as $product)
 
            <li class="border flex flex-col justify-between">
-               <figure> <img class="object-cover w-full" src="{{ '/storage/products_thumb/' . $product->image->url }}" alt="{{$product->name}}"> </figure>
+               <figure> <img class="object-cover w-full h-48" src="{{ '/storage/products_thumb/' . $product->image->url }}" alt="{{$product->name}}"> </figure>
                <div class="flex justify-center">
                    <div>
                        <h2 class="font-bold text-lg  text-gray-800"> {{$product->name}} </h2>
