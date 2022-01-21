@@ -118,10 +118,10 @@ class NewOrder extends Component{
                 'title' => "Ya está en lista",
             ]); 
         }else{
-            $this->dispatchBrowserEvent('toast', [
-                'icon' => 'success',
-                'title' => "Agregado",
-            ]); 
+            // $this->dispatchBrowserEvent('toast', [
+            //     'icon' => 'success',
+            //     'title' => "Agregado",
+            // ]); 
            $this->emitTo('admin.sales.new-order', 'render');
         }
     }

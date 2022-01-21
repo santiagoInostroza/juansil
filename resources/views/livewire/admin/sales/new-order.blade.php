@@ -20,7 +20,8 @@
         <div class=" overflow-auto h-full ">
             <div class="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-2 relative mb-12">
                 @foreach ($products as $product)
-                    <div class="flex flex-col justify-between border rounded p-2 cursor-default @if($product->stock <= 0) bg-red-100 text-red-600   @elseif($product->stock <= $product->stock_min) bg-yellow-100 @else bg-green-200 text-green-800 @endif ">
+                    <div class="flex flex-col justify-between border rounded p-2 cursor-default relative @if($product->stock <= 0) bg-gray-100 text-gray-600   @elseif($product->stock <= $product->stock_min) bg-yellow-100 @else bg-green-200 text-green-800 @endif ">
+                       
                         <div class="relative ">
                             <figure>
                                 @if ($product->image)
@@ -40,18 +41,63 @@
                         
                         </div>
     
-                        <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full">
-                            @foreach ($product->salePrices as $price)
-                                <div id="quantity_{{$price->id}}" x-data="{loading:false}" class="relative text-xs cursor-pointer bg-white hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 border border-gray-200 rounded shadow" @if($price->quantity <= $product->stock) x-on:click="loading=true;$wire.addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }}).then(()=>loading=false)" @else x-on:click="loading=true;$wire.alertStock({{$price->quantity}}).then(()=>loading=false)" @endif >
-                                    <div x-show="loading">
-                                        <x-spinner.spinner2></x-spinner.spinner2>
+                        <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full relative">
+                            @if($product->stock <= 0)
+                                SIN STOCK
+                            @elseif (isset(session('venta.items')[$product->id]))
+                             
+                                @php
+                                    $item = session('venta.items')[$product->id];
+                                    $key = $product->id;
+                                @endphp
+
+                                <div x-data="{quantityBox:{{ $item['cantidad_por_caja'] }}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order2_{{$item['product_id']}}" class="flex items-center justify-center h-24">
+                                   
+                                    <div class="flex flex-col md:flex-row items-center justify-center gap-2">
+                                        <x-jet-input x-model="quantity" x-on:keyup.debounce.800ms="loading=true;$wire.setQuantity({{$key}}, quantity ).then((response)=>{loading=false; if(response>0){quantity=response}})"  type="number" min=1 class="w-12"> </x-jet-input>
+                                        <span class="">x</span> 
+                                        <x-jet-input x-model="quantityBox" x-on:keyup.debounce.800ms="loading=true;$wire.setQuantityBox({{$key}}, quantityBox ).then((response)=>{loading=false; if(response>0){quantityBox=response}})"  type="number" min=1 class="w-12" > </x-jet-input>
+                                        <div> {{session('venta.items')[$product->id]['cantidad_total']  }}  un.</div>
+                                        <div class="p-2 cursor-pointer" wire:click="removeFromTemporalOrder({{ $key }})">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+
                                     </div>
-                                    <div class="select-none">x {{$price->quantity}}</div>
-                                    <div class="select-none">${{ number_format($price->total_price,0,',','.') }}</div>
-                                    <div class="text-red-600 select-none">(${{ number_format($price->price,0,',','.') }})</div>
+                                   <div class="hidden" :class="{'hidden' : !loading}">
+                                        <x-spinner.spinner2></x-spinner.spinner>
+                                    </div>   
+                                                                         
                                 </div>
-                            @endforeach 
+
+
+
+                            @else
+                                @foreach ($product->salePrices as $price)
+                                <div class=" h-24">
+                                    <div id="quantity_{{$price->id}}" x-data="{loading:false}" class="relative text-xs cursor-pointer bg-white hover:bg-gray-200 text-gray-800 font-semibold py-2 px-2 border border-gray-200 rounded shadow" 
+                                        @if($price->quantity <= $product->stock) 
+                                            x-on:click="$wire.addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }});toast('Agregado','success')" 
+                                        @else 
+                                            x-on:click="loading=true;$wire.alertStock({{$price->quantity}}).then(()=>loading=false)" 
+                                        @endif >
+                                        <div x-show="loading">
+                                            <x-spinner.spinner2></x-spinner.spinner2>
+                                        </div>
+                                        <div class="select-none">x {{$price->quantity}}</div>
+                                        <div class="select-none">${{ number_format($price->total_price,0,',','.') }}</div>
+                                        <div class="text-red-600 select-none">(${{ number_format($price->price,0,',','.') }})</div>
+                                    </div>
+                                </div>
+                                   
+                                @endforeach 
+                               
+                            @endif
+                           
                         </div>
+
+                        @if($product->stock <= 0)
+                            <div class="absolute inset-0 bg-gray-600 opacity-25"></div>
+                        @endif
                     </div>
                 @endforeach
     
@@ -59,7 +105,6 @@
         </div>
         
     </div>
-    
     {{-- PEDIDO NUEVO --}}
     <div class=" rounded bg-white  overflow-auto overflow-x-hidden h-full" >
         <div class="flex justify-between shadow p-2 px-4 md:hidden" x-on:click="showDetail = !showDetail">
@@ -209,7 +254,7 @@
                                         <tr class="relative">
                                             <td class="py-2 whitespace-nowrap">
                                                
-                                                <div x-data="{quantityBox:0, quantity:0, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
+                                                <div x-data="{quantityBox:{{ $item['cantidad_por_caja']}}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
                                                     
                                                     <figure class="w-12">
                                                         <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>

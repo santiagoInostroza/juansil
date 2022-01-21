@@ -533,7 +533,7 @@ class SaleController extends Controller{
             }
         }
        
-        $items[] =
+        $items[$product->id] =
             [
                 'product_id' => $product->id,
                 'product_name' => $product->name,
