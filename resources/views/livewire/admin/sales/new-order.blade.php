@@ -43,7 +43,7 @@
     
                         <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full relative">
                             @if($product->stock <= 0)
-                            
+
                             @elseif (isset(session('venta.items')[$product->id]))
                              
                                 @php
@@ -159,7 +159,7 @@
                     <div  class="w-full ">
         
                         <div class="grid grid-cols-2 gap-2">
-                            <div x-data="{loading:false}" class="relative">
+                            <div id="dias" x-data="{loading:false}" class="relative">
                                 <div class="hidden" :class="{'hidden':!loading}">
                                     <x-spinner.spinner2></x-spinner.spinner2>
                                 </div>

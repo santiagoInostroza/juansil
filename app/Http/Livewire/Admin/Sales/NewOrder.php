@@ -88,7 +88,11 @@ class NewOrder extends Component{
     }
 
     public function mount(){    
-        // $this->lu = Carbon::now()->nextMonday();  
+       $this->asignarDias(); 
+      
+    }
+    
+    public function asignarDias(){
         $this->lu = date('Y-m-d', strtotime('monday'))  ;
         $this->ma = date('Y-m-d', strtotime('tuesday'))  ;
         $this->mi = date('Y-m-d', strtotime('wednesday'))  ;
@@ -256,6 +260,7 @@ class NewOrder extends Component{
         $this->emit('resetear');
        
         $this->reset();
+        $this->asignarDias(); //al resetear se borran los dias por eso los vuelvo a asignar
         $this->eliminarSesionVenta();
         // $this->dispatchBrowserEvent('alerta', [
         //     'msj' => "Venta a " . $sale->customer->name . " Total ". number_format($sale->total,0,',','.'),
