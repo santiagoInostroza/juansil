@@ -76,7 +76,7 @@
                                 <div class=" h-24">
                                     <div id="quantity_{{$price->id}}" x-data="{loading:false}" class="relative text-xs cursor-pointer bg-white hover:bg-gray-200 text-gray-800 font-semibold py-2 px-2 border border-gray-200 rounded shadow" 
                                         @if($price->quantity <= $product->stock) 
-                                            x-on:click="$wire.addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }});toast('Agregado','success')" 
+                                            x-on:click="loading=true;$wire.addToTemporalOrder({{ $product->id }},{{$price->quantity}},{{ $price->price }}).then(()=>loading=false);toast('Agregado','success')" 
                                         @else 
                                             x-on:click="loading=true;$wire.alertStock({{$price->quantity}}).then(()=>loading=false)" 
                                         @endif >
