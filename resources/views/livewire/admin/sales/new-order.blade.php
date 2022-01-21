@@ -43,7 +43,7 @@
     
                         <div class="flex items-center gap-2 overflow-x-auto overflow-y-hidden w-full relative">
                             @if($product->stock <= 0)
-                                SIN STOCK
+                            
                             @elseif (isset(session('venta.items')[$product->id]))
                              
                                 @php
@@ -51,21 +51,18 @@
                                     $key = $product->id;
                                 @endphp
 
-                                <div x-data="{quantityBox:{{ $item['cantidad_por_caja'] }}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order2_{{$item['product_id']}}" class="flex items-center justify-center h-24">
+                                <div x-data="{quantityBox:{{ $item['cantidad_por_caja'] }}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order2_{{$item['product_id']}}" class="flex items-center justify-between gap-2 h-24 w-full">
                                    
                                     <div class="flex items-center justify-center gap-2">
                                         <x-jet-input x-model="quantity" x-on:keyup.debounce.800ms="loading=true;$wire.setQuantity({{$key}}, quantity ).then((response)=>{loading=false; if(response>0){quantity=response}})"  type="number" min=1 class="w-12"> </x-jet-input>
                                         <span class="">x</span> 
                                         <x-jet-input x-model="quantityBox" x-on:keyup.debounce.800ms="loading=true;$wire.setQuantityBox({{$key}}, quantityBox ).then((response)=>{loading=false; if(response>0){quantityBox=response}})"  type="number" min=1 class="w-12" > </x-jet-input>
                                         <div> {{session('venta.items')[$product->id]['cantidad_total']  }}  un.</div>
-                                        <div class="p-2 cursor-pointer" wire:click="removeFromTemporalOrder({{ $key }})">
-                                            <i class="fas fa-times"></i>
-                                        </div>
-
                                     </div>
-                                   <div class="hidden" :class="{'hidden' : !loading}">
+                                    <div class="hidden" :class="{'hidden' : !loading}">
                                         <x-spinner.spinner2></x-spinner.spinner>
                                     </div>   
+                                    <x-jet-danger-button class="p-2 cursor-pointer" wire:click="removeFromTemporalOrder({{ $key }})"><i class="fas fa-times"></i></x-jet-danger-button>
                                                                          
                                 </div>
 

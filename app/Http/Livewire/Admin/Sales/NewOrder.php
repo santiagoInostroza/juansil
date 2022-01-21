@@ -97,8 +97,9 @@ class NewOrder extends Component{
     }
 
     public function render(){
-        $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->get();
-
+        $products = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->where('stock','>',0)->get();
+        $products2 = Product::where('name' , 'like' ,  '%' . $this->search . '%' )->where('stock','<=',0)->get();
+        $products = $products->concat($products2);
         if (session()->has('venta.items')) {
             $this->items = session('venta.items');
         }
