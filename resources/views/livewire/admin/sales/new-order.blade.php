@@ -53,7 +53,7 @@
 
                                 <div x-data="{quantityBox:{{ $item['cantidad_por_caja'] }}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order2_{{$item['product_id']}}" class="flex items-center justify-center h-24">
                                    
-                                    <div class="flex flex-col md:flex-row items-center justify-center gap-2">
+                                    <div class="flex items-center justify-center gap-2">
                                         <x-jet-input x-model="quantity" x-on:keyup.debounce.800ms="loading=true;$wire.setQuantity({{$key}}, quantity ).then((response)=>{loading=false; if(response>0){quantity=response}})"  type="number" min=1 class="w-12"> </x-jet-input>
                                         <span class="">x</span> 
                                         <x-jet-input x-model="quantityBox" x-on:keyup.debounce.800ms="loading=true;$wire.setQuantityBox({{$key}}, quantityBox ).then((response)=>{loading=false; if(response>0){quantityBox=response}})"  type="number" min=1 class="w-12" > </x-jet-input>
