@@ -12,6 +12,7 @@ class Totals extends Component{
 
     public $month;
     public $year;
+    public $period;
 
     public function mount(){
         $this->period =  $this->year.'-'.$this->month;
