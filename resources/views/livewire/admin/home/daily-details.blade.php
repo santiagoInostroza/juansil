@@ -13,6 +13,8 @@
         $total = $salesArray[$date]->sum('total');
         $totalPagado = $salesArray[$date]->where('payment_status','!=','1')->sum('payment_amount');
         $diferencia = $total - $totalPagado;
+        $diferenciaDeliveries = $salesArray[$date]->where('deliveries','=',1)->count('pending_amount');
+        $diferenciaBodega = $salesArray[$date]->where('deliveries','!=',1)->count('pending_amount');
 
         $totalSemana +=$total;
         $totalSemanaPagado +=$totalPagado;
@@ -35,7 +37,7 @@
             <div>${{number_format($totalPagado,0,',','.')}}</div>
           </div>
           <div>
-            <div>Diferencia</div>
+            <div>Diferencia (deliveries{{$diferenciaDeliveries}} bodega{{$diferenciaBodega}})</div>
             <div>${{number_format($diferencia,0,',','.')}}</div>
           </div>
         </div>
