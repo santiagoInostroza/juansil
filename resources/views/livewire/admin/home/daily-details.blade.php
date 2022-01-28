@@ -50,7 +50,6 @@
        
     </div>
     <div>
-      {{$salesArray[$date]}}
     </div>
     @if ($item->format('N')==7)
         <div class="p-4 flex gap-4 bg-red-100">
