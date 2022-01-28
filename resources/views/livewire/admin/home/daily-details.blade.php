@@ -2,7 +2,9 @@
   @php
       $totalSemana = 0;
   @endphp
+  {{$sales}}
   @foreach ($period as $item)
+
     @php
         $total = $sales->where('payment_date','=',$item)->sum('total');
         $totalSemana +=$total;
@@ -10,7 +12,7 @@
 
     @if ($item->format('N')==1)
       <div class="p-4">
-        
+
     @endif
     
     <div class="border">
