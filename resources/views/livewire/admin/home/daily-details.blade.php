@@ -11,7 +11,7 @@
     @php
         $date = Str::limit($item, 10, '');
         $total = $salesArray[$date]->sum('total');
-        $totalPagado = $salesArray[$date]->where('payment_status','!=','1')->sum('total');
+        $totalPagado = $salesArray[$date]->where('payment_status','!=','1')->sum('payment_amount');
         $diferencia = $total - $totalPagado;
 
         $totalSemana +=$total;
