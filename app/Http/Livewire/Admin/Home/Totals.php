@@ -18,11 +18,7 @@ class Totals extends Component{
         $this->period =  $this->year.'-'.$this->month;
     }
     
-    public function render(){
-
-      
-
-       
+    public function render(){       
         $totalSales = Sale::whereMonth('date', $this->month)->whereYear('date', $this->year)->sum('total');
         $totalCost = Sale::whereMonth('date', $this->month)->whereYear('date', $this->year)->sum('total_cost');
         $diferencia = $totalSales - $totalCost;

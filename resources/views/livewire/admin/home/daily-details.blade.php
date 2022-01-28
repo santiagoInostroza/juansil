@@ -10,6 +10,7 @@
     @php
         $date = Str::limit($item, 10, '');
         $total = $salesArray[$date]->sum('total');
+        $totalPagado = $salesArray[$date]->where('payment_status','=','3')->sum('total');
 
         $totalSemana +=$total;
     @endphp   
@@ -19,11 +20,14 @@
           {{Str::upper(Str::limit($item->dayName, 3, ''))}} 
           {{$item->format('d')}}
       </div>
-      <div class="p-4">
+      <div class="p-4 flex gap-4">
         <div>
-          @if ($total>0)
-            ${{number_format($total,0,',','.')}}
-          @endif
+          <div>total</div>
+          <div>${{number_format($total,0,',','.')}}</div>
+        </div>
+        <div>
+          <div>total Pagado</div>
+          <div>${{number_format($totalPagado,0,',','.')}}</div>
         </div>
       </div>
     
