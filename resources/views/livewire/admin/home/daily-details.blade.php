@@ -12,9 +12,11 @@
         $date = Str::limit($item, 10, '');
         $total = $salesArray[$date]->sum('total');
         $totalPagado = $salesArray[$date]->where('payment_status','=','3')->sum('total');
+        $diferencia = $total - $totalPagado;
 
         $totalSemana +=$total;
         $totalSemanaPagado +=$totalPagado;
+        $diferenciaSemana = $totalSemana - $totalSemanaPagado;
     @endphp   
     
     <div class="border">
@@ -31,6 +33,10 @@
           <div>total Pagado</div>
           <div>${{number_format($totalPagado,0,',','.')}}</div>
         </div>
+        <div>
+          <div>Diferencia</div>
+          <div>${{number_format($diferencia,0,',','.')}}</div>
+        </div>
       </div>
     
        
@@ -45,11 +51,16 @@
             <div>Total Pagado</div>
             <div>${{number_format($totalSemanaPagado,0,',','.')}}</div>
           </div>
+          <div>
+            <div>Pendiente</div>
+            <div>${{number_format($diferenciaSemana,0,',','.')}}</div>
+          </div>
         </div>
         <br><br>
       @php
           $totalSemana = 0;
           $totalSemanaPagado = 0;
+          $diferenciaSemana = 0;
       @endphp
     @endif
   @endforeach
