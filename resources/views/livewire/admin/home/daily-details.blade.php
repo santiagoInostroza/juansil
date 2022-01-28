@@ -41,7 +41,7 @@
         </div>
       </div>
       <div>
-        <a href="{{route('admin.deliveries.index',$date)}}">Deliveries</a>
+        <a class="p-2 shadow bg-gray-100 rounded" href="{{route('admin.deliveries.index',$date)}}" target="_blank">Deliveries</a>
       </div>
       
     
