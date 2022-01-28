@@ -1,6 +1,7 @@
 <div> 
   @php
       $totalSemana = 0;
+      $totalSemanaPagado = 0;
   @endphp
   
 
@@ -13,6 +14,7 @@
         $totalPagado = $salesArray[$date]->where('payment_status','=','3')->sum('total');
 
         $totalSemana +=$total;
+        $totalSemanaPagado +=$totalPagado;
     @endphp   
     
     <div class="border">
@@ -34,12 +36,20 @@
        
     </div>
     @if ($item->format('N')==7)
-        <div class="p-4">
-          Total semana ${{number_format($totalSemana,0,',','.')}}
+        <div class="p-4 flex gap-4 bg-red-100">
+          <div>
+            <div>Total</div>
+            <div>${{number_format($total,0,',','.')}}</div>
+          </div>
+          <div>
+            <div>Total Pagado</div>
+            <div>${{number_format($totalSemanaPagado,0,',','.')}}</div>
+          </div>
         </div>
         <br><br>
       @php
           $totalSemana = 0;
+          $totalSemanaPagado = 0;
       @endphp
     @endif
   @endforeach
