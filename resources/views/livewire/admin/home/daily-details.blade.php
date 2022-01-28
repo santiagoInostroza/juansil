@@ -2,7 +2,10 @@
   @php
       $totalSemana = 0;
   @endphp
-  {{$sales}}
+  @foreach ($sales as $sale)
+  <div>{{$sale->payment_date}} {{$sale->total}}</div>
+      
+  @endforeach
   @foreach ($period as $item)
 
     @php
