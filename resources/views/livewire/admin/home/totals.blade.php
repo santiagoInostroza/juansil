@@ -2,7 +2,7 @@
     <div class="p-4">
         <div class="flex justify-center items-center gap-4">
             <div wire:click="lastMonth" class="cursor-pointer text-sm font-bold">Anterior</div>
-
+            {{$period}}
             <div class="relative">
                 <x-jet-input class="" type="month" id="start" name="start" min="2021-06"  max="{{date('Y')}}-12"  wire:model="period"></x-jet-input>
                 <div wire:loading wire:target="month" class="absolute right-10 top-2">
