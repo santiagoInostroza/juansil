@@ -41,14 +41,11 @@
         </div>
       </div>
       <div>
-        <a class="p-2 shadow bg-gray-100 rounded" href="{{route('admin.deliveries.index',$date)}}" target="_blank">Deliveries</a>
+        <a class="p-2 shadow bg-gray-100 rounded text-gray-600 font-bold tracking-widest uppercase text-sm" href="{{route('admin.deliveries.index',$date)}}" target="_blank">Deliveries</a>
       </div>
       
     
        
-    </div>
-    <div>
-      {{$salesArray[$date]}}
     </div>
     @if ($item->format('N')==7)
         <div class="p-4 flex gap-4 bg-red-100">
