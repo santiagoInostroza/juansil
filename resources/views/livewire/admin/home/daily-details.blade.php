@@ -2,24 +2,21 @@
   @php
       $totalSemana = 0;
   @endphp
-  <div>{{$sales->count()}}</div>
-  @foreach ($sales as $sale)
-    <div>{{$sale->payment_date}} {{$sale->total}}</div>
-      
-  @endforeach
+  
+
   @foreach ($period as $item)
+    
 
     @php
-        $total = $sales->where('payment_date','=',$item)->sum('total');
-        // $total = $sales->where('payment_date','like','%'. Str::limit($item,10,'') . '%')->sum('total');
+        $date = Str::limit($item, 10, '');
+        $total = $salesArray[$date]->sum('total');
 
         $totalSemana +=$total;
     @endphp
 
-    @if ($item->format('N')==1)
-      <div class="p-4">
+    {{$salesArray[$date]}}
 
-    @endif
+   
     
     <div class="border">
       <div class="text-sm">
@@ -41,7 +38,6 @@
           Total semana ${{number_format($totalSemana,0,',','.')}}
         </div>
         <br><br>
-      </div>
       @php
           $totalSemana = 0;
       @endphp
