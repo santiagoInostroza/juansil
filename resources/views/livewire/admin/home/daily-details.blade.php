@@ -39,7 +39,7 @@
         <div class="p-4 flex gap-4 bg-red-100">
           <div>
             <div>Total</div>
-            <div>${{number_format($total,0,',','.')}}</div>
+            <div>${{number_format($totalSemana,0,',','.')}}</div>
           </div>
           <div>
             <div>Total Pagado</div>
