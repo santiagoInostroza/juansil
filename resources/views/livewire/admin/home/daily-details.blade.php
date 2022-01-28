@@ -10,8 +10,8 @@
   @foreach ($period as $item)
 
     @php
-        // $total = $sales->where('payment_date','=',$item)->sum('total');
-        $total = $sales->where('payment_date','like','%'. Str::limit($item,10,'') . '%')->sum('total');
+        $total = $sales->where('payment_date','=',$item)->sum('total');
+        // $total = $sales->where('payment_date','like','%'. Str::limit($item,10,'') . '%')->sum('total');
 
         $totalSemana +=$total;
     @endphp
