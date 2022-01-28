@@ -12,11 +12,7 @@
         $total = $salesArray[$date]->sum('total');
 
         $totalSemana +=$total;
-    @endphp
-
-    {{$salesArray[$date]}}
-
-   
+    @endphp   
     
     <div class="border">
       <div class="text-sm">

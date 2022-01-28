@@ -28,12 +28,12 @@ class DailyDetails extends Component{
         $salesArray= [];
         foreach ($period as $key => $value) {
             $date = Str::limit($value, 10, '');
-            $salesArray[$date]= Sale::whereDate('payment_date','like','%'.$date.'%')->get();
+            $salesArray[$date]= Sale::whereDate('date','like','%'.$date.'%')->get();
         }
 
-        $sales = Sale::whereMonth('payment_date','=',$this->month)->whereYear('payment_date','=',$this->year)->get();
+        // $sales = Sale::whereMonth('date','=',$this->month)->whereYear('date','=',$this->year)->get();
 
 
-        return view('livewire.admin.home.daily-details',compact('sales','period','salesArray'));
+        return view('livewire.admin.home.daily-details',compact('period','salesArray'));
     }
 }
