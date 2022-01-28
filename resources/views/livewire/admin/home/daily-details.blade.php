@@ -19,25 +19,31 @@
         $diferenciaSemana = $totalSemana - $totalSemanaPagado;
     @endphp   
     
-    <div class="border">
-      <div class="text-sm">
+    <div class="border flex justify-between items-center gap-2">
+      <div>
+        <div class="text-sm">
           {{Str::upper(Str::limit($item->dayName, 3, ''))}} 
           {{$item->format('d')}}
+        </div>
+        <div class="p-4 flex gap-4">
+          <div>
+            <div>total</div>
+            <div>${{number_format($total,0,',','.')}}</div>
+          </div>
+          <div>
+            <div>total Pagado</div>
+            <div>${{number_format($totalPagado,0,',','.')}}</div>
+          </div>
+          <div>
+            <div>Diferencia</div>
+            <div>${{number_format($diferencia,0,',','.')}}</div>
+          </div>
+        </div>
       </div>
-      <div class="p-4 flex gap-4">
-        <div>
-          <div>total</div>
-          <div>${{number_format($total,0,',','.')}}</div>
-        </div>
-        <div>
-          <div>total Pagado</div>
-          <div>${{number_format($totalPagado,0,',','.')}}</div>
-        </div>
-        <div>
-          <div>Diferencia</div>
-          <div>${{number_format($diferencia,0,',','.')}}</div>
-        </div>
+      <div>
+        <a href="{{route('admin.deliveries.index',$date)}}">Deliveries</a>
       </div>
+      
     
        
     </div>
