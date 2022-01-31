@@ -10,16 +10,15 @@
   </div>
 
   @foreach ($period as $date)
-    <div class="flex justify-between items-center gap-2 p-1">
+    <div class="flex justify-between items-center gap-2 ">
       <div class="flex gap-4 items-center w-full">
         <div class="text-sm w-6"> {{Str::upper(Str::limit($date->dayName, 1, ''))}}  {{$date->format('d')}}</div>
-        <div class="flex gap-4 w-96 ">
-          <div class="border bg-green-300" style="width: {{$sales[$date->format('Y-m-d')]['sales_percentage']}}%">
-            <div class="flex justify-between gap-4">
-              <div>${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}</div>
-              <div>{{number_format($sales[$date->format('Y-m-d')]['sales_percentage'],0,',','.')}}%</div>
-            </div>
+        <div class="flex gap-4 w-96 items-center ">
+          <div class="border text-white font-bold p-1" style="width: {{$sales[$date->format('Y-m-d')]['sales_percentage']}}%; background: rgb({{  255 - ($sales[$date->format('Y-m-d')]['sales_percentage'] * 2.55)}}, 100, 0)">
+            <div class="">${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}</div>
           </div>
+          
+          <div>{{number_format($sales[$date->format('Y-m-d')]['sales_percentage'],0,',','.')}}%</div>
         </div>
       </div>
       <div class="">
