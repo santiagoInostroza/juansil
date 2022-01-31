@@ -27,8 +27,12 @@ class DailyDetails extends Component{
         
         $salesArray= [];
         foreach ($period as $key => $value) {
-            $date = Str::limit($value, 10, '');
-            $salesArray[$date]= Sale::whereDate('date','like','%'.$date.'%')->get();
+            $date = Str::limit($value, 10, ''); //2020-12-12
+            $salesArray[$date]= Sale::whereYear('date','=',date('Y',strtotime($value)))
+            ->whereMonth('date','=',date('m',strtotime($value)))
+            ->whereDay('date','=',date('d',strtotime($value)))
+            ->get();
+            // $salesArray[$date]= Sale::whereDate('date','like','%'.$date.'%')->get();
         }
 
         // $sales = Sale::whereMonth('date','=',$this->month)->whereYear('date','=',$this->year)->get();
