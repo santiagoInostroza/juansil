@@ -1,77 +1,49 @@
 <div> 
-  @php
-      $totalSemana = 0;
-      $totalSemanaPagado = 0;
-  @endphp
   
+  TOTAL MES
+  {{$sales['totalMonth']}}
+  <div>
+    {{-- {{$sales}} --}}
+  </div>
+  <div>
+    {{$allSales}}
+  </div>
 
-  @foreach ($period as $item)
-    
-
-    @php
-        $date = Str::limit($item, 10, '');
-        $total = $salesArray[$date]->sum('total');
-        $totalPagado = $salesArray[$date]->where('payment_status','!=','1')->sum('payment_amount');
-        $diferencia = $total - $totalPagado;
-        $diferenciaDeliveries = $salesArray[$date]->where('delivery','=',1)->where('pending_amount','>',0)->count();
-        $diferenciaBodega = $salesArray[$date]->where('delivery','!=',1)->where('pending_amount','>',0)->count();
-
-        $totalSemana +=$total;
-        $totalSemanaPagado +=$totalPagado;
-        $diferenciaSemana = $totalSemana - $totalSemanaPagado;
-    @endphp   
-    
-    <div class="border flex justify-between items-center gap-2">
-      <div>
-        <div class="text-sm">
-          {{Str::upper(Str::limit($item->dayName, 3, ''))}} 
-          {{$item->format('d')}}
-        </div>
-        <div class="p-4 flex gap-4">
-          <div>
-            <div>total</div>
-            <div>${{number_format($total,0,',','.')}}</div>
-          </div>
-          <div>
-            <div>total Pagado</div>
-            <div>${{number_format($totalPagado,0,',','.')}}</div>
-          </div>
-          <div>
-            <div>Diferencia (deliveries{{$diferenciaDeliveries}} bodega{{$diferenciaBodega}})</div>
-            <div>${{number_format($diferencia,0,',','.')}}</div>
+  @foreach ($period as $date)
+    <div class="flex justify-between items-center gap-2 p-1">
+      <div class="flex gap-4 items-center   w-full">
+        <div class="text-sm w-6"> {{Str::upper(Str::limit($date->dayName, 1, ''))}}  {{$date->format('d')}}</div>
+        <div class="flex gap-4 w-full ">
+          <div class="border bg-green-300" style="width: {{$sales[$date->format('Y-m-d')]['sales_percentage']}}%">
+            <div>${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}</div>
           </div>
         </div>
       </div>
-      <div>
+      <div class="">
         <a class="p-2 shadow bg-gray-100 rounded text-gray-600 font-bold tracking-widest uppercase text-sm" href="{{route('admin.deliveries.index',$date)}}" target="_blank">Deliveries</a>
       </div>
       
     
-       
+      
     </div>
     <div>
     </div>
-    @if ($item->format('N')==7)
+    @if ($date->format('N')==7)
         <div class="p-4 flex gap-4 bg-red-100">
           <div>
             <div>Total</div>
-            <div>${{number_format($totalSemana,0,',','.')}}</div>
+            {{-- <div>${{number_format($totalSemana,0,',','.')}}</div> --}}
           </div>
           <div>
             <div>Total Pagado</div>
-            <div>${{number_format($totalSemanaPagado,0,',','.')}}</div>
+            {{-- <div>${{number_format($totalSemanaPagado,0,',','.')}}</div> --}}
           </div>
           <div>
             <div>Pendiente</div>
-            <div>${{number_format($diferenciaSemana,0,',','.')}}</div>
+            {{-- <div>${{number_format($diferenciaSemana,0,',','.')}}</div> --}}
           </div>
         </div>
         <br><br>
-      @php
-          $totalSemana = 0;
-          $totalSemanaPagado = 0;
-          $diferenciaSemana = 0;
-      @endphp
     @endif
   @endforeach
     
