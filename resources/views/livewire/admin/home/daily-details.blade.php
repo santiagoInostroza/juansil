@@ -2,11 +2,11 @@
   
   TOTAL MES
   {{$sales['totalMonth']}}
+  {{$sales['maxMonth']}}
   <div>
     {{-- {{$sales}} --}}
   </div>
   <div>
-    {{$allSales}}
   </div>
 
   @foreach ($period as $date)
