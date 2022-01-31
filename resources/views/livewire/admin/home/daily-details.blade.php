@@ -13,7 +13,7 @@
     <div class="flex justify-between items-center gap-2 ">
       <div class="flex gap-4 items-center w-full">
         <div class="text-sm w-6"> {{Str::upper(Str::limit($date->dayName, 1, ''))}}  {{$date->format('d')}}</div>
-        <div class="flex gap-4 w-96 items-center ">
+        <div class="flex gap-8 w-96 items-center ">
           <div class="border text-white font-bold p-1" style="text-shadow: 1px 1px #000000; width: {{$sales[$date->format('Y-m-d')]['sales_percentage']}}%; background: rgb({{  255 - ($sales[$date->format('Y-m-d')]['sales_percentage'] * 2.55)}}, 100, 0)">
             <div class="">${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}</div>
           </div>
