@@ -52,13 +52,21 @@ class DailyDetails extends Component{
             $date = $dateTime->format('Y-m-d');
             $sales= $allSales->where('new_date', '=', $date );
            
-            // VENTAS TOTALES
+            // TODAS LAS VENTAS DEL MES
+            $this->sales['all']= $allSales;
+
+            // TODAS LAS VENTAS DEL DIA
             $this->sales[$date]= $sales;
             $this->sales[$date]['total']= $sales->sum('total');
             $this->sales[$date]['sales_percentage']=($this->sales[$date]['total']>0) ? $this->sales[$date]['total'] / $this->sales['maxMonth'] * 100 : 0;
 
+            // TODAS LASA VENTAS PENDIENTES
             $this->sales[$date]['pending']= $sales->where('payment_status',1);
+
+            // TODAS LAS VENTAS PARCIALMENTE ABONADAS
             $this->sales[$date]['partial']= $sales->where('payment_status',2);
+
+            // TODAS LAS VENTAS PAGADAS
             $this->sales[$date]['paid_out']= $sales->where('payment_status',3);
 
 
