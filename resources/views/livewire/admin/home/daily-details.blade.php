@@ -15,7 +15,7 @@
         <div class="text-sm w-6"> {{Str::upper(Str::limit($date->dayName, 1, ''))}}  {{$date->format('d')}}</div>
         <div class="flex gap-4 w-96 ">
           <div class="border bg-green-300" style="width: {{$sales[$date->format('Y-m-d')]['sales_percentage']}}%">
-            <div class="flex">
+            <div class="flex justify-between gap-4">
               <div>${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}</div>
               <div>{{number_format($sales[$date->format('Y-m-d')]['sales_percentage'],0,',','.')}}%</div>
             </div>
