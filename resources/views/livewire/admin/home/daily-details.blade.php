@@ -16,8 +16,8 @@
         <div class="flex gap-4 w-96 ">
           <div class="border bg-green-300" style="width: {{$sales[$date->format('Y-m-d')]['sales_percentage']}}%">
             <div class="flex">
-              ${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}
-              {{number_format($sales[$date->format('Y-m-d')]['sales_percentage'],0,',','.')}}%
+              <div>${{number_format($sales[$date->format('Y-m-d')]->sum('total'),0,',','.')}}</div>
+              <div>{{number_format($sales[$date->format('Y-m-d')]['sales_percentage'],0,',','.')}}%</div>
             </div>
           </div>
         </div>
