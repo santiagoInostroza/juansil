@@ -30,9 +30,9 @@ class CreateCustomersTable extends Migration
             $table->string('longitud')->nullable();
             $table->string('comentario')->nullable();
             $table->unsignedBigInteger('customer_data_id')->nullable();
+            $table->foreign('customer_data_id')->references('id')->on('customer_data')->onDelete('cascade');
             $table->timestamps();
 
-            $table->foreign('customer_data_id')->references('id')->on('customer_data')->onDelete('cascade');
 
 
         });

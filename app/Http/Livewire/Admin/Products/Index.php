@@ -58,8 +58,16 @@ class Index extends Component{
 
 
     public function render(){
+        $str = explode(' ', $this->search);
 
-        $query = Product::with(['salePrices','category','tags','brand','image'])->where('name','like','%'. $this->search . '%')->orderBy($this->sort,$this->direction);
+        $query = Product::with(['salePrices','category','tags','brand','image'])
+        // ->where('name','like','%'. $this->search . '%')
+        ->where(function($query) use($str) {
+            foreach($str as $s) {
+                $query = $query->where('name','like',"%" . $s . "%");
+            }
+        })
+        ->orderBy($this->sort,$this->direction);
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }

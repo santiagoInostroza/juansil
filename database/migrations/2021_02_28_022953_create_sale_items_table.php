@@ -23,11 +23,10 @@ class CreateSaleItemsTable extends Migration
             $table->BigInteger('precio');
             $table->BigInteger('precio_por_caja');
             $table->BigInteger('precio_total');
-            $table->timestamps();
-
-
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            $table->timestamps();
 
         });
        
