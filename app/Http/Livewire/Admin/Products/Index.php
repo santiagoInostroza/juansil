@@ -58,8 +58,9 @@ class Index extends Component{
     }
 
 
-    public function updatingNumberOfProductsToDisplay(){
+    public function updatedNumberOfProductsToDisplay(){
         session(['numberOfProductsToDisplay' => $this->numberOfProductsToDisplay]);
+     
     }
   
 
