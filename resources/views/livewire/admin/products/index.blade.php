@@ -30,16 +30,16 @@
                     Mostrar
                     <div wire:ignore>
                         <select class="border rounded p-2"  wire:model="show">
-                            <option value="1" @if($this->show==1) selected @endif >1</option>
-                            <option value="5" @if($this->show==5) selected @endif >5</option>
-                            <option value="10" @if($this->show==10) selected @endif >10</option>
-                            <option value="20" @if($this->show==20) selected @endif >20</option>
-                            <option value="50" @if($this->show==50) selected @endif >50</option>
-                            <option value="100" @if($this->show==100) selected @endif >100</option>
+                            <option value="1" @if($this->numberOfProductsToDisplay==1) selected @endif >1</option>
+                            <option value="5" @if($this->numberOfProductsToDisplay==5) selected @endif >5</option>
+                            <option value="10" @if($this->numberOfProductsToDisplay==10) selected @endif >10</option>
+                            <option value="20" @if($this->numberOfProductsToDisplay==20) selected @endif >20</option>
+                            <option value="50" @if($this->numberOfProductsToDisplay==50) selected @endif >50</option>
+                            <option value="100" @if($this->numberOfProductsToDisplay==100) selected @endif >100</option>
                         </select>
                     </div>
                     productos
-                    <div wire:loading wire:target="show,onlyStock">
+                    <div wire:loading wire:target="numberOfProductsToDisplay,onlyStock">
                         <x-spinner.spinner size='10'></x-spinner.spinner>
                     </div>
                 </label>
