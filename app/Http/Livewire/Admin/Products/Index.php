@@ -34,7 +34,7 @@ class Index extends Component{
     public $openChangePhoto = false;
     public $productStatus;
     public $onlyStock = false;
-    public $show=5;
+    public $numberOfProductsToDisplay;
 
     public $editRow;
     public $editRowVerify = true;
@@ -50,9 +50,17 @@ class Index extends Component{
     // public function updatingOnlyStock(){
     //     $this->editRowVerify = true;
     // }
-    // public function updatingShow(){
-    //     $this->editRowVerify = true;
-    // }
+
+    public function mount(){
+          $this->numberOfProductsToDisplay = (session('numberOfProductsToDisplay')) ?session('numberOfProductsToDisplay') :10;
+       
+
+    }
+
+
+    public function updatingNumberOfProductsToDisplay(){
+        session(['numberOfProductsToDisplay' => $this->numberOfProductsToDisplay]);
+    }
   
 
 
@@ -71,7 +79,7 @@ class Index extends Component{
         if($this->onlyStock){
             $products= $query->where('stock','>',0);
         }
-        $products = $query->paginate($this->show);
+        $products = $query->paginate($this->numberOfProductsToDisplay);
 
         $brands= Brand::orderBy('name','asc')->get();
         $categories= Category::orderBy('name','asc')->get();
