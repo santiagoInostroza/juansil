@@ -205,13 +205,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="my-4 flex flex-col gap-2">
-                                                            <div>
 
-                                                                {{$sale->customer->name}}
-                                                            </div>
-                                                            <div>
-                                                                {{$sale->customer->direccion}}
-                                                            </div>
+                                                            <div> {{$sale->customer->name}} </div>
+                                                            <div> {{$sale->customer->direccion}}  </div>
 
                                                             <textarea x-ref="comment" class="border rounded p-4">{{$sale->comments}}</textarea>
 
@@ -245,6 +241,10 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">                                
                                     <div class="flex items-center gap-2">
+                                        <div>
+                                            <a href="https://api.whatsapp.com/send?phone={{ $sale->customer->celular }}&text=Hola,"
+                                                target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
+                                        </div>
                                         @if ($sale->payment_status == 3  )
                                             @if ($sale->boleta != 1)
                                                 <div x-data="{loading:false}" id="generateTicket_{{$sale->id}}" class="relative">                                        
