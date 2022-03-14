@@ -242,7 +242,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">                                
                                     <div class="flex items-center gap-2">
                                         <div>
-                                            <a href="https://api.whatsapp.com/send?phone={{ $sale->customer->celular }}&text=Hola,"
+                                            <a href="https://api.whatsapp.com/send?phone={{ $sale->customer->celular }}"
                                                 target="_blank"><i class="fab fa-whatsapp p-2 bg-success"></i></a>
                                         </div>
                                         @if ($sale->payment_status == 3  )
