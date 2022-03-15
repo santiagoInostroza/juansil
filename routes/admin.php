@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\MovementController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventarioController;
 use App\Http\Controllers\Admin\CustomerDataController;
 
@@ -60,6 +61,12 @@ Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->middle
 Route::resource('routes', RouteController::class)->middleware('can:admin.home')->names('routes');
 Route::get('sectors',[RouteController::class,'sectors'])->middleware('can:admin.home')->name('routes.sectors');
 Route::get('report', [ReportController::class,'index'])->middleware('can:admin.home')->name('admin.report');
+
+
+
+Route::get('newAdmin', [DashboardController::class,'index'])->middleware('can:admin.home')->name('admin.dashboard.main');
+
+
 
 
 

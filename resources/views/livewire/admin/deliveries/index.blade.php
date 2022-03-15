@@ -30,7 +30,7 @@
         @else
             <h2 class="text-xl p-2 flex items-center gap-4 justify-between md:justify-start">
                 <div>Pedidos {{ count($orders) }}</div> 
-                <div>${{ number_format($orders->sum('total'),0,',','.') }}</div>
+                {{-- <div>${{ number_format($orders->sum('total'),0,',','.') }}</div> --}}
             </h2>
            <div class="flex flex-col md:flex-row items-start ">
                 <div wire:ignore id="map" class="w-full">
