@@ -26,7 +26,7 @@
     // }
     // google.maps.event.addDomListener(window, "load", initMap);
 
-    let svgMarker = {
+    let svgMarkerCompletado = {
         path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
         fillColor: "blue",
         fillOpacity: 1,
@@ -36,17 +36,54 @@
         anchor: new google.maps.Point(15, 30),
     };
 
+    let svgMarkerEntregado = {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "purple",
+        fillOpacity: 1,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 1.3,
+        anchor: new google.maps.Point(15, 30),
+    };
+
+    let svgMarkerPagado = {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "Lime",
+        fillOpacity: 1,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 1.3,
+        anchor: new google.maps.Point(15, 30),
+    };
+
+
     window.onload = function() {
         window.addEventListener('name-updated', event => {
 
             for (let i = 0; i < markers.length; i++) {
                 const marker = markers[i];
-                console.log("identificador: ", marker.identificador);
-                console.log('event.detail.id: ', event.detail.id);
                 if (marker.identificador == event.detail.id) {
 
+                    console.log("identificador: ", marker.identificador);
+                console.log('event.detail.id: ', event.detail.id);
+                console.log('event.detail.delivery_stage: ', event.detail.delivery_stage);
+                console.log('event.detail.payment_status: ', event.detail.payment_status);
+
                     marker.setAnimation(google.maps.Animation.BOUNCE);
-                    marker.setIcon(svgMarker);
+
+                    // entregado con pago pendiente 
+                    if(event.detail.delivery_stage == 1 && event.detail.payment_status != 3){
+                        marker.setIcon(svgMarkerEntregado);
+                        console.log('Entregado');
+                    // Pagado con entrega pendiente 
+                    }else if(event.detail.delivery_stage != 1 && event.detail.payment_status == 3){
+                         marker.setIcon(svgMarkerPagado);
+                         console.log('pagado');
+                    }else{
+                        //completado
+                        marker.setIcon(svgMarkerCompletado);
+                        console.log('completado');
+                    }
                 }
 
             }
@@ -99,6 +136,8 @@
                     scale: 1,
                     anchor: new google.maps.Point(15, 30),
                 };
+
+                
                
 
                 if (navigator.geolocation) {
@@ -140,6 +179,7 @@
 
 
         function setMarkers(map, locations) {
+          
             for (var i = 0; i < locations.length; i++) {
                 //var myLatLng = new google.maps.LatLng(marcadores[i][1], marcadores[i][2]);
                 var marker = new google.maps.Marker({
@@ -169,6 +209,9 @@
 
         };
 
+
+
+        // Obtener y almacenar todas las coordenadas en locations
         function getLocations() {
             const locations = [];
             let latitudes = document.querySelectorAll(".latitud"); //$(".latitud");
@@ -176,14 +219,15 @@
                 let longitudes = document.querySelectorAll(".longitud"); //$(".longitud");
                 let id_venta = document.querySelectorAll(".id_venta"); //$(".id_venta");
                 let direccion = document.querySelectorAll(".direccion"); //$(".id_venta");
-                for (let index = 0; index < latitudes.length; index++) {
+                for (let i = 0; i < latitudes.length; i++) {
                     locations.push(
-                        [{
-                                "lat": Number(latitudes[index].value),
-                                "lng": Number(longitudes[index].value)
+                        [
+                            {
+                                "lat": Number(latitudes[i].value),
+                                "lng": Number(longitudes[i].value)
                             }, //0
-                            id_venta[index].value, //1
-                            direccion[index].value //2
+                            id_venta[i].value, //1
+                            direccion[i].value //2
                         ]
                     )
                 }
@@ -203,10 +247,55 @@
                         }, //0
                         id_venta2[index].value, //1
                         direccion2[index].value, //2
-                        svgMarker, //3
+                        svgMarkerCompletado, //3
                     ]
                 )
             }
+
+            //entregado con pago pendiente 
+
+            var latitudes3 = document.querySelectorAll(".latitud3"); //$(".latitud2");
+            if (latitudes3) {
+                var longitudes3 = document.querySelectorAll(".longitud3"); // $(".longitud2");
+                let id_venta3 = document.querySelectorAll(".id_venta3"); //$(".id_venta");
+                let direccion3 = document.querySelectorAll(".direccion3"); //$(".id_venta");
+
+                for (let index = 0; index < latitudes3.length; index++) {
+                    locations.push(
+                        [{
+                                "lat": Number(latitudes3[index].value),
+                                "lng": Number(longitudes3[index].value)
+                            }, //0
+                            id_venta3[index].value, //1
+                            direccion3[index].value, //2
+                            svgMarkerEntregado, //3
+                        ]
+                    )
+                }
+            }
+
+            //  Pagado con entrega pendiente 
+            var latitudes4 = document.querySelectorAll(".latitud4"); //$(".latitud2");
+            if (latitudes4) {
+                var longitudes4 = document.querySelectorAll(".longitud4"); // $(".longitud2");
+                let id_venta4 = document.querySelectorAll(".id_venta4"); //$(".id_venta");
+                let direccion4 = document.querySelectorAll(".direccion4"); //$(".id_venta");
+
+                for (let index = 0; index < latitudes4.length; index++) {
+                    locations.push(
+                        [{
+                                "lat": Number(latitudes4[index].value),
+                                "lng": Number(longitudes4[index].value)
+                            }, //0
+                            id_venta4[index].value, //1
+                            direccion4[index].value, //2
+                            svgMarkerPagado, //3
+                        ]
+                    )
+                }
+            }
+      
+
             return locations;
         }
 

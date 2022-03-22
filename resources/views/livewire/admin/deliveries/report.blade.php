@@ -6,9 +6,11 @@
 
     <div class="hidden" :class="{'hidden':!open}" >
         <div class="bg-white grid gap-2 p-4">
-            <div>Pedidos totales {{$orders->count()}}</div>
-            <div>Pedidos entregados {{$orders->where('delivery_stage', '1')->count() }}</div>
-            <div>Pedidos Pagados {{$orders->where('payment_status', '3')->count() }}</div>
+            <div class="text-xl">Pedidos totales {{$orders->count()}}</div>
+            <div>Pedidos entregados {{$orders->where('delivery_stage', '1')->where('payment_status','!=', '3')->count() }}</div>
+            <div>Pedidos Pagados {{$orders->where('delivery_stage','!=', '1')->where('payment_status', '3')->count() }}</div>
+            <div>Pedidos Pendientes {{ ($orders->where('payment_status', '1')->where('delivery_stage','!=', 1))->count() }}</div>
+            <div>Pedidos Completados {{ ($orders->where('payment_status', '3')->where('delivery_stage', 1))->count() }}</div>
             
             <div class="grid grid-cols-3 gap-4 px-4 w-max-content">
                 @if ($orders->where('payment_account',1)->count()>0)
@@ -32,8 +34,12 @@
                     <div> ${{ number_format($orders->where('payment_account',5)->sum('total'),0,',','.') }}</div>
                 @endif
                 @if ($orders->where('payment_account',6)->count()>0)
-                    <div class="col-span-2"> {{$orders->where('payment_account',6)->count()}} Otros</div>
+                    <div class="col-span-2"> {{$orders->where('payment_account',6)->count()}} Cuenta Juansil</div>
                     <div> ${{ number_format($orders->where('payment_account',6)->sum('total'),0,',','.') }}</div>
+                @endif
+                @if ($orders->where('payment_account',7)->count()>0)
+                    <div class="col-span-2"> {{$orders->where('payment_account',7)->count()}} Otros</div>
+                    <div> ${{ number_format($orders->where('payment_account',7)->sum('total'),0,',','.') }}</div>
                 @endif
             </div>
 

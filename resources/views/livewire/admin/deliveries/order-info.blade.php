@@ -177,8 +177,7 @@
             </div>
 
             <div class="flex justify-between md:justify-start gap-4">
-                <div class="relative" x-data="{loading:false,showPay:false,loading2:false}" id="pay_{{$venta->id}}">
-                    
+                <div class="relative" x-data="{loading:false,showPay:false,showPay2:false,loading2:false}" id="pay_{{$venta->id}}">
                     {{-- <i class="far fa-money-bill-alt  mr-2"></i> --}}
                     @if ($venta->payment_status == 1)
                         <div class="hidden" :class="{'hidden': !loading}">
@@ -201,7 +200,8 @@
                                             <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 3).then(()=>{loading2=false; showPay=false;})"> Cuenta rut Santy </x-jet-button>
                                             <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 4).then(()=>{loading2=false; showPay=false;})"> Cuenta rut Silvia </x-jet-button>
                                             <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 5).then(()=>{loading2=false; showPay=false;})"> Cuenta Santander </x-jet-button>
-                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 6).then(()=>{loading2=false; showPay=false;})"> Otra </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 6).then(()=>{loading2=false; showPay=false;})"> Cuenta Juansil </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 7).then(()=>{loading2=false; showPay=false;})"> Otra </x-jet-button>
                                         
                                             <div class="hidden" :class="{'hidden': !loading2}">
                                                 <x-spinner.spinner2 size="8"></x-spinner.spinner2>
@@ -212,14 +212,13 @@
                                     </div>
                                 </x-modal.modal2>
                             </div>
-
                         </div>
                     @elseif($venta->payment_status==2)
                         Abonado<div wire:click='pagarDiferencia({{ $venta->id }})' style="background: #d0e80a" class="btn ml-2">Pagar</div>
                     @elseif($venta->payment_status==3) {{-- PAGADO --}}
 
-                        <div class="bg-green-500 text-white p-1 rounded">
-                            <span> 
+                        <div class="bg-green-500 text-white p-1 rounded" x-on:dblclick="showPay2 = true">
+                            <div> 
                                 Pagado el 
                                 {{ Helper::fecha($venta->payment_date)->timezone('America/Santiago')->dayName}} {{ Helper::fecha($venta->payment_date)->timezone('America/Santiago')->format('H:i') }}  
                                 
@@ -227,8 +226,66 @@
                                     por {{$venta->paymentBy()->name}}
                                 @endif
                                 <i class="fas fa-check"></i>
-                            </span>
+                                <div>
+                                    
+                                    @switch($venta->payment_account)
+                                        @case(1)
+                                            Efectivo
+                                            @break
+                                        @case(2)
+                                            Rut Paty
+                                            @break
+                                        @case(3)
+                                            Rut Santy
+                                            @break
+                                        @case(4)
+                                            Rut Silvia
+                                            @break
+                                        @case(5)
+                                            Cuenta santander
+                                            @break
+                                        @case(6)
+                                            Cuenta Juansil
+                                            @break
+                                        @case(7)
+                                            Otra
+                                            @break
+                                        @default
+                                            
+                                    @endswitch
+                                </div>
+
+                            </div>
+                            <div class="hidden" :class="{'hidden' : !showPay2}">
+                                <x-modal.modal2>
+                                    <div class="p-4">
+                                        <div class="flex items-center justify-between gap-4">
+                                            <h2 class="text-gray-600 font-bold text-xl">Cambiar metodo de pago</h2>
+                                            <div x-on:click="showPay2=false" class="rounded-full shadow p-2 px-3">
+                                                <i class="fas fa-times"></i>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-2 gap-y-4 mt-8 relative">
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 1).then(()=>{loading2=false; showPay2=false;})"> Efectivo </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 2).then(()=>{loading2=false; showPay2=false;})"> Cuenta rut Paty </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 3).then(()=>{loading2=false; showPay2=false;})"> Cuenta rut Santy </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 4).then(()=>{loading2=false; showPay2=false;})"> Cuenta rut Silvia </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 5).then(()=>{loading2=false; showPay2=false;})"> Cuenta Santander </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 6).then(()=>{loading2=false; showPay2=false;})"> Cuenta Juansil </x-jet-button>
+                                            <x-jet-button x-on:click="loading2=true;loading=true; $wire.payOrder({{ $venta }}, 7).then(()=>{loading2=false; showPay2=false;})"> Otra </x-jet-button>
+                                        
+                                            <div class="hidden" :class="{'hidden': !loading2}">
+                                                <x-spinner.spinner2 size="8"></x-spinner.spinner2>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </x-modal.modal2>
+                            </div>
                         </div>
+
+                      
                         
                     @endif
                 </div>
@@ -255,6 +312,26 @@
                         
                         @endif
                     </div>
+                </div>
+            </div>
+            <div class="my-2" x-data="{isOpenComment:false,comment:''}">
+                <x-jet-secondary-button x-on:click="isOpenComment = true">
+                    <i class="fas fa-comment"></i> Agregar comentario
+                </x-jet-secondary-button>
+                <div class="text-gray-500 text-sm shadow bg-white p-4 rounded mt-2">
+                    {!!$sale->driver_comment!!}
+                </div>
+                <div x-show="isOpenComment">
+                    <x-modal.alert2>
+                        <x-slot name="header">Ingresa un comentario</x-slot>
+                        <x-slot name="body">
+                            <textarea x-model="comment" name="" id="" class="bg-white w-full border rounded"></textarea>
+                        </x-slot>
+                        <x-slot name="footer">
+                            <x-jet-secondary-button x-on:click="isOpenComment=false">Cancelar</x-jet-secondary-button>
+                            <x-jet-button x-on:click="$wire.saveDriverComment({{$sale}},comment).then(()=>{isOpenComment=false})">Guardar Comentario</x-jet-button>
+                        </x-slot>
+                    </x-modal.alert2>
                 </div>
             </div>
 

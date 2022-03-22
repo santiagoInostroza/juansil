@@ -13,7 +13,7 @@ class Index extends Component{
     public $date;
 
 
-    protected $listeners = ['closeAgregarProducto','payOrder','deliverOrder'];
+    protected $listeners = ['closeAgregarProducto','payOrder','deliverOrder','saveDriverComment'];
 
 
 
@@ -42,7 +42,12 @@ class Index extends Component{
     public function payOrder(Sale $sale, $account = 1){
         $deliveryController= new DeliveryController();
         $deliveryController->payOrder($sale, $account);
-        $this->dispatchBrowserEvent('name-updated', ['id' => $sale->id]);
+        $this->dispatchBrowserEvent('name-updated', 
+        [
+            'id' => $sale->id,
+            'delivery_stage' => $sale->delivery_stage,
+            'payment_status' => $sale->payment_status,
+        ]);
         $this->emit('render');
       }
 
@@ -50,7 +55,20 @@ class Index extends Component{
         $deliveryController= new DeliveryController();
         $deliveryController->deliverOrder($sale);
         $this->emit('render');
-        $this->dispatchBrowserEvent('name-updated', ['id' => $sale->id]);
+        $this->dispatchBrowserEvent('name-updated', 
+        [
+            'id' => $sale->id,
+            'delivery_stage' => $sale->delivery_stage,
+            'payment_status' => $sale->payment_status,
+        ]);
+    }
+    public function saveDriverComment(Sale $sale, $comment ){
+
+       $sale->driver_comment =($sale->driver_comment==null)
+        ? $comment .'<br>'. auth()->user()->name . ' ' . date('d-m-Y H:i:s').'<br>'
+        :  $comment.'<br>'. auth()->user()->name . ' ' . date('d-m-Y H:i:s').'<br><br>'.  $sale->driver_comment ;       
+       $sale->save();
+       $this->emit('render');
     }
 
 

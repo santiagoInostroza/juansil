@@ -32,4 +32,7 @@ class OrderInfo extends Component{
     public function deliverOrder(Sale $sale){
         $this->emit('deliverOrder',$sale);
     }
+    public function saveDriverComment(Sale $sale,$comment){
+        $this->emit('saveDriverComment',$sale,$comment);
+    }
 }

@@ -177,6 +177,8 @@
                     </div>
                 </div>
 
+                
+
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
                     <x-jet-responsive-nav-link href="{{ route('profile.show') }}"

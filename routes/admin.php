@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventarioController;
 use App\Http\Controllers\Admin\CustomerDataController;
 
-Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.home')->name('admin.home');
+Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.home.index')->name('admin.home');
 
 Route::resource('categorias', CategoryController::class)->middleware('can:admin.home')->names('admin.categories');
 Route::resource('etiquetas', TagController::class)->middleware('can:admin.home')->names('admin.tags');
@@ -38,7 +38,7 @@ Route::resource('proveedores', SupplierController::class)->middleware('can:admin
 Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create'])->middleware('can:admin.home')->name('admin.purchases.create');
 Route::resource('compras', PurchaseController::class)->middleware('can:admin.home')->names('admin.purchases');
 
-Route::get('deliveries/{date?}', [DeliveryController::class,'index'])->middleware('can:admin.home')->name('admin.deliveries.index');
+Route::get('deliveries/{date?}', [DeliveryController::class,'index'])->middleware('can:admin.deliveries.index')->name('admin.deliveries.index');
 
 Route::resource('movimientos', MovementController::class)->middleware('can:admin.home')->names('admin.movements');
 Route::resource('stock', StockController::class)->middleware('can:admin.home')->names('admin.stock');
@@ -47,13 +47,13 @@ Route::get('customer', [CustomerController::class,'index2'])->middleware('can:ad
 Route::resource('clientes', CustomerController::class)->middleware('can:admin.home')->names('admin.customers');
 Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerData'])->middleware('can:admin.home')->name('admin.customers.datos_cliente');
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->middleware('can:admin.home')->name('admin.sales.create');
-Route::get('ventas/index2', [SaleController::class,'index2'])->middleware('can:admin.home')->name('admin.sales.index2');
-Route::resource('ventas', SaleController::class)->middleware('can:admin.home')->names('admin.sales');
+Route::get('ventas/index2', [SaleController::class,'index2'])->middleware('can:admin.sales.index')->name('admin.sales.index2');
+Route::resource('ventas', SaleController::class)->middleware('can:admin.sales.index')->names('admin.sales');
 Route::resource('comunas', ComunaController::class)->middleware('can:admin.home')->names('admin.comunas');
 
 Route::get('users/index',[UserController::class,'newIndex'])->middleware('can:admin.home')->name('admin.users.newIndex');
 Route::get('visits',[VisitController::class,'index'])->middleware('can:admin.home')->name('admin.visits.index');
-Route::resource('users',  UserController::class)->only('index','edit','update')->middleware('can:admin.home')->names('admin.users');
+Route::resource('users',  UserController::class)->only('index','edit','update')->middleware('can:admin.home.index')->names('admin.users');
 Route::resource('roles',  RoleController::class)->middleware('can:admin.home')->names('admin.roles');
 Route::get('permission',[RoleController::class,'permission'])->middleware('can:admin.home')->name('admin.permission');
 Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->middleware('can:admin.home')->name('admin.sales.pagos_pendientes');
@@ -64,7 +64,7 @@ Route::get('report', [ReportController::class,'index'])->middleware('can:admin.h
 
 
 
-Route::get('newAdmin', [DashboardController::class,'index'])->middleware('can:admin.home')->name('admin.dashboard.main');
+
 
 
 

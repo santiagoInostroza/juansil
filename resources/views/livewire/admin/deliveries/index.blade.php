@@ -20,7 +20,6 @@
 
 
 
-
     <div class="border border-gray-100 shadow rounded bg-white">
        
         @if (count($orders) == 0)

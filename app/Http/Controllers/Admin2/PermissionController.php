@@ -1,37 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin2;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
-class DashboardController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+class PermissionController extends Controller{
     public function index(){
-       return view('admin.dashboard.main');
+        return view('admin2.permissions.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('admin2.permissions.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         //
@@ -54,9 +38,8 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Permission $permission){
+        return view('admin2.permissions.edit',compact('permission'));
     }
 
     /**
