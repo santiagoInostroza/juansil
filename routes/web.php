@@ -57,7 +57,7 @@ Route::get('test', [TestController::class,'index'])->name('test');
 
 // ADMIN 2 //
 
-Route::get('dashboard', [DashboardController::class,'index'])->middleware('can:admin.dashboard.index','auth')->name('admin2.dashboard.index');
+Route::get('dashboard', [DashboardController::class,'index'])->middleware('can:admin.home','auth')->name('admin2.dashboard.index');
 Route::get('fintech', [DashboardController::class,'fintech'])->middleware('can:admin.dashboard.fintech','auth')->name('admin2.dashboard.fintech');
 
 Route::get('admin2/roles', [RoleController::class,'index'])->middleware('can:admin.roles.index')->name('admin2.roles.index');
