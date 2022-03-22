@@ -57,7 +57,7 @@ Route::get('test', [TestController::class,'index'])->name('test');
 
 // ADMIN 2 //
 
-Route::get('dashboard', [DashboardController::class,'index'])->middleware('can:admin.home','auth')->name('admin2.dashboard.index');
+Route::get('dashboard', [DashboardController::class,'index'])->middleware('can:admin.dashboard.index','auth')->name('admin2.dashboard.index');
 Route::get('fintech', [DashboardController::class,'fintech'])->middleware('can:admin.dashboard.fintech','auth')->name('admin2.dashboard.fintech');
 
 Route::get('admin2/roles', [RoleController::class,'index'])->middleware('can:admin.roles.index')->name('admin2.roles.index');
@@ -65,9 +65,9 @@ Route::get('admin2/roles/create', [RoleController::class,'create'])->middleware(
 Route::get('admin2/roles/{role}', [RoleController::class,'show'])->middleware('can:admin.roles.show')->name('admin2.roles.show');
 Route::get('admin2/roles/{role}/edit', [RoleController::class,'edit'])->middleware('can:admin.roles.edit')->name('admin2.roles.edit');
 
-Route::get('admin2/permissions', [PermissionController::class,'index'])->middleware('can:admin.home')->name('admin2.permissions.index');
-Route::get('admin2/permissions/create', [PermissionController::class,'create'])->middleware('can:admin.home')->name('admin2.permissions.create');
-Route::get('admin2/permissions/{permission}/edit', [PermissionController::class,'edit'])->middleware('can:admin.home')->name('admin2.permissions.edit');
+Route::get('admin2/permissions', [PermissionController::class,'index'])->middleware('can:admin.permissions.index')->name('admin2.permissions.index');
+Route::get('admin2/permissions/create', [PermissionController::class,'create'])->middleware('can:admin.permissions.create')->name('admin2.permissions.create');
+Route::get('admin2/permissions/{permission}/edit', [PermissionController::class,'edit'])->middleware('can:admin.permissions.edit')->name('admin2.permissions.edit');
 
 Route::get('admin2/users', [UserController::class,'index'])->middleware('can:admin.users.index')->name('admin2.users.index');
 Route::get('admin2/users/{user}/edit', [UserController::class,'edit'])->middleware('can:admin.users.edit')->name('admin2.users.edit');
