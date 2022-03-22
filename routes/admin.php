@@ -26,17 +26,17 @@ use App\Http\Controllers\Admin\CustomerDataController;
 
 Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.home.index')->name('admin.home');
 
-Route::resource('categorias', CategoryController::class)->middleware('can:admin.home')->names('admin.categories');
-Route::resource('etiquetas', TagController::class)->middleware('can:admin.home')->names('admin.tags');
+Route::resource('categorias', CategoryController::class)->middleware('can:admin.categories.index')->names('admin.categories');
+Route::resource('etiquetas', TagController::class)->middleware('can:admin.tags.index')->names('admin.tags');
 Route::resource('marcas', BrandController::class)->middleware('can:admin.home')->names('admin.brands');
 
 
-Route::get('productos/newProduct/{producto}',[ProductController::class,'newProduct'])->middleware('can:admin.home')->name('admin.products.new_product');
-Route::resource('productos', ProductController::class)->middleware('can:admin.home')->names('admin.products');
+Route::get('productos/newProduct/{producto}',[ProductController::class,'newProduct'])->middleware('can:admin.products.index')->name('admin.products.new_product');
+Route::resource('productos', ProductController::class)->middleware('can:admin.products.index')->names('admin.products');
 
-Route::resource('proveedores', SupplierController::class)->middleware('can:admin.home')->names('admin.suppliers');
-Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create'])->middleware('can:admin.home')->name('admin.purchases.create');
-Route::resource('compras', PurchaseController::class)->middleware('can:admin.home')->names('admin.purchases');
+Route::resource('proveedores', SupplierController::class)->middleware('can:admin.suppliers.index')->names('admin.suppliers');
+Route::get('compras/create/{proveedor_id}', [PurchaseController::class,'create'])->middleware('can:admin.purchases.index')->name('admin.purchases.create');
+Route::resource('compras', PurchaseController::class)->middleware('can:admin.purchases.index')->names('admin.purchases');
 
 Route::get('deliveries/{date?}', [DeliveryController::class,'index'])->middleware('can:admin.deliveries.index')->name('admin.deliveries.index');
 
@@ -49,7 +49,7 @@ Route::get('datos-cliente/{cliente}', [CustomerController::class,'showCustomerDa
 Route::get('ventas/create/{cliente_id}', [SaleController::class,'create'])->middleware('can:admin.home')->name('admin.sales.create');
 Route::get('ventas/index2', [SaleController::class,'index2'])->middleware('can:admin.sales.index')->name('admin.sales.index2');
 Route::resource('ventas', SaleController::class)->middleware('can:admin.sales.index')->names('admin.sales');
-Route::resource('comunas', ComunaController::class)->middleware('can:admin.home')->names('admin.comunas');
+Route::resource('comunas', ComunaController::class)->middleware('can:admin.home,index')->names('admin.comunas');
 
 Route::get('users/index',[UserController::class,'newIndex'])->middleware('can:admin.home')->name('admin.users.newIndex');
 Route::get('visits',[VisitController::class,'index'])->middleware('can:admin.home')->name('admin.visits.index');
@@ -59,8 +59,8 @@ Route::get('permission',[RoleController::class,'permission'])->middleware('can:a
 Route::get('pagos-pendientes',[SaleController::class,'pagosPendientes'])->middleware('can:admin.home')->name('admin.sales.pagos_pendientes');
 
 Route::resource('routes', RouteController::class)->middleware('can:admin.home')->names('routes');
-Route::get('sectors',[RouteController::class,'sectors'])->middleware('can:admin.home')->name('routes.sectors');
-Route::get('report', [ReportController::class,'index'])->middleware('can:admin.home')->name('admin.report');
+Route::get('sectors',[RouteController::class,'sectors'])->middleware('can:admin.home.index')->name('routes.sectors');
+Route::get('report', [ReportController::class,'index'])->middleware('can:admin.home.index')->name('admin.report');
 
 
 
