@@ -28,7 +28,7 @@
                             </div>
                         
                             <a href="{{ route('admin.customers.edit', $venta->customer) }}">{{ $venta->customer->name }}</a>
-                            <div class="absolute top-0 right-0 pt-1 px-4 p text-3xl bg-white "> ${{ number_format($venta->total,0,',','.')}}</div>
+                            <div class="text-3xl bg-white "> ${{ number_format($venta->total,0,',','.')}}</div>
                         </div>
                         <div class="w-full pb-2">
                             <a class="pb-2" style="width: max-content" href='https://www.google.cl/maps/place/{{ $venta->customer->direccion }}'  target='_blank'>
@@ -168,7 +168,7 @@
                     <div class="grid grid-cols-2 gap-x-4">
                         <div>Subtotal</div>
                         <div class="text-right">${{ number_format($venta->subtotal,0,',','.')}}</div>
-                        <div class="">Despacho</div>
+                        <div class="">delivery</div>
                         <div class="text-right">${{ number_format($venta->delivery_value,0,',','.')}}</div>
                         <div class="font-bold">Total</div>
                         <div class="text-right font-bold">${{ number_format($venta->total,0,',','.')}}</div>
@@ -314,7 +314,7 @@
                     </div>
                 </div>
             </div>
-            <div class="my-2" x-data="{isOpenComment:false,comment:''}">
+            <div class="my-2" id="addComments_{{$venta->id}}" x-data="{isOpenComment:false,comment:''}">
                 <x-jet-secondary-button x-on:click="isOpenComment = true">
                     <i class="fas fa-comment"></i> Agregar comentario
                 </x-jet-secondary-button>

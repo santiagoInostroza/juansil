@@ -167,22 +167,22 @@
 
                             {{-- entregado con pago pendiente --}}
                             @if ($venta->delivery_stage==1 && $venta->payment_status!=3)
-                                <input type="" class="latitud3" value="{{ $venta->customer->latitud }}">
-                                <input type="" class="longitud3" value="{{ $venta->customer->longitud }}">
-                                <input type="" class="id_venta3" value="{{ $venta->id }}">
-                                <input type="" class="direccion3" value="{{ $venta->customer->direccion }}">
+                                <input type="hidden" class="latitud3" value="{{ $venta->customer->latitud }}">
+                                <input type="hidden" class="longitud3" value="{{ $venta->customer->longitud }}">
+                                <input type="hidden" class="id_venta3" value="{{ $venta->id }}">
+                                <input type="hidden" class="direccion3" value="{{ $venta->customer->direccion }}">
                                 {{-- Pagado con entrega pendiente --}}
                             @elseif($venta->delivery_stage != 1 && $venta->payment_status==3)
-                                <input type="" class="latitud4" value="{{ $venta->customer->latitud }}">
-                                <input type="" class="longitud4" value="{{ $venta->customer->longitud }}">
-                                <input type="" class="id_venta4" value="{{ $venta->id }}">
-                                <input type="" class="direccion4" value="{{ $venta->customer->direccion }}">
+                                <input type="hidden" class="latitud4" value="{{ $venta->customer->latitud }}">
+                                <input type="hidden" class="longitud4" value="{{ $venta->customer->longitud }}">
+                                <input type="hidden" class="id_venta4" value="{{ $venta->id }}">
+                                <input type="hidden" class="direccion4" value="{{ $venta->customer->direccion }}">
 
                             @else
-                                <input type="" class="latitud" value="{{ $venta->customer->latitud }}">
-                                <input type="" class="longitud" value="{{ $venta->customer->longitud }}">
-                                <input type="" class="id_venta" value="{{ $venta->id }}">
-                                <input type="" class="direccion" value="{{ $venta->customer->direccion }}">
+                                <input type="hidden" class="latitud" value="{{ $venta->customer->latitud }}">
+                                <input type="hidden" class="longitud" value="{{ $venta->customer->longitud }}">
+                                <input type="hidden" class="id_venta" value="{{ $venta->id }}">
+                                <input type="hidden" class="direccion" value="{{ $venta->customer->direccion }}">
                          
                             @endif
                            
