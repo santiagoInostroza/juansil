@@ -318,9 +318,11 @@
                 <x-jet-secondary-button x-on:click="isOpenComment = true">
                     <i class="fas fa-comment"></i> Agregar comentario
                 </x-jet-secondary-button>
-                <div class="text-gray-500 text-sm shadow bg-white p-4 rounded mt-2">
-                    {!!$sale->driver_comment!!}
-                </div>
+                @if ($sale->driver_comment!=null)
+                    <div class="text-gray-500 text-sm shadow bg-white p-4 rounded mt-2">
+                        {!!$sale->driver_comment!!}
+                    </div>
+                @endif
                 <div x-show="isOpenComment">
                     <x-modal.alert2>
                         <x-slot name="header">Ingresa un comentario</x-slot>
