@@ -1,4 +1,4 @@
-<div wire:pool.600s>
+<div>
     @if ($paymentsPendingVerification->count()>0)
 
         <div x-data="{isOpenPaymentVerification:false}">
