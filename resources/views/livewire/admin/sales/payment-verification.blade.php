@@ -40,7 +40,19 @@
                                     <x-table.td>{{ $payment->id}}</x-table.td>
                                     <x-table.td>{{ $payment->customer->name}}</x-table.td>
                                     <x-table.td> ${{ number_format($payment->total,0,',','.')}}</x-table.td>
-                                    <x-table.td> <img class="max-h-72" src="{{ Storage::url($payment->payment_receipt_url) }}" alt=""></x-table.td>
+                                    <x-table.td>
+                                        <div x-data="{isOpenModalImage:false}">
+                                            <img class="w-24 h-24 cursor-pointer object-cover" src="{{ Storage::url($payment->payment_receipt_url) }}" alt="" x-on:click="isOpenModalImage=true">
+                                            <div x-show="isOpenModalImage">
+                                                <x-modal.modal_image>
+                                                    <img class="" src="{{ Storage::url($payment->payment_receipt_url) }}" alt="">
+                                                    <div class="absolute bottom-4 right-4">
+                                                        <x-jet-button x-on:click="isOpenModalImage=false">Cerrar</x-jet-button>
+                                                    </div>
+                                                </x-modal.modal_image>
+                                            </div>
+                                        </div>
+                                        </x-table.td>
                                     <x-table.td> 
                                         {!!$payment->driver_comment!!}    
                                     </x-table.td>

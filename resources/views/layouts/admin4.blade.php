@@ -368,7 +368,6 @@
 
                     @can('verify payments')
                         <div>
-                            
                             @livewire('admin.sales.payment-verification', key('payment-verification'))
                         </div>
                     @endcan
