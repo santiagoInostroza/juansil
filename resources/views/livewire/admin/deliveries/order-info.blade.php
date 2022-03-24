@@ -1,6 +1,6 @@
-<div class="px-4">
+<div>
     @if ($mostrar_venta)
-        <section class="grid gap-4 relative">  
+        <section class="relative w-full">  
 
             {{-- COMENTARIOS --}}
             @if ( $venta->customer->comentario != null || $venta->comments != null )
@@ -59,7 +59,7 @@
                 
 
                 {{-- BOTONERA DE OPCIONES DE INTERACCION CLIENTE --}}
-                <div class="w-full flex items-center gap-2 text-3xl" >
+                <div class=" flex flex-wrap items-center gap-2 " >
                     @if ($venta->customer->celular)
                         {{-- BOTON LLAMADA --}}
                         <x-jet-secondary-button>

@@ -1,4 +1,4 @@
-<div class="bg-gray-200 p-4 rounded">
+<div class="bg-gray-200 rounded p-2">
     <div class="flex items-center">
         <a class="shadow rounded p-2 bg-white" href="{{ route('admin.deliveries.index',['date'=> date("Y-m-d",strtotime($date . " -1 day"))]) }}"> Anterior </a>
         <x-jet-input  type="date" name="date" id="" class="w-full mx-4" value="{{ $date }}" onchange="return cambiarFecha(this);"></x-jet-input>
@@ -20,7 +20,7 @@
 
 
 
-    <div class="border border-gray-100 shadow rounded bg-white">
+    <div class="bg-white">
        
         @if (count($orders) == 0)
             <h2 class="text-xl p-2">
@@ -31,12 +31,11 @@
                 <div>Pedidos {{ count($orders) }}</div> 
                 {{-- <div>${{ number_format($orders->sum('total'),0,',','.') }}</div> --}}
             </h2>
-           <div class="flex flex-col md:flex-row items-start ">
-                <div wire:ignore id="map" class="w-full">
+           <div class="flex flex-col md:flex-row items-start  ">
+                <div wire:ignore id="map" class="w-full border border-gray-100 shadow rounded">
                     Cargando mapa...
                 </div>
-                <div class="" id='info_venta'>
-                
+                <div class="mt-4" id='info_venta'>
                     <livewire:admin.deliveries.order-info>
                 </div>
            </div>
