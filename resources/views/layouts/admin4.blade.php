@@ -364,12 +364,22 @@
 
            
               
-                <main class="bg-white-300 flex-1 p-3 overflow-hidden">
-                    @isset($slot)
-                        {{ $slot }}
-                    @endisset
+                <main class="flex-1">
 
-                    @yield('content')
+                    @can('verify payments')
+                        <div>
+                            @livewire('admin.sales.payment-verification', key('payment-verification'))
+                        </div>
+                    @endcan
+
+                    <div class="bg-white-300  p-3 overflow-hidden">
+
+                        @isset($slot)
+                        {{ $slot }}
+                        @endisset
+                        
+                        @yield('content')
+                    </div>
                 </main>
               
             </div>

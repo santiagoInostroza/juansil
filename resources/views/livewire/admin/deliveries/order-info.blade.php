@@ -72,6 +72,7 @@
                                 <i class="fab fa-whatsapp text-lg"></i>
                             </x-jet-secondary-button>
                             <div x-cloak x-show="isOpenSendWasap" x-on:click.away="isOpenSendWasap = false" x-on:click="isOpenSendWasap = false">
+                                <h2 class="font-bold text-gray-500 my-2">Acceso directo a wasap</h2>
                                 <div class="shadow absolute p-4 bg-white rounded text-sm grid gap-2">
                                     <div>
                                         <a href="https://api.whatsapp.com/send?phone={{ $venta->customer->celular }}&text=Hola,%20soy%20el%20repartidor,%20traigo%20su%20pedido" target="_blank">

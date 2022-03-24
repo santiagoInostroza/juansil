@@ -19,6 +19,9 @@ class OrderInfo extends Component{
 
     public $payment_receipt;
 
+    public function mount(){       
+    }
+
 
     protected $listeners = ['mostrar_venta','render'];
 
@@ -55,6 +58,10 @@ class OrderInfo extends Component{
             Storage::makeDirectory('payment_receipts');
         }
 
+        if(Storage::exists($this->venta->payment_receipt_url)){
+            Storage::delete($this->venta->payment_receipt_url);
+        }
+
         $manager =  new ImageManager();
         $image1 = $manager->make( $this->payment_receipt );
         $image1->resize(500, 500, function ($constraint) {
@@ -62,7 +69,7 @@ class OrderInfo extends Component{
             $constraint->upsize();
         });
         $image1->encode('webp');
-        $url = 'payment_receipts/receipt_sale_' . $this->venta->id . '.webp';
+        $url = 'payment_receipts/receipt_sale_' .rand().'_'. $this->venta->id . '.webp';
         $image1->save('storage/'.$url);  
 
         // $url = $this->payment_receipt->store('payment_receipts');
@@ -70,8 +77,17 @@ class OrderInfo extends Component{
         $this->venta->payment_receipt_url= $url;
         $this->venta->payment_receipt_date= Carbon::now();
         $this->venta->payment_receipt_by= auth()->user()->id;
+        $this->venta->verify_payment_receipt= 0;
+        $this->venta->verify_payment_receipt_by= 0;
         $this->venta->save();
 
+
+
+
+
+
+
+  
         $this->reset('payment_receipt');
         $this->dispatchBrowserEvent('toast',['title'=>'Guardado con exito']);
 
