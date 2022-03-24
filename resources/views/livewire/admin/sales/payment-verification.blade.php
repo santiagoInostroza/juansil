@@ -43,7 +43,7 @@
                                     <x-table.td>
                                         <div x-data="{isOpenModalImage:false}">
                                             <img class="w-24 h-24 cursor-pointer object-cover" src="{{ Storage::url($payment->payment_receipt_url) }}" alt="" x-on:click="isOpenModalImage=true">
-                                            <div x-show="isOpenModalImage">
+                                            <div class="hidden" :class="!isOpenModalImage ?'hidden': ''" x-show="isOpenModalImage">
                                                 <x-modal.modal_image>
                                                     <img class="" src="{{ Storage::url($payment->payment_receipt_url) }}" alt="">
                                                     <div class="absolute bottom-4 right-4">
