@@ -365,10 +365,10 @@
            
               
                 <main class="flex-1">
-hola
+
                     @can('verify payments')
                         <div>
-                            hola1
+                            
                             @livewire('admin.sales.payment-verification', key('payment-verification'))
                         </div>
                     @endcan

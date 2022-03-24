@@ -1,7 +1,7 @@
 <div>
-    hola 2
+  
     @if ($paymentsPendingVerification->count()>0)
-    
+
 
         <div x-data="{isOpenPaymentVerification:false}">
             
@@ -16,13 +16,13 @@
         </div>
         <div x-cloak x-show="isOpenPaymentVerification" x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute" >
             
-            <div class="fixed bottom-1 right-1 p-4 bg-white shadow rounded max-w-screen-xl max-h-9/12  z-10">
+            <div class="fixed bottom-1 right-1 p-4 bg-white shadow rounded max-w-screen-xl max-h-9/12  z-10 overflow-auto">
                 
                 <div class="flex items-center gap-2 justify-between">
                     <h2 class="font-bold text-gray-500">Verificacion de pagos</h2>
                     <div class="p-2 cursor-pointer" x-on:click="isOpenPaymentVerification=false"><i class="fas fa-times"></i></div>
                 </div>
-                <div class="h-full overflow-auto">
+                <div class="">
                     <x-table.table>
                         <x-slot name="thead">
                             <x-table.tr>
