@@ -14,7 +14,7 @@
                 @endif
             </div>
         </div>
-        <div x-show="isOpenPaymentVerification"  x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute"  >
+        <div x-cloak x-show="isOpenPaymentVerification"  x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute"  >
             
             <div class="fixed bottom-1 right-1 p-4 bg-white shadow rounded max-w-screen-xl max-h-9/12  z-10 overflow-auto">
                 
@@ -41,7 +41,7 @@
                                     <x-table.td>{{ $payment->customer->name}}</x-table.td>
                                     <x-table.td> ${{ number_format($payment->total,0,',','.')}}</x-table.td>
                                     <x-table.td>
-                                        <div x-data="{isOpenModalImage:false}">
+                                        <div x-cloak id="image_payment_receipt_{{$payment->id}}" x-data="{isOpenModalImage:false}">
                                             <img class="w-24 h-24 cursor-pointer object-cover" src="{{ Storage::url($payment->payment_receipt_url) }}" alt="" x-on:click="isOpenModalImage=true">
                                             <div class="hidden" :class="!isOpenModalImage ?'hidden': ''" x-show="isOpenModalImage">
                                                 <x-modal.modal_image>

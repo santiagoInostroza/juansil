@@ -39,6 +39,11 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="{{asset('css/ckStyles.css')}}">
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/balloon/ckeditor.js"></script> --}}
+
+
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
 
 <body>
