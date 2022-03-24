@@ -8,7 +8,9 @@ use Livewire\Component;
 class PaymentVerification extends Component{
     public function render(){
         return view('livewire.admin.sales.payment-verification',[
-           'paymentsPendingVerification' => Sale::where('payment_receipt_date', '!=' , null)->where('verify_payment_receipt','!=',  1)->get(),
+           'paymentsPendingVerification' => Sale::where('payment_receipt_date', '!=' , null)->where(function($query){
+               $query->orWhere('verify_payment_receipt', null)->orWhere('verify_payment_receipt', 0);
+           })->get(),
         ]);
     }
 
