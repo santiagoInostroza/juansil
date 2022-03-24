@@ -66,6 +66,11 @@ class Sale extends Model
         return $user;
     }
 
+    public function paymentReceiptBy(){
+        return  User::find($this->payment_receipt_by); 
+        
+    }
+
 
    
 

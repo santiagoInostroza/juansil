@@ -27,6 +27,7 @@ class AddDriverCommentToSalesTable extends Migration
     {
         Schema::table('sales', function (Blueprint $table) {
             $table->dropColumn('driver_comment');
+            
         });
     }
 }

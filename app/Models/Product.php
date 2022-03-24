@@ -42,8 +42,7 @@ class Product extends Model
     }
 
     //RELACION 1 A 1 POLIMORFICA
-    public function image()
-    {
+    public function image(){
        return $this->morphOne(Image::class,'imageable');
     }
 

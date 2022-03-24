@@ -28,6 +28,7 @@ class AddUserIdToCustomersTable extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->dropForeign('customers_user_id_foreign');
+            
         });
     }
 }

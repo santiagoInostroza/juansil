@@ -41,21 +41,22 @@ class Index extends Component{
 
     public function payOrder(Sale $sale, $account = 1){
         $deliveryController= new DeliveryController();
-        $deliveryController->payOrder($sale, $account);
-        $this->dispatchBrowserEvent('name-updated', 
-        [
-            'id' => $sale->id,
-            'delivery_stage' => $sale->delivery_stage,
-            'payment_status' => $sale->payment_status,
-        ]);
+        $sale = $deliveryController->payOrder($sale, $account);
+        $this->dispatchBrowserEvent('orderUpdate', 
+            [
+                'id' => $sale->id,
+                'delivery_stage' => $sale->delivery_stage,
+                'payment_status' => $sale->payment_status,
+            ]);
         $this->emit('render');
       }
 
-      public function deliverOrder(Sale $sale){
+      public function deliverOrder(Sale $sale, $reverse = false){
+
         $deliveryController= new DeliveryController();
-        $deliveryController->deliverOrder($sale);
+        $deliveryController->deliverOrder($sale,$reverse);
         $this->emit('render');
-        $this->dispatchBrowserEvent('name-updated', 
+        $this->dispatchBrowserEvent('orderUpdate', 
         [
             'id' => $sale->id,
             'delivery_stage' => $sale->delivery_stage,

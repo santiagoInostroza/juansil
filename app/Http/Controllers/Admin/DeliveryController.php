@@ -51,18 +51,23 @@ class DeliveryController extends Controller
     }
 
     public function payOrder(Sale $sale, $account){
-       $sale->payment_status=3;
-       $sale->payment_date=Carbon::now();
-       $sale->payment_amount= $sale->pending_amount;
-       $sale->pending_amount=0;
-       $sale->payment_account=$account;
-       $sale->user_payment= auth()->user()->id;
+        //Si account es null es porque se deshizo el pago, por lo tanto se revierte todo el pago
+      
+       $sale->payment_status=($account == null) ? 1 : 3;
+       $sale->payment_date=($account == null) ? null : Carbon::now();
+       $sale->payment_amount=($account == null) ? 0 :  $sale->pending_amount;
+       $sale->pending_amount=($account == null) ?  $sale->payment_amount : 0;
+       $sale->payment_account=($account == null) ? null : $account;
+       $sale->user_payment= ($account == null) ? null : auth()->user()->id;
        $sale->save();
+       return $sale;
     }
-    public function deliverOrder(Sale $sale){
-        $sale->delivery_stage=1;
-        $sale->date_delivered=Carbon::now();
-        $sale->delivered_user= auth()->user()->id;
+    public function deliverOrder(Sale $sale,$reverse){
+        // SI reverse ES TRUE REVIERTE EL ENTREGADO A NO ENTREGADO
+        
+        $sale->delivery_stage=($reverse)? null : 1;
+        $sale->date_delivered=($reverse)? null :Carbon::now();
+        $sale->delivered_user= ($reverse)? null : auth()->user()->id;
         $sale->save();
     }
 }

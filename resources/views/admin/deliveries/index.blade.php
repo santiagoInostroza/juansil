@@ -6,7 +6,8 @@
         }
 
         #map {
-            height: 450px;
+           min-height: 450px;
+           height: 100%;
         }
 
     </style>
@@ -58,16 +59,16 @@
 
 
     window.onload = function() {
-        window.addEventListener('name-updated', event => {
+        window.addEventListener('orderUpdate', event => {
 
             for (let i = 0; i < markers.length; i++) {
                 const marker = markers[i];
                 if (marker.identificador == event.detail.id) {
 
-                    console.log("identificador: ", marker.identificador);
-                console.log('event.detail.id: ', event.detail.id);
-                console.log('event.detail.delivery_stage: ', event.detail.delivery_stage);
-                console.log('event.detail.payment_status: ', event.detail.payment_status);
+                    // console.log("identificador: ", marker.identificador);
+                    // console.log('event.detail.id: ', event.detail.id);
+                    // console.log('event.detail.delivery_stage: ', event.detail.delivery_stage);
+                    // console.log('event.detail.payment_status: ', event.detail.payment_status);
 
                     marker.setAnimation(google.maps.Animation.BOUNCE);
 
@@ -79,6 +80,8 @@
                     }else if(event.detail.delivery_stage != 1 && event.detail.payment_status == 3){
                          marker.setIcon(svgMarkerPagado);
                          console.log('pagado');
+                    }else if(event.detail.payment_status != 3){
+                        marker.setIcon();
                     }else{
                         //completado
                         marker.setIcon(svgMarkerCompletado);
@@ -227,7 +230,8 @@
                                 "lng": Number(longitudes[i].value)
                             }, //0
                             id_venta[i].value, //1
-                            direccion[i].value //2
+                            direccion[i].value, //2
+                            null,
                         ]
                     )
                 }
