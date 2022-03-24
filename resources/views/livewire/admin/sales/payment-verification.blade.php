@@ -1,4 +1,5 @@
 <div>
+    hola 2
     @if ($paymentsPendingVerification->count()>0)
 
         <div x-data="{isOpenPaymentVerification:false}">
