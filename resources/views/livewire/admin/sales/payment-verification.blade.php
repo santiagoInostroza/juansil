@@ -3,7 +3,7 @@
     @if ($paymentsPendingVerification->count()>0)
 
 
-        <div x-data="{isOpenPaymentVerification:false}">
+        <div  x-data="{isOpenPaymentVerification:false}">
             
         <div class="fixed p-4 bottom-0 right-0 shadow rounded border-l-4 bg-white border-red-500 cursor-pointer" x-on:click="isOpenPaymentVerification=true">
             <div class="animate-bounce">
@@ -14,7 +14,7 @@
                 @endif
             </div>
         </div>
-        <div x-cloak x-show="isOpenPaymentVerification" x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute" >
+        <div x-cloak x-show="isOpenPaymentVerification"  x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute hidden" :class="!isOpenPaymentVerification ?'hidden': ''" >
             
             <div class="fixed bottom-1 right-1 p-4 bg-white shadow rounded max-w-screen-xl max-h-9/12  z-10 overflow-auto">
                 
