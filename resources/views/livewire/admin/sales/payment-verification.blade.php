@@ -57,7 +57,25 @@
                                         {!!$payment->driver_comment!!}    
                                     </x-table.td>
                                     <x-table.td> 
-                                        <x-jet-button wire:click="verify({{ $payment->id }})">Verificar</x-jet-button>
+                                        <div x-data="{isOpenVerify:false}">
+                                            <x-jet-button x-on:click="isOpenVerify=true">Confirmar</x-jet-button>
+                                            <div x-cloak x-show="isOpenVerify" xtransition>
+                                                <x-modal.alert2>
+                                                    <x-slot name="header">Confirmar pago</x-slot>
+                                                    <x-slot name="body">
+                                                        El pago ha sido revisado y está verificado por mi.
+                                                    </x-slot>
+                                                    <x-slot name="footer">
+                                                        <div class="flex gap-4 justify-center">
+                                                            <x-jet-secondary-button x-on:click="isOpenVerify=false">no</x-jet-secondary-button>
+                                                            <x-jet-button wire:click="verify({{ $payment->id }})">Si</x-jet-button>
+                                                        </div>
+                                                    </x-slot>
+                                                </x-modal.alert2>
+                                                
+                                            </div>
+
+                                        </div>
                                     </x-table.td>
                                 </x-table.tr>
                             @endforeach

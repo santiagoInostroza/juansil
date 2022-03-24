@@ -27,6 +27,9 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @livewireStyles
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
 
 <body>
@@ -105,11 +108,19 @@
        
                 <!--/Sidebar-->
               
-                <main class="bg-white-300 flex-1 p-3 overflow-hidden">
-                    @isset($slot)
+                <main class="flex-1 ">
+                    @can('verify payments')
+                        <div>
+                            @livewire('admin.sales.payment-verification', key('payment-verification'))
+                        </div>
+                    @endcan
+                    <div class="bg-white-300 p-3 overflow-hidden">
+
+                        @isset($slot)
                         {{ $slot }}
-                    @endisset
-                    @yield('content')
+                        @endisset
+                        @yield('content')
+                    </div>
                 </main>
               
             </div>

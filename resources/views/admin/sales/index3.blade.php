@@ -53,12 +53,10 @@
             <div x-show="showOrders" class="rounded bg-white p-2 overflow-hidden" :class="(showOrders && (showNewOrder || showEditOrder )) ? 'mite' : 'mite2'"  >
                 @livewire('admin.sales.orders')
             </div>
-            
-        
 
             {{-- BOTON NUEVO PEDIDO --}}
-            <div x-show="showButtonAddNewSale" x-on:click="openNewOrder" class="fixed right-4 bottom-4 p-6 rounded-full shadow bg-gray-900 text-white transform hover:scale-125 cursor-pointer">
-                <i class="fas fa-plus text-2xl"></i>
+            <div x-show="showButtonAddNewSale" x-on:click="openNewOrder" class="fixed right-10 bottom-16 p-3 rounded-full shadow bg-gray-900 text-white transform hover:scale-125 cursor-pointer">
+                <i class="fas fa-plus"></i>
             </div>
         </div>
     </div>

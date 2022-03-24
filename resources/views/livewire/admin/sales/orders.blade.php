@@ -20,13 +20,15 @@
                     Total de venta ${{number_format($sales->sum('total'),0,',','.')}} Total de boletas ${{number_format($sales->where('boleta',1)->sum('total'),0,',','.')}} Compras ${{number_format($purchases->sum('total'),0,',','.')}}
                 @endif
             </div>
-            <div class="pr-4">
-                @if ($sales->count()== 1)
-                {{$sales->count()}}  resultado
-                @elseif ($sales->count()> 1)
-                {{$sales->count()}} 
-                resultados
-                @endif
+            <div class="pr-4 flex items-center gap-4">
+                <div>
+                    @if ($sales->count()== 1)
+                    {{$sales->count()}}  resultado
+                    @elseif ($sales->count()> 1)
+                    {{$sales->count()}}  resultados
+                    @endif
+                </div>
+                
             </div>
         </div>
         <div class="my-2">
