@@ -14,7 +14,7 @@
                 @endif
             </div>
         </div>
-        <div x-cloak x-show="isOpenPaymentVerification"  x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute hidden" :class="!isOpenPaymentVerification ?'hidden': ''" >
+        <div x-show="isOpenPaymentVerification"  x-on:click.away="isOpenPaymentVerification=false" class="h-screen absolute hidden" :class="isOpenPaymentVerification ?'': 'hidden'" >
             
             <div class="fixed bottom-1 right-1 p-4 bg-white shadow rounded max-w-screen-xl max-h-9/12  z-10 overflow-auto">
                 
