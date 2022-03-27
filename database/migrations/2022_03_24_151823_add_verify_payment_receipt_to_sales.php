@@ -38,11 +38,11 @@ class AddVerifyPaymentReceiptToSales extends Migration
             
             $table->dropColumn('verify_payment_receipt');
             $table->dropColumn('verify_payment_receipt_by');
-            $table->dropColumn('verify_payment_receipt_date');
-            $table->dropColumn('stage');
-            $table->dropColumn('difference');
-            $table->dropColumn('percentage');
-            $table->dropColumn('address_id');
+            // $table->dropColumn('verify_payment_receipt_date');
+            // $table->dropColumn('stage');
+            // $table->dropColumn('difference');
+            // $table->dropColumn('percentage');
+            // $table->dropColumn('address_id');
             // $table->dropForeign('sales_address_id_foreign');
         });
     }
