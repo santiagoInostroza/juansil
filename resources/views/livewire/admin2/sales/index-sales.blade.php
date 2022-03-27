@@ -597,8 +597,47 @@
                                                 </div>
                                             </div>
                                         @else
-                                            
-                                        @endif
+                                            @if ($sale->payment_receipt_url)
+                                                  
+                                                    <div x-data="{isOpenVerify:false}">
+                                                        <span x-on:click="isOpenVerify=true" class="cursor-pointer text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full">
+                                                            Pendiente validar
+                                                        </span>
+                                                        <div x-cloak x-show="isOpenVerify" xtransition>
+                                                            <x-modal.alert2>
+                                                                <x-slot name="header">Confirmar pago</x-slot>
+                                                                <x-slot name="body">
+                                                                    <div class="max-h-96 max-w">
+                                                                        <img class="max-h-80 w-full object-contain transform shadow rounded transition ease-in-out delay-100 hover:-translate-y-1 scale-75 hover:scale-125 duration-1000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
+                                                                    </div>
+                                                                    <div>
+                                                                        <div>
+                                                                            {{$sale->customer->name}} 
+                                                                        </div>
+                                                                        <div>
+                                                                            Total ${{number_format($sale->total,0,',','.')}}
+                                                                        </div>
+                                                                        <div>
+                                                                            El pago ha sido revisado y lo he verificado.
+                                                                        </div>
+                                                                    </div>
+                                                                </x-slot>
+                                                                <x-slot name="footer">
+                                                                    <div class="flex gap-4 justify-center">
+                                                                        <x-jet-secondary-button x-on:click="isOpenVerify=false">no</x-jet-secondary-button>
+                                                                        <x-jet-button wire:click="verifyReceipt({{ $sale->id }})">Si</x-jet-button>
+                                                                    </div>
+                                                                </x-slot>
+                                                            </x-modal.alert2>
+                                                            
+                                                        </div>
+            
+                                                    </div>
+                                          
+                                                
+                                            @endif
+                                                
+                                            @endif
 
                                         
                                         

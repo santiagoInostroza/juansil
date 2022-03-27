@@ -1,5 +1,5 @@
 <div>
-    <div class="fixed inset-0 bg-gray-600 opacity-90"></div>
+    <div class="fixed inset-0 bg-gray-600 opacity-90 z-10"></div>
     <div class="fixed inset-0 flex justify-center items-center z-10">
         <div class="bg-white shadow rounded">
             
