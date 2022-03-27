@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SupplierController extends Controller{
+
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('can:admin.suppliers.index')->only('index');
+        $this->middleware('can:admin.suppliers.create')->only('create');
+        $this->middleware('can:admin.suppliers.show')->only('show');
+        $this->middleware('can:admin.suppliers.edit')->only('edit');
+        // $this->middleware('subscribed')->except('store');
+
+    }
    
     public function index(){
       return view('admin2.suppliers.index');

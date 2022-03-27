@@ -56,16 +56,21 @@
                     <div class="w-full h-full" :class="isMobile ? 'pl-0' :  isOpenAside  ? 'pl-64':'pl-0'">
 
 
-                        @if (isset($header))
-                            <header class="">
-                                    {{ $header }}
-                            </header>
-                        @endif
-                        @hasSection('header')
-                            <header class="uppercase">
-                                @yield('header')
-                            </header>
-                        @endif
+                        <header class="">
+                            @if (session()->has('message'))
+                                <x-alerts.alert-success>
+                                    {{ session('message') }}
+                                </x-alerts.alert-success>   
+                            @endif
+
+                            @if (isset($header))
+                                {{ $header }}
+                            @endif
+                            
+                            @hasSection('header')
+                                    @yield('header')
+                            @endif
+                        </header>
 
 
 
@@ -104,11 +109,11 @@
                     <script>
                         function main(){
                             return{
-                                isOpenAside : (window.innerWidth < 1024) ? false : true,
+                                isOpenAside : (window.innerWidth < 1024) ? false : false,
                                 isMobile : (window.innerWidth < 768) ? true : false,
                                 resize:function(){
-                                    this.isOpenAside =  (window.innerWidth < 1024) ? false : true; 
-                                    this.isMobile = (window.innerWidth < 768) ? true : false;
+                                    this.isOpenAside =  (window.innerWidth < 1024) ? false : false; 
+                                    this.isMobile = (window.innerWidth < 768) ? false : false;
                                 },
                             }
                         }

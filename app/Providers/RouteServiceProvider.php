@@ -34,9 +34,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot(){
         $this->configureRateLimiting();
+
+        Route::resourceVerbs([
+            'create' => 'crear',
+            'edit' => 'editar',
+        ]);
 
         $this->routes(function () {
             Route::prefix('api')

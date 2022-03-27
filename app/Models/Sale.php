@@ -31,6 +31,10 @@ class Sale extends Model
         return $this->hasMany(MovementSale::class);
     }
 
+    public function createdBy(){
+        $user = User::find($this->user_created); 
+        return $user;
+    }
     public function created_by(){
         $user = User::find($this->user_created); 
         return $user;
@@ -67,9 +71,12 @@ class Sale extends Model
     }
 
     public function paymentReceiptBy(){
-        return  User::find($this->payment_receipt_by); 
-        
+        return  User::find($this->payment_receipt_by);    
     }
+    public function verifyPaymentReceiptBy(){
+        return  User::find($this->verify_payment_receipt_by);    
+    }
+
 
 
    

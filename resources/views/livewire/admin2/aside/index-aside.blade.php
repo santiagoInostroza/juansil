@@ -64,27 +64,27 @@
             //     ]
             // ],
         
-            // [
-            //     'name' => 'VENTAS',
-            //     'icon' => 'fas fa-cash-register',
-            //     'route' => 'admin.sales.*',
-            //     'can' => 'admin.sales.index',
-            //     'child' =>  
-            //         [
-            //             [
-            //                 'name' => 'LISTA DE VENTAS',
-            //                 // 'icon' => 'fas fa-cash-register',
-            //                 'route' => 'admin.sales.index',
-            //                 'can' => 'admin.sales.index'
-            //             ],
-            //             [
-            //                 'name' => 'CREAR VENTA',
-            //                 // 'icon' => 'fas fa-cash-register',
-            //                 'route' => 'admin.sales.create',
-            //                 'can' => 'admin.sales.create'
-            //             ],
-            //         ],
-            // ],
+            [
+                'name' => 'VENTAS',
+                'icon' => 'fas fa-cash-register',
+                'route' => 'admin2.sales.*',
+                'can' => 'admin.sales.index',
+                'child' =>  
+                    [
+                        [
+                            'name' => 'LISTA DE VENTAS',
+                            // 'icon' => 'fas fa-cash-register',
+                            'route' => 'admin2.sales.index',
+                            'can' => 'admin.sales.index'
+                        ],
+                        [
+                            'name' => 'CREAR VENTA',
+                            // 'icon' => 'fas fa-cash-register',
+                            'route' => 'admin2.sales.create',
+                            'can' => 'admin.sales.create'
+                        ],
+                    ],
+            ],
             
             // [
             //     'name' => 'CATEGORIAS',
@@ -122,6 +122,7 @@
                 'route' => 'admin2.suppliers.index',
                 'can' => 'admin.suppliers.index'
             ],
+          
             // [
             //     'name' => 'Clientes',
             //     'icon' => 'fas fa-user',
@@ -132,19 +133,21 @@
         ];
     @endphp
 
-    <div class="flex gap-2 items-center justify-between mb-8">
+    <div class="flex gap-2 items-center justify-between">
         <div class="p-2">
             {{auth()->user()->name}}
             <div class="text-xs text-gray-500">
                 {{auth()->user()->roles()->first()->name}}
             </div>
         </div>
-        <template  x-if="isMobile">
+        <template  x-if="true">
             <div x-on:click="isOpenAside = !isOpenAside" class="px-2 cursor-pointer hover:font-bold hover:text-gray-400 ">
                 <i class="fas fa-arrow-left"></i>
             </div>
         </template>
     </div>
+
+    <div class="border-t my-4"></div>
     
     @foreach ($vistas as $vista)
         @if (isset($vista['child']))

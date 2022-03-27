@@ -7,11 +7,18 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 
 class RoleController extends Controller{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('can:admin.roles.index')->only('index');
+        $this->middleware('can:admin.roles.create')->only('create');
+        $this->middleware('can:admin.roles.show')->only('show');
+        $this->middleware('can:admin.roles.edit')->only('edit');
+        // $this->middleware('subscribed')->except('store');
+
+    }
+
     public function index(){
         return view('admin2.roles.index');
     }

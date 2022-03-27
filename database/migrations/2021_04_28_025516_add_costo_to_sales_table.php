@@ -9,7 +9,7 @@ class AddCostoToSalesTable extends Migration{
     public function up(){
         Schema::table('sales', function (Blueprint $table) {
             $table->integer('total_cost')->nullable();
-            $table->integer('etapa')->default(0); //  creando = 0 / creada = 1
+            // $table->integer('etapa')->default(0); //  creando = 0 / creada = 1
            
         });
     }

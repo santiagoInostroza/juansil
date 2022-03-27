@@ -8,6 +8,17 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller{
 
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('can:admin.users.index')->only('index');
+        $this->middleware('can:admin.users.create')->only('create');
+        $this->middleware('can:admin.users.show')->only('show');
+        $this->middleware('can:admin.users.edit')->only('edit');
+        // $this->middleware('subscribed')->except('store');
+
+    }
+
     public function index(){
         return view('admin2.users.index');
     }

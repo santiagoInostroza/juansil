@@ -11,11 +11,19 @@ class AddVerifyPaymentReceiptToSales extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
+       
         Schema::table('sales', function (Blueprint $table) {
            $table->tinyInteger('verify_payment_receipt')->nullable();
            $table->unsignedBigInteger('verify_payment_receipt_by')->nullable();
+           $table->dateTime('verify_payment_receipt_date')->nullable(); //   
+           $table->tinyInteger('stage')->default(0); //     / pedido = 1 / en proceso = 2 / completado = 3 /  anulado =4 / pendiente = 5 /
+           $table->bigInteger('difference')->nullable(); //   
+           $table->double('percentage')->nullable(); //   
+           $table->unsignedBigInteger('address_id')->nullable(); //
+
+           $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
+
         });
     }
 
@@ -27,8 +35,15 @@ class AddVerifyPaymentReceiptToSales extends Migration
     public function down()
     {
         Schema::table('sales', function (Blueprint $table) {
+            
             $table->dropColumn('verify_payment_receipt');
             $table->dropColumn('verify_payment_receipt_by');
+            $table->dropColumn('verify_payment_receipt_date');
+            $table->dropColumn('stage');
+            $table->dropColumn('difference');
+            $table->dropColumn('percentage');
+            $table->dropColumn('address_id');
+            // $table->dropForeign('sales_address_id_foreign');
         });
     }
 }

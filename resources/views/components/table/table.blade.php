@@ -1,4 +1,4 @@
-<div class="w-full h-full mx-auto   ">
+<div class="w-full h-full mx-auto">
     @if (isset($title) || isset($subtitlle))
         <header class=" py-4 border-b border-gray-100">
     @endif
@@ -21,7 +21,7 @@
                         </thead>
                     @endif
                     @if (isset($tbody))
-                        <tbody class="text-sm divide-y divide-gray-100">
+                        <tbody class="text-xs divide-y divide-gray-100 relative">
                             {{ $tbody}}               
                         </tbody>
                     @endif

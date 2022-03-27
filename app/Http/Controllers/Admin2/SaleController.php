@@ -4,31 +4,35 @@ namespace App\Http\Controllers\Admin2;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 
-class PermissionController extends Controller{
+class SaleController extends Controller{
 
     public function __construct(){
 
         $this->middleware('auth');
-        $this->middleware('can:admin.permissions.index')->only('index');
-        $this->middleware('can:admin.permissions.create')->only('create');
-        $this->middleware('can:admin.permissions.show')->only('show');
-        $this->middleware('can:admin.permissions.edit')->only('edit');
+        $this->middleware('can:admin.sales.index')->only('index');
+        $this->middleware('can:admin.sales.create')->only('create');
+        $this->middleware('can:admin.sales.show')->only('show');
+        $this->middleware('can:admin.sales.edit')->only('edit');
         // $this->middleware('subscribed')->except('store');
 
     }
 
 
     public function index(){
-        return view('admin2.permissions.index');
+      return view('admin2.sales.index');
     }
-
+    
     public function create(){
-        return view('admin2.permissions.create');
+        //
     }
 
-   
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         //
@@ -51,8 +55,9 @@ class PermissionController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission){
-        return view('admin2.permissions.edit',compact('permission'));
+    public function edit($id)
+    {
+        //
     }
 
     /**

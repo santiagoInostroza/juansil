@@ -13,6 +13,12 @@ class Helper extends Controller
         }
         return false;
     } 
+    public static function date($fecha){
+        if ($fecha!="") {
+            return Carbon::parse($fecha);
+        }
+        return false;
+    } 
 
     public static function fechaHora($fecha){
         if ($fecha!="") {
