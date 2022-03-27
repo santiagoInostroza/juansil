@@ -99,7 +99,7 @@ class IndexSales extends Component{
             $columns['subtotal']=(session()->has('saleColumns.subtotal')) ? session('saleColumns.subtotal') :false;
             $columns['tipo venta']=(session()->has('saleColumns.tipo venta')) ? session('saleColumns.tipo venta') :false;
             $columns['comentario conductor']=(session()->has('saleColumns.comentario conductor')) ? session('saleColumns.comentario conductor') :true;
-            $columns['boleta emitida']=(session()->has('saleColumns.boleta emitida')) ? session('saleColumns.boleta emitida') :true;
+            $columns['boleta emitida']=(session()->has('saleColumns.boleta emitida')) ? session('saleColumns.boleta emitida') :false;
             $columns['boleta emitida el']=(session()->has('saleColumns.boleta emitida el')) ? session('saleColumns.boleta emitida el') :false;
             $columns['boleta emitida por']=(session()->has('saleColumns.boleta emitida por')) ? session('saleColumns.boleta emitida por') :false;
             $columns['usuario recibe pago']=(session()->has('saleColumns.usuario recibe pago')) ? session('saleColumns.usuario recibe pago') :false;
