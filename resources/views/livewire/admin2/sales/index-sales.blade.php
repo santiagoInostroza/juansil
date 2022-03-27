@@ -518,7 +518,9 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <x-jet-secondary-button wire:click="setBoleta({{$sale->id}})">Emitir</x-jet-secondary-button>
+                                            @if ($sale->payment_status)
+                                                <x-jet-secondary-button wire:click="setBoleta({{$sale->id}})">Emitir</x-jet-secondary-button>
+                                            @endif
 
                                         @endif
                                         
