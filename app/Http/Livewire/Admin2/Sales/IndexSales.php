@@ -117,6 +117,7 @@ class IndexSales extends Component{
                 $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :true;
                 $columns['imagen del recibo']=(session()->has('saleColumns.imagen del recibo')) ? session('saleColumns.imagen del recibo') :true;
                 $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :true;
+                $columns['verificacion recibo']=(session()->has('saleColumns.verificacion recibo')) ? session('saleColumns.verificacion recibo') :true;
             
             } else {
                 $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :true;
