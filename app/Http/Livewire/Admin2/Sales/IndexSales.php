@@ -111,7 +111,7 @@ class IndexSales extends Component{
             $columns['recibo verificado el']=(session()->has('saleColumns.recibo verificado el')) ? session('saleColumns.recibo verificado el') :false;
             $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :false;
 
-            if ($type = 'mobile') {
+            if ($type == 'mobile') {
                 $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :true;
                 $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :true;
                 $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :true;
