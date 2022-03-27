@@ -13,9 +13,15 @@ class Helper extends Controller
         }
         return false;
     } 
-    public static function date($fecha){
+
+    public static function date($fecha,$timezone = true){
         if ($fecha!="") {
-            return Carbon::parse($fecha);
+           
+           $fecha =  Carbon::parse($fecha)->locale('es_ES');
+            if ($timezone) {
+                $fecha =  $fecha->timezone('America/Santiago');
+            }
+            return  $fecha;
         }
         return false;
     } 
