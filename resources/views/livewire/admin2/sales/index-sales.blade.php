@@ -24,7 +24,7 @@
                     <span> {{ $sales->total()}} resultados</span>
                     <div id="change_date" x-data="{isOpenChangeDate:false}">
                         <div x-on:click="isOpenChangeDate=true" class="p-2.5 bg-white border rounded cursor-pointer select-none">
-                            Fecha <i class="fas fa-chevron-down ml-2"></i>
+                            Mostrar <i class="fas fa-chevron-down ml-2"></i>
                         </div>
                         <div  x-cloak  x-show="isOpenChangeDate"x-transition x-on:click.away="isOpenChangeDate=false" x-on:click="isOpenChangeDate=false">
                             <ul   class="bg-white rounded shadow absolute z-10 overflow-auto py-2 w-max-content transform -translate-x-1/2 select-none border mt-2">
@@ -48,6 +48,16 @@
                                 <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'tenDaysAgo') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
                                     <div wire:click="$set('filterDate','tenDaysAgo')" class="mr-2" >
                                         Hace 10 dias
+                                    </div>
+                                </li>
+                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'tenDaysAgo') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
+                                    <div wire:click="$set('filterDate','month')" class="mr-2" >
+                                        Todo el mes
+                                    </div>
+                                </li>
+                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'tenDaysAgo') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
+                                    <div wire:click="$set('filterDate','pendingTickets')" class="mr-2" >
+                                        Boletas pendientes
                                     </div>
                                 </li>
                                 <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'all') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">

@@ -48,6 +48,12 @@ class IndexSales extends Component{
         if ($this->filterDate =='tenDaysAgo') {
             $sales = $sales->whereDate('date', '>=', Carbon::now()->subDays(10));
         }
+        if ($this->filterDate =='month') {
+            $sales = $sales->whereMonth('date', '>=', Carbon::now()->format('m'))->whereYear('date', '>=', Carbon::now()->format('Y'));
+        }
+        if ($this->filterDate =='pendingTickets') {
+            $sales = $sales->where('payment_status',3 )->where('boleta','0');
+        }
 
         $sales = $sales->where(function($query) use ($strings){
             foreach ($strings as $string ) {
