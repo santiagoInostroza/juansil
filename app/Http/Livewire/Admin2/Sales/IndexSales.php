@@ -117,8 +117,15 @@ class IndexSales extends Component{
                 $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :true;
                 $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :true;
                 $columns['imagen del recibo']=(session()->has('saleColumns.imagen del recibo')) ? session('saleColumns.imagen del recibo') :true;
-                $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :true;
                 $columns['verificacion recibo']=(session()->has('saleColumns.verificacion recibo')) ? session('saleColumns.verificacion recibo') :true;
+                $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :true;
+            
+            } else if ($type == 'boleta') {
+                $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :true;
+                $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :true;
+                $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :true;
+                $columns['verificacion recibo']=(session()->has('saleColumns.verificacion recibo')) ? session('saleColumns.verificacion recibo') :true;
+                $columns['boleta emitida']=(session()->has('saleColumns.boleta emitida')) ? session('saleColumns.boleta emitida') :true;
             
             } else {
                 $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :true;
@@ -165,18 +172,17 @@ class IndexSales extends Component{
     public function setColumns($name){
         switch ($name) {
             case 'mobile':
-                foreach ($this->columns as $nameColumn => $valueColumn) {
-                    $valueColumn = false;
-                 }
                 session()->forget('saleColumns');
                 $this->columns = $this->loadColumns('mobile');
                 break;
             case 'basic':
-                foreach ($this->columns as $nameColumn => $valueColumn) {
-                    $valueColumn = false;
-                 }
+             
                 session()->forget('saleColumns');
                 $this->columns = $this->loadColumns();
+                break;
+            case 'boleta':
+                session()->forget('saleColumns');
+                $this->columns = $this->loadColumns('boleta');
                 break;
             case 'all':
                 foreach ($this->columns as $nameColumn => $valueColumn) {

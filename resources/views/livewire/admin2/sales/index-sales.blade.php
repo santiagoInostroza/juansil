@@ -76,6 +76,11 @@
                                         seleccionar basicos
                                     </div>
                                 </li>
+                                <li class="p-2  cursor-pointer hover:bg-gray-100" x-on:click="isOpenChangeColumns=false">
+                                    <div wire:click="setColumns('boleta')" class="mr-2" >
+                                        emitir boletas
+                                    </div>
+                                </li>
                             
                                 <li class="p-2  cursor-pointer hover:bg-gray-100" x-on:click="isOpenChangeColumns=false">
                                     <div wire:click="setColumns('all')" class="mr-2" >
