@@ -189,7 +189,7 @@
 
                                 @if ( $nameColumn == 'fecha' && $columns['fecha'])
                                     <x-table.td>
-                                        {{ ($sale->date) ? Helper::date($sale->date)->dayName : ''}} {{ ($sale->date) ? Helper::date($sale->date)->format('d-m-Y') : '' }}
+                                        {{ ($sale->created_at) ? Helper::date($sale->created_at)->dayName : ''}} {{ ($sale->created_at) ? Helper::date($sale->created_at)->format('d-m-y H:i') .' hrs.' : '' }} 
                                     </x-table.td>
                                 @endif
 
