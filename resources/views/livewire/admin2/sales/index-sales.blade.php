@@ -50,12 +50,12 @@
                                         Hace 10 dias
                                     </div>
                                 </li>
-                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'tenDaysAgo') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
+                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'month') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
                                     <div wire:click="$set('filterDate','month')" class="mr-2" >
                                         Todo el mes
                                     </div>
                                 </li>
-                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'tenDaysAgo') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
+                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'pendingTickets') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
                                     <div wire:click="$set('filterDate','pendingTickets')" class="mr-2" >
                                         Boletas pendientes
                                     </div>
