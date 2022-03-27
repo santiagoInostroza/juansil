@@ -71,45 +71,71 @@ class IndexSales extends Component{
         ]);
     }
 
-    public function loadColumns(){
-         
-            $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :true;
-            $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :true;
-            $columns['direccion']=(session()->has('saleColumns.direccion')) ? session('saleColumns.direccion') :true;
-            $columns['total']=(session()->has('saleColumns.total')) ? session('saleColumns.total') :true;
+    public function loadColumns($type = ''){
+        
+            $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :false;
+            $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :false;
+            $columns['direccion']=(session()->has('saleColumns.direccion')) ? session('saleColumns.direccion') :false;
+            $columns['total']=(session()->has('saleColumns.total')) ? session('saleColumns.total') :false;
             if(auth()->user()->hasRole('SuperAdmin') ){
-                $columns['costo']=(session()->has('saleColumns.costo')) ? session('saleColumns.costo') :true;
-                $columns['diferencia']=(session()->has('saleColumns.diferencia')) ? session('saleColumns.diferencia') :true;
-                $columns['porcentaje']=(session()->has('saleColumns.porcentaje')) ? session('saleColumns.porcentaje') :true;
+                $columns['costo']=(session()->has('saleColumns.costo')) ? session('saleColumns.costo') :false;
+                $columns['diferencia']=(session()->has('saleColumns.diferencia')) ? session('saleColumns.diferencia') :false;
+                $columns['porcentaje']=(session()->has('saleColumns.porcentaje')) ? session('saleColumns.porcentaje') :false;
             }
-            $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :true;
+            $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :false;
             $columns['tipo de pago']=(session()->has('saleColumns.tipo de pago')) ? session('saleColumns.tipo de pago') :false;
             $columns['monto pagado']=(session()->has('saleColumns.monto pagado')) ? session('saleColumns.monto pagado') :false;
             $columns['monto pendiente']=(session()->has('saleColumns.monto pendiente')) ? session('saleColumns.monto pendiente') :false;
             $columns['fecha de pago']=(session()->has('saleColumns.fecha de pago')) ? session('saleColumns.fecha de pago') :false;
             $columns['delivery']=(session()->has('saleColumns.delivery')) ? session('saleColumns.delivery') :false;
-            $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :true;
+            $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :false;
             $columns['fecha de entrega']=(session()->has('saleColumns.fecha de entrega')) ? session('saleColumns.fecha de entrega') :false;
             $columns['fecha entregado']=(session()->has('saleColumns.fecha entregado')) ? session('saleColumns.fecha entregado') :false;
             $columns['entregado por']=(session()->has('saleColumns.entregado por')) ? session('saleColumns.entregado por') :false;
             $columns['comentarios preventa']=(session()->has('saleColumns.comentarios preventa')) ? session('saleColumns.comentarios preventa') :false;
-            $columns['vendedor']=(session()->has('saleColumns.vendedor')) ? session('saleColumns.vendedor') :true;
+            $columns['vendedor']=(session()->has('saleColumns.vendedor')) ? session('saleColumns.vendedor') :false;
            
             $columns['valor despacho']=(session()->has('saleColumns.valor despacho')) ? session('saleColumns.valor despacho') :false;
             $columns['subtotal']=(session()->has('saleColumns.subtotal')) ? session('saleColumns.subtotal') :false;
             $columns['tipo venta']=(session()->has('saleColumns.tipo venta')) ? session('saleColumns.tipo venta') :false;
-            $columns['comentario conductor']=(session()->has('saleColumns.comentario conductor')) ? session('saleColumns.comentario conductor') :true;
+            $columns['comentario conductor']=(session()->has('saleColumns.comentario conductor')) ? session('saleColumns.comentario conductor') :false;
             $columns['boleta emitida']=(session()->has('saleColumns.boleta emitida')) ? session('saleColumns.boleta emitida') :false;
             $columns['boleta emitida el']=(session()->has('saleColumns.boleta emitida el')) ? session('saleColumns.boleta emitida el') :false;
             $columns['boleta emitida por']=(session()->has('saleColumns.boleta emitida por')) ? session('saleColumns.boleta emitida por') :false;
             $columns['usuario recibe pago']=(session()->has('saleColumns.usuario recibe pago')) ? session('saleColumns.usuario recibe pago') :false;
-            $columns['imagen del recibo']=(session()->has('saleColumns.imagen del recibo')) ? session('saleColumns.imagen del recibo') :true;
+            $columns['imagen del recibo']=(session()->has('saleColumns.imagen del recibo')) ? session('saleColumns.imagen del recibo') :false;
             $columns['recibo subido el']=(session()->has('saleColumns.recibo subido el')) ? session('saleColumns.recibo subido el') :false;
             $columns['recibo subido por']=(session()->has('saleColumns.recibo subido por')) ? session('saleColumns.recibo subido por') :false;
-            $columns['verificacion recibo']=(session()->has('saleColumns.verificacion recibo')) ? session('saleColumns.verificacion recibo') :true;
+            $columns['verificacion recibo']=(session()->has('saleColumns.verificacion recibo')) ? session('saleColumns.verificacion recibo') :false;
             $columns['recibo verificado por']=(session()->has('saleColumns.recibo verificado por')) ? session('saleColumns.recibo verificado por') :false;
             $columns['recibo verificado el']=(session()->has('saleColumns.recibo verificado el')) ? session('saleColumns.recibo verificado el') :false;
-            $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :true;
+            $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :false;
+
+            if ($type = 'mobile') {
+                $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :true;
+                $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :true;
+                $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :true;
+                $columns['imagen del recibo']=(session()->has('saleColumns.imagen del recibo')) ? session('saleColumns.imagen del recibo') :true;
+                $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :true;
+            
+            } else {
+                $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :true;
+                $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :true;
+                $columns['direccion']=(session()->has('saleColumns.direccion')) ? session('saleColumns.direccion') :true;
+                $columns['total']=(session()->has('saleColumns.total')) ? session('saleColumns.total') :true;
+                if(auth()->user()->hasRole('SuperAdmin') ){
+                    $columns['costo']=(session()->has('saleColumns.costo')) ? session('saleColumns.costo') :true;
+                    $columns['diferencia']=(session()->has('saleColumns.diferencia')) ? session('saleColumns.diferencia') :true;
+                    $columns['porcentaje']=(session()->has('saleColumns.porcentaje')) ? session('saleColumns.porcentaje') :true;
+                }
+                $columns['estado de pago']=(session()->has('saleColumns.estado de pago')) ? session('saleColumns.estado de pago') :true;
+                $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :true;
+                $columns['vendedor']=(session()->has('saleColumns.vendedor')) ? session('saleColumns.vendedor') :true;
+                $columns['imagen del recibo']=(session()->has('saleColumns.imagen del recibo')) ? session('saleColumns.imagen del recibo') :true;
+                $columns['verificacion recibo']=(session()->has('saleColumns.verificacion recibo')) ? session('saleColumns.verificacion recibo') :true;
+                $columns['accion']=(session()->has('saleColumns.accion')) ? session('saleColumns.accion') :true;
+            }
+       
         
         return $columns;
     }
@@ -132,10 +158,17 @@ class IndexSales extends Component{
         $sale->fecha_boleta = Carbon::now();
         $sale->user_boleta = auth()->user()->id;
         $sale->save();
-     }
+    }
 
     public function setColumns($name){
         switch ($name) {
+            case 'mobile':
+                foreach ($this->columns as $nameColumn => $valueColumn) {
+                    $valueColumn = false;
+                 }
+                session()->forget('saleColumns');
+                $this->columns = $this->loadColumns('mobile');
+                break;
             case 'basic':
                 foreach ($this->columns as $nameColumn => $valueColumn) {
                     $valueColumn = false;

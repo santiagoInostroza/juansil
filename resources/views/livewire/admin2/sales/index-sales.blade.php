@@ -15,7 +15,7 @@
 
         {{-- TITLE --}}
         <x-slot name="title">
-            <div class="flex justify-between gap-12 items-center">
+            <div class="flex justify-between gap-x-12 gap-y-2 items-center flex-wrap-reverse">
                 <div class=" flex-1 flex gap-2 items-center">
                     <x-jet-input class="w-full" wire:model.debounce.1s="search" placeholder="Ingresa palabra o frase para buscar..." type="search"></x-jet-input>
                 </div>
@@ -66,6 +66,11 @@
                         <div  x-cloak  x-show="isOpenChangeColumns"x-transition x-on:click.away="isOpenChangeColumns=false">
                             <ul  class="bg-white rounded shadow absolute z-10 h-96 overflow-auto py-2 w-max-content transform -translate-x-1/2 select-none border mt-2">
                             
+                                <li class="p-2  cursor-pointer hover:bg-gray-100" x-on:click="isOpenChangeColumns=false">
+                                    <div wire:click="setColumns('mobile')" class="mr-2" >
+                                        seleccionar para Mobil
+                                    </div>
+                                </li>
                                 <li class="p-2  cursor-pointer hover:bg-gray-100" x-on:click="isOpenChangeColumns=false">
                                     <div wire:click="setColumns('basic')" class="mr-2" >
                                         seleccionar basicos
@@ -162,7 +167,20 @@
                                 @endif
 
                                 @if ( $nameColumn == 'nombre' && $columns['nombre'])
-                                    <x-table.td>{{$sale->name}}</x-table.td>
+                                    <x-table.td>
+
+                                        <div id='tooltip_name_{{$sale->id}}' x-data='{tooltip:false}' x-on:mouseleave='tooltip=false'>
+                                            <div x-on:mouseover='tooltip=true'>
+                                                {{$sale->name}}
+                                            </div>
+                                            <div x-show='tooltip' x-cloak x-transition >
+                                                <div class='bg-white rounded shadow p-4 absolute'>
+                                                    <div>  {{$sale->address}}  </div>
+                                                    <div> Total ${{number_format($sale->total,0,',','.')}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </x-table.td>
                                 @endif
 
                                 @if ( $nameColumn == 'direccion' && $columns['direccion'])
@@ -522,7 +540,7 @@
                                                     <img class="w-10 object-cover cursor-pointer" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
                                                 </div>
                                                 <div x-show='tooltip' x-cloak x-transition >
-                                                    <div class='bg-white rounded shadow p-4 absolute'>
+                                                    <div class='bg-white rounded shadow p-4 absolute transform -translate-x-1/3'>
                                                         <div>por {{ ($sale->paymentReceiptBy())? $sale->paymentReceiptBy()->name :''}}</div>
                                                         <div>el {{($sale->payment_receipt_date) ? Helper::date($sale->payment_receipt_date)->dayName : ''}} {{($sale->payment_receipt_date) ? Helper::date($sale->payment_receipt_date)->format('d-m-Y H:i') : ''}} </div>
                                                     </div>
