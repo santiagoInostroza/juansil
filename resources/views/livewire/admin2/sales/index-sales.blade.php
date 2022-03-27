@@ -187,6 +187,12 @@
                                     <x-table.td>{{$sale->address}}</x-table.td>
                                 @endif
 
+                                @if ( $nameColumn == 'fecha' && $columns['fecha'])
+                                    <x-table.td>
+                                        {{ ($sale->date) ? Helper::date($sale->date)->dayName : ''}} {{ ($sale->date) ? Helper::date($sale->date)->format('d-m-Y') : '' }}
+                                    </x-table.td>
+                                @endif
+
                                 @if ( isset($columns['total']) &&  $nameColumn == 'total' && $columns['total']) 
                                     <x-table.td>${{number_format($sale->total,0,',','.')}}</x-table.td>
                                 @endif

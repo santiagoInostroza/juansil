@@ -76,6 +76,7 @@ class IndexSales extends Component{
             $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :false;
             $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :false;
             $columns['direccion']=(session()->has('saleColumns.direccion')) ? session('saleColumns.direccion') :false;
+            $columns['fecha']=(session()->has('saleColumns.fecha')) ? session('saleColumns.fecha') :false;
             $columns['total']=(session()->has('saleColumns.total')) ? session('saleColumns.total') :false;
             if(auth()->user()->hasRole('SuperAdmin') ){
                 $columns['costo']=(session()->has('saleColumns.costo')) ? session('saleColumns.costo') :false;
@@ -123,9 +124,9 @@ class IndexSales extends Component{
                 $columns['id']=(session()->has('saleColumns.id')) ? session('saleColumns.id') :true;
                 $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :true;
                 $columns['direccion']=(session()->has('saleColumns.direccion')) ? session('saleColumns.direccion') :true;
+                $columns['fecha']=(session()->has('saleColumns.fecha')) ? session('saleColumns.fecha') :true;
                 $columns['total']=(session()->has('saleColumns.total')) ? session('saleColumns.total') :true;
                 if(auth()->user()->hasRole('SuperAdmin') ){
-                    $columns['costo']=(session()->has('saleColumns.costo')) ? session('saleColumns.costo') :true;
                     $columns['diferencia']=(session()->has('saleColumns.diferencia')) ? session('saleColumns.diferencia') :true;
                     $columns['porcentaje']=(session()->has('saleColumns.porcentaje')) ? session('saleColumns.porcentaje') :true;
                 }
