@@ -408,7 +408,7 @@
                                 @if ( $nameColumn == 'fecha de entrega' && $columns['fecha de entrega']) 
                                     <x-table.td>
                                     {{$sale->delivery_date}}
-                                        {{ ($sale->delivery_date) ? Helper::date($sale->delivery_date)->dayName : ''}} {{ ($sale->delivery_date) ? Helper::date($sale->delivery_date)->format('d-m-Y') : '' }}
+                                        {{ ($sale->delivery_date) ? Helper::date($sale->delivery_date,false)->dayName : ''}} {{ ($sale->delivery_date) ? Helper::date($sale->delivery_date,false)->format('d-m-Y') : '' }}
                                     
                                     </x-table.td>
                                 @endif
