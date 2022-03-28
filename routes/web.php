@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin2\RoleController;
 use App\Http\Controllers\Admin2\SaleController;
 use App\Http\Controllers\Admin2\UserController;
 use App\Http\Livewire\TestApiGoogleMapsComponent;
+use App\Http\Controllers\Admin2\PurchaseController;
 use App\Http\Controllers\Admin2\SupplierController;
 use App\Http\Controllers\Admin2\DashboardController;
 use App\Http\Controllers\Admin2\PermissionController;
@@ -91,6 +92,7 @@ Route::resource( 'admin2/ventas', SaleController::class)->names('admin2.sales');
 // Route::get('admin2/sales', [SaleController::class,'index'])->middleware('can:admin.sales.index')->name('admin2.sales.index');
 // Route::get('admin2/sales/create', [SaleController::class,'create'])->middleware('can:admin.sales.create')->name('admin2.sales.create');
 
+Route::resource( 'admin2/compras', PurchaseController::class)->names('admin2.purchases');
 
 
 

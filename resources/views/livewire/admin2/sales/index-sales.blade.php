@@ -13,21 +13,22 @@
     {{-- TABLE --}}
     <x-table.table>
 
-        {{-- TITLE --}}
-        <x-slot name="title">
-            <div class="flex justify-between gap-x-12 gap-y-2 items-center flex-wrap-reverse">
+      
+        <x-slot name="subtitle">
+            <div class="flex justify-between gap-x-12 gap-y-2 items-center flex-wrap-reverse my-4">
                 <div class=" flex-1 flex gap-2 items-center">
                     <x-jet-input class="w-full" wire:model.debounce.1s="search" placeholder="Ingresa palabra o frase para buscar..." type="search"></x-jet-input>
                 </div>
                 
                 <div class="flex items-center gap-2">
                     <span> {{ $sales->total()}} resultados</span>
+                    
                     <div id="change_date" x-data="{isOpenChangeDate:false}">
                         <div x-on:click="isOpenChangeDate=true" class="p-2.5 bg-white border rounded cursor-pointer select-none">
-                            Mostrar <i class="fas fa-chevron-down ml-2"></i>
+                            <i class="fas fa-filter text-gray-500"></i> filtros <i class="fas fa-chevron-down ml-2"></i>
                         </div>
                         <div  x-cloak  x-show="isOpenChangeDate"x-transition x-on:click.away="isOpenChangeDate=false" x-on:click="isOpenChangeDate=false">
-                            <ul   class="bg-white rounded shadow absolute z-10 overflow-auto py-2 w-max-content transform -translate-x-1/2 select-none border mt-2">
+                            <ul   class="bg-white rounded shadow absolute z-10 overflow-auto py-2 w-max-content transform -translate-x-1/3 select-none border mt-2">
                             
                                 <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'todaysRoute') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
                                     <div wire:click="$set('filterDate','todaysRoute')" class="mr-2" >
@@ -55,9 +56,9 @@
                                         Todo el mes
                                     </div>
                                 </li>
-                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'pendingTickets') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
-                                    <div wire:click="$set('filterDate','pendingTickets')" class="mr-2" >
-                                        Boletas pendientes
+                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'pendingTicketsOfMonth') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
+                                    <div wire:click="$set('filterDate','pendingTicketsOfMonth')" class="mr-2" >
+                                        Boletas pendientes del mes
                                     </div>
                                 </li>
                                 <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'all') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
@@ -116,33 +117,115 @@
                         </div>
                         <div  x-cloak  x-show="isOpenChangeFiles"x-transition x-on:click.away="isOpenChangeFiles=false">
                             <ul  class="bg-white rounded shadow absolute z-10  overflow-auto py-2 select-none border mt-2">
-                                    <label >
-                                        <li class="p-2  cursor-pointer hover:bg-gray-50 {{ ($rows==10)?'bg-gray-500 text-white hover:bg-gray-600':''}}">
-                                            <div wire:click="$set('rows',10)" x-on:click="isOpenChangeFiles=false">
-                                            10
-                                            </div>
-                                        </li>
-                                    </label>
-                                    <label>
-                                        <li class="p-2  cursor-pointer hover:bg-gray-50 {{ ($rows==25)?'bg-gray-500 text-white hover:bg-gray-600':''}} ">
-                                            <div wire:click="$set('rows',25)" x-on:click="isOpenChangeFiles=false">
-                                                25
-                                            </div>
-                                        </li>
-                                    </label>
-                                    <label>
-                                        <li class="p-2  cursor-pointer hover:bg-gray-50 {{ ($rows==100)?'bg-gray-500 text-white hover:bg-gray-600':''}} ">
-                                            <div wire:click="$set('rows',100)" x-on:click="isOpenChangeFiles=false">
-                                                100
-                                            </div>
-                                        </li>
-                                    </label>
+                                <label >
+                                    <li class="p-2  cursor-pointer hover:bg-gray-50 {{ ($rows==10)?'bg-gray-500 text-white hover:bg-gray-600':''}}">
+                                        <div wire:click="$set('rows',10)" x-on:click="isOpenChangeFiles=false">
+                                        10
+                                        </div>
+                                    </li>
+                                </label>
+                                <label>
+                                    <li class="p-2  cursor-pointer hover:bg-gray-50 {{ ($rows==25)?'bg-gray-500 text-white hover:bg-gray-600':''}} ">
+                                        <div wire:click="$set('rows',25)" x-on:click="isOpenChangeFiles=false">
+                                            25
+                                        </div>
+                                    </li>
+                                </label>
+                                <label>
+                                    <li class="p-2  cursor-pointer hover:bg-gray-50 {{ ($rows==100)?'bg-gray-500 text-white hover:bg-gray-600':''}} ">
+                                        <div wire:click="$set('rows',100)" x-on:click="isOpenChangeFiles=false">
+                                            100
+                                        </div>
+                                    </li>
+                                </label>
                             </ul>
                         </div>
                     </div> 
                 </div>
             </div>
+            {{-- FILTROS ESOECIFICOS  NO LE GUSTARON A LA PATY--}}
+            {{-- <div class="text-indigo-500 flex flex-wrap gap-2 py-2">
+                @if($sale_id != "")
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center gapx-2 px-1 rounded-3xl bg-indigo-100">
+                            
+                            <div class="p-1">
+                                id:  {{$sale_id}}
+                            </div>
+                            <div class="p-1 cursor-pointer" wire:click="$set('sale_id','')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+               @endif
+                <div>
+                    @if($name != "")
+                        <div class="flex items-center gapx-2 px-1 rounded-3xl bg-indigo-100">
+                            <div class="p-1">
+                                nombre:  {{$name}}
+                            </div>
+                            <div class="p-1 cursor-pointer" wire:click="$set('name','')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                
+                <div>
+                    @if($address != "")
+                        <div class="flex items-center gapx-2 px-1 rounded-3xl bg-indigo-100">
+                            <div class="p-1">
+                                direccion:  {{$address}}
+                            </div>
+                            <div class="p-1 cursor-pointer" wire:click="$set('name','')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    @if($dateStart != "" && $dateEnd != "")
+                        <div class="flex items-center gapx-2 px-1 rounded-3xl bg-indigo-100">
+                            <div class="p-1">
+                                fecha inicio:  {{$dateStart}}
+                                fecha fin:  {{$dateEnd}}
+                            </div>
+                            <div class="p-1 cursor-pointer" wire:click="$set('name','')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    @if($dateStart != "" && $dateEnd == "")
+                        <div class="flex items-center gapx-2 px-1 rounded-3xl bg-indigo-100">
+                            <div class="p-1">
+                                fecha :  {{$dateStart}}
+                               
+                            </div>
+                            <div class="p-1 cursor-pointer" wire:click="$set('name','')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    @if($dateStart == "" && $dateEnd != "")
+                        <div class="flex items-center gapx-2 px-1 rounded-3xl bg-indigo-100">
+                            <div class="p-1">
+                                fecha :  {{$dateEnd}}
+                               
+                            </div>
+                            <div class="p-1 cursor-pointer" wire:click="$set('name','')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+            </div> --}}
         </x-slot>
+       
 
 
         <x-slot name='thead'>
@@ -153,13 +236,25 @@
                     @endif
                 @endforeach
             </x-table.tr>
-            <x-table.tr>
+            {{-- FILTROS ESOECIFICOS  NO LE GUSTARON A LA PATY--}}
+            {{-- <x-table.tr>
                 @foreach ($columns as $nameColumn => $valueColumn)
-                    @if ($valueColumn) 
+                    @if ($nameColumn == 'id' && $columns['id']) 
+                        <x-table.th> <div><x-jet-input class="w-14 text-xs" placeholder="id" wire:model.debounce.1s="sale_id"></x-jet-input></div></x-table.th>
+                    @elseif ($nameColumn == 'nombre' && $columns['nombre']) 
+                        <x-table.th> <div><x-jet-input class="w-max text-xs" placeholder="nombre" wire:model.debounce.1s="name"></x-jet-input></div></x-table.th>
+                    @elseif ($nameColumn == 'direccion' && $columns['direccion'])
+                        <x-table.th> <div><x-jet-input class="w-max text-xs" placeholder="direccion" wire:model.debounce.1s="address"></x-jet-input></div></x-table.th>
+                    @elseif ($nameColumn == 'fecha' && $columns['fecha'])
+                        <x-table.th> 
+                            <div><x-jet-input class="text-xs w-max" type="date" wire:model.debounce.1s="dateStart"></x-jet-input></div>
+                            <div><x-jet-input class="text-xs w-max" type="date" wire:model.debounce.1s="dateEnd"></x-jet-input></div>
+                        </x-table.th>
+                    @else
                         <x-table.th> <div></div></x-table.th>
                     @endif
                 @endforeach
-            </x-table.tr>
+            </x-table.tr> --}}
         </x-slot>
         <x-slot name='tbody'>
             @if ($sales->count())
@@ -312,7 +407,7 @@
 
                                 @if ( $nameColumn == 'fecha de entrega' && $columns['fecha de entrega']) 
                                     <x-table.td>
-                                    
+                                    {{$sale->delivery_date}}
                                         {{ ($sale->delivery_date) ? Helper::date($sale->delivery_date)->dayName : ''}} {{ ($sale->delivery_date) ? Helper::date($sale->delivery_date)->format('d-m-Y') : '' }}
                                     
                                     </x-table.td>

@@ -43,26 +43,26 @@
                     ],
             ],
             
-            // [
-            //     'name' => 'COMPRAS',
-            //     'icon' => 'fas fa-file-invoice',
-            //     'route' => 'admin.purchases.*',
-            //     'can' => 'admin.purchases.index',
-            //     'child' => [
-            //         [
-            //             'name' => 'LISTA DE COMPRAS',
-            //             'icon' => 'fas fa-file-invoice',
-            //             'route' => 'admin.purchases.index',
-            //             'can' => 'admin.purchases.index'
-            //         ],
-            //         [
-            //             'name' => 'CREAR COMPRA',
-            //             'icon' => 'fas fa-file-invoice',
-            //             'route' => 'admin.purchases.create',
-            //             'can' => 'admin.purchases.create'
-            //         ],
-            //     ]
-            // ],
+            [
+                'name' => 'COMPRAS',
+                'icon' => 'fas fa-file-invoice',
+                'route' => 'admin2.purchases.*',
+                // 'can' => 'admin.purchases.index',
+                'child' => [
+                    [
+                        'name' => 'LISTA DE COMPRAS',
+                        'icon' => 'fas fa-file-invoice',
+                        'route' => 'admin2.purchases.index',
+                        'can' => 'admin.purchases.index'
+                    ],
+                    [
+                        'name' => 'CREAR COMPRA',
+                        'icon' => 'fas fa-file-invoice',
+                        'route' => 'admin2.purchases.create',
+                        'can' => 'admin.purchases.create'
+                    ],
+                ]
+            ],
         
             [
                 'name' => 'VENTAS',

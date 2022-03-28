@@ -113,7 +113,7 @@ class Orders extends Component{
 
         $sale->boleta = 1;
         $sale->user_boleta = auth()->user()->id;
-        $sale->fecha_boleta = Carbon::now()->timezone('America/Santiago');
+        $sale->fecha_boleta = Carbon::now();
         $sale->save();
         
     }

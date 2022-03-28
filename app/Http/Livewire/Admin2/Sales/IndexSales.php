@@ -11,16 +11,29 @@ class IndexSales extends Component{
     use WithPagination;
 
     public $search;
-    public $name;
+
+    // public $sale_id;
+    // public $name;
+    // public $address;
+    // public $dateStart;
+    // public $dateEnd;
+
     public $columns;
     public $rows;
     public $filterDate;
 
+
     public function mount(){
         // session()->forget('saleColumns');
-        $this->id = "";
-        $this->name = "";
         $this->search = "";
+
+
+        // $this->sale_id = "";
+        // $this->name = "";
+        // $this->address = "";
+        // $this->dateStart = '';
+        // $this->dateEnd ='';
+
         $this->columns = $this->loadColumns();
         $this->rows =(session()->has('saleFiles'))? session('saleFiles'): 10;
         $this->filterDate =(session()->has('saleFilterDate'))? session('saleFilterDate'): 'all';
@@ -30,12 +43,13 @@ class IndexSales extends Component{
 
     public function render(){
 
-        $strings = explode(' ', trim($this->search));
+        
         
 
         $sales= Sale::join('customers','customers.id','sales.customer_id')
         ->with('customer');
-      
+
+        
         if ($this->filterDate =='todaysRoute') {
             $sales = $sales->whereDate('delivery_date', Carbon::today());
         }
@@ -48,23 +62,52 @@ class IndexSales extends Component{
         if ($this->filterDate =='tenDaysAgo') {
             $sales = $sales->whereDate('date', '>=', Carbon::now()->subDays(10));
         }
-        if ($this->filterDate =='month') {
+        if ($this->filterDate =='month' || $this->filterDate =='pendingTicketsOfMonth') {
             $sales = $sales->whereMonth('date', '>=', Carbon::now()->format('m'))->whereYear('date', '>=', Carbon::now()->format('Y'));
         }
-        if ($this->filterDate =='pendingTickets') {
+        if ($this->filterDate =='pendingTicketsOfMonth') {
             $sales = $sales->where('payment_status',3 )->where('boleta','0');
+        } 
+        //  FILTROS ESOECIFICOS  NO LE GUSTARON A LA PATY
+        // if ($this->sale_id != "") {
+        //     $sales = $sales->where('sales.id',$this->sale_id);
+        // }   
+
+        // if ($this->name != '') {
+        //     $sales = $sales->where('name', 'like', '%' . $this->name . '%');
+        // }
+        // if ($this->address != '') {
+        //     $sales = $sales->where('direccion', 'like', '%' . $this->address . '%');
+        // }
+
+        // if ($this->dateStart != '' && $this->dateEnd != '') {
+        //     $sales = $sales->whereBetween('date', [$this->dateStart, $this->dateEnd] );
+        // }
+
+        // if ($this->dateStart != '' && $this->dateEnd == '') {
+        //     $sales = $sales->whereDate('date', $this->dateStart);
+        // }
+        
+        // if ($this->dateStart == '' && $this->dateEnd != '') {
+        //     $sales = $sales->whereDate('date', $this->dateEnd);
+        // }
+
+        $strings = explode(' ', trim($this->search));
+
+        if($this->search != ""){
+            $sales = $sales->where(function($query) use ($strings){
+                foreach ($strings as $string ) {
+                $query 
+                ->orWhere('name','like', '%' . $string . '%') 
+                ->orWhere('direccion','like', '%' . $string . '%');
+                }
+            });
         }
 
-        $sales = $sales->where(function($query) use ($strings){
-            foreach ($strings as $string ) {
-             $query 
-              ->orWhere('name','like', '%' . $string . '%') 
-              ->orWhere('direccion','like', '%' . $string . '%');
-            }
-        })
-        ->select('sales.*','customers.name as name', 'customers.direccion as address')
-        ->orderBy('id', 'desc')
-        ;
+        $sales = $sales->select('sales.*','customers.name as name', 'customers.direccion as address') 
+        ->orderBy('id', 'desc');
+
+        
         
 
         $customerNames = $sales->pluck('customers.name')->unique();

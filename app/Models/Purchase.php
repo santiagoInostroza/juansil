@@ -33,6 +33,10 @@ class Purchase extends Model
     }
 
     
+    public function createdBy(){
+        $user = User::find($this->user_created); 
+        return $user;
+    }
     public function created_by(){
         $user = User::find($this->user_created); 
         return $user;
