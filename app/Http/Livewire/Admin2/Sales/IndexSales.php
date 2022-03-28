@@ -126,6 +126,7 @@ class IndexSales extends Component{
             $columns['nombre']=(session()->has('saleColumns.nombre')) ? session('saleColumns.nombre') :false;
             $columns['direccion']=(session()->has('saleColumns.direccion')) ? session('saleColumns.direccion') :false;
             $columns['fecha']=(session()->has('saleColumns.fecha')) ? session('saleColumns.fecha') :false;
+            $columns['fecha de entrega']=(session()->has('saleColumns.fecha de entrega')) ? session('saleColumns.fecha de entrega') :false;
             $columns['total']=(session()->has('saleColumns.total')) ? session('saleColumns.total') :false;
             if(auth()->user()->hasRole('SuperAdmin') ){
                 $columns['costo']=(session()->has('saleColumns.costo')) ? session('saleColumns.costo') :false;
@@ -139,7 +140,7 @@ class IndexSales extends Component{
             $columns['fecha de pago']=(session()->has('saleColumns.fecha de pago')) ? session('saleColumns.fecha de pago') :false;
             $columns['delivery']=(session()->has('saleColumns.delivery')) ? session('saleColumns.delivery') :false;
             $columns['estado de entrega']=(session()->has('saleColumns.estado de entrega')) ? session('saleColumns.estado de entrega') :false;
-            $columns['fecha de entrega']=(session()->has('saleColumns.fecha de entrega')) ? session('saleColumns.fecha de entrega') :false;
+            
             $columns['fecha entregado']=(session()->has('saleColumns.fecha entregado')) ? session('saleColumns.fecha entregado') :false;
             $columns['entregado por']=(session()->has('saleColumns.entregado por')) ? session('saleColumns.entregado por') :false;
             $columns['comentarios preventa']=(session()->has('saleColumns.comentarios preventa')) ? session('saleColumns.comentarios preventa') :false;
