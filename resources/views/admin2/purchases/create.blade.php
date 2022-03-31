@@ -33,5 +33,7 @@
 
 
 @section('content')
-    @livewire('admin2.purchases.create-purchase', key('create-purchase'))
+    <div>
+        <livewire:admin2.purchases.create-purchase wire:key="create-purchase">
+    </div>
 @endsection

@@ -341,9 +341,7 @@ class CreateSale extends Component{
                 'precio_total' => $this->precio_total,
             ];
 
-        session([
-            'venta.items' => $items
-        ]);
+        session(['venta.items' => $items ]);
 
         $total = 0;
         foreach (session('venta.items') as  $value) {

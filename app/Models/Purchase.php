@@ -28,8 +28,9 @@ class Purchase extends Model
       //RELACION MUCHOS A MUCHOS
     public function products(){
         return $this->belongsToMany(Product::class)
-        ->withPivot('id','cantidad','cantidad_por_caja','cantidad_total','precio','precio_por_caja','total')
-        ->withTimestamps();
+        // ->withPivot('id','cantidad','cantidad_por_caja','cantidad_total','precio','precio_por_caja','total')
+        // ->withTimestamps()
+        ;
     }
 
     

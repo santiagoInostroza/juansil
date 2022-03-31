@@ -38,8 +38,11 @@ class UserController extends Controller{
         //
     }
 
-    public function edit(User $user){
-       return view('admin2.users.edit',compact('user'));
+    public function edit(User $usuario){
+       
+       return view('admin2.users.edit',[
+           'user' => $usuario
+       ]);
     }
 
   

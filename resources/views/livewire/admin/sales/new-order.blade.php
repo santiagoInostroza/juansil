@@ -251,7 +251,7 @@
                                         <tr class="relative">
                                             <td class="py-2 whitespace-nowrap">
                                                
-                                                <div x-data="{quantityBox:{{ $item['cantidad_por_caja']}}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
+                                                <div x-init="console.log('onot')" x-data="{quantityBox:{{ $item['cantidad_por_caja']}}, quantity:{{ $item['cantidad']}}, loading:false}" x-init="quantityBox={{ $item['cantidad_por_caja'] }}; quantity={{ $item['cantidad']}} " id="lista_order_{{$item['product_id']}}" class="flex items-center justify-center">
                                                     
                                                     <figure class="w-12">
                                                         <img  class="object-contain h-8 w-8" src="{{Storage::url('products_thumb/' . $item['image'])}}" alt="{{'products_thumb/' . $item['product_id'] }}" title='Id producto {{ $item['product_id'] }}'>

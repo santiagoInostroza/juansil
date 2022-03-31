@@ -1,4 +1,4 @@
-<td class="p-2 whitespace-nowrap font-semibold">
+<th  {{ $attributes->merge(['class' => 'p-2 whitespace-nowrap font-bold']) }}>
    {{ $slot }}
-</td>
+</th>
 

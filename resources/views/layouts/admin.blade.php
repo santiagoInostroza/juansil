@@ -106,25 +106,27 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        function main(){
-                            return{
-                                isOpenAside : (window.innerWidth < 1024) ? false : false,
-                                isMobile : (window.innerWidth < 768) ? true : false,
-                                resize:function(){
-                                    this.isOpenAside =  (window.innerWidth < 1024) ? false : false; 
-                                    this.isMobile = (window.innerWidth < 768) ? false : false;
-                                },
-                            }
-                        }
-                    </script>
+                    
                 </div>
             </main>
         </div>
 
-      
+        <script>
+            function main(){
+                return{
+                    isOpenAside : (window.innerWidth < 1024) ? false : false,
+                    isMobile : (window.innerWidth < 768) ? true : false,
+                    resize:function(){
+                        this.isOpenAside =  (window.innerWidth < 1024) ? false : false; 
+                        this.isMobile = (window.innerWidth < 768) ? false : false;
+                    },
+                }
+            }
+        </script>
 
         @stack('modals')
+
+        @stack('scripts')
 
         @livewireScripts
      

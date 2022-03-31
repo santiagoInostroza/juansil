@@ -60,4 +60,40 @@
 		],
 		"description": "tooltip basico"
 	},
+	"dropdown": {
+		"scope": "html,php,blade",
+		"prefix": "_dropdown",
+		"body": [
+			
+			"<div id='dropdown_' x-data='{dropdown:false}' >",
+			"	<div x-on:click='dropdown=true'>",
+			" ",
+			"	</div>",
+			"	<div x-show='dropdown' x-cloak x-transition x-on:click.away='dropdown=false'>",
+			"		<div class='bg-white rounded shadow p-4 absolute'>",
+			" ",			
+			"		</div>",
+			"	</div>",
+			"</div>",
+			
+		],
+		"description": "dropdown basico"
+	},
+	"loader": {
+		"scope": "html,php,blade",
+		"prefix": "_loader",
+		"body": [
+			
+			"<div wire:loading.flex target='searchProduct' >"
+			"	<div class='absolute inset-0 bg-gray-200 z-10' ></div>"
+			"	<div class='absolute inset-0 flex justify-center items-center z-10'>"
+			"		<div class='text-gray-800'>"
+			"			<i class='fas fa-spinner animate-spin text-4xl'></i>"
+			"		</div>"
+			"	</div>"
+			"</div> "
+			
+		],
+		"description": "loader basico"
+	},
 }

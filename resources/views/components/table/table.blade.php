@@ -16,12 +16,14 @@
             <div class="overflow-auto  w-full h-full m-auto">
                 <table class="table-auto w-full  rounded bg-white">
                     @if (isset($thead))
-                        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                        <thead class="text-xs font-bold text-indigo-900 ">
                             {{ $thead}}
                         </thead>
                     @endif
                     @if (isset($tbody))
+
                         <tbody class="text-xs divide-y divide-gray-100 relative">
+                            
                             {{ $tbody}}               
                         </tbody>
                     @endif
