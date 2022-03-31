@@ -74,7 +74,7 @@
                             @can('admin.dashboard.fintech')
                                 <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero</a>
                             @endcan
-                            @can('admin.deliveries.index')
+                            @can('admin.dashboard.index')
                                 <a href="{{ route('admin.dashboard.index') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Dashboard</a>
                             @endcan
                             @can('products.specialPrice')
