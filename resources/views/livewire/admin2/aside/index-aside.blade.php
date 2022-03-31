@@ -150,7 +150,8 @@
     <div class="border-t my-4"></div>
     
     @foreach ($vistas as $vista)
-        @can($vista['child'])
+
+        @can($vista['can'])
             @if (isset($vista['child']))
                 
                 <div x-data="{isOpen:false}" >
