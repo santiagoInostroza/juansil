@@ -81,7 +81,7 @@
                                 <a href="{{ route('products.specialPrice') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Ver catalogo especial</a>
                                
                             @endcan
-                            @auth
+                            @can('products.specialPrice')
                                 <a href="{{ route('orders') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Mis compras</a>
                             @endauth
 
