@@ -4,7 +4,7 @@
         No tienes los permisos necesarios para ver esta pantalla!! XD
     </h1>
     @php
-        header( "refresh;url=/" ); 
+       return redirect()->route('admin.home.index');
     @endphp
 
 </div>
