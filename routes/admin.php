@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventarioController;
 use App\Http\Controllers\Admin\CustomerDataController;
 
-Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.home.index')->name('admin.home');
+Route::get('/', [HomeController::class,'index' ])->middleware('can:admin.dashboard.fintech')->name('admin.home');
 
 Route::resource('categorias', CategoryController::class)->middleware('can:admin.categories.index')->names('admin.categories');
 Route::resource('etiquetas', TagController::class)->middleware('can:admin.tags.index')->names('admin.tags');
