@@ -71,7 +71,7 @@
             [
                 'name' => 'Ventas old',
                 'icon' => 'fab fa-wpforms',
-                'route' => 'admin.sales.index',
+                'route' => 'admin.sales.index2',
                 'can' => 'admin.sales.index'
                
             ],
