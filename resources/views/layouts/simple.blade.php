@@ -71,8 +71,11 @@
                             <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Perfil</a>
                            
                             
-                            @can('admin.home.index')
+                            @can('admin.dashboard.fintech')
                                 <a href="{{ route('admin.home') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Tablero</a>
+                            @endcan
+                            @can('admin.deliveries.index')
+                                <a href="{{ route('admin.dashboard.index') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Dashboard</a>
                             @endcan
                             @can('products.specialPrice')
                                 <a href="{{ route('products.specialPrice') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Ver catalogo especial</a>
