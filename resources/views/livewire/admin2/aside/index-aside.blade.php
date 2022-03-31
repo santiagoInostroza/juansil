@@ -47,7 +47,7 @@
                 'name' => 'COMPRAS',
                 'icon' => 'fas fa-file-invoice',
                 'route' => 'admin2.purchases.*',
-                // 'can' => 'admin.purchases.index',
+                'can' => 'admin.purchases.index',
                 'child' => [
                     [
                         'name' => 'LISTA DE COMPRAS',
@@ -150,62 +150,66 @@
     <div class="border-t my-4"></div>
     
     @foreach ($vistas as $vista)
-        @if (isset($vista['child']))
-            <div x-data="{isOpen:false}" >
-                <div x-on:click="isOpen = !isOpen" x-on:click.away="isOpen = false" class=" flex justify-between items-center gap-2 p-2 hover:text-white   w-full cursor-pointer @if(request()->routeIs($vista['route'])) bg-gray-900 text-white @endif" :class=" isOpen ? 'font-bold bg-gray-800':'' "  >
-                    <div class="flex items-center gap-2">
-                        <div class="text-gray-300">
+        @can($vista['child'])
+            @if (isset($vista['child']))
+                
+                <div x-data="{isOpen:false}" >
+                    <div x-on:click="isOpen = !isOpen" x-on:click.away="isOpen = false" class=" flex justify-between items-center gap-2 p-2 hover:text-white   w-full cursor-pointer @if(request()->routeIs($vista['route'])) bg-gray-900 text-white @endif" :class=" isOpen ? 'font-bold bg-gray-800':'' "  >
+                        <div class="flex items-center gap-2">
+                            <div class="text-gray-300">
+                                <i class="{{$vista['icon']}}"></i>
+                            </div>
+                            <h3>{{ Str::ucfirst(Str::lower($vista['name']))  }}</h3>    
+                        </div>
+                        <div>
+                            <i x-cloak x-show="isOpen" class="fas fa-chevron-up" ></i>
+                            <i x-cloak x-show="!isOpen" class="fas fa-chevron-down" ></i>
+                        </div>
+                    </div>
+                    <div x-cloak x-show="isOpen" class=" w-full" x-transition>
+                        
+                        @foreach ( $vista['child'] as $key => $v )
+                    
+                            @if ( isset($v['can']) && $v['can'] != "")
+                                @can($v['can'])
+                                    <a href="{{ route($v['route']) }}" class="bg-gray-800 flex items-center pl-8 gap-2 p-2 hover:text-white w-full cursor-pointer @if(request()->routeIs($v['route'])) bg-gray-800 text-red-500 font-bold hover:text-red-700 @endif">
+                                        <h3 class="">{{ Str::ucfirst(Str::lower($v['name'])) }}</h3>
+                                    
+                                    </a>
+                                @endcan
+                            @else
+                                <a href="{{ route($v['route']) }}" class="bg-gray-800 flex items-center  pl-8 gap-2 p-4 hover:text-white w-full cursor-pointer @if(request()->routeIs($v['route'])) bg-gray-800 text-red-500 font-bold hover:text-red-700 @endif">
+                                    <h3 class="pl-6">{{ Str::ucfirst(Str::lower($v['name']))  }}</h3>
+                                </a>
+                            @endif
+                        
+                        
+                        @endforeach   
+
+                    </div>
+                    
+                </div>
+            @else
+                @if (isset($vista['can']) && $vista['can'] != "")
+                    @can($vista['can'])
+                    <a href="{{ route($vista['route']) }}" class="flex items-center gap-2 p-2 hover:text-white  w-full cursor-pointer @if(request()->routeIs($vista['route'])) bg-gray-900 text-white @endif">
+                        <div class="text-gray-400">
                             <i class="{{$vista['icon']}}"></i>
                         </div>
-                        <h3>{{ Str::ucfirst(Str::lower($vista['name']))  }}</h3>    
-                    </div>
-                    <div>
-                        <i x-cloak x-show="isOpen" class="fas fa-chevron-up" ></i>
-                        <i x-cloak x-show="!isOpen" class="fas fa-chevron-down" ></i>
-                    </div>
-                </div>
-                <div x-cloak x-show="isOpen" class=" w-full" x-transition>
+                        <h3>{{  Str::ucfirst(Str::lower($vista['name']))   }}</h3>
                     
-                    @foreach ( $vista['child'] as $key => $v )
-                  
-                        @if ( isset($v['can']) && $v['can'] != "")
-                            @can($v['can'])
-                                <a href="{{ route($v['route']) }}" class="bg-gray-800 flex items-center pl-8 gap-2 p-2 hover:text-white w-full cursor-pointer @if(request()->routeIs($v['route'])) bg-gray-800 text-red-500 font-bold hover:text-red-700 @endif">
-                                    <h3 class="">{{ Str::ucfirst(Str::lower($v['name'])) }}</h3>
-                                  
-                                </a>
-                            @endcan
-                        @else
-                            <a href="{{ route($v['route']) }}" class="bg-gray-800 flex items-center  pl-8 gap-2 p-4 hover:text-white w-full cursor-pointer @if(request()->routeIs($v['route'])) bg-gray-800 text-red-500 font-bold hover:text-red-700 @endif">
-                                <h3 class="pl-6">{{ Str::ucfirst(Str::lower($v['name']))  }}</h3>
-                            </a>
-                        @endif
-                    
-                    
-                    @endforeach   
-
-                </div>
-                
-            </div>
-        @else
-            @if (isset($vista['can']) && $vista['can'] != "")
-                @can($vista['can'])
-                <a href="{{ route($vista['route']) }}" class="flex items-center gap-2 p-2 hover:text-white  w-full cursor-pointer @if(request()->routeIs($vista['route'])) bg-gray-900 text-white @endif">
-                    <div class="text-gray-400">
-                        <i class="{{$vista['icon']}}"></i>
-                    </div>
-                    <h3>{{  Str::ucfirst(Str::lower($vista['name']))   }}</h3>
-                
-                </a>
-                @endcan
-            @else
-                <a href="{{ route($vista['route']) }}" class="flex items-center gap-2 p-2 hover:text-white w-full cursor-pointer @if(request()->routeIs($vista['route'])) bg-gray-900 text-white @endif">
-                    <div class="text-gray-400">
-                        <i class="{{$vista['icon']}}"></i>
-                    </div>
-                    <h3>{{ Str::ucfirst(Str::lower($vista['name']))   }}</h3>
-                </a>
+                    </a>
+                    @endcan
+                @else
+                    <a href="{{ route($vista['route']) }}" class="flex items-center gap-2 p-2 hover:text-white w-full cursor-pointer @if(request()->routeIs($vista['route'])) bg-gray-900 text-white @endif">
+                        <div class="text-gray-400">
+                            <i class="{{$vista['icon']}}"></i>
+                        </div>
+                        <h3>{{ Str::ucfirst(Str::lower($vista['name']))   }}</h3>
+                    </a>
+                @endif
             @endif
-        @endif
+            
+        @endcan
     @endforeach  
 </div>
