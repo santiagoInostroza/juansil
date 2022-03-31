@@ -20,6 +20,10 @@
                 'can' => 'admin.users.index'
                
             ],
+           
+
+
+
             [
                 'name' => 'roles y permisos',
                 'icon' => 'fas fa-users-cog',
@@ -62,6 +66,14 @@
                         'can' => 'admin.purchases.create'
                     ],
                 ]
+            ],
+
+            [
+                'name' => 'Ventas old',
+                'icon' => 'fab fa-wpforms',
+                'route' => 'admin.sales.index',
+                'can' => 'admin.sales.index'
+               
             ],
         
             [
