@@ -60,6 +60,12 @@
                         'can' => 'admin.purchases.index'
                     ],
                     [
+                        'name' => 'COMPRAS OLD',
+                        'icon' => 'fas fa-file-invoice',
+                        'route' => 'admin.purchases.index',
+                        'can' => 'admin.purchases.index'
+                    ],
+                    [
                         'name' => 'CREAR COMPRA',
                         'icon' => 'fas fa-file-invoice',
                         'route' => 'admin2.purchases.create',
@@ -107,6 +113,8 @@
                 'can' => 'admin.deliveries.index'
                
             ],
+
+        
             
             // [
             //     'name' => 'CATEGORIAS',

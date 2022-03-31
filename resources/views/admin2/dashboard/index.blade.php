@@ -15,8 +15,10 @@
         <div class="font-sans">Aqui verás como va tu mes...</div>
     </div>
 
-    @if (auth()->user()->hasRole('Seller'))
+
+    @if (auth()->user()->hasRole('Vendedor'))
         @livewire('admin2.dashboard.seller.index-dashboard-seller', ['user' => auth()->user()], key('seller'))
+     
        
     @endif
 
