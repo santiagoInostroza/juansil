@@ -75,6 +75,8 @@
                 'can' => 'admin.sales.index'
                
             ],
+
+           
         
             [
                 'name' => 'VENTAS',
@@ -96,6 +98,14 @@
                             'can' => 'admin.sales.create'
                         ],
                     ],
+            ],
+
+            [
+                'name' => 'Deliveries',
+                'icon' => 'fas fa-truck',
+                'route' => 'admin.deliveries.index',
+                'can' => 'admin.deliveries.index'
+               
             ],
             
             // [
