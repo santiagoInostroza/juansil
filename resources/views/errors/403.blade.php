@@ -4,7 +4,7 @@
         No tienes los permisos necesarios para ver esta pantalla!! XD
     </h1>
     @php
-       return redirect()->route('admin2.dashboard.index');
+        header( "refresh:0;url=/" ); 
     @endphp
 
 </div>
