@@ -2,7 +2,7 @@
 
 {{-- {{ $salesOfTheMonthCompleted}} --}}
 
- <div class="flex flex-wrap justify-center mt-12">
+ <div class="flex flex-wrap justify-center mt-6">
     <div class="w-full ">
         <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
 

@@ -23,17 +23,19 @@
 
 
     @if (auth()->user()->hasRole('SuperAdmin'))
+    <ul>
         @foreach ($users as $user)
-        <div>
-            {{-- title --}}
-            <div class="flex justify-between items-center p-4 border-b-2 border-indigo-500">
-                <div class="font-bold text-xl">{{ $user->name }}</div>
-                <div class="font-bold text-xl">{{ $user->email }}</div>
-            </div>
-            {{-- content --}}
-            @livewire('admin2.dashboard.seller.index-dashboard-seller', ['user' => $user], key('seller'.$user->id))
-        </div>
+            <li>
+                {{-- title --}}
+                <div class="flex justify-between items-center p-4 border-b-2 border-indigo-500">
+                    <div class="font-bold text-xl">{{ $user->name }}</div>
+                    <div class="font-bold text-xl">{{ $user->email }}</div>
+                </div>
+                {{-- content --}}
+                @livewire('admin2.dashboard.seller.index-dashboard-seller', ['user' => $user], key('seller_'.$user->id. rand()))
+            </li>
         @endforeach
+    </ul>
      
        
     @endif
