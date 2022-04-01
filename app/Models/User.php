@@ -88,4 +88,94 @@ class User extends Authenticatable
         return $this->hasMany(Customer::class);
     }
 
+    // get sales
+      public function sales(){
+        $sales = Sale::where('user_created',$this->id)->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+
+    // sales of the month 
+    public function salesOfTheMonth(){
+        $sales = Sale::where('user_created',$this->id)->whereMonth('payment_date',date('m'))->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+    // sales of the month where payment = 3 && 
+    public function salesOfTheMonthCompleted($month = null){
+
+        if($month == null){
+            $month = date('m');
+        }
+        $sales = Sale::where('user_created',$this->id)->whereMonth('payment_date',$month)->where('payment_status',3)->get();
+
+        $sales = Sale::where('user_created',$this->id)->where('payment_status',3)->where(function($query) use($month){
+            $query
+            ->where('payment_date', '!=' ,null)
+            ->whereMonth('payment_date', $month)->get();
+        })->orWhere(function($query) use($month){
+            $query
+            ->where('payment_date' ,null)
+            ->whereMonth('date',$month)->get();
+        })->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+
+    
+    // sales of the year where payment_status = 3 
+    public function salesOfTheYear(){
+        $sales = Sale::where('user_created',$this->id)->whereYear('payment_date',date('Y'))->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+    // sales of the year where payment_status = 3 
+    public function salesOfTheYearCompleted(){
+        $sales = Sale::where('user_created',$this->id)->where('payment_status',3)->whereYear('payment_date',date('Y'))->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+
+    // sales of the day 
+    public function salesOfToday(){
+        $sales = Sale::where('user_created',$this->id)->whereDate('payment_date',date('Y-m-d'))->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+
+    //sales of yesterday 
+    public function salesOfYesterday(){
+        $sales = Sale::where('user_created',$this->id)->whereDate('created_at',date('Y-m-d',strtotime('-1 day')))->get();
+        if($sales->count()){
+            return $sales;
+        }
+        return false;
+    }
+
+
+
+
+
+
+    
+
+
+    public function createdBy(){
+        $user = User::find($this->user_created); 
+        return $user;
+    }
+
+
 }

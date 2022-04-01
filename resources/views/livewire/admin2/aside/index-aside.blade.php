@@ -103,6 +103,12 @@
                             'route' => 'admin2.sales.create',
                             'can' => 'admin.sales.create'
                         ],
+                        [
+                            'name' => 'Ventas old',
+                            // 'icon' => 'fas fa-cash-register',
+                            'route' => 'admin.sales.index2',
+                            'can' => 'admin.sales.create'
+                        ],
                     ],
             ],
 
