@@ -94,7 +94,7 @@
                         <x-table.tr>
                             <x-table.td>{{$sale->id}}</x-table.td>
                             <x-table.td>{{$sale->customer->name}}</x-table.td>
-                            <x-table.td>{{$sale->total}}</x-table.td>
+                            <x-table.td>${{ number_format($sale->total,0,',','.') }}</x-table.td>
                             <x-table.td>{{$sale->payment_status}}</x-table.td>
                             <x-table.td>{{$sale->date}}</x-table.td>
                             <x-table.td>{{$sale->payment_date}}</x-table.td>
