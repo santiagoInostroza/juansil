@@ -7,6 +7,7 @@ use Livewire\Component;
 class IndexDashboardSeller extends Component{
     public $user;
     public $month;
+
     public $salesOfTheYearCompleted;
     public $salesOfTheMonthCompleted;
     public $salesOfToday;
@@ -16,11 +17,6 @@ class IndexDashboardSeller extends Component{
     public $salesgreaterThan50k;
 
     public $totalToPay;
-
-    public function mount(){
-        $this->month = 3;
-        
-    }
 
     public function render(){
         
