@@ -59,7 +59,35 @@
 
         </div>
     </div> 
+  
 </div>
+
+
+    <x-table.table>
+        <x-slot name='thead'>
+            <x-table.tr>
+                <x-table.th>Id</x-table.th>
+                <x-table.th>Cliente</x-table.th>
+                <x-table.th>Total</x-table.th>
+                <x-table.th>Estado de pago</x-table.th>
+                <x-table.th>fecha creada la venta</x-table.th>
+                <x-table.th>Fecha de pago</x-table.th>
+            </x-table.tr>
+        </x-slot>
+        <x-slot name='tbody'>
+            @foreach ($salesOfTheMonthCompleted as $sale)
+                <x-table.tr>
+                    <x-table.td>{{$sale->id}}</x-table.td>
+                    <x-table.td>{{$sale->customer->name}}</x-table.td>
+                    <x-table.td>{{$sale->total}}</x-table.td>
+                    <x-table.td>{{$sale->payment_status}}</x-table.td>
+                    <x-table.td>{{$sale->date}}</x-table.td>
+                    <x-table.td>{{$sale->payment_date}}</x-table.td>
+                </x-table.tr>
+            @endforeach
+        </x-slot>
+    </x-table.table>
+
 
     {{-- dashboard --}}
     

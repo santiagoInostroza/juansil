@@ -111,24 +111,28 @@ class User extends Authenticatable
         if($month == null){
             $month = date('m');
         }
-        $sales = Sale::where('user_created',$this->id)->whereMonth('payment_date',$month)->where('payment_status',3)->get();
 
-        $sales = Sale::where('user_created',$this->id)->where('payment_status',3)->where(function($query) use($month){
-            $query
-            ->where('payment_date', '!=' ,null)
-            ->whereMonth('payment_date', $month)->get();
-        })->orWhere(function($query) use($month){
-            $query
-            ->where('payment_date' ,null)
-            ->whereMonth('date',$month)->get();
-        })->get();
+        
+        $sales = Sale::where('user_created',$this->id)->where('payment_status',3)
+            ->where(function($query) use($month){
+                $query->where(function($q) use($month){
+                    $q->where('payment_date', '!=' ,null)
+                    ->whereMonth('payment_date', $month)->get();
+                    })->orWhere(function($query) use($month){
+                        $query
+                        ->where('payment_date' ,null)
+                        ->whereMonth('date',$month)->get();
+                    });
+            })->get();
+                   
+
         if($sales->count()){
             return $sales;
         }
         return false;
     }
 
-    
+
     // sales of the year where payment_status = 3 
     public function salesOfTheYear(){
         $sales = Sale::where('user_created',$this->id)->whereYear('payment_date',date('Y'))->get();
