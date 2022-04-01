@@ -45,11 +45,15 @@
     @endif
 
     @if (auth()->user()->hasRole('Vendedor'))
-        @livewire('admin2.dashboard.seller.index-dashboard-seller', ['user' => auth()->user(),'month' => $month], key('seller'))
+        <div class="mb-8">
+            @livewire('admin2.dashboard.seller.index-dashboard-seller', ['user' => auth()->user(),'month' => $month], key('seller'))
+        </div>
     @endif
 
     @if (auth()->user()->hasRole('Driver'))
-        @livewire('admin2.dashboard.driver.index-dashboard-driver', ['user' => auth()->user(),'month' => $month], key('driver'))
+        <div class="mb-8">
+            @livewire('admin2.dashboard.driver.index-dashboard-driver', ['user' => auth()->user(),'month' => $month], key('driver'))
+        </div>
     @endif
 
 @endsection
