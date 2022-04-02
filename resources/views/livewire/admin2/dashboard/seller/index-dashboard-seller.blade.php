@@ -15,7 +15,7 @@
                     <div class="w-full p-6">
                         <div class="flex flex-wrap">
                         
-                            <div class="w-1/2">
+                            <div class="w-1/3">
                                 <div class="p-3">
                                     <p class="text-gray-700 text-sm">
                                         {{ __('Pedidos de hoy') }}
@@ -25,7 +25,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-1/4">
+                            <div class="w-1/3">
+                                <div class="p-3">
+                                    <p class="text-gray-700 text-sm">
+                                        {{ __('Pedidos de ayer') }}
+                                    </p>
+                                    <div class="font-bold text-xl mb-2">
+                                        {{ ($salesOfYesterday) ? $salesOfYesterday->count() : 0 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-1/3">
                                 <div class="p-3">
                                     <p class="text-gray-700 text-sm">
                                         {{ __('Pedidos del mes') }}

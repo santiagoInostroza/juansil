@@ -14,6 +14,7 @@ class IndexDashboardSeller extends Component{
     public $salesOfTheMonthCompleted;
 
     public $salesOfToday;
+    public $salesOfYesterday;
 
     public $salesLessThan30k;
     public $salesgreaterThan30k;
@@ -26,7 +27,10 @@ class IndexDashboardSeller extends Component{
     public function render(){
         
         $this->salesOfTheYearCompleted = $this->user->salesOfTheYearCompleted();
+
         $this->salesOfToday = $this->user->salesOfToday();
+        $this->salesOfYesterday = $this->user->salesOfYesterday();
+        
 
 
         $this->salesOfTheMonth = $this->user->salesOfTheMonth();
