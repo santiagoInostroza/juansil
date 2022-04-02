@@ -98,13 +98,29 @@ class User extends Authenticatable
     }
 
     // sales of the month 
-    public function salesOfTheMonth(){
-        $sales = Sale::where('user_created',$this->id)->whereMonth('payment_date',date('m'))->get();
+    public function salesOfTheMonth($month = null, $year = null){
+        if($month == null){
+            $month = date('m');
+        }
+        if($year == null){
+            $year = date('Y');
+        }
+        $monthAndYear=[
+            'month' => $month,
+            'year' => $year,
+        ];
+        $sales = Sale::where('user_created',$this->id)
+        ->whereMonth('date',$month)
+        ->whereYear('date',$year)
+        ->get();
         if($sales->count()){
             return $sales;
         }
         return false;
     }
+
+
+
     // sales of the month where payment = 3 
     public function salesOfTheMonthCompleted($month = null, $year = null){
 

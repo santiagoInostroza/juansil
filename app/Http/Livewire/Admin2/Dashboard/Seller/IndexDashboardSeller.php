@@ -10,7 +10,9 @@ class IndexDashboardSeller extends Component{
     public $year;
 
     public $salesOfTheYearCompleted;
+    public $salesOfTheMonth;
     public $salesOfTheMonthCompleted;
+
     public $salesOfToday;
 
     public $salesLessThan30k;
@@ -27,6 +29,7 @@ class IndexDashboardSeller extends Component{
         $this->salesOfToday = $this->user->salesOfToday();
 
 
+        $this->salesOfTheMonth = $this->user->salesOfTheMonth();
         $this->salesOfTheMonthCompleted =  $this->user->salesOfTheMonthCompleted($this->month,$this->year);
 
         $this->salesLessThan30k = ($this->salesOfTheMonthCompleted) ? $this->salesOfTheMonthCompleted->where('total','<',30000)->count() : 0;
