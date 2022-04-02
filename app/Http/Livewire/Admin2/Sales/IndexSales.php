@@ -51,7 +51,10 @@ class IndexSales extends Component{
 
         
         if ($this->filterDate =='todaysRoute') {
-            $sales = $sales->whereDate('delivery_date', Carbon::today());
+            $sales = $sales->whereDate('delivery_date',  Carbon::today()->timezone('America/Santiago'));
+        }
+        if ($this->filterDate =='yesterdayRoute') {
+            $sales = $sales->whereDate('delivery_date', Carbon::yesterday()->timezone('America/Santiago'));
         }
         if ($this->filterDate =='sheduledToday') {
             $sales = $sales->whereDate('date', Carbon::today());

@@ -7,6 +7,7 @@ use Livewire\Component;
 class IndexDashboardSeller extends Component{
     public $user;
     public $month;
+    public $year;
 
     public $salesOfTheYearCompleted;
     public $salesOfTheMonthCompleted;
@@ -24,7 +25,7 @@ class IndexDashboardSeller extends Component{
         $this->salesOfToday = $this->user->salesOfToday();
 
 
-        $this->salesOfTheMonthCompleted =  $this->user->salesOfTheMonthCompleted($this->month);
+        $this->salesOfTheMonthCompleted =  $this->user->salesOfTheMonthCompleted($this->month,$this->year);
 
         $this->salesLessThan30k =  $this->salesOfTheMonthCompleted->where('total','<',30000)->count();
         $this->salesgreaterThan30k =  $this->salesOfTheMonthCompleted->where('total','>=',30000)->where('total','<',50000)->count();

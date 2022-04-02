@@ -9,15 +9,22 @@ use App\Models\User;
 
 class DashboardController extends Controller{
 
-    public function index(){
-        $month = 3;
-        //sales distinct user_created
+    public function index($period= null){
+        if($period == null){
+            $period = date('Y-m');
+        }
+
+        $month = date('m', strtotime($period));
+        $year = date('Y', strtotime($period));
+        
         $sales = Sale::distinct('user_created')->get('user_created as user')->pluck('user');
-        $users = User::whereIn('id',$sales)->get();
+        $usersWithSales = User::whereIn('id',$sales)->get();
 
         return view('admin2.dashboard.index',[
-            'users' => $users,
+            'usersWithSales' => $usersWithSales,
             'month' => $month,
+            'year' => $year,
+            'period' => $period,
         ]);
      }
 }

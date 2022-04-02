@@ -1,6 +1,9 @@
 <div x-data="{isOpenDetail:false}">
 
-{{-- {{ $salesOfTheMonthCompleted}} --}}
+
+
+
+
 
     <div class="flex flex-wrap justify-center mt-6">
         <div class="w-full ">
@@ -50,7 +53,23 @@
                                     {{ __('Total a pagar') }}
                                 </p>
                                 <div class="font-bold text-xl mb-2">
-                                $ {{ number_Format($totalToPay,0,',','.') }}
+                                    @if (auth()->user()->hasRole('SuperAdmin'))
+                                        $ {{ number_Format($totalToPay,0,',','.') }}
+                                    @else
+                                        <div id='tooltip_' x-data='{tooltip:false}' x-on:mouseleave='tooltip=false'>
+                                            <div x-on:mouseover='tooltip=true'>
+                                                <div class="cursor-pointer">
+                                                    ??
+                                                </div>
+                                            </div>
+                                            <div x-show='tooltip' x-cloak x-transition >
+                                                <div class='bg-white rounded shadow p-4 absolute'>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                               
                                 </div>
                             </div>
                         </div>

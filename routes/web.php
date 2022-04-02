@@ -60,6 +60,7 @@ Route::get('test', [TestController::class,'index'])->name('test');
 
 // ADMIN 2 //
 
+Route::get('dashboard/{period?}', [DashboardController::class,'index'])->middleware('can:admin.dashboard.index','auth')->name('admin2.dashboard.index');
 Route::get('dashboard', [DashboardController::class,'index'])->middleware('can:admin.dashboard.index','auth')->name('admin2.dashboard.index');
 Route::get('fintech', [DashboardController::class,'fintech'])->middleware('can:admin.dashboard.fintech','auth')->name('admin2.dashboard.fintech');
 

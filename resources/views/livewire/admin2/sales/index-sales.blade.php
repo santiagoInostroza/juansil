@@ -35,6 +35,11 @@
                                         Ruta de hoy
                                     </div>
                                 </li>
+                                <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'yesterdayRoute') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
+                                    <div wire:click="$set('filterDate','yesterdayRoute')" class="mr-2" >
+                                        Ruta de ayer
+                                    </div>
+                                </li>
                             
                                 <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'sheduledToday') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
                                     <div wire:click="$set('filterDate','sheduledToday')" class="mr-2" >

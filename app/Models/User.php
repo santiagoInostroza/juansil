@@ -105,23 +105,34 @@ class User extends Authenticatable
         }
         return false;
     }
-    // sales of the month where payment = 3 && 
-    public function salesOfTheMonthCompleted($month = null){
+    // sales of the month where payment = 3 
+    public function salesOfTheMonthCompleted($month = null, $year = null){
 
         if($month == null){
             $month = date('m');
         }
+        if($year == null){
+            $year = date('Y');
+        }
+        $monthAndYear=[
+            'month' => $month,
+            'year' => $year,
+        ];
 
         
         $sales = Sale::where('user_created',$this->id)->where('payment_status',3)
-            ->where(function($query) use($month){
-                $query->where(function($q) use($month){
+            ->where(function($query) use($monthAndYear){
+                $query->where(function($q) use($monthAndYear){
                     $q->where('payment_date', '!=' ,null)
-                    ->whereMonth('payment_date', $month)->get();
-                    })->orWhere(function($query) use($month){
+                    ->whereMonth('payment_date', $monthAndYear['month'])
+                    ->whereYear('payment_date', $monthAndYear['year'])
+                    ->get();
+                    })->orWhere(function($query) use($monthAndYear){
                         $query
                         ->where('payment_date' ,null)
-                        ->whereMonth('date',$month)->get();
+                        ->whereMonth('date',$monthAndYear['month'])
+                        ->whereYear('date',$monthAndYear['year'])
+                        ->get();
                     });
             })->get();
                    
@@ -152,7 +163,7 @@ class User extends Authenticatable
 
     // sales of the day 
     public function salesOfToday(){
-        $sales = Sale::where('user_created',$this->id)->whereDate('payment_date',date('Y-m-d'))->get();
+        $sales = Sale::where('user_created',$this->id)->whereDate('date',date('Y-m-d'))->get();
         if($sales->count()){
             return $sales;
         }
