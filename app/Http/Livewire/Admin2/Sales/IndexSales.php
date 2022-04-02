@@ -35,7 +35,7 @@ class IndexSales extends Component{
         // $this->dateEnd ='';
 
         $this->columns = $this->loadColumns();
-        $this->rows =(session()->has('saleFiles'))? session('saleFiles'): 10;
+        $this->rows =(session()->has('saleRows'))? session('saleRows'): 10;
         $this->filterDate =(session()->has('saleFilterDate'))? session('saleFilterDate'): 'all';
     }
 
