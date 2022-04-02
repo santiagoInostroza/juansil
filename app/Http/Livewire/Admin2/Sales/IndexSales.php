@@ -206,7 +206,7 @@ class IndexSales extends Component{
         $this->resetPage();
     }
 
-    public function updatedFiles(){
+    public function updatedRows(){
         session(['saleRows'=>$this->rows]);
     }
     
