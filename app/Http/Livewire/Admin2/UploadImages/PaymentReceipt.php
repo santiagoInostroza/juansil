@@ -67,7 +67,7 @@ class PaymentReceipt extends Component{
 
   
         $this->reset('payment_receipt');
-        $this->emitUp('render');
+        $this->emit('render');
         $this->dispatchBrowserEvent('toast',['title'=>'Guardado con exito']);
 
     }
