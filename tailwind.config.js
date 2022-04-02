@@ -33,6 +33,9 @@ module.exports = {
             transitionDuration: {
                 '0': '0ms',
                 '2000': '2000ms',
+            },
+            rotate: {
+                '270': '270deg',
               }
         },
         taGallery: {

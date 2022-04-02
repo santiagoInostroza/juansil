@@ -27,7 +27,7 @@
                         <div x-on:click="isOpenChangeDate=true" class="p-2.5 bg-white border rounded cursor-pointer select-none">
                             <i class="fas fa-filter text-gray-500"></i> filtros <i class="fas fa-chevron-down ml-2"></i>
                         </div>
-                        <div  x-cloak  x-show="isOpenChangeDate"x-transition x-on:click.away="isOpenChangeDate=false" x-on:click="isOpenChangeDate=false">
+                        <div  x-cloak x-show="isOpenChangeDate"x-transition x-on:click.away="isOpenChangeDate=false" x-on:click="isOpenChangeDate=false">
                             <ul   class="bg-white rounded shadow absolute z-10 overflow-auto py-2 w-max-content transform -translate-x-1/3 select-none border mt-2">
                             
                                 <li class="p-2  cursor-pointer hover:bg-gray-100 {{ ($filterDate == 'todaysRoute') ? 'hover:bg-gray-600 text-white bg-gray-500':''}}">
@@ -288,7 +288,7 @@
                                             <div x-on:mouseover='tooltip=true'>
                                                 {{$sale->name}}
                                             </div>
-                                            <div x-show='tooltip' x-cloak x-transition >
+                                            <div x-cloak x-show='tooltip' x-transition >
                                                 <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                     <div>  {{$sale->address}}  </div>
                                                     <div> Total ${{number_format($sale->total,0,',','.')}}</div>
@@ -531,7 +531,7 @@
                                                         </button>
                                                     @endif
                                                 </div>
-                                                <div x-show="tooltip" x-cloak x-transition >
+                                                <div x-cloak x-show="tooltip" x-transition >
                                                     <div class="bg-white rounded shadow p-4 absolute z-10">
                                                         venta realizada por un ejecutivo 
                                                     </div>
@@ -544,7 +544,7 @@
                                                 <div x-on:mouseover="tooltip=true">
                                                     <i class="fas fa-cart-arrow-down"></i>
                                                 </div>
-                                                <div x-show="tooltip" x-cloak x-transition >
+                                                <div x-cloak x-show="tooltip" x-transition >
                                                     <div class="bg-white rounded shadow p-4 absolute z-10">
                                                         venta realizada a travez de la página
                                                     </div>
@@ -555,7 +555,7 @@
                                                 <div x-on:mouseover='tooltip=true'>
                                                     <i class="fas fa-user"></i>
                                                 </div>
-                                                <div x-show='tooltip' x-cloak x-transition >
+                                                <div x-cloak x-show='tooltip' x-transition >
                                                     <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                         venta especial 
                                                     </div>
@@ -615,7 +615,7 @@
                                                 <span x-on:mouseover="tooltip=true" class="select-none text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-500 text-white rounded-full">
                                                     Boleta emitida
                                                 </span>
-                                                <div x-show='tooltip' x-cloak x-transition >
+                                                <div x-cloak x-show='tooltip' x-transition >
                                                     <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                     <div>
                                                             por {{ ($sale->boletaBy())? $sale->boletaBy()->name :''}}
@@ -657,7 +657,7 @@
                                 @if ( $nameColumn == 'imagen del recibo' && $columns['imagen del recibo']) 
                                     <x-table.td>
                                         @if ($sale->payment_receipt_url)
-                                            <div id='tooltip_payment_receipt_url_{{$sale->id}}' x-data='{tooltip:false,isOpenModalImage:false}' x-on:mouseleave='tooltip=false'>
+                                            <div id='tooltip_payment_receipt_url_{{$sale->id}}' x-data='{tooltip:false,isOpenModalImage:false,rotate:0}' x-on:mouseleave='tooltip=false'>
                                                 <div class="flex items-center gap-1">
 
                                                     <div x-on:mouseover='tooltip=true' x-on:click="isOpenModalImage=true">
@@ -667,7 +667,7 @@
                                                         <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id" />
                                                     @endif
                                                 </div>
-                                                <div x-show='tooltip' x-cloak x-transition>
+                                                <div x-cloak x-show='tooltip' x-transition>
                                                     <div class='bg-white rounded shadow p-4 absolute z-10 transform -translate-x-1/3'>
                                                         <div>por {{ ($sale->paymentReceiptBy())? $sale->paymentReceiptBy()->name :''}}</div>
                                                         <div>el {{($sale->payment_receipt_date) ? Helper::date($sale->payment_receipt_date)->dayName : ''}} {{($sale->payment_receipt_date) ? Helper::date($sale->payment_receipt_date)->format('d-m-Y H:i') : ''}} </div>
@@ -676,8 +676,9 @@
                                                 <div x-cloak x-show="isOpenModalImage" x-transition>
                                                     <x-modals.image-screen>
                                                         <div>
-                                                            <img class="w-full object-contain transform  transition hover:scale-250 duration-2000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
-                                                            <div class="fixed bottom-12 right-12 ">
+                                                            <img class="w-full object-contain transform  transition hover:scale-250 duration-2000 " :class="(rotate ==1) ? 'rotate-90': rotate ==2? 'rotate-180' : rotate==3 ? 'rotate-270' : '' " src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
+                                                            <div class="absolute w-full bottom-0 left-0 flex justify-center items-center gap-2">
+                                                                <x-jet-secondary-button x-on:click="(rotate==3) ? rotate=0 : rotate++"> Rotar</x-jet-secondary-button>
                                                                 <x-jet-danger-button x-on:click="isOpenModalImage=false">Cerrar</x-jet-danger-button>
                                                             </div>
                                                         </div>
@@ -714,7 +715,7 @@
                                                 <span x-on:mouseover="tooltip=true" class="select-none text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-500 text-white rounded-full">
                                                     Pago Verificado
                                                 </span>
-                                                <div x-show='tooltip' x-cloak x-transition >
+                                                <div x-cloak x-show='tooltip' x-transition >
                                                     <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                         <div>
                                                             por {{ ($sale->verifyPaymentReceiptBy() ) ? $sale->verifyPaymentReceiptBy()->name :''}}

@@ -43,7 +43,7 @@
         </div>
     @endif
 
-    <div x-cloack x-show="isOpenAddPaymentReceipt" x.on:click.away="isOpenAddPaymentReceipt=false">
+    <div x-cloak x-show="isOpenAddPaymentReceipt" x.on:click.away="isOpenAddPaymentReceipt=false">
         <x-modal.alert2>
             <div>
                 <x-slot name="header">Cambiar recibo de pago</x-slot>
