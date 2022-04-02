@@ -6,7 +6,7 @@
                 <div class="font-semibold bg-indigo-100 text-gray-700 py-3 px-6 mb-0">
                     {{ __('Ventas del mes') }}  ({{ $totalSales }})
                     @if (auth()->user()->hasRole('SuperAdmin'))
-                        $ {{ number_Format($totalSales,0,',','.') }}
+                        $ {{ number_Format($totalAmountOfSales,0,',','.') }}
                     @endif
                 </div>
 
