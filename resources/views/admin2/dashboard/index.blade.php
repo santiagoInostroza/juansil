@@ -22,25 +22,23 @@
 
     <div x-data="{date:'{{$period}}' }">
         <div class="p-4 bg-white rounded shadow flex justify-between items-center">
-            <div> 
-                <a href="{{ route('admin2.dashboard.index','')}}" class="flex items-center gap-2">
-                    Anterior
-                </a> 
-            </div>
+
+            <a href="{{ route('admin2.dashboard.index',$prevPeriod)}}" class="flex items-center gap-2">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                Anterior
+           </a> 
 
             <input x-model="date"  type="month"  x-on:change="location.replace('/dashboard/' + date)">
 
-            <a href="{{ route('admin2.dashboard.index','')}}" class="flex items-center gap-2">
+
+            <a href="{{ route('admin2.dashboard.index',$nextPeriod)}}" class="flex items-center gap-2">
                 siguiente
-                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 5l7 7-7 7"></path></svg>
-           </a>  
-
-            {{-- redirect to next period --}}
-
-
-
-
-
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+            </a>  
             
         </div>
     </div>

@@ -14,6 +14,12 @@ class DashboardController extends Controller{
             $period = date('Y-m');
         }
 
+        // $prevPeriod = date( 'Y-m', strtotime($period. '-1 month'));
+        $nextPeriod = date( 'Y-m', strtotime($period. '+1 month'));
+        $prevPeriod = date('Y-m', strtotime('-1 months', strtotime($period)));
+       
+        
+
         $month = date('m', strtotime($period));
         $year = date('Y', strtotime($period));
         
@@ -25,6 +31,8 @@ class DashboardController extends Controller{
             'month' => $month,
             'year' => $year,
             'period' => $period,
+            'nextPeriod' => $nextPeriod,
+            'prevPeriod' => $prevPeriod,
         ]);
      }
 }
