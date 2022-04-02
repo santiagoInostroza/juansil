@@ -925,6 +925,7 @@
     @stack('modals')
 
     @stack('js')
+    @stack('scripts')
     <script>
         window.addEventListener('alerta_express', event => {
             // alert(event.detail.msj);

@@ -81,6 +81,7 @@
      
 
         @stack('js')
+        @stack('scripts')
         @isset($js)
             {{$js}}
         @endisset

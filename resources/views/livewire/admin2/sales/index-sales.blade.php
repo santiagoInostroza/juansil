@@ -289,7 +289,7 @@
                                                 {{$sale->name}}
                                             </div>
                                             <div x-show='tooltip' x-cloak x-transition >
-                                                <div class='bg-white rounded shadow p-4 absolute'>
+                                                <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                     <div>  {{$sale->address}}  </div>
                                                     <div> Total ${{number_format($sale->total,0,',','.')}}</div>
                                                 </div>
@@ -532,7 +532,7 @@
                                                     @endif
                                                 </div>
                                                 <div x-show="tooltip" x-cloak x-transition >
-                                                    <div class="bg-white rounded shadow p-4 absolute">
+                                                    <div class="bg-white rounded shadow p-4 absolute z-10">
                                                         venta realizada por un ejecutivo 
                                                     </div>
                                                 </div>
@@ -545,7 +545,7 @@
                                                     <i class="fas fa-cart-arrow-down"></i>
                                                 </div>
                                                 <div x-show="tooltip" x-cloak x-transition >
-                                                    <div class="bg-white rounded shadow p-4 absolute">
+                                                    <div class="bg-white rounded shadow p-4 absolute z-10">
                                                         venta realizada a travez de la página
                                                     </div>
                                                 </div>
@@ -556,7 +556,7 @@
                                                     <i class="fas fa-user"></i>
                                                 </div>
                                                 <div x-show='tooltip' x-cloak x-transition >
-                                                    <div class='bg-white rounded shadow p-4 absolute'>
+                                                    <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                         venta especial 
                                                     </div>
                                                 </div>
@@ -616,7 +616,7 @@
                                                     Boleta emitida
                                                 </span>
                                                 <div x-show='tooltip' x-cloak x-transition >
-                                                    <div class='bg-white rounded shadow p-4 absolute'>
+                                                    <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                     <div>
                                                             por {{ ($sale->boletaBy())? $sale->boletaBy()->name :''}}
                                                     </div>
@@ -658,11 +658,17 @@
                                     <x-table.td>
                                         @if ($sale->payment_receipt_url)
                                             <div id='tooltip_payment_receipt_url_{{$sale->id}}' x-data='{tooltip:false,isOpenModalImage:false}' x-on:mouseleave='tooltip=false'>
-                                                <div x-on:mouseover='tooltip=true' x-on:click="isOpenModalImage=true">
-                                                    <img class="w-10 object-cover cursor-pointer" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
+                                                <div class="flex items-center gap-1">
+
+                                                    <div x-on:mouseover='tooltip=true' x-on:click="isOpenModalImage=true">
+                                                        <img class="w-10 object-cover cursor-pointer" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
+                                                    </div>
+                                                    @if ($sale->verify_payment_receipt == null || $sale->verify_payment_receipt == 0)
+                                                        <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id" />
+                                                    @endif
                                                 </div>
-                                                <div x-show='tooltip' x-cloak x-transition >
-                                                    <div class='bg-white rounded shadow p-4 absolute transform -translate-x-1/3'>
+                                                <div x-show='tooltip' x-cloak x-transition>
+                                                    <div class='bg-white rounded shadow p-4 absolute z-10 transform -translate-x-1/3'>
                                                         <div>por {{ ($sale->paymentReceiptBy())? $sale->paymentReceiptBy()->name :''}}</div>
                                                         <div>el {{($sale->payment_receipt_date) ? Helper::date($sale->payment_receipt_date)->dayName : ''}} {{($sale->payment_receipt_date) ? Helper::date($sale->payment_receipt_date)->format('d-m-Y H:i') : ''}} </div>
                                                     </div>
@@ -670,18 +676,20 @@
                                                 <div x-cloak x-show="isOpenModalImage" x-transition>
                                                     <x-modals.image-screen>
                                                         <div>
-                                                            <img class="w-full object-contain transform shadow rounded transition ease-in-out delay-100 hover:-translate-y-1 scale-75 hover:scale-125 duration-1000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
+                                                            <img class="w-full object-contain transform  transition hover:scale-250 duration-2000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
                                                             <div class="fixed bottom-12 right-12 ">
                                                                 <x-jet-danger-button x-on:click="isOpenModalImage=false">Cerrar</x-jet-danger-button>
                                                             </div>
                                                         </div>
                                                     </x-modals.image-screen>
                                                 </div>
+
                                             </div>
                                         @elseif($sale->payment_account > 1 && ($sale->verify_payment_receipt == null || $sale->verify_payment_receipt == 0) )
-                                            <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full">
-                                                Pendiente
-                                            </span>
+                                    
+                                            <div class="flex gap-1 items-center text-xs py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full">
+                                                Pendiente <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id" />
+                                            </div>
                                         @endif
 
                                     </x-table.td>
@@ -707,7 +715,7 @@
                                                     Pago Verificado
                                                 </span>
                                                 <div x-show='tooltip' x-cloak x-transition >
-                                                    <div class='bg-white rounded shadow p-4 absolute'>
+                                                    <div class='bg-white rounded shadow p-4 absolute z-10'>
                                                         <div>
                                                             por {{ ($sale->verifyPaymentReceiptBy() ) ? $sale->verifyPaymentReceiptBy()->name :''}}
                                                         </div>
@@ -720,7 +728,6 @@
                                             </div>
                                         @else
                                             @if ($sale->payment_receipt_url)
-                                                  
                                                     <div x-data="{isOpenVerify:false}">
                                                         <span x-on:click="isOpenVerify=true" class="cursor-pointer text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full">
                                                             Pendiente validar
@@ -730,7 +737,7 @@
                                                                 <x-slot name="header">Confirmar pago</x-slot>
                                                                 <x-slot name="body">
                                                                     <div class="max-h-96 max-w">
-                                                                        <img class="max-h-80 w-full object-contain transform shadow rounded transition ease-in-out delay-100 hover:-translate-y-1 scale-75 hover:scale-125 duration-1000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
+                                                                        <img class="max-h-80 w-full object-contain transform hover:scale-250 duration-2000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
                                                                     </div>
                                                                     <div>
                                                                         <div>
@@ -755,11 +762,10 @@
                                                         </div>
             
                                                     </div>
-                                          
                                                 
                                             @endif
                                                 
-                                            @endif
+                                        @endif
 
                                         
                                         

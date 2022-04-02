@@ -185,6 +185,7 @@
 
         @stack('modals')
         @stack('js')
+        @stack('scripts')
         @livewireScripts
       
    

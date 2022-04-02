@@ -22,7 +22,7 @@
                     @endif
                     @if (isset($tbody))
 
-                        <tbody class="text-xs divide-y divide-gray-100 relative">
+                        <tbody class="text-xs divide-y divide-gray-100">
                             
                             {{ $tbody}}               
                         </tbody>

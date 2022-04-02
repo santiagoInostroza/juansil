@@ -12,6 +12,8 @@ class IndexSales extends Component{
 
     public $search;
 
+    public $listeners = ['render'];
+
     // public $sale_id;
     // public $name;
     // public $address;

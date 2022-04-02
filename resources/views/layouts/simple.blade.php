@@ -213,9 +213,17 @@
  
 
     @stack('js')
+
     @isset($js)
         {{$js}}
     @endisset
+
+    @stack('scripts')
+
+    @isset($scripts)
+        {{$scripts}}
+    @endisset
+
     @livewireScripts
 
     {{--MI DROPDOWN --}}

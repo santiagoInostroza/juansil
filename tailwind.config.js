@@ -22,6 +22,18 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            scale: {
+                '175': '1.75',
+                '200': '2',
+                '250': '2.5',
+                '300': '3',
+                '400': '4',
+                '500': '5',
+            },
+            transitionDuration: {
+                '0': '0ms',
+                '2000': '2000ms',
+              }
         },
         taGallery: {
             animations: ['swing', 'swipe', 'slide', 'rotate', 'snake', 'window', 'scroll', 'fade', 'dynamic'],
