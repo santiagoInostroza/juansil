@@ -664,7 +664,7 @@
                                                         <img class="w-10 object-cover cursor-pointer transform hover:scale-250 duration-2000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
                                                     </div>
                                                     @if ($sale->verify_payment_receipt == null || $sale->verify_payment_receipt == 0)
-                                                        <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id" />
+                                                        <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id . rand()" />
                                                     @endif
                                                 </div>
                                                 <div x-cloak x-show='tooltip' x-transition>

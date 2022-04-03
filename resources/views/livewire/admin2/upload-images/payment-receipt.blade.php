@@ -9,13 +9,15 @@
 
     @if ($payment_receipt  )
         <x-modal.alert2>
-            <div>
-                <x-slot name="header">Deseas guardar esta imagen?</x-slot>
-                <x-slot name="body">                                      
-                       
-                  
-
-                    <img class="max-w-sm max-h-72 object-cover m-auto" src=" {{$payment_receipt->temporaryUrl()}}" alt="Imagen temporal del recibo">
+           
+                <x-slot name="header">
+                    <span class="text-gray-500 font-bold">
+                        Deseas guardar esta imagen?
+                    </span>
+                </x-slot>
+               
+                <x-slot name="body">   
+                    <img class="max-w-sm max-h-72 object-cover m-auto transform hover:scale-250 duration-2000" src=" {{$payment_receipt->temporaryUrl()}}" alt="Imagen temporal del recibo">
                 </x-slot>
                 <x-slot name="footer">
                     <div class="flex items-center gap-4 justify-between">
@@ -23,8 +25,7 @@
                         <x-jet-button wire:click="savePaymentReceipt()">Guardar</x-jet-button>
                     </div>
                 </x-slot>
-                
-            </div>
+         
         </x-modal>
     @endif
 
@@ -49,7 +50,10 @@
                 <x-slot name="header">Cambiar recibo de pago</x-slot>
                 <x-slot name="body"> 
                   
+                    @if ($sale->payment_receipt_url)
+                    
                     <img class="max-w-sm max-h-72 object-cover m-auto transform hover:scale-300 transition-all duration-2000" src="{{ Storage::url($sale->payment_receipt_url) }}"  alt="Imagen del recibo">
+                    @endif
                    
 
 
