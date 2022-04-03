@@ -351,51 +351,7 @@
 
                                 @if ( $nameColumn == 'estado de pago' && $columns['estado de pago']) 
                                     <x-table.td>
-                                        <div>
-                                            @if ($sale->payment_status==1)
-                                                <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full">
-                                                    Pendiente
-                                                </span>
-                                                
-                                            @elseif($sale->payment_status==2)
-                                                <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded-full">
-                                                    Abonado
-                                                </span>
-                                            
-                                            @elseif($sale->payment_status==3)
-                                                <div id="payment_status_{{$sale->id}}" x-data="{isOpenPaymentStatus:false}" x-on:mouseout="isOpenPaymentStatus=false">
-                                                    <span x-on:mouseover="isOpenPaymentStatus=true" class="select-none text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-500 text-white rounded-full">
-                                                        Pagado  
-                                                    </span>
-                                                    @if ($sale->payment_date)
-                                                        <div x-cloak x-show="isOpenPaymentStatus">
-                                                            <div class="bg-white shadow p-4 absolute rounded">
-                                                                el   {{ ($sale->payment_date) ? Helper::date($sale->payment_date)->dayName : ''}} {{ ($sale->payment_date) ? Helper::date($sale->payment_date)->format('d-m-Y H:i') : '' }}
-                                                                <div>
-                                                                    @if ($sale->payment_account == 1)
-                                                                        Efectivo
-                                                                    @elseif($sale->payment_account == 2)
-                                                                        Cuenta rut Paty
-                                                                    @elseif($sale->payment_account == 3)
-                                                                        Cuenta rut Santiago
-                                                                    @elseif($sale->payment_account == 4)
-                                                                        Cuenta rut Silvia
-                                                                    @elseif($sale->payment_account == 5)
-                                                                        Cuenta corriente Santander Santiago
-                                                                    @elseif($sale->payment_account == 6)
-                                                                        Cuenta vista (chequera electronica) Juansil
-                                                                    @elseif($sale->payment_account == 7)
-                                                                        Otra                                    
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    
-                                                </div>
-                                            
-                                            @endif
-                                        </div>
+                                        <livewire:admin2.buttons.sales.pay-order :sale="$sale" :key="'pay_order_'.$sale->id.'_'.rand()" />
                                     </x-table.td>
                                 @endif
 
@@ -664,7 +620,7 @@
                                                         <img class="w-10 object-cover cursor-pointer transform hover:scale-250 duration-2000" src="{{Storage::url($sale->payment_receipt_url)}}" alt="Imagen del recibo {{$sale->id}}">
                                                     </div>
                                                     @if ($sale->verify_payment_receipt == null || $sale->verify_payment_receipt == 0)
-                                                        <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id . rand()" />
+                                                        <livewire:admin2.upload-images.payment-receipt size="text-md" :sale="$sale" :key="'sale_'.$sale->id . rand()" >
                                                     @endif
                                                 </div>
                                                 <div x-cloak x-show='tooltip' x-transition>
