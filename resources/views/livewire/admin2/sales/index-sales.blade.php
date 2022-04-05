@@ -23,10 +23,8 @@
                 <div class="flex items-center gap-2">
                     <span> {{ $sales->total()}} resultados</span>
                     @if ($filterDate == "todaysRoute")
-                    para el {{Carbon\Carbon::today()->format('d-m-Y')}}
+                        para el {{Carbon\Carbon::today()->dayName}} {{Carbon\Carbon::today()->format('d-m-Y')}}
                     @endif
-                    ({{$filterDate}})
-                    <span></span>
                     
                     <div id="change_date" x-data="{isOpenChangeDate:false}">
                         <div x-on:click="isOpenChangeDate=true" class="p-2.5 bg-white border rounded cursor-pointer select-none">
