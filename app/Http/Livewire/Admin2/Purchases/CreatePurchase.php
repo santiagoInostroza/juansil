@@ -39,13 +39,14 @@ class CreatePurchase extends Component{
             'newPurchase.items.'.$product->name => [
                 'product_id' => $product->id,
                 'name' => $product->name,
+                'image_url' => $product->image->url,
                 'stock' => $product->stock,
-                'quantity' => 0,
-                'quantity_box' => 0,
-                'total_quantity' => 0,
-                'price' => 0,
-                'total_price' => 0,
-                'price_box' => 0,
+                'quantity' => '',
+                'quantity_box' => '',
+                'total_quantity' => '',
+                'price' => '',
+                'total_price' => '',
+                'price_box' => '',
             ] 
         ]);      
     }

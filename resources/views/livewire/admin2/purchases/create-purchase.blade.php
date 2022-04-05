@@ -29,14 +29,14 @@
                             </x-slot>
                             <x-slot name='tbody'>
                                 @foreach (session('newPurchase.items') as $key => $item)
-                                    <tr class="shadow hover:bg-indigo-50 relative" 
+                                    <tr class="shadow hover:bg-indigo-50" 
                                         x-data="{ 
-                                            quantity:'{{($item['quantity'])?$item['quantity']:0}}', 
-                                            quantity_box:'{{$item['quantity_box']}}', 
-                                            total_quantity:'{{$item['total_quantity']}}', 
-                                            price:'{{$item['price']}}', 
-                                            price_box:'{{$item['price_box']}}', 
-                                            total_price:'{{$item['total_price']}}',
+                                            quantity:'{{ $item['quantity'] }}', 
+                                            quantity_box:'{{ $item['quantity_box'] }}', 
+                                            total_quantity:'{{ $item['total_quantity'] }}', 
+                                            price:'{{ $item['price'] }}', 
+                                            price_box:'{{ $item['price_box'] }}', 
+                                            total_price:'{{ $item['total_price'] }}',
                                             loading:false,
                                             getTotal: function(){
                                                 this.loading=true;
@@ -62,7 +62,14 @@
                                         x-init="console.log('init')"
                                         >
                                         <x-table.td>{{$item['product_id']}}</x-table.td>
-                                        <x-table.td>{{$item['name']}}</x-table.td>
+                                        <x-table.td>
+                                            <div class="flex gap-1 items-center">
+                                                <figure>
+                                                    <img src="{{ Storage::url('products_thumb/' . $item['image_url']) }}" alt="{{ $item['name'] }}" class="w-12 h-12 rounded-full mr-2 object-cover transform hover:translate-x-10 hover:scale-500 duration-2000">
+                                                </figure>
+                                                {{$item['name']}}
+                                            </div>
+                                        </x-table.td>
                                         <x-table.td class="text-right">{{$item['stock']}}</x-table.td>
                                         <x-table.td> 
                                             
@@ -134,9 +141,7 @@
                         <textarea name="comment" id="comment" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Comentario"></textarea>
                     </div>
                     <div class="flex items-center justify-between">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                            Guardar
-                        </button>
+                        <x-jet-button>Guardar</x-jet-button>                        
                     </div>
                 </form>
             </div>
