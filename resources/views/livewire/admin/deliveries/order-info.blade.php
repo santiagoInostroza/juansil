@@ -122,7 +122,7 @@
                                               
                                                 <div class="font-bold">
                                                     @if ($sale->date_delivered)
-                                                        {{Helper::fecha($sale->date_delivered)->diffForHumans()}} {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->dayName }} a las {{ Helper::fecha($sale->date_delivered)->timezone('America/Santiago')->format('H:i') }}
+                                                        {{Helper::fecha($sale->date_delivered)->diffForHumans()}} {{ Helper::fecha($sale->date_delivered)->dayName }} a las {{ Helper::fecha($sale->date_delivered)->format('H:i') }}
                                                     @else
                                                         Aún no se ha entregado
                                                     @endif
@@ -316,7 +316,7 @@
                                         <a class="cursor-pointer text-yellow-500 px-2"  x-on:click="showPay2 = true"> <i class="fas fa-pen"></i> </a>
                                     </div>
                                     <div>
-                                         {{ Str::limit(Helper::fecha($venta->payment_date)->timezone('America/Santiago')->dayName, 3,'') }} {{ Helper::fecha($venta->payment_date)->timezone('America/Santiago')->format('H:i') }} hrs. 
+                                         {{ Str::limit(Helper::fecha($venta->payment_date)->dayName, 3,'') }} {{ Helper::fecha($venta->payment_date)->format('H:i') }} hrs. 
                                     </div>
                                     
                                     @if ($venta->paymentBy())
@@ -406,7 +406,7 @@
                                         </div>
                                         <a class="cursor-pointer text-yellow-500 px-2"  x-on:click="deliverOrder = true"> <i class="fas fa-pen"></i> </a>
                                     </div>
-                                    <div>{{ Str::limit(Helper::fecha($venta->date_delivered)->timezone('America/Santiago')->dayName, 3, '') }}  {{ Helper::fecha($venta->date_delivered)->timezone('America/Santiago')->format('H:i') }} hrs. </div> 
+                                    <div>{{ Str::limit(Helper::fecha($venta->date_delivered)->dayName, 3, '') }}  {{ Helper::fecha($venta->date_delivered)->format('H:i') }} hrs. </div> 
                                     
                                     @if ($venta->deliveredBy())
                                         <div>
